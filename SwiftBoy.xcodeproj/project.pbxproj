@@ -12,6 +12,18 @@
 		90A1217822995D3900737DC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A1217722995D3900737DC4 /* Assets.xcassets */; };
 		90A1217B22995D3900737DC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A1217922995D3900737DC4 /* Main.storyboard */; };
 		90A1218722995D3900737DC4 /* SwiftBoyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1218622995D3900737DC4 /* SwiftBoyTests.swift */; };
+		90A1219822995EE700737DC4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1219722995EE700737DC4 /* main.swift */; };
+		90A1219F22995F5B00737DC4 /* PrintOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1219E22995F5B00737DC4 /* PrintOpcodes.swift */; };
+		90A121A922996F8100737DC4 /* OpenOpcodesFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121A822996F8100737DC4 /* OpenOpcodesFile.swift */; };
+		90A121AB2299770E00737DC4 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121AA2299770E00737DC4 /* Opcode.swift */; };
+		90A121AE22998CD800737DC4 /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121AD22998CD800737DC4 /* Registers.swift */; };
+		90A121B22299A01300737DC4 /* Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121B12299A01300737DC4 /* Cpu.swift */; };
+		90A121B82299B6A800737DC4 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121B72299B6A800737DC4 /* Memory.swift */; };
+		90A121BB2299B89000737DC4 /* Array+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121BA2299B89000737DC4 /* Array+subscript.swift */; };
+		90A121BD2299B9AD00737DC4 /* PrintSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121BC2299B9AD00737DC4 /* PrintSwitch.swift */; };
+		90A121BF2299BAC000737DC4 /* Cpu+execute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121BE2299BAC000737DC4 /* Cpu+execute.swift */; };
+		90A121C12299C4D300737DC4 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121C02299C4D300737DC4 /* Opcode.swift */; };
+		90A121C32299C79B00737DC4 /* Opcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121C22299C79B00737DC4 /* Opcodes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +47,20 @@
 		90A1218222995D3900737DC4 /* SwiftBoyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftBoyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A1218622995D3900737DC4 /* SwiftBoyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBoyTests.swift; sourceTree = "<group>"; };
 		90A1218822995D3900737DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90A1219522995EE600737DC4 /* CodeGen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CodeGen; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A1219722995EE700737DC4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		90A1219D22995F2100737DC4 /* opcodes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = opcodes.json; sourceTree = "<group>"; };
+		90A1219E22995F5B00737DC4 /* PrintOpcodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintOpcodes.swift; sourceTree = "<group>"; };
+		90A121A822996F8100737DC4 /* OpenOpcodesFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenOpcodesFile.swift; sourceTree = "<group>"; };
+		90A121AA2299770E00737DC4 /* Opcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
+		90A121AD22998CD800737DC4 /* Registers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registers.swift; sourceTree = "<group>"; };
+		90A121B12299A01300737DC4 /* Cpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cpu.swift; sourceTree = "<group>"; };
+		90A121B72299B6A800737DC4 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		90A121BA2299B89000737DC4 /* Array+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+subscript.swift"; sourceTree = "<group>"; };
+		90A121BC2299B9AD00737DC4 /* PrintSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSwitch.swift; sourceTree = "<group>"; };
+		90A121BE2299BAC000737DC4 /* Cpu+execute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+execute.swift"; sourceTree = "<group>"; };
+		90A121C02299C4D300737DC4 /* Opcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
+		90A121C22299C79B00737DC4 /* Opcodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcodes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +78,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90A1219222995EE600737DC4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -59,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				90A1217222995D3800737DC4 /* SwiftBoy */,
+				90A1219622995EE700737DC4 /* CodeGen */,
 				90A1218522995D3900737DC4 /* SwiftBoyTests */,
 				90A1217122995D3800737DC4 /* Products */,
 			);
@@ -69,6 +103,7 @@
 			children = (
 				90A1217022995D3800737DC4 /* SwiftBoy.app */,
 				90A1218222995D3900737DC4 /* SwiftBoyTests.xctest */,
+				90A1219522995EE600737DC4 /* CodeGen */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,9 +111,11 @@
 		90A1217222995D3800737DC4 /* SwiftBoy */ = {
 			isa = PBXGroup;
 			children = (
+				90A121AC22998CCD00737DC4 /* Emulator */,
+				90A121B92299B87E00737DC4 /* Extensions */,
+				90A1217722995D3900737DC4 /* Assets.xcassets */,
 				90A1217322995D3800737DC4 /* AppDelegate.swift */,
 				90A1217522995D3800737DC4 /* ViewController.swift */,
-				90A1217722995D3900737DC4 /* Assets.xcassets */,
 				90A1217922995D3900737DC4 /* Main.storyboard */,
 				90A1217C22995D3900737DC4 /* Info.plist */,
 				90A1217D22995D3900737DC4 /* SwiftBoy.entitlements */,
@@ -95,6 +132,48 @@
 			path = SwiftBoyTests;
 			sourceTree = "<group>";
 		};
+		90A1219622995EE700737DC4 /* CodeGen */ = {
+			isa = PBXGroup;
+			children = (
+				90A1219C22995F0900737DC4 /* Opcodes */,
+				90A1219722995EE700737DC4 /* main.swift */,
+			);
+			path = CodeGen;
+			sourceTree = "<group>";
+		};
+		90A1219C22995F0900737DC4 /* Opcodes */ = {
+			isa = PBXGroup;
+			children = (
+				90A1219D22995F2100737DC4 /* opcodes.json */,
+				90A121AA2299770E00737DC4 /* Opcode.swift */,
+				90A121A822996F8100737DC4 /* OpenOpcodesFile.swift */,
+				90A1219E22995F5B00737DC4 /* PrintOpcodes.swift */,
+				90A121BC2299B9AD00737DC4 /* PrintSwitch.swift */,
+			);
+			path = Opcodes;
+			sourceTree = "<group>";
+		};
+		90A121AC22998CCD00737DC4 /* Emulator */ = {
+			isa = PBXGroup;
+			children = (
+				90A121B12299A01300737DC4 /* Cpu.swift */,
+				90A121BE2299BAC000737DC4 /* Cpu+execute.swift */,
+				90A121AD22998CD800737DC4 /* Registers.swift */,
+				90A121B72299B6A800737DC4 /* Memory.swift */,
+				90A121C02299C4D300737DC4 /* Opcode.swift */,
+				90A121C22299C79B00737DC4 /* Opcodes.swift */,
+			);
+			path = Emulator;
+			sourceTree = "<group>";
+		};
+		90A121B92299B87E00737DC4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				90A121BA2299B89000737DC4 /* Array+subscript.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,6 +184,7 @@
 				90A1216C22995D3800737DC4 /* Sources */,
 				90A1216D22995D3800737DC4 /* Frameworks */,
 				90A1216E22995D3800737DC4 /* Resources */,
+				90A121A3229960DD00737DC4 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -133,6 +213,22 @@
 			productReference = 90A1218222995D3900737DC4 /* SwiftBoyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		90A1219422995EE600737DC4 /* CodeGen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90A1219922995EE700737DC4 /* Build configuration list for PBXNativeTarget "CodeGen" */;
+			buildPhases = (
+				90A1219122995EE600737DC4 /* Sources */,
+				90A1219222995EE600737DC4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CodeGen;
+			productName = CodeGen;
+			productReference = 90A1219522995EE600737DC4 /* CodeGen */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -150,6 +246,9 @@
 						CreatedOnToolsVersion = 10.2.1;
 						TestTargetID = 90A1216F22995D3800737DC4;
 					};
+					90A1219422995EE600737DC4 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 				};
 			};
 			buildConfigurationList = 90A1216B22995D3800737DC4 /* Build configuration list for PBXProject "SwiftBoy" */;
@@ -166,6 +265,7 @@
 			projectRoot = "";
 			targets = (
 				90A1216F22995D3800737DC4 /* SwiftBoy */,
+				90A1219422995EE600737DC4 /* CodeGen */,
 				90A1218122995D3900737DC4 /* SwiftBoyTests */,
 			);
 		};
@@ -190,12 +290,40 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		90A121A3229960DD00737DC4 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		90A1216C22995D3800737DC4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				90A1217622995D3800737DC4 /* ViewController.swift in Sources */,
+				90A121BB2299B89000737DC4 /* Array+subscript.swift in Sources */,
+				90A121C32299C79B00737DC4 /* Opcodes.swift in Sources */,
+				90A121B22299A01300737DC4 /* Cpu.swift in Sources */,
+				90A121AE22998CD800737DC4 /* Registers.swift in Sources */,
+				90A121B82299B6A800737DC4 /* Memory.swift in Sources */,
+				90A121C12299C4D300737DC4 /* Opcode.swift in Sources */,
+				90A121BF2299BAC000737DC4 /* Cpu+execute.swift in Sources */,
 				90A1217422995D3800737DC4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +333,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A1218722995D3900737DC4 /* SwiftBoyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90A1219122995EE600737DC4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90A121A922996F8100737DC4 /* OpenOpcodesFile.swift in Sources */,
+				90A121BD2299B9AD00737DC4 /* PrintSwitch.swift in Sources */,
+				90A1219822995EE700737DC4 /* main.swift in Sources */,
+				90A121AB2299770E00737DC4 /* Opcode.swift in Sources */,
+				90A1219F22995F5B00737DC4 /* PrintOpcodes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +565,26 @@
 			};
 			name = Release;
 		};
+		90A1219A22995EE700737DC4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AEAQ6C3MPC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		90A1219B22995EE700737DC4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AEAQ6C3MPC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -451,6 +611,15 @@
 			buildConfigurations = (
 				90A1218F22995D3900737DC4 /* Debug */,
 				90A1219022995D3900737DC4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90A1219922995EE700737DC4 /* Build configuration list for PBXNativeTarget "CodeGen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90A1219A22995EE700737DC4 /* Debug */,
+				90A1219B22995EE700737DC4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
