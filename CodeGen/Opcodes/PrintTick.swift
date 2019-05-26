@@ -223,51 +223,48 @@ private func printTick(_ opcode: Opcode) {
     }
     else { printUnimplementedOpcode(opcode) }
 
-    //    case "rlca":
-    //      print("")
-    //    case "rrca":
-    //      print("")
-    //    case "stop":
-    //      print("")
-    //    case "rla":
-    //      print("")
-    //    case "jr":
-    //      print("")
-    //    case "rra":
-    //      print("")
-    //    case "daa":
-    //      print("")
-    //    case "cpl":
-    //      print("")
-    //    case "scf":
-    //      print("")
-    //    case "ccf":
-    //      print("")
-    //    case "halt":
-    //      print("")
+  case "rlca": print("case .\(opcode.enumCase): self.rlca()")
+  case "rla":  print("case .\(opcode.enumCase): self.rla()")
+  case "rrca": print("case .\(opcode.enumCase): self.rrca()")
+  case "rra":  print("case .\(opcode.enumCase): self.rra()")
 
-    //    case "ret":
-    //      print("")
-    //    case "pop":
-    //      print("")
-    //    case "jp":
-    //      print("")
-    //    case "call":
-    //      print("")
-    //    case "push":
-    //      print("")
-    //    case "rst":
-    //      print("")
-    //    case "prefix":
-    //      print("")
-    //    case "reti":
-    //      print("")
-    //    case "ldh":
-    //      print("")
-    //    case "di":
-    //      print("")
-    //    case "ei":
-  //      print("")
+//  case "stop":
+//    print("")
+//  case "jr":
+//    print("")
+//  case "daa":
+//    print("")
+//  case "cpl":
+//    print("")
+//  case "scf":
+//    print("")
+//  case "ccf":
+//    print("")
+//  case "halt":
+//    print("")
+//  case "ret":
+//    print("")
+//  case "pop":
+//    print("")
+//  case "jp":
+//    print("")
+//  case "call":
+//    print("")
+//  case "push":
+//    print("")
+//  case "rst":
+//    print("")
+//  case "prefix":
+//    print("")
+//  case "reti":
+//    print("")
+//  case "ldh":
+//    print("")
+//  case "di":
+//    print("")
+//  case "ei":
+//    print("")
+
   default:
     printUnimplementedOpcode(opcode)
   }

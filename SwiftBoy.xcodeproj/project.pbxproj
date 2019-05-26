@@ -29,6 +29,12 @@
 		90A121D1229AA4E600737DC4 /* Cpu+Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D0229AA4E600737DC4 /* Cpu+Logic.swift */; };
 		90A121D3229AD2E800737DC4 /* Cpu+Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D2229AD2E800737DC4 /* Cpu+Arithmetic.swift */; };
 		90A121D6229AD3D500737DC4 /* CpuLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D4229AD37600737DC4 /* CpuLogicTests.swift */; };
+		90A121D8229AF5BD00737DC4 /* Cpu+Rotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D7229AF5BD00737DC4 /* Cpu+Rotate.swift */; };
+		90A121DE229AF76300737DC4 /* CpuRotateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D9229AF5D600737DC4 /* CpuRotateTests.swift */; };
+		90A121E0229B0E9500737DC4 /* Cpu+Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121DF229B0E9500737DC4 /* Cpu+Shift.swift */; };
+		90A121E3229B0ED800737DC4 /* CpuShiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121E1229B0ED400737DC4 /* CpuShiftTests.swift */; };
+		90A121E5229B194300737DC4 /* Cpu+Bit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121E4229B194300737DC4 /* Cpu+Bit.swift */; };
+		90A121E8229B195900737DC4 /* CpuBitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121E6229B195300737DC4 /* CpuBitTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +77,12 @@
 		90A121D0229AA4E600737DC4 /* Cpu+Logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Logic.swift"; sourceTree = "<group>"; };
 		90A121D2229AD2E800737DC4 /* Cpu+Arithmetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Arithmetic.swift"; sourceTree = "<group>"; };
 		90A121D4229AD37600737DC4 /* CpuLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuLogicTests.swift; sourceTree = "<group>"; };
+		90A121D7229AF5BD00737DC4 /* Cpu+Rotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Rotate.swift"; sourceTree = "<group>"; };
+		90A121D9229AF5D600737DC4 /* CpuRotateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuRotateTests.swift; sourceTree = "<group>"; };
+		90A121DF229B0E9500737DC4 /* Cpu+Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Shift.swift"; sourceTree = "<group>"; };
+		90A121E1229B0ED400737DC4 /* CpuShiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuShiftTests.swift; sourceTree = "<group>"; };
+		90A121E4229B194300737DC4 /* Cpu+Bit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Bit.swift"; sourceTree = "<group>"; };
+		90A121E6229B195300737DC4 /* CpuBitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuBitTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +182,9 @@
 				90A121CC229A9B7400737DC4 /* Cpu+Ld.swift */,
 				90A121D0229AA4E600737DC4 /* Cpu+Logic.swift */,
 				90A121D2229AD2E800737DC4 /* Cpu+Arithmetic.swift */,
+				90A121D7229AF5BD00737DC4 /* Cpu+Rotate.swift */,
+				90A121DF229B0E9500737DC4 /* Cpu+Shift.swift */,
+				90A121E4229B194300737DC4 /* Cpu+Bit.swift */,
 				90A121CE229AA20100737DC4 /* Cpu+Tick.swift */,
 				90A121AD22998CD800737DC4 /* Registers.swift */,
 				90A121B72299B6A800737DC4 /* Memory.swift */,
@@ -193,6 +208,9 @@
 				90A121C9229A963000737DC4 /* CpuLdTests.swift */,
 				90A121D4229AD37600737DC4 /* CpuLogicTests.swift */,
 				90A1218622995D3900737DC4 /* CpuArithmeticTests.swift */,
+				90A121D9229AF5D600737DC4 /* CpuRotateTests.swift */,
+				90A121E1229B0ED400737DC4 /* CpuShiftTests.swift */,
+				90A121E6229B195300737DC4 /* CpuBitTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -350,7 +368,10 @@
 				90A121D3229AD2E800737DC4 /* Cpu+Arithmetic.swift in Sources */,
 				90A121B82299B6A800737DC4 /* Memory.swift in Sources */,
 				90A121C12299C4D300737DC4 /* Opcode.swift in Sources */,
+				90A121E5229B194300737DC4 /* Cpu+Bit.swift in Sources */,
+				90A121E0229B0E9500737DC4 /* Cpu+Shift.swift in Sources */,
 				90A1217422995D3800737DC4 /* AppDelegate.swift in Sources */,
+				90A121D8229AF5BD00737DC4 /* Cpu+Rotate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,8 +379,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90A121E3229B0ED800737DC4 /* CpuShiftTests.swift in Sources */,
+				90A121DE229AF76300737DC4 /* CpuRotateTests.swift in Sources */,
 				90A121CB229A963B00737DC4 /* CpuLdTests.swift in Sources */,
 				90A1218722995D3900737DC4 /* CpuArithmeticTests.swift in Sources */,
+				90A121E8229B195900737DC4 /* CpuBitTests.swift in Sources */,
 				90A121D6229AD3D500737DC4 /* CpuLogicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

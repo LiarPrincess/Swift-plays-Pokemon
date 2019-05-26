@@ -21,7 +21,7 @@ extension Cpu {
     case .inc_b_04: self.inc_r(.b)
     case .dec_b_05: self.dec_r(.b)
     case .ld_b_d8_06: self.ld_r_d8(.b, self.memory.read(self.pc + 1))
-      //case .rlca_07: break
+    case .rlca_07: self.rlca()
     //case .ld_pA16_sp_08: break
     case .add_hl_bc_09: self.add_hl_r(.bc)
     case .ld_a_pBC_0a: self.ld_a_pBC()
@@ -29,7 +29,7 @@ extension Cpu {
     case .inc_c_0c: self.inc_r(.c)
     case .dec_c_0d: self.dec_r(.c)
     case .ld_c_d8_0e: self.ld_r_d8(.c, self.memory.read(self.pc + 1))
-      //case .rrca_0f: break
+    case .rrca_0f: self.rrca()
       //case .stop_0_10: break
     //case .ld_de_d16_11: break
     case .ld_pDE_a_12: self.ld_pDE_a()
@@ -37,7 +37,7 @@ extension Cpu {
     case .inc_d_14: self.inc_r(.d)
     case .dec_d_15: self.dec_r(.d)
     case .ld_d_d8_16: self.ld_r_d8(.d, self.memory.read(self.pc + 1))
-      //case .rla_17: break
+    case .rla_17: self.rla()
     //case .jr_r8_18: break
     case .add_hl_de_19: self.add_hl_r(.de)
     case .ld_a_pDE_1a: self.ld_a_pDE()
@@ -45,7 +45,7 @@ extension Cpu {
     case .inc_e_1c: self.inc_r(.e)
     case .dec_e_1d: self.dec_r(.e)
     case .ld_e_d8_1e: self.ld_r_d8(.e, self.memory.read(self.pc + 1))
-      //case .rra_1f: break
+    case .rra_1f: self.rra()
       //case .jr_nz_r8_20: break
     //case .ld_hl_d16_21: break
     case .ld_pHLI_a_22: self.ld_pHLI_a()
@@ -264,4 +264,4 @@ extension Cpu {
   }
 
 }
-// Implemented opcodes: 193, remaining: 62
+// Implemented opcodes: 197, remaining: 58
