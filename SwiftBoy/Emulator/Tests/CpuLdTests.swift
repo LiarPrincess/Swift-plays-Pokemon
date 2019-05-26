@@ -1,9 +1,9 @@
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+
 import XCTest
 @testable import SwiftBoy
 
-// 8-Bit Transfer and Input/Output Instructions
-// 16-Bit Transfer Instructions
-// https://ia801906.us.archive.org/19/items/GameBoyProgManVer1.1/GameBoyProgManVer1.1.pdf
 class CpuLdTests: XCTestCase {
 
   /// LD A,B ; A←B

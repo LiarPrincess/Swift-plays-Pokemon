@@ -1,5 +1,5 @@
-// 8-Bit Transfer and Input/Output Instructions
-// 16-Bit Transfer Instructions
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
 
 extension Cpu {
 

@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>4EED5C4C-C9D4-47C7-8EA6-BFF56C066864</key>
+		<key>10C561F4-6425-4CCF-A423-361A411A0E23</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
 			<key>fileName</key>
-			<string>4EED5C4C-C9D4-47C7-8EA6-BFF56C066864.xcactivitylog</string>
+			<string>10C561F4-6425-4CCF-A423-361A411A0E23.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -24,41 +24,15 @@
 			<key>signature</key>
 			<string>CodeGen-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>580569579.55566001</real>
+			<real>580580289.15134704</real>
 			<key>timeStoppedRecording</key>
-			<real>580569580.51871395</real>
+			<real>580580290.19941795</real>
 			<key>title</key>
 			<string>Build target CodeGen</string>
 			<key>uniqueIdentifier</key>
-			<string>4EED5C4C-C9D4-47C7-8EA6-BFF56C066864</string>
+			<string>10C561F4-6425-4CCF-A423-361A411A0E23</string>
 		</dict>
-		<key>5FBBA30A-5FAD-4ADA-98C7-FA6D28D8A0A5</key>
-		<dict>
-			<key>className</key>
-			<string>IDEActivityLogSection</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.target</string>
-			<key>fileName</key>
-			<string>5FBBA30A-5FAD-4ADA-98C7-FA6D28D8A0A5.xcactivitylog</string>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>S</string>
-			</dict>
-			<key>signature</key>
-			<string>SwiftBoyTests-abzeqnrybuyschbjgynicpjneiwq</string>
-			<key>timeStartedRecording</key>
-			<real>580569552.36469102</real>
-			<key>timeStoppedRecording</key>
-			<real>580569555.56241906</real>
-			<key>title</key>
-			<string>Build target SwiftBoyTests</string>
-			<key>uniqueIdentifier</key>
-			<string>5FBBA30A-5FAD-4ADA-98C7-FA6D28D8A0A5</string>
-		</dict>
-		<key>C9F35312-0162-4CE0-91C6-F6636A93A01B</key>
+		<key>13349F28-2EDA-4EFA-BFE1-67F27C4BD832</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -67,7 +41,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
 			<key>fileName</key>
-			<string>C9F35312-0162-4CE0-91C6-F6636A93A01B.xcactivitylog</string>
+			<string>13349F28-2EDA-4EFA-BFE1-67F27C4BD832.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -76,13 +50,39 @@
 			<key>signature</key>
 			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>580569626.02741802</real>
+			<real>580580352.34082103</real>
 			<key>timeStoppedRecording</key>
-			<real>580569629.051175</real>
+			<real>580580352.94761205</real>
 			<key>title</key>
 			<string>Build target SwiftBoy</string>
 			<key>uniqueIdentifier</key>
-			<string>C9F35312-0162-4CE0-91C6-F6636A93A01B</string>
+			<string>13349F28-2EDA-4EFA-BFE1-67F27C4BD832</string>
+		</dict>
+		<key>1CD0EE4A-A116-4429-B9D3-FAF4F8D27261</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.target</string>
+			<key>fileName</key>
+			<string>1CD0EE4A-A116-4429-B9D3-FAF4F8D27261.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>SwiftBoyTests-abzeqnrybuyschbjgynicpjneiwq</string>
+			<key>timeStartedRecording</key>
+			<real>580580352.95324099</real>
+			<key>timeStoppedRecording</key>
+			<real>580580356.67762494</real>
+			<key>title</key>
+			<string>Build target SwiftBoyTests</string>
+			<key>uniqueIdentifier</key>
+			<string>1CD0EE4A-A116-4429-B9D3-FAF4F8D27261</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>

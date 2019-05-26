@@ -11,7 +11,7 @@
 		90A1217622995D3800737DC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1217522995D3800737DC4 /* ViewController.swift */; };
 		90A1217822995D3900737DC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A1217722995D3900737DC4 /* Assets.xcassets */; };
 		90A1217B22995D3900737DC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A1217922995D3900737DC4 /* Main.storyboard */; };
-		90A1218722995D3900737DC4 /* CpuALUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1218622995D3900737DC4 /* CpuALUTests.swift */; };
+		90A1218722995D3900737DC4 /* CpuArithmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1218622995D3900737DC4 /* CpuArithmeticTests.swift */; };
 		90A1219822995EE700737DC4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1219722995EE700737DC4 /* main.swift */; };
 		90A1219F22995F5B00737DC4 /* PrintOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1219E22995F5B00737DC4 /* PrintOpcodes.swift */; };
 		90A121A922996F8100737DC4 /* OpenOpcodesFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121A822996F8100737DC4 /* OpenOpcodesFile.swift */; };
@@ -26,7 +26,9 @@
 		90A121CB229A963B00737DC4 /* CpuLdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121C9229A963000737DC4 /* CpuLdTests.swift */; };
 		90A121CD229A9B7400737DC4 /* Cpu+Ld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121CC229A9B7400737DC4 /* Cpu+Ld.swift */; };
 		90A121CF229AA20100737DC4 /* Cpu+Tick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121CE229AA20100737DC4 /* Cpu+Tick.swift */; };
-		90A121D1229AA4E600737DC4 /* Cpu+ALU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D0229AA4E600737DC4 /* Cpu+ALU.swift */; };
+		90A121D1229AA4E600737DC4 /* Cpu+Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D0229AA4E600737DC4 /* Cpu+Logic.swift */; };
+		90A121D3229AD2E800737DC4 /* Cpu+Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D2229AD2E800737DC4 /* Cpu+Arithmetic.swift */; };
+		90A121D6229AD3D500737DC4 /* CpuLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A121D4229AD37600737DC4 /* CpuLogicTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +50,7 @@
 		90A1217C22995D3900737DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A1217D22995D3900737DC4 /* SwiftBoy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftBoy.entitlements; sourceTree = "<group>"; };
 		90A1218222995D3900737DC4 /* SwiftBoyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftBoyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		90A1218622995D3900737DC4 /* CpuALUTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuALUTests.swift; sourceTree = "<group>"; };
+		90A1218622995D3900737DC4 /* CpuArithmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuArithmeticTests.swift; sourceTree = "<group>"; };
 		90A1218822995D3900737DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A1219522995EE600737DC4 /* CodeGen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CodeGen; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A1219722995EE700737DC4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -66,7 +68,9 @@
 		90A121C9229A963000737DC4 /* CpuLdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuLdTests.swift; sourceTree = "<group>"; };
 		90A121CC229A9B7400737DC4 /* Cpu+Ld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Ld.swift"; sourceTree = "<group>"; };
 		90A121CE229AA20100737DC4 /* Cpu+Tick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Tick.swift"; sourceTree = "<group>"; };
-		90A121D0229AA4E600737DC4 /* Cpu+ALU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+ALU.swift"; sourceTree = "<group>"; };
+		90A121D0229AA4E600737DC4 /* Cpu+Logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Logic.swift"; sourceTree = "<group>"; };
+		90A121D2229AD2E800737DC4 /* Cpu+Arithmetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Arithmetic.swift"; sourceTree = "<group>"; };
+		90A121D4229AD37600737DC4 /* CpuLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuLogicTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +168,8 @@
 				90A121C8229A7AB500737DC4 /* Tests */,
 				90A121B12299A01300737DC4 /* Cpu.swift */,
 				90A121CC229A9B7400737DC4 /* Cpu+Ld.swift */,
-				90A121D0229AA4E600737DC4 /* Cpu+ALU.swift */,
+				90A121D0229AA4E600737DC4 /* Cpu+Logic.swift */,
+				90A121D2229AD2E800737DC4 /* Cpu+Arithmetic.swift */,
 				90A121CE229AA20100737DC4 /* Cpu+Tick.swift */,
 				90A121AD22998CD800737DC4 /* Registers.swift */,
 				90A121B72299B6A800737DC4 /* Memory.swift */,
@@ -186,7 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				90A121C9229A963000737DC4 /* CpuLdTests.swift */,
-				90A1218622995D3900737DC4 /* CpuALUTests.swift */,
+				90A121D4229AD37600737DC4 /* CpuLogicTests.swift */,
+				90A1218622995D3900737DC4 /* CpuArithmeticTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -338,9 +344,10 @@
 				90A121BB2299B89000737DC4 /* Array+subscript.swift in Sources */,
 				90A121CF229AA20100737DC4 /* Cpu+Tick.swift in Sources */,
 				90A121C32299C79B00737DC4 /* Opcodes.swift in Sources */,
-				90A121D1229AA4E600737DC4 /* Cpu+ALU.swift in Sources */,
+				90A121D1229AA4E600737DC4 /* Cpu+Logic.swift in Sources */,
 				90A121B22299A01300737DC4 /* Cpu.swift in Sources */,
 				90A121AE22998CD800737DC4 /* Registers.swift in Sources */,
+				90A121D3229AD2E800737DC4 /* Cpu+Arithmetic.swift in Sources */,
 				90A121B82299B6A800737DC4 /* Memory.swift in Sources */,
 				90A121C12299C4D300737DC4 /* Opcode.swift in Sources */,
 				90A1217422995D3800737DC4 /* AppDelegate.swift in Sources */,
@@ -352,7 +359,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A121CB229A963B00737DC4 /* CpuLdTests.swift in Sources */,
-				90A1218722995D3900737DC4 /* CpuALUTests.swift in Sources */,
+				90A1218722995D3900737DC4 /* CpuArithmeticTests.swift in Sources */,
+				90A121D6229AD3D500737DC4 /* CpuLogicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
