@@ -6,33 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>235532FC-E1BB-48A4-9CC8-78CD694888BE</key>
-		<dict>
-			<key>className</key>
-			<string>IDEActivityLogSection</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.target</string>
-			<key>fileName</key>
-			<string>235532FC-E1BB-48A4-9CC8-78CD694888BE.xcactivitylog</string>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>S</string>
-			</dict>
-			<key>signature</key>
-			<string>SwiftBoyTests-abzeqnrybuyschbjgynicpjneiwq</string>
-			<key>timeStartedRecording</key>
-			<real>580561477.59236395</real>
-			<key>timeStoppedRecording</key>
-			<real>580561480.87888706</real>
-			<key>title</key>
-			<string>Build target SwiftBoyTests</string>
-			<key>uniqueIdentifier</key>
-			<string>235532FC-E1BB-48A4-9CC8-78CD694888BE</string>
-		</dict>
-		<key>2446F863-BDD1-41D5-B43C-DDC47F6C016C</key>
+		<key>4EED5C4C-C9D4-47C7-8EA6-BFF56C066864</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -41,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
 			<key>fileName</key>
-			<string>2446F863-BDD1-41D5-B43C-DDC47F6C016C.xcactivitylog</string>
+			<string>4EED5C4C-C9D4-47C7-8EA6-BFF56C066864.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -50,15 +24,41 @@
 			<key>signature</key>
 			<string>CodeGen-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>580561949.30009902</real>
+			<real>580569579.55566001</real>
 			<key>timeStoppedRecording</key>
-			<real>580561950.20919895</real>
+			<real>580569580.51871395</real>
 			<key>title</key>
 			<string>Build target CodeGen</string>
 			<key>uniqueIdentifier</key>
-			<string>2446F863-BDD1-41D5-B43C-DDC47F6C016C</string>
+			<string>4EED5C4C-C9D4-47C7-8EA6-BFF56C066864</string>
 		</dict>
-		<key>266C84DA-9796-41AD-BF22-74A9F33968C5</key>
+		<key>5FBBA30A-5FAD-4ADA-98C7-FA6D28D8A0A5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.target</string>
+			<key>fileName</key>
+			<string>5FBBA30A-5FAD-4ADA-98C7-FA6D28D8A0A5.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>SwiftBoyTests-abzeqnrybuyschbjgynicpjneiwq</string>
+			<key>timeStartedRecording</key>
+			<real>580569552.36469102</real>
+			<key>timeStoppedRecording</key>
+			<real>580569555.56241906</real>
+			<key>title</key>
+			<string>Build target SwiftBoyTests</string>
+			<key>uniqueIdentifier</key>
+			<string>5FBBA30A-5FAD-4ADA-98C7-FA6D28D8A0A5</string>
+		</dict>
+		<key>C9F35312-0162-4CE0-91C6-F6636A93A01B</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -67,7 +67,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
 			<key>fileName</key>
-			<string>266C84DA-9796-41AD-BF22-74A9F33968C5.xcactivitylog</string>
+			<string>C9F35312-0162-4CE0-91C6-F6636A93A01B.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -76,13 +76,13 @@
 			<key>signature</key>
 			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>580561477.30931902</real>
+			<real>580569626.02741802</real>
 			<key>timeStoppedRecording</key>
-			<real>580561477.52613401</real>
+			<real>580569629.051175</real>
 			<key>title</key>
 			<string>Build target SwiftBoy</string>
 			<key>uniqueIdentifier</key>
-			<string>266C84DA-9796-41AD-BF22-74A9F33968C5</string>
+			<string>C9F35312-0162-4CE0-91C6-F6636A93A01B</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>

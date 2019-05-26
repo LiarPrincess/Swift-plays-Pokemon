@@ -1,3 +1,5 @@
+// swiftlint:disable file_length
+
 func printTick() throws {
   let opcodes = try openOpcodesFile()
 
@@ -29,7 +31,6 @@ private func printTickFunction(_ opcodes: Opcodes) {
 
   print("// Swift compiler generates better code if we switch on 'opcode.type' and not on 'opcode'")
   print("switch opcode.type {")
-
 
   for op in opcodes.unprefixed { // .prefix(10)
     printTick(op)
@@ -101,8 +102,81 @@ private func printTick(_ opcode: Opcode) {
     }
     else { printUnimplementedOpcode(opcode) }
 
-//    case "adc":
-//      print("")
+  case "adc":
+    // opcode.operand1 is always 'A' (000)
+    let operand = opcode.operand2!.lowercased()
+
+    if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.adc_r(.\(operand))")
+    } else if isd8(operand) {
+      print("case .\(opcode.enumCase): self.adc_d8(\(d8))")
+    } else if ispHL(operand) {
+      print("case .\(opcode.enumCase): self.adc_pHL()")
+    }
+    else { printUnimplementedOpcode(opcode) }
+
+  case "sub":
+    let operand = opcode.operand1!.lowercased()
+
+    if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.sub_r(.\(operand))")
+    } else if isd8(operand) {
+      print("case .\(opcode.enumCase): self.sub_d8(\(d8))")
+    } else if ispHL(operand) {
+      print("case .\(opcode.enumCase): self.sub_pHL()")
+    }
+    else { printUnimplementedOpcode(opcode) }
+
+  case "sbc":
+    // opcode.operand1 is always 'A' (000)
+    let operand = opcode.operand2!.lowercased()
+
+    if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.sbc_r(.\(operand))")
+    } else if isd8(operand) {
+      print("case .\(opcode.enumCase): self.sbc_d8(\(d8))")
+    } else if ispHL(operand) {
+      print("case .\(opcode.enumCase): self.sbc_pHL()")
+    }
+    else { printUnimplementedOpcode(opcode) }
+
+  case "and":
+    let operand = opcode.operand1!.lowercased()
+
+    if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.and_r(.\(operand))")
+    } else if isd8(operand) {
+      print("case .\(opcode.enumCase): self.and_d8(\(d8))")
+    } else if ispHL(operand) {
+      print("case .\(opcode.enumCase): self.and_pHL()")
+    }
+    else { printUnimplementedOpcode(opcode) }
+
+  case "or":
+    let operand = opcode.operand1!.lowercased()
+
+    if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.or_r(.\(operand))")
+    } else if isd8(operand) {
+      print("case .\(opcode.enumCase): self.or_d8(\(d8))")
+    } else if ispHL(operand) {
+      print("case .\(opcode.enumCase): self.or_pHL()")
+    }
+    else { printUnimplementedOpcode(opcode) }
+
+  case "xor":
+    let operand = opcode.operand1!.lowercased()
+
+    if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.xor_r(.\(operand))")
+    } else if isd8(operand) {
+      print("case .\(opcode.enumCase): self.xor_d8(\(d8))")
+    } else if ispHL(operand) {
+      print("case .\(opcode.enumCase): self.xor_pHL()")
+    }
+    else { printUnimplementedOpcode(opcode) }
+
+    // -----------------
 
   case "inc":
     let operand = opcode.operand1!.lowercased()
@@ -141,17 +215,6 @@ private func printTick(_ opcode: Opcode) {
     //    case "ccf":
     //      print("")
     //    case "halt":
-    //      print("")
-
-    //    case "sub":
-    //      print("")
-    //    case "sbc":
-    //      print("")
-    //    case "and":
-    //      print("")
-    //    case "xor":
-    //      print("")
-    //    case "or":
     //      print("")
     //    case "cp":
     //      print("")

@@ -150,54 +150,54 @@ extension Cpu {
     case .add_a_l_85: self.add_r(.l)
     case .add_a_pHL_86: self.add_pHL()
     case .add_a_a_87: self.add_r(.a)
-      //case .adc_a_b_88: break
-      //case .adc_a_c_89: break
-      //case .adc_a_d_8a: break
-      //case .adc_a_e_8b: break
-      //case .adc_a_h_8c: break
-      //case .adc_a_l_8d: break
-      //case .adc_a_pHL_8e: break
-      //case .adc_a_a_8f: break
-      //case .sub_b_90: break
-      //case .sub_c_91: break
-      //case .sub_d_92: break
-      //case .sub_e_93: break
-      //case .sub_h_94: break
-      //case .sub_l_95: break
-      //case .sub_pHL_96: break
-      //case .sub_a_97: break
-      //case .sbc_a_b_98: break
-      //case .sbc_a_c_99: break
-      //case .sbc_a_d_9a: break
-      //case .sbc_a_e_9b: break
-      //case .sbc_a_h_9c: break
-      //case .sbc_a_l_9d: break
-      //case .sbc_a_pHL_9e: break
-      //case .sbc_a_a_9f: break
-      //case .and_b_a0: break
-      //case .and_c_a1: break
-      //case .and_d_a2: break
-      //case .and_e_a3: break
-      //case .and_h_a4: break
-      //case .and_l_a5: break
-      //case .and_pHL_a6: break
-      //case .and_a_a7: break
-      //case .xor_b_a8: break
-      //case .xor_c_a9: break
-      //case .xor_d_aa: break
-      //case .xor_e_ab: break
-      //case .xor_h_ac: break
-      //case .xor_l_ad: break
-      //case .xor_pHL_ae: break
-      //case .xor_a_af: break
-      //case .or_b_b0: break
-      //case .or_c_b1: break
-      //case .or_d_b2: break
-      //case .or_e_b3: break
-      //case .or_h_b4: break
-      //case .or_l_b5: break
-      //case .or_pHL_b6: break
-      //case .or_a_b7: break
+    case .adc_a_b_88: self.adc_r(.b)
+    case .adc_a_c_89: self.adc_r(.c)
+    case .adc_a_d_8a: self.adc_r(.d)
+    case .adc_a_e_8b: self.adc_r(.e)
+    case .adc_a_h_8c: self.adc_r(.h)
+    case .adc_a_l_8d: self.adc_r(.l)
+    case .adc_a_pHL_8e: self.adc_pHL()
+    case .adc_a_a_8f: self.adc_r(.a)
+    case .sub_b_90: self.sub_r(.b)
+    case .sub_c_91: self.sub_r(.c)
+    case .sub_d_92: self.sub_r(.d)
+    case .sub_e_93: self.sub_r(.e)
+    case .sub_h_94: self.sub_r(.h)
+    case .sub_l_95: self.sub_r(.l)
+    case .sub_pHL_96: self.sub_pHL()
+    case .sub_a_97: self.sub_r(.a)
+    case .sbc_a_b_98: self.sbc_r(.b)
+    case .sbc_a_c_99: self.sbc_r(.c)
+    case .sbc_a_d_9a: self.sbc_r(.d)
+    case .sbc_a_e_9b: self.sbc_r(.e)
+    case .sbc_a_h_9c: self.sbc_r(.h)
+    case .sbc_a_l_9d: self.sbc_r(.l)
+    case .sbc_a_pHL_9e: self.sbc_pHL()
+    case .sbc_a_a_9f: self.sbc_r(.a)
+    case .and_b_a0: self.and_r(.b)
+    case .and_c_a1: self.and_r(.c)
+    case .and_d_a2: self.and_r(.d)
+    case .and_e_a3: self.and_r(.e)
+    case .and_h_a4: self.and_r(.h)
+    case .and_l_a5: self.and_r(.l)
+    case .and_pHL_a6: self.and_pHL()
+    case .and_a_a7: self.and_r(.a)
+    case .xor_b_a8: self.xor_r(.b)
+    case .xor_c_a9: self.xor_r(.c)
+    case .xor_d_aa: self.xor_r(.d)
+    case .xor_e_ab: self.xor_r(.e)
+    case .xor_h_ac: self.xor_r(.h)
+    case .xor_l_ad: self.xor_r(.l)
+    case .xor_pHL_ae: self.xor_pHL()
+    case .xor_a_af: self.xor_r(.a)
+    case .or_b_b0: self.or_r(.b)
+    case .or_c_b1: self.or_r(.c)
+    case .or_d_b2: self.or_r(.d)
+    case .or_e_b3: self.or_r(.e)
+    case .or_h_b4: self.or_r(.h)
+    case .or_l_b5: self.or_r(.l)
+    case .or_pHL_b6: self.or_pHL()
+    case .or_a_b7: self.or_r(.a)
       //case .cp_b_b8: break
       //case .cp_c_b9: break
       //case .cp_d_ba: break
@@ -219,39 +219,39 @@ extension Cpu {
       //case .jp_z_a16_ca: break
       //case .prefix_cb_cb: break
       //case .call_z_a16_cc: break
-      //case .call_a16_cd: break
-      //case .adc_a_d8_ce: break
+    //case .call_a16_cd: break
+    case .adc_a_d8_ce: self.adc_d8(self.memory.read(self.pc + 1))
       //case .rst_08h_cf: break
       //case .ret_nc_d0: break
       //case .pop_de_d1: break
       //case .jp_nc_a16_d2: break
       //case .call_nc_a16_d4: break
-      //case .push_de_d5: break
-      //case .sub_d8_d6: break
+    //case .push_de_d5: break
+    case .sub_d8_d6: self.sub_d8(self.memory.read(self.pc + 1))
       //case .rst_10h_d7: break
       //case .ret_c_d8: break
       //case .reti_d9: break
       //case .jp_c_a16_da: break
-      //case .call_c_a16_dc: break
-      //case .sbc_a_d8_de: break
+    //case .call_c_a16_dc: break
+    case .sbc_a_d8_de: self.sbc_d8(self.memory.read(self.pc + 1))
       //case .rst_18h_df: break
       //case .ldh_pA8_a_e0: break
     //case .pop_hl_e1: break
     case .ld_pC_a_e2: self.ld_ffC_a()
-      //case .push_hl_e5: break
-      //case .and_d8_e6: break
+    //case .push_hl_e5: break
+    case .and_d8_e6: self.and_d8(self.memory.read(self.pc + 1))
       //case .rst_20h_e7: break
       //case .add_sp_r8_e8: break
       //case .jp_pHL_e9: break
-      //case .ld_pA16_a_ea: break
-      //case .xor_d8_ee: break
+    //case .ld_pA16_a_ea: break
+    case .xor_d8_ee: self.xor_d8(self.memory.read(self.pc + 1))
       //case .rst_28h_ef: break
       //case .ldh_a_pA8_f0: break
     //case .pop_af_f1: break
     case .ld_a_pC_f2: self.ld_a_ffC()
       //case .di_f3: break
-      //case .push_af_f5: break
-      //case .or_d8_f6: break
+    //case .push_af_f5: break
+    case .or_d8_f6: self.or_d8(self.memory.read(self.pc + 1))
       //case .rst_30h_f7: break
       //case .ld_hl_spPlusR8_f8: break
       //case .ld_sp_hl_f9: break
@@ -264,4 +264,4 @@ extension Cpu {
   }
 
 }
-// Implemented opcodes: 115, remaining: 140
+// Implemented opcodes: 169, remaining: 86

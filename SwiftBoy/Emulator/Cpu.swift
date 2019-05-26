@@ -1,5 +1,3 @@
-// swiftlint:disable file_length
-
 struct Cpu {
 
   /// Program counter: PC.
