@@ -1,6 +1,7 @@
-// PrefixedOpcode
+typealias Opcode       = OpcodeBase<OpcodeType>
+typealias PrefixOpcode = OpcodeBase<PrefixOpcodeType>
 
-struct Opcode {
+struct OpcodeBase<Type> {
 
   /// Address
   let addr: String
@@ -9,7 +10,7 @@ struct Opcode {
   let mnemonic: String
 
   /// Opcode type
-  let type: OpcodeType
+  let type: Type
 
   /// Byte count
   let length: Int
@@ -19,7 +20,7 @@ struct Opcode {
 
   init(_ addr: String,
        _ mnemonic: String,
-       type: OpcodeType,
+       type: Type,
        length: Int,
        cycles: [Int]) {
 

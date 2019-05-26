@@ -1,8 +1,6 @@
 import Foundation
 
-do {
-//  try printOpcodes()
-  try printTick()
-} catch  {
-  print("Unexpected error: \(error).")
-}
+//try printOpcodes()
+//try printPrefixOpcodes()
+try printExecute()
+//try printExecutePrefix()

@@ -10,4 +10,14 @@ struct Cpu {
 
   var registers = Registers()
   var memory = Memory()
+
+  internal var nextWord: UInt8 {
+    return self.memory.read(self.pc + 1)
+  }
+
+  internal var nextLong: UInt16 {
+    let low = self.memory.read(self.pc + 1)
+    let high = self.memory.read(self.pc + 2)
+    return (UInt16(high) << 8) | UInt16(low)
+  }
 }

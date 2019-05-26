@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>51369C9E-91F3-4409-9886-81719E981875</key>
+		<key>6B4A0743-D10F-48CE-A4F8-2316582A8DF9</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
 			<key>fileName</key>
-			<string>51369C9E-91F3-4409-9886-81719E981875.xcactivitylog</string>
+			<string>6B4A0743-D10F-48CE-A4F8-2316582A8DF9.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -24,41 +24,15 @@
 			<key>signature</key>
 			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>580593315.18372703</real>
+			<real>580599520.59893501</real>
 			<key>timeStoppedRecording</key>
-			<real>580593318.19873405</real>
+			<real>580599520.88364899</real>
 			<key>title</key>
 			<string>Build target SwiftBoy</string>
 			<key>uniqueIdentifier</key>
-			<string>51369C9E-91F3-4409-9886-81719E981875</string>
+			<string>6B4A0743-D10F-48CE-A4F8-2316582A8DF9</string>
 		</dict>
-		<key>A38090DE-E7BD-448C-A282-F8BEDD0C80A6</key>
-		<dict>
-			<key>className</key>
-			<string>IDEActivityLogSection</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.target</string>
-			<key>fileName</key>
-			<string>A38090DE-E7BD-448C-A282-F8BEDD0C80A6.xcactivitylog</string>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>S</string>
-			</dict>
-			<key>signature</key>
-			<string>SwiftBoyTests-abzeqnrybuyschbjgynicpjneiwq</string>
-			<key>timeStartedRecording</key>
-			<real>580593318.208516</real>
-			<key>timeStoppedRecording</key>
-			<real>580593320.61620605</real>
-			<key>title</key>
-			<string>Build target SwiftBoyTests</string>
-			<key>uniqueIdentifier</key>
-			<string>A38090DE-E7BD-448C-A282-F8BEDD0C80A6</string>
-		</dict>
-		<key>B42C8F61-45B7-474A-A594-7DB33F7BBE98</key>
+		<key>E8A53B0D-7410-4428-95FF-79482F6AD1EE</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -67,22 +41,22 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
 			<key>fileName</key>
-			<string>B42C8F61-45B7-474A-A594-7DB33F7BBE98.xcactivitylog</string>
+			<string>E8A53B0D-7410-4428-95FF-79482F6AD1EE.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>S</string>
+				<string>W</string>
 			</dict>
 			<key>signature</key>
 			<string>CodeGen-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>580584000.015499</real>
+			<real>580599532.28375697</real>
 			<key>timeStoppedRecording</key>
-			<real>580584001.00644398</real>
+			<real>580599533.43353403</real>
 			<key>title</key>
 			<string>Build target CodeGen</string>
 			<key>uniqueIdentifier</key>
-			<string>B42C8F61-45B7-474A-A594-7DB33F7BBE98</string>
+			<string>E8A53B0D-7410-4428-95FF-79482F6AD1EE</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>

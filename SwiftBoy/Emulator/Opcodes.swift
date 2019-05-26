@@ -12,7 +12,7 @@ enum OpcodeType {
   case inc_bc_03
   case inc_b_04
   case dec_b_05
-  case ld_b_d8_06
+  case ld_b_n_06
   case rlca_07
   case ld_pA16_sp_08
   case add_hl_bc_09
@@ -20,7 +20,7 @@ enum OpcodeType {
   case dec_bc_0b
   case inc_c_0c
   case dec_c_0d
-  case ld_c_d8_0e
+  case ld_c_n_0e
   case rrca_0f
   case stop_0_10
   case ld_de_d16_11
@@ -28,7 +28,7 @@ enum OpcodeType {
   case inc_de_13
   case inc_d_14
   case dec_d_15
-  case ld_d_d8_16
+  case ld_d_n_16
   case rla_17
   case jr_r8_18
   case add_hl_de_19
@@ -36,7 +36,7 @@ enum OpcodeType {
   case dec_de_1b
   case inc_e_1c
   case dec_e_1d
-  case ld_e_d8_1e
+  case ld_e_n_1e
   case rra_1f
   case jr_nz_r8_20
   case ld_hl_d16_21
@@ -44,7 +44,7 @@ enum OpcodeType {
   case inc_hl_23
   case inc_h_24
   case dec_h_25
-  case ld_h_d8_26
+  case ld_h_n_26
   case daa_27
   case jr_z_r8_28
   case add_hl_hl_29
@@ -52,7 +52,7 @@ enum OpcodeType {
   case dec_hl_2b
   case inc_l_2c
   case dec_l_2d
-  case ld_l_d8_2e
+  case ld_l_n_2e
   case cpl_2f
   case jr_nc_r8_30
   case ld_sp_d16_31
@@ -60,7 +60,7 @@ enum OpcodeType {
   case inc_sp_33
   case inc_pHL_34
   case dec_pHL_35
-  case ld_pHL_d8_36
+  case ld_pHL_n_36
   case scf_37
   case jr_c_r8_38
   case add_hl_sp_39
@@ -68,7 +68,7 @@ enum OpcodeType {
   case dec_sp_3b
   case inc_a_3c
   case dec_a_3d
-  case ld_a_d8_3e
+  case ld_a_n_3e
   case ccf_3f
   case ld_b_b_40
   case ld_b_c_41
@@ -204,7 +204,7 @@ enum OpcodeType {
   case jp_a16_c3
   case call_nz_a16_c4
   case push_bc_c5
-  case add_a_d8_c6
+  case add_a_n_c6
   case rst_00h_c7
   case ret_z_c8
   case ret_c9
@@ -212,44 +212,44 @@ enum OpcodeType {
   case prefix_cb_cb
   case call_z_a16_cc
   case call_a16_cd
-  case adc_a_d8_ce
+  case adc_a_n_ce
   case rst_08h_cf
   case ret_nc_d0
   case pop_de_d1
   case jp_nc_a16_d2
   case call_nc_a16_d4
   case push_de_d5
-  case sub_d8_d6
+  case sub_n_d6
   case rst_10h_d7
   case ret_c_d8
   case reti_d9
   case jp_c_a16_da
   case call_c_a16_dc
-  case sbc_a_d8_de
+  case sbc_a_n_de
   case rst_18h_df
   case ldh_pA8_a_e0
   case pop_hl_e1
   case ld_pC_a_e2
   case push_hl_e5
-  case and_d8_e6
+  case and_n_e6
   case rst_20h_e7
   case add_sp_r8_e8
   case jp_pHL_e9
   case ld_pA16_a_ea
-  case xor_d8_ee
+  case xor_n_ee
   case rst_28h_ef
   case ldh_a_pA8_f0
   case pop_af_f1
   case ld_a_pC_f2
   case di_f3
   case push_af_f5
-  case or_d8_f6
+  case or_n_f6
   case rst_30h_f7
   case ld_hl_spPlusR8_f8
   case ld_sp_hl_f9
   case ld_a_pA16_fa
   case ei_fb
-  case cp_d8_fe
+  case cp_n_fe
   case rst_38h_ff
 }
 
@@ -260,7 +260,7 @@ let opcodes: [Opcode] = [
   Opcode("0x3", "inc",       type: .inc_bc_03,             length: 1, cycles: [8]),
   Opcode("0x4", "inc",       type: .inc_b_04,              length: 1, cycles: [4]),
   Opcode("0x5", "dec",       type: .dec_b_05,              length: 1, cycles: [4]),
-  Opcode("0x6", "ld",        type: .ld_b_d8_06,            length: 2, cycles: [8]),
+  Opcode("0x6", "ld",        type: .ld_b_n_06,             length: 2, cycles: [8]),
   Opcode("0x7", "rlca",      type: .rlca_07,               length: 1, cycles: [4]),
   Opcode("0x8", "ld",        type: .ld_pA16_sp_08,         length: 3, cycles: [20]),
   Opcode("0x9", "add",       type: .add_hl_bc_09,          length: 1, cycles: [8]),
@@ -268,7 +268,7 @@ let opcodes: [Opcode] = [
   Opcode("0xb", "dec",       type: .dec_bc_0b,             length: 1, cycles: [8]),
   Opcode("0xc", "inc",       type: .inc_c_0c,              length: 1, cycles: [4]),
   Opcode("0xd", "dec",       type: .dec_c_0d,              length: 1, cycles: [4]),
-  Opcode("0xe", "ld",        type: .ld_c_d8_0e,            length: 2, cycles: [8]),
+  Opcode("0xe", "ld",        type: .ld_c_n_0e,             length: 2, cycles: [8]),
   Opcode("0xf", "rrca",      type: .rrca_0f,               length: 1, cycles: [4]),
   Opcode("0x10", "stop",     type: .stop_0_10,             length: 1, cycles: [4]),
   Opcode("0x11", "ld",       type: .ld_de_d16_11,          length: 3, cycles: [12]),
@@ -276,7 +276,7 @@ let opcodes: [Opcode] = [
   Opcode("0x13", "inc",      type: .inc_de_13,             length: 1, cycles: [8]),
   Opcode("0x14", "inc",      type: .inc_d_14,              length: 1, cycles: [4]),
   Opcode("0x15", "dec",      type: .dec_d_15,              length: 1, cycles: [4]),
-  Opcode("0x16", "ld",       type: .ld_d_d8_16,            length: 2, cycles: [8]),
+  Opcode("0x16", "ld",       type: .ld_d_n_16,             length: 2, cycles: [8]),
   Opcode("0x17", "rla",      type: .rla_17,                length: 1, cycles: [4]),
   Opcode("0x18", "jr",       type: .jr_r8_18,              length: 2, cycles: [12]),
   Opcode("0x19", "add",      type: .add_hl_de_19,          length: 1, cycles: [8]),
@@ -284,7 +284,7 @@ let opcodes: [Opcode] = [
   Opcode("0x1b", "dec",      type: .dec_de_1b,             length: 1, cycles: [8]),
   Opcode("0x1c", "inc",      type: .inc_e_1c,              length: 1, cycles: [4]),
   Opcode("0x1d", "dec",      type: .dec_e_1d,              length: 1, cycles: [4]),
-  Opcode("0x1e", "ld",       type: .ld_e_d8_1e,            length: 2, cycles: [8]),
+  Opcode("0x1e", "ld",       type: .ld_e_n_1e,             length: 2, cycles: [8]),
   Opcode("0x1f", "rra",      type: .rra_1f,                length: 1, cycles: [4]),
   Opcode("0x20", "jr",       type: .jr_nz_r8_20,           length: 2, cycles: [12, 8]),
   Opcode("0x21", "ld",       type: .ld_hl_d16_21,          length: 3, cycles: [12]),
@@ -292,7 +292,7 @@ let opcodes: [Opcode] = [
   Opcode("0x23", "inc",      type: .inc_hl_23,             length: 1, cycles: [8]),
   Opcode("0x24", "inc",      type: .inc_h_24,              length: 1, cycles: [4]),
   Opcode("0x25", "dec",      type: .dec_h_25,              length: 1, cycles: [4]),
-  Opcode("0x26", "ld",       type: .ld_h_d8_26,            length: 2, cycles: [8]),
+  Opcode("0x26", "ld",       type: .ld_h_n_26,             length: 2, cycles: [8]),
   Opcode("0x27", "daa",      type: .daa_27,                length: 1, cycles: [4]),
   Opcode("0x28", "jr",       type: .jr_z_r8_28,            length: 2, cycles: [12, 8]),
   Opcode("0x29", "add",      type: .add_hl_hl_29,          length: 1, cycles: [8]),
@@ -300,7 +300,7 @@ let opcodes: [Opcode] = [
   Opcode("0x2b", "dec",      type: .dec_hl_2b,             length: 1, cycles: [8]),
   Opcode("0x2c", "inc",      type: .inc_l_2c,              length: 1, cycles: [4]),
   Opcode("0x2d", "dec",      type: .dec_l_2d,              length: 1, cycles: [4]),
-  Opcode("0x2e", "ld",       type: .ld_l_d8_2e,            length: 2, cycles: [8]),
+  Opcode("0x2e", "ld",       type: .ld_l_n_2e,             length: 2, cycles: [8]),
   Opcode("0x2f", "cpl",      type: .cpl_2f,                length: 1, cycles: [4]),
   Opcode("0x30", "jr",       type: .jr_nc_r8_30,           length: 2, cycles: [12, 8]),
   Opcode("0x31", "ld",       type: .ld_sp_d16_31,          length: 3, cycles: [12]),
@@ -308,7 +308,7 @@ let opcodes: [Opcode] = [
   Opcode("0x33", "inc",      type: .inc_sp_33,             length: 1, cycles: [8]),
   Opcode("0x34", "inc",      type: .inc_pHL_34,            length: 1, cycles: [12]),
   Opcode("0x35", "dec",      type: .dec_pHL_35,            length: 1, cycles: [12]),
-  Opcode("0x36", "ld",       type: .ld_pHL_d8_36,          length: 2, cycles: [12]),
+  Opcode("0x36", "ld",       type: .ld_pHL_n_36,           length: 2, cycles: [12]),
   Opcode("0x37", "scf",      type: .scf_37,                length: 1, cycles: [4]),
   Opcode("0x38", "jr",       type: .jr_c_r8_38,            length: 2, cycles: [12, 8]),
   Opcode("0x39", "add",      type: .add_hl_sp_39,          length: 1, cycles: [8]),
@@ -316,7 +316,7 @@ let opcodes: [Opcode] = [
   Opcode("0x3b", "dec",      type: .dec_sp_3b,             length: 1, cycles: [8]),
   Opcode("0x3c", "inc",      type: .inc_a_3c,              length: 1, cycles: [4]),
   Opcode("0x3d", "dec",      type: .dec_a_3d,              length: 1, cycles: [4]),
-  Opcode("0x3e", "ld",       type: .ld_a_d8_3e,            length: 2, cycles: [8]),
+  Opcode("0x3e", "ld",       type: .ld_a_n_3e,             length: 2, cycles: [8]),
   Opcode("0x3f", "ccf",      type: .ccf_3f,                length: 1, cycles: [4]),
   Opcode("0x40", "ld",       type: .ld_b_b_40,             length: 1, cycles: [4]),
   Opcode("0x41", "ld",       type: .ld_b_c_41,             length: 1, cycles: [4]),
@@ -452,7 +452,7 @@ let opcodes: [Opcode] = [
   Opcode("0xc3", "jp",       type: .jp_a16_c3,             length: 3, cycles: [16]),
   Opcode("0xc4", "call",     type: .call_nz_a16_c4,        length: 3, cycles: [24, 12]),
   Opcode("0xc5", "push",     type: .push_bc_c5,            length: 1, cycles: [16]),
-  Opcode("0xc6", "add",      type: .add_a_d8_c6,           length: 2, cycles: [8]),
+  Opcode("0xc6", "add",      type: .add_a_n_c6,            length: 2, cycles: [8]),
   Opcode("0xc7", "rst",      type: .rst_00h_c7,            length: 1, cycles: [16]),
   Opcode("0xc8", "ret",      type: .ret_z_c8,              length: 1, cycles: [20, 8]),
   Opcode("0xc9", "ret",      type: .ret_c9,                length: 1, cycles: [16]),
@@ -460,43 +460,43 @@ let opcodes: [Opcode] = [
   Opcode("0xcb", "prefix",   type: .prefix_cb_cb,          length: 1, cycles: [4]),
   Opcode("0xcc", "call",     type: .call_z_a16_cc,         length: 3, cycles: [24, 12]),
   Opcode("0xcd", "call",     type: .call_a16_cd,           length: 3, cycles: [24]),
-  Opcode("0xce", "adc",      type: .adc_a_d8_ce,           length: 2, cycles: [8]),
+  Opcode("0xce", "adc",      type: .adc_a_n_ce,            length: 2, cycles: [8]),
   Opcode("0xcf", "rst",      type: .rst_08h_cf,            length: 1, cycles: [16]),
   Opcode("0xd0", "ret",      type: .ret_nc_d0,             length: 1, cycles: [20, 8]),
   Opcode("0xd1", "pop",      type: .pop_de_d1,             length: 1, cycles: [12]),
   Opcode("0xd2", "jp",       type: .jp_nc_a16_d2,          length: 3, cycles: [16, 12]),
   Opcode("0xd4", "call",     type: .call_nc_a16_d4,        length: 3, cycles: [24, 12]),
   Opcode("0xd5", "push",     type: .push_de_d5,            length: 1, cycles: [16]),
-  Opcode("0xd6", "sub",      type: .sub_d8_d6,             length: 2, cycles: [8]),
+  Opcode("0xd6", "sub",      type: .sub_n_d6,              length: 2, cycles: [8]),
   Opcode("0xd7", "rst",      type: .rst_10h_d7,            length: 1, cycles: [16]),
   Opcode("0xd8", "ret",      type: .ret_c_d8,              length: 1, cycles: [20, 8]),
   Opcode("0xd9", "reti",     type: .reti_d9,               length: 1, cycles: [16]),
   Opcode("0xda", "jp",       type: .jp_c_a16_da,           length: 3, cycles: [16, 12]),
   Opcode("0xdc", "call",     type: .call_c_a16_dc,         length: 3, cycles: [24, 12]),
-  Opcode("0xde", "sbc",      type: .sbc_a_d8_de,           length: 2, cycles: [8]),
+  Opcode("0xde", "sbc",      type: .sbc_a_n_de,            length: 2, cycles: [8]),
   Opcode("0xdf", "rst",      type: .rst_18h_df,            length: 1, cycles: [16]),
   Opcode("0xe0", "ldh",      type: .ldh_pA8_a_e0,          length: 2, cycles: [12]),
   Opcode("0xe1", "pop",      type: .pop_hl_e1,             length: 1, cycles: [12]),
   Opcode("0xe2", "ld",       type: .ld_pC_a_e2,            length: 1, cycles: [8]),
   Opcode("0xe5", "push",     type: .push_hl_e5,            length: 1, cycles: [16]),
-  Opcode("0xe6", "and",      type: .and_d8_e6,             length: 2, cycles: [8]),
+  Opcode("0xe6", "and",      type: .and_n_e6,              length: 2, cycles: [8]),
   Opcode("0xe7", "rst",      type: .rst_20h_e7,            length: 1, cycles: [16]),
   Opcode("0xe8", "add",      type: .add_sp_r8_e8,          length: 2, cycles: [16]),
   Opcode("0xe9", "jp",       type: .jp_pHL_e9,             length: 1, cycles: [4]),
   Opcode("0xea", "ld",       type: .ld_pA16_a_ea,          length: 3, cycles: [16]),
-  Opcode("0xee", "xor",      type: .xor_d8_ee,             length: 2, cycles: [8]),
+  Opcode("0xee", "xor",      type: .xor_n_ee,              length: 2, cycles: [8]),
   Opcode("0xef", "rst",      type: .rst_28h_ef,            length: 1, cycles: [16]),
   Opcode("0xf0", "ldh",      type: .ldh_a_pA8_f0,          length: 2, cycles: [12]),
   Opcode("0xf1", "pop",      type: .pop_af_f1,             length: 1, cycles: [12]),
   Opcode("0xf2", "ld",       type: .ld_a_pC_f2,            length: 1, cycles: [8]),
   Opcode("0xf3", "di",       type: .di_f3,                 length: 1, cycles: [4]),
   Opcode("0xf5", "push",     type: .push_af_f5,            length: 1, cycles: [16]),
-  Opcode("0xf6", "or",       type: .or_d8_f6,              length: 2, cycles: [8]),
+  Opcode("0xf6", "or",       type: .or_n_f6,               length: 2, cycles: [8]),
   Opcode("0xf7", "rst",      type: .rst_30h_f7,            length: 1, cycles: [16]),
   Opcode("0xf8", "ld",       type: .ld_hl_spPlusR8_f8,     length: 2, cycles: [12]),
   Opcode("0xf9", "ld",       type: .ld_sp_hl_f9,           length: 1, cycles: [8]),
   Opcode("0xfa", "ld",       type: .ld_a_pA16_fa,          length: 3, cycles: [16]),
   Opcode("0xfb", "ei",       type: .ei_fb,                 length: 1, cycles: [4]),
-  Opcode("0xfe", "cp",       type: .cp_d8_fe,              length: 2, cycles: [8]),
+  Opcode("0xfe", "cp",       type: .cp_n_fe,               length: 2, cycles: [8]),
   Opcode("0xff", "rst",      type: .rst_38h_ff,            length: 1, cycles: [16]),
 ]

@@ -1,9 +1,19 @@
 func printOpcodes() throws {
-let opcodes = try openOpcodesFile()
+  let data = try openOpcodesFile()
+  let opcodes = data.unprefixed
 
   printHeader()
-  printOpcodeTypeEnum(opcodes.unprefixed)
-  printOpcodes(opcodes.unprefixed)
+  printOpcodeTypeEnum("OpcodeType", opcodes)
+  printOpcodes("Opcode", "opcodes", opcodes)
+}
+
+func printPrefixOpcodes() throws {
+  let data = try openOpcodesFile()
+  let opcodes = data.cbprefixed
+
+  printHeader()
+  printOpcodeTypeEnum("PrefixOpcodeType", opcodes)
+  printOpcodes("PrefixOpcode", "prefixOpcodes", opcodes)
 }
 
 // MARK: - Printing
@@ -19,8 +29,8 @@ private func printHeader() {
   print("")
 }
 
-private func printOpcodeTypeEnum(_ opcodes: [Opcode]) {
-  print("enum OpcodeType {")
+private func printOpcodeTypeEnum(_ name: String, _ opcodes: [Opcode]) {
+  print("enum \(name) {")
   for op in opcodes {
     print("  case \(op.enumCase)")
   }
@@ -28,8 +38,8 @@ private func printOpcodeTypeEnum(_ opcodes: [Opcode]) {
   print("")
 }
 
-private func printOpcodes(_ opcodes: [Opcode]) {
-  print("let opcodes: [Opcode] = [")
+private func printOpcodes(_ className: String, _ variable: String, _ opcodes: [Opcode]) {
+  print("let \(variable): [\(className)] = [")
   for op in opcodes {
 
     var column1 = ""
@@ -45,7 +55,7 @@ private func printOpcodes(_ opcodes: [Opcode]) {
     column3 += "length: \(op.length), "
     column3 += "cycles: \(op.cycles)"
 
-    print("  Opcode(\(column1)\(column2)\(column3)),")
+    print("  \(className)(\(column1)\(column2)\(column3)),")
   }
   print("]")
   print("")

@@ -71,6 +71,15 @@ struct Opcode {
     case "H": return "h"
     case "L": return "l"
 
+    case "0": return "0"
+    case "1": return "1"
+    case "2": return "2"
+    case "3": return "3"
+    case "4": return "4"
+    case "5": return "5"
+    case "6": return "6"
+    case "7": return "7"
+
     case "AF": return "af"
     case "BC": return "bc"
     case "CB": return "cb"
@@ -82,7 +91,7 @@ struct Opcode {
     case "Z":   return "z"
     case "a16": return "a16"
     case "d16": return "d16"
-    case "d8":  return "d8"
+    case "d8":  return "n"
     case "r8":  return "r8"
 
     case "SP":    return "sp"
@@ -96,8 +105,6 @@ struct Opcode {
     case "(HL-)": return "pHLD"
     case "(a8)":  return "pA8"
     case "(a16)": return "pA16"
-
-    case "0": return "0"
 
     default: return "Unknown value: " + value.lowercased()
     }

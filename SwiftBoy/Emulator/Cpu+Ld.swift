@@ -2,6 +2,7 @@
 // swiftlint:disable file_length
 
 extension Cpu {
+  // TODO: Remove remaining d8
 
   /// Loads the contents of register r' into register r.
   mutating func ld_r_r(_ dst: SingleRegister, _ src: SingleRegister) {
@@ -10,7 +11,7 @@ extension Cpu {
   }
 
   /// Loads 8-bit immediate data n into register r.
-  mutating func ld_r_d8(_ r: SingleRegister, _ n: UInt8) {
+  mutating func ld_r_n(_ r: SingleRegister, _ n: UInt8) {
     self.registers.set(r, to: n)
   }
 
@@ -28,7 +29,7 @@ extension Cpu {
   }
 
   /// Loads 8-bit immediate data n into memory specified by register pair HL.
-  mutating func ld_pHL_d8(_ n: UInt8) {
+  mutating func ld_pHL_n(_ n: UInt8) {
     let hl = self.registers.hl
     self.memory.write(hl, value: n)
   }

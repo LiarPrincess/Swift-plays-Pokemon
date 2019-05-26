@@ -1,14 +1,15 @@
 // swiftlint:disable file_length
+// swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
 
-func printTick() throws {
+func printExecute() throws {
   let opcodes = try openOpcodesFile()
 
   printHeader()
   print("extension Cpu {")
-  print("")
-  printTickFunction(opcodes)
+  printExecuteFunction(opcodes.unprefixed)
   print("}")
-  print("// Implemented opcodes: \(255 - unimplementedOpcodes), remaining: \(unimplementedOpcodes)")
+  print("// Implemented opcodes: \(opcodes.unprefixed.count - unimplementedOpcodes), remaining: \(unimplementedOpcodes)")
 }
 
 private func printHeader() {
@@ -23,16 +24,11 @@ private func printHeader() {
   print("")
 }
 
-private func printTickFunction(_ opcodes: Opcodes) {
-  print("mutating func tick() {")
-  print("let opcodeIndex = self.memory.read(self.pc)")
-  print("let opcode = opcodes[opcodeIndex]")
-  print("")
-
-  print("// Swift compiler generates better code if we switch on 'opcode.type' and not on 'opcode'")
+private func printExecuteFunction(_ opcodes: [Opcode]) {
+  print("mutating func execute(_ opcode: Opcode) {")
   print("switch opcode.type {")
 
-  for op in opcodes.unprefixed { // .prefix(10)
+  for op in opcodes {
     printTick(op)
   }
 
@@ -40,13 +36,12 @@ private func printTickFunction(_ opcodes: Opcodes) {
   print("}")
 
   print("}")
-  print("")
 }
 
-// swiftlint:disable:next function_body_length cyclomatic_complexity
 private func printTick(_ opcode: Opcode) {
   let mnemonic = opcode.mnemonic.lowercased()
-  let d8 = "self.memory.read(self.pc + 1)"
+  let nextWord = "self.nextWord"
+  let nextLong = "self.nextLong"
 
   switch mnemonic {
   case "nop":
@@ -59,13 +54,13 @@ private func printTick(_ opcode: Opcode) {
     if isRegister(operand1) && isRegister(operand2) {
       print("case .\(opcode.enumCase): self.ld_r_r(.\(operand1), .\(operand2))")
     } else if isRegister(operand1) && isd8(operand2) {
-      print("case .\(opcode.enumCase): self.ld_r_d8(.\(operand1), \(d8))")
+      print("case .\(opcode.enumCase): self.ld_r_n(.\(operand1), \(nextWord))")
     } else if isRegister(operand1) && ispHL(operand2) {
       print("case .\(opcode.enumCase): self.ld_r_pHL(.\(operand1))")
     } else if ispHL(operand1) && isRegister(operand2) {
       print("case .\(opcode.enumCase): self.ld_pHL_r(.\(operand2))")
     } else if ispHL(operand1) && isd8(operand2) {
-      print("case .\(opcode.enumCase): self.ld_pHL_d8(\(d8))")
+      print("case .\(opcode.enumCase): self.ld_pHL_n(\(nextWord))")
     } else if isA(operand1) && ispBC(operand2) {
       print("case .\(opcode.enumCase): self.ld_a_pBC()")
     } else if isA(operand1) && ispDE(operand2) {
@@ -96,7 +91,7 @@ private func printTick(_ opcode: Opcode) {
     if isA(operand1) && isRegister(operand2) {
       print("case .\(opcode.enumCase): self.add_a_r(.\(operand2))")
     } else if isA(operand1) && isd8(operand2) {
-      print("case .\(opcode.enumCase): self.add_a_n(\(d8))")
+      print("case .\(opcode.enumCase): self.add_a_n(\(nextWord))")
     } else if isA(operand1) && ispHL(operand2) {
       print("case .\(opcode.enumCase): self.add_a_pHL()")
     } else if isHL(operand1) && isCombinedRegister(operand2) {
@@ -104,7 +99,7 @@ private func printTick(_ opcode: Opcode) {
     } else if opcode.addr == "0x39" {
       print("case .\(opcode.enumCase): self.add_hl_sp()")
     } else if opcode.addr == "0xe8" {
-      print("case .\(opcode.enumCase): self.add_sp_n(\(d8))")
+      print("case .\(opcode.enumCase): self.add_sp_n(\(nextWord))")
     }
     else { printUnimplementedOpcode(opcode) }
 
@@ -115,7 +110,7 @@ private func printTick(_ opcode: Opcode) {
     if isRegister(operand) {
       print("case .\(opcode.enumCase): self.adc_a_r(.\(operand))")
     } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.adc_a_n(\(d8))")
+      print("case .\(opcode.enumCase): self.adc_a_n(\(nextWord))")
     } else if ispHL(operand) {
       print("case .\(opcode.enumCase): self.adc_a_pHL()")
     }
@@ -128,7 +123,7 @@ private func printTick(_ opcode: Opcode) {
     if isRegister(operand) {
       print("case .\(opcode.enumCase): self.sub_a_r(.\(operand))")
     } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.sub_a_n(\(d8))")
+      print("case .\(opcode.enumCase): self.sub_a_n(\(nextWord))")
     } else if ispHL(operand) {
       print("case .\(opcode.enumCase): self.sub_a_pHL()")
     }
@@ -141,7 +136,7 @@ private func printTick(_ opcode: Opcode) {
     if isRegister(operand) {
       print("case .\(opcode.enumCase): self.sbc_a_r(.\(operand))")
     } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.sbc_a_n(\(d8))")
+      print("case .\(opcode.enumCase): self.sbc_a_n(\(nextWord))")
     } else if ispHL(operand) {
       print("case .\(opcode.enumCase): self.sbc_a_pHL()")
     }
@@ -153,7 +148,7 @@ private func printTick(_ opcode: Opcode) {
     if isRegister(operand) {
       print("case .\(opcode.enumCase): self.and_a_r(.\(operand))")
     } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.and_a_n(\(d8))")
+      print("case .\(opcode.enumCase): self.and_a_n(\(nextWord))")
     } else if ispHL(operand) {
       print("case .\(opcode.enumCase): self.and_a_pHL()")
     }
@@ -165,7 +160,7 @@ private func printTick(_ opcode: Opcode) {
     if isRegister(operand) {
       print("case .\(opcode.enumCase): self.or_a_r(.\(operand))")
     } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.or_a_n(\(d8))")
+      print("case .\(opcode.enumCase): self.or_a_n(\(nextWord))")
     } else if ispHL(operand) {
       print("case .\(opcode.enumCase): self.or_a_pHL()")
     }
@@ -177,7 +172,7 @@ private func printTick(_ opcode: Opcode) {
     if isRegister(operand) {
       print("case .\(opcode.enumCase): self.xor_a_r(.\(operand))")
     } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.xor_a_n(\(d8))")
+      print("case .\(opcode.enumCase): self.xor_a_n(\(nextWord))")
     } else if ispHL(operand) {
       print("case .\(opcode.enumCase): self.xor_a_pHL()")
     }
@@ -189,7 +184,7 @@ private func printTick(_ opcode: Opcode) {
     if isRegister(operand) {
       print("case .\(opcode.enumCase): self.cp_a_r(.\(operand))")
     } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.cp_a_n(\(d8))")
+      print("case .\(opcode.enumCase): self.cp_a_n(\(nextWord))")
     } else if ispHL(operand) {
       print("case .\(opcode.enumCase): self.cp_a_pHL()")
     }

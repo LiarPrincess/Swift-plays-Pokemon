@@ -17,9 +17,9 @@ class CpuLdTests: XCTestCase {
   }
 
   /// LD B,24h ; B← 24h
-  func test_ld_r_d8() {
+  func test_ld_r_n() {
     var cpu = Cpu()
-    cpu.ld_r_d8(.b, 0x24)
+    cpu.ld_r_n(.b, 0x24)
 
     XCTAssertEqual(cpu.registers.b, 0x24)
   }
@@ -48,10 +48,10 @@ class CpuLdTests: XCTestCase {
 
   /// When HL = 8AC5h,
   /// LD (HL), 0;8AC5h←0
-  func test_ld_pHL_d8() {
+  func test_ld_pHL_n() {
     var cpu = Cpu()
     cpu.registers.hl = 0x8ac5
-    cpu.ld_pHL_d8(0x3c) // memory starts with value 0
+    cpu.ld_pHL_n(0x3c) // memory starts with value 0
 
     XCTAssertEqual(cpu.memory.read(0x8ac5), 0x3c)
   }
