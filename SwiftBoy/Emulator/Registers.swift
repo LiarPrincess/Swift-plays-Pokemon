@@ -1,50 +1,70 @@
-private let zeroFlagPosition:      UInt8 = 7
-private let subtractFlagPosition:  UInt8 = 6
-private let halfCarryFlagPosition: UInt8 = 5
-private let carryFlagPosition:     UInt8 = 4
+enum SingleRegister {
+  case a
+  case b
+  case c
+  case d
+  case e
+  case h
+  case l
+}
+
+enum CombinedRegister {
+  case bc
+  case de
+  case hl
+}
 
 struct Registers {
 
-  var a: UInt8
-  var b: UInt8
-  var c: UInt8
-  var d: UInt8
-  var e: UInt8
-  var f: UInt8
-  var h: UInt8
-  var l: UInt8
+  /// Accumulator: A
+  /// An 8-bit register for storing data and the results of arithmetic and logical operations.
+  var a: UInt8 = 0
 
-  init() {
-    self.a = 0
-    self.b = 0
-    self.c = 0
-    self.d = 0
-    self.e = 0
-    self.f = 0
-    self.h = 0
-    self.l = 0
-  }
+  /// Auxiliary register: B
+  var b: UInt8 = 0
+
+  /// Auxiliary register: C
+  var c: UInt8 = 0
+
+  /// Auxiliary register: D
+  var d: UInt8 = 0
+
+  /// Auxiliary register: E
+  var e: UInt8 = 0
+
+  /// Auxiliary register: H
+  var h: UInt8 = 0
+
+  /// Auxiliary register: L
+  var l: UInt8 = 0
+
+  /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
+  var zeroFlag: Bool = false
+
+  /// N: Set to 1 following execution of the substruction instruction, regardless of the result.
+  var subtractFlag: Bool = false
+
+  /// H: Set to 1 when an operation results in carrying from or borrowing to bit 3.
+  var halfCarryFlag: Bool = false
+
+  /// CY: Set to 1 when an operation results in carrying from or borrowing to bit 7.
+  var carryFlag: Bool = false
 
   // MARK: - Combined registers
 
-  var af: UInt16 {
-    get { return self.get16(self.a, self.f) }
-    set { set16(&self.a, &self.f, to: newValue) }
-  }
-
   var bc: UInt16 {
     get { return self.get16(self.b, self.c) }
-    set { set16(&self.b, &self.c, to: newValue) }
+    set { self.set16(&self.b, &self.c, to: newValue) }
   }
 
   var de: UInt16 {
     get { return self.get16(self.d, self.e) }
-    set { set16(&self.d, &self.e, to: newValue) }
+    set { self.set16(&self.d, &self.e, to: newValue) }
   }
 
   var hl: UInt16 {
     get { return self.get16(self.h, self.l) }
-    set { set16(&self.h, &self.l, to: newValue) }
+    set { self.set16(&self.h, &self.l, to: newValue) }
   }
 
   private func get16(_ high: UInt8, _ low: UInt8) -> UInt16 {
@@ -56,36 +76,45 @@ struct Registers {
     low = UInt8(value & 0xff)
   }
 
-  // MARK: - Flags
+  // MARK: - Addressing
 
-  var zeroFlag: Bool {
-    get { return self.getFlag(at: zeroFlagPosition) }
-    set { self.setFlag(at: zeroFlagPosition, to: newValue) }
+  func get(_ r: SingleRegister) -> UInt8 {
+    switch r {
+    case .a: return self.a
+    case .b: return self.b
+    case .c: return self.c
+    case .d: return self.d
+    case .e: return self.e
+    case .h: return self.h
+    case .l: return self.l
+    }
   }
 
-  var subtractFlag: Bool {
-    get { return self.getFlag(at: subtractFlagPosition) }
-    set { self.setFlag(at: subtractFlagPosition, to: newValue) }
+  func get(_ r: CombinedRegister) -> UInt16 {
+    switch r {
+    case .bc: return self.bc
+    case .de: return self.de
+    case .hl: return self.hl
+    }
   }
 
-  var halfCarryFlag: Bool {
-    get { return self.getFlag(at: halfCarryFlagPosition) }
-    set { self.setFlag(at: halfCarryFlagPosition, to: newValue) }
+  mutating func set(_ r: SingleRegister, to value: UInt8) {
+    switch r {
+    case .a: self.a = value
+    case .b: self.b = value
+    case .c: self.c = value
+    case .d: self.d = value
+    case .e: self.e = value
+    case .h: self.h = value
+    case .l: self.l = value
+    }
   }
 
-  var carryFlag: Bool {
-    get { return self.getFlag(at: carryFlagPosition) }
-    set { self.setFlag(at: carryFlagPosition, to: newValue) }
-  }
-
-  private func getFlag(at position: UInt8) -> Bool {
-    let mask = UInt8(1) << position
-    return self.f & mask != 0
-  }
-
-  private mutating func setFlag(at position: UInt8, to value: Bool) {
-    let mask = UInt8(1) << position
-    if value { self.f |= mask }
-    else { self.f &= (~mask) }
+  mutating func set(_ r: CombinedRegister, to value: UInt16) {
+    switch r {
+    case .bc: self.bc = value
+    case .de: self.de = value
+    case .hl: self.hl = value
+    }
   }
 }

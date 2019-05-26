@@ -1,8 +1,8 @@
 import Foundation
 
 do {
-  try printOpcodes()
-//  try printSwitch()
+//  try printOpcodes()
+  try printTick()
 } catch  {
   print("Unexpected error: \(error).")
 }
