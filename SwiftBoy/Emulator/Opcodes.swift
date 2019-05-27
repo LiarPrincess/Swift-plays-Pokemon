@@ -12,7 +12,7 @@ enum OpcodeType {
   case inc_bc_03
   case inc_b_04
   case dec_b_05
-  case ld_b_n_06
+  case ld_b_d8_06
   case rlca_07
   case ld_pA16_sp_08
   case add_hl_bc_09
@@ -20,7 +20,7 @@ enum OpcodeType {
   case dec_bc_0b
   case inc_c_0c
   case dec_c_0d
-  case ld_c_n_0e
+  case ld_c_d8_0e
   case rrca_0f
   case stop_0_10
   case ld_de_d16_11
@@ -28,7 +28,7 @@ enum OpcodeType {
   case inc_de_13
   case inc_d_14
   case dec_d_15
-  case ld_d_n_16
+  case ld_d_d8_16
   case rla_17
   case jr_r8_18
   case add_hl_de_19
@@ -36,7 +36,7 @@ enum OpcodeType {
   case dec_de_1b
   case inc_e_1c
   case dec_e_1d
-  case ld_e_n_1e
+  case ld_e_d8_1e
   case rra_1f
   case jr_nz_r8_20
   case ld_hl_d16_21
@@ -44,7 +44,7 @@ enum OpcodeType {
   case inc_hl_23
   case inc_h_24
   case dec_h_25
-  case ld_h_n_26
+  case ld_h_d8_26
   case daa_27
   case jr_z_r8_28
   case add_hl_hl_29
@@ -52,7 +52,7 @@ enum OpcodeType {
   case dec_hl_2b
   case inc_l_2c
   case dec_l_2d
-  case ld_l_n_2e
+  case ld_l_d8_2e
   case cpl_2f
   case jr_nc_r8_30
   case ld_sp_d16_31
@@ -60,7 +60,7 @@ enum OpcodeType {
   case inc_sp_33
   case inc_pHL_34
   case dec_pHL_35
-  case ld_pHL_n_36
+  case ld_pHL_d8_36
   case scf_37
   case jr_c_r8_38
   case add_hl_sp_39
@@ -68,7 +68,7 @@ enum OpcodeType {
   case dec_sp_3b
   case inc_a_3c
   case dec_a_3d
-  case ld_a_n_3e
+  case ld_a_d8_3e
   case ccf_3f
   case ld_b_b_40
   case ld_b_c_41
@@ -204,7 +204,7 @@ enum OpcodeType {
   case jp_a16_c3
   case call_nz_a16_c4
   case push_bc_c5
-  case add_a_n_c6
+  case add_a_d8_c6
   case rst_00h_c7
   case ret_z_c8
   case ret_c9
@@ -212,291 +212,292 @@ enum OpcodeType {
   case prefix_cb_cb
   case call_z_a16_cc
   case call_a16_cd
-  case adc_a_n_ce
+  case adc_a_d8_ce
   case rst_08h_cf
   case ret_nc_d0
   case pop_de_d1
   case jp_nc_a16_d2
   case call_nc_a16_d4
   case push_de_d5
-  case sub_n_d6
+  case sub_d8_d6
   case rst_10h_d7
   case ret_c_d8
   case reti_d9
   case jp_c_a16_da
   case call_c_a16_dc
-  case sbc_a_n_de
+  case sbc_a_d8_de
   case rst_18h_df
   case ldh_pA8_a_e0
   case pop_hl_e1
   case ld_pC_a_e2
   case push_hl_e5
-  case and_n_e6
+  case and_d8_e6
   case rst_20h_e7
   case add_sp_r8_e8
   case jp_pHL_e9
   case ld_pA16_a_ea
-  case xor_n_ee
+  case xor_d8_ee
   case rst_28h_ef
   case ldh_a_pA8_f0
   case pop_af_f1
   case ld_a_pC_f2
   case di_f3
   case push_af_f5
-  case or_n_f6
+  case or_d8_f6
   case rst_30h_f7
-  case ld_hl_spPlusR8_f8
+  case ld_hl_spR8_f8
   case ld_sp_hl_f9
   case ld_a_pA16_fa
   case ei_fb
-  case cp_n_fe
+  case cp_d8_fe
   case rst_38h_ff
 }
 
 let opcodes: [Opcode] = [
-  Opcode("0x0", "nop",       type: .nop_00,                length: 1, cycles: [4]),
-  Opcode("0x1", "ld",        type: .ld_bc_d16_01,          length: 3, cycles: [12]),
-  Opcode("0x2", "ld",        type: .ld_pBC_a_02,           length: 1, cycles: [8]),
-  Opcode("0x3", "inc",       type: .inc_bc_03,             length: 1, cycles: [8]),
-  Opcode("0x4", "inc",       type: .inc_b_04,              length: 1, cycles: [4]),
-  Opcode("0x5", "dec",       type: .dec_b_05,              length: 1, cycles: [4]),
-  Opcode("0x6", "ld",        type: .ld_b_n_06,             length: 2, cycles: [8]),
-  Opcode("0x7", "rlca",      type: .rlca_07,               length: 1, cycles: [4]),
-  Opcode("0x8", "ld",        type: .ld_pA16_sp_08,         length: 3, cycles: [20]),
-  Opcode("0x9", "add",       type: .add_hl_bc_09,          length: 1, cycles: [8]),
-  Opcode("0xa", "ld",        type: .ld_a_pBC_0a,           length: 1, cycles: [8]),
-  Opcode("0xb", "dec",       type: .dec_bc_0b,             length: 1, cycles: [8]),
-  Opcode("0xc", "inc",       type: .inc_c_0c,              length: 1, cycles: [4]),
-  Opcode("0xd", "dec",       type: .dec_c_0d,              length: 1, cycles: [4]),
-  Opcode("0xe", "ld",        type: .ld_c_n_0e,             length: 2, cycles: [8]),
-  Opcode("0xf", "rrca",      type: .rrca_0f,               length: 1, cycles: [4]),
-  Opcode("0x10", "stop",     type: .stop_0_10,             length: 1, cycles: [4]),
-  Opcode("0x11", "ld",       type: .ld_de_d16_11,          length: 3, cycles: [12]),
-  Opcode("0x12", "ld",       type: .ld_pDE_a_12,           length: 1, cycles: [8]),
-  Opcode("0x13", "inc",      type: .inc_de_13,             length: 1, cycles: [8]),
-  Opcode("0x14", "inc",      type: .inc_d_14,              length: 1, cycles: [4]),
-  Opcode("0x15", "dec",      type: .dec_d_15,              length: 1, cycles: [4]),
-  Opcode("0x16", "ld",       type: .ld_d_n_16,             length: 2, cycles: [8]),
-  Opcode("0x17", "rla",      type: .rla_17,                length: 1, cycles: [4]),
-  Opcode("0x18", "jr",       type: .jr_r8_18,              length: 2, cycles: [12]),
-  Opcode("0x19", "add",      type: .add_hl_de_19,          length: 1, cycles: [8]),
-  Opcode("0x1a", "ld",       type: .ld_a_pDE_1a,           length: 1, cycles: [8]),
-  Opcode("0x1b", "dec",      type: .dec_de_1b,             length: 1, cycles: [8]),
-  Opcode("0x1c", "inc",      type: .inc_e_1c,              length: 1, cycles: [4]),
-  Opcode("0x1d", "dec",      type: .dec_e_1d,              length: 1, cycles: [4]),
-  Opcode("0x1e", "ld",       type: .ld_e_n_1e,             length: 2, cycles: [8]),
-  Opcode("0x1f", "rra",      type: .rra_1f,                length: 1, cycles: [4]),
-  Opcode("0x20", "jr",       type: .jr_nz_r8_20,           length: 2, cycles: [12, 8]),
-  Opcode("0x21", "ld",       type: .ld_hl_d16_21,          length: 3, cycles: [12]),
-  Opcode("0x22", "ld",       type: .ld_pHLI_a_22,          length: 1, cycles: [8]),
-  Opcode("0x23", "inc",      type: .inc_hl_23,             length: 1, cycles: [8]),
-  Opcode("0x24", "inc",      type: .inc_h_24,              length: 1, cycles: [4]),
-  Opcode("0x25", "dec",      type: .dec_h_25,              length: 1, cycles: [4]),
-  Opcode("0x26", "ld",       type: .ld_h_n_26,             length: 2, cycles: [8]),
-  Opcode("0x27", "daa",      type: .daa_27,                length: 1, cycles: [4]),
-  Opcode("0x28", "jr",       type: .jr_z_r8_28,            length: 2, cycles: [12, 8]),
-  Opcode("0x29", "add",      type: .add_hl_hl_29,          length: 1, cycles: [8]),
-  Opcode("0x2a", "ld",       type: .ld_a_pHLI_2a,          length: 1, cycles: [8]),
-  Opcode("0x2b", "dec",      type: .dec_hl_2b,             length: 1, cycles: [8]),
-  Opcode("0x2c", "inc",      type: .inc_l_2c,              length: 1, cycles: [4]),
-  Opcode("0x2d", "dec",      type: .dec_l_2d,              length: 1, cycles: [4]),
-  Opcode("0x2e", "ld",       type: .ld_l_n_2e,             length: 2, cycles: [8]),
-  Opcode("0x2f", "cpl",      type: .cpl_2f,                length: 1, cycles: [4]),
-  Opcode("0x30", "jr",       type: .jr_nc_r8_30,           length: 2, cycles: [12, 8]),
-  Opcode("0x31", "ld",       type: .ld_sp_d16_31,          length: 3, cycles: [12]),
-  Opcode("0x32", "ld",       type: .ld_pHLD_a_32,          length: 1, cycles: [8]),
-  Opcode("0x33", "inc",      type: .inc_sp_33,             length: 1, cycles: [8]),
-  Opcode("0x34", "inc",      type: .inc_pHL_34,            length: 1, cycles: [12]),
-  Opcode("0x35", "dec",      type: .dec_pHL_35,            length: 1, cycles: [12]),
-  Opcode("0x36", "ld",       type: .ld_pHL_n_36,           length: 2, cycles: [12]),
-  Opcode("0x37", "scf",      type: .scf_37,                length: 1, cycles: [4]),
-  Opcode("0x38", "jr",       type: .jr_c_r8_38,            length: 2, cycles: [12, 8]),
-  Opcode("0x39", "add",      type: .add_hl_sp_39,          length: 1, cycles: [8]),
-  Opcode("0x3a", "ld",       type: .ld_a_pHLD_3a,          length: 1, cycles: [8]),
-  Opcode("0x3b", "dec",      type: .dec_sp_3b,             length: 1, cycles: [8]),
-  Opcode("0x3c", "inc",      type: .inc_a_3c,              length: 1, cycles: [4]),
-  Opcode("0x3d", "dec",      type: .dec_a_3d,              length: 1, cycles: [4]),
-  Opcode("0x3e", "ld",       type: .ld_a_n_3e,             length: 2, cycles: [8]),
-  Opcode("0x3f", "ccf",      type: .ccf_3f,                length: 1, cycles: [4]),
-  Opcode("0x40", "ld",       type: .ld_b_b_40,             length: 1, cycles: [4]),
-  Opcode("0x41", "ld",       type: .ld_b_c_41,             length: 1, cycles: [4]),
-  Opcode("0x42", "ld",       type: .ld_b_d_42,             length: 1, cycles: [4]),
-  Opcode("0x43", "ld",       type: .ld_b_e_43,             length: 1, cycles: [4]),
-  Opcode("0x44", "ld",       type: .ld_b_h_44,             length: 1, cycles: [4]),
-  Opcode("0x45", "ld",       type: .ld_b_l_45,             length: 1, cycles: [4]),
-  Opcode("0x46", "ld",       type: .ld_b_pHL_46,           length: 1, cycles: [8]),
-  Opcode("0x47", "ld",       type: .ld_b_a_47,             length: 1, cycles: [4]),
-  Opcode("0x48", "ld",       type: .ld_c_b_48,             length: 1, cycles: [4]),
-  Opcode("0x49", "ld",       type: .ld_c_c_49,             length: 1, cycles: [4]),
-  Opcode("0x4a", "ld",       type: .ld_c_d_4a,             length: 1, cycles: [4]),
-  Opcode("0x4b", "ld",       type: .ld_c_e_4b,             length: 1, cycles: [4]),
-  Opcode("0x4c", "ld",       type: .ld_c_h_4c,             length: 1, cycles: [4]),
-  Opcode("0x4d", "ld",       type: .ld_c_l_4d,             length: 1, cycles: [4]),
-  Opcode("0x4e", "ld",       type: .ld_c_pHL_4e,           length: 1, cycles: [8]),
-  Opcode("0x4f", "ld",       type: .ld_c_a_4f,             length: 1, cycles: [4]),
-  Opcode("0x50", "ld",       type: .ld_d_b_50,             length: 1, cycles: [4]),
-  Opcode("0x51", "ld",       type: .ld_d_c_51,             length: 1, cycles: [4]),
-  Opcode("0x52", "ld",       type: .ld_d_d_52,             length: 1, cycles: [4]),
-  Opcode("0x53", "ld",       type: .ld_d_e_53,             length: 1, cycles: [4]),
-  Opcode("0x54", "ld",       type: .ld_d_h_54,             length: 1, cycles: [4]),
-  Opcode("0x55", "ld",       type: .ld_d_l_55,             length: 1, cycles: [4]),
-  Opcode("0x56", "ld",       type: .ld_d_pHL_56,           length: 1, cycles: [8]),
-  Opcode("0x57", "ld",       type: .ld_d_a_57,             length: 1, cycles: [4]),
-  Opcode("0x58", "ld",       type: .ld_e_b_58,             length: 1, cycles: [4]),
-  Opcode("0x59", "ld",       type: .ld_e_c_59,             length: 1, cycles: [4]),
-  Opcode("0x5a", "ld",       type: .ld_e_d_5a,             length: 1, cycles: [4]),
-  Opcode("0x5b", "ld",       type: .ld_e_e_5b,             length: 1, cycles: [4]),
-  Opcode("0x5c", "ld",       type: .ld_e_h_5c,             length: 1, cycles: [4]),
-  Opcode("0x5d", "ld",       type: .ld_e_l_5d,             length: 1, cycles: [4]),
-  Opcode("0x5e", "ld",       type: .ld_e_pHL_5e,           length: 1, cycles: [8]),
-  Opcode("0x5f", "ld",       type: .ld_e_a_5f,             length: 1, cycles: [4]),
-  Opcode("0x60", "ld",       type: .ld_h_b_60,             length: 1, cycles: [4]),
-  Opcode("0x61", "ld",       type: .ld_h_c_61,             length: 1, cycles: [4]),
-  Opcode("0x62", "ld",       type: .ld_h_d_62,             length: 1, cycles: [4]),
-  Opcode("0x63", "ld",       type: .ld_h_e_63,             length: 1, cycles: [4]),
-  Opcode("0x64", "ld",       type: .ld_h_h_64,             length: 1, cycles: [4]),
-  Opcode("0x65", "ld",       type: .ld_h_l_65,             length: 1, cycles: [4]),
-  Opcode("0x66", "ld",       type: .ld_h_pHL_66,           length: 1, cycles: [8]),
-  Opcode("0x67", "ld",       type: .ld_h_a_67,             length: 1, cycles: [4]),
-  Opcode("0x68", "ld",       type: .ld_l_b_68,             length: 1, cycles: [4]),
-  Opcode("0x69", "ld",       type: .ld_l_c_69,             length: 1, cycles: [4]),
-  Opcode("0x6a", "ld",       type: .ld_l_d_6a,             length: 1, cycles: [4]),
-  Opcode("0x6b", "ld",       type: .ld_l_e_6b,             length: 1, cycles: [4]),
-  Opcode("0x6c", "ld",       type: .ld_l_h_6c,             length: 1, cycles: [4]),
-  Opcode("0x6d", "ld",       type: .ld_l_l_6d,             length: 1, cycles: [4]),
-  Opcode("0x6e", "ld",       type: .ld_l_pHL_6e,           length: 1, cycles: [8]),
-  Opcode("0x6f", "ld",       type: .ld_l_a_6f,             length: 1, cycles: [4]),
-  Opcode("0x70", "ld",       type: .ld_pHL_b_70,           length: 1, cycles: [8]),
-  Opcode("0x71", "ld",       type: .ld_pHL_c_71,           length: 1, cycles: [8]),
-  Opcode("0x72", "ld",       type: .ld_pHL_d_72,           length: 1, cycles: [8]),
-  Opcode("0x73", "ld",       type: .ld_pHL_e_73,           length: 1, cycles: [8]),
-  Opcode("0x74", "ld",       type: .ld_pHL_h_74,           length: 1, cycles: [8]),
-  Opcode("0x75", "ld",       type: .ld_pHL_l_75,           length: 1, cycles: [8]),
-  Opcode("0x76", "halt",     type: .halt_76,               length: 1, cycles: [4]),
-  Opcode("0x77", "ld",       type: .ld_pHL_a_77,           length: 1, cycles: [8]),
-  Opcode("0x78", "ld",       type: .ld_a_b_78,             length: 1, cycles: [4]),
-  Opcode("0x79", "ld",       type: .ld_a_c_79,             length: 1, cycles: [4]),
-  Opcode("0x7a", "ld",       type: .ld_a_d_7a,             length: 1, cycles: [4]),
-  Opcode("0x7b", "ld",       type: .ld_a_e_7b,             length: 1, cycles: [4]),
-  Opcode("0x7c", "ld",       type: .ld_a_h_7c,             length: 1, cycles: [4]),
-  Opcode("0x7d", "ld",       type: .ld_a_l_7d,             length: 1, cycles: [4]),
-  Opcode("0x7e", "ld",       type: .ld_a_pHL_7e,           length: 1, cycles: [8]),
-  Opcode("0x7f", "ld",       type: .ld_a_a_7f,             length: 1, cycles: [4]),
-  Opcode("0x80", "add",      type: .add_a_b_80,            length: 1, cycles: [4]),
-  Opcode("0x81", "add",      type: .add_a_c_81,            length: 1, cycles: [4]),
-  Opcode("0x82", "add",      type: .add_a_d_82,            length: 1, cycles: [4]),
-  Opcode("0x83", "add",      type: .add_a_e_83,            length: 1, cycles: [4]),
-  Opcode("0x84", "add",      type: .add_a_h_84,            length: 1, cycles: [4]),
-  Opcode("0x85", "add",      type: .add_a_l_85,            length: 1, cycles: [4]),
-  Opcode("0x86", "add",      type: .add_a_pHL_86,          length: 1, cycles: [8]),
-  Opcode("0x87", "add",      type: .add_a_a_87,            length: 1, cycles: [4]),
-  Opcode("0x88", "adc",      type: .adc_a_b_88,            length: 1, cycles: [4]),
-  Opcode("0x89", "adc",      type: .adc_a_c_89,            length: 1, cycles: [4]),
-  Opcode("0x8a", "adc",      type: .adc_a_d_8a,            length: 1, cycles: [4]),
-  Opcode("0x8b", "adc",      type: .adc_a_e_8b,            length: 1, cycles: [4]),
-  Opcode("0x8c", "adc",      type: .adc_a_h_8c,            length: 1, cycles: [4]),
-  Opcode("0x8d", "adc",      type: .adc_a_l_8d,            length: 1, cycles: [4]),
-  Opcode("0x8e", "adc",      type: .adc_a_pHL_8e,          length: 1, cycles: [8]),
-  Opcode("0x8f", "adc",      type: .adc_a_a_8f,            length: 1, cycles: [4]),
-  Opcode("0x90", "sub",      type: .sub_b_90,              length: 1, cycles: [4]),
-  Opcode("0x91", "sub",      type: .sub_c_91,              length: 1, cycles: [4]),
-  Opcode("0x92", "sub",      type: .sub_d_92,              length: 1, cycles: [4]),
-  Opcode("0x93", "sub",      type: .sub_e_93,              length: 1, cycles: [4]),
-  Opcode("0x94", "sub",      type: .sub_h_94,              length: 1, cycles: [4]),
-  Opcode("0x95", "sub",      type: .sub_l_95,              length: 1, cycles: [4]),
-  Opcode("0x96", "sub",      type: .sub_pHL_96,            length: 1, cycles: [8]),
-  Opcode("0x97", "sub",      type: .sub_a_97,              length: 1, cycles: [4]),
-  Opcode("0x98", "sbc",      type: .sbc_a_b_98,            length: 1, cycles: [4]),
-  Opcode("0x99", "sbc",      type: .sbc_a_c_99,            length: 1, cycles: [4]),
-  Opcode("0x9a", "sbc",      type: .sbc_a_d_9a,            length: 1, cycles: [4]),
-  Opcode("0x9b", "sbc",      type: .sbc_a_e_9b,            length: 1, cycles: [4]),
-  Opcode("0x9c", "sbc",      type: .sbc_a_h_9c,            length: 1, cycles: [4]),
-  Opcode("0x9d", "sbc",      type: .sbc_a_l_9d,            length: 1, cycles: [4]),
-  Opcode("0x9e", "sbc",      type: .sbc_a_pHL_9e,          length: 1, cycles: [8]),
-  Opcode("0x9f", "sbc",      type: .sbc_a_a_9f,            length: 1, cycles: [4]),
-  Opcode("0xa0", "and",      type: .and_b_a0,              length: 1, cycles: [4]),
-  Opcode("0xa1", "and",      type: .and_c_a1,              length: 1, cycles: [4]),
-  Opcode("0xa2", "and",      type: .and_d_a2,              length: 1, cycles: [4]),
-  Opcode("0xa3", "and",      type: .and_e_a3,              length: 1, cycles: [4]),
-  Opcode("0xa4", "and",      type: .and_h_a4,              length: 1, cycles: [4]),
-  Opcode("0xa5", "and",      type: .and_l_a5,              length: 1, cycles: [4]),
-  Opcode("0xa6", "and",      type: .and_pHL_a6,            length: 1, cycles: [8]),
-  Opcode("0xa7", "and",      type: .and_a_a7,              length: 1, cycles: [4]),
-  Opcode("0xa8", "xor",      type: .xor_b_a8,              length: 1, cycles: [4]),
-  Opcode("0xa9", "xor",      type: .xor_c_a9,              length: 1, cycles: [4]),
-  Opcode("0xaa", "xor",      type: .xor_d_aa,              length: 1, cycles: [4]),
-  Opcode("0xab", "xor",      type: .xor_e_ab,              length: 1, cycles: [4]),
-  Opcode("0xac", "xor",      type: .xor_h_ac,              length: 1, cycles: [4]),
-  Opcode("0xad", "xor",      type: .xor_l_ad,              length: 1, cycles: [4]),
-  Opcode("0xae", "xor",      type: .xor_pHL_ae,            length: 1, cycles: [8]),
-  Opcode("0xaf", "xor",      type: .xor_a_af,              length: 1, cycles: [4]),
-  Opcode("0xb0", "or",       type: .or_b_b0,               length: 1, cycles: [4]),
-  Opcode("0xb1", "or",       type: .or_c_b1,               length: 1, cycles: [4]),
-  Opcode("0xb2", "or",       type: .or_d_b2,               length: 1, cycles: [4]),
-  Opcode("0xb3", "or",       type: .or_e_b3,               length: 1, cycles: [4]),
-  Opcode("0xb4", "or",       type: .or_h_b4,               length: 1, cycles: [4]),
-  Opcode("0xb5", "or",       type: .or_l_b5,               length: 1, cycles: [4]),
-  Opcode("0xb6", "or",       type: .or_pHL_b6,             length: 1, cycles: [8]),
-  Opcode("0xb7", "or",       type: .or_a_b7,               length: 1, cycles: [4]),
-  Opcode("0xb8", "cp",       type: .cp_b_b8,               length: 1, cycles: [4]),
-  Opcode("0xb9", "cp",       type: .cp_c_b9,               length: 1, cycles: [4]),
-  Opcode("0xba", "cp",       type: .cp_d_ba,               length: 1, cycles: [4]),
-  Opcode("0xbb", "cp",       type: .cp_e_bb,               length: 1, cycles: [4]),
-  Opcode("0xbc", "cp",       type: .cp_h_bc,               length: 1, cycles: [4]),
-  Opcode("0xbd", "cp",       type: .cp_l_bd,               length: 1, cycles: [4]),
-  Opcode("0xbe", "cp",       type: .cp_pHL_be,             length: 1, cycles: [8]),
-  Opcode("0xbf", "cp",       type: .cp_a_bf,               length: 1, cycles: [4]),
-  Opcode("0xc0", "ret",      type: .ret_nz_c0,             length: 1, cycles: [20, 8]),
-  Opcode("0xc1", "pop",      type: .pop_bc_c1,             length: 1, cycles: [12]),
-  Opcode("0xc2", "jp",       type: .jp_nz_a16_c2,          length: 3, cycles: [16, 12]),
-  Opcode("0xc3", "jp",       type: .jp_a16_c3,             length: 3, cycles: [16]),
-  Opcode("0xc4", "call",     type: .call_nz_a16_c4,        length: 3, cycles: [24, 12]),
-  Opcode("0xc5", "push",     type: .push_bc_c5,            length: 1, cycles: [16]),
-  Opcode("0xc6", "add",      type: .add_a_n_c6,            length: 2, cycles: [8]),
-  Opcode("0xc7", "rst",      type: .rst_00h_c7,            length: 1, cycles: [16]),
-  Opcode("0xc8", "ret",      type: .ret_z_c8,              length: 1, cycles: [20, 8]),
-  Opcode("0xc9", "ret",      type: .ret_c9,                length: 1, cycles: [16]),
-  Opcode("0xca", "jp",       type: .jp_z_a16_ca,           length: 3, cycles: [16, 12]),
-  Opcode("0xcb", "prefix",   type: .prefix_cb_cb,          length: 1, cycles: [4]),
-  Opcode("0xcc", "call",     type: .call_z_a16_cc,         length: 3, cycles: [24, 12]),
-  Opcode("0xcd", "call",     type: .call_a16_cd,           length: 3, cycles: [24]),
-  Opcode("0xce", "adc",      type: .adc_a_n_ce,            length: 2, cycles: [8]),
-  Opcode("0xcf", "rst",      type: .rst_08h_cf,            length: 1, cycles: [16]),
-  Opcode("0xd0", "ret",      type: .ret_nc_d0,             length: 1, cycles: [20, 8]),
-  Opcode("0xd1", "pop",      type: .pop_de_d1,             length: 1, cycles: [12]),
-  Opcode("0xd2", "jp",       type: .jp_nc_a16_d2,          length: 3, cycles: [16, 12]),
-  Opcode("0xd4", "call",     type: .call_nc_a16_d4,        length: 3, cycles: [24, 12]),
-  Opcode("0xd5", "push",     type: .push_de_d5,            length: 1, cycles: [16]),
-  Opcode("0xd6", "sub",      type: .sub_n_d6,              length: 2, cycles: [8]),
-  Opcode("0xd7", "rst",      type: .rst_10h_d7,            length: 1, cycles: [16]),
-  Opcode("0xd8", "ret",      type: .ret_c_d8,              length: 1, cycles: [20, 8]),
-  Opcode("0xd9", "reti",     type: .reti_d9,               length: 1, cycles: [16]),
-  Opcode("0xda", "jp",       type: .jp_c_a16_da,           length: 3, cycles: [16, 12]),
-  Opcode("0xdc", "call",     type: .call_c_a16_dc,         length: 3, cycles: [24, 12]),
-  Opcode("0xde", "sbc",      type: .sbc_a_n_de,            length: 2, cycles: [8]),
-  Opcode("0xdf", "rst",      type: .rst_18h_df,            length: 1, cycles: [16]),
-  Opcode("0xe0", "ldh",      type: .ldh_pA8_a_e0,          length: 2, cycles: [12]),
-  Opcode("0xe1", "pop",      type: .pop_hl_e1,             length: 1, cycles: [12]),
-  Opcode("0xe2", "ld",       type: .ld_pC_a_e2,            length: 1, cycles: [8]),
-  Opcode("0xe5", "push",     type: .push_hl_e5,            length: 1, cycles: [16]),
-  Opcode("0xe6", "and",      type: .and_n_e6,              length: 2, cycles: [8]),
-  Opcode("0xe7", "rst",      type: .rst_20h_e7,            length: 1, cycles: [16]),
-  Opcode("0xe8", "add",      type: .add_sp_r8_e8,          length: 2, cycles: [16]),
-  Opcode("0xe9", "jp",       type: .jp_pHL_e9,             length: 1, cycles: [4]),
-  Opcode("0xea", "ld",       type: .ld_pA16_a_ea,          length: 3, cycles: [16]),
-  Opcode("0xee", "xor",      type: .xor_n_ee,              length: 2, cycles: [8]),
-  Opcode("0xef", "rst",      type: .rst_28h_ef,            length: 1, cycles: [16]),
-  Opcode("0xf0", "ldh",      type: .ldh_a_pA8_f0,          length: 2, cycles: [12]),
-  Opcode("0xf1", "pop",      type: .pop_af_f1,             length: 1, cycles: [12]),
-  Opcode("0xf2", "ld",       type: .ld_a_pC_f2,            length: 1, cycles: [8]),
-  Opcode("0xf3", "di",       type: .di_f3,                 length: 1, cycles: [4]),
-  Opcode("0xf5", "push",     type: .push_af_f5,            length: 1, cycles: [16]),
-  Opcode("0xf6", "or",       type: .or_n_f6,               length: 2, cycles: [8]),
-  Opcode("0xf7", "rst",      type: .rst_30h_f7,            length: 1, cycles: [16]),
-  Opcode("0xf8", "ld",       type: .ld_hl_spPlusR8_f8,     length: 2, cycles: [12]),
-  Opcode("0xf9", "ld",       type: .ld_sp_hl_f9,           length: 1, cycles: [8]),
-  Opcode("0xfa", "ld",       type: .ld_a_pA16_fa,          length: 3, cycles: [16]),
-  Opcode("0xfb", "ei",       type: .ei_fb,                 length: 1, cycles: [4]),
-  Opcode("0xfe", "cp",       type: .cp_n_fe,               length: 2, cycles: [8]),
-  Opcode("0xff", "rst",      type: .rst_38h_ff,            length: 1, cycles: [16]),
+  Opcode(addr: "0x0",     type: .nop_00,            debug: "nop",            length: 1, cycles: [4]),
+  Opcode(addr: "0x1",     type: .ld_bc_d16_01,      debug: "ld_bc_d16",      length: 3, cycles: [12]),
+  Opcode(addr: "0x2",     type: .ld_pBC_a_02,       debug: "ld_pBC_a",       length: 1, cycles: [8]),
+  Opcode(addr: "0x3",     type: .inc_bc_03,         debug: "inc_bc",         length: 1, cycles: [8]),
+  Opcode(addr: "0x4",     type: .inc_b_04,          debug: "inc_b",          length: 1, cycles: [4]),
+  Opcode(addr: "0x5",     type: .dec_b_05,          debug: "dec_b",          length: 1, cycles: [4]),
+  Opcode(addr: "0x6",     type: .ld_b_d8_06,        debug: "ld_b_d8",        length: 2, cycles: [8]),
+  Opcode(addr: "0x7",     type: .rlca_07,           debug: "rlca",           length: 1, cycles: [4]),
+  Opcode(addr: "0x8",     type: .ld_pA16_sp_08,     debug: "ld_pA16_sp",     length: 3, cycles: [20]),
+  Opcode(addr: "0x9",     type: .add_hl_bc_09,      debug: "add_hl_bc",      length: 1, cycles: [8]),
+  Opcode(addr: "0xa",     type: .ld_a_pBC_0a,       debug: "ld_a_pBC",       length: 1, cycles: [8]),
+  Opcode(addr: "0xb",     type: .dec_bc_0b,         debug: "dec_bc",         length: 1, cycles: [8]),
+  Opcode(addr: "0xc",     type: .inc_c_0c,          debug: "inc_c",          length: 1, cycles: [4]),
+  Opcode(addr: "0xd",     type: .dec_c_0d,          debug: "dec_c",          length: 1, cycles: [4]),
+  Opcode(addr: "0xe",     type: .ld_c_d8_0e,        debug: "ld_c_d8",        length: 2, cycles: [8]),
+  Opcode(addr: "0xf",     type: .rrca_0f,           debug: "rrca",           length: 1, cycles: [4]),
+  Opcode(addr: "0x10",    type: .stop_0_10,         debug: "stop_0",         length: 1, cycles: [4]),
+  Opcode(addr: "0x11",    type: .ld_de_d16_11,      debug: "ld_de_d16",      length: 3, cycles: [12]),
+  Opcode(addr: "0x12",    type: .ld_pDE_a_12,       debug: "ld_pDE_a",       length: 1, cycles: [8]),
+  Opcode(addr: "0x13",    type: .inc_de_13,         debug: "inc_de",         length: 1, cycles: [8]),
+  Opcode(addr: "0x14",    type: .inc_d_14,          debug: "inc_d",          length: 1, cycles: [4]),
+  Opcode(addr: "0x15",    type: .dec_d_15,          debug: "dec_d",          length: 1, cycles: [4]),
+  Opcode(addr: "0x16",    type: .ld_d_d8_16,        debug: "ld_d_d8",        length: 2, cycles: [8]),
+  Opcode(addr: "0x17",    type: .rla_17,            debug: "rla",            length: 1, cycles: [4]),
+  Opcode(addr: "0x18",    type: .jr_r8_18,          debug: "jr_r8",          length: 2, cycles: [12]),
+  Opcode(addr: "0x19",    type: .add_hl_de_19,      debug: "add_hl_de",      length: 1, cycles: [8]),
+  Opcode(addr: "0x1a",    type: .ld_a_pDE_1a,       debug: "ld_a_pDE",       length: 1, cycles: [8]),
+  Opcode(addr: "0x1b",    type: .dec_de_1b,         debug: "dec_de",         length: 1, cycles: [8]),
+  Opcode(addr: "0x1c",    type: .inc_e_1c,          debug: "inc_e",          length: 1, cycles: [4]),
+  Opcode(addr: "0x1d",    type: .dec_e_1d,          debug: "dec_e",          length: 1, cycles: [4]),
+  Opcode(addr: "0x1e",    type: .ld_e_d8_1e,        debug: "ld_e_d8",        length: 2, cycles: [8]),
+  Opcode(addr: "0x1f",    type: .rra_1f,            debug: "rra",            length: 1, cycles: [4]),
+  Opcode(addr: "0x20",    type: .jr_nz_r8_20,       debug: "jr_nz_r8",       length: 2, cycles: [12, 8]),
+  Opcode(addr: "0x21",    type: .ld_hl_d16_21,      debug: "ld_hl_d16",      length: 3, cycles: [12]),
+  Opcode(addr: "0x22",    type: .ld_pHLI_a_22,      debug: "ld_pHLI_a",      length: 1, cycles: [8]),
+  Opcode(addr: "0x23",    type: .inc_hl_23,         debug: "inc_hl",         length: 1, cycles: [8]),
+  Opcode(addr: "0x24",    type: .inc_h_24,          debug: "inc_h",          length: 1, cycles: [4]),
+  Opcode(addr: "0x25",    type: .dec_h_25,          debug: "dec_h",          length: 1, cycles: [4]),
+  Opcode(addr: "0x26",    type: .ld_h_d8_26,        debug: "ld_h_d8",        length: 2, cycles: [8]),
+  Opcode(addr: "0x27",    type: .daa_27,            debug: "daa",            length: 1, cycles: [4]),
+  Opcode(addr: "0x28",    type: .jr_z_r8_28,        debug: "jr_z_r8",        length: 2, cycles: [12, 8]),
+  Opcode(addr: "0x29",    type: .add_hl_hl_29,      debug: "add_hl_hl",      length: 1, cycles: [8]),
+  Opcode(addr: "0x2a",    type: .ld_a_pHLI_2a,      debug: "ld_a_pHLI",      length: 1, cycles: [8]),
+  Opcode(addr: "0x2b",    type: .dec_hl_2b,         debug: "dec_hl",         length: 1, cycles: [8]),
+  Opcode(addr: "0x2c",    type: .inc_l_2c,          debug: "inc_l",          length: 1, cycles: [4]),
+  Opcode(addr: "0x2d",    type: .dec_l_2d,          debug: "dec_l",          length: 1, cycles: [4]),
+  Opcode(addr: "0x2e",    type: .ld_l_d8_2e,        debug: "ld_l_d8",        length: 2, cycles: [8]),
+  Opcode(addr: "0x2f",    type: .cpl_2f,            debug: "cpl",            length: 1, cycles: [4]),
+  Opcode(addr: "0x30",    type: .jr_nc_r8_30,       debug: "jr_nc_r8",       length: 2, cycles: [12, 8]),
+  Opcode(addr: "0x31",    type: .ld_sp_d16_31,      debug: "ld_sp_d16",      length: 3, cycles: [12]),
+  Opcode(addr: "0x32",    type: .ld_pHLD_a_32,      debug: "ld_pHLD_a",      length: 1, cycles: [8]),
+  Opcode(addr: "0x33",    type: .inc_sp_33,         debug: "inc_sp",         length: 1, cycles: [8]),
+  Opcode(addr: "0x34",    type: .inc_pHL_34,        debug: "inc_pHL",        length: 1, cycles: [12]),
+  Opcode(addr: "0x35",    type: .dec_pHL_35,        debug: "dec_pHL",        length: 1, cycles: [12]),
+  Opcode(addr: "0x36",    type: .ld_pHL_d8_36,      debug: "ld_pHL_d8",      length: 2, cycles: [12]),
+  Opcode(addr: "0x37",    type: .scf_37,            debug: "scf",            length: 1, cycles: [4]),
+  Opcode(addr: "0x38",    type: .jr_c_r8_38,        debug: "jr_c_r8",        length: 2, cycles: [12, 8]),
+  Opcode(addr: "0x39",    type: .add_hl_sp_39,      debug: "add_hl_sp",      length: 1, cycles: [8]),
+  Opcode(addr: "0x3a",    type: .ld_a_pHLD_3a,      debug: "ld_a_pHLD",      length: 1, cycles: [8]),
+  Opcode(addr: "0x3b",    type: .dec_sp_3b,         debug: "dec_sp",         length: 1, cycles: [8]),
+  Opcode(addr: "0x3c",    type: .inc_a_3c,          debug: "inc_a",          length: 1, cycles: [4]),
+  Opcode(addr: "0x3d",    type: .dec_a_3d,          debug: "dec_a",          length: 1, cycles: [4]),
+  Opcode(addr: "0x3e",    type: .ld_a_d8_3e,        debug: "ld_a_d8",        length: 2, cycles: [8]),
+  Opcode(addr: "0x3f",    type: .ccf_3f,            debug: "ccf",            length: 1, cycles: [4]),
+  Opcode(addr: "0x40",    type: .ld_b_b_40,         debug: "ld_b_b",         length: 1, cycles: [4]),
+  Opcode(addr: "0x41",    type: .ld_b_c_41,         debug: "ld_b_c",         length: 1, cycles: [4]),
+  Opcode(addr: "0x42",    type: .ld_b_d_42,         debug: "ld_b_d",         length: 1, cycles: [4]),
+  Opcode(addr: "0x43",    type: .ld_b_e_43,         debug: "ld_b_e",         length: 1, cycles: [4]),
+  Opcode(addr: "0x44",    type: .ld_b_h_44,         debug: "ld_b_h",         length: 1, cycles: [4]),
+  Opcode(addr: "0x45",    type: .ld_b_l_45,         debug: "ld_b_l",         length: 1, cycles: [4]),
+  Opcode(addr: "0x46",    type: .ld_b_pHL_46,       debug: "ld_b_pHL",       length: 1, cycles: [8]),
+  Opcode(addr: "0x47",    type: .ld_b_a_47,         debug: "ld_b_a",         length: 1, cycles: [4]),
+  Opcode(addr: "0x48",    type: .ld_c_b_48,         debug: "ld_c_b",         length: 1, cycles: [4]),
+  Opcode(addr: "0x49",    type: .ld_c_c_49,         debug: "ld_c_c",         length: 1, cycles: [4]),
+  Opcode(addr: "0x4a",    type: .ld_c_d_4a,         debug: "ld_c_d",         length: 1, cycles: [4]),
+  Opcode(addr: "0x4b",    type: .ld_c_e_4b,         debug: "ld_c_e",         length: 1, cycles: [4]),
+  Opcode(addr: "0x4c",    type: .ld_c_h_4c,         debug: "ld_c_h",         length: 1, cycles: [4]),
+  Opcode(addr: "0x4d",    type: .ld_c_l_4d,         debug: "ld_c_l",         length: 1, cycles: [4]),
+  Opcode(addr: "0x4e",    type: .ld_c_pHL_4e,       debug: "ld_c_pHL",       length: 1, cycles: [8]),
+  Opcode(addr: "0x4f",    type: .ld_c_a_4f,         debug: "ld_c_a",         length: 1, cycles: [4]),
+  Opcode(addr: "0x50",    type: .ld_d_b_50,         debug: "ld_d_b",         length: 1, cycles: [4]),
+  Opcode(addr: "0x51",    type: .ld_d_c_51,         debug: "ld_d_c",         length: 1, cycles: [4]),
+  Opcode(addr: "0x52",    type: .ld_d_d_52,         debug: "ld_d_d",         length: 1, cycles: [4]),
+  Opcode(addr: "0x53",    type: .ld_d_e_53,         debug: "ld_d_e",         length: 1, cycles: [4]),
+  Opcode(addr: "0x54",    type: .ld_d_h_54,         debug: "ld_d_h",         length: 1, cycles: [4]),
+  Opcode(addr: "0x55",    type: .ld_d_l_55,         debug: "ld_d_l",         length: 1, cycles: [4]),
+  Opcode(addr: "0x56",    type: .ld_d_pHL_56,       debug: "ld_d_pHL",       length: 1, cycles: [8]),
+  Opcode(addr: "0x57",    type: .ld_d_a_57,         debug: "ld_d_a",         length: 1, cycles: [4]),
+  Opcode(addr: "0x58",    type: .ld_e_b_58,         debug: "ld_e_b",         length: 1, cycles: [4]),
+  Opcode(addr: "0x59",    type: .ld_e_c_59,         debug: "ld_e_c",         length: 1, cycles: [4]),
+  Opcode(addr: "0x5a",    type: .ld_e_d_5a,         debug: "ld_e_d",         length: 1, cycles: [4]),
+  Opcode(addr: "0x5b",    type: .ld_e_e_5b,         debug: "ld_e_e",         length: 1, cycles: [4]),
+  Opcode(addr: "0x5c",    type: .ld_e_h_5c,         debug: "ld_e_h",         length: 1, cycles: [4]),
+  Opcode(addr: "0x5d",    type: .ld_e_l_5d,         debug: "ld_e_l",         length: 1, cycles: [4]),
+  Opcode(addr: "0x5e",    type: .ld_e_pHL_5e,       debug: "ld_e_pHL",       length: 1, cycles: [8]),
+  Opcode(addr: "0x5f",    type: .ld_e_a_5f,         debug: "ld_e_a",         length: 1, cycles: [4]),
+  Opcode(addr: "0x60",    type: .ld_h_b_60,         debug: "ld_h_b",         length: 1, cycles: [4]),
+  Opcode(addr: "0x61",    type: .ld_h_c_61,         debug: "ld_h_c",         length: 1, cycles: [4]),
+  Opcode(addr: "0x62",    type: .ld_h_d_62,         debug: "ld_h_d",         length: 1, cycles: [4]),
+  Opcode(addr: "0x63",    type: .ld_h_e_63,         debug: "ld_h_e",         length: 1, cycles: [4]),
+  Opcode(addr: "0x64",    type: .ld_h_h_64,         debug: "ld_h_h",         length: 1, cycles: [4]),
+  Opcode(addr: "0x65",    type: .ld_h_l_65,         debug: "ld_h_l",         length: 1, cycles: [4]),
+  Opcode(addr: "0x66",    type: .ld_h_pHL_66,       debug: "ld_h_pHL",       length: 1, cycles: [8]),
+  Opcode(addr: "0x67",    type: .ld_h_a_67,         debug: "ld_h_a",         length: 1, cycles: [4]),
+  Opcode(addr: "0x68",    type: .ld_l_b_68,         debug: "ld_l_b",         length: 1, cycles: [4]),
+  Opcode(addr: "0x69",    type: .ld_l_c_69,         debug: "ld_l_c",         length: 1, cycles: [4]),
+  Opcode(addr: "0x6a",    type: .ld_l_d_6a,         debug: "ld_l_d",         length: 1, cycles: [4]),
+  Opcode(addr: "0x6b",    type: .ld_l_e_6b,         debug: "ld_l_e",         length: 1, cycles: [4]),
+  Opcode(addr: "0x6c",    type: .ld_l_h_6c,         debug: "ld_l_h",         length: 1, cycles: [4]),
+  Opcode(addr: "0x6d",    type: .ld_l_l_6d,         debug: "ld_l_l",         length: 1, cycles: [4]),
+  Opcode(addr: "0x6e",    type: .ld_l_pHL_6e,       debug: "ld_l_pHL",       length: 1, cycles: [8]),
+  Opcode(addr: "0x6f",    type: .ld_l_a_6f,         debug: "ld_l_a",         length: 1, cycles: [4]),
+  Opcode(addr: "0x70",    type: .ld_pHL_b_70,       debug: "ld_pHL_b",       length: 1, cycles: [8]),
+  Opcode(addr: "0x71",    type: .ld_pHL_c_71,       debug: "ld_pHL_c",       length: 1, cycles: [8]),
+  Opcode(addr: "0x72",    type: .ld_pHL_d_72,       debug: "ld_pHL_d",       length: 1, cycles: [8]),
+  Opcode(addr: "0x73",    type: .ld_pHL_e_73,       debug: "ld_pHL_e",       length: 1, cycles: [8]),
+  Opcode(addr: "0x74",    type: .ld_pHL_h_74,       debug: "ld_pHL_h",       length: 1, cycles: [8]),
+  Opcode(addr: "0x75",    type: .ld_pHL_l_75,       debug: "ld_pHL_l",       length: 1, cycles: [8]),
+  Opcode(addr: "0x76",    type: .halt_76,           debug: "halt",           length: 1, cycles: [4]),
+  Opcode(addr: "0x77",    type: .ld_pHL_a_77,       debug: "ld_pHL_a",       length: 1, cycles: [8]),
+  Opcode(addr: "0x78",    type: .ld_a_b_78,         debug: "ld_a_b",         length: 1, cycles: [4]),
+  Opcode(addr: "0x79",    type: .ld_a_c_79,         debug: "ld_a_c",         length: 1, cycles: [4]),
+  Opcode(addr: "0x7a",    type: .ld_a_d_7a,         debug: "ld_a_d",         length: 1, cycles: [4]),
+  Opcode(addr: "0x7b",    type: .ld_a_e_7b,         debug: "ld_a_e",         length: 1, cycles: [4]),
+  Opcode(addr: "0x7c",    type: .ld_a_h_7c,         debug: "ld_a_h",         length: 1, cycles: [4]),
+  Opcode(addr: "0x7d",    type: .ld_a_l_7d,         debug: "ld_a_l",         length: 1, cycles: [4]),
+  Opcode(addr: "0x7e",    type: .ld_a_pHL_7e,       debug: "ld_a_pHL",       length: 1, cycles: [8]),
+  Opcode(addr: "0x7f",    type: .ld_a_a_7f,         debug: "ld_a_a",         length: 1, cycles: [4]),
+  Opcode(addr: "0x80",    type: .add_a_b_80,        debug: "add_a_b",        length: 1, cycles: [4]),
+  Opcode(addr: "0x81",    type: .add_a_c_81,        debug: "add_a_c",        length: 1, cycles: [4]),
+  Opcode(addr: "0x82",    type: .add_a_d_82,        debug: "add_a_d",        length: 1, cycles: [4]),
+  Opcode(addr: "0x83",    type: .add_a_e_83,        debug: "add_a_e",        length: 1, cycles: [4]),
+  Opcode(addr: "0x84",    type: .add_a_h_84,        debug: "add_a_h",        length: 1, cycles: [4]),
+  Opcode(addr: "0x85",    type: .add_a_l_85,        debug: "add_a_l",        length: 1, cycles: [4]),
+  Opcode(addr: "0x86",    type: .add_a_pHL_86,      debug: "add_a_pHL",      length: 1, cycles: [8]),
+  Opcode(addr: "0x87",    type: .add_a_a_87,        debug: "add_a_a",        length: 1, cycles: [4]),
+  Opcode(addr: "0x88",    type: .adc_a_b_88,        debug: "adc_a_b",        length: 1, cycles: [4]),
+  Opcode(addr: "0x89",    type: .adc_a_c_89,        debug: "adc_a_c",        length: 1, cycles: [4]),
+  Opcode(addr: "0x8a",    type: .adc_a_d_8a,        debug: "adc_a_d",        length: 1, cycles: [4]),
+  Opcode(addr: "0x8b",    type: .adc_a_e_8b,        debug: "adc_a_e",        length: 1, cycles: [4]),
+  Opcode(addr: "0x8c",    type: .adc_a_h_8c,        debug: "adc_a_h",        length: 1, cycles: [4]),
+  Opcode(addr: "0x8d",    type: .adc_a_l_8d,        debug: "adc_a_l",        length: 1, cycles: [4]),
+  Opcode(addr: "0x8e",    type: .adc_a_pHL_8e,      debug: "adc_a_pHL",      length: 1, cycles: [8]),
+  Opcode(addr: "0x8f",    type: .adc_a_a_8f,        debug: "adc_a_a",        length: 1, cycles: [4]),
+  Opcode(addr: "0x90",    type: .sub_b_90,          debug: "sub_b",          length: 1, cycles: [4]),
+  Opcode(addr: "0x91",    type: .sub_c_91,          debug: "sub_c",          length: 1, cycles: [4]),
+  Opcode(addr: "0x92",    type: .sub_d_92,          debug: "sub_d",          length: 1, cycles: [4]),
+  Opcode(addr: "0x93",    type: .sub_e_93,          debug: "sub_e",          length: 1, cycles: [4]),
+  Opcode(addr: "0x94",    type: .sub_h_94,          debug: "sub_h",          length: 1, cycles: [4]),
+  Opcode(addr: "0x95",    type: .sub_l_95,          debug: "sub_l",          length: 1, cycles: [4]),
+  Opcode(addr: "0x96",    type: .sub_pHL_96,        debug: "sub_pHL",        length: 1, cycles: [8]),
+  Opcode(addr: "0x97",    type: .sub_a_97,          debug: "sub_a",          length: 1, cycles: [4]),
+  Opcode(addr: "0x98",    type: .sbc_a_b_98,        debug: "sbc_a_b",        length: 1, cycles: [4]),
+  Opcode(addr: "0x99",    type: .sbc_a_c_99,        debug: "sbc_a_c",        length: 1, cycles: [4]),
+  Opcode(addr: "0x9a",    type: .sbc_a_d_9a,        debug: "sbc_a_d",        length: 1, cycles: [4]),
+  Opcode(addr: "0x9b",    type: .sbc_a_e_9b,        debug: "sbc_a_e",        length: 1, cycles: [4]),
+  Opcode(addr: "0x9c",    type: .sbc_a_h_9c,        debug: "sbc_a_h",        length: 1, cycles: [4]),
+  Opcode(addr: "0x9d",    type: .sbc_a_l_9d,        debug: "sbc_a_l",        length: 1, cycles: [4]),
+  Opcode(addr: "0x9e",    type: .sbc_a_pHL_9e,      debug: "sbc_a_pHL",      length: 1, cycles: [8]),
+  Opcode(addr: "0x9f",    type: .sbc_a_a_9f,        debug: "sbc_a_a",        length: 1, cycles: [4]),
+  Opcode(addr: "0xa0",    type: .and_b_a0,          debug: "and_b",          length: 1, cycles: [4]),
+  Opcode(addr: "0xa1",    type: .and_c_a1,          debug: "and_c",          length: 1, cycles: [4]),
+  Opcode(addr: "0xa2",    type: .and_d_a2,          debug: "and_d",          length: 1, cycles: [4]),
+  Opcode(addr: "0xa3",    type: .and_e_a3,          debug: "and_e",          length: 1, cycles: [4]),
+  Opcode(addr: "0xa4",    type: .and_h_a4,          debug: "and_h",          length: 1, cycles: [4]),
+  Opcode(addr: "0xa5",    type: .and_l_a5,          debug: "and_l",          length: 1, cycles: [4]),
+  Opcode(addr: "0xa6",    type: .and_pHL_a6,        debug: "and_pHL",        length: 1, cycles: [8]),
+  Opcode(addr: "0xa7",    type: .and_a_a7,          debug: "and_a",          length: 1, cycles: [4]),
+  Opcode(addr: "0xa8",    type: .xor_b_a8,          debug: "xor_b",          length: 1, cycles: [4]),
+  Opcode(addr: "0xa9",    type: .xor_c_a9,          debug: "xor_c",          length: 1, cycles: [4]),
+  Opcode(addr: "0xaa",    type: .xor_d_aa,          debug: "xor_d",          length: 1, cycles: [4]),
+  Opcode(addr: "0xab",    type: .xor_e_ab,          debug: "xor_e",          length: 1, cycles: [4]),
+  Opcode(addr: "0xac",    type: .xor_h_ac,          debug: "xor_h",          length: 1, cycles: [4]),
+  Opcode(addr: "0xad",    type: .xor_l_ad,          debug: "xor_l",          length: 1, cycles: [4]),
+  Opcode(addr: "0xae",    type: .xor_pHL_ae,        debug: "xor_pHL",        length: 1, cycles: [8]),
+  Opcode(addr: "0xaf",    type: .xor_a_af,          debug: "xor_a",          length: 1, cycles: [4]),
+  Opcode(addr: "0xb0",    type: .or_b_b0,           debug: "or_b",           length: 1, cycles: [4]),
+  Opcode(addr: "0xb1",    type: .or_c_b1,           debug: "or_c",           length: 1, cycles: [4]),
+  Opcode(addr: "0xb2",    type: .or_d_b2,           debug: "or_d",           length: 1, cycles: [4]),
+  Opcode(addr: "0xb3",    type: .or_e_b3,           debug: "or_e",           length: 1, cycles: [4]),
+  Opcode(addr: "0xb4",    type: .or_h_b4,           debug: "or_h",           length: 1, cycles: [4]),
+  Opcode(addr: "0xb5",    type: .or_l_b5,           debug: "or_l",           length: 1, cycles: [4]),
+  Opcode(addr: "0xb6",    type: .or_pHL_b6,         debug: "or_pHL",         length: 1, cycles: [8]),
+  Opcode(addr: "0xb7",    type: .or_a_b7,           debug: "or_a",           length: 1, cycles: [4]),
+  Opcode(addr: "0xb8",    type: .cp_b_b8,           debug: "cp_b",           length: 1, cycles: [4]),
+  Opcode(addr: "0xb9",    type: .cp_c_b9,           debug: "cp_c",           length: 1, cycles: [4]),
+  Opcode(addr: "0xba",    type: .cp_d_ba,           debug: "cp_d",           length: 1, cycles: [4]),
+  Opcode(addr: "0xbb",    type: .cp_e_bb,           debug: "cp_e",           length: 1, cycles: [4]),
+  Opcode(addr: "0xbc",    type: .cp_h_bc,           debug: "cp_h",           length: 1, cycles: [4]),
+  Opcode(addr: "0xbd",    type: .cp_l_bd,           debug: "cp_l",           length: 1, cycles: [4]),
+  Opcode(addr: "0xbe",    type: .cp_pHL_be,         debug: "cp_pHL",         length: 1, cycles: [8]),
+  Opcode(addr: "0xbf",    type: .cp_a_bf,           debug: "cp_a",           length: 1, cycles: [4]),
+  Opcode(addr: "0xc0",    type: .ret_nz_c0,         debug: "ret_nz",         length: 1, cycles: [20, 8]),
+  Opcode(addr: "0xc1",    type: .pop_bc_c1,         debug: "pop_bc",         length: 1, cycles: [12]),
+  Opcode(addr: "0xc2",    type: .jp_nz_a16_c2,      debug: "jp_nz_a16",      length: 3, cycles: [16, 12]),
+  Opcode(addr: "0xc3",    type: .jp_a16_c3,         debug: "jp_a16",         length: 3, cycles: [16]),
+  Opcode(addr: "0xc4",    type: .call_nz_a16_c4,    debug: "call_nz_a16",    length: 3, cycles: [24, 12]),
+  Opcode(addr: "0xc5",    type: .push_bc_c5,        debug: "push_bc",        length: 1, cycles: [16]),
+  Opcode(addr: "0xc6",    type: .add_a_d8_c6,       debug: "add_a_d8",       length: 2, cycles: [8]),
+  Opcode(addr: "0xc7",    type: .rst_00h_c7,        debug: "rst_00h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xc8",    type: .ret_z_c8,          debug: "ret_z",          length: 1, cycles: [20, 8]),
+  Opcode(addr: "0xc9",    type: .ret_c9,            debug: "ret",            length: 1, cycles: [16]),
+  Opcode(addr: "0xca",    type: .jp_z_a16_ca,       debug: "jp_z_a16",       length: 3, cycles: [16, 12]),
+  Opcode(addr: "0xcb",    type: .prefix_cb_cb,      debug: "prefix_cb",      length: 1, cycles: [4]),
+  Opcode(addr: "0xcc",    type: .call_z_a16_cc,     debug: "call_z_a16",     length: 3, cycles: [24, 12]),
+  Opcode(addr: "0xcd",    type: .call_a16_cd,       debug: "call_a16",       length: 3, cycles: [24]),
+  Opcode(addr: "0xce",    type: .adc_a_d8_ce,       debug: "adc_a_d8",       length: 2, cycles: [8]),
+  Opcode(addr: "0xcf",    type: .rst_08h_cf,        debug: "rst_08h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xd0",    type: .ret_nc_d0,         debug: "ret_nc",         length: 1, cycles: [20, 8]),
+  Opcode(addr: "0xd1",    type: .pop_de_d1,         debug: "pop_de",         length: 1, cycles: [12]),
+  Opcode(addr: "0xd2",    type: .jp_nc_a16_d2,      debug: "jp_nc_a16",      length: 3, cycles: [16, 12]),
+  Opcode(addr: "0xd4",    type: .call_nc_a16_d4,    debug: "call_nc_a16",    length: 3, cycles: [24, 12]),
+  Opcode(addr: "0xd5",    type: .push_de_d5,        debug: "push_de",        length: 1, cycles: [16]),
+  Opcode(addr: "0xd6",    type: .sub_d8_d6,         debug: "sub_d8",         length: 2, cycles: [8]),
+  Opcode(addr: "0xd7",    type: .rst_10h_d7,        debug: "rst_10h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xd8",    type: .ret_c_d8,          debug: "ret_c",          length: 1, cycles: [20, 8]),
+  Opcode(addr: "0xd9",    type: .reti_d9,           debug: "reti",           length: 1, cycles: [16]),
+  Opcode(addr: "0xda",    type: .jp_c_a16_da,       debug: "jp_c_a16",       length: 3, cycles: [16, 12]),
+  Opcode(addr: "0xdc",    type: .call_c_a16_dc,     debug: "call_c_a16",     length: 3, cycles: [24, 12]),
+  Opcode(addr: "0xde",    type: .sbc_a_d8_de,       debug: "sbc_a_d8",       length: 2, cycles: [8]),
+  Opcode(addr: "0xdf",    type: .rst_18h_df,        debug: "rst_18h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xe0",    type: .ldh_pA8_a_e0,      debug: "ldh_pA8_a",      length: 2, cycles: [12]),
+  Opcode(addr: "0xe1",    type: .pop_hl_e1,         debug: "pop_hl",         length: 1, cycles: [12]),
+  Opcode(addr: "0xe2",    type: .ld_pC_a_e2,        debug: "ld_pC_a",        length: 1, cycles: [8]),
+  Opcode(addr: "0xe5",    type: .push_hl_e5,        debug: "push_hl",        length: 1, cycles: [16]),
+  Opcode(addr: "0xe6",    type: .and_d8_e6,         debug: "and_d8",         length: 2, cycles: [8]),
+  Opcode(addr: "0xe7",    type: .rst_20h_e7,        debug: "rst_20h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xe8",    type: .add_sp_r8_e8,      debug: "add_sp_r8",      length: 2, cycles: [16]),
+  Opcode(addr: "0xe9",    type: .jp_pHL_e9,         debug: "jp_pHL",         length: 1, cycles: [4]),
+  Opcode(addr: "0xea",    type: .ld_pA16_a_ea,      debug: "ld_pA16_a",      length: 3, cycles: [16]),
+  Opcode(addr: "0xee",    type: .xor_d8_ee,         debug: "xor_d8",         length: 2, cycles: [8]),
+  Opcode(addr: "0xef",    type: .rst_28h_ef,        debug: "rst_28h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xf0",    type: .ldh_a_pA8_f0,      debug: "ldh_a_pA8",      length: 2, cycles: [12]),
+  Opcode(addr: "0xf1",    type: .pop_af_f1,         debug: "pop_af",         length: 1, cycles: [12]),
+  Opcode(addr: "0xf2",    type: .ld_a_pC_f2,        debug: "ld_a_pC",        length: 1, cycles: [8]),
+  Opcode(addr: "0xf3",    type: .di_f3,             debug: "di",             length: 1, cycles: [4]),
+  Opcode(addr: "0xf5",    type: .push_af_f5,        debug: "push_af",        length: 1, cycles: [16]),
+  Opcode(addr: "0xf6",    type: .or_d8_f6,          debug: "or_d8",          length: 2, cycles: [8]),
+  Opcode(addr: "0xf7",    type: .rst_30h_f7,        debug: "rst_30h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xf8",    type: .ld_hl_spR8_f8,     debug: "ld_hl_spR8",     length: 2, cycles: [12]),
+  Opcode(addr: "0xf9",    type: .ld_sp_hl_f9,       debug: "ld_sp_hl",       length: 1, cycles: [8]),
+  Opcode(addr: "0xfa",    type: .ld_a_pA16_fa,      debug: "ld_a_pA16",      length: 3, cycles: [16]),
+  Opcode(addr: "0xfb",    type: .ei_fb,             debug: "ei",             length: 1, cycles: [4]),
+  Opcode(addr: "0xfe",    type: .cp_d8_fe,          debug: "cp_d8",          length: 2, cycles: [8]),
+  Opcode(addr: "0xff",    type: .rst_38h_ff,        debug: "rst_38h",        length: 1, cycles: [16]),
 ]
+

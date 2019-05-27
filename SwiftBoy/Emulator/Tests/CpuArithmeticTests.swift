@@ -26,10 +26,10 @@ class CpuArithmeticTests: XCTestCase {
 
   /// When A = 3Ch,
   /// ADDA.FFh ; A←3Bh,Z←0,H←1,N←0,CY←1
-  func test_add_a_n() {
+  func test_add_a_d8() {
     var cpu = Cpu()
     cpu.registers.a = 0x3c
-    cpu.add_a_n(0xff)
+    cpu.add_a_d8(0xff)
 
     XCTAssertEqual(cpu.registers.a, 0x3b)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -118,14 +118,14 @@ class CpuArithmeticTests: XCTestCase {
 
   /// WhenA=E1h,E=0Fh,(HL)=1Eh,andCY=1,
   /// ADC A, 3Bh ; A←1Dh,Z←0,H←0,CY←-1
-  func test_adc_a_n() {
+  func test_adc_a_d8() {
     var cpu = Cpu()
     cpu.registers.a = 0xe1
     cpu.registers.e = 0x0f
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0x1e)
     cpu.registers.carryFlag = true
-    cpu.adc_a_n(0x3b)
+    cpu.adc_a_d8(0x3b)
 
     XCTAssertEqual(cpu.registers.a, 0x1d)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -173,13 +173,13 @@ class CpuArithmeticTests: XCTestCase {
 
   /// When A = 3Eh, E = 3Eh, and (HL) = 40h,
   /// SUB 0Fh; A←2Fh,Z←0,H←1,N←1 CY←0
-  func test_sub_a_n() {
+  func test_sub_a_d8() {
     var cpu = Cpu()
     cpu.registers.a = 0x3e
     cpu.registers.e = 0x3e
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0x40)
-    cpu.sub_a_n(0x0f)
+    cpu.sub_a_d8(0x0f)
 
     XCTAssertEqual(cpu.registers.a, 0x2f)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -227,14 +227,14 @@ class CpuArithmeticTests: XCTestCase {
 
   /// WhenA=3Bh, (HL)=4Fh,H=2Ah,andCY=1,
   /// SBC A, 3Ah; A←00h,Z←1,H←0,N←1 CY←0
-  func test_sbc_a_n() {
+  func test_sbc_a_d8() {
     var cpu = Cpu()
     cpu.registers.a = 0x3b
     cpu.registers.e = 0x2a // we are using .e instead of .h
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0x4f)
     cpu.registers.carryFlag = true
-    cpu.sbc_a_n(0x3a)
+    cpu.sbc_a_d8(0x3a)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -282,13 +282,13 @@ class CpuArithmeticTests: XCTestCase {
 
   /// When A = 3Ch, B = 2Fh, and (HL) = 40h,
   /// CP 3Ch ; Z←1,H←0,N←1,CY←0
-  func test_cp_a_n() {
+  func test_cp_a_d8() {
     var cpu = Cpu()
     cpu.registers.a = 0x3c
     cpu.registers.b = 0x2f
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0x40)
-    cpu.cp_a_n(0x3c)
+    cpu.cp_a_d8(0x3c)
 
     XCTAssertEqual(cpu.registers.a, 0x3c) // not stored
     XCTAssertEqual(cpu.registers.zeroFlag, true)

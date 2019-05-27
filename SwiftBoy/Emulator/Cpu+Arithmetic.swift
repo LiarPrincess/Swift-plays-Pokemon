@@ -13,7 +13,7 @@ extension Cpu {
 
   /// Adds 8-bit immediate operand n to the contents of register A
   /// and stores the results in register A.
-  mutating func add_a_n(_ n: UInt8) {
+  mutating func add_a_d8(_ n: UInt8) {
     self.add_a(n)
   }
 
@@ -85,7 +85,7 @@ extension Cpu {
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
-  mutating func adc_a_n(_ n: UInt8) {
+  mutating func adc_a_d8(_ n: UInt8) {
     self.adc_a(n)
   }
 
@@ -120,7 +120,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func sub_a_n(_ n: UInt8) {
+  mutating func sub_a_d8(_ n: UInt8) {
     self.sub_a(n)
   }
 
@@ -154,7 +154,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func sbc_a_n(_ n: UInt8) {
+  mutating func sbc_a_d8(_ n: UInt8) {
     self.sbc_a(n)
   }
 
@@ -192,7 +192,7 @@ extension Cpu {
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
-  mutating func cp_a_n(_ n: UInt8) {
+  mutating func cp_a_d8(_ n: UInt8) {
     self.cp_a(n)
   }
 

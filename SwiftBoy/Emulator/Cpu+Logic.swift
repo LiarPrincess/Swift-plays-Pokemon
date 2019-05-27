@@ -13,7 +13,7 @@ extension Cpu {
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func and_a_n(_ n: UInt8) {
+  mutating func and_a_d8(_ n: UInt8) {
     self.and_a(n)
   }
 
@@ -45,7 +45,7 @@ extension Cpu {
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func or_a_n(_ n: UInt8) {
+  mutating func or_a_d8(_ n: UInt8) {
     self.or_a(n)
   }
 
@@ -77,7 +77,7 @@ extension Cpu {
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func xor_a_n(_ n: UInt8) {
+  mutating func xor_a_d8(_ n: UInt8) {
     self.xor_a(n)
   }
 

@@ -25,20 +25,33 @@ struct Opcode {
   /// Operand 2
   let operand2: String?
 
-  var enumCase: String {
-    var result = ""
-
-    result += self.mnemonic.lowercased()
-    result += "_"
+  var debug: String {
+    var result = self.mnemonic.lowercased()
 
     if let operand1 = self.operand1 {
-      result += getOperandValue(operand1)
       result += "_"
+      result += getOperandValue(operand1)
     }
 
     if let operand2 = self.operand2 {
-      result += getOperandValue(operand2)
       result += "_"
+      result += getOperandValue(operand2)
+    }
+
+    return result
+  }
+
+  var enumCase: String {
+    var result = self.mnemonic.lowercased()
+
+    if let operand1 = self.operand1 {
+      result += "_"
+      result += getOperandValue(operand1)
+    }
+
+    if let operand2 = self.operand2 {
+      result += "_"
+      result += getOperandValue(operand2)
     }
 
     let addrNum: String.SubSequence = {
@@ -46,6 +59,7 @@ struct Opcode {
       return a.count == 2 ? a : "0" + a
     }()
 
+    result += "_"
     result += addrNum
 
     return result
@@ -54,15 +68,6 @@ struct Opcode {
   // swiftlint:disable:next cyclomatic_complexity function_body_length
   private func getOperandValue(_ value: String) -> String {
     switch value {
-    case "00H": return "00h"
-    case "08H": return "08h"
-    case "10H": return "10h"
-    case "18H": return "18h"
-    case "20H": return "20h"
-    case "28H": return "28h"
-    case "30H": return "30h"
-    case "38H": return "38h"
-
     case "A": return "a"
     case "B": return "b"
     case "C": return "c"
@@ -70,6 +75,12 @@ struct Opcode {
     case "E": return "e"
     case "H": return "h"
     case "L": return "l"
+
+    case "AF": return "af"
+    case "BC": return "bc"
+    case "CB": return "cb"
+    case "DE": return "de"
+    case "HL": return "hl"
 
     case "0": return "0"
     case "1": return "1"
@@ -80,22 +91,25 @@ struct Opcode {
     case "6": return "6"
     case "7": return "7"
 
-    case "AF": return "af"
-    case "BC": return "bc"
-    case "CB": return "cb"
-    case "DE": return "de"
-    case "HL": return "hl"
+    case "00H": return "00h"
+    case "08H": return "08h"
+    case "10H": return "10h"
+    case "18H": return "18h"
+    case "20H": return "20h"
+    case "28H": return "28h"
+    case "30H": return "30h"
+    case "38H": return "38h"
 
+    case "SP":    return "sp"
+    case "SP+r8": return "spR8"
+
+    case "d8":  return "d8"
+    case "d16": return "d16"
+    case "r8":  return "r8"
+    case "a16": return "a16"
     case "NC":  return "nc"
     case "NZ":  return "nz"
     case "Z":   return "z"
-    case "a16": return "a16"
-    case "d16": return "d16"
-    case "d8":  return "n"
-    case "r8":  return "r8"
-
-    case "SP":    return "sp"
-    case "SP+r8": return "spPlusR8"
 
     case "(BC)":  return "pBC"
     case "(C)":   return "pC"

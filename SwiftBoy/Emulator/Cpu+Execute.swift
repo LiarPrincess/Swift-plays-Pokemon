@@ -15,7 +15,7 @@ extension Cpu {
     case .inc_bc_03: self.inc_r(.bc)
     case .inc_b_04: self.inc_r(.b)
     case .dec_b_05: self.dec_r(.b)
-    case .ld_b_n_06: self.ld_r_n(.b, self.nextWord)
+    case .ld_b_d8_06: self.ld_r_d8(.b, self.next8)
     case .rlca_07: self.rlca()
     //case .ld_pA16_sp_08: break
     case .add_hl_bc_09: self.add_hl_r(.bc)
@@ -23,55 +23,55 @@ extension Cpu {
     case .dec_bc_0b: self.dec_r(.bc)
     case .inc_c_0c: self.inc_r(.c)
     case .dec_c_0d: self.dec_r(.c)
-    case .ld_c_n_0e: self.ld_r_n(.c, self.nextWord)
+    case .ld_c_d8_0e: self.ld_r_d8(.c, self.next8)
     case .rrca_0f: self.rrca()
-      //case .stop_0_10: break
+    //case .stop_0_10: break
     //case .ld_de_d16_11: break
     case .ld_pDE_a_12: self.ld_pDE_a()
     case .inc_de_13: self.inc_r(.de)
     case .inc_d_14: self.inc_r(.d)
     case .dec_d_15: self.dec_r(.d)
-    case .ld_d_n_16: self.ld_r_n(.d, self.nextWord)
+    case .ld_d_d8_16: self.ld_r_d8(.d, self.next8)
     case .rla_17: self.rla()
-    //case .jr_r8_18: break
+    case .jr_r8_18: self.jr_e(self.next8)
     case .add_hl_de_19: self.add_hl_r(.de)
     case .ld_a_pDE_1a: self.ld_a_pDE()
     case .dec_de_1b: self.dec_r(.de)
     case .inc_e_1c: self.inc_r(.e)
     case .dec_e_1d: self.dec_r(.e)
-    case .ld_e_n_1e: self.ld_r_n(.e, self.nextWord)
+    case .ld_e_d8_1e: self.ld_r_d8(.e, self.next8)
     case .rra_1f: self.rra()
-      //case .jr_nz_r8_20: break
+    case .jr_nz_r8_20: self.jr_cc_e(.nz, self.next8)
     //case .ld_hl_d16_21: break
     case .ld_pHLI_a_22: self.ld_pHLI_a()
     case .inc_hl_23: self.inc_r(.hl)
     case .inc_h_24: self.inc_r(.h)
     case .dec_h_25: self.dec_r(.h)
-    case .ld_h_n_26: self.ld_r_n(.h, self.nextWord)
-      //case .daa_27: break
-    //case .jr_z_r8_28: break
+    case .ld_h_d8_26: self.ld_r_d8(.h, self.next8)
+    //case .daa_27: break
+    case .jr_z_r8_28: self.jr_cc_e(.z, self.next8)
     case .add_hl_hl_29: self.add_hl_r(.hl)
     case .ld_a_pHLI_2a: self.ld_a_pHLI()
     case .dec_hl_2b: self.dec_r(.hl)
     case .inc_l_2c: self.inc_r(.l)
     case .dec_l_2d: self.dec_r(.l)
-    case .ld_l_n_2e: self.ld_r_n(.l, self.nextWord)
-      //case .cpl_2f: break
-      //case .jr_nc_r8_30: break
+    case .ld_l_d8_2e: self.ld_r_d8(.l, self.next8)
+    //case .cpl_2f: break
+    case .jr_nc_r8_30: self.jr_cc_e(.nc, self.next8)
     //case .ld_sp_d16_31: break
     case .ld_pHLD_a_32: self.ld_pHLD_a()
     case .inc_sp_33: self.inc_sp()
     case .inc_pHL_34: self.inc_pHL()
     case .dec_pHL_35: self.dec_pHL()
-    case .ld_pHL_n_36: self.ld_pHL_n(self.nextWord)
-      //case .scf_37: break
-    //case .jr_c_r8_38: break
+    case .ld_pHL_d8_36: self.ld_pHL_d8(self.next8)
+    //case .scf_37: break
+    case .jr_c_r8_38: self.jr_cc_e(.c, self.next8)
     case .add_hl_sp_39: self.add_hl_sp()
     case .ld_a_pHLD_3a: self.ld_a_pHLD()
     case .dec_sp_3b: self.dec_sp()
     case .inc_a_3c: self.inc_r(.a)
     case .dec_a_3d: self.dec_r(.a)
-    case .ld_a_n_3e: self.ld_r_n(.a, self.nextWord)
+    case .ld_a_d8_3e: self.ld_r_d8(.a, self.next8)
     //case .ccf_3f: break
     case .ld_b_b_40: self.ld_r_r(.b, .b)
     case .ld_b_c_41: self.ld_r_r(.b, .c)
@@ -201,61 +201,61 @@ extension Cpu {
     case .cp_l_bd: self.cp_a_r(.l)
     case .cp_pHL_be: self.cp_a_pHL()
     case .cp_a_bf: self.cp_a_r(.a)
-      //case .ret_nz_c0: break
-      //case .pop_bc_c1: break
-      //case .jp_nz_a16_c2: break
-      //case .jp_a16_c3: break
-      //case .call_nz_a16_c4: break
+    //case .ret_nz_c0: break
+    //case .pop_bc_c1: break
+    case .jp_nz_a16_c2: self.jp_cc_nn(.nz, self.next16)
+    case .jp_a16_c3: self.jp_nn(self.next16)
+    //case .call_nz_a16_c4: break
     //case .push_bc_c5: break
-    case .add_a_n_c6: self.add_a_n(self.nextWord)
-      //case .rst_00h_c7: break
-      //case .ret_z_c8: break
-      //case .ret_c9: break
-      //case .jp_z_a16_ca: break
-      //case .prefix_cb_cb: break
-      //case .call_z_a16_cc: break
+    case .add_a_d8_c6: self.add_a_d8(self.next8)
+    //case .rst_00h_c7: break
+    //case .ret_z_c8: break
+    //case .ret_c9: break
+    case .jp_z_a16_ca: self.jp_cc_nn(.z, self.next16)
+    //case .prefix_cb_cb: break
+    //case .call_z_a16_cc: break
     //case .call_a16_cd: break
-    case .adc_a_n_ce: self.adc_a_n(self.nextWord)
-      //case .rst_08h_cf: break
-      //case .ret_nc_d0: break
-      //case .pop_de_d1: break
-      //case .jp_nc_a16_d2: break
-      //case .call_nc_a16_d4: break
+    case .adc_a_d8_ce: self.adc_a_d8(self.next8)
+    //case .rst_08h_cf: break
+    //case .ret_nc_d0: break
+    //case .pop_de_d1: break
+    case .jp_nc_a16_d2: self.jp_cc_nn(.nc, self.next16)
+    //case .call_nc_a16_d4: break
     //case .push_de_d5: break
-    case .sub_n_d6: self.sub_a_n(self.nextWord)
-      //case .rst_10h_d7: break
-      //case .ret_c_d8: break
-      //case .reti_d9: break
-      //case .jp_c_a16_da: break
+    case .sub_d8_d6: self.sub_a_d8(self.next8)
+    //case .rst_10h_d7: break
+    //case .ret_c_d8: break
+    //case .reti_d9: break
+    case .jp_c_a16_da: self.jp_cc_nn(.c, self.next16)
     //case .call_c_a16_dc: break
-    case .sbc_a_n_de: self.sbc_a_n(self.nextWord)
-      //case .rst_18h_df: break
-      //case .ldh_pA8_a_e0: break
+    case .sbc_a_d8_de: self.sbc_a_d8(self.next8)
+    //case .rst_18h_df: break
+    //case .ldh_pA8_a_e0: break
     //case .pop_hl_e1: break
     case .ld_pC_a_e2: self.ld_ffC_a()
     //case .push_hl_e5: break
-    case .and_n_e6: self.and_a_n(self.nextWord)
+    case .and_d8_e6: self.and_a_d8(self.next8)
     //case .rst_20h_e7: break
-    case .add_sp_r8_e8: self.add_sp_n(self.nextWord)
-      //case .jp_pHL_e9: break
+    case .add_sp_r8_e8: self.add_sp_n(self.next8)
+    case .jp_pHL_e9: self.jp_pHL()
     //case .ld_pA16_a_ea: break
-    case .xor_n_ee: self.xor_a_n(self.nextWord)
-      //case .rst_28h_ef: break
-      //case .ldh_a_pA8_f0: break
+    case .xor_d8_ee: self.xor_a_d8(self.next8)
+    //case .rst_28h_ef: break
+    //case .ldh_a_pA8_f0: break
     //case .pop_af_f1: break
     case .ld_a_pC_f2: self.ld_a_ffC()
-      //case .di_f3: break
+    //case .di_f3: break
     //case .push_af_f5: break
-    case .or_n_f6: self.or_a_n(self.nextWord)
-      //case .rst_30h_f7: break
-      //case .ld_hl_spPlusR8_f8: break
-      //case .ld_sp_hl_f9: break
-      //case .ld_a_pA16_fa: break
+    case .or_d8_f6: self.or_a_d8(self.next8)
+    //case .rst_30h_f7: break
+    //case .ld_hl_spR8_f8: break
+    //case .ld_sp_hl_f9: break
+    //case .ld_a_pA16_fa: break
     //case .ei_fb: break
-    case .cp_n_fe: self.cp_a_n(self.nextWord)
+    case .cp_d8_fe: self.cp_a_d8(self.next8)
     //case .rst_38h_ff: break
     default: print("Unknown opcode: \(opcode)")
     }
   }
 }
-// Implemented opcodes: 187, remaining: 58
+// Implemented opcodes: 198, remaining: 47

@@ -6,27 +6,27 @@ struct OpcodeBase<Type> {
   /// Address
   let addr: String
 
-  /// Instruction mnemonic
-  let mnemonic: String
-
   /// Opcode type
   let type: Type
 
+  /// Debug string
+  let debug: String
+
   /// Byte count
-  let length: Int
+  let length: UInt16
 
   /// Duration in cycles
-  let cycles: [Int]
+  let cycles: [UInt]
 
-  init(_ addr: String,
-       _ mnemonic: String,
+  init(addr: String,
        type: Type,
-       length: Int,
-       cycles: [Int]) {
+       debug: String,
+       length: UInt16,
+       cycles: [UInt]) {
 
-    self.addr = addr
-    self.mnemonic = mnemonic
     self.type = type
+    self.addr = addr
+    self.debug = debug
     self.length = length
     self.cycles = cycles
   }
@@ -34,7 +34,7 @@ struct OpcodeBase<Type> {
 
 extension Opcode: CustomStringConvertible {
   var description: String {
-    return self.addr + " " + self.mnemonic
+    return self.debug
   }
 }
 

@@ -1,19 +1,13 @@
-func printOpcodes() throws {
-  let data = try openOpcodesFile()
-  let opcodes = data.unprefixed
-
+func printOpcodes(_ opcodes: Opcodes) {
   printHeader()
-  printOpcodeTypeEnum("OpcodeType", opcodes)
-  printOpcodes("Opcode", "opcodes", opcodes)
+  printOpcodeTypeEnum("OpcodeType", opcodes.unprefixed)
+  printOpcodes("Opcode", "opcodes", opcodes.unprefixed)
 }
 
-func printPrefixOpcodes() throws {
-  let data = try openOpcodesFile()
-  let opcodes = data.cbprefixed
-
+func printPrefixOpcodes(_ opcodes: Opcodes) {
   printHeader()
-  printOpcodeTypeEnum("PrefixOpcodeType", opcodes)
-  printOpcodes("PrefixOpcode", "prefixOpcodes", opcodes)
+  printOpcodeTypeEnum("PrefixOpcodeType", opcodes.cbprefixed)
+  printOpcodes("PrefixOpcode", "prefixOpcodes", opcodes.cbprefixed)
 }
 
 // MARK: - Printing
@@ -42,23 +36,30 @@ private func printOpcodes(_ className: String, _ variable: String, _ opcodes: [O
   print("let \(variable): [\(className)] = [")
   for op in opcodes {
 
-    var column1 = ""
-    column1 += quote(op.addr) + ", "
-    column1 += quote(op.mnemonic.lowercased()) + ","
-    column1 = column1.padding(toLength: 20, withPad: " ", startingAt: 0)
+    var addrColumn = "addr: \"\(op.addr)\", "
+    addrColumn = pad(addrColumn, toLength: 17)
 
-    var column2 = ""
-    column2 += "type: .\(op.enumCase), "
-    column2 = column2.padding(toLength: 30, withPad: " ", startingAt: 0)
+    var typeColumn = "type: .\(op.enumCase), "
+    typeColumn = pad(typeColumn, toLength: 26)
+
+    var debugColumn = "debug: \"\(op.debug)\", "
+    debugColumn = pad(debugColumn, toLength: 25)
 
     var column3 = ""
     column3 += "length: \(op.length), "
     column3 += "cycles: \(op.cycles)"
 
-    print("  \(className)(\(column1)\(column2)\(column3)),")
+    print("  \(className)(\(addrColumn)\(typeColumn)\(debugColumn)\(column3)),")
   }
   print("]")
   print("")
+}
+
+private func pad(_ s: String, toLength: Int) -> String {
+  // String.padding ignores negative padding
+  let diff = toLength - s.count
+  assert(diff >= 0, "'\(s)' has length \(s.count) (vs \(toLength))")
+  return s + String(repeating: " " , count: diff)
 }
 
 private func quote(_ s: String) -> String {
