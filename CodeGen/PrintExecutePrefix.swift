@@ -24,35 +24,8 @@ private func printCpuExtension(_ opcodes: [Opcode]) {
   print("    switch opcode.type {")
 
   for op in opcodes {
-    let mnemonic = op.mnemonic.lowercased()
-
-    print("/* \(op.addr) */ case .\(op.enumCase): ", terminator: "")
-
-    switch mnemonic {
-    case "rlc", "rrc", "rl", "rr", "sla", "sra", "srl", "swap":
-      let operand = op.operand1!.lowercased()
-
-      if isRegister(operand) {
-        print("self.\(mnemonic)_r(.\(operand))")
-      } else if ispHL(operand) {
-        print("self.\(mnemonic)_pHL()")
-      }
-      else { printUnimplementedOpcode(op) }
-
-    case "bit", "res", "set":
-      let operand1 = op.operand1!.lowercased()
-      let operand2 = op.operand2!.lowercased()
-
-      if isRegister(operand2) {
-        print("self.\(mnemonic)_r(\(operand1), .\(operand2))")
-      } else if ispHL(operand2) {
-        print("self.\(mnemonic)_pHL(\(operand1))")
-      }
-      else { printUnimplementedOpcode(op) }
-
-    default:
-      printUnimplementedOpcode(op)
-    }
+    let call = getOpcodeCall(op)
+    print("/* \(op.addr) */ case .\(op.enumCase): \(call)")
   }
 
   print("    }")
@@ -60,19 +33,37 @@ private func printCpuExtension(_ opcodes: [Opcode]) {
   print("}")
 }
 
-private func printUnimplementedOpcode(_ opcode: Opcode) {
-  print("break")
+private func getOpcodeCall(_ opcode: Opcode) -> String {
+  let mnemonic = opcode.mnemonic.lowercased()
+  switch mnemonic {
+  case "rlc", "rrc", "rl", "rr", "sla", "sra", "srl", "swap":
+    let operand = opcode.operand1!.lowercased()
+
+    if isRegister(operand) { return "self.\(mnemonic)_r(.\(operand))" }
+    if ispHL(operand) { return "self.\(mnemonic)_pHL()" }
+
+  case "bit", "res", "set":
+    let operand1 = opcode.operand1!.lowercased()
+    let operand2 = opcode.operand2!.lowercased()
+
+    if isRegister(operand2) { return "self.\(mnemonic)_r(\(operand1), .\(operand2))" }
+    if ispHL(operand2) { return "self.\(mnemonic)_pHL(\(operand1))" }
+
+  default: break
+  }
+  return ""
 }
 
-private func isRegister(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "a" || op == "b"
-    || op == "c" || op == "d"
-    || op == "e"
-    || op == "h" || op == "l"
+private let singleRegisters  = ["a", "b", "c", "d", "e", "h", "l"]
+
+private func isRegister(_ operand: String?) -> Bool {
+  return singleRegisters.contains { isEqual(operand, $0) }
 }
 
-private func ispHL(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "(hl)"
+private func ispHL(_ operand: String?) -> Bool {
+  return isEqual(operand, "(hl)")
+}
+
+private func isEqual(_ operand: String?, _ value: String) -> Bool {
+  return operand?.lowercased() == value
 }

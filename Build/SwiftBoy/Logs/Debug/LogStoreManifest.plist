@@ -1286,6 +1286,38 @@
 			<key>uniqueIdentifier</key>
 			<string>1204A18C-920D-4295-A69A-119B30799306</string>
 		</dict>
+		<key>122E2CA9-8928-4DDC-A9D3-356B60DBE4A4</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>122E2CA9-8928-4DDC-A9D3-356B60DBE4A4.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580676853.13285804</real>
+			<key>timeStoppedRecording</key>
+			<real>580676855.15302098</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>122E2CA9-8928-4DDC-A9D3-356B60DBE4A4</string>
+		</dict>
 		<key>12395B33-CEBC-466C-A4EC-25396CB429C6</key>
 		<dict>
 			<key>className</key>
@@ -1766,6 +1798,38 @@
 			<key>uniqueIdentifier</key>
 			<string>156C8232-8770-4ECC-8865-48A333A7DC30</string>
 		</dict>
+		<key>165E4DF2-3EDA-4EB1-9480-8225E6ACD0D9</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>165E4DF2-3EDA-4EB1-9480-8225E6ACD0D9.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678324.29796505</real>
+			<key>timeStoppedRecording</key>
+			<real>580678326.66075301</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>165E4DF2-3EDA-4EB1-9480-8225E6ACD0D9</string>
+		</dict>
 		<key>1696932D-8F36-4B1F-BEC3-6DE373D1403B</key>
 		<dict>
 			<key>className</key>
@@ -1925,6 +1989,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>18E74E14-A05F-4FB3-8D80-8DC2D183DA35</string>
+		</dict>
+		<key>19D6AB96-7EE3-490E-A1E9-50A4C1EF0172</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>19D6AB96-7EE3-490E-A1E9-50A4C1EF0172.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580679048.25368202</real>
+			<key>timeStoppedRecording</key>
+			<real>580679050.18300104</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>19D6AB96-7EE3-490E-A1E9-50A4C1EF0172</string>
 		</dict>
 		<key>1A1DDC6A-8ED3-4724-93FA-027489B0D08C</key>
 		<dict>
@@ -2502,6 +2598,38 @@
 			<key>uniqueIdentifier</key>
 			<string>20DD7ECD-7D6E-45AF-B5F0-9977D05052A4</string>
 		</dict>
+		<key>212F065F-B4EB-4B05-9095-9DCC3FA2C4E5</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>212F065F-B4EB-4B05-9095-9DCC3FA2C4E5.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580677442.70897102</real>
+			<key>timeStoppedRecording</key>
+			<real>580677445.73337805</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>212F065F-B4EB-4B05-9095-9DCC3FA2C4E5</string>
+		</dict>
 		<key>217E9A74-28F8-4BF3-9EC5-3DC3AE38847B</key>
 		<dict>
 			<key>className</key>
@@ -2597,6 +2725,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>2226ECEF-6077-4727-A3EF-A009B82536DD</string>
+		</dict>
+		<key>2243FCB5-C2C4-494C-BAE5-615AA56AD1B1</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>2243FCB5-C2C4-494C-BAE5-615AA56AD1B1.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580675988.498891</real>
+			<key>timeStoppedRecording</key>
+			<real>580675990.81219804</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>2243FCB5-C2C4-494C-BAE5-615AA56AD1B1</string>
 		</dict>
 		<key>2298210E-AA4F-4687-B505-D20A3583A184</key>
 		<dict>
@@ -3462,6 +3622,38 @@
 			<key>uniqueIdentifier</key>
 			<string>3063713E-EBBD-4F95-B59A-895E6DE923AC</string>
 		</dict>
+		<key>30C242D1-BC22-4D76-9F74-C04F050E1997</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>30C242D1-BC22-4D76-9F74-C04F050E1997.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678109.43146706</real>
+			<key>timeStoppedRecording</key>
+			<real>580678111.65811503</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>30C242D1-BC22-4D76-9F74-C04F050E1997</string>
+		</dict>
 		<key>30C91D15-8449-4007-B4B7-166ED35FA70D</key>
 		<dict>
 			<key>className</key>
@@ -4326,6 +4518,38 @@
 			<key>uniqueIdentifier</key>
 			<string>3F0B32BE-B680-4DC2-A975-7689A7E28F31</string>
 		</dict>
+		<key>3FE0EC88-5391-4783-BB5B-D36C515FB069</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>3FE0EC88-5391-4783-BB5B-D36C515FB069.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580676341.42594802</real>
+			<key>timeStoppedRecording</key>
+			<real>580676343.99507499</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>3FE0EC88-5391-4783-BB5B-D36C515FB069</string>
+		</dict>
 		<key>411FD747-D247-4B2F-A7AD-A3BB4E8CB8D5</key>
 		<dict>
 			<key>className</key>
@@ -4549,6 +4773,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>43794F4A-2D3E-45AC-A637-3D7370923B09</string>
+		</dict>
+		<key>43AE385F-49CA-4E6C-99F3-443C287AF58C</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>43AE385F-49CA-4E6C-99F3-443C287AF58C.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580677963.733796</real>
+			<key>timeStoppedRecording</key>
+			<real>580678039.73669505</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>43AE385F-49CA-4E6C-99F3-443C287AF58C</string>
 		</dict>
 		<key>449AC0CF-5A3B-4E59-8AFA-63F59C003B40</key>
 		<dict>
@@ -5286,6 +5542,38 @@
 			<key>uniqueIdentifier</key>
 			<string>4BFF7441-5C37-4615-9DC9-EBE32FFA5D85</string>
 		</dict>
+		<key>4C5D4DA9-B9B7-4E59-88B2-CC8A429F93B7</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>4C5D4DA9-B9B7-4E59-88B2-CC8A429F93B7.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580676117.692976</real>
+			<key>timeStoppedRecording</key>
+			<real>580676120.04261005</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>4C5D4DA9-B9B7-4E59-88B2-CC8A429F93B7</string>
+		</dict>
 		<key>4D7FAC6E-D93D-4543-82D3-8880D06AD7F7</key>
 		<dict>
 			<key>className</key>
@@ -5861,6 +6149,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>53D6B56F-C6AB-40D4-B09C-900D9215F4BB</string>
+		</dict>
+		<key>540429CA-C3A6-43F4-AD96-042248694AD7</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>540429CA-C3A6-43F4-AD96-042248694AD7.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580677753.09262002</real>
+			<key>timeStoppedRecording</key>
+			<real>580677755.12385798</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>540429CA-C3A6-43F4-AD96-042248694AD7</string>
 		</dict>
 		<key>547D5BD8-B711-4E12-A27D-0FB9FD43A075</key>
 		<dict>
@@ -8006,6 +8326,38 @@
 			<key>uniqueIdentifier</key>
 			<string>6F92ADC5-0235-4C2D-AC84-03445DBD76C9</string>
 		</dict>
+		<key>6FA78AF4-C76C-4579-8324-1B1B05CD9A81</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>6FA78AF4-C76C-4579-8324-1B1B05CD9A81.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678536.21586704</real>
+			<key>timeStoppedRecording</key>
+			<real>580678538.23636305</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>6FA78AF4-C76C-4579-8324-1B1B05CD9A81</string>
+		</dict>
 		<key>708B443C-3E0A-4861-9E8E-1C94725FE7AC</key>
 		<dict>
 			<key>className</key>
@@ -8133,6 +8485,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>720F7EAD-E3D2-40C3-A56A-8EB02EA745AD</string>
+		</dict>
+		<key>7219BDE7-C355-4685-A7DB-A54DD9711E4D</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>7219BDE7-C355-4685-A7DB-A54DD9711E4D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580677121.53993404</real>
+			<key>timeStoppedRecording</key>
+			<real>580677123.58818698</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>7219BDE7-C355-4685-A7DB-A54DD9711E4D</string>
 		</dict>
 		<key>72297D15-98DB-4401-9240-7426BC276DC5</key>
 		<dict>
@@ -10342,6 +10726,38 @@
 			<key>uniqueIdentifier</key>
 			<string>8BC3B2D0-6DA5-46CE-8D2B-354D24293838</string>
 		</dict>
+		<key>8BC79E20-A38E-4CEC-9D6D-7397493FF41A</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>8BC79E20-A38E-4CEC-9D6D-7397493FF41A.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678997.23354495</real>
+			<key>timeStoppedRecording</key>
+			<real>580678999.99526799</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>8BC79E20-A38E-4CEC-9D6D-7397493FF41A</string>
+		</dict>
 		<key>8C583391-E643-4F58-901D-AC4D49F889CB</key>
 		<dict>
 			<key>className</key>
@@ -11526,6 +11942,38 @@
 			<key>uniqueIdentifier</key>
 			<string>968AFBEC-8DB5-4E81-B514-7CCBD999C68F</string>
 		</dict>
+		<key>96CAAF9C-CF1D-4EB2-8118-F6A101710FF7</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>96CAAF9C-CF1D-4EB2-8118-F6A101710FF7.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678732.34375095</real>
+			<key>timeStoppedRecording</key>
+			<real>580678734.723122</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>96CAAF9C-CF1D-4EB2-8118-F6A101710FF7</string>
+		</dict>
 		<key>96FE66EA-FCAA-4CD6-89F2-6DAF7C186F44</key>
 		<dict>
 			<key>className</key>
@@ -11590,6 +12038,38 @@
 			<key>uniqueIdentifier</key>
 			<string>9718DEAB-BA0C-4A9D-87C4-E9E6CDAA9E4A</string>
 		</dict>
+		<key>98D66267-E0E7-4F45-AC9C-DAD3A814B562</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>98D66267-E0E7-4F45-AC9C-DAD3A814B562.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580676312.91289997</real>
+			<key>timeStoppedRecording</key>
+			<real>580676315.89854503</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>98D66267-E0E7-4F45-AC9C-DAD3A814B562</string>
+		</dict>
 		<key>9AB6AF0B-B0CF-453E-B0BE-994EFA05EBE8</key>
 		<dict>
 			<key>className</key>
@@ -11653,6 +12133,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>9C0BF77A-6C9C-43B7-8467-64A0D635E12B</string>
+		</dict>
+		<key>9C6F184A-CB7B-4C62-ADD7-A64315BE443B</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>9C6F184A-CB7B-4C62-ADD7-A64315BE443B.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580676992.38510799</real>
+			<key>timeStoppedRecording</key>
+			<real>580676994.39747095</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>9C6F184A-CB7B-4C62-ADD7-A64315BE443B</string>
 		</dict>
 		<key>9C8DD198-19D1-4A48-9BFB-AE4FC1F5BA76</key>
 		<dict>
@@ -12229,6 +12741,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>9FE795AD-6494-4A90-BB2C-F971A3464005</string>
+		</dict>
+		<key>A02F5A6F-50ED-4855-8060-7E0A9E38F08F</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>A02F5A6F-50ED-4855-8060-7E0A9E38F08F.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580677713.91911805</real>
+			<key>timeStoppedRecording</key>
+			<real>580677716.85155106</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>A02F5A6F-50ED-4855-8060-7E0A9E38F08F</string>
 		</dict>
 		<key>A076C70B-8610-43BD-8806-1D9F258B1817</key>
 		<dict>
@@ -13670,6 +14214,38 @@
 			<key>uniqueIdentifier</key>
 			<string>B2E6434E-5847-4BD7-9C9A-33794984063E</string>
 		</dict>
+		<key>B302A031-C8F2-4F35-A582-A402E1E8000E</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>B302A031-C8F2-4F35-A582-A402E1E8000E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580677707.61688697</real>
+			<key>timeStoppedRecording</key>
+			<real>580677709.915398</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>B302A031-C8F2-4F35-A582-A402E1E8000E</string>
+		</dict>
 		<key>B37B3D2E-087F-4687-ADBF-CE5552778A64</key>
 		<dict>
 			<key>className</key>
@@ -15046,6 +15622,38 @@
 			<key>uniqueIdentifier</key>
 			<string>C3D75461-93A9-4F4C-94EA-F30A6EE408D1</string>
 		</dict>
+		<key>C41B9685-6927-4D5A-8C00-0560CFAAAD6D</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>C41B9685-6927-4D5A-8C00-0560CFAAAD6D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580676739.00846398</real>
+			<key>timeStoppedRecording</key>
+			<real>580676741.87198603</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>C41B9685-6927-4D5A-8C00-0560CFAAAD6D</string>
+		</dict>
 		<key>C41CB18B-4BCA-46BF-8BA5-218718F24F67</key>
 		<dict>
 			<key>className</key>
@@ -15333,6 +15941,38 @@
 			<string>Debug SwiftBoy</string>
 			<key>uniqueIdentifier</key>
 			<string>C5951691-AA0B-4A6C-B219-799FCB3C6116</string>
+		</dict>
+		<key>C603D901-0895-4169-89C6-3E4F6E7FC96A</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>C603D901-0895-4169-89C6-3E4F6E7FC96A.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678508.96964705</real>
+			<key>timeStoppedRecording</key>
+			<real>580678511.21507597</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>C603D901-0895-4169-89C6-3E4F6E7FC96A</string>
 		</dict>
 		<key>C6306BF8-8F63-44E6-9740-417B838ABEEC</key>
 		<dict>
@@ -15654,6 +16294,38 @@
 			<key>uniqueIdentifier</key>
 			<string>CA23D45E-0FE5-4612-9096-0F845868BE16</string>
 		</dict>
+		<key>CA601EB8-3494-43E6-8B47-E927C0274957</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>CA601EB8-3494-43E6-8B47-E927C0274957.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580677947.23201704</real>
+			<key>timeStoppedRecording</key>
+			<real>580677964.10011697</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>CA601EB8-3494-43E6-8B47-E927C0274957</string>
+		</dict>
 		<key>CBD2C1C6-9510-4109-80DC-F72BE32141EC</key>
 		<dict>
 			<key>className</key>
@@ -15749,6 +16421,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>CD443708-905E-49DB-91F3-C6B260CEE25B</string>
+		</dict>
+		<key>CD9354E0-8C98-4DB3-B8DD-0D84F63FCE30</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>CD9354E0-8C98-4DB3-B8DD-0D84F63FCE30.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678604.92021406</real>
+			<key>timeStoppedRecording</key>
+			<real>580678607.60946703</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>CD9354E0-8C98-4DB3-B8DD-0D84F63FCE30</string>
 		</dict>
 		<key>CE07DE41-656E-4805-A3B6-CC0F11211AE2</key>
 		<dict>
@@ -16166,6 +16870,38 @@
 			<key>uniqueIdentifier</key>
 			<string>D306C058-1409-43CD-B1B4-062039DC5D69</string>
 		</dict>
+		<key>D33D00D2-38DD-4B68-ADF5-79BDE98ACCFD</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>D33D00D2-38DD-4B68-ADF5-79BDE98ACCFD.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678222.38620698</real>
+			<key>timeStoppedRecording</key>
+			<real>580678225.02191198</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>D33D00D2-38DD-4B68-ADF5-79BDE98ACCFD</string>
+		</dict>
 		<key>D4425CDD-E3EA-458F-8A9E-B04A938B2C28</key>
 		<dict>
 			<key>className</key>
@@ -16453,6 +17189,38 @@
 			<string>Debug SwiftBoy</string>
 			<key>uniqueIdentifier</key>
 			<string>D84D9C21-5B11-4B97-BC56-83C5C750C007</string>
+		</dict>
+		<key>D8CEF0EB-9012-4E47-9CE0-650F439EDC8E</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>D8CEF0EB-9012-4E47-9CE0-650F439EDC8E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580677338.11110699</real>
+			<key>timeStoppedRecording</key>
+			<real>580677340.13947594</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>D8CEF0EB-9012-4E47-9CE0-650F439EDC8E</string>
 		</dict>
 		<key>D8D0604C-3FD4-48A6-8CBA-C320EC4AAD2B</key>
 		<dict>
@@ -17990,6 +18758,38 @@
 			<key>uniqueIdentifier</key>
 			<string>EAC27DD7-5FF6-41C2-A8DB-3C3F56FAF87D</string>
 		</dict>
+		<key>EB04BD40-795A-4B85-8971-0BCF1E7AFF3D</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>EB04BD40-795A-4B85-8971-0BCF1E7AFF3D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678094.09215999</real>
+			<key>timeStoppedRecording</key>
+			<real>580678096.03330398</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>EB04BD40-795A-4B85-8971-0BCF1E7AFF3D</string>
+		</dict>
 		<key>EB480BFA-06C8-4ACA-B025-0D91D5080ADB</key>
 		<dict>
 			<key>className</key>
@@ -18821,6 +19621,38 @@
 			<string>Debug CodeGen</string>
 			<key>uniqueIdentifier</key>
 			<string>F7D6ADB1-FF11-4C0A-896B-9A067EE0AAE0</string>
+		</dict>
+		<key>F7DDA230-C80D-4E19-8A84-CA8F4F6CC8EB</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>F7DDA230-C80D-4E19-8A84-CA8F4F6CC8EB.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580678525.45129299</real>
+			<key>timeStoppedRecording</key>
+			<real>580678527.88989794</real>
+			<key>title</key>
+			<string>Debug CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>F7DDA230-C80D-4E19-8A84-CA8F4F6CC8EB</string>
 		</dict>
 		<key>F800B511-D5B3-43A5-B670-3E38A0BF52EC</key>
 		<dict>
