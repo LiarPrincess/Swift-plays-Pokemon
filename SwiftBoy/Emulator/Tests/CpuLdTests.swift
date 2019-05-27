@@ -219,4 +219,41 @@ class CpuLdTests: XCTestCase {
 
     XCTAssertEqual(cpu.registers.hl, 0x3A5B)
   }
+
+  /// When HL = FFFFh
+  /// LD SP,HL ; SP ←FFFFh
+  func test_ld_sp_hl() {
+    var cpu = Cpu()
+    cpu.registers.hl = 0xffff
+    cpu.ld_sp_hl()
+
+    XCTAssertEqual(cpu.sp, 0xffff)
+  }
+
+  /// When SP = FFFEh,
+  /// PUSH BC ; (FFFCh), (FFFCh) ← B, SP ← FFFCh
+  func test_push() {
+    var cpu = Cpu()
+    cpu.sp = 0xfffe
+    cpu.registers.bc = 0xabcd
+    cpu.push(.bc)
+
+    XCTAssertEqual(cpu.sp, 0xfffc)
+    XCTAssertEqual(cpu.memory.read(0xfffd), 0xab)
+    XCTAssertEqual(cpu.memory.read(0xfffc), 0xcd)
+  }
+
+  /// When SP = FFFCh, (FFFCh) = 5Fh, and (FFFDh) = 3Ch,
+  /// POP BC ; B ← 3Ch, C ← 5Fh, SP ← FFFEh
+  func test_pop() {
+    var cpu = Cpu()
+    cpu.sp = 0xfffc
+    cpu.memory.write(0xfffc, value: 0x5f)
+    cpu.memory.write(0xfffd, value: 0x3c)
+    cpu.pop(.bc)
+
+    XCTAssertEqual(cpu.registers.b, 0x3c)
+    XCTAssertEqual(cpu.registers.c, 0x5f)
+    XCTAssertEqual(cpu.sp, 0xfffe)
+  }
 }

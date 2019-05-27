@@ -54,13 +54,13 @@ struct Opcode {
       result += getOperandValue(operand2)
     }
 
-    let addrNum: String.SubSequence = {
-      let a = self.addr.dropFirst(2)
-      return a.count == 2 ? a : "0" + a
-    }()
-
-    result += "_"
-    result += addrNum
+//    let addrNum: String.SubSequence = {
+//      let a = self.addr.dropFirst(2)
+//      return a.count == 2 ? a : "0" + a
+//    }()
+//
+//    result += "_"
+//    result += addrNum
 
     return result
   }

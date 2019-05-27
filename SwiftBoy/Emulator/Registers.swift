@@ -9,6 +9,7 @@ enum SingleRegister {
 }
 
 enum CombinedRegister {
+  case af
   case bc
   case de
   case hl
@@ -92,6 +93,7 @@ struct Registers {
 
   func get(_ r: CombinedRegister) -> UInt16 {
     switch r {
+    case .af: return 0 // TODO: Get AF
     case .bc: return self.bc
     case .de: return self.de
     case .hl: return self.hl
@@ -112,6 +114,7 @@ struct Registers {
 
   mutating func set(_ r: CombinedRegister, to value: UInt16) {
     switch r {
+    case .af: break // TODO: Set AF
     case .bc: self.bc = value
     case .de: self.de = value
     case .hl: self.hl = value

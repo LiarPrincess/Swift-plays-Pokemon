@@ -152,5 +152,38 @@ extension Cpu {
     self.sp = nn
   }
 
-  // TODO: Finish page 100 (1st implemented)
+  /// Loads the contents of register pair HL in stack pointer SP.
+  mutating func ld_sp_hl() {
+    self.sp = self.registers.hl
+  }
+
+  /// Pushes the contents of register pair qq onto the memory stack.
+  /// First 1 is substracted from SP and the contents of the higher portion of qq are placed on the stack.
+  /// The contents of the lower portion of qq are then placed on the stack.
+  /// The contents of SP are automatically decremented by 2.
+  mutating func push(_ rr: CombinedRegister) {
+    let nn = self.registers.get(rr)
+
+    self.push(UInt8(nn >> 8))
+    self.push(UInt8(nn & 0xff))
+  }
+
+  private mutating func push(_ n: UInt8) {
+    self.sp -= 1
+    self.memory.write(self.sp, value: n)
+  }
+
+  mutating func pop(_ rr: CombinedRegister) {
+    let low  = UInt16(self.pop())
+    let high = UInt16(self.pop())
+
+    let nn = (high << 8) | low
+    self.registers.set(rr, to: nn)
+  }
+
+  private mutating func pop() -> UInt8 {
+    let n = self.memory.read(self.sp)
+    self.sp += 1
+    return n
+  }
 }

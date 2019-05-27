@@ -5,257 +5,286 @@
 // swiftlint:disable file_length
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
+// swiftlint:disable switch_case_alignment
 
 extension Cpu {
   mutating func execute(_ opcode: Opcode) {
     switch opcode.type {
-    case .nop_00: break
-    case .ld_bc_d16_01: self.ld_rr_d16(.bc, self.next16)
-    case .ld_pBC_a_02: self.ld_pBC_a()
-    case .inc_bc_03: self.inc_r(.bc)
-    case .inc_b_04: self.inc_r(.b)
-    case .dec_b_05: self.dec_r(.b)
-    case .ld_b_d8_06: self.ld_r_d8(.b, self.next8)
-    case .rlca_07: self.rlca()
-    //case .ld_pA16_sp_08: break
-    case .add_hl_bc_09: self.add_hl_r(.bc)
-    case .ld_a_pBC_0a: self.ld_a_pBC()
-    case .dec_bc_0b: self.dec_r(.bc)
-    case .inc_c_0c: self.inc_r(.c)
-    case .dec_c_0d: self.dec_r(.c)
-    case .ld_c_d8_0e: self.ld_r_d8(.c, self.next8)
-    case .rrca_0f: self.rrca()
-    //case .stop_0_10: break
-    case .ld_de_d16_11: self.ld_rr_d16(.de, self.next16)
-    case .ld_pDE_a_12: self.ld_pDE_a()
-    case .inc_de_13: self.inc_r(.de)
-    case .inc_d_14: self.inc_r(.d)
-    case .dec_d_15: self.dec_r(.d)
-    case .ld_d_d8_16: self.ld_r_d8(.d, self.next8)
-    case .rla_17: self.rla()
-    case .jr_r8_18: self.jr_e(self.next8)
-    case .add_hl_de_19: self.add_hl_r(.de)
-    case .ld_a_pDE_1a: self.ld_a_pDE()
-    case .dec_de_1b: self.dec_r(.de)
-    case .inc_e_1c: self.inc_r(.e)
-    case .dec_e_1d: self.dec_r(.e)
-    case .ld_e_d8_1e: self.ld_r_d8(.e, self.next8)
-    case .rra_1f: self.rra()
-    case .jr_nz_r8_20: self.jr_cc_e(.nz, self.next8)
-    case .ld_hl_d16_21: self.ld_rr_d16(.hl, self.next16)
-    case .ld_pHLI_a_22: self.ld_pHLI_a()
-    case .inc_hl_23: self.inc_r(.hl)
-    case .inc_h_24: self.inc_r(.h)
-    case .dec_h_25: self.dec_r(.h)
-    case .ld_h_d8_26: self.ld_r_d8(.h, self.next8)
-    //case .daa_27: break
-    case .jr_z_r8_28: self.jr_cc_e(.z, self.next8)
-    case .add_hl_hl_29: self.add_hl_r(.hl)
-    case .ld_a_pHLI_2a: self.ld_a_pHLI()
-    case .dec_hl_2b: self.dec_r(.hl)
-    case .inc_l_2c: self.inc_r(.l)
-    case .dec_l_2d: self.dec_r(.l)
-    case .ld_l_d8_2e: self.ld_r_d8(.l, self.next8)
-    //case .cpl_2f: break
-    case .jr_nc_r8_30: self.jr_cc_e(.nc, self.next8)
-    case .ld_sp_d16_31: self.ld_sp_d16(self.next16)
-    case .ld_pHLD_a_32: self.ld_pHLD_a()
-    case .inc_sp_33: self.inc_sp()
-    case .inc_pHL_34: self.inc_pHL()
-    case .dec_pHL_35: self.dec_pHL()
-    case .ld_pHL_d8_36: self.ld_pHL_d8(self.next8)
-    //case .scf_37: break
-    case .jr_c_r8_38: self.jr_cc_e(.c, self.next8)
-    case .add_hl_sp_39: self.add_hl_sp()
-    case .ld_a_pHLD_3a: self.ld_a_pHLD()
-    case .dec_sp_3b: self.dec_sp()
-    case .inc_a_3c: self.inc_r(.a)
-    case .dec_a_3d: self.dec_r(.a)
-    case .ld_a_d8_3e: self.ld_r_d8(.a, self.next8)
-    //case .ccf_3f: break
-    case .ld_b_b_40: self.ld_r_r(.b, .b)
-    case .ld_b_c_41: self.ld_r_r(.b, .c)
-    case .ld_b_d_42: self.ld_r_r(.b, .d)
-    case .ld_b_e_43: self.ld_r_r(.b, .e)
-    case .ld_b_h_44: self.ld_r_r(.b, .h)
-    case .ld_b_l_45: self.ld_r_r(.b, .l)
-    case .ld_b_pHL_46: self.ld_r_pHL(.b)
-    case .ld_b_a_47: self.ld_r_r(.b, .a)
-    case .ld_c_b_48: self.ld_r_r(.c, .b)
-    case .ld_c_c_49: self.ld_r_r(.c, .c)
-    case .ld_c_d_4a: self.ld_r_r(.c, .d)
-    case .ld_c_e_4b: self.ld_r_r(.c, .e)
-    case .ld_c_h_4c: self.ld_r_r(.c, .h)
-    case .ld_c_l_4d: self.ld_r_r(.c, .l)
-    case .ld_c_pHL_4e: self.ld_r_pHL(.c)
-    case .ld_c_a_4f: self.ld_r_r(.c, .a)
-    case .ld_d_b_50: self.ld_r_r(.d, .b)
-    case .ld_d_c_51: self.ld_r_r(.d, .c)
-    case .ld_d_d_52: self.ld_r_r(.d, .d)
-    case .ld_d_e_53: self.ld_r_r(.d, .e)
-    case .ld_d_h_54: self.ld_r_r(.d, .h)
-    case .ld_d_l_55: self.ld_r_r(.d, .l)
-    case .ld_d_pHL_56: self.ld_r_pHL(.d)
-    case .ld_d_a_57: self.ld_r_r(.d, .a)
-    case .ld_e_b_58: self.ld_r_r(.e, .b)
-    case .ld_e_c_59: self.ld_r_r(.e, .c)
-    case .ld_e_d_5a: self.ld_r_r(.e, .d)
-    case .ld_e_e_5b: self.ld_r_r(.e, .e)
-    case .ld_e_h_5c: self.ld_r_r(.e, .h)
-    case .ld_e_l_5d: self.ld_r_r(.e, .l)
-    case .ld_e_pHL_5e: self.ld_r_pHL(.e)
-    case .ld_e_a_5f: self.ld_r_r(.e, .a)
-    case .ld_h_b_60: self.ld_r_r(.h, .b)
-    case .ld_h_c_61: self.ld_r_r(.h, .c)
-    case .ld_h_d_62: self.ld_r_r(.h, .d)
-    case .ld_h_e_63: self.ld_r_r(.h, .e)
-    case .ld_h_h_64: self.ld_r_r(.h, .h)
-    case .ld_h_l_65: self.ld_r_r(.h, .l)
-    case .ld_h_pHL_66: self.ld_r_pHL(.h)
-    case .ld_h_a_67: self.ld_r_r(.h, .a)
-    case .ld_l_b_68: self.ld_r_r(.l, .b)
-    case .ld_l_c_69: self.ld_r_r(.l, .c)
-    case .ld_l_d_6a: self.ld_r_r(.l, .d)
-    case .ld_l_e_6b: self.ld_r_r(.l, .e)
-    case .ld_l_h_6c: self.ld_r_r(.l, .h)
-    case .ld_l_l_6d: self.ld_r_r(.l, .l)
-    case .ld_l_pHL_6e: self.ld_r_pHL(.l)
-    case .ld_l_a_6f: self.ld_r_r(.l, .a)
-    case .ld_pHL_b_70: self.ld_pHL_r(.b)
-    case .ld_pHL_c_71: self.ld_pHL_r(.c)
-    case .ld_pHL_d_72: self.ld_pHL_r(.d)
-    case .ld_pHL_e_73: self.ld_pHL_r(.e)
-    case .ld_pHL_h_74: self.ld_pHL_r(.h)
-    case .ld_pHL_l_75: self.ld_pHL_r(.l)
-    //case .halt_76: break
-    case .ld_pHL_a_77: self.ld_pHL_r(.a)
-    case .ld_a_b_78: self.ld_r_r(.a, .b)
-    case .ld_a_c_79: self.ld_r_r(.a, .c)
-    case .ld_a_d_7a: self.ld_r_r(.a, .d)
-    case .ld_a_e_7b: self.ld_r_r(.a, .e)
-    case .ld_a_h_7c: self.ld_r_r(.a, .h)
-    case .ld_a_l_7d: self.ld_r_r(.a, .l)
-    case .ld_a_pHL_7e: self.ld_r_pHL(.a)
-    case .ld_a_a_7f: self.ld_r_r(.a, .a)
-    case .add_a_b_80: self.add_a_r(.b)
-    case .add_a_c_81: self.add_a_r(.c)
-    case .add_a_d_82: self.add_a_r(.d)
-    case .add_a_e_83: self.add_a_r(.e)
-    case .add_a_h_84: self.add_a_r(.h)
-    case .add_a_l_85: self.add_a_r(.l)
-    case .add_a_pHL_86: self.add_a_pHL()
-    case .add_a_a_87: self.add_a_r(.a)
-    case .adc_a_b_88: self.adc_a_r(.b)
-    case .adc_a_c_89: self.adc_a_r(.c)
-    case .adc_a_d_8a: self.adc_a_r(.d)
-    case .adc_a_e_8b: self.adc_a_r(.e)
-    case .adc_a_h_8c: self.adc_a_r(.h)
-    case .adc_a_l_8d: self.adc_a_r(.l)
-    case .adc_a_pHL_8e: self.adc_a_pHL()
-    case .adc_a_a_8f: self.adc_a_r(.a)
-    case .sub_b_90: self.sub_a_r(.b)
-    case .sub_c_91: self.sub_a_r(.c)
-    case .sub_d_92: self.sub_a_r(.d)
-    case .sub_e_93: self.sub_a_r(.e)
-    case .sub_h_94: self.sub_a_r(.h)
-    case .sub_l_95: self.sub_a_r(.l)
-    case .sub_pHL_96: self.sub_a_pHL()
-    case .sub_a_97: self.sub_a_r(.a)
-    case .sbc_a_b_98: self.sbc_a_r(.b)
-    case .sbc_a_c_99: self.sbc_a_r(.c)
-    case .sbc_a_d_9a: self.sbc_a_r(.d)
-    case .sbc_a_e_9b: self.sbc_a_r(.e)
-    case .sbc_a_h_9c: self.sbc_a_r(.h)
-    case .sbc_a_l_9d: self.sbc_a_r(.l)
-    case .sbc_a_pHL_9e: self.sbc_a_pHL()
-    case .sbc_a_a_9f: self.sbc_a_r(.a)
-    case .and_b_a0: self.and_a_r(.b)
-    case .and_c_a1: self.and_a_r(.c)
-    case .and_d_a2: self.and_a_r(.d)
-    case .and_e_a3: self.and_a_r(.e)
-    case .and_h_a4: self.and_a_r(.h)
-    case .and_l_a5: self.and_a_r(.l)
-    case .and_pHL_a6: self.and_a_pHL()
-    case .and_a_a7: self.and_a_r(.a)
-    case .xor_b_a8: self.xor_a_r(.b)
-    case .xor_c_a9: self.xor_a_r(.c)
-    case .xor_d_aa: self.xor_a_r(.d)
-    case .xor_e_ab: self.xor_a_r(.e)
-    case .xor_h_ac: self.xor_a_r(.h)
-    case .xor_l_ad: self.xor_a_r(.l)
-    case .xor_pHL_ae: self.xor_a_pHL()
-    case .xor_a_af: self.xor_a_r(.a)
-    case .or_b_b0: self.or_a_r(.b)
-    case .or_c_b1: self.or_a_r(.c)
-    case .or_d_b2: self.or_a_r(.d)
-    case .or_e_b3: self.or_a_r(.e)
-    case .or_h_b4: self.or_a_r(.h)
-    case .or_l_b5: self.or_a_r(.l)
-    case .or_pHL_b6: self.or_a_pHL()
-    case .or_a_b7: self.or_a_r(.a)
-    case .cp_b_b8: self.cp_a_r(.b)
-    case .cp_c_b9: self.cp_a_r(.c)
-    case .cp_d_ba: self.cp_a_r(.d)
-    case .cp_e_bb: self.cp_a_r(.e)
-    case .cp_h_bc: self.cp_a_r(.h)
-    case .cp_l_bd: self.cp_a_r(.l)
-    case .cp_pHL_be: self.cp_a_pHL()
-    case .cp_a_bf: self.cp_a_r(.a)
-    //case .ret_nz_c0: break
-    //case .pop_bc_c1: break
-    case .jp_nz_a16_c2: self.jp_cc_nn(.nz, self.next16)
-    case .jp_a16_c3: self.jp_nn(self.next16)
-    //case .call_nz_a16_c4: break
-    //case .push_bc_c5: break
-    case .add_a_d8_c6: self.add_a_d8(self.next8)
-    //case .rst_00h_c7: break
-    //case .ret_z_c8: break
-    //case .ret_c9: break
-    case .jp_z_a16_ca: self.jp_cc_nn(.z, self.next16)
-    //case .prefix_cb_cb: break
-    //case .call_z_a16_cc: break
-    //case .call_a16_cd: break
-    case .adc_a_d8_ce: self.adc_a_d8(self.next8)
-    //case .rst_08h_cf: break
-    //case .ret_nc_d0: break
-    //case .pop_de_d1: break
-    case .jp_nc_a16_d2: self.jp_cc_nn(.nc, self.next16)
-    //case .call_nc_a16_d4: break
-    //case .push_de_d5: break
-    case .sub_d8_d6: self.sub_a_d8(self.next8)
-    //case .rst_10h_d7: break
-    //case .ret_c_d8: break
-    //case .reti_d9: break
-    case .jp_c_a16_da: self.jp_cc_nn(.c, self.next16)
-    //case .call_c_a16_dc: break
-    case .sbc_a_d8_de: self.sbc_a_d8(self.next8)
-    //case .rst_18h_df: break
-    case .ldh_pA8_a_e0: self.ld_pA8_a(self.next8)
-    //case .pop_hl_e1: break
-    case .ld_pC_a_e2: self.ld_ffC_a()
-    //case .push_hl_e5: break
-    case .and_d8_e6: self.and_a_d8(self.next8)
-    //case .rst_20h_e7: break
-    case .add_sp_r8_e8: self.add_sp_n(self.next8)
-    case .jp_pHL_e9: self.jp_pHL()
-    case .ld_pA16_a_ea: self.ld_pA16_a(self.next16)
-    case .xor_d8_ee: self.xor_a_d8(self.next8)
-    //case .rst_28h_ef: break
-    case .ldh_a_pA8_f0: self.ld_a_pA8(self.next8)
-    //case .pop_af_f1: break
-    case .ld_a_pC_f2: self.ld_a_ffC()
-    //case .di_f3: break
-    //case .push_af_f5: break
-    case .or_d8_f6: self.or_a_d8(self.next8)
-    //case .rst_30h_f7: break
-    //case .ld_hl_spR8_f8: break
-    //case .ld_sp_hl_f9: break
-    case .ld_a_pA16_fa: self.ld_a_pA16(self.next16)
-    //case .ei_fb: break
-    case .cp_d8_fe: self.cp_a_d8(self.next8)
-    //case .rst_38h_ff: break
+/* 0x0 */ case .nop: break
+/* 0x1 */ case .ld_bc_d16: self.ld_rr_d16(.bc, self.next16)
+/* 0x2 */ case .ld_pBC_a: self.ld_pBC_a()
+/* 0x3 */ case .inc_bc: self.inc_r(.bc)
+/* 0x4 */ case .inc_b: self.inc_r(.b)
+/* 0x5 */ case .dec_b: self.dec_r(.b)
+/* 0x6 */ case .ld_b_d8: self.ld_r_d8(.b, self.next8)
+/* 0x7 */ case .rlca: self.rlca()
+/* 0x8 */ //case .ld_pA16_sp: break
+/* 0x9 */ case .add_hl_bc: self.add_hl_r(.bc)
+/* 0xa */ case .ld_a_pBC: self.ld_a_pBC()
+/* 0xb */ case .dec_bc: self.dec_r(.bc)
+/* 0xc */ case .inc_c: self.inc_r(.c)
+/* 0xd */ case .dec_c: self.dec_r(.c)
+/* 0xe */ case .ld_c_d8: self.ld_r_d8(.c, self.next8)
+/* 0xf */ case .rrca: self.rrca()
+/* 0x10 */ //case .stop_0: break
+/* 0x11 */ case .ld_de_d16: self.ld_rr_d16(.de, self.next16)
+/* 0x12 */ case .ld_pDE_a: self.ld_pDE_a()
+/* 0x13 */ case .inc_de: self.inc_r(.de)
+/* 0x14 */ case .inc_d: self.inc_r(.d)
+/* 0x15 */ case .dec_d: self.dec_r(.d)
+/* 0x16 */ case .ld_d_d8: self.ld_r_d8(.d, self.next8)
+/* 0x17 */ case .rla: self.rla()
+/* 0x18 */ case .jr_r8: self.jr_e(self.next8)
+/* 0x19 */ case .add_hl_de: self.add_hl_r(.de)
+/* 0x1a */ case .ld_a_pDE: self.ld_a_pDE()
+/* 0x1b */ case .dec_de: self.dec_r(.de)
+/* 0x1c */ case .inc_e: self.inc_r(.e)
+/* 0x1d */ case .dec_e: self.dec_r(.e)
+/* 0x1e */ case .ld_e_d8: self.ld_r_d8(.e, self.next8)
+/* 0x1f */ case .rra: self.rra()
+/* 0x20 */ case .jr_nz_r8: self.jr_cc_e(.nz, self.next8)
+/* 0x21 */ case .ld_hl_d16: self.ld_rr_d16(.hl, self.next16)
+/* 0x22 */ case .ld_pHLI_a: self.ld_pHLI_a()
+/* 0x23 */ case .inc_hl: self.inc_r(.hl)
+/* 0x24 */ case .inc_h: self.inc_r(.h)
+/* 0x25 */ case .dec_h: self.dec_r(.h)
+/* 0x26 */ case .ld_h_d8: self.ld_r_d8(.h, self.next8)
+/* 0x27 */ //case .daa: break
+/* 0x28 */ case .jr_z_r8: self.jr_cc_e(.z, self.next8)
+/* 0x29 */ case .add_hl_hl: self.add_hl_r(.hl)
+/* 0x2a */ case .ld_a_pHLI: self.ld_a_pHLI()
+/* 0x2b */ case .dec_hl: self.dec_r(.hl)
+/* 0x2c */ case .inc_l: self.inc_r(.l)
+/* 0x2d */ case .dec_l: self.dec_r(.l)
+/* 0x2e */ case .ld_l_d8: self.ld_r_d8(.l, self.next8)
+/* 0x2f */ //case .cpl: break
+/* 0x30 */ case .jr_nc_r8: self.jr_cc_e(.nc, self.next8)
+/* 0x31 */ case .ld_sp_d16: self.ld_sp_d16(self.next16)
+/* 0x32 */ case .ld_pHLD_a: self.ld_pHLD_a()
+/* 0x33 */ case .inc_sp: self.inc_sp()
+/* 0x34 */ case .inc_pHL: self.inc_pHL()
+/* 0x35 */ case .dec_pHL: self.dec_pHL()
+/* 0x36 */ case .ld_pHL_d8: self.ld_pHL_d8(self.next8)
+/* 0x37 */ //case .scf: break
+/* 0x38 */ case .jr_c_r8: self.jr_cc_e(.c, self.next8)
+/* 0x39 */ case .add_hl_sp: self.add_hl_sp()
+/* 0x3a */ case .ld_a_pHLD: self.ld_a_pHLD()
+/* 0x3b */ case .dec_sp: self.dec_sp()
+/* 0x3c */ case .inc_a: self.inc_r(.a)
+/* 0x3d */ case .dec_a: self.dec_r(.a)
+/* 0x3e */ case .ld_a_d8: self.ld_r_d8(.a, self.next8)
+/* 0x3f */ //case .ccf: break
+/* 0x40 */ case .ld_b_b: self.ld_r_r(.b, .b)
+/* 0x41 */ case .ld_b_c: self.ld_r_r(.b, .c)
+/* 0x42 */ case .ld_b_d: self.ld_r_r(.b, .d)
+/* 0x43 */ case .ld_b_e: self.ld_r_r(.b, .e)
+/* 0x44 */ case .ld_b_h: self.ld_r_r(.b, .h)
+/* 0x45 */ case .ld_b_l: self.ld_r_r(.b, .l)
+/* 0x46 */ case .ld_b_pHL: self.ld_r_pHL(.b)
+/* 0x47 */ case .ld_b_a: self.ld_r_r(.b, .a)
+/* 0x48 */ case .ld_c_b: self.ld_r_r(.c, .b)
+/* 0x49 */ case .ld_c_c: self.ld_r_r(.c, .c)
+/* 0x4a */ case .ld_c_d: self.ld_r_r(.c, .d)
+/* 0x4b */ case .ld_c_e: self.ld_r_r(.c, .e)
+/* 0x4c */ case .ld_c_h: self.ld_r_r(.c, .h)
+/* 0x4d */ case .ld_c_l: self.ld_r_r(.c, .l)
+/* 0x4e */ case .ld_c_pHL: self.ld_r_pHL(.c)
+/* 0x4f */ case .ld_c_a: self.ld_r_r(.c, .a)
+/* 0x50 */ case .ld_d_b: self.ld_r_r(.d, .b)
+/* 0x51 */ case .ld_d_c: self.ld_r_r(.d, .c)
+/* 0x52 */ case .ld_d_d: self.ld_r_r(.d, .d)
+/* 0x53 */ case .ld_d_e: self.ld_r_r(.d, .e)
+/* 0x54 */ case .ld_d_h: self.ld_r_r(.d, .h)
+/* 0x55 */ case .ld_d_l: self.ld_r_r(.d, .l)
+/* 0x56 */ case .ld_d_pHL: self.ld_r_pHL(.d)
+/* 0x57 */ case .ld_d_a: self.ld_r_r(.d, .a)
+/* 0x58 */ case .ld_e_b: self.ld_r_r(.e, .b)
+/* 0x59 */ case .ld_e_c: self.ld_r_r(.e, .c)
+/* 0x5a */ case .ld_e_d: self.ld_r_r(.e, .d)
+/* 0x5b */ case .ld_e_e: self.ld_r_r(.e, .e)
+/* 0x5c */ case .ld_e_h: self.ld_r_r(.e, .h)
+/* 0x5d */ case .ld_e_l: self.ld_r_r(.e, .l)
+/* 0x5e */ case .ld_e_pHL: self.ld_r_pHL(.e)
+/* 0x5f */ case .ld_e_a: self.ld_r_r(.e, .a)
+/* 0x60 */ case .ld_h_b: self.ld_r_r(.h, .b)
+/* 0x61 */ case .ld_h_c: self.ld_r_r(.h, .c)
+/* 0x62 */ case .ld_h_d: self.ld_r_r(.h, .d)
+/* 0x63 */ case .ld_h_e: self.ld_r_r(.h, .e)
+/* 0x64 */ case .ld_h_h: self.ld_r_r(.h, .h)
+/* 0x65 */ case .ld_h_l: self.ld_r_r(.h, .l)
+/* 0x66 */ case .ld_h_pHL: self.ld_r_pHL(.h)
+/* 0x67 */ case .ld_h_a: self.ld_r_r(.h, .a)
+/* 0x68 */ case .ld_l_b: self.ld_r_r(.l, .b)
+/* 0x69 */ case .ld_l_c: self.ld_r_r(.l, .c)
+/* 0x6a */ case .ld_l_d: self.ld_r_r(.l, .d)
+/* 0x6b */ case .ld_l_e: self.ld_r_r(.l, .e)
+/* 0x6c */ case .ld_l_h: self.ld_r_r(.l, .h)
+/* 0x6d */ case .ld_l_l: self.ld_r_r(.l, .l)
+/* 0x6e */ case .ld_l_pHL: self.ld_r_pHL(.l)
+/* 0x6f */ case .ld_l_a: self.ld_r_r(.l, .a)
+/* 0x70 */ case .ld_pHL_b: self.ld_pHL_r(.b)
+/* 0x71 */ case .ld_pHL_c: self.ld_pHL_r(.c)
+/* 0x72 */ case .ld_pHL_d: self.ld_pHL_r(.d)
+/* 0x73 */ case .ld_pHL_e: self.ld_pHL_r(.e)
+/* 0x74 */ case .ld_pHL_h: self.ld_pHL_r(.h)
+/* 0x75 */ case .ld_pHL_l: self.ld_pHL_r(.l)
+/* 0x76 */ //case .halt: break
+/* 0x77 */ case .ld_pHL_a: self.ld_pHL_r(.a)
+/* 0x78 */ case .ld_a_b: self.ld_r_r(.a, .b)
+/* 0x79 */ case .ld_a_c: self.ld_r_r(.a, .c)
+/* 0x7a */ case .ld_a_d: self.ld_r_r(.a, .d)
+/* 0x7b */ case .ld_a_e: self.ld_r_r(.a, .e)
+/* 0x7c */ case .ld_a_h: self.ld_r_r(.a, .h)
+/* 0x7d */ case .ld_a_l: self.ld_r_r(.a, .l)
+/* 0x7e */ case .ld_a_pHL: self.ld_r_pHL(.a)
+/* 0x7f */ case .ld_a_a: self.ld_r_r(.a, .a)
+/* 0x80 */ case .add_a_b: self.add_a_r(.b)
+/* 0x81 */ case .add_a_c: self.add_a_r(.c)
+/* 0x82 */ case .add_a_d: self.add_a_r(.d)
+/* 0x83 */ case .add_a_e: self.add_a_r(.e)
+/* 0x84 */ case .add_a_h: self.add_a_r(.h)
+/* 0x85 */ case .add_a_l: self.add_a_r(.l)
+/* 0x86 */ case .add_a_pHL: self.add_a_pHL()
+/* 0x87 */ case .add_a_a: self.add_a_r(.a)
+/* 0x88 */ case .adc_a_b: self.adc_a_r(.b)
+/* 0x89 */ case .adc_a_c: self.adc_a_r(.c)
+/* 0x8a */ case .adc_a_d: self.adc_a_r(.d)
+/* 0x8b */ case .adc_a_e: self.adc_a_r(.e)
+/* 0x8c */ case .adc_a_h: self.adc_a_r(.h)
+/* 0x8d */ case .adc_a_l: self.adc_a_r(.l)
+/* 0x8e */ case .adc_a_pHL: self.adc_a_pHL()
+/* 0x8f */ case .adc_a_a: self.adc_a_r(.a)
+/* 0x90 */ case .sub_b: self.sub_a_r(.b)
+/* 0x91 */ case .sub_c: self.sub_a_r(.c)
+/* 0x92 */ case .sub_d: self.sub_a_r(.d)
+/* 0x93 */ case .sub_e: self.sub_a_r(.e)
+/* 0x94 */ case .sub_h: self.sub_a_r(.h)
+/* 0x95 */ case .sub_l: self.sub_a_r(.l)
+/* 0x96 */ case .sub_pHL: self.sub_a_pHL()
+/* 0x97 */ case .sub_a: self.sub_a_r(.a)
+/* 0x98 */ case .sbc_a_b: self.sbc_a_r(.b)
+/* 0x99 */ case .sbc_a_c: self.sbc_a_r(.c)
+/* 0x9a */ case .sbc_a_d: self.sbc_a_r(.d)
+/* 0x9b */ case .sbc_a_e: self.sbc_a_r(.e)
+/* 0x9c */ case .sbc_a_h: self.sbc_a_r(.h)
+/* 0x9d */ case .sbc_a_l: self.sbc_a_r(.l)
+/* 0x9e */ case .sbc_a_pHL: self.sbc_a_pHL()
+/* 0x9f */ case .sbc_a_a: self.sbc_a_r(.a)
+/* 0xa0 */ case .and_b: self.and_a_r(.b)
+/* 0xa1 */ case .and_c: self.and_a_r(.c)
+/* 0xa2 */ case .and_d: self.and_a_r(.d)
+/* 0xa3 */ case .and_e: self.and_a_r(.e)
+/* 0xa4 */ case .and_h: self.and_a_r(.h)
+/* 0xa5 */ case .and_l: self.and_a_r(.l)
+/* 0xa6 */ case .and_pHL: self.and_a_pHL()
+/* 0xa7 */ case .and_a: self.and_a_r(.a)
+/* 0xa8 */ case .xor_b: self.xor_a_r(.b)
+/* 0xa9 */ case .xor_c: self.xor_a_r(.c)
+/* 0xaa */ case .xor_d: self.xor_a_r(.d)
+/* 0xab */ case .xor_e: self.xor_a_r(.e)
+/* 0xac */ case .xor_h: self.xor_a_r(.h)
+/* 0xad */ case .xor_l: self.xor_a_r(.l)
+/* 0xae */ case .xor_pHL: self.xor_a_pHL()
+/* 0xaf */ case .xor_a: self.xor_a_r(.a)
+/* 0xb0 */ case .or_b: self.or_a_r(.b)
+/* 0xb1 */ case .or_c: self.or_a_r(.c)
+/* 0xb2 */ case .or_d: self.or_a_r(.d)
+/* 0xb3 */ case .or_e: self.or_a_r(.e)
+/* 0xb4 */ case .or_h: self.or_a_r(.h)
+/* 0xb5 */ case .or_l: self.or_a_r(.l)
+/* 0xb6 */ case .or_pHL: self.or_a_pHL()
+/* 0xb7 */ case .or_a: self.or_a_r(.a)
+/* 0xb8 */ case .cp_b: self.cp_a_r(.b)
+/* 0xb9 */ case .cp_c: self.cp_a_r(.c)
+/* 0xba */ case .cp_d: self.cp_a_r(.d)
+/* 0xbb */ case .cp_e: self.cp_a_r(.e)
+/* 0xbc */ case .cp_h: self.cp_a_r(.h)
+/* 0xbd */ case .cp_l: self.cp_a_r(.l)
+/* 0xbe */ case .cp_pHL: self.cp_a_pHL()
+/* 0xbf */ case .cp_a: self.cp_a_r(.a)
+/* 0xc0 */ //case .ret_nz: break
+/* 0xc1 */ case .pop_bc: self.pop(.bc)
+/* 0xc2 */ case .jp_nz_a16: self.jp_cc_nn(.nz, self.next16)
+/* 0xc3 */ case .jp_a16: self.jp_nn(self.next16)
+/* 0xc4 */ //case .call_nz_a16: break
+/* 0xc5 */ case .push_bc: self.push(.bc)
+/* 0xc6 */ case .add_a_d8: self.add_a_d8(self.next8)
+/* 0xc7 */ //case .rst_00h: break
+/* 0xc8 */ //case .ret_z: break
+/* 0xc9 */ //case .ret: break
+/* 0xca */ case .jp_z_a16: self.jp_cc_nn(.z, self.next16)
+/* 0xcb */ //case .prefix_cb: break
+/* 0xcc */ //case .call_z_a16: break
+/* 0xcd */ //case .call_a16: break
+/* 0xce */ case .adc_a_d8: self.adc_a_d8(self.next8)
+/* 0xcf */ //case .rst_08h: break
+/* 0xd0 */ //case .ret_nc: break
+/* 0xd1 */ case .pop_de: self.pop(.de)
+/* 0xd2 */ case .jp_nc_a16: self.jp_cc_nn(.nc, self.next16)
+/* 0xd4 */ //case .call_nc_a16: break
+/* 0xd5 */ case .push_de: self.push(.de)
+/* 0xd6 */ case .sub_d8: self.sub_a_d8(self.next8)
+/* 0xd7 */ //case .rst_10h: break
+/* 0xd8 */ //case .ret_c: break
+/* 0xd9 */ //case .reti: break
+/* 0xda */ case .jp_c_a16: self.jp_cc_nn(.c, self.next16)
+/* 0xdc */ //case .call_c_a16: break
+/* 0xde */ case .sbc_a_d8: self.sbc_a_d8(self.next8)
+/* 0xdf */ //case .rst_18h: break
+/* 0xe0 */ case .ldh_pA8_a: self.ld_pA8_a(self.next8)
+/* 0xe1 */ case .pop_hl: self.pop(.hl)
+/* 0xe2 */ case .ld_pC_a: self.ld_ffC_a()
+/* 0xe5 */ case .push_hl: self.push(.hl)
+/* 0xe6 */ case .and_d8: self.and_a_d8(self.next8)
+/* 0xe7 */ //case .rst_20h: break
+/* 0xe8 */ case .add_sp_r8: self.add_sp_n(self.next8)
+/* 0xe9 */ case .jp_pHL: self.jp_pHL()
+/* 0xea */ case .ld_pA16_a: self.ld_pA16_a(self.next16)
+/* 0xee */ case .xor_d8: self.xor_a_d8(self.next8)
+/* 0xef */ //case .rst_28h: break
+/* 0xf0 */ case .ldh_a_pA8: self.ld_a_pA8(self.next8)
+/* 0xf1 */ /* 0xf2 */ case .ld_a_pC: self.ld_a_ffC()
+/* 0xf3 */ //case .di: break
+/* 0xf5 */ /* 0xf6 */ case .or_d8: self.or_a_d8(self.next8)
+/* 0xf7 */ //case .rst_30h: break
+/* 0xf8 */ //case .ld_hl_spR8: break
+/* 0xf9 */ case .ld_sp_hl: self.ld_sp_hl()
+/* 0xfa */ case .ld_a_pA16: self.ld_a_pA16(self.next16)
+/* 0xfb */ //case .ei: break
+/* 0xfe */ case .cp_d8: self.cp_a_d8(self.next8)
+/* 0xff */ //case .rst_38h: break
     default: print("Unknown opcode: \(opcode)")
     }
   }
 }
-// Implemented opcodes: 206, remaining: 39
+// Implemented opcodes: 215, remaining: 30
+// 0xcf
+// 0xdc
+// 0xcc
+// 0xc7
+// 0xe7
+// 0x2f
+// 0xcb
+// 0xef
+// 0xf3
+// 0xc8
+// 0xf7
+// 0x3f
+// 0xff
+// 0x37
+// 0x8
+// 0xd4
+// 0x27
+// 0xc9
+// 0xcd
+// 0xc0
+// 0x76
+// 0xd9
+// 0xd7
+// 0xdf
+// 0xfb
+// 0xd8
+// 0x10
+// 0xc4
+// 0xd0
+// 0xf8

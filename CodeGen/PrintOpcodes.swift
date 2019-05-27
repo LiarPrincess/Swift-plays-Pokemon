@@ -26,7 +26,7 @@ private func printHeader() {
 private func printOpcodeTypeEnum(_ name: String, _ opcodes: [Opcode]) {
   print("enum \(name) {")
   for op in opcodes {
-    print("  case \(op.enumCase)")
+    print("/** \(op.addr) */ case \(op.enumCase)")
   }
   print("}")
   print("")
