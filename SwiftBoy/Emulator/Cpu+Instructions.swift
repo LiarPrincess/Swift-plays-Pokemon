@@ -171,14 +171,7 @@ extension Cpu {
   /// The contents of SP are automatically decremented by 2.
   mutating func push(_ rr: CombinedRegister) {
     let nn = self.registers.get(rr)
-
-    self.push(UInt8(nn >> 8))
-    self.push(UInt8(nn & 0xff))
-  }
-
-  private mutating func push(_ n: UInt8) {
-    self.sp -= 1
-    self.memory.write(self.sp, value: n)
+    self.push16(nn)
   }
 
   /// Pops contents from the memory stack and into register pair qq.
@@ -186,17 +179,8 @@ extension Cpu {
   /// Next, the contents of SP are incremented by 1 and the contents of the memory they specify are loaded in the upper portion of qq.
   /// The contents of SP are automatically incremented by 2.
   mutating func pop(_ rr: CombinedRegister) {
-    let low  = UInt16(self.pop())
-    let high = UInt16(self.pop())
-
-    let nn = (high << 8) | low
+    let nn = self.pop16()
     self.registers.set(rr, to: nn)
-  }
-
-  private mutating func pop() -> UInt8 {
-    let n = self.memory.read(self.sp)
-    self.sp += 1
-    return n
   }
 
   /// The 8-bit operand e is added to SP and the result is stored in HL.
@@ -1018,4 +1002,70 @@ extension Cpu {
     }
   }
 
+  // MARK: - Call and Return Instructions
+
+  // MARK: Call
+
+  /// Pushes the PC value corresponding to the instruction at the address following that of the
+  /// CALL instruction to the 2 bytes following the byte specified by the current SP.
+  /// Operand nn is then loaded in the PC.
+  mutating func call_a16(_ nn: UInt16) {
+    self.call(nn)
+  }
+
+  /// If condition cc matches the flag, the PC value corresponding to the instruction following the
+  /// CALL instruction in memory is pushed to the 2 bytes following the memory byte specified by the SP.
+  /// Operand nn is then loaded in the PC.
+  mutating func call_cc_a16(_ condition: JumpCondition, _ nn: UInt16) {
+    if self.canJump(condition) {
+      self.call(nn)
+    }
+  }
+
+  private mutating func call(_ nn: UInt16) {
+    let length = UInt16(3) // the same for both 'call'
+    let returnAddr = self.pc + length
+    self.push16(returnAddr)
+
+    self.pc = nn
+  }
+
+  // MARK: Ret
+
+  /// Pops from the memory stack the PC value pushed when the
+  /// subroutine was called, returning control to the source program.
+  mutating func ret() {
+    self.pc = self.pop16()
+  }
+
+  /// The address for the return from the interrupt is loaded in program counter PC.
+  /// The master interrupt enable flag is returned to its pre-interrupt status.
+  mutating func reti() {
+    self.ret()
+    self.enableInterrupts()
+  }
+
+  /// If condition cc and the flag match, control is returned
+  /// to the source program by popping from the memory stack
+  /// the PC value pushed to the stack when the subroutine was called.
+  mutating func ret_cc(_ condition: JumpCondition) {
+    if canJump(condition) {
+      self.ret()
+    }
+  }
+
+  // MARK: Rst
+
+  /// Pushes the current value of the PC to the memory stack and loads to the PC
+  /// the page 0 memory addresses provided by operand t.
+  /// Then next instruction is fetched from the address specified by the new content of PC.
+  mutating func rst(_ t: UInt8) {
+    let length = UInt16(1) // the same for both 'rst'
+    let returnAddr = self.pc + length
+    self.push16(returnAddr)
+
+    self.pc = UInt16(t)
+  }
+
+  // MARK: - General-Purpose Arithmetic Operations and CPU Control Instructions
 }

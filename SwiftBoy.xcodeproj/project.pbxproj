@@ -34,6 +34,7 @@
 		90A12202229B35D600737DC4 /* Cpu+ExecutePrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A12201229B35D600737DC4 /* Cpu+ExecutePrefix.swift */; };
 		90A12205229B36F300737DC4 /* PrintExecutePrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A12204229B36F300737DC4 /* PrintExecutePrefix.swift */; };
 		90A12207229C228400737DC4 /* Cpu+Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A12206229C228400737DC4 /* Cpu+Instructions.swift */; };
+		90A1220B229C50CE00737DC4 /* CpuCallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A12208229C506D00737DC4 /* CpuCallTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		90A12201229B35D600737DC4 /* Cpu+ExecutePrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+ExecutePrefix.swift"; sourceTree = "<group>"; };
 		90A12204229B36F300737DC4 /* PrintExecutePrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintExecutePrefix.swift; sourceTree = "<group>"; };
 		90A12206229C228400737DC4 /* Cpu+Instructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Instructions.swift"; sourceTree = "<group>"; };
+		90A12208229C506D00737DC4 /* CpuCallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuCallTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				90A121E1229B0ED400737DC4 /* CpuShiftTests.swift */,
 				90A121E6229B195300737DC4 /* CpuBitTests.swift */,
 				90A121EB229B2E0E00737DC4 /* CpuJumpTests.swift */,
+				90A12208229C506D00737DC4 /* CpuCallTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				90A121E3229B0ED800737DC4 /* CpuShiftTests.swift in Sources */,
 				90A121DE229AF76300737DC4 /* CpuRotateTests.swift in Sources */,
 				90A121CB229A963B00737DC4 /* CpuLdTests.swift in Sources */,
+				90A1220B229C50CE00737DC4 /* CpuCallTests.swift in Sources */,
 				90A1218722995D3900737DC4 /* CpuArithmeticTests.swift in Sources */,
 				90A121E8229B195900737DC4 /* CpuBitTests.swift in Sources */,
 				90A121D6229AD3D500737DC4 /* CpuLogicTests.swift in Sources */,

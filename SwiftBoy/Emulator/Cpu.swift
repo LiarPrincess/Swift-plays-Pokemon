@@ -27,16 +27,40 @@ struct Cpu {
     }
   }
 
-  /// Word at pc + 1
   var next8: UInt8 {
     return self.memory.read(self.pc + 1)
   }
 
-  /// Long at (pc+1 << 8) | (pc+2)
   var next16: UInt16 {
     let low  = UInt16(self.memory.read(self.pc + 1))
     let high = UInt16(self.memory.read(self.pc + 2))
     return (high << 8) | low
+  }
+
+  mutating func push8(_ n: UInt8) {
+    self.sp -= 1
+    self.memory.write(self.sp, value: n)
+  }
+
+  mutating func push16(_ nn: UInt16) {
+    self.push8(UInt8(nn >> 8))
+    self.push8(UInt8(nn & 0xff))
+  }
+
+  mutating func pop8() -> UInt8 {
+    let n = self.memory.read(self.sp)
+    self.sp += 1
+    return n
+  }
+
+  mutating func pop16() -> UInt16 {
+    let low  = UInt16(self.pop8())
+    let high = UInt16(self.pop8())
+    return (high << 8) | low
+  }
+
+  mutating func enableInterrupts() {
+    // TODO: Interrupts
   }
 }
 

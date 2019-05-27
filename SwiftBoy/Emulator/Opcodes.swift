@@ -207,7 +207,7 @@ enum OpcodeType {
 /** 0xc4 */ case call_nz_a16
 /** 0xc5 */ case push_bc
 /** 0xc6 */ case add_a_d8
-/** 0xc7 */ case rst_00h
+/** 0xc7 */ case rst_00
 /** 0xc8 */ case ret_z
 /** 0xc9 */ case ret
 /** 0xca */ case jp_z_a16
@@ -215,44 +215,44 @@ enum OpcodeType {
 /** 0xcc */ case call_z_a16
 /** 0xcd */ case call_a16
 /** 0xce */ case adc_a_d8
-/** 0xcf */ case rst_08h
+/** 0xcf */ case rst_08
 /** 0xd0 */ case ret_nc
 /** 0xd1 */ case pop_de
 /** 0xd2 */ case jp_nc_a16
 /** 0xd4 */ case call_nc_a16
 /** 0xd5 */ case push_de
 /** 0xd6 */ case sub_d8
-/** 0xd7 */ case rst_10h
+/** 0xd7 */ case rst_10
 /** 0xd8 */ case ret_c
 /** 0xd9 */ case reti
 /** 0xda */ case jp_c_a16
 /** 0xdc */ case call_c_a16
 /** 0xde */ case sbc_a_d8
-/** 0xdf */ case rst_18h
+/** 0xdf */ case rst_18
 /** 0xe0 */ case ldh_pA8_a
 /** 0xe1 */ case pop_hl
 /** 0xe2 */ case ld_pC_a
 /** 0xe5 */ case push_hl
 /** 0xe6 */ case and_d8
-/** 0xe7 */ case rst_20h
+/** 0xe7 */ case rst_20
 /** 0xe8 */ case add_sp_r8
 /** 0xe9 */ case jp_pHL
 /** 0xea */ case ld_pA16_a
 /** 0xee */ case xor_d8
-/** 0xef */ case rst_28h
+/** 0xef */ case rst_28
 /** 0xf0 */ case ldh_a_pA8
 /** 0xf1 */ case pop_af
 /** 0xf2 */ case ld_a_pC
 /** 0xf3 */ case di
 /** 0xf5 */ case push_af
 /** 0xf6 */ case or_d8
-/** 0xf7 */ case rst_30h
+/** 0xf7 */ case rst_30
 /** 0xf8 */ case ld_hl_spR8
 /** 0xf9 */ case ld_sp_hl
 /** 0xfa */ case ld_a_pA16
 /** 0xfb */ case ei
 /** 0xfe */ case cp_d8
-/** 0xff */ case rst_38h
+/** 0xff */ case rst_38
 }
 
 let opcodes: [Opcode] = [
@@ -455,7 +455,7 @@ let opcodes: [Opcode] = [
   Opcode(addr: "0xc4",    type: .call_nz_a16,       debug: "call_nz_a16",    length: 3, cycles: [24, 12]),
   Opcode(addr: "0xc5",    type: .push_bc,           debug: "push_bc",        length: 1, cycles: [16]),
   Opcode(addr: "0xc6",    type: .add_a_d8,          debug: "add_a_d8",       length: 2, cycles: [8]),
-  Opcode(addr: "0xc7",    type: .rst_00h,           debug: "rst_00h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xc7",    type: .rst_00,            debug: "rst_00",         length: 1, cycles: [16]),
   Opcode(addr: "0xc8",    type: .ret_z,             debug: "ret_z",          length: 1, cycles: [20, 8]),
   Opcode(addr: "0xc9",    type: .ret,               debug: "ret",            length: 1, cycles: [16]),
   Opcode(addr: "0xca",    type: .jp_z_a16,          debug: "jp_z_a16",       length: 3, cycles: [16, 12]),
@@ -463,43 +463,43 @@ let opcodes: [Opcode] = [
   Opcode(addr: "0xcc",    type: .call_z_a16,        debug: "call_z_a16",     length: 3, cycles: [24, 12]),
   Opcode(addr: "0xcd",    type: .call_a16,          debug: "call_a16",       length: 3, cycles: [24]),
   Opcode(addr: "0xce",    type: .adc_a_d8,          debug: "adc_a_d8",       length: 2, cycles: [8]),
-  Opcode(addr: "0xcf",    type: .rst_08h,           debug: "rst_08h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xcf",    type: .rst_08,            debug: "rst_08",         length: 1, cycles: [16]),
   Opcode(addr: "0xd0",    type: .ret_nc,            debug: "ret_nc",         length: 1, cycles: [20, 8]),
   Opcode(addr: "0xd1",    type: .pop_de,            debug: "pop_de",         length: 1, cycles: [12]),
   Opcode(addr: "0xd2",    type: .jp_nc_a16,         debug: "jp_nc_a16",      length: 3, cycles: [16, 12]),
   Opcode(addr: "0xd4",    type: .call_nc_a16,       debug: "call_nc_a16",    length: 3, cycles: [24, 12]),
   Opcode(addr: "0xd5",    type: .push_de,           debug: "push_de",        length: 1, cycles: [16]),
   Opcode(addr: "0xd6",    type: .sub_d8,            debug: "sub_d8",         length: 2, cycles: [8]),
-  Opcode(addr: "0xd7",    type: .rst_10h,           debug: "rst_10h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xd7",    type: .rst_10,            debug: "rst_10",         length: 1, cycles: [16]),
   Opcode(addr: "0xd8",    type: .ret_c,             debug: "ret_c",          length: 1, cycles: [20, 8]),
   Opcode(addr: "0xd9",    type: .reti,              debug: "reti",           length: 1, cycles: [16]),
   Opcode(addr: "0xda",    type: .jp_c_a16,          debug: "jp_c_a16",       length: 3, cycles: [16, 12]),
   Opcode(addr: "0xdc",    type: .call_c_a16,        debug: "call_c_a16",     length: 3, cycles: [24, 12]),
   Opcode(addr: "0xde",    type: .sbc_a_d8,          debug: "sbc_a_d8",       length: 2, cycles: [8]),
-  Opcode(addr: "0xdf",    type: .rst_18h,           debug: "rst_18h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xdf",    type: .rst_18,            debug: "rst_18",         length: 1, cycles: [16]),
   Opcode(addr: "0xe0",    type: .ldh_pA8_a,         debug: "ldh_pA8_a",      length: 2, cycles: [12]),
   Opcode(addr: "0xe1",    type: .pop_hl,            debug: "pop_hl",         length: 1, cycles: [12]),
   Opcode(addr: "0xe2",    type: .ld_pC_a,           debug: "ld_pC_a",        length: 1, cycles: [8]),
   Opcode(addr: "0xe5",    type: .push_hl,           debug: "push_hl",        length: 1, cycles: [16]),
   Opcode(addr: "0xe6",    type: .and_d8,            debug: "and_d8",         length: 2, cycles: [8]),
-  Opcode(addr: "0xe7",    type: .rst_20h,           debug: "rst_20h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xe7",    type: .rst_20,            debug: "rst_20",         length: 1, cycles: [16]),
   Opcode(addr: "0xe8",    type: .add_sp_r8,         debug: "add_sp_r8",      length: 2, cycles: [16]),
   Opcode(addr: "0xe9",    type: .jp_pHL,            debug: "jp_pHL",         length: 1, cycles: [4]),
   Opcode(addr: "0xea",    type: .ld_pA16_a,         debug: "ld_pA16_a",      length: 3, cycles: [16]),
   Opcode(addr: "0xee",    type: .xor_d8,            debug: "xor_d8",         length: 2, cycles: [8]),
-  Opcode(addr: "0xef",    type: .rst_28h,           debug: "rst_28h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xef",    type: .rst_28,            debug: "rst_28",         length: 1, cycles: [16]),
   Opcode(addr: "0xf0",    type: .ldh_a_pA8,         debug: "ldh_a_pA8",      length: 2, cycles: [12]),
   Opcode(addr: "0xf1",    type: .pop_af,            debug: "pop_af",         length: 1, cycles: [12]),
   Opcode(addr: "0xf2",    type: .ld_a_pC,           debug: "ld_a_pC",        length: 1, cycles: [8]),
   Opcode(addr: "0xf3",    type: .di,                debug: "di",             length: 1, cycles: [4]),
   Opcode(addr: "0xf5",    type: .push_af,           debug: "push_af",        length: 1, cycles: [16]),
   Opcode(addr: "0xf6",    type: .or_d8,             debug: "or_d8",          length: 2, cycles: [8]),
-  Opcode(addr: "0xf7",    type: .rst_30h,           debug: "rst_30h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xf7",    type: .rst_30,            debug: "rst_30",         length: 1, cycles: [16]),
   Opcode(addr: "0xf8",    type: .ld_hl_spR8,        debug: "ld_hl_spR8",     length: 2, cycles: [12]),
   Opcode(addr: "0xf9",    type: .ld_sp_hl,          debug: "ld_sp_hl",       length: 1, cycles: [8]),
   Opcode(addr: "0xfa",    type: .ld_a_pA16,         debug: "ld_a_pA16",      length: 3, cycles: [16]),
   Opcode(addr: "0xfb",    type: .ei,                debug: "ei",             length: 1, cycles: [4]),
   Opcode(addr: "0xfe",    type: .cp_d8,             debug: "cp_d8",          length: 2, cycles: [8]),
-  Opcode(addr: "0xff",    type: .rst_38h,           debug: "rst_38h",        length: 1, cycles: [16]),
+  Opcode(addr: "0xff",    type: .rst_38,            debug: "rst_38",         length: 1, cycles: [16]),
 ]
 

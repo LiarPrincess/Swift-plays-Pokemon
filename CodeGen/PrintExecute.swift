@@ -29,7 +29,6 @@ private func printCpuExtension(_ opcodes: [Opcode]) {
     printOpcodeCase(op)
   }
 
-  print("    default: print(\"Unknown opcode: \\(opcode)\")")
   print("    }")
   print("  }")
   print("}")
@@ -261,16 +260,16 @@ private func printOpcodeCase(_ opcode: Opcode) {
   case "rra":  print("case .\(opcode.enumCase): self.rra()")
 
   case "jp":
-    if opcode.addr == "0xe9" {
-      print("case .\(opcode.enumCase): self.jp_pHL()")
-    } else if opcode.addr == "0xc3" {
-      print("case .\(opcode.enumCase): self.jp_nn(\(next16))")
+    switch opcode.addr {
+    case "0xe9": print("case .\(opcode.enumCase): self.jp_pHL()")
+    case "0xc3": print("case .\(opcode.enumCase): self.jp_nn(\(next16))")
+    default:
+      if isJumpCondition(opcode.operand1) {
+        let condition = opcode.operand1!.lowercased()
+        print("case .\(opcode.enumCase): self.jp_cc_nn(.\(condition), \(next16))")
+      }
+      else { printUnimplementedOpcode(opcode) }
     }
-    else if isa16(opcode.operand2!) {
-      let condition = opcode.operand1!.lowercased()
-      print("case .\(opcode.enumCase): self.jp_cc_nn(.\(condition), \(next16))")
-    }
-    else { printUnimplementedOpcode(opcode) }
 
   case "jr":
     if opcode.addr == "0x18" {
@@ -289,19 +288,39 @@ private func printOpcodeCase(_ opcode: Opcode) {
     let operand = opcode.operand1!.lowercased()
     print("case .\(opcode.enumCase): self.pop(.\(operand))")
 
-//  case "stop":
-//  case "daa":
-//  case "cpl":
-//  case "scf":
-//  case "ccf":
-//  case "halt":
-//  case "ret":
-//  case "call":
-//  case "rst":
-//  case "prefix":
-//  case "reti":
-//  case "di":
-//  case "ei":
+  case "call":
+    if opcode.addr == "0xcd" {
+      print("case .\(opcode.enumCase): self.call_a16(\(next16))")
+    } else if isJumpCondition(opcode.operand1) {
+      let condition = opcode.operand1!.lowercased()
+      print("case .\(opcode.enumCase): self.call_cc_a16(.\(condition), \(next16))")
+    }
+
+  case "ret":
+    if opcode.addr == "0xc9" {
+      print("case .\(opcode.enumCase): self.ret()")
+    } else if isJumpCondition(opcode.operand1) {
+      let condition = opcode.operand1!.lowercased()
+      print("case .\(opcode.enumCase): self.ret_cc(.\(condition))")
+    }
+
+  case "reti":
+    print("case .\(opcode.enumCase): self.reti()")
+
+  case "rst":
+    let operand = opcode.operand1!.lowercased()
+    let argument = "0x" + operand.dropLast()
+    print("case .\(opcode.enumCase): self.rst(\(argument))")
+
+  case "stop":   print("case .\(opcode.enumCase): break // <--")
+  case "daa":    print("case .\(opcode.enumCase): break // <--")
+  case "cpl":    print("case .\(opcode.enumCase): break // <--")
+  case "scf":    print("case .\(opcode.enumCase): break // <--")
+  case "ccf":    print("case .\(opcode.enumCase): break // <--")
+  case "halt":   print("case .\(opcode.enumCase): break // <--")
+  case "prefix": print("case .\(opcode.enumCase): break // <--")
+  case "di":     print("case .\(opcode.enumCase): break // <--")
+  case "ei":     print("case .\(opcode.enumCase): break // <--")
 
   default:
     printUnimplementedOpcode(opcode)
@@ -317,6 +336,7 @@ private func printUnimplementedOpcode(_ opcode: Opcode) {
 
 private let singleRegisters  = ["a", "b", "c", "d", "e", "h", "l"]
 private let combinedRegisters = ["af", "bc", "de", "hl"]
+private let jumpConditions = ["nz", "z", "nc", "c"]
 
 private func isRegister(_ operand: String?) -> Bool {
   return singleRegisters.contains { isEqual(operand, $0) }
@@ -324,6 +344,10 @@ private func isRegister(_ operand: String?) -> Bool {
 
 private func isCombinedRegister(_ operand: String?) -> Bool {
   return combinedRegisters.contains { isEqual(operand, $0) }
+}
+
+private func isJumpCondition(_ operand: String?) -> Bool {
+  return jumpConditions.contains { isEqual(operand, $0) }
 }
 
 private func isA(_ operand: String?) -> Bool {
