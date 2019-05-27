@@ -6,6 +6,8 @@ import XCTest
 
 class CpuLdTests: XCTestCase {
 
+  // MARK: - 8-Bit Transfer and Input/Output Instructions
+
   /// LD A,B ; A←B
   func test_ld_r_r() {
     var cpu = Cpu()
@@ -100,6 +102,44 @@ class CpuLdTests: XCTestCase {
     XCTAssertEqual(cpu.memory.read(0xff9f), 0x5f)
   }
 
+  /// To load data at FF34h into register A, type the following.
+  /// LD A, (FF34)
+  func test_ld_a_pA8() {
+    var cpu = Cpu()
+    cpu.memory.write(0xff34, value: 0xfe)
+    cpu.ld_a_pA8(0x34)
+
+    XCTAssertEqual(cpu.registers.a, 0xfe)
+  }
+
+  /// To load the contents of register A in 0xFF34, type the following.
+  /// LD (FF34), A
+  func test_ld_pA8_a() {
+    var cpu = Cpu()
+    cpu.registers.a = 0xfe
+    cpu.ld_pA8_a(0x34)
+
+    XCTAssertEqual(cpu.memory.read(0xff34), 0xfe)
+  }
+
+  /// LD A, (8000h) ; A ← (8000h)
+  func test_ld_a_pA16() {
+    var cpu = Cpu()
+    cpu.memory.write(0xff34, value: 0xfe)
+    cpu.ld_a_pA16(0xff34)
+
+    XCTAssertEqual(cpu.registers.a, 0xfe)
+  }
+
+  /// LD (8000h), A ; (8000h) ← A
+  func test_ld_pA16_a() {
+    var cpu = Cpu()
+    cpu.registers.a = 0xfe
+    cpu.ld_pA16_a(0x8000)
+
+    XCTAssertEqual(cpu.memory.read(0x8000), 0xfe)
+  }
+
   /// When HL = 1FFh and (1FFh) = 56h,
   /// LD A, (HLI) ; A←56h,HL←200h
   func test_ld_a_pHLI() {
@@ -168,5 +208,15 @@ class CpuLdTests: XCTestCase {
 
     XCTAssertEqual(cpu.memory.read(0x4000), 0x5)
     XCTAssertEqual(cpu.registers.hl, 0x3fff)
+  }
+
+  // MARK: - 16-Bit Transfer Instructions
+
+  /// LD HL,3A5Bh ; H ←3Ah,L←5Bh
+  func test_ld_rr_d16() {
+    var cpu = Cpu()
+    cpu.ld_rr_d16(.hl, 0x3a5b)
+
+    XCTAssertEqual(cpu.registers.hl, 0x3A5B)
   }
 }

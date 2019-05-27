@@ -78,6 +78,23 @@ private func printOpcodeCase(_ opcode: Opcode) {
       print("    case .\(opcode.enumCase): self.ld_pHLI_a()")
     } else if opcode.addr == "0x32" {
       print("    case .\(opcode.enumCase): self.ld_pHLD_a()")
+    } else if opcode.addr == "0xfa" {
+      print("    case .\(opcode.enumCase): self.ld_a_pA16(\(next16))")
+    } else if opcode.addr == "0xea" {
+      print("    case .\(opcode.enumCase): self.ld_pA16_a(\(next16))")
+    } else if isCombinedRegister(operand1) && isd16(operand2) {
+      print("    case .\(opcode.enumCase): self.ld_rr_d16(.\(operand1), \(next16))")
+    } else if isSP(operand1) && isd16(operand2) {
+      print("    case .\(opcode.enumCase): self.ld_sp_d16(\(next16))")
+    }
+    else { printUnimplementedOpcode(opcode) }
+
+  // no idea why those are 'ldh' instead of 'ld' (as in official documentation)
+  case "ldh":
+    if opcode.addr == "0xf0" {
+      print("    case .\(opcode.enumCase): self.ld_a_pA8(\(next8))")
+    } else if opcode.addr == "0xe0" {
+      print("    case .\(opcode.enumCase): self.ld_pA8_a(\(next8))")
     }
     else { printUnimplementedOpcode(opcode) }
 
@@ -253,7 +270,7 @@ private func printOpcodeCase(_ opcode: Opcode) {
 //  case "rst":
 //  case "prefix":
 //  case "reti":
-//  case "ldh":
+
 //  case "di":
 //  case "ei":
 
@@ -312,6 +329,11 @@ private func isd8(_ operand: String) -> Bool {
   return op == "d8"
 }
 
+private func isd16(_ operand: String) -> Bool {
+  let op = operand.lowercased()
+  return op == "d16"
+}
+
 private func isa16(_ operand: String) -> Bool {
   let op = operand.lowercased()
   return op == "a16"
@@ -320,4 +342,9 @@ private func isa16(_ operand: String) -> Bool {
 private func isr8(_ operand: String) -> Bool {
   let op = operand.lowercased()
   return op == "r8"
+}
+
+private func isSP(_ operand: String) -> Bool {
+  let op = operand.lowercased()
+  return op == "sp"
 }

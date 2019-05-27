@@ -12,9 +12,9 @@ struct Cpu {
   var memory = Memory()
 
   mutating func run() {
-    let maxPc = 7
+    let maxPc = 6
 
-    while self.pc < maxPc {
+    while self.pc <= maxPc {
       let opcodeIndex = self.memory.read(self.pc)
       let opcode = opcodes[opcodeIndex]
 

@@ -10,7 +10,7 @@ extension Cpu {
   mutating func execute(_ opcode: Opcode) {
     switch opcode.type {
     case .nop_00: break
-    //case .ld_bc_d16_01: break
+    case .ld_bc_d16_01: self.ld_rr_d16(.bc, self.next16)
     case .ld_pBC_a_02: self.ld_pBC_a()
     case .inc_bc_03: self.inc_r(.bc)
     case .inc_b_04: self.inc_r(.b)
@@ -26,7 +26,7 @@ extension Cpu {
     case .ld_c_d8_0e: self.ld_r_d8(.c, self.next8)
     case .rrca_0f: self.rrca()
     //case .stop_0_10: break
-    //case .ld_de_d16_11: break
+    case .ld_de_d16_11: self.ld_rr_d16(.de, self.next16)
     case .ld_pDE_a_12: self.ld_pDE_a()
     case .inc_de_13: self.inc_r(.de)
     case .inc_d_14: self.inc_r(.d)
@@ -42,7 +42,7 @@ extension Cpu {
     case .ld_e_d8_1e: self.ld_r_d8(.e, self.next8)
     case .rra_1f: self.rra()
     case .jr_nz_r8_20: self.jr_cc_e(.nz, self.next8)
-    //case .ld_hl_d16_21: break
+    case .ld_hl_d16_21: self.ld_rr_d16(.hl, self.next16)
     case .ld_pHLI_a_22: self.ld_pHLI_a()
     case .inc_hl_23: self.inc_r(.hl)
     case .inc_h_24: self.inc_r(.h)
@@ -58,7 +58,7 @@ extension Cpu {
     case .ld_l_d8_2e: self.ld_r_d8(.l, self.next8)
     //case .cpl_2f: break
     case .jr_nc_r8_30: self.jr_cc_e(.nc, self.next8)
-    //case .ld_sp_d16_31: break
+    case .ld_sp_d16_31: self.ld_sp_d16(self.next16)
     case .ld_pHLD_a_32: self.ld_pHLD_a()
     case .inc_sp_33: self.inc_sp()
     case .inc_pHL_34: self.inc_pHL()
@@ -230,7 +230,7 @@ extension Cpu {
     //case .call_c_a16_dc: break
     case .sbc_a_d8_de: self.sbc_a_d8(self.next8)
     //case .rst_18h_df: break
-    //case .ldh_pA8_a_e0: break
+    case .ldh_pA8_a_e0: self.ld_pA8_a(self.next8)
     //case .pop_hl_e1: break
     case .ld_pC_a_e2: self.ld_ffC_a()
     //case .push_hl_e5: break
@@ -238,10 +238,10 @@ extension Cpu {
     //case .rst_20h_e7: break
     case .add_sp_r8_e8: self.add_sp_n(self.next8)
     case .jp_pHL_e9: self.jp_pHL()
-    //case .ld_pA16_a_ea: break
+    case .ld_pA16_a_ea: self.ld_pA16_a(self.next16)
     case .xor_d8_ee: self.xor_a_d8(self.next8)
     //case .rst_28h_ef: break
-    //case .ldh_a_pA8_f0: break
+    case .ldh_a_pA8_f0: self.ld_a_pA8(self.next8)
     //case .pop_af_f1: break
     case .ld_a_pC_f2: self.ld_a_ffC()
     //case .di_f3: break
@@ -250,7 +250,7 @@ extension Cpu {
     //case .rst_30h_f7: break
     //case .ld_hl_spR8_f8: break
     //case .ld_sp_hl_f9: break
-    //case .ld_a_pA16_fa: break
+    case .ld_a_pA16_fa: self.ld_a_pA16(self.next16)
     //case .ei_fb: break
     case .cp_d8_fe: self.cp_a_d8(self.next8)
     //case .rst_38h_ff: break
@@ -258,4 +258,4 @@ extension Cpu {
     }
   }
 }
-// Implemented opcodes: 198, remaining: 47
+// Implemented opcodes: 206, remaining: 39

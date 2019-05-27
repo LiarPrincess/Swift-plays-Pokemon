@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>149ABEB9-087F-412E-98BE-B5B1D762CE39</key>
+		<key>49892E2C-655B-4D8C-9BFC-DD209DCA6981</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
 			<key>fileName</key>
-			<string>149ABEB9-087F-412E-98BE-B5B1D762CE39.xcactivitylog</string>
+			<string>49892E2C-655B-4D8C-9BFC-DD209DCA6981.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -24,41 +24,15 @@
 			<key>signature</key>
 			<string>CodeGen-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>580643792.66105902</real>
+			<real>580649351.93399</real>
 			<key>timeStoppedRecording</key>
-			<real>580643793.64392102</real>
+			<real>580649353.65817201</real>
 			<key>title</key>
 			<string>Build target CodeGen</string>
 			<key>uniqueIdentifier</key>
-			<string>149ABEB9-087F-412E-98BE-B5B1D762CE39</string>
+			<string>49892E2C-655B-4D8C-9BFC-DD209DCA6981</string>
 		</dict>
-		<key>219B3D6D-22FF-4007-9C2F-4428856F10E2</key>
-		<dict>
-			<key>className</key>
-			<string>IDEActivityLogSection</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
-			<key>fileName</key>
-			<string>219B3D6D-22FF-4007-9C2F-4428856F10E2.xcactivitylog</string>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>W</string>
-			</dict>
-			<key>signature</key>
-			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
-			<key>timeStartedRecording</key>
-			<real>580645757.15430295</real>
-			<key>timeStoppedRecording</key>
-			<real>580645760.29780495</real>
-			<key>title</key>
-			<string>Build target SwiftBoy</string>
-			<key>uniqueIdentifier</key>
-			<string>219B3D6D-22FF-4007-9C2F-4428856F10E2</string>
-		</dict>
-		<key>3F204A09-30A9-458B-81AB-6787D8A2544E</key>
+		<key>AD5B1C6C-A938-430C-AF30-420DDD6845A8</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -67,7 +41,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.target</string>
 			<key>fileName</key>
-			<string>3F204A09-30A9-458B-81AB-6787D8A2544E.xcactivitylog</string>
+			<string>AD5B1C6C-A938-430C-AF30-420DDD6845A8.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -76,13 +50,39 @@
 			<key>signature</key>
 			<string>SwiftBoyTests-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>580643926.20440996</real>
+			<real>580649638.25348103</real>
 			<key>timeStoppedRecording</key>
-			<real>580643929.93156898</real>
+			<real>580649641.62053096</real>
 			<key>title</key>
 			<string>Build target SwiftBoyTests</string>
 			<key>uniqueIdentifier</key>
-			<string>3F204A09-30A9-458B-81AB-6787D8A2544E</string>
+			<string>AD5B1C6C-A938-430C-AF30-420DDD6845A8</string>
+		</dict>
+		<key>B09DE7FF-B948-4460-97D5-FED1FDA2AB0B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
+			<key>fileName</key>
+			<string>B09DE7FF-B948-4460-97D5-FED1FDA2AB0B.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>signature</key>
+			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
+			<key>timeStartedRecording</key>
+			<real>580649635.34051204</real>
+			<key>timeStoppedRecording</key>
+			<real>580649638.24845505</real>
+			<key>title</key>
+			<string>Build target SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>B09DE7FF-B948-4460-97D5-FED1FDA2AB0B</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>

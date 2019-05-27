@@ -2,7 +2,8 @@
 // swiftlint:disable file_length
 
 extension Cpu {
-  // TODO: Remove remaining d8
+
+  // MARK: - 8-Bit Transfer and Input/Output Instructions
 
   /// Loads the contents of register r' into register r.
   mutating func ld_r_r(_ dst: SingleRegister, _ src: SingleRegister) {
@@ -61,7 +62,27 @@ extension Cpu {
     self.memory.write(address, value: a)
   }
 
-  // TODO: Missing 4x opcodes from pages 97 and 98
+  /// Loads into register A the contents of the internal RAM, port register, or mode register
+  /// at the address in the range FF00h-FFFFh specified by the 8-bit immediate operand n.
+  mutating func ld_a_pA8(_ n: UInt8) {
+    let addr = 0xff00 | UInt16(n)
+    self.registers.a = self.memory.read(addr)
+  }
+
+  /// Loads the contents of register A to the internal RAM, port register, or mode register
+  /// at the address in the range FF00h-FFFFh specified by the 8-bit immediate operand n.
+  mutating func ld_pA8_a(_ n: UInt8) {
+    let addr = 0xff00 | UInt16(n)
+    self.memory.write(addr, value: self.registers.a)
+  }
+
+  mutating func ld_a_pA16(_ nn: UInt16) {
+    self.registers.a = self.memory.read(nn)
+  }
+
+  mutating func ld_pA16_a(_ nn: UInt16) {
+    self.memory.write(nn, value: self.registers.a)
+  }
 
   /// Loads in register A the contents of memory specified by the contents of register pair HL
   /// and simultaneously increments the contents of HL.
@@ -119,5 +140,17 @@ extension Cpu {
     self.registers.hl = newHL
   }
 
-  // TODO: Missing '16-Bit Transfer Instructions' from page 100
+  // MARK: - 16-Bit Transfer Instructions
+
+  /// Loads 2 bytes of immediate data to register pair dd.
+  mutating func ld_rr_d16(_ rr: CombinedRegister, _ nn: UInt16) {
+    self.registers.set(rr, to: nn)
+  }
+
+  /// Loads 2 bytes of immediate data to register pair dd.
+  mutating func ld_sp_d16(_ nn: UInt16) {
+    self.sp = nn
+  }
+
+  // TODO: Finish page 100 (1st implemented)
 }
