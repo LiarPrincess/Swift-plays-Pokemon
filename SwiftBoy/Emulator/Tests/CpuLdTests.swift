@@ -256,4 +256,29 @@ class CpuLdTests: XCTestCase {
     XCTAssertEqual(cpu.registers.c, 0x5f)
     XCTAssertEqual(cpu.sp, 0xfffe)
   }
+
+  /// When SP = 0xFFF8,
+  /// LDHL SP, 2 ; HL←0xFFFA,CY←0,H←0,N←0,Z←0
+  func test_ld_hl_sp_plus_e() {
+    var cpu = Cpu()
+    cpu.sp = 0xfff8
+    cpu.ld_hl_sp_plus_e(2)
+
+    XCTAssertEqual(cpu.registers.hl, 0xfffa)
+    XCTAssertEqual(cpu.registers.zeroFlag, false)
+    XCTAssertEqual(cpu.registers.halfCarryFlag, false)
+    XCTAssertEqual(cpu.registers.subtractFlag, false)
+    XCTAssertEqual(cpu.registers.carryFlag, false)
+  }
+
+  /// When SP = FFF8h,
+  /// LD (C100h) , SP ; C100h ← F8h C101h← FFh
+  func test_ld_pA16_sp() {
+    var cpu = Cpu()
+    cpu.sp = 0xfff8
+    cpu.ld_pA16_sp(0xc100)
+
+    XCTAssertEqual(cpu.memory.read(0xc100), 0xf8)
+    XCTAssertEqual(cpu.memory.read(0xc101), 0xff)
+  }
 }

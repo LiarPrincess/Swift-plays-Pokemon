@@ -84,10 +84,10 @@ class CpuArithmeticTests: XCTestCase {
 
   /// SP = FFF8h
   /// ADDSP,2 ; SP←0xFFFA,CY←0,H←0,N←0,Z←0
-  func test_add_sp_n() {
+  func test_add_sp_r8() {
     var cpu = Cpu()
     cpu.sp = 0xfff8
-    cpu.add_sp_n(0x2)
+    cpu.add_sp_r8(0x2)
 
     XCTAssertEqual(cpu.sp, 0xfffa)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -331,10 +331,10 @@ class CpuArithmeticTests: XCTestCase {
 
   /// When DE = 235Fh,
   /// INC DE ; DE ← 2360h
-  func test_inc_r16() {
+  func test_inc_rr() {
     var cpu = Cpu()
     cpu.registers.de = 0x235f
-    cpu.inc_r(.de)
+    cpu.inc_rr(.de)
 
     XCTAssertEqual(cpu.registers.de, 0x2360)
   }
@@ -370,10 +370,10 @@ class CpuArithmeticTests: XCTestCase {
 
   /// When DE = 235Fh,
   /// DEC DE ; DE ← 235Eh
-  func test_dec_r16() {
+  func test_dec_rr() {
     var cpu = Cpu()
     cpu.registers.de = 0x235f
-    cpu.dec_r(.de)
+    cpu.dec_rr(.de)
 
     XCTAssertEqual(cpu.registers.de, 0x235e)
   }

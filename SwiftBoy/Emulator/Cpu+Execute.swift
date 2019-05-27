@@ -13,15 +13,15 @@ extension Cpu {
 /* 0x0 */ case .nop: break
 /* 0x1 */ case .ld_bc_d16: self.ld_rr_d16(.bc, self.next16)
 /* 0x2 */ case .ld_pBC_a: self.ld_pBC_a()
-/* 0x3 */ case .inc_bc: self.inc_r(.bc)
+/* 0x3 */ case .inc_bc: self.inc_rr(.bc)
 /* 0x4 */ case .inc_b: self.inc_r(.b)
 /* 0x5 */ case .dec_b: self.dec_r(.b)
 /* 0x6 */ case .ld_b_d8: self.ld_r_d8(.b, self.next8)
 /* 0x7 */ case .rlca: self.rlca()
-/* 0x8 */ //case .ld_pA16_sp: break
+/* 0x8 */ case .ld_pA16_sp: self.ld_pA16_sp(self.next16)
 /* 0x9 */ case .add_hl_bc: self.add_hl_r(.bc)
 /* 0xa */ case .ld_a_pBC: self.ld_a_pBC()
-/* 0xb */ case .dec_bc: self.dec_r(.bc)
+/* 0xb */ case .dec_bc: self.dec_rr(.bc)
 /* 0xc */ case .inc_c: self.inc_r(.c)
 /* 0xd */ case .dec_c: self.dec_r(.c)
 /* 0xe */ case .ld_c_d8: self.ld_r_d8(.c, self.next8)
@@ -29,7 +29,7 @@ extension Cpu {
 /* 0x10 */ //case .stop_0: break
 /* 0x11 */ case .ld_de_d16: self.ld_rr_d16(.de, self.next16)
 /* 0x12 */ case .ld_pDE_a: self.ld_pDE_a()
-/* 0x13 */ case .inc_de: self.inc_r(.de)
+/* 0x13 */ case .inc_de: self.inc_rr(.de)
 /* 0x14 */ case .inc_d: self.inc_r(.d)
 /* 0x15 */ case .dec_d: self.dec_r(.d)
 /* 0x16 */ case .ld_d_d8: self.ld_r_d8(.d, self.next8)
@@ -37,7 +37,7 @@ extension Cpu {
 /* 0x18 */ case .jr_r8: self.jr_e(self.next8)
 /* 0x19 */ case .add_hl_de: self.add_hl_r(.de)
 /* 0x1a */ case .ld_a_pDE: self.ld_a_pDE()
-/* 0x1b */ case .dec_de: self.dec_r(.de)
+/* 0x1b */ case .dec_de: self.dec_rr(.de)
 /* 0x1c */ case .inc_e: self.inc_r(.e)
 /* 0x1d */ case .dec_e: self.dec_r(.e)
 /* 0x1e */ case .ld_e_d8: self.ld_r_d8(.e, self.next8)
@@ -45,7 +45,7 @@ extension Cpu {
 /* 0x20 */ case .jr_nz_r8: self.jr_cc_e(.nz, self.next8)
 /* 0x21 */ case .ld_hl_d16: self.ld_rr_d16(.hl, self.next16)
 /* 0x22 */ case .ld_pHLI_a: self.ld_pHLI_a()
-/* 0x23 */ case .inc_hl: self.inc_r(.hl)
+/* 0x23 */ case .inc_hl: self.inc_rr(.hl)
 /* 0x24 */ case .inc_h: self.inc_r(.h)
 /* 0x25 */ case .dec_h: self.dec_r(.h)
 /* 0x26 */ case .ld_h_d8: self.ld_r_d8(.h, self.next8)
@@ -53,7 +53,7 @@ extension Cpu {
 /* 0x28 */ case .jr_z_r8: self.jr_cc_e(.z, self.next8)
 /* 0x29 */ case .add_hl_hl: self.add_hl_r(.hl)
 /* 0x2a */ case .ld_a_pHLI: self.ld_a_pHLI()
-/* 0x2b */ case .dec_hl: self.dec_r(.hl)
+/* 0x2b */ case .dec_hl: self.dec_rr(.hl)
 /* 0x2c */ case .inc_l: self.inc_r(.l)
 /* 0x2d */ case .dec_l: self.dec_r(.l)
 /* 0x2e */ case .ld_l_d8: self.ld_r_d8(.l, self.next8)
@@ -237,17 +237,19 @@ extension Cpu {
 /* 0xe5 */ case .push_hl: self.push(.hl)
 /* 0xe6 */ case .and_d8: self.and_a_d8(self.next8)
 /* 0xe7 */ //case .rst_20h: break
-/* 0xe8 */ case .add_sp_r8: self.add_sp_n(self.next8)
+/* 0xe8 */ case .add_sp_r8: self.add_sp_r8(self.next8)
 /* 0xe9 */ case .jp_pHL: self.jp_pHL()
 /* 0xea */ case .ld_pA16_a: self.ld_pA16_a(self.next16)
 /* 0xee */ case .xor_d8: self.xor_a_d8(self.next8)
 /* 0xef */ //case .rst_28h: break
 /* 0xf0 */ case .ldh_a_pA8: self.ld_a_pA8(self.next8)
-/* 0xf1 */ /* 0xf2 */ case .ld_a_pC: self.ld_a_ffC()
+/* 0xf1 */ case .pop_af: self.pop(.af)
+/* 0xf2 */ case .ld_a_pC: self.ld_a_ffC()
 /* 0xf3 */ //case .di: break
-/* 0xf5 */ /* 0xf6 */ case .or_d8: self.or_a_d8(self.next8)
+/* 0xf5 */ case .push_af: self.push(.af)
+/* 0xf6 */ case .or_d8: self.or_a_d8(self.next8)
 /* 0xf7 */ //case .rst_30h: break
-/* 0xf8 */ //case .ld_hl_spR8: break
+/* 0xf8 */ case .ld_hl_spR8: self.ld_hl_sp_plus_e(self.next8)
 /* 0xf9 */ case .ld_sp_hl: self.ld_sp_hl()
 /* 0xfa */ case .ld_a_pA16: self.ld_a_pA16(self.next16)
 /* 0xfb */ //case .ei: break
@@ -257,34 +259,4 @@ extension Cpu {
     }
   }
 }
-// Implemented opcodes: 215, remaining: 30
-// 0xcf
-// 0xdc
-// 0xcc
-// 0xc7
-// 0xe7
-// 0x2f
-// 0xcb
-// 0xef
-// 0xf3
-// 0xc8
-// 0xf7
-// 0x3f
-// 0xff
-// 0x37
-// 0x8
-// 0xd4
-// 0x27
-// 0xc9
-// 0xcd
-// 0xc0
-// 0x76
-// 0xd9
-// 0xd7
-// 0xdf
-// 0xfb
-// 0xd8
-// 0x10
-// 0xc4
-// 0xd0
-// 0xf8
+// Implemented opcodes: 217, remaining: 28

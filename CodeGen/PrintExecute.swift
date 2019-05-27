@@ -26,7 +26,6 @@ private func printCpuExtension(_ opcodes: [Opcode]) {
   print("    switch opcode.type {")
 
   for op in opcodes {
-//    printOpcodeCase2(op)
     printOpcodeCase(op)
   }
 
@@ -34,13 +33,7 @@ private func printCpuExtension(_ opcodes: [Opcode]) {
   print("    }")
   print("  }")
   print("}")
-
-  let uoc = unimplementedOpcodes.count
-  print("// Implemented opcodes: \(opcodes.count - uoc), remaining: \(uoc)")
-
-  for addr in unimplementedOpcodes {
-    print("// \(addr)")
-  }
+  print("// Implemented opcodes: \(opcodes.count - unimplementedOpcodes), remaining: \(unimplementedOpcodes)")
 }
 
 private func printOpcodeCase(_ opcode: Opcode) {
@@ -48,6 +41,7 @@ private func printOpcodeCase(_ opcode: Opcode) {
   let next8 = "self.next8"
   let next16 = "self.next16"
 
+  // getFunctionCall(_ opcode: Opcode)
   print("/* \(opcode.addr) */ ", terminator: "")
   switch mnemonic {
   case "nop":
@@ -57,21 +51,7 @@ private func printOpcodeCase(_ opcode: Opcode) {
     let operand1 = opcode.operand1!.lowercased()
     let operand2 = opcode.operand2!.lowercased()
 
-    if isRegister(operand1) && isRegister(operand2) {
-      print("case .\(opcode.enumCase): self.ld_r_r(.\(operand1), .\(operand2))")
-    } else if isRegister(operand1) && isd8(operand2) {
-      print("case .\(opcode.enumCase): self.ld_r_d8(.\(operand1), \(next8))")
-    } else if isRegister(operand1) && ispHL(operand2) {
-      print("case .\(opcode.enumCase): self.ld_r_pHL(.\(operand1))")
-    } else if ispHL(operand1) && isRegister(operand2) {
-      print("case .\(opcode.enumCase): self.ld_pHL_r(.\(operand2))")
-    } else if ispHL(operand1) && isd8(operand2) {
-      print("case .\(opcode.enumCase): self.ld_pHL_d8(\(next8))")
-    } else if isA(operand1) && ispBC(operand2) {
-      print("case .\(opcode.enumCase): self.ld_a_pBC()")
-    } else if isA(operand1) && ispDE(operand2) {
-      print("case .\(opcode.enumCase): self.ld_a_pDE()")
-    } else if opcode.addr == "0xf2" {
+    if opcode.addr == "0xf2" {
       print("case .\(opcode.enumCase): self.ld_a_ffC()")
     } else if opcode.addr == "0xe2" {
       print("case .\(opcode.enumCase): self.ld_ffC_a()")
@@ -91,12 +71,35 @@ private func printOpcodeCase(_ opcode: Opcode) {
       print("case .\(opcode.enumCase): self.ld_a_pA16(\(next16))")
     } else if opcode.addr == "0xea" {
       print("case .\(opcode.enumCase): self.ld_pA16_a(\(next16))")
-    } else if isCombinedRegister(operand1) && isd16(operand2) {
-      print("case .\(opcode.enumCase): self.ld_rr_d16(.\(operand1), \(next16))")
-    } else if isSP(operand1) && isd16(operand2) {
-      print("case .\(opcode.enumCase): self.ld_sp_d16(\(next16))")
+    } else if opcode.addr == "0xf8" {
+      print("case .\(opcode.enumCase): self.ld_hl_sp_plus_e(\(next8))")
+    } else if opcode.addr == "0x8" {
+      print("case .\(opcode.enumCase): self.ld_pA16_sp(\(next16))")
     } else if opcode.addr == "0xf9" {
       print("case .\(opcode.enumCase): self.ld_sp_hl()")
+    } else if opcode.addr == "0xa" {
+      print("case .\(opcode.enumCase): self.ld_a_pBC()")
+    } else if opcode.addr == "0x1a" {
+      print("case .\(opcode.enumCase): self.ld_a_pDE()")
+    } else if opcode.addr == "0x31" {
+      print("case .\(opcode.enumCase): self.ld_sp_d16(\(next16))")
+    } else if opcode.addr == "0x36" {
+      print("case .\(opcode.enumCase): self.ld_pHL_d8(\(next8))")
+    }
+    else if isRegister(operand1) {
+      if isRegister(operand2) {
+        print("case .\(opcode.enumCase): self.ld_r_r(.\(operand1), .\(operand2))")
+      } else if isd8(operand2) {
+        print("case .\(opcode.enumCase): self.ld_r_d8(.\(operand1), \(next8))")
+      } else if ispHL(operand2) {
+        print("case .\(opcode.enumCase): self.ld_r_pHL(.\(operand1))")
+      }
+    }
+    else if isCombinedRegister(operand1) && isd16(operand2) {
+      print("case .\(opcode.enumCase): self.ld_rr_d16(.\(operand1), \(next16))")
+    }
+    else if ispHL(operand1) && isRegister(operand2) {
+      print("case .\(opcode.enumCase): self.ld_pHL_r(.\(operand2))")
     }
     else { printUnimplementedOpcode(opcode) }
 
@@ -113,18 +116,19 @@ private func printOpcodeCase(_ opcode: Opcode) {
     let operand1 = opcode.operand1!.lowercased()
     let operand2 = opcode.operand2!.lowercased()
 
-    if isA(operand1) && isRegister(operand2) {
-      print("case .\(opcode.enumCase): self.add_a_r(.\(operand2))")
-    } else if isA(operand1) && isd8(operand2) {
-      print("case .\(opcode.enumCase): self.add_a_d8(\(next8))")
-    } else if isA(operand1) && ispHL(operand2) {
+    if opcode.addr == "0x39" {
+      print("case .\(opcode.enumCase): self.add_hl_sp()")
+    } else if opcode.addr == "0x86" {
       print("case .\(opcode.enumCase): self.add_a_pHL()")
+    } else if opcode.addr == "0xc6" {
+      print("case .\(opcode.enumCase): self.add_a_d8(\(next8))")
+    } else if opcode.addr == "0xe8" {
+      print("case .\(opcode.enumCase): self.add_sp_r8(\(next8))")
+    }
+    else if isA(operand1) && isRegister(operand2) {
+      print("case .\(opcode.enumCase): self.add_a_r(.\(operand2))")
     } else if isHL(operand1) && isCombinedRegister(operand2) {
       print("case .\(opcode.enumCase): self.add_hl_r(.\(operand2))")
-    } else if opcode.addr == "0x39" {
-      print("case .\(opcode.enumCase): self.add_hl_sp()")
-    } else if opcode.addr == "0xe8" {
-      print("case .\(opcode.enumCase): self.add_sp_n(\(next8))")
     }
     else { printUnimplementedOpcode(opcode) }
 
@@ -132,25 +136,26 @@ private func printOpcodeCase(_ opcode: Opcode) {
     // opcode.operand1 is always 'A' (000)
     let operand = opcode.operand2!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.adc_a_r(.\(operand))")
-    } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.adc_a_d8(\(next8))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0x8e" {
       print("case .\(opcode.enumCase): self.adc_a_pHL()")
+    } else if opcode.addr == "0xce" {
+      print("case .\(opcode.enumCase): self.adc_a_d8(\(next8))")
     }
-    // add_hl_r
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.adc_a_r(.\(operand))")
+    }
     else { printUnimplementedOpcode(opcode) }
 
   case "sub":
     let operand = opcode.operand1!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.sub_a_r(.\(operand))")
-    } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.sub_a_d8(\(next8))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0x96" {
       print("case .\(opcode.enumCase): self.sub_a_pHL()")
+    } else if opcode.addr == "0xd6" {
+      print("case .\(opcode.enumCase): self.sub_a_d8(\(next8))")
+    }
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.sub_a_r(.\(operand))")
     }
     else { printUnimplementedOpcode(opcode) }
 
@@ -158,88 +163,95 @@ private func printOpcodeCase(_ opcode: Opcode) {
     // opcode.operand1 is always 'A' (000)
     let operand = opcode.operand2!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.sbc_a_r(.\(operand))")
-    } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.sbc_a_d8(\(next8))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0x9e" {
       print("case .\(opcode.enumCase): self.sbc_a_pHL()")
+    } else if opcode.addr == "0xde" {
+      print("case .\(opcode.enumCase): self.sbc_a_d8(\(next8))")
+    }
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.sbc_a_r(.\(operand))")
     }
     else { printUnimplementedOpcode(opcode) }
 
   case "and":
     let operand = opcode.operand1!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.and_a_r(.\(operand))")
-    } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.and_a_d8(\(next8))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0xa6" {
       print("case .\(opcode.enumCase): self.and_a_pHL()")
+    } else if opcode.addr == "0xe6" {
+      print("case .\(opcode.enumCase): self.and_a_d8(\(next8))")
+    }
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.and_a_r(.\(operand))")
     }
     else { printUnimplementedOpcode(opcode) }
 
   case "or":
     let operand = opcode.operand1!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.or_a_r(.\(operand))")
-    } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.or_a_d8(\(next8))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0xb6" {
       print("case .\(opcode.enumCase): self.or_a_pHL()")
+    } else if opcode.addr == "0xf6" {
+      print("case .\(opcode.enumCase): self.or_a_d8(\(next8))")
+    }
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.or_a_r(.\(operand))")
     }
     else { printUnimplementedOpcode(opcode) }
 
   case "xor":
     let operand = opcode.operand1!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.xor_a_r(.\(operand))")
-    } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.xor_a_d8(\(next8))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0xae" {
       print("case .\(opcode.enumCase): self.xor_a_pHL()")
+    } else if opcode.addr == "0xee" {
+      print("case .\(opcode.enumCase): self.xor_a_d8(\(next8))")
+    }
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.xor_a_r(.\(operand))")
     }
     else { printUnimplementedOpcode(opcode) }
 
   case "cp":
     let operand = opcode.operand1!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.cp_a_r(.\(operand))")
-    } else if isd8(operand) {
-      print("case .\(opcode.enumCase): self.cp_a_d8(\(next8))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0xbe" {
       print("case .\(opcode.enumCase): self.cp_a_pHL()")
+    } else if opcode.addr == "0xfe" {
+      print("case .\(opcode.enumCase): self.cp_a_d8(\(next8))")
+    }
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.cp_a_r(.\(operand))")
     }
     else { printUnimplementedOpcode(opcode) }
 
   case "inc":
     let operand = opcode.operand1!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.inc_r(.\(operand))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0x34" {
       print("case .\(opcode.enumCase): self.inc_pHL()")
-    } else if isCombinedRegister(operand) {
-      print("case .\(opcode.enumCase): self.inc_r(.\(operand))")
     } else if opcode.addr == "0x33" {
       print("case .\(opcode.enumCase): self.inc_sp()")
+    }
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.inc_r(.\(operand))")
+    } else if isCombinedRegister(operand) {
+      print("case .\(opcode.enumCase): self.inc_rr(.\(operand))")
     }
     else { printUnimplementedOpcode(opcode) }
 
   case "dec":
     let operand = opcode.operand1!.lowercased()
 
-    if isRegister(operand) {
-      print("case .\(opcode.enumCase): self.dec_r(.\(operand))")
-    } else if ispHL(operand) {
+    if opcode.addr == "0x35" {
       print("case .\(opcode.enumCase): self.dec_pHL()")
-    } else if isCombinedRegister(operand) {
-      print("case .\(opcode.enumCase): self.dec_r(.\(operand))")
     } else if opcode.addr == "0x3b" {
       print("case .\(opcode.enumCase): self.dec_sp()")
+    }
+    else if isRegister(operand) {
+      print("case .\(opcode.enumCase): self.dec_r(.\(operand))")
+    } else if isCombinedRegister(operand) {
+      print("case .\(opcode.enumCase): self.dec_rr(.\(operand))")
     }
     else { printUnimplementedOpcode(opcode) }
 
@@ -251,16 +263,17 @@ private func printOpcodeCase(_ opcode: Opcode) {
   case "jp":
     if opcode.addr == "0xe9" {
       print("case .\(opcode.enumCase): self.jp_pHL()")
-    } else if opcode.operand2 == nil {
+    } else if opcode.addr == "0xc3" {
       print("case .\(opcode.enumCase): self.jp_nn(\(next16))")
-    } else if isa16(opcode.operand2!) {
+    }
+    else if isa16(opcode.operand2!) {
       let condition = opcode.operand1!.lowercased()
       print("case .\(opcode.enumCase): self.jp_cc_nn(.\(condition), \(next16))")
     }
     else { printUnimplementedOpcode(opcode) }
 
   case "jr":
-    if opcode.operand2 == nil {
+    if opcode.addr == "0x18" {
       print("case .\(opcode.enumCase): self.jr_e(\(next8))")
     } else if isr8(opcode.operand2!) {
       let condition = opcode.operand1!.lowercased()
@@ -270,14 +283,11 @@ private func printOpcodeCase(_ opcode: Opcode) {
 
   case "push":
     let operand = opcode.operand1!.lowercased()
-    if isCombinedRegister(operand) {
-      print("case .\(opcode.enumCase): self.push(.\(operand))")
-    }
+    print("case .\(opcode.enumCase): self.push(.\(operand))")
+
   case "pop":
     let operand = opcode.operand1!.lowercased()
-    if isCombinedRegister(operand) {
-      print("case .\(opcode.enumCase): self.pop(.\(operand))")
-    }
+    print("case .\(opcode.enumCase): self.pop(.\(operand))")
 
 //  case "stop":
 //  case "daa":
@@ -298,72 +308,64 @@ private func printOpcodeCase(_ opcode: Opcode) {
   }
 }
 
-private var unimplementedOpcodes = Set<String>()
+private var unimplementedOpcodes = 0
 
 private func printUnimplementedOpcode(_ opcode: Opcode) {
-  unimplementedOpcodes.insert(opcode.addr)
+  unimplementedOpcodes += 1
   print("//case .\(opcode.enumCase): break")
 }
 
-private func isRegister(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "a" || op == "b"
-      || op == "c" || op == "d"
-      || op == "e"
-      || op == "h" || op == "l"
+private let singleRegisters  = ["a", "b", "c", "d", "e", "h", "l"]
+private let combinedRegisters = ["af", "bc", "de", "hl"]
+
+private func isRegister(_ operand: String?) -> Bool {
+  return singleRegisters.contains { isEqual(operand, $0) }
 }
 
-private func isCombinedRegister(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "bc" || op == "de" || op == "hl"
+private func isCombinedRegister(_ operand: String?) -> Bool {
+  return combinedRegisters.contains { isEqual(operand, $0) }
 }
 
-private func isA(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "a"
+private func isA(_ operand: String?) -> Bool {
+  return isEqual(operand, "a")
 }
 
-private func isHL(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "hl"
+private func isHL(_ operand: String?) -> Bool {
+  return isEqual(operand, "hl")
 }
 
-private func ispHL(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "(hl)"
+private func ispHL(_ operand: String?) -> Bool {
+  return isEqual(operand, "(hl)")
 }
 
-private func ispBC(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "(bc)"
+private func ispBC(_ operand: String?) -> Bool {
+  return isEqual(operand, "(bc)")
 }
 
-private func ispDE(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "(de)"
+private func ispDE(_ operand: String?) -> Bool {
+  return isEqual(operand, "(de)")
 }
 
-private func isd8(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "d8"
+private func isd8(_ operand: String?) -> Bool {
+  return isEqual(operand, "d8")
 }
 
-private func isd16(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "d16"
+private func isd16(_ operand: String?) -> Bool {
+  return isEqual(operand, "d16")
 }
 
-private func isa16(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "a16"
+private func isa16(_ operand: String?) -> Bool {
+  return isEqual(operand, "a16")
 }
 
-private func isr8(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "r8"
+private func isr8(_ operand: String?) -> Bool {
+  return isEqual(operand, "r8")
 }
 
-private func isSP(_ operand: String) -> Bool {
-  let op = operand.lowercased()
-  return op == "sp"
+private func isSP(_ operand: String?) -> Bool {
+  return isEqual(operand, "sp")
+}
+
+private func isEqual(_ operand: String?, _ value: String) -> Bool {
+  return operand?.lowercased() == value
 }

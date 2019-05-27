@@ -2,8 +2,10 @@
 // DO NOT EDIT!
 
 // swiftlint:disable superfluous_disable_command
-// swiftlint:disable trailing_comma
 // swiftlint:disable file_length
+// swiftlint:disable type_body_length
+// swiftlint:disable trailing_newline
+// swiftlint:disable trailing_comma
 
 enum PrefixOpcodeType {
 /** 0x0 */ case rlc_b

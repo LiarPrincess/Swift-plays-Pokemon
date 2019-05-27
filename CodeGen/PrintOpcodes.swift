@@ -18,8 +18,10 @@ private func printHeader() {
   print("")
 
   print("// swiftlint:disable superfluous_disable_command")
-  print("// swiftlint:disable trailing_comma")
   print("// swiftlint:disable file_length")
+  print("// swiftlint:disable type_body_length")
+  print("// swiftlint:disable trailing_newline")
+  print("// swiftlint:disable trailing_comma")
   print("")
 }
 
