@@ -7,12 +7,40 @@
 		<key>CodeGen.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
-		<key>SwiftBoy.xcscheme_^#shared#^_</key>
+		<key>SwiftBoyKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
+		</dict>
+		<key>SwiftBoyMac.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>901B5BDD229D31FC00A25554</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>90A1216F22995D3800737DC4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>90A1218122995D3900737DC4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>90A1219422995EE600737DC4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

@@ -8,9 +8,9 @@
 // swiftlint:disable switch_case_alignment
 
 extension Cpu {
-  mutating func execute(_ opcode: Opcode) {
+  internal func execute(_ opcode: UnprefixedOpcode) {
     switch opcode.type {
-/* 0x0 */ case .nop: break
+/* 0x0 */ case .nop: self.nop()
 /* 0x1 */ case .ld_bc_d16: self.ld_rr_d16(.bc, self.next16)
 /* 0x2 */ case .ld_pBC_a: self.ld_pBC_a()
 /* 0x3 */ case .inc_bc: self.inc_rr(.bc)
@@ -26,7 +26,7 @@ extension Cpu {
 /* 0xd */ case .dec_c: self.dec_r(.c)
 /* 0xe */ case .ld_c_d8: self.ld_r_d8(.c, self.next8)
 /* 0xf */ case .rrca: self.rrca()
-/* 0x10 */ case .stop_0: break // <--
+/* 0x10 */ case .stop: self.nop() // <------------------------------------
 /* 0x11 */ case .ld_de_d16: self.ld_rr_d16(.de, self.next16)
 /* 0x12 */ case .ld_pDE_a: self.ld_pDE_a()
 /* 0x13 */ case .inc_de: self.inc_rr(.de)
@@ -49,7 +49,7 @@ extension Cpu {
 /* 0x24 */ case .inc_h: self.inc_r(.h)
 /* 0x25 */ case .dec_h: self.dec_r(.h)
 /* 0x26 */ case .ld_h_d8: self.ld_r_d8(.h, self.next8)
-/* 0x27 */ case .daa: break // <--
+/* 0x27 */ case .daa: self.nop() // <------------------------------------
 /* 0x28 */ case .jr_z_r8: self.jr_cc_e(.z, self.next8)
 /* 0x29 */ case .add_hl_hl: self.add_hl_r(.hl)
 /* 0x2a */ case .ld_a_pHLI: self.ld_a_pHLI()
@@ -57,7 +57,7 @@ extension Cpu {
 /* 0x2c */ case .inc_l: self.inc_r(.l)
 /* 0x2d */ case .dec_l: self.dec_r(.l)
 /* 0x2e */ case .ld_l_d8: self.ld_r_d8(.l, self.next8)
-/* 0x2f */ case .cpl: break // <--
+/* 0x2f */ case .cpl: self.nop() // <------------------------------------
 /* 0x30 */ case .jr_nc_r8: self.jr_cc_e(.nc, self.next8)
 /* 0x31 */ case .ld_sp_d16: self.ld_sp_d16(self.next16)
 /* 0x32 */ case .ld_pHLD_a: self.ld_pHLD_a()
@@ -65,7 +65,7 @@ extension Cpu {
 /* 0x34 */ case .inc_pHL: self.inc_pHL()
 /* 0x35 */ case .dec_pHL: self.dec_pHL()
 /* 0x36 */ case .ld_pHL_d8: self.ld_pHL_d8(self.next8)
-/* 0x37 */ case .scf: break // <--
+/* 0x37 */ case .scf: self.nop() // <------------------------------------
 /* 0x38 */ case .jr_c_r8: self.jr_cc_e(.c, self.next8)
 /* 0x39 */ case .add_hl_sp: self.add_hl_sp()
 /* 0x3a */ case .ld_a_pHLD: self.ld_a_pHLD()
@@ -73,7 +73,7 @@ extension Cpu {
 /* 0x3c */ case .inc_a: self.inc_r(.a)
 /* 0x3d */ case .dec_a: self.dec_r(.a)
 /* 0x3e */ case .ld_a_d8: self.ld_r_d8(.a, self.next8)
-/* 0x3f */ case .ccf: break // <--
+/* 0x3f */ case .ccf: self.nop() // <------------------------------------
 /* 0x40 */ case .ld_b_b: self.ld_r_r(.b, .b)
 /* 0x41 */ case .ld_b_c: self.ld_r_r(.b, .c)
 /* 0x42 */ case .ld_b_d: self.ld_r_r(.b, .d)
@@ -128,7 +128,7 @@ extension Cpu {
 /* 0x73 */ case .ld_pHL_e: self.ld_pHL_r(.e)
 /* 0x74 */ case .ld_pHL_h: self.ld_pHL_r(.h)
 /* 0x75 */ case .ld_pHL_l: self.ld_pHL_r(.l)
-/* 0x76 */ case .halt: break // <--
+/* 0x76 */ case .halt: self.nop() // <------------------------------------
 /* 0x77 */ case .ld_pHL_a: self.ld_pHL_r(.a)
 /* 0x78 */ case .ld_a_b: self.ld_r_r(.a, .b)
 /* 0x79 */ case .ld_a_c: self.ld_r_r(.a, .c)
@@ -213,7 +213,7 @@ extension Cpu {
 /* 0xc8 */ case .ret_z: self.ret_cc(.z)
 /* 0xc9 */ case .ret: self.ret()
 /* 0xca */ case .jp_z_a16: self.jp_cc_nn(.z, self.next16)
-/* 0xcb */ case .prefix_cb: break // <--
+/* 0xcb */ case .prefix: self.prefix(self.next8)
 /* 0xcc */ case .call_z_a16: self.call_cc_a16(.z, self.next16)
 /* 0xcd */ case .call_a16: self.call_a16(self.next16)
 /* 0xce */ case .adc_a_d8: self.adc_a_d8(self.next8)
@@ -245,14 +245,14 @@ extension Cpu {
 /* 0xf0 */ case .ldh_a_pA8: self.ld_a_pA8(self.next8)
 /* 0xf1 */ case .pop_af: self.pop(.af)
 /* 0xf2 */ case .ld_a_pC: self.ld_a_ffC()
-/* 0xf3 */ case .di: break // <--
+/* 0xf3 */ case .di: self.nop() // <------------------------------------
 /* 0xf5 */ case .push_af: self.push(.af)
 /* 0xf6 */ case .or_d8: self.or_a_d8(self.next8)
 /* 0xf7 */ case .rst_30: self.rst(0x30)
 /* 0xf8 */ case .ld_hl_spR8: self.ld_hl_sp_plus_e(self.next8)
 /* 0xf9 */ case .ld_sp_hl: self.ld_sp_hl()
 /* 0xfa */ case .ld_a_pA16: self.ld_a_pA16(self.next16)
-/* 0xfb */ case .ei: break // <--
+/* 0xfb */ case .ei: self.nop() // <------------------------------------
 /* 0xfe */ case .cp_d8: self.cp_a_d8(self.next8)
 /* 0xff */ case .rst_38: self.rst(0x38)
     }

@@ -1,4 +1,4 @@
-extension Array {
+public extension Array {
   subscript(index: UInt8) -> Element {
     get { return self[Int(index)] }
     set { self[Int(index)] = newValue }

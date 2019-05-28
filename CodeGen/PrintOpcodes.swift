@@ -1,13 +1,17 @@
 func printOpcodes(_ opcodes: Opcodes) {
+  let className = "UnprefixedOpcode"
+
   printHeader()
-  printOpcodeTypeEnum("OpcodeType", opcodes.unprefixed)
-  printOpcodes("Opcode", "opcodes", opcodes.unprefixed)
+  printOpcodeTypeEnum(className, opcodes.unprefixed)
+  printOpcodes(className, "unprefixedOpcodes", opcodes.unprefixed, hasGaps: true)
 }
 
 func printPrefixOpcodes(_ opcodes: Opcodes) {
+  let className = "CBPrefixedOpcode"
+
   printHeader()
-  printOpcodeTypeEnum("PrefixOpcodeType", opcodes.cbprefixed)
-  printOpcodes("PrefixOpcode", "prefixOpcodes", opcodes.cbprefixed)
+  printOpcodeTypeEnum(className, opcodes.cbprefixed)
+  printOpcodes(className, "cbPrefixedOpcodes", opcodes.cbprefixed, hasGaps: false)
 }
 
 // MARK: - Printing
@@ -25,8 +29,8 @@ private func printHeader() {
   print("")
 }
 
-private func printOpcodeTypeEnum(_ name: String, _ opcodes: [Opcode]) {
-  print("enum \(name) {")
+private func printOpcodeTypeEnum(_ className: String, _ opcodes: [Opcode]) {
+  print("public enum \(className)Type {")
   for op in opcodes {
     print("/** \(op.addr) */ case \(op.enumCase)")
   }
@@ -34,27 +38,48 @@ private func printOpcodeTypeEnum(_ name: String, _ opcodes: [Opcode]) {
   print("")
 }
 
-private func printOpcodes(_ className: String, _ variable: String, _ opcodes: [Opcode]) {
-  print("let \(variable): [\(className)] = [")
-  for op in opcodes {
+private func printOpcodes(_ className: String, _ variable: String, _ opcodes: [Opcode], hasGaps: Bool) {
+  let optional = hasGaps ? "?" : ""
+  print("public let \(variable): [\(className)\(optional)] = [")
 
-    var addrColumn = "addr: \"\(op.addr)\", "
+  // Some adresses are missing
+  let opcodeByAddress = byAddress(opcodes)
+
+  for i in 0...0xff {
+    let address = "0x" + String(i, radix: 16, uppercase: false)
+    let addressString = "/* \(address) */"
+
+    guard let opcode = opcodeByAddress[address] else {
+      print("\(addressString) nil,")
+      continue
+    }
+
+    var addrColumn = "addr: \"\(opcode.addr)\", "
     addrColumn = pad(addrColumn, toLength: 17)
 
-    var typeColumn = "type: .\(op.enumCase), "
+    var typeColumn = "type: .\(opcode.enumCase), "
     typeColumn = pad(typeColumn, toLength: 26)
 
-    var debugColumn = "debug: \"\(op.debug)\", "
+    var debugColumn = "debug: \"\(opcode.debug)\", "
     debugColumn = pad(debugColumn, toLength: 25)
 
     var column3 = ""
-    column3 += "length: \(op.length), "
-    column3 += "cycles: \(op.cycles)"
+    column3 += "length: \(opcode.length), "
+    column3 += "cycles: \(opcode.cycles)"
 
-    print("  \(className)(\(addrColumn)\(typeColumn)\(debugColumn)\(column3)),")
+    print("\(addressString) \(className)(\(addrColumn)\(typeColumn)\(debugColumn)\(column3)),")
   }
+
   print("]")
   print("")
+}
+
+private func byAddress(_ opcodes: [Opcode]) -> [String:Opcode] {
+  var result = [String:Opcode]()
+  for op in opcodes {
+    result[op.addr] = op
+  }
+  return result
 }
 
 private func pad(_ s: String, toLength: Int) -> String {

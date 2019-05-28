@@ -1,5 +1,3 @@
-// swiftlint:disable function_body_length
-
 func printExecutePrefix(_ opcodes: Opcodes) {
   printHeader()
   printCpuExtension(opcodes.cbprefixed)
@@ -20,12 +18,12 @@ private func printHeader() {
 
 private func printCpuExtension(_ opcodes: [Opcode]) {
   print("extension Cpu {")
-  print("  mutating func execute(_ opcode: PrefixOpcode) {")
+  print("  internal func execute(_ opcode: CBPrefixedOpcode) {")
   print("    switch opcode.type {")
 
   for op in opcodes {
     let call = getOpcodeCall(op)
-    print("/* \(op.addr) */ case .\(op.enumCase): \(call)")
+    print("/* \(op.addr) */ case .\(op.enumCase): self.\(call)")
   }
 
   print("    }")
@@ -39,15 +37,15 @@ private func getOpcodeCall(_ opcode: Opcode) -> String {
   case "rlc", "rrc", "rl", "rr", "sla", "sra", "srl", "swap":
     let operand = opcode.operand1!.lowercased()
 
-    if isRegister(operand) { return "self.\(mnemonic)_r(.\(operand))" }
-    if ispHL(operand) { return "self.\(mnemonic)_pHL()" }
+    if isRegister(operand) { return "\(mnemonic)_r(.\(operand))" }
+    if ispHL(operand) { return "\(mnemonic)_pHL()" }
 
   case "bit", "res", "set":
     let operand1 = opcode.operand1!.lowercased()
     let operand2 = opcode.operand2!.lowercased()
 
-    if isRegister(operand2) { return "self.\(mnemonic)_r(\(operand1), .\(operand2))" }
-    if ispHL(operand2) { return "self.\(mnemonic)_pHL(\(operand1))" }
+    if isRegister(operand2) { return "\(mnemonic)_r(\(operand1), .\(operand2))" }
+    if ispHL(operand2) { return "\(mnemonic)_pHL(\(operand1))" }
 
   default: break
   }

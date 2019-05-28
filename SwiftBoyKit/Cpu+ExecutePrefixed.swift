@@ -8,7 +8,7 @@
 // swiftlint:disable switch_case_alignment
 
 extension Cpu {
-  mutating func execute(_ opcode: PrefixOpcode) {
+  internal func execute(_ opcode: CBPrefixedOpcode) {
     switch opcode.type {
 /* 0x0 */ case .rlc_b: self.rlc_r(.b)
 /* 0x1 */ case .rlc_c: self.rlc_r(.c)

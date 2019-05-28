@@ -1,7 +1,7 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-enum JumpCondition {
+internal enum JumpCondition {
   case nz
   case z
   case nc
@@ -9,62 +9,62 @@ enum JumpCondition {
 }
 
 // This file is massive, but we need it this way so we can easier Cmd+F.
-extension Cpu {
+internal extension Cpu {
 
   // MARK: - 8-Bit Transfer and Input/Output Instructions
 
   /// Loads the contents of register r' into register r.
-  mutating func ld_r_r(_ dst: SingleRegister, _ src: SingleRegister) {
+  func ld_r_r(_ dst: SingleRegister, _ src: SingleRegister) {
     let value = self.registers.get(src)
     self.registers.set(dst, to: value)
   }
 
   /// Loads 8-bit immediate data n into register r.
-  mutating func ld_r_d8(_ r: SingleRegister, _ n: UInt8) {
+  func ld_r_d8(_ r: SingleRegister, _ n: UInt8) {
     self.registers.set(r, to: n)
   }
 
   /// Loads the contents of memory (8 bits) specified by register pair HL into register r.
-  mutating func ld_r_pHL(_ r: SingleRegister) {
+  func ld_r_pHL(_ r: SingleRegister) {
     let n = self.memory.read(self.registers.hl)
     self.registers.set(r, to: n)
   }
 
   /// Stores the contents of register r in memory specified by register pair HL.
-  mutating func ld_pHL_r(_ r: SingleRegister) {
+  func ld_pHL_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     let hl = self.registers.hl
     self.memory.write(hl, value: n)
   }
 
   /// Loads 8-bit immediate data n into memory specified by register pair HL.
-  mutating func ld_pHL_d8(_ n: UInt8) {
+  func ld_pHL_d8(_ n: UInt8) {
     let hl = self.registers.hl
     self.memory.write(hl, value: n)
   }
 
   /// Loads the contents specified by the contents of register pair BC into register A.
-  mutating func ld_a_pBC() {
+  func ld_a_pBC() {
     let bc = self.registers.bc
     self.registers.a = self.memory.read(bc)
   }
 
   /// Loads the contents specified by the contents of register pair DE into register A.
-  mutating func ld_a_pDE() {
+  func ld_a_pDE() {
     let de = self.registers.de
     self.registers.a = self.memory.read(de)
   }
 
   /// Loads into register A the contents of the internal RAM, port register,
   /// or mode register at the address in the range FF00h-FFFFh specified by register C.
-  mutating func ld_a_ffC() {
+  func ld_a_ffC() {
     let address = UInt16(0xff00) + UInt16(self.registers.c)
     self.registers.a = self.memory.read(address)
   }
 
   /// Loads the contents of register A in the internal RAM, port register,
   /// or mode register at the address in the range FF00h-FFFFh specified by register C.
-  mutating func ld_ffC_a() {
+  func ld_ffC_a() {
     let a = self.registers.a
     let address = UInt16(0xff00) + UInt16(self.registers.c)
     self.memory.write(address, value: a)
@@ -72,29 +72,29 @@ extension Cpu {
 
   /// Loads into register A the contents of the internal RAM, port register, or mode register
   /// at the address in the range FF00h-FFFFh specified by the 8-bit immediate operand n.
-  mutating func ld_a_pA8(_ n: UInt8) {
+  func ld_a_pA8(_ n: UInt8) {
     let addr = 0xff00 | UInt16(n)
     self.registers.a = self.memory.read(addr)
   }
 
   /// Loads the contents of register A to the internal RAM, port register, or mode register
   /// at the address in the range FF00h-FFFFh specified by the 8-bit immediate operand n.
-  mutating func ld_pA8_a(_ n: UInt8) {
+  func ld_pA8_a(_ n: UInt8) {
     let addr = 0xff00 | UInt16(n)
     self.memory.write(addr, value: self.registers.a)
   }
 
-  mutating func ld_a_pA16(_ nn: UInt16) {
+  func ld_a_pA16(_ nn: UInt16) {
     self.registers.a = self.memory.read(nn)
   }
 
-  mutating func ld_pA16_a(_ nn: UInt16) {
+  func ld_pA16_a(_ nn: UInt16) {
     self.memory.write(nn, value: self.registers.a)
   }
 
   /// Loads in register A the contents of memory specified by the contents of register pair HL
   /// and simultaneously increments the contents of HL.
-  mutating func ld_a_pHLI() {
+  func ld_a_pHLI() {
     let hl = self.registers.hl
     self.registers.a = self.memory.read(hl)
 
@@ -104,7 +104,7 @@ extension Cpu {
 
   /// Loads in register A the contents of memory specified by the contents of register pair HL
   /// and simultaneously decrements the contents of HL.
-  mutating func ld_a_pHLD() {
+  func ld_a_pHLD() {
     let hl = self.registers.hl
     self.registers.a = self.memory.read(hl)
 
@@ -113,14 +113,14 @@ extension Cpu {
   }
 
   /// Stores the contents of register A in the memory specified by register pair BC.
-  mutating func ld_pBC_a() {
+  func ld_pBC_a() {
     let a = self.registers.a
     let bc = self.registers.bc
     self.memory.write(bc, value: a)
   }
 
   /// Stores the contents of register A in the memory specified by register pair DE.
-  mutating func ld_pDE_a() {
+  func ld_pDE_a() {
     let a = self.registers.a
     let de = self.registers.de
     self.memory.write(de, value: a)
@@ -128,7 +128,7 @@ extension Cpu {
 
   /// Stores the contents of register A in the memory specified by register pair HL
   /// and simultaneously increments the contents of HL.
-  mutating func ld_pHLI_a() {
+  func ld_pHLI_a() {
     let a = self.registers.a
     let hl = self.registers.hl
     self.memory.write(hl, value: a)
@@ -139,7 +139,7 @@ extension Cpu {
 
   /// Stores the contents of register A in the memory specified by register pair HL
   /// and simultaneously decrements the contents of HL.
-  mutating func ld_pHLD_a() {
+  func ld_pHLD_a() {
     let a = self.registers.a
     let hl = self.registers.hl
     self.memory.write(hl, value: a)
@@ -151,17 +151,17 @@ extension Cpu {
   // MARK: - 16-Bit Transfer Instructions
 
   /// Loads 2 bytes of immediate data to register pair dd.
-  mutating func ld_rr_d16(_ rr: CombinedRegister, _ nn: UInt16) {
+  func ld_rr_d16(_ rr: CombinedRegister, _ nn: UInt16) {
     self.registers.set(rr, to: nn)
   }
 
   /// Loads 2 bytes of immediate data to register pair dd.
-  mutating func ld_sp_d16(_ nn: UInt16) {
+  func ld_sp_d16(_ nn: UInt16) {
     self.sp = nn
   }
 
   /// Loads the contents of register pair HL in stack pointer SP.
-  mutating func ld_sp_hl() {
+  func ld_sp_hl() {
     self.sp = self.registers.hl
   }
 
@@ -169,7 +169,7 @@ extension Cpu {
   /// First 1 is substracted from SP and the contents of the higher portion of qq are placed on the stack.
   /// The contents of the lower portion of qq are then placed on the stack.
   /// The contents of SP are automatically decremented by 2.
-  mutating func push(_ rr: CombinedRegister) {
+  func push(_ rr: CombinedRegister) {
     let nn = self.registers.get(rr)
     self.push16(nn)
   }
@@ -178,17 +178,17 @@ extension Cpu {
   /// First the contents of memory specified by the contents of SP are loaded in the lower portion of qq.
   /// Next, the contents of SP are incremented by 1 and the contents of the memory they specify are loaded in the upper portion of qq.
   /// The contents of SP are automatically incremented by 2.
-  mutating func pop(_ rr: CombinedRegister) {
+  func pop(_ rr: CombinedRegister) {
     let nn = self.pop16()
     self.registers.set(rr, to: nn)
   }
 
   /// The 8-bit operand e is added to SP and the result is stored in HL.
-  mutating func ld_hl_sp_plus_e(_ n: UInt8) {
+  func ld_hl_sp_plus_e(_ n: UInt8) {
     let e = Int8(n)
     let value = Int(self.sp) + Int(e)
 
-    // TODO: ld_hl_sp_plus_e half carry
+    // TODO: implement half carry for 'ld_hl_sp_plus_e'
     self.registers.zeroFlag = false
     self.registers.halfCarryFlag = false
     self.registers.subtractFlag = false
@@ -199,7 +199,7 @@ extension Cpu {
 
   /// Stores the lower byte of SP at address nn specified by the 16-bit
   /// immediate operand nn and the upper byte of SP at address nn + 1.
-  mutating func ld_pA16_sp(_ nn: UInt16) {
+  func ld_pA16_sp(_ nn: UInt16) {
     let low = UInt8(self.sp & 0xff)
     self.memory.write(nn, value: low)
 
@@ -213,23 +213,23 @@ extension Cpu {
 
   /// Adds the contents of register r to those of register A
   /// and stores the results in register A.
-  mutating func add_a_r(_ r: SingleRegister) {
+  func add_a_r(_ r: SingleRegister) {
     self.add_a(self.registers.get(r))
   }
 
   /// Adds 8-bit immediate operand n to the contents of register A
   /// and stores the results in register A.
-  mutating func add_a_d8(_ n: UInt8) {
+  func add_a_d8(_ n: UInt8) {
     self.add_a(n)
   }
 
   /// Adds the contents of memory specified by the contents of register pair HL
   /// to the contents of register A and stores the results in register A
-  mutating func add_a_pHL() {
+  func add_a_pHL() {
     self.add_a(self.memory.read(self.registers.hl))
   }
 
-  private mutating func add_a(_ n: UInt8) {
+  private func add_a(_ n: UInt8) {
     let a = self.registers.a
     let (newValue, overflow) = a.addingReportingOverflow(n)
 
@@ -243,19 +243,19 @@ extension Cpu {
 
   /// Adds the contents of register pair ss to the contents of register pair HL
   /// and stores the results in HL.
-  mutating func add_hl_r(_ r: CombinedRegister) {
+  func add_hl_r(_ r: CombinedRegister) {
     self.add_hl(self.registers.get(r))
   }
 
   /// Adds the contents of register pair ss to the contents of register pair HL
   /// and stores the results in HL.
-  mutating func add_hl_sp() {
+  func add_hl_sp() {
     self.add_hl(self.sp)
   }
 
   /// Adds the contents of register pair ss to the contents of register pair HL
   /// and stores the results in HL.
-  mutating func add_hl(_ n: UInt16) {
+  func add_hl(_ n: UInt16) {
     let hl = self.registers.hl
     let (newValue, overflow) = hl.addingReportingOverflow(n)
 
@@ -268,7 +268,7 @@ extension Cpu {
   }
 
   /// Adds the contents of the 8-bit immediate operand e and SP and stores the results in SP.
-  mutating func add_sp_r8(_ n: UInt8) {
+  func add_sp_r8(_ n: UInt8) {
     let sp = self.sp
     let nn = UInt16(n)
     let (newValue, overflow) = sp.addingReportingOverflow(nn)
@@ -285,23 +285,23 @@ extension Cpu {
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
-  mutating func adc_a_r(_ r: SingleRegister) {
+  func adc_a_r(_ r: SingleRegister) {
     self.adc_a(self.registers.get(r))
   }
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
-  mutating func adc_a_d8(_ n: UInt8) {
+  func adc_a_d8(_ n: UInt8) {
     self.adc_a(n)
   }
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
-  mutating func adc_a_pHL() {
+  func adc_a_pHL() {
     self.adc_a(self.memory.read(self.registers.hl))
   }
 
-  private mutating func adc_a(_ n: UInt8) {
+  private func adc_a(_ n: UInt8) {
     let a = self.registers.a
     let cy: UInt8 = self.registers.carryFlag ? 1 : 0
 
@@ -320,23 +320,23 @@ extension Cpu {
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func sub_a_r(_ r: SingleRegister) {
+  func sub_a_r(_ r: SingleRegister) {
     self.sub_a(self.registers.get(r))
   }
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func sub_a_d8(_ n: UInt8) {
+  func sub_a_d8(_ n: UInt8) {
     self.sub_a(n)
   }
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func sub_a_pHL() {
+  func sub_a_pHL() {
     self.sub_a(self.memory.read(self.registers.hl))
   }
 
-  private mutating func sub_a(_ n: UInt8) {
+  private func sub_a(_ n: UInt8) {
     let a = self.registers.a
 
     let (newValue, overflow) = a.subtractingReportingOverflow(n)
@@ -354,23 +354,23 @@ extension Cpu {
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func sbc_a_r(_ r: SingleRegister) {
+  func sbc_a_r(_ r: SingleRegister) {
     self.sbc_a(self.registers.get(r))
   }
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func sbc_a_d8(_ n: UInt8) {
+  func sbc_a_d8(_ n: UInt8) {
     self.sbc_a(n)
   }
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func sbc_a_pHL() {
+  func sbc_a_pHL() {
     self.sbc_a(self.memory.read(self.registers.hl))
   }
 
-  mutating func sbc_a(_ n: UInt8) {
+  func sbc_a(_ n: UInt8) {
     let a = self.registers.a
     let cy: UInt8 = self.registers.carryFlag ? 1 : 0
 
@@ -392,24 +392,24 @@ extension Cpu {
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
-  mutating func cp_a_r(_ r: SingleRegister) {
+  func cp_a_r(_ r: SingleRegister) {
     self.cp_a(self.registers.get(r))
   }
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
-  mutating func cp_a_d8(_ n: UInt8) {
+  func cp_a_d8(_ n: UInt8) {
     self.cp_a(n)
   }
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
-  mutating func cp_a_pHL() {
+  func cp_a_pHL() {
     self.cp_a(self.memory.read(self.registers.hl))
   }
 
   /// Basically sub, but without storing result
-  private mutating func cp_a(_ n: UInt8) {
+  private func cp_a(_ n: UInt8) {
     let a = self.registers.a
 
     let (newValue, overflow) = a.subtractingReportingOverflow(n)
@@ -424,7 +424,7 @@ extension Cpu {
   // MARK: Inc
 
   /// Increments the contents of register r by 1.
-  mutating func inc_r(_ r: SingleRegister) {
+  func inc_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     let (newValue, _) = n.addingReportingOverflow(1)
 
@@ -437,7 +437,7 @@ extension Cpu {
   }
 
   /// Increments the contents of register pair ss by 1.
-  mutating func inc_rr(_ r: CombinedRegister) {
+  func inc_rr(_ r: CombinedRegister) {
     let n = self.registers.get(r)
     let (newValue, _) = n.addingReportingOverflow(1)
     // flags affected: none
@@ -445,7 +445,7 @@ extension Cpu {
   }
 
   /// Increments by 1 the contents of memory specified by register pair HL.
-  mutating func inc_pHL() {
+  func inc_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
 
@@ -460,7 +460,7 @@ extension Cpu {
   }
 
   /// Increments the contents of register pair ss by 1.
-  mutating func inc_sp() {
+  func inc_sp() {
     let (newValue, _) = self.sp.addingReportingOverflow(1)
     // flags affected: none
     self.sp = newValue
@@ -469,7 +469,7 @@ extension Cpu {
   // MARK: Dec
 
   /// Subtract 1 from the contents of register r by 1.
-  mutating func dec_r(_ r: SingleRegister) {
+  func dec_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
 
     let (newValue, _) = n.subtractingReportingOverflow(1)
@@ -484,7 +484,7 @@ extension Cpu {
   }
 
   /// Decrements the contents of register pair ss by 1.
-  mutating func dec_rr(_ r: CombinedRegister) {
+  func dec_rr(_ r: CombinedRegister) {
     let n = self.registers.get(r)
     let (newValue, _) = n.subtractingReportingOverflow(1)
     // flags affected: none
@@ -492,7 +492,7 @@ extension Cpu {
   }
 
   /// Decrements by 1 the contents of memory specified by register pair HL.
-  mutating func dec_pHL() {
+  func dec_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
 
@@ -508,7 +508,7 @@ extension Cpu {
   }
 
   /// Decrements the contents of register pair ss by 1.
-  mutating func dec_sp() {
+  func dec_sp() {
     let (newValue, _) = self.sp.subtractingReportingOverflow(1)
     // flags affected: none
     self.sp = newValue
@@ -518,23 +518,23 @@ extension Cpu {
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func and_a_r(_ r: SingleRegister) {
+  func and_a_r(_ r: SingleRegister) {
     self.and_a(self.registers.get(r))
   }
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func and_a_d8(_ n: UInt8) {
+  func and_a_d8(_ n: UInt8) {
     self.and_a(n)
   }
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func and_a_pHL() {
+  func and_a_pHL() {
     self.and_a(self.memory.read(self.registers.hl))
   }
 
-  private mutating func and_a(_ n: UInt8) {
+  private func and_a(_ n: UInt8) {
     let a = self.registers.a
     let newValue = a & n
 
@@ -550,23 +550,23 @@ extension Cpu {
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func or_a_r(_ r: SingleRegister) {
+  func or_a_r(_ r: SingleRegister) {
     self.or_a(self.registers.get(r))
   }
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func or_a_d8(_ n: UInt8) {
+  func or_a_d8(_ n: UInt8) {
     self.or_a(n)
   }
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func or_a_pHL() {
+  func or_a_pHL() {
     self.or_a(self.memory.read(self.registers.hl))
   }
 
-  private mutating func or_a(_ n: UInt8) {
+  private func or_a(_ n: UInt8) {
     let a = self.registers.a
     let newValue = a | n
 
@@ -582,23 +582,23 @@ extension Cpu {
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func xor_a_r(_ r: SingleRegister) {
+  func xor_a_r(_ r: SingleRegister) {
     self.xor_a(self.registers.get(r))
   }
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func xor_a_d8(_ n: UInt8) {
+  func xor_a_d8(_ n: UInt8) {
     self.xor_a(n)
   }
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  mutating func xor_a_pHL() {
+  func xor_a_pHL() {
     self.xor_a(self.memory.read(self.registers.hl))
   }
 
-  private mutating func xor_a(_ n: UInt8) {
+  private func xor_a(_ n: UInt8) {
     let a = self.registers.a
     let newValue = a ^ n
 
@@ -615,7 +615,7 @@ extension Cpu {
   // MARK: Rotate left
 
   /// Rotates the contents of register A to the left.
-  mutating func rlca() {
+  func rlca() {
     let a = self.registers.a
 
     let carry = a >> 7
@@ -631,7 +631,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of register A to the left.
-  mutating func rla() {
+  func rla() {
     let a = self.registers.a
 
     let carry = a >> 7
@@ -648,7 +648,7 @@ extension Cpu {
   // MARK: Rotate right
 
   /// Rotates the contents of register A to the right.
-  mutating func rrca() {
+  func rrca() {
     let a = self.registers.a
 
     let carry = a & 0x1
@@ -663,7 +663,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of register A to the right.
-  mutating func rra() {
+  func rra() {
     let a = self.registers.a
 
     let carry = a & 0x1
@@ -680,19 +680,19 @@ extension Cpu {
   // MARK: Prefix rotate left
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
-  mutating func rlc_r(_ r: SingleRegister) {
+  func rlc_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rlc(n))
   }
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
-  mutating func rlc_pHL() {
+  func rlc_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.rlc(n))
   }
 
-  private mutating func rlc(_ n: UInt8) -> UInt8 {
+  private func rlc(_ n: UInt8) -> UInt8 {
     let carry = n >> 7
     let newValue = (n << 1) | carry
 
@@ -705,19 +705,19 @@ extension Cpu {
   }
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
-  mutating func rl_r(_ r: SingleRegister) {
+  func rl_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rl(n))
   }
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
-  mutating func rl_pHL() {
+  func rl_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.rl(n))
   }
 
-  private mutating func rl(_ n: UInt8) -> UInt8 {
+  private func rl(_ n: UInt8) -> UInt8 {
     let carry = n >> 7
     let newValue = (n << 1) | (self.registers.carryFlag ? 0x8 : 0x0)
 
@@ -732,19 +732,19 @@ extension Cpu {
   // MARK: Prefix rotate right
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
-  mutating func rrc_r(_ r: SingleRegister) {
+  func rrc_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rrc(n))
   }
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
-  mutating func rrc_pHL() {
+  func rrc_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.rrc(n))
   }
 
-  private mutating func rrc(_ n: UInt8) -> UInt8 {
+  private func rrc(_ n: UInt8) -> UInt8 {
     let carry = n & 0x01
     let newValue = (n >> 1) | (carry << 7)
 
@@ -757,19 +757,19 @@ extension Cpu {
   }
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
-  mutating func rr_r(_ r: SingleRegister) {
+  func rr_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rr(n))
   }
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
-  mutating func rr_pHL() {
+  func rr_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.rr(n))
   }
 
-  private mutating func rr(_ n: UInt8) -> UInt8 {
+  private func rr(_ n: UInt8) -> UInt8 {
     let carry = n & 0x01
     let newValue = (n >> 1) | (self.registers.carryFlag ? 0x8 : 0x0)
 
@@ -784,19 +784,19 @@ extension Cpu {
   // MARK: Shift
 
   /// Shifts the contents of operand m to the left.
-  mutating func sla_r(_ r: SingleRegister) {
+  func sla_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.sla(n))
   }
 
   /// Shifts the contents of operand m to the left.
-  mutating func sla_pHL() {
+  func sla_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.sla(n))
   }
 
-  private mutating func sla(_ n: UInt8) -> UInt8 {
+  private func sla(_ n: UInt8) -> UInt8 {
     let carry = n >> 7
     let newValue = (n << 1)
 
@@ -809,19 +809,19 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  mutating func sra_r(_ r: SingleRegister) {
+  func sra_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.sra(n))
   }
 
   /// Shifts the contents of operand m to the right.
-  mutating func sra_pHL() {
+  func sra_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.sra(n))
   }
 
-  private mutating func sra(_ n: UInt8) -> UInt8 {
+  private func sra(_ n: UInt8) -> UInt8 {
     let carry = n & 0x01
     let newValue = (n >> 1) | (n & 0x80)
 
@@ -834,19 +834,19 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  mutating func srl_r(_ r: SingleRegister) {
+  func srl_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.srl(n))
   }
 
   /// Shifts the contents of operand m to the right.
-  mutating func srl_pHL() {
+  func srl_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.srl(n))
   }
 
-  private mutating func srl(_ n: UInt8) -> UInt8 {
+  private func srl(_ n: UInt8) -> UInt8 {
     let carry = n & 0x01
     let newValue = (n >> 1)
 
@@ -861,19 +861,19 @@ extension Cpu {
   // MARK: Swap
 
   /// Shifts the contents of operand m to the right.
-  mutating func swap_r(_ r: SingleRegister) {
+  func swap_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.swap(n))
   }
 
   /// Shifts the contents of operand m to the right.
-  mutating func swap_pHL() {
+  func swap_pHL() {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.swap(n))
   }
 
-  private mutating func swap(_ n: UInt8) -> UInt8 {
+  private func swap(_ n: UInt8) -> UInt8 {
     let newValue = (n << 4) | (n >> 4)
 
     self.registers.zeroFlag = newValue == 0
@@ -890,7 +890,7 @@ extension Cpu {
 
   /// Copies the complement of the contents of the specified bit
   /// in register r to the Z flag of the program status word (PSW).
-  mutating func bit_r(_ b: UInt8, _ r: SingleRegister) {
+  func bit_r(_ b: UInt8, _ r: SingleRegister) {
     let n = self.registers.get(r)
     self.bit(b, n)
   }
@@ -898,12 +898,12 @@ extension Cpu {
   /// Copies the complement of the contents of the specified bit
   /// in memory specified by the contents of register pair HL
   /// to the Z flag of the program status word (PSW).
-  mutating func bit_pHL(_ b: UInt8) {
+  func bit_pHL(_ b: UInt8) {
     let n = self.memory.read(self.registers.hl)
     self.bit(b, n)
   }
 
-  private mutating func bit(_ b: UInt8, _ n: UInt8) {
+  private func bit(_ b: UInt8, _ n: UInt8) {
     let mask: UInt8 = 0x1 << b
 
     // Remember that this is complement!
@@ -916,13 +916,13 @@ extension Cpu {
   // MARK: Set
 
   /// Sets to 1 the specified bit in specified register r.
-  mutating func set_r(_ b: UInt8, _ r: SingleRegister) {
+  func set_r(_ b: UInt8, _ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.set(b, n))
   }
 
   /// Sets to 1 the specified bit in the memory contents specified by registers H and L.
-  mutating func set_pHL(_ b: UInt8) {
+  func set_pHL(_ b: UInt8) {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.set(b, n))
@@ -935,13 +935,13 @@ extension Cpu {
   // MARK: Reset
 
   /// Resets to 0 the specified bit in the specified register r.
-  mutating func res_r(_ b: UInt8, _ r: SingleRegister) {
+  func res_r(_ b: UInt8, _ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.res(b, n))
   }
 
   /// Resets to 0 the specified bit in the memory contents specified by registers H and L.
-  mutating func res_pHL(_ b: UInt8) {
+  func res_pHL(_ b: UInt8) {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.res(b, n))
@@ -957,39 +957,44 @@ extension Cpu {
 
   /// Loads the operand nn to the program counter (PC).
   /// nn specifies the address of the subsequently executed instruction.
-  mutating func jp_nn(_ nn: UInt16) {
+  func jp_nn(_ nn: UInt16) {
     self.pc = nn
   }
 
   /// Loads operand nn in the PC if condition cc and the flag status match.
-  mutating func jp_cc_nn(_ condition: JumpCondition, _ nn: UInt16) {
+  func jp_cc_nn(_ condition: JumpCondition, _ nn: UInt16) {
     if self.canJump(condition) {
       self.pc = nn
     }
   }
 
   /// Loads the contents of register pair HL in program counter PC.
-  mutating func jp_pHL() {
+  func jp_pHL() {
     self.pc = self.registers.hl
   }
 
   // MARK: JR
 
   /// Jumps -127 to +129 steps from the current address.
-  mutating func jr_e(_ e: UInt8) {
+  func jr_e(_ e: UInt8) {
     self.jr(e)
   }
 
   /// If condition cc and the flag status match, jumps -127 to +129 steps from the current address.
-  mutating func jr_cc_e(_ condition: JumpCondition, _ e: UInt8) {
+  func jr_cc_e(_ condition: JumpCondition, _ e: UInt8) {
     if self.canJump(condition) {
       self.jr(e)
     }
   }
 
-  private mutating func jr(_ e: UInt8) {
-    let offset = Int8(e)
-    let pc = Int(self.pc) + Int(offset)
+  private func jr(_ e: UInt8) {
+    let offset = Int8(bitPattern: e)
+
+    // Current address here would be the address for the instruction following JR.
+    let length = UInt16(2)
+    let currentAddress = self.pc + length
+
+    let pc = Int(currentAddress) + Int(offset)
     self.pc = UInt16(pc)
   }
 
@@ -1009,20 +1014,20 @@ extension Cpu {
   /// Pushes the PC value corresponding to the instruction at the address following that of the
   /// CALL instruction to the 2 bytes following the byte specified by the current SP.
   /// Operand nn is then loaded in the PC.
-  mutating func call_a16(_ nn: UInt16) {
+  func call_a16(_ nn: UInt16) {
     self.call(nn)
   }
 
   /// If condition cc matches the flag, the PC value corresponding to the instruction following the
   /// CALL instruction in memory is pushed to the 2 bytes following the memory byte specified by the SP.
   /// Operand nn is then loaded in the PC.
-  mutating func call_cc_a16(_ condition: JumpCondition, _ nn: UInt16) {
+  func call_cc_a16(_ condition: JumpCondition, _ nn: UInt16) {
     if self.canJump(condition) {
       self.call(nn)
     }
   }
 
-  private mutating func call(_ nn: UInt16) {
+  private func call(_ nn: UInt16) {
     let length = UInt16(3) // the same for both 'call'
     let returnAddr = self.pc + length
     self.push16(returnAddr)
@@ -1034,13 +1039,13 @@ extension Cpu {
 
   /// Pops from the memory stack the PC value pushed when the
   /// subroutine was called, returning control to the source program.
-  mutating func ret() {
+  func ret() {
     self.pc = self.pop16()
   }
 
   /// The address for the return from the interrupt is loaded in program counter PC.
   /// The master interrupt enable flag is returned to its pre-interrupt status.
-  mutating func reti() {
+  func reti() {
     self.ret()
     self.enableInterrupts()
   }
@@ -1048,7 +1053,7 @@ extension Cpu {
   /// If condition cc and the flag match, control is returned
   /// to the source program by popping from the memory stack
   /// the PC value pushed to the stack when the subroutine was called.
-  mutating func ret_cc(_ condition: JumpCondition) {
+  func ret_cc(_ condition: JumpCondition) {
     if canJump(condition) {
       self.ret()
     }
@@ -1059,7 +1064,7 @@ extension Cpu {
   /// Pushes the current value of the PC to the memory stack and loads to the PC
   /// the page 0 memory addresses provided by operand t.
   /// Then next instruction is fetched from the address specified by the new content of PC.
-  mutating func rst(_ t: UInt8) {
+  func rst(_ t: UInt8) {
     let length = UInt16(1) // the same for both 'rst'
     let returnAddr = self.pc + length
     self.push16(returnAddr)
@@ -1068,4 +1073,17 @@ extension Cpu {
   }
 
   // MARK: - General-Purpose Arithmetic Operations and CPU Control Instructions
+
+  func nop() { }
+
+  func prefix(_ n: UInt8) {
+    let opcode = cbPrefixedOpcodes[n]
+
+    self.delegate?.cpuWillExecute(self, opcode: opcode)
+    self.execute(opcode)
+    self.delegate?.cpuDidExecute(self, opcode: opcode)
+
+    // there are no jumps, calls etc. in prefix instructions
+    self.pc += opcode.length
+  }
 }

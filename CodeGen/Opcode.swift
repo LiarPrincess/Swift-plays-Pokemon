@@ -43,6 +43,8 @@ struct Opcode {
 
   var enumCase: String {
     var result = self.mnemonic.lowercased()
+    if result == "prefix" { return result }
+    if result == "stop"   { return result }
 
     if let operand1 = self.operand1 {
       result += "_"
@@ -53,14 +55,6 @@ struct Opcode {
       result += "_"
       result += getOperandValue(operand2)
     }
-
-//    let addrNum: String.SubSequence = {
-//      let a = self.addr.dropFirst(2)
-//      return a.count == 2 ? a : "0" + a
-//    }()
-//
-//    result += "_"
-//    result += addrNum
 
     return result
   }

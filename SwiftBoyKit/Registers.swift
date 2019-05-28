@@ -1,4 +1,9 @@
-enum SingleRegister {
+private let zeroFlagPosition:      UInt16 = 7
+private let subtractFlagPosition:  UInt16 = 6
+private let halfCarryFlagPosition: UInt16 = 5
+private let carryFlagPosition:     UInt16 = 4
+
+public enum SingleRegister {
   case a
   case b
   case c
@@ -8,62 +13,62 @@ enum SingleRegister {
   case l
 }
 
-enum CombinedRegister {
+public enum CombinedRegister {
   case af
   case bc
   case de
   case hl
 }
 
-struct Registers {
+public struct Registers {
 
   /// Accumulator: A
   /// An 8-bit register for storing data and the results of arithmetic and logical operations.
-  var a: UInt8 = 0
+  public var a: UInt8 = 0
 
   /// Auxiliary register: B
-  var b: UInt8 = 0
+  public var b: UInt8 = 0
 
   /// Auxiliary register: C
-  var c: UInt8 = 0
+  public var c: UInt8 = 0
 
   /// Auxiliary register: D
-  var d: UInt8 = 0
+  public var d: UInt8 = 0
 
   /// Auxiliary register: E
-  var e: UInt8 = 0
+  public var e: UInt8 = 0
 
   /// Auxiliary register: H
-  var h: UInt8 = 0
+  public var h: UInt8 = 0
 
   /// Auxiliary register: L
-  var l: UInt8 = 0
+  public var l: UInt8 = 0
 
   /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
-  var zeroFlag: Bool = false
+  public var zeroFlag: Bool = false
 
   /// N: Set to 1 following execution of the substruction instruction, regardless of the result.
-  var subtractFlag: Bool = false
+  public var subtractFlag: Bool = false
 
   /// H: Set to 1 when an operation results in carrying from or borrowing to bit 3.
-  var halfCarryFlag: Bool = false
+  public var halfCarryFlag: Bool = false
 
   /// CY: Set to 1 when an operation results in carrying from or borrowing to bit 7.
-  var carryFlag: Bool = false
+  public var carryFlag: Bool = false
 
   // MARK: - Combined registers
 
-  var bc: UInt16 {
+  public var bc: UInt16 {
     get { return self.get16(self.b, self.c) }
     set { self.set16(&self.b, &self.c, to: newValue) }
   }
 
-  var de: UInt16 {
+  public var de: UInt16 {
     get { return self.get16(self.d, self.e) }
     set { self.set16(&self.d, &self.e, to: newValue) }
   }
 
-  var hl: UInt16 {
+  public var hl: UInt16 {
     get { return self.get16(self.h, self.l) }
     set { self.set16(&self.h, &self.l, to: newValue) }
   }
@@ -79,7 +84,7 @@ struct Registers {
 
   // MARK: - Addressing
 
-  func get(_ r: SingleRegister) -> UInt8 {
+  public func get(_ r: SingleRegister) -> UInt8 {
     switch r {
     case .a: return self.a
     case .b: return self.b
@@ -91,16 +96,21 @@ struct Registers {
     }
   }
 
-  func get(_ r: CombinedRegister) -> UInt16 {
+  public func get(_ r: CombinedRegister) -> UInt16 {
     switch r {
-    case .af: return 0 // TODO: Get AF
+    case .af:
+      let zeroFlag:      UInt16 = self.zeroFlag      ? (1 << zeroFlagPosition)      : 0
+      let subtractFlag:  UInt16 = self.subtractFlag  ? (1 << subtractFlagPosition)  : 0
+      let halfCarryFlag: UInt16 = self.halfCarryFlag ? (1 << halfCarryFlagPosition) : 0
+      let carryFlag:     UInt16 = self.carryFlag     ? (1 << carryFlagPosition)     : 0
+      return zeroFlag | subtractFlag | halfCarryFlag | carryFlag
     case .bc: return self.bc
     case .de: return self.de
     case .hl: return self.hl
     }
   }
 
-  mutating func set(_ r: SingleRegister, to value: UInt8) {
+  public mutating func set(_ r: SingleRegister, to value: UInt8) {
     switch r {
     case .a: self.a = value
     case .b: self.b = value
@@ -112,9 +122,13 @@ struct Registers {
     }
   }
 
-  mutating func set(_ r: CombinedRegister, to value: UInt16) {
+  public mutating func set(_ r: CombinedRegister, to value: UInt16) {
     switch r {
-    case .af: break // TODO: Set AF
+    case .af:
+      self.zeroFlag      = (value & zeroFlagPosition)      == zeroFlagPosition
+      self.subtractFlag  = (value & subtractFlagPosition)  == subtractFlagPosition
+      self.halfCarryFlag = (value & halfCarryFlagPosition) == halfCarryFlagPosition
+      self.carryFlag     = (value & carryFlagPosition)     == carryFlagPosition
     case .bc: self.bc = value
     case .de: self.de = value
     case .hl: self.hl = value

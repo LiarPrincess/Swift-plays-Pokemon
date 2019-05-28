@@ -281,7 +281,4 @@ class CpuLdTests: XCTestCase {
     XCTAssertEqual(cpu.memory.read(0xc100), 0xf8)
     XCTAssertEqual(cpu.memory.read(0xc101), 0xff)
   }
-
-  // MARK: - Call and Return Instructions
-
 }

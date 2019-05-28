@@ -76,4 +76,12 @@ class CpuJumpTests: XCTestCase {
 
   // MARK: - JR
 
+  /// Test taken from bootstrap
+  func test_jr_e() {
+    var cpu = Cpu()
+    cpu.pc = 10
+    cpu.jr_e(0xfb) // -2
+
+    XCTAssertEqual(cpu.pc, 0x0007)
+  }
 }
