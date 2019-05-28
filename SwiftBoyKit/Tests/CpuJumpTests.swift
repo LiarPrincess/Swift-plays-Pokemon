@@ -2,7 +2,7 @@
 // swiftlint:disable file_length
 
 import XCTest
-@testable import SwiftBoy
+@testable import SwiftBoyKit
 
 class CpuJumpTests: XCTestCase {
 
@@ -10,7 +10,7 @@ class CpuJumpTests: XCTestCase {
 
   /// JP 8000h ; Jump to 8000h.
   func test_jp_nn() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.jp_nn(0x8000)
 
     XCTAssertEqual(cpu.pc, 0x8000)
@@ -19,7 +19,7 @@ class CpuJumpTests: XCTestCase {
   /// When Z=1andC=0,
   /// JP NZ, 8000h ; Moves to next instruction after 3 cycles.
   func test_jp_cc_nn_nz() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
     cpu.pc = 0xfefe
@@ -31,7 +31,7 @@ class CpuJumpTests: XCTestCase {
   /// When Z=1andC=0,
   /// JP Z, 8000h ; Jumps to address 8000h.
   func test_jp_cc_nn_z() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
     cpu.pc = 0xfefe
@@ -43,7 +43,7 @@ class CpuJumpTests: XCTestCase {
   /// When Z=1andC=0,
   /// JP C, 8000h ; Moves to next instruction after 3 cycles.
   func test_jp_cc_nn_c() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
     cpu.pc = 0xfefe
@@ -55,7 +55,7 @@ class CpuJumpTests: XCTestCase {
   /// When Z=1andC=0,
   /// JP NC, 8000h ; Jumps to address 8000h.
   func test_jp_cc_nn_nc() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
     cpu.pc = 0xfefe
@@ -67,7 +67,7 @@ class CpuJumpTests: XCTestCase {
   /// When HL = 8000h,
   /// JP (HL) ; Jumps to 8000h.
   func test_jp_pHL() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.hl = 0x8000
     cpu.jp_pHL()
 
@@ -78,7 +78,7 @@ class CpuJumpTests: XCTestCase {
 
   /// Test taken from bootstrap
   func test_jr_e() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 10
     cpu.jr_e(0xfb) // -2
 

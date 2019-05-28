@@ -2,7 +2,7 @@
 // swiftlint:disable file_length
 
 import XCTest
-@testable import SwiftBoy
+@testable import SwiftBoyKit
 
 class CpuBitTests: XCTestCase {
 
@@ -11,7 +11,7 @@ class CpuBitTests: XCTestCase {
   /// When A = 80h and L = EFh
   /// BIT 7, A ; Z←0,H←1,N←0
   func test_bit_r_1() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.a = 0x80
     cpu.registers.l = 0xef
     cpu.bit_r(7, .a)
@@ -24,7 +24,7 @@ class CpuBitTests: XCTestCase {
   /// When A = 80h and L = EFh
   /// BIT 4, L ; Z←1,H←1,N←0
   func test_bit_r_2() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.a = 0x80
     cpu.registers.l = 0xef
     cpu.bit_r(4, .l)
@@ -37,7 +37,7 @@ class CpuBitTests: XCTestCase {
   /// When (HL) = FEh,
   /// BIT 0, (HL) ; Z←1,H←1,N←0
   func test_bit_pHL_1() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xfe)
     cpu.bit_pHL(0)
@@ -50,7 +50,7 @@ class CpuBitTests: XCTestCase {
   /// When (HL) = FEh,
   /// BIT 1, (HL) ; Z←0,H←1,N←0
   func test_bit_pHL_2() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xfe)
     cpu.bit_pHL(1)
@@ -65,7 +65,7 @@ class CpuBitTests: XCTestCase {
   /// When A = 80h and L = 3Bh,
   /// SET 3, A ; A←0x84
   func test_set_r_1() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
     cpu.set_r(3, .a)
@@ -77,7 +77,7 @@ class CpuBitTests: XCTestCase {
   /// When A = 80h and L = 3Bh,
   /// SET 7, L ; L←0xBB
   func test_set_r_2() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
     cpu.set_r(7, .l)
@@ -88,7 +88,7 @@ class CpuBitTests: XCTestCase {
   /// When 00h is the memory contents specified by H and L,
   /// SET 3, (HL) ; (HL) ← 04H
   func test_set_pHL() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0x00)
     cpu.set_pHL(3)
@@ -102,7 +102,7 @@ class CpuBitTests: XCTestCase {
   /// When A = 80h and L = 3Bh,
   /// RES 7,A;A←00h
   func test_res_r_1() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
     cpu.res_r(7, .a)
@@ -113,7 +113,7 @@ class CpuBitTests: XCTestCase {
   /// When A = 80h and L = 3Bh,
   /// RES 1, L ; L ← 39h
   func test_res_r_2() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
     cpu.res_r(1, .l)
@@ -124,7 +124,7 @@ class CpuBitTests: XCTestCase {
   /// When 0xFF is the memory contents specified by H and L,
   /// RES 3, (HL) ; (HL) ← F7h
   func test_res_pHL() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xff)
     cpu.res_pHL(3)

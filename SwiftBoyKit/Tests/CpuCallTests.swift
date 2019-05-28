@@ -2,7 +2,7 @@
 // swiftlint:disable file_length
 
 import XCTest
-@testable import SwiftBoy
+@testable import SwiftBoyKit
 
 class CpuCallTests: XCTestCase {
 
@@ -12,7 +12,7 @@ class CpuCallTests: XCTestCase {
   /// Jumps to address 1234h
   /// (FFFDH) ← 80H (FFFCH) ← 03H SP ← FFFCH
   func test_call_a16() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.call_a16(0x1234)
@@ -26,7 +26,7 @@ class CpuCallTests: XCTestCase {
   /// Examples: When Z = 1,
   /// CALL NZ, 1234h ; Moves to next instruction after 3 cycles.
   func test_call_cc_a16_nz() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.registers.zeroFlag = true
@@ -39,7 +39,7 @@ class CpuCallTests: XCTestCase {
   /// Examples: When Z = 1,
   /// CALL Z, 1234h ; Pushes 8003h to the stack, and jumps to 1234h.
   func test_call_cc_a16_z() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.registers.zeroFlag = true
@@ -57,7 +57,7 @@ class CpuCallTests: XCTestCase {
   /// 9000H
   /// RET ; Returns to address 0x8003
   func test_ret() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.call_a16(0x9000)
@@ -72,7 +72,7 @@ class CpuCallTests: XCTestCase {
   /// 8000H INC L :An external interrupt occurs here.
   /// 8001H
   func test_reti() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 0x0040
     cpu.sp = 0xfffe
     cpu.push16(0x8000)
@@ -88,7 +88,7 @@ class CpuCallTests: XCTestCase {
   /// Set Z
   /// 9000h RET Z ; Returns to address 8003h
   func test_ret_cc_z() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.call_a16(0x9000)
@@ -104,7 +104,7 @@ class CpuCallTests: XCTestCase {
   /// Clear Z
   /// 9000h RET Z ; Moves to next instruction after 2 cycles
   func test_ret_cc_nz() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.call_a16(0x9000)
@@ -119,7 +119,7 @@ class CpuCallTests: XCTestCase {
   /// 8000h RST 1 ; Pushes 8001h to the stack,
   /// 8001h         and jumps to 0008h.
   func test_rst() {
-    var cpu = Cpu()
+    let cpu = Cpu()
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.rst(0x08)
