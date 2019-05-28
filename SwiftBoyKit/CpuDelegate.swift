@@ -1,4 +1,4 @@
-public protocol CpuDelegate: class {
+public protocol CpuDelegate: RegistersDelegate {
   func cpuWillExecute(_ cpu: Cpu, opcode: UnprefixedOpcode)
   func cpuWillExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode)
 
@@ -10,6 +10,6 @@ public extension CpuDelegate {
   func cpuWillExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) { }
   func cpuWillExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) { }
 
-  func cpuDidExecute(_ cpu:Cpu, opcode: UnprefixedOpcode) { }
-  func cpuDidExecute(_ cpu:Cpu, opcode: CBPrefixedOpcode) { }
+  func cpuDidExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) { }
+  func cpuDidExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) { }
 }

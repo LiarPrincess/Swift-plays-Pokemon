@@ -67,6 +67,8 @@ private func printOpcodes(_ className: String, _ variable: String, _ opcodes: [O
     column3 += "length: \(opcode.length), "
     column3 += "cycles: \(opcode.cycles)"
 
+    //let mnemonic = opcode.mnemonic.lowercased()
+    //if mnemonic.contains("pop") || mnemonic.contains("push")
     print("\(addressString) \(className)(\(addrColumn)\(typeColumn)\(debugColumn)\(column3)),")
   }
 

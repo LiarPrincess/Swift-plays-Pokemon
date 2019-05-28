@@ -20,29 +20,29 @@ public enum CombinedRegister {
   case hl
 }
 
-public struct Registers {
+public struct Registers: Codable {
 
   /// Accumulator: A
   /// An 8-bit register for storing data and the results of arithmetic and logical operations.
-  public var a: UInt8 = 0
+  public var a: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .a, to: self.a) } }
 
   /// Auxiliary register: B
-  public var b: UInt8 = 0
+  public var b: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .b, to: self.b) } }
 
   /// Auxiliary register: C
-  public var c: UInt8 = 0
+  public var c: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .c, to: self.c) } }
 
   /// Auxiliary register: D
-  public var d: UInt8 = 0
+  public var d: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .d, to: self.d) } }
 
   /// Auxiliary register: E
-  public var e: UInt8 = 0
+  public var e: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .e, to: self.e) } }
 
   /// Auxiliary register: H
-  public var h: UInt8 = 0
+  public var h: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .h, to: self.h) } }
 
   /// Auxiliary register: L
-  public var l: UInt8 = 0
+  public var l: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .l, to: self.l) } }
 
   /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
   public var zeroFlag: Bool = false
@@ -56,31 +56,46 @@ public struct Registers {
   /// CY: Set to 1 when an operation results in carrying from or borrowing to bit 7.
   public var carryFlag: Bool = false
 
+  public weak var delegate: RegistersDelegate?
+
+  internal init(delegate: RegistersDelegate? = nil) {
+    self.delegate = delegate
+  }
+
   // MARK: - Combined registers
 
   public var bc: UInt16 {
-    get { return self.get16(self.b, self.c) }
-    set { self.set16(&self.b, &self.c, to: newValue) }
+    get { return (UInt16(self.b) << 8) | UInt16(self.c) }
+    set {
+      self.b = UInt8((newValue & 0xff00) >> 8)
+      self.c = UInt8(newValue & 0xff)
+    }
   }
 
   public var de: UInt16 {
-    get { return self.get16(self.d, self.e) }
-    set { self.set16(&self.d, &self.e, to: newValue) }
+    get { return (UInt16(self.d) << 8) | UInt16(self.e) }
+    set {
+      self.d = UInt8((newValue & 0xff00) >> 8)
+      self.e = UInt8(newValue & 0xff)
+    }
   }
 
   public var hl: UInt16 {
-    get { return self.get16(self.h, self.l) }
-    set { self.set16(&self.h, &self.l, to: newValue) }
+    get { return (UInt16(self.h) << 8) | UInt16(self.l) }
+    set {
+      self.h = UInt8((newValue & 0xff00) >> 8)
+      self.l = UInt8(newValue & 0xff)
+    }
   }
 
-  private func get16(_ high: UInt8, _ low: UInt8) -> UInt16 {
-    return (UInt16(high) << 8) | UInt16(low)
-  }
-
-  private func set16(_ high: inout UInt8, _ low: inout UInt8, to value: UInt16) {
-    high = UInt8((value & 0xff00) >> 8)
-    low = UInt8(value & 0xff)
-  }
+//  private func get16(_ high: UInt8, _ low: UInt8) -> UInt16 {
+//    return (UInt16(high) << 8) | UInt16(low)
+//  }
+//
+//  private func set16(_ high: inout UInt8, _ low: inout UInt8, to value: UInt16) {
+//    high = UInt8((value & 0xff00) >> 8)
+//    low = UInt8(value & 0xff)
+//  }
 
   // MARK: - Addressing
 
@@ -133,5 +148,21 @@ public struct Registers {
     case .de: self.de = value
     case .hl: self.hl = value
     }
+  }
+
+  // MARK: - Codable
+
+  public enum CodingKeys: CodingKey {
+    case a
+    case b
+    case c
+    case d
+    case e
+    case h
+    case l
+    case zeroFlag
+    case subtractFlag
+    case halfCarryFlag
+    case carryFlag
   }
 }

@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>8359D977-2755-4991-BAEE-D61849FA1C26</key>
+		<key>00B5B908-196A-4214-8F63-BB5B7E80AAA1</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>8359D977-2755-4991-BAEE-D61849FA1C26.xcactivitylog</string>
+			<string>00B5B908-196A-4214-8F63-BB5B7E80AAA1.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -30,15 +30,15 @@
 			<key>signature</key>
 			<string>Build SwiftBoy</string>
 			<key>timeStartedRecording</key>
-			<real>580737983.82158196</real>
+			<real>580771344.76349795</real>
 			<key>timeStoppedRecording</key>
-			<real>580738008.48923099</real>
+			<real>580771345.69888198</real>
 			<key>title</key>
 			<string>Build SwiftBoy</string>
 			<key>uniqueIdentifier</key>
-			<string>8359D977-2755-4991-BAEE-D61849FA1C26</string>
+			<string>00B5B908-196A-4214-8F63-BB5B7E80AAA1</string>
 		</dict>
-		<key>A3A4622A-CC2E-4993-9C7A-62AF04980BBE</key>
+		<key>00EAD3BD-EA0F-44CD-886F-49A331966E75</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -47,7 +47,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>A3A4622A-CC2E-4993-9C7A-62AF04980BBE.xcactivitylog</string>
+			<string>00EAD3BD-EA0F-44CD-886F-49A331966E75.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -62,13 +62,3629 @@
 			<key>signature</key>
 			<string>Build SwiftBoy</string>
 			<key>timeStartedRecording</key>
-			<real>580738108.85245395</real>
+			<real>580768962.63326204</real>
 			<key>timeStoppedRecording</key>
-			<real>580738110.75974202</real>
+			<real>580768965.71393895</real>
 			<key>title</key>
 			<string>Build SwiftBoy</string>
 			<key>uniqueIdentifier</key>
-			<string>A3A4622A-CC2E-4993-9C7A-62AF04980BBE</string>
+			<string>00EAD3BD-EA0F-44CD-886F-49A331966E75</string>
+		</dict>
+		<key>01A2F459-D514-4214-B02E-D8B0FEBAE55A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>01A2F459-D514-4214-B02E-D8B0FEBAE55A.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771208.85602403</real>
+			<key>timeStoppedRecording</key>
+			<real>580771212.101969</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>01A2F459-D514-4214-B02E-D8B0FEBAE55A</string>
+		</dict>
+		<key>046FA35C-E03C-4D97-AFE5-E95D6359FF43</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>046FA35C-E03C-4D97-AFE5-E95D6359FF43.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767985.01282406</real>
+			<key>timeStoppedRecording</key>
+			<real>580767988.25989902</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>046FA35C-E03C-4D97-AFE5-E95D6359FF43</string>
+		</dict>
+		<key>079671D3-3E88-4740-BB0C-4B02312BDA74</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>079671D3-3E88-4740-BB0C-4B02312BDA74.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765315.60146296</real>
+			<key>timeStoppedRecording</key>
+			<real>580765318.81891596</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>079671D3-3E88-4740-BB0C-4B02312BDA74</string>
+		</dict>
+		<key>0AC654E6-7C0C-4C52-AFC6-17BBF700BF98</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0AC654E6-7C0C-4C52-AFC6-17BBF700BF98.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771331.70036304</real>
+			<key>timeStoppedRecording</key>
+			<real>580771334.79496205</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>0AC654E6-7C0C-4C52-AFC6-17BBF700BF98</string>
+		</dict>
+		<key>0ACA4773-77C9-42EF-8617-4510BFC9D562</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0ACA4773-77C9-42EF-8617-4510BFC9D562.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767429.97536504</real>
+			<key>timeStoppedRecording</key>
+			<real>580767433.14785898</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>0ACA4773-77C9-42EF-8617-4510BFC9D562</string>
+		</dict>
+		<key>0CF57E12-724A-479C-BF44-EE1D14AEB912</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0CF57E12-724A-479C-BF44-EE1D14AEB912.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762638.83736002</real>
+			<key>timeStoppedRecording</key>
+			<real>580762643.78771996</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>0CF57E12-724A-479C-BF44-EE1D14AEB912</string>
+		</dict>
+		<key>0D60A07D-5AC6-4FF1-9D03-C72219A8775D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0D60A07D-5AC6-4FF1-9D03-C72219A8775D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765278.53982401</real>
+			<key>timeStoppedRecording</key>
+			<real>580765285.63299596</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>0D60A07D-5AC6-4FF1-9D03-C72219A8775D</string>
+		</dict>
+		<key>0E6ED8F3-5C87-465A-87C8-7CC798052D6D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0E6ED8F3-5C87-465A-87C8-7CC798052D6D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580760252.89518702</real>
+			<key>timeStoppedRecording</key>
+			<real>580760254.23031497</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>0E6ED8F3-5C87-465A-87C8-7CC798052D6D</string>
+		</dict>
+		<key>13DAEC8C-51C2-488F-846C-306047D7A416</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>13DAEC8C-51C2-488F-846C-306047D7A416.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766211.16433406</real>
+			<key>timeStoppedRecording</key>
+			<real>580766219.23607802</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>13DAEC8C-51C2-488F-846C-306047D7A416</string>
+		</dict>
+		<key>147986BA-FC1A-4E67-A813-B636ACC5C9F9</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>147986BA-FC1A-4E67-A813-B636ACC5C9F9.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766786.43566203</real>
+			<key>timeStoppedRecording</key>
+			<real>580766786.51950395</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>147986BA-FC1A-4E67-A813-B636ACC5C9F9</string>
+		</dict>
+		<key>15B08E43-EA95-476F-8493-6BCD7D0EB526</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>15B08E43-EA95-476F-8493-6BCD7D0EB526.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762840.58699703</real>
+			<key>timeStoppedRecording</key>
+			<real>580762843.54803097</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>15B08E43-EA95-476F-8493-6BCD7D0EB526</string>
+		</dict>
+		<key>182311EF-0DCD-4949-A0C6-CAFC611ADC53</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>182311EF-0DCD-4949-A0C6-CAFC611ADC53.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762274.96371198</real>
+			<key>timeStoppedRecording</key>
+			<real>580762278.21317196</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>182311EF-0DCD-4949-A0C6-CAFC611ADC53</string>
+		</dict>
+		<key>18CC956A-55F8-45E5-B5AA-E86FB24BB974</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>18CC956A-55F8-45E5-B5AA-E86FB24BB974.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580770757.34422803</real>
+			<key>timeStoppedRecording</key>
+			<real>580770760.65497398</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>18CC956A-55F8-45E5-B5AA-E86FB24BB974</string>
+		</dict>
+		<key>1B966295-E53C-4D5C-91E5-57156B6ADDAC</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1B966295-E53C-4D5C-91E5-57156B6ADDAC.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580768490.26813698</real>
+			<key>timeStoppedRecording</key>
+			<real>580768493.48022997</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>1B966295-E53C-4D5C-91E5-57156B6ADDAC</string>
+		</dict>
+		<key>1C3C3E0A-6CDE-4E5F-B478-6F5653B4E041</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1C3C3E0A-6CDE-4E5F-B478-6F5653B4E041.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765788.20025504</real>
+			<key>timeStoppedRecording</key>
+			<real>580765791.30090904</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>1C3C3E0A-6CDE-4E5F-B478-6F5653B4E041</string>
+		</dict>
+		<key>1EB8CB39-D7C7-4822-86C6-BE29A86CCEA3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1EB8CB39-D7C7-4822-86C6-BE29A86CCEA3.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765831.25939703</real>
+			<key>timeStoppedRecording</key>
+			<real>580765834.81555903</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>1EB8CB39-D7C7-4822-86C6-BE29A86CCEA3</string>
+		</dict>
+		<key>23A3DF04-55B8-4CE4-BEE9-7B0CDAEF2B23</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>23A3DF04-55B8-4CE4-BEE9-7B0CDAEF2B23.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580768706.89817905</real>
+			<key>timeStoppedRecording</key>
+			<real>580768710.51930904</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>23A3DF04-55B8-4CE4-BEE9-7B0CDAEF2B23</string>
+		</dict>
+		<key>24D298DC-1A0E-43B2-BC10-5F068DA3F767</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>24D298DC-1A0E-43B2-BC10-5F068DA3F767.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580768774.41884303</real>
+			<key>timeStoppedRecording</key>
+			<real>580768777.60244596</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>24D298DC-1A0E-43B2-BC10-5F068DA3F767</string>
+		</dict>
+		<key>2B1F9473-AA79-4199-971B-80A651559E6E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2B1F9473-AA79-4199-971B-80A651559E6E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766721.61669302</real>
+			<key>timeStoppedRecording</key>
+			<real>580766728.00817704</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>2B1F9473-AA79-4199-971B-80A651559E6E</string>
+		</dict>
+		<key>2C6531B6-06FC-455F-9007-B47927F8E73E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2C6531B6-06FC-455F-9007-B47927F8E73E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771550.14360702</real>
+			<key>timeStoppedRecording</key>
+			<real>580771557.498209</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>2C6531B6-06FC-455F-9007-B47927F8E73E</string>
+		</dict>
+		<key>2D57CCC4-2F62-4C6D-B5DB-046CC251232B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2D57CCC4-2F62-4C6D-B5DB-046CC251232B.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580768924.42398906</real>
+			<key>timeStoppedRecording</key>
+			<real>580768928.87952697</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>2D57CCC4-2F62-4C6D-B5DB-046CC251232B</string>
+		</dict>
+		<key>2D96E9B7-C6F0-4A78-B693-0E685DF2B527</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2D96E9B7-C6F0-4A78-B693-0E685DF2B527.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767913.06069303</real>
+			<key>timeStoppedRecording</key>
+			<real>580767913.16348398</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>2D96E9B7-C6F0-4A78-B693-0E685DF2B527</string>
+		</dict>
+		<key>3133F5A7-09C4-49E7-B710-7621989621CC</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3133F5A7-09C4-49E7-B710-7621989621CC.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767419.94268703</real>
+			<key>timeStoppedRecording</key>
+			<real>580767420.73609102</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>3133F5A7-09C4-49E7-B710-7621989621CC</string>
+		</dict>
+		<key>32944EC9-708E-482E-AFBB-30902C7A6DD9</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>32944EC9-708E-482E-AFBB-30902C7A6DD9.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580765752.35953701</real>
+			<key>timeStoppedRecording</key>
+			<real>580765753.20419204</real>
+			<key>title</key>
+			<string>Build CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>32944EC9-708E-482E-AFBB-30902C7A6DD9</string>
+		</dict>
+		<key>355D6076-B733-4F91-89B8-8686F1B5EB97</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>355D6076-B733-4F91-89B8-8686F1B5EB97.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580770659.265095</real>
+			<key>timeStoppedRecording</key>
+			<real>580770663.30313003</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>355D6076-B733-4F91-89B8-8686F1B5EB97</string>
+		</dict>
+		<key>3858C4B5-6A2A-4B73-8B50-9D01F7C909A5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3858C4B5-6A2A-4B73-8B50-9D01F7C909A5.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767471.58441997</real>
+			<key>timeStoppedRecording</key>
+			<real>580767474.48216605</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>3858C4B5-6A2A-4B73-8B50-9D01F7C909A5</string>
+		</dict>
+		<key>3B3A6F22-CD43-40DB-97A7-EC56069CCF12</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3B3A6F22-CD43-40DB-97A7-EC56069CCF12.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771420.10701895</real>
+			<key>timeStoppedRecording</key>
+			<real>580771423.30067897</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>3B3A6F22-CD43-40DB-97A7-EC56069CCF12</string>
+		</dict>
+		<key>3C5E5E7D-8A55-4497-9AA9-EA9C830B7190</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3C5E5E7D-8A55-4497-9AA9-EA9C830B7190.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580760629.49677002</real>
+			<key>timeStoppedRecording</key>
+			<real>580760633.084355</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>3C5E5E7D-8A55-4497-9AA9-EA9C830B7190</string>
+		</dict>
+		<key>415D2041-25BF-4FA5-BAA8-98E28CE88D23</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>415D2041-25BF-4FA5-BAA8-98E28CE88D23.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580761158.97365797</real>
+			<key>timeStoppedRecording</key>
+			<real>580761162.78002</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>415D2041-25BF-4FA5-BAA8-98E28CE88D23</string>
+		</dict>
+		<key>420C9D2C-16C6-4ED9-92E1-ACD540CE2AFB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>420C9D2C-16C6-4ED9-92E1-ACD540CE2AFB.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580770740.25205505</real>
+			<key>timeStoppedRecording</key>
+			<real>580770740.51397204</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>420C9D2C-16C6-4ED9-92E1-ACD540CE2AFB</string>
+		</dict>
+		<key>42D190C0-7BD8-4BA4-93E1-AAA8DE382ACB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>42D190C0-7BD8-4BA4-93E1-AAA8DE382ACB.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580757542.07657397</real>
+			<key>timeStoppedRecording</key>
+			<real>580757542.15274405</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>42D190C0-7BD8-4BA4-93E1-AAA8DE382ACB</string>
+		</dict>
+		<key>42FEE780-1BB8-46A7-974F-174E8C08036E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>42FEE780-1BB8-46A7-974F-174E8C08036E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766364.64176297</real>
+			<key>timeStoppedRecording</key>
+			<real>580766368.457003</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>42FEE780-1BB8-46A7-974F-174E8C08036E</string>
+		</dict>
+		<key>4363C306-BFC1-4F13-89F9-B575C8781B0D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4363C306-BFC1-4F13-89F9-B575C8781B0D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766988.95184696</real>
+			<key>timeStoppedRecording</key>
+			<real>580766989.02694905</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>4363C306-BFC1-4F13-89F9-B575C8781B0D</string>
+		</dict>
+		<key>4444A076-1AEC-4313-860E-6B971FC3C25E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4444A076-1AEC-4313-860E-6B971FC3C25E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762334.56569302</real>
+			<key>timeStoppedRecording</key>
+			<real>580762338.05350101</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>4444A076-1AEC-4313-860E-6B971FC3C25E</string>
+		</dict>
+		<key>4514CC62-78DB-4202-9C9C-9DE3377A905A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4514CC62-78DB-4202-9C9C-9DE3377A905A.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767962.99912906</real>
+			<key>timeStoppedRecording</key>
+			<real>580767967.10028005</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>4514CC62-78DB-4202-9C9C-9DE3377A905A</string>
+		</dict>
+		<key>452384D0-7163-4FA3-A850-1605CF2B9678</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>452384D0-7163-4FA3-A850-1605CF2B9678.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580770525.07441795</real>
+			<key>timeStoppedRecording</key>
+			<real>580770528.26213396</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>452384D0-7163-4FA3-A850-1605CF2B9678</string>
+		</dict>
+		<key>4CF3D8F7-49BD-44F9-82CB-100A32E8C6D5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4CF3D8F7-49BD-44F9-82CB-100A32E8C6D5.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765858.37035096</real>
+			<key>timeStoppedRecording</key>
+			<real>580765861.57172406</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>4CF3D8F7-49BD-44F9-82CB-100A32E8C6D5</string>
+		</dict>
+		<key>4D0D6737-85F2-44B1-AB8F-C56090C03D68</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4D0D6737-85F2-44B1-AB8F-C56090C03D68.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762762.34458399</real>
+			<key>timeStoppedRecording</key>
+			<real>580762765.08377695</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>4D0D6737-85F2-44B1-AB8F-C56090C03D68</string>
+		</dict>
+		<key>4E75C48E-8C95-41CD-91ED-973E8AFCD007</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4E75C48E-8C95-41CD-91ED-973E8AFCD007.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771225.67980301</real>
+			<key>timeStoppedRecording</key>
+			<real>580771228.69148898</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>4E75C48E-8C95-41CD-91ED-973E8AFCD007</string>
+		</dict>
+		<key>509FD87D-6462-4F0E-A108-B9148747C53E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>509FD87D-6462-4F0E-A108-B9148747C53E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765774.27087998</real>
+			<key>timeStoppedRecording</key>
+			<real>580765775.40649903</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>509FD87D-6462-4F0E-A108-B9148747C53E</string>
+		</dict>
+		<key>5155C463-73B4-4FF9-9BC6-E569FBED4D17</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5155C463-73B4-4FF9-9BC6-E569FBED4D17.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766125.93832099</real>
+			<key>timeStoppedRecording</key>
+			<real>580766128.71247804</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>5155C463-73B4-4FF9-9BC6-E569FBED4D17</string>
+		</dict>
+		<key>52B63F21-E96C-4E7C-97CD-E5FD568AFE10</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>52B63F21-E96C-4E7C-97CD-E5FD568AFE10.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580769271.66325104</real>
+			<key>timeStoppedRecording</key>
+			<real>580769275.91575599</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>52B63F21-E96C-4E7C-97CD-E5FD568AFE10</string>
+		</dict>
+		<key>52BDEEAB-E06A-4B7E-8797-359DF1B9F707</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>52BDEEAB-E06A-4B7E-8797-359DF1B9F707.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767770.95755398</real>
+			<key>timeStoppedRecording</key>
+			<real>580767774.01129103</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>52BDEEAB-E06A-4B7E-8797-359DF1B9F707</string>
+		</dict>
+		<key>5C69F33D-88FE-4C97-850A-4C425DBEEE4C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5C69F33D-88FE-4C97-850A-4C425DBEEE4C.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762176.77815497</real>
+			<key>timeStoppedRecording</key>
+			<real>580762183.04951501</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>5C69F33D-88FE-4C97-850A-4C425DBEEE4C</string>
+		</dict>
+		<key>5D5AA6ED-F7EC-48C8-B16B-D3EF80E8D4EA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5D5AA6ED-F7EC-48C8-B16B-D3EF80E8D4EA.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580761860.01747501</real>
+			<key>timeStoppedRecording</key>
+			<real>580761860.07885599</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>5D5AA6ED-F7EC-48C8-B16B-D3EF80E8D4EA</string>
+		</dict>
+		<key>657832C3-1764-424A-BA9D-22E46C693323</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>657832C3-1764-424A-BA9D-22E46C693323.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771425.97930205</real>
+			<key>timeStoppedRecording</key>
+			<real>580771429.18523502</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>657832C3-1764-424A-BA9D-22E46C693323</string>
+		</dict>
+		<key>6661C0FD-72F9-42AF-B4DA-75E1B7285357</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>6661C0FD-72F9-42AF-B4DA-75E1B7285357.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765884.60261595</real>
+			<key>timeStoppedRecording</key>
+			<real>580765888.23871803</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>6661C0FD-72F9-42AF-B4DA-75E1B7285357</string>
+		</dict>
+		<key>68F9742E-22D2-41B2-A67C-FB14FD620445</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>68F9742E-22D2-41B2-A67C-FB14FD620445.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580757884.47493994</real>
+			<key>timeStoppedRecording</key>
+			<real>580757890.93354201</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>68F9742E-22D2-41B2-A67C-FB14FD620445</string>
+		</dict>
+		<key>695A1769-6C88-46B6-AAC9-FDA52D25A216</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>695A1769-6C88-46B6-AAC9-FDA52D25A216.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580770587.726946</real>
+			<key>timeStoppedRecording</key>
+			<real>580770590.91106904</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>695A1769-6C88-46B6-AAC9-FDA52D25A216</string>
+		</dict>
+		<key>6BED4628-2429-40A9-BB87-BC1A50767EDA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>6BED4628-2429-40A9-BB87-BC1A50767EDA.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762224.04315901</real>
+			<key>timeStoppedRecording</key>
+			<real>580762224.09881103</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>6BED4628-2429-40A9-BB87-BC1A50767EDA</string>
+		</dict>
+		<key>6F467EDD-DFC4-4E7A-BF80-18AF360EFA64</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>6F467EDD-DFC4-4E7A-BF80-18AF360EFA64.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765645.16486597</real>
+			<key>timeStoppedRecording</key>
+			<real>580765648.79073</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>6F467EDD-DFC4-4E7A-BF80-18AF360EFA64</string>
+		</dict>
+		<key>725F12D3-E2F8-4B0E-AED6-43541E55C982</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>725F12D3-E2F8-4B0E-AED6-43541E55C982.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580765663.977988</real>
+			<key>timeStoppedRecording</key>
+			<real>580765665.02099502</real>
+			<key>title</key>
+			<string>Build CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>725F12D3-E2F8-4B0E-AED6-43541E55C982</string>
+		</dict>
+		<key>73F24A25-672C-4935-AD7A-159D1B6907EA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>73F24A25-672C-4935-AD7A-159D1B6907EA.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580769334.27991998</real>
+			<key>timeStoppedRecording</key>
+			<real>580769337.71030295</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>73F24A25-672C-4935-AD7A-159D1B6907EA</string>
+		</dict>
+		<key>7B192C5C-75AD-45A9-A139-BAE50519294F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7B192C5C-75AD-45A9-A139-BAE50519294F.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762410.60852802</real>
+			<key>timeStoppedRecording</key>
+			<real>580762415.46615005</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>7B192C5C-75AD-45A9-A139-BAE50519294F</string>
+		</dict>
+		<key>7D63D64B-7730-4FFC-BF70-C8C12CF18BC2</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7D63D64B-7730-4FFC-BF70-C8C12CF18BC2.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767009.90787601</real>
+			<key>timeStoppedRecording</key>
+			<real>580767012.80313802</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>7D63D64B-7730-4FFC-BF70-C8C12CF18BC2</string>
+		</dict>
+		<key>83495EC1-8BD8-4CD7-AC3C-09A5D13EF648</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>83495EC1-8BD8-4CD7-AC3C-09A5D13EF648.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580761405.07698405</real>
+			<key>timeStoppedRecording</key>
+			<real>580761405.91938198</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>83495EC1-8BD8-4CD7-AC3C-09A5D13EF648</string>
+		</dict>
+		<key>891CE754-8592-4498-93D0-79C57C4AC398</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>891CE754-8592-4498-93D0-79C57C4AC398.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580760192.15830398</real>
+			<key>timeStoppedRecording</key>
+			<real>580760192.73928595</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>891CE754-8592-4498-93D0-79C57C4AC398</string>
+		</dict>
+		<key>892D9C09-8A66-455C-9184-0F44F792F299</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>892D9C09-8A66-455C-9184-0F44F792F299.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767620.51662004</real>
+			<key>timeStoppedRecording</key>
+			<real>580767623.75643897</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>892D9C09-8A66-455C-9184-0F44F792F299</string>
+		</dict>
+		<key>8C69936C-080D-4D26-B377-EA156BA8FD61</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8C69936C-080D-4D26-B377-EA156BA8FD61.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762789.77719903</real>
+			<key>timeStoppedRecording</key>
+			<real>580762792.97238004</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>8C69936C-080D-4D26-B377-EA156BA8FD61</string>
+		</dict>
+		<key>8CF51968-01C9-4C0F-90A8-59536087A215</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8CF51968-01C9-4C0F-90A8-59536087A215.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580770411.91502202</real>
+			<key>timeStoppedRecording</key>
+			<real>580770417.85416901</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>8CF51968-01C9-4C0F-90A8-59536087A215</string>
+		</dict>
+		<key>8D16F066-C075-43EA-BE2C-B3BE96A821A4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8D16F066-C075-43EA-BE2C-B3BE96A821A4.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765012.89289701</real>
+			<key>timeStoppedRecording</key>
+			<real>580765015.91253495</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>8D16F066-C075-43EA-BE2C-B3BE96A821A4</string>
+		</dict>
+		<key>93AACD6C-E670-402B-906E-57FCDFAE959F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>93AACD6C-E670-402B-906E-57FCDFAE959F.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767642.12379396</real>
+			<key>timeStoppedRecording</key>
+			<real>580767645.63695598</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>93AACD6C-E670-402B-906E-57FCDFAE959F</string>
+		</dict>
+		<key>9485E5F6-8CE7-4F96-B5F3-340F1A0C811F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9485E5F6-8CE7-4F96-B5F3-340F1A0C811F.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CodeGen</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build CodeGen</string>
+			<key>timeStartedRecording</key>
+			<real>580765650.95395005</real>
+			<key>timeStoppedRecording</key>
+			<real>580765652.53294098</real>
+			<key>title</key>
+			<string>Build CodeGen</string>
+			<key>uniqueIdentifier</key>
+			<string>9485E5F6-8CE7-4F96-B5F3-340F1A0C811F</string>
+		</dict>
+		<key>95AEB614-6250-49BA-8417-FB634F030466</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>95AEB614-6250-49BA-8417-FB634F030466.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580760604.63245296</real>
+			<key>timeStoppedRecording</key>
+			<real>580760605.30732405</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>95AEB614-6250-49BA-8417-FB634F030466</string>
+		</dict>
+		<key>983DC375-FB79-4009-9DAE-EBD5B975B0D5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>983DC375-FB79-4009-9DAE-EBD5B975B0D5.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580758009.19611204</real>
+			<key>timeStoppedRecording</key>
+			<real>580758012.08957303</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>983DC375-FB79-4009-9DAE-EBD5B975B0D5</string>
+		</dict>
+		<key>9AA54CFD-7FC9-4BE0-BFD4-BE1B70C9284B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9AA54CFD-7FC9-4BE0-BFD4-BE1B70C9284B.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771410.22683895</real>
+			<key>timeStoppedRecording</key>
+			<real>580771411.632671</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>9AA54CFD-7FC9-4BE0-BFD4-BE1B70C9284B</string>
+		</dict>
+		<key>9D8F3147-62A5-4654-8483-81AD53FE55F1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9D8F3147-62A5-4654-8483-81AD53FE55F1.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765977.33424902</real>
+			<key>timeStoppedRecording</key>
+			<real>580765980.49069703</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>9D8F3147-62A5-4654-8483-81AD53FE55F1</string>
+		</dict>
+		<key>9EB0B8F4-108E-43F4-B8A9-D4A2CE42F212</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9EB0B8F4-108E-43F4-B8A9-D4A2CE42F212.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767670.43135095</real>
+			<key>timeStoppedRecording</key>
+			<real>580767673.46687901</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>9EB0B8F4-108E-43F4-B8A9-D4A2CE42F212</string>
+		</dict>
+		<key>9FE87AB5-D11C-499D-8030-922A7B9006B0</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9FE87AB5-D11C-499D-8030-922A7B9006B0.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766756.01104999</real>
+			<key>timeStoppedRecording</key>
+			<real>580766759.78783</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>9FE87AB5-D11C-499D-8030-922A7B9006B0</string>
+		</dict>
+		<key>A21C4975-4BA8-4CDF-9FCA-FF7D234E3EE0</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A21C4975-4BA8-4CDF-9FCA-FF7D234E3EE0.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765255.65156305</real>
+			<key>timeStoppedRecording</key>
+			<real>580765256.63379002</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>A21C4975-4BA8-4CDF-9FCA-FF7D234E3EE0</string>
+		</dict>
+		<key>A8FB6AF5-888F-4EEE-BD70-7F0BF1A6F93D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A8FB6AF5-888F-4EEE-BD70-7F0BF1A6F93D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762828.85744905</real>
+			<key>timeStoppedRecording</key>
+			<real>580762831.68673301</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>A8FB6AF5-888F-4EEE-BD70-7F0BF1A6F93D</string>
+		</dict>
+		<key>A9032CB8-1FF7-4149-A33C-5C10E555E836</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A9032CB8-1FF7-4149-A33C-5C10E555E836.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580761437.72660398</real>
+			<key>timeStoppedRecording</key>
+			<real>580761439.34190297</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>A9032CB8-1FF7-4149-A33C-5C10E555E836</string>
+		</dict>
+		<key>A9CF8D3A-110F-46D1-BAF1-347F0056CC9F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A9CF8D3A-110F-46D1-BAF1-347F0056CC9F.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580757460.63538504</real>
+			<key>timeStoppedRecording</key>
+			<real>580757465.92094505</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>A9CF8D3A-110F-46D1-BAF1-347F0056CC9F</string>
+		</dict>
+		<key>AA4B82C5-29D2-4BCB-8086-BBB112DC51EE</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>AA4B82C5-29D2-4BCB-8086-BBB112DC51EE.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767362.27693605</real>
+			<key>timeStoppedRecording</key>
+			<real>580767363.70825899</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>AA4B82C5-29D2-4BCB-8086-BBB112DC51EE</string>
+		</dict>
+		<key>ABFD27EE-AABB-4E4E-AAA7-553EEA7EF772</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>ABFD27EE-AABB-4E4E-AAA7-553EEA7EF772.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580769382.70399404</real>
+			<key>timeStoppedRecording</key>
+			<real>580769385.96670103</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>ABFD27EE-AABB-4E4E-AAA7-553EEA7EF772</string>
+		</dict>
+		<key>B07C354A-4278-44A6-B322-CFBE701772BE</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B07C354A-4278-44A6-B322-CFBE701772BE.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580757493.51135099</real>
+			<key>timeStoppedRecording</key>
+			<real>580757495.72648597</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>B07C354A-4278-44A6-B322-CFBE701772BE</string>
+		</dict>
+		<key>B0E7DFC4-3F00-4FAE-933B-F618FFD2A3BB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B0E7DFC4-3F00-4FAE-933B-F618FFD2A3BB.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771397.78198898</real>
+			<key>timeStoppedRecording</key>
+			<real>580771398.69331706</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>B0E7DFC4-3F00-4FAE-933B-F618FFD2A3BB</string>
+		</dict>
+		<key>B6BD1E24-732A-4960-9BE7-7D08E2BABF1D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B6BD1E24-732A-4960-9BE7-7D08E2BABF1D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766244.10040605</real>
+			<key>timeStoppedRecording</key>
+			<real>580766247.51986003</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>B6BD1E24-732A-4960-9BE7-7D08E2BABF1D</string>
+		</dict>
+		<key>B95728AE-E557-4541-AA3B-B24D39B3C49A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B95728AE-E557-4541-AA3B-B24D39B3C49A.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767821.57721698</real>
+			<key>timeStoppedRecording</key>
+			<real>580767824.65619898</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>B95728AE-E557-4541-AA3B-B24D39B3C49A</string>
+		</dict>
+		<key>BFD8645F-4D36-4B91-8A0A-8D288EDBA8AD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>BFD8645F-4D36-4B91-8A0A-8D288EDBA8AD.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580758127.44119298</real>
+			<key>timeStoppedRecording</key>
+			<real>580758130.34586096</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>BFD8645F-4D36-4B91-8A0A-8D288EDBA8AD</string>
+		</dict>
+		<key>C335CDE5-F96B-4300-B41C-0F2A05CBB349</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C335CDE5-F96B-4300-B41C-0F2A05CBB349.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580769677.49433506</real>
+			<key>timeStoppedRecording</key>
+			<real>580769680.58280098</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>C335CDE5-F96B-4300-B41C-0F2A05CBB349</string>
+		</dict>
+		<key>C3A8B60B-D39E-4B7C-979C-0CE1C018869A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C3A8B60B-D39E-4B7C-979C-0CE1C018869A.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771461.70453298</real>
+			<key>timeStoppedRecording</key>
+			<real>580771463.91093194</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>C3A8B60B-D39E-4B7C-979C-0CE1C018869A</string>
+		</dict>
+		<key>C78284BB-4C5A-44CB-9110-A842E3959D71</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C78284BB-4C5A-44CB-9110-A842E3959D71.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765909.83559406</real>
+			<key>timeStoppedRecording</key>
+			<real>580765912.94284999</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>C78284BB-4C5A-44CB-9110-A842E3959D71</string>
+		</dict>
+		<key>CDE7EF46-E981-4714-BDB8-E45F973C13A1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>CDE7EF46-E981-4714-BDB8-E45F973C13A1.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765931.47602403</real>
+			<key>timeStoppedRecording</key>
+			<real>580765934.419011</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>CDE7EF46-E981-4714-BDB8-E45F973C13A1</string>
+		</dict>
+		<key>CFF184A9-BD6F-4B19-B384-1577B25D3472</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>CFF184A9-BD6F-4B19-B384-1577B25D3472.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580768830.41326404</real>
+			<key>timeStoppedRecording</key>
+			<real>580768833.56450403</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>CFF184A9-BD6F-4B19-B384-1577B25D3472</string>
+		</dict>
+		<key>D2015D7D-1783-4189-9C85-70B82F99BFC4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D2015D7D-1783-4189-9C85-70B82F99BFC4.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580757507.90323699</real>
+			<key>timeStoppedRecording</key>
+			<real>580757510.76212096</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>D2015D7D-1783-4189-9C85-70B82F99BFC4</string>
+		</dict>
+		<key>D26F12AB-BB5C-47F5-92C6-451A5B9DE051</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D26F12AB-BB5C-47F5-92C6-451A5B9DE051.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580770800.98171794</real>
+			<key>timeStoppedRecording</key>
+			<real>580770804.78220904</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>D26F12AB-BB5C-47F5-92C6-451A5B9DE051</string>
+		</dict>
+		<key>D2D85707-8AD2-4428-BD9B-6521B66C3837</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D2D85707-8AD2-4428-BD9B-6521B66C3837.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771306.40266001</real>
+			<key>timeStoppedRecording</key>
+			<real>580771309.55030596</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>D2D85707-8AD2-4428-BD9B-6521B66C3837</string>
+		</dict>
+		<key>D4204C64-6B07-44D1-A57A-0E446FB02EFF</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D4204C64-6B07-44D1-A57A-0E446FB02EFF.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766771.53934598</real>
+			<key>timeStoppedRecording</key>
+			<real>580766774.08932698</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>D4204C64-6B07-44D1-A57A-0E446FB02EFF</string>
+		</dict>
+		<key>D588E263-8B56-4FC8-ACE5-BDCFD48C05DD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D588E263-8B56-4FC8-ACE5-BDCFD48C05DD.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766978.90721905</real>
+			<key>timeStoppedRecording</key>
+			<real>580766982.05310798</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>D588E263-8B56-4FC8-ACE5-BDCFD48C05DD</string>
+		</dict>
+		<key>D7482FC2-1E7A-4BE7-A783-36EE42FCCA92</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D7482FC2-1E7A-4BE7-A783-36EE42FCCA92.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580767745.12805998</real>
+			<key>timeStoppedRecording</key>
+			<real>580767748.54145002</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>D7482FC2-1E7A-4BE7-A783-36EE42FCCA92</string>
+		</dict>
+		<key>D7DC2227-19E6-46FF-A4A6-AC2D7F9296ED</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D7DC2227-19E6-46FF-A4A6-AC2D7F9296ED.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580757974.08334601</real>
+			<key>timeStoppedRecording</key>
+			<real>580757977.17972195</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>D7DC2227-19E6-46FF-A4A6-AC2D7F9296ED</string>
+		</dict>
+		<key>D99FB977-379F-49A8-AB69-A40BFAC73D50</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D99FB977-379F-49A8-AB69-A40BFAC73D50.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580761424.45408702</real>
+			<key>timeStoppedRecording</key>
+			<real>580761425.71521604</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>D99FB977-379F-49A8-AB69-A40BFAC73D50</string>
+		</dict>
+		<key>DDD90BDD-E7C3-4EBD-8AB7-53C51C50256C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DDD90BDD-E7C3-4EBD-8AB7-53C51C50256C.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580758215.14916897</real>
+			<key>timeStoppedRecording</key>
+			<real>580758217.96082795</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>DDD90BDD-E7C3-4EBD-8AB7-53C51C50256C</string>
+		</dict>
+		<key>DF25BE68-B28B-4BE0-AEC5-412A8FA2BA1B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DF25BE68-B28B-4BE0-AEC5-412A8FA2BA1B.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762569.42715704</real>
+			<key>timeStoppedRecording</key>
+			<real>580762573.67780304</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>DF25BE68-B28B-4BE0-AEC5-412A8FA2BA1B</string>
+		</dict>
+		<key>DF527FED-5671-48E2-ADB0-59BB8A572FE6</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DF527FED-5671-48E2-ADB0-59BB8A572FE6.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771142.43091905</real>
+			<key>timeStoppedRecording</key>
+			<real>580771145.49789798</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>DF527FED-5671-48E2-ADB0-59BB8A572FE6</string>
+		</dict>
+		<key>E062816D-67D8-4D25-8BEA-B50728487A63</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E062816D-67D8-4D25-8BEA-B50728487A63.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580759308.50262904</real>
+			<key>timeStoppedRecording</key>
+			<real>580759315.48120403</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>E062816D-67D8-4D25-8BEA-B50728487A63</string>
+		</dict>
+		<key>E29E9EA1-A726-47BB-A3A0-2A48418127A8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E29E9EA1-A726-47BB-A3A0-2A48418127A8.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580758039.13714898</real>
+			<key>timeStoppedRecording</key>
+			<real>580758042.09737098</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>E29E9EA1-A726-47BB-A3A0-2A48418127A8</string>
+		</dict>
+		<key>E5A30F01-9864-4056-B6A4-EFEED1BDE41D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E5A30F01-9864-4056-B6A4-EFEED1BDE41D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580766668.22647798</real>
+			<key>timeStoppedRecording</key>
+			<real>580766675.94226396</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>E5A30F01-9864-4056-B6A4-EFEED1BDE41D</string>
+		</dict>
+		<key>E699AE30-AAE1-4DD3-A505-42467B7D5892</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E699AE30-AAE1-4DD3-A505-42467B7D5892.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580771124.41383004</real>
+			<key>timeStoppedRecording</key>
+			<real>580771127.77840805</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>E699AE30-AAE1-4DD3-A505-42467B7D5892</string>
+		</dict>
+		<key>ED49BBE3-3B00-4E4C-90AA-2021FAEE5E41</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>ED49BBE3-3B00-4E4C-90AA-2021FAEE5E41.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580757636.62938404</real>
+			<key>timeStoppedRecording</key>
+			<real>580757639.50956595</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>ED49BBE3-3B00-4E4C-90AA-2021FAEE5E41</string>
+		</dict>
+		<key>EE0F8912-83A3-49BC-BC1F-2938BA6CB1C1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EE0F8912-83A3-49BC-BC1F-2938BA6CB1C1.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765792.74494302</real>
+			<key>timeStoppedRecording</key>
+			<real>580765792.82563806</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>EE0F8912-83A3-49BC-BC1F-2938BA6CB1C1</string>
+		</dict>
+		<key>F4B44EA1-F824-4B1D-A4CA-906F95129E2A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F4B44EA1-F824-4B1D-A4CA-906F95129E2A.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580761830.67262399</real>
+			<key>timeStoppedRecording</key>
+			<real>580761835.924191</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>F4B44EA1-F824-4B1D-A4CA-906F95129E2A</string>
+		</dict>
+		<key>F511AAA3-1302-4E76-B019-2EDBD97E8C05</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F511AAA3-1302-4E76-B019-2EDBD97E8C05.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580768025.233724</real>
+			<key>timeStoppedRecording</key>
+			<real>580768026.33036995</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>F511AAA3-1302-4E76-B019-2EDBD97E8C05</string>
+		</dict>
+		<key>F644DA1A-F682-463D-A9AD-351F4F5A9F6C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F644DA1A-F682-463D-A9AD-351F4F5A9F6C.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580761151.40068495</real>
+			<key>timeStoppedRecording</key>
+			<real>580761158.88882804</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>F644DA1A-F682-463D-A9AD-351F4F5A9F6C</string>
+		</dict>
+		<key>F7322B73-EB1F-4F3D-9CE4-F623FA51C7A0</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F7322B73-EB1F-4F3D-9CE4-F623FA51C7A0.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580765352.04488897</real>
+			<key>timeStoppedRecording</key>
+			<real>580765354.95588696</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>F7322B73-EB1F-4F3D-9CE4-F623FA51C7A0</string>
+		</dict>
+		<key>F742C2A5-3CEA-4318-8B1E-E82B44B7529E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F742C2A5-3CEA-4318-8B1E-E82B44B7529E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580764963.37886405</real>
+			<key>timeStoppedRecording</key>
+			<real>580764968.738078</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>F742C2A5-3CEA-4318-8B1E-E82B44B7529E</string>
+		</dict>
+		<key>F9DB135E-2984-444F-B4FD-2627C82EDB3D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F9DB135E-2984-444F-B4FD-2627C82EDB3D.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580762735.90417194</real>
+			<key>timeStoppedRecording</key>
+			<real>580762738.74586403</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>F9DB135E-2984-444F-B4FD-2627C82EDB3D</string>
+		</dict>
+		<key>FAA0344E-A9E3-4F89-B479-1C90DE8F787E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FAA0344E-A9E3-4F89-B479-1C90DE8F787E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580769605.84925604</real>
+			<key>timeStoppedRecording</key>
+			<real>580769610.20154905</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>FAA0344E-A9E3-4F89-B479-1C90DE8F787E</string>
+		</dict>
+		<key>FB5C44C3-CBC7-4695-82E5-E43CB7EE2EB1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FB5C44C3-CBC7-4695-82E5-E43CB7EE2EB1.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580770872.14309394</real>
+			<key>timeStoppedRecording</key>
+			<real>580770875.76872003</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>FB5C44C3-CBC7-4695-82E5-E43CB7EE2EB1</string>
+		</dict>
+		<key>FF30BDCB-02E4-41F0-98AA-08D784E6B1B6</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FF30BDCB-02E4-41F0-98AA-08D784E6B1B6.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580761467.72502506</real>
+			<key>timeStoppedRecording</key>
+			<real>580761469.43100703</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>FF30BDCB-02E4-41F0-98AA-08D784E6B1B6</string>
+		</dict>
+		<key>FF63B48E-FA5E-4E10-B0B8-0E122A702020</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FF63B48E-FA5E-4E10-B0B8-0E122A702020.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580760203.45274699</real>
+			<key>timeStoppedRecording</key>
+			<real>580760205.112957</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>FF63B48E-FA5E-4E10-B0B8-0E122A702020</string>
+		</dict>
+		<key>FFEF26DD-9320-4B06-8F7F-55316D11CFE2</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FFEF26DD-9320-4B06-8F7F-55316D11CFE2.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>SwiftBoy project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>SwiftBoy</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build SwiftBoy</string>
+			<key>timeStartedRecording</key>
+			<real>580768451.11843896</real>
+			<key>timeStoppedRecording</key>
+			<real>580768456.09236002</real>
+			<key>title</key>
+			<string>Build SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>FFEF26DD-9320-4B06-8F7F-55316D11CFE2</string>
 		</dict>
 	</dict>
 </dict>

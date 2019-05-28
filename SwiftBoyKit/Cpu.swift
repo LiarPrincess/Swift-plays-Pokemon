@@ -1,4 +1,4 @@
-public class Cpu {
+public class Cpu: Codable {
 
   /// Program counter: PC.
   /// A 16-bit register that holds the address data of the program to be executed next.
@@ -11,21 +11,24 @@ public class Cpu {
   public var memory: Memory
   public var registers: Registers
 
-  internal weak var delegate: CpuDelegate?
+  public weak var delegate: CpuDelegate? {
+    didSet { self.registers.delegate = self.delegate }
+  }
 
   public init(memory: Memory? = nil, delegate: CpuDelegate? = nil) {
-    self.registers = Registers()
+    self.registers = Registers(delegate: delegate)
     self.memory = memory ?? Memory()
     self.delegate = delegate
   }
 
-  public func run(cycles: UInt) {
-    let limitByCycles = true
-    let maxCycle =  limitByCycles ?    11 : 99_999
-    let maxPc    = !limitByCycles ? 0x00c : 0xffff
+  public var currentCycle: UInt = 0
 
-    var cycle = 0
-    while cycle < maxCycle && self.pc < maxPc {
+  public func run(maxCycles: UInt? = nil, lastPC: UInt16? = nil) {
+    let maxCycles = maxCycles ?? UInt.max
+    let lastPC  = lastPC ?? UInt16.max
+
+    var brakepoint = false
+    while currentCycle <= maxCycles && self.pc != lastPC {
       let oldPc = self.pc
 
       let opcodeIndex = self.memory.read(self.pc)
@@ -37,12 +40,23 @@ public class Cpu {
       self.execute(opcode)
       self.delegate?.cpuDidExecute(self, opcode: opcode)
 
+      // ------------
+      brakepoint = brakepoint || self.currentCycle == 4083 // self.pc == 0x003d
+      if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
+        let x = 5
+      }
+
+      if self.pc == 0x003E && self.registers.zeroFlag {
+        print("a: \(self.registers.a.hex), zero: \(self.registers.zeroFlag), cycle: \(self.currentCycle)")
+      }
+      // ------------
+
       // if instruction has set new PC then skip update
       if self.pc == oldPc {
         self.pc += opcode.length
       }
 
-      cycle += 1
+      self.currentCycle += 1
     }
   }
 
@@ -88,5 +102,14 @@ public class Cpu {
 
   internal func enableInterrupts() {
     // TODO: Implement interrupts
+  }
+
+  // MARK: - Codable
+
+  public enum CodingKeys: CodingKey {
+    case pc
+    case sp
+    case memory
+    case registers
   }
 }

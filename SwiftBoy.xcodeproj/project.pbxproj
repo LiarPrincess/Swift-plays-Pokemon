@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		908D6E08229DC71A00523C18 /* SaveLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E07229DC71A00523C18 /* SaveLoad.swift */; };
+		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
 		90A17B46229D59830027133B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B45229D59830027133B /* ViewController.swift */; };
 		90A17B48229D59840027133B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A17B47229D59840027133B /* Assets.xcassets */; };
@@ -23,7 +25,6 @@
 		90A17B94229D59D50027133B /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B85229D59D50027133B /* Memory.swift */; };
 		90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */; };
 		90A17B96229D59D50027133B /* CpuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B87229D59D50027133B /* CpuDelegate.swift */; };
-		90A17B97229D59D50027133B /* Cpu+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B88229D59D50027133B /* Cpu+Debug.swift */; };
 		90A17B98229D59D50027133B /* Cpu+ExecuteUnprefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */; };
 		90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */; };
 		90A17B9A229D59D50027133B /* MemoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8B229D59D50027133B /* MemoryDelegate.swift */; };
@@ -45,7 +46,7 @@
 		90A17BB9229D59FC0027133B /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB3229D59FC0027133B /* Opcode.swift */; };
 		90A17BBA229D59FC0027133B /* PrintExecuteUnprefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB4229D59FC0027133B /* PrintExecuteUnprefixed.swift */; };
 		90A17BBB229D59FC0027133B /* PrintExecuteCBPrefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB6229D59FC0027133B /* PrintExecuteCBPrefixed.swift */; };
-		90A17BBD229D5ABE0027133B /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BBC229D5ABE0027133B /* Debug.swift */; };
+		90A65ADB229D6BAD00C604B3 /* RegistersDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A65ADA229D6BAD00C604B3 /* RegistersDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		908D6E07229DC71A00523C18 /* SaveLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoad.swift; sourceTree = "<group>"; };
+		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* SwiftBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A17B43229D59830027133B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90A17B45229D59830027133B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +120,6 @@
 		90A17B85229D59D50027133B /* Memory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBPrefixedOpcodes.swift; sourceTree = "<group>"; };
 		90A17B87229D59D50027133B /* CpuDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuDelegate.swift; sourceTree = "<group>"; };
-		90A17B88229D59D50027133B /* Cpu+Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+Debug.swift"; sourceTree = "<group>"; };
 		90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+ExecuteUnprefixed.swift"; sourceTree = "<group>"; };
 		90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+ExecutePrefixed.swift"; sourceTree = "<group>"; };
 		90A17B8B229D59D50027133B /* MemoryDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryDelegate.swift; sourceTree = "<group>"; };
@@ -140,7 +142,7 @@
 		90A17BB4229D59FC0027133B /* PrintExecuteUnprefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintExecuteUnprefixed.swift; sourceTree = "<group>"; };
 		90A17BB5229D59FC0027133B /* opcodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = opcodes.json; sourceTree = "<group>"; };
 		90A17BB6229D59FC0027133B /* PrintExecuteCBPrefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintExecuteCBPrefixed.swift; sourceTree = "<group>"; };
-		90A17BBC229D5ABE0027133B /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		90A65ADA229D6BAD00C604B3 /* RegistersDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistersDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,7 +206,7 @@
 			children = (
 				90A17B43229D59830027133B /* AppDelegate.swift */,
 				90A17B45229D59830027133B /* ViewController.swift */,
-				90A17BBC229D5ABE0027133B /* Debug.swift */,
+				908D6E07229DC71A00523C18 /* SaveLoad.swift */,
 				90A17B47229D59840027133B /* Assets.xcassets */,
 				90A17B49229D59840027133B /* Main.storyboard */,
 				90A17B4C229D59840027133B /* Info.plist */,
@@ -217,21 +219,22 @@
 			isa = PBXGroup;
 			children = (
 				90A17BBE229D5B710027133B /* Tests */,
-				90A17B8D229D59D50027133B /* Array+subscript.swift */,
-				90A17B83229D59D50027133B /* bootrom.swift */,
-				90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */,
+				90A17B82229D59D50027133B /* Registers.swift */,
+				90A65ADA229D6BAD00C604B3 /* RegistersDelegate.swift */,
 				90A17B8E229D59D50027133B /* Cpu.swift */,
-				90A17B88229D59D50027133B /* Cpu+Debug.swift */,
-				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
-				90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */,
 				90A17B81229D59D40027133B /* Cpu+Instructions.swift */,
+				90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */,
+				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
 				90A17B87229D59D50027133B /* CpuDelegate.swift */,
+				90A17B8F229D59D50027133B /* Opcode.swift */,
+				90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */,
+				90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */,
+				90A17B83229D59D50027133B /* bootrom.swift */,
 				90A17B85229D59D50027133B /* Memory.swift */,
 				90A17B8B229D59D50027133B /* MemoryDelegate.swift */,
-				90A17B8F229D59D50027133B /* Opcode.swift */,
-				90A17B82229D59D50027133B /* Registers.swift */,
+				90A17B8D229D59D50027133B /* Array+subscript.swift */,
 				90A17B84229D59D50027133B /* UInt+radixFormat.swift */,
-				90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */,
+				908D6E0B229DDECD00523C18 /* String+pad.swift */,
 				90A17B5A229D59A20027133B /* SwiftBoyKit.h */,
 				90A17B5B229D59A20027133B /* Info.plist */,
 			);
@@ -263,15 +266,15 @@
 		90A17BBE229D5B710027133B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				90A17BA5229D59EE0027133B /* CpuArithmeticTests.swift */,
-				90A17BA3229D59EE0027133B /* CpuBitTests.swift */,
-				90A17BA0229D59EE0027133B /* CpuCallTests.swift */,
-				90A17BA4229D59EE0027133B /* CpuJumpTests.swift */,
 				90A17BA6229D59EE0027133B /* CpuLdTests.swift */,
+				90A17BA5229D59EE0027133B /* CpuArithmeticTests.swift */,
 				90A17BA2229D59EE0027133B /* CpuLogicTests.swift */,
-				90A17BA7229D59EE0027133B /* CpuOtherTests.swift */,
+				90A17BA3229D59EE0027133B /* CpuBitTests.swift */,
 				90A17B9F229D59EE0027133B /* CpuRotateTests.swift */,
 				90A17BA1229D59EE0027133B /* CpuShiftTests.swift */,
+				90A17BA4229D59EE0027133B /* CpuJumpTests.swift */,
+				90A17BA0229D59EE0027133B /* CpuCallTests.swift */,
+				90A17BA7229D59EE0027133B /* CpuOtherTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				90A17B3D229D59830027133B /* Frameworks */,
 				90A17B3E229D59830027133B /* Resources */,
 				90A17B72229D59A30027133B /* Embed Frameworks */,
+				908D6E0A229DDE7B00523C18 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -436,14 +440,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		908D6E0A229DDE7B00523C18 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		90A17B3C229D59830027133B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				90A17B46229D59830027133B /* ViewController.swift in Sources */,
-				90A17BBD229D5ABE0027133B /* Debug.swift in Sources */,
 				90A17B44229D59830027133B /* AppDelegate.swift in Sources */,
+				908D6E08229DC71A00523C18 /* SaveLoad.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,13 +481,14 @@
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
+				908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */,
+				90A65ADB229D6BAD00C604B3 /* RegistersDelegate.swift in Sources */,
 				90A17B98229D59D50027133B /* Cpu+ExecuteUnprefixed.swift in Sources */,
 				90A17B9B229D59D50027133B /* UnprefixedOpcodes.swift in Sources */,
 				90A17B90229D59D50027133B /* Cpu+Instructions.swift in Sources */,
 				90A17B9A229D59D50027133B /* MemoryDelegate.swift in Sources */,
 				90A17B9D229D59D50027133B /* Cpu.swift in Sources */,
 				90A17B9C229D59D50027133B /* Array+subscript.swift in Sources */,
-				90A17B97229D59D50027133B /* Cpu+Debug.swift in Sources */,
 				90A17B94229D59D50027133B /* Memory.swift in Sources */,
 				90A17B92229D59D50027133B /* bootrom.swift in Sources */,
 				90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */,
