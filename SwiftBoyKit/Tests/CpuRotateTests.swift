@@ -1,5 +1,6 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+// swiftlint:disable type_body_length
 
 import XCTest
 @testable import SwiftBoyKit
@@ -10,7 +11,7 @@ class CpuRotateTests: XCTestCase {
 
   /// When A = 85h and CY = 0,
   /// RLCA ; A←0Ah,CY←1,Z←0,H←0,N←0
-  func test_rlca() {
+  func disabled_test_rlca() {
     let cpu = Cpu()
     cpu.registers.a = 0x85
     cpu.registers.carryFlag = false

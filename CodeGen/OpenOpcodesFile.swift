@@ -1,6 +1,7 @@
-import Foundation
-
+// swiftlint:disable force_unwrapping
 // swiftlint:disable force_cast
+
+import Foundation
 
 struct Opcodes {
   let unprefixed: [Opcode]
@@ -31,7 +32,7 @@ private func parseOpcodes(_ data: [String:[String:Any]]) -> [Opcode] {
     .sorted(by: addr)
 }
 
-func toOp(_ value: [String:Any]) -> Opcode {
+private func toOp(_ value: [String:Any]) -> Opcode {
   return Opcode(
     mnemonic: value["mnemonic"] as! String,
     length: value["length"] as! Int,
@@ -43,7 +44,7 @@ func toOp(_ value: [String:Any]) -> Opcode {
   )
 }
 
-func addr(_ lhs: Opcode, _ rhs: Opcode) -> Bool {
+private func addr(_ lhs: Opcode, _ rhs: Opcode) -> Bool {
   return lhs.addr.count != rhs.addr.count ?
     lhs.addr.count < rhs.addr.count :
     lhs.addr < rhs.addr

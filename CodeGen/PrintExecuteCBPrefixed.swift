@@ -1,3 +1,5 @@
+// swiftlint:disable force_unwrapping
+
 func printExecutePrefix(_ opcodes: Opcodes) {
   printHeader()
   printCpuExtension(opcodes.cbprefixed)
@@ -19,7 +21,7 @@ private func printHeader() {
 private func printCpuExtension(_ opcodes: [Opcode]) {
   print("extension Cpu {")
   print("  internal func execute(_ opcode: CBPrefixedOpcode) {")
-  print("    switch opcode.type {")
+  print("    switch opcode.value {")
 
   for op in opcodes {
     let call = getOpcodeCall(op)

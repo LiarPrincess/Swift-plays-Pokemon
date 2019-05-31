@@ -26,13 +26,25 @@ private func printHeader() {
   print("// swiftlint:disable type_body_length")
   print("// swiftlint:disable trailing_newline")
   print("// swiftlint:disable trailing_comma")
+  print("// swiftlint:disable collection_alignment")
   print("")
 }
 
 private func printOpcodeTypeEnum(_ className: String, _ opcodes: [Opcode]) {
-  print("public enum \(className)Type {")
-  for op in opcodes {
-    print("/** \(op.addr) */ case \(op.enumCase)")
+  print("/// See official \"Gameboy programming manual\" for details of each operation")
+  print("public enum \(className)Value: UInt8, RawRepresentable {")
+
+  // Some adresses are missing
+  let opcodeByAddress = byAddress(opcodes)
+
+  for i in 0...0xff {
+    let address = "0x" + String(i, radix: 16, uppercase: false)
+
+    if let opcode = opcodeByAddress[address] {
+      print("  case \(opcode.enumCase) = \(opcode.addr)")
+    } else {
+      print("  /* \(address) - this opcode does not exists */")
+    }
   }
   print("}")
   print("")
@@ -50,26 +62,13 @@ private func printOpcodes(_ className: String, _ variable: String, _ opcodes: [O
     let addressString = "/* \(address) */"
 
     guard let opcode = opcodeByAddress[address] else {
-      print("\(addressString) nil,")
+      print("\(addressString) nil, /* this opcode does not exists */")
       continue
     }
 
-    var addrColumn = "addr: \"\(opcode.addr)\", "
-    addrColumn = pad(addrColumn, toLength: 17)
-
-    var typeColumn = "type: .\(opcode.enumCase), "
-    typeColumn = pad(typeColumn, toLength: 26)
-
-    var debugColumn = "debug: \"\(opcode.debug)\", "
-    debugColumn = pad(debugColumn, toLength: 25)
-
-    var column3 = ""
-    column3 += "length: \(opcode.length), "
-    column3 += "cycles: \(opcode.cycles)"
-
-    //let mnemonic = opcode.mnemonic.lowercased()
-    //if mnemonic.contains("pop") || mnemonic.contains("push")
-    print("\(addressString) \(className)(\(addrColumn)\(typeColumn)\(debugColumn)\(column3)),")
+    let valueColumn = pad("value: .\(opcode.enumCase), ", toLength: 22)
+    let lengthColumn = "length: \(opcode.length), cycles: \(opcode.cycles)"
+    print("\(addressString) \(className)(\(valueColumn)\(lengthColumn)),")
   }
 
   print("]")

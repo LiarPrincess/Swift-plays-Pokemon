@@ -25,22 +25,6 @@ struct Opcode {
   /// Operand 2
   let operand2: String?
 
-  var debug: String {
-    var result = self.mnemonic.lowercased()
-
-    if let operand1 = self.operand1 {
-      result += "_"
-      result += getOperandValue(operand1)
-    }
-
-    if let operand2 = self.operand2 {
-      result += "_"
-      result += getOperandValue(operand2)
-    }
-
-    return result
-  }
-
   var enumCase: String {
     var result = self.mnemonic.lowercased()
     if result == "prefix" { return result }

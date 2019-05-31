@@ -41,9 +41,9 @@ public class Cpu: Codable {
       self.delegate?.cpuDidExecute(self, opcode: opcode)
 
       // ------------
-      brakepoint = brakepoint || self.currentCycle == 4083 // self.pc == 0x003d
+      brakepoint = brakepoint || self.currentCycle == 4_083 // self.pc == 0x003d
       if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
-        let x = 5
+        _ = 5
       }
 
       if self.pc == 0x003E && self.registers.zeroFlag {
@@ -53,7 +53,7 @@ public class Cpu: Codable {
 
       // if instruction has set new PC then skip update
       if self.pc == oldPc {
-        self.pc += opcode.length
+        self.pc += UInt16(opcode.length)
       }
 
       self.currentCycle += 1

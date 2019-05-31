@@ -256,8 +256,8 @@
 				90A17BB3229D59FC0027133B /* Opcode.swift */,
 				90A17BB1229D59FC0027133B /* OpenOpcodesFile.swift */,
 				90A17BB2229D59FC0027133B /* PrintOpcodes.swift */,
-				90A17BB6229D59FC0027133B /* PrintExecuteCBPrefixed.swift */,
 				90A17BB4229D59FC0027133B /* PrintExecuteUnprefixed.swift */,
+				90A17BB6229D59FC0027133B /* PrintExecuteCBPrefixed.swift */,
 				90A17B7C229D59B10027133B /* main.swift */,
 			);
 			path = CodeGen;

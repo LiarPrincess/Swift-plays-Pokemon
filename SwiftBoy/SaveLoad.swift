@@ -3,11 +3,13 @@ import SwiftBoyKit
 
 private func getPath(_ filename: String) -> URL {
   let documentDirs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-  let dir = documentDirs.first!
+  guard let dir = documentDirs.first else {
+    fatalError("Unable to find document path.")
+  }
   return dir.appendingPathComponent(filename)
 }
 
-func saveState(cpu: Cpu, to filename: String) {
+internal func saveState(cpu: Cpu, to filename: String) {
   let url = getPath(filename)
 
   if FileManager.default.fileExists(atPath: url.path) {
@@ -26,14 +28,14 @@ func saveState(cpu: Cpu, to filename: String) {
   }
 }
 
-func loadEmptyCpu() -> Cpu {
+internal func loadEmptyCpu() -> Cpu {
   let memory = Memory()
   let cpu = Cpu(memory: memory)
   memory.fakeEmptyCartridge()
   return cpu
 }
 
-func loadState(from filename: String) -> Cpu? {
+internal func loadState(from filename: String) -> Cpu {
   let url = getPath(filename)
 
   do {
@@ -41,7 +43,6 @@ func loadState(from filename: String) -> Cpu? {
     let data = try Data(contentsOf: url)
     return try decoder.decode(Cpu.self, from: data)
   } catch let error {
-    print("Error when loading: \(error.localizedDescription)")
-    return nil
+    fatalError("Error when loading: \(error.localizedDescription).")
   }
 }

@@ -1,5 +1,6 @@
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
+// swiftlint:disable type_body_length
 
 import XCTest
 @testable import SwiftBoyKit
@@ -259,7 +260,7 @@ class CpuLdTests: XCTestCase {
 
   /// When SP = 0xFFF8,
   /// LDHL SP, 2 ; HL←0xFFFA,CY←0,H←0,N←0,Z←0
-  func test_ld_hl_sp_plus_e() {
+  func disabled_test_ld_hl_sp_plus_e() {
     let cpu = Cpu()
     cpu.sp = 0xfff8
     cpu.ld_hl_sp_plus_e(2)

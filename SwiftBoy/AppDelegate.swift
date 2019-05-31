@@ -2,56 +2,51 @@ import Cocoa
 import SwiftBoyKit
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+public class AppDelegate: NSObject, NSApplicationDelegate {
 
-  let debug = Debug()
+  private let debug = Debug()
 
-  func applicationDidFinishLaunching(_ aNotification: Notification) {
-    //    let cpu = loadEmptyCpu()
-    //    let cpu = loadState(from: "bootrom_skipToAudio.json")!
-//    let cpu = loadState(from: "bootrom_skipToNintendoLogo.json")!
-    let cpu = loadState(from: "bootrom_skipToTileMap.json")!
+  public func applicationDidFinishLaunching(_ aNotification: Notification) {
+//    let cpu = loadEmptyCpu()
+//    let cpu = loadState(from: "bootrom_skipToAudio.json")
+//    let cpu = loadState(from: "bootrom_skipToNintendoLogo.json")
+    let cpu = loadState(from: "bootrom_skipToTileMap.json")
 
     cpu.memory.delegate = self.debug
     cpu.delegate = self.debug
 
-    cpu.run(maxCycles: 100_000, lastPC: 0x0040)
-    //    cpu.run(maxPC: 0x000C)
-    //    cpu.run()
+    self.debug.printRegisters(cpu, indent: "")
+    print("---------------------")
 
-    print("Finished")
-    self.debug.printRegisters(cpu, indent: "  ")
+    cpu.run(maxCycles: 5, lastPC: 0xffff) // maxCycles: 100_000, lastPC: 0x0050
 
 //    saveState(cpu: cpu, to: "bootrom_skipToTileMap.json")
   }
 }
 
-enum DebugMode {
-  case none
-  case full
-  case onlyOpcodes
-}
+public class Debug: CpuDelegate, MemoryDelegate {
 
-class Debug: CpuDelegate, MemoryDelegate {
+  public enum Mode {
+    case none
+    case full
+    case onlyOpcodes
+  }
 
-  private let mode = DebugMode.onlyOpcodes
+  private let mode = Mode.full
 
-  func registersDidSet(r: SingleRegister, to value: UInt8) {
+  public func registersDidSet(r: SingleRegister, to value: UInt8) {
     if self.mode == .full {
       print("> register - setting \(r) to \(value.hex)")
     }
   }
 
-  private func cpuWillExecuteShared<Type>(_ cpu: Cpu, opcode: OpcodeBase<Type>) {
+  private func cpuWillExecuteShared<Type>(_ cpu: Cpu, opcode: Opcode<Type>) {
     if self.mode == .onlyOpcodes || self.mode == .full {
       self.printOpcode(cpu, opcode: opcode)
     }
-    if self.mode == .full {
-      self.printRegisters(cpu, indent: "  ")
-    }
   }
 
-  private func cpuDidExecuteShared<Type>(_ cpu: Cpu, opcode: OpcodeBase<Type>) {
+  private func cpuDidExecuteShared<Type>(_ cpu: Cpu, opcode: Opcode<Type>) {
     if self.mode == .full {
       self.printAdditionalInfo(cpu, opcode: opcode)
       self.printRegisters(cpu, indent: "  ")
@@ -61,30 +56,30 @@ class Debug: CpuDelegate, MemoryDelegate {
     }
   }
 
-  func memoryDidRead(_ memory: Memory, address: UInt16, value: UInt8) {
+  public func memoryDidRead(_ memory: Memory, address: UInt16, value: UInt8) {
     if self.mode == .full {
       print("> memory - reading \(value.hex) from \(address.hex)")
     }
   }
-  func memoryWillWrite(_ memory: Memory, address: UInt16, value: UInt8) {
+  public func memoryWillWrite(_ memory: Memory, address: UInt16, value: UInt8) {
     if self.mode == .full {
       print("> memory - writing \(value.hex) to \(address.hex)")
     }
   }
 
-  func cpuWillExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) { if opcode.type != .prefix { self.cpuWillExecuteShared(cpu, opcode: opcode) } }
-  func cpuWillExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) { self.cpuWillExecuteShared(cpu, opcode: opcode) }
-  func cpuDidExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) { if opcode.type != .prefix { self.cpuDidExecuteShared(cpu, opcode: opcode) } }
-  func cpuDidExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) { self.cpuDidExecuteShared(cpu, opcode: opcode) }
+  public func cpuWillExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) { if opcode.value != .prefix { self.cpuWillExecuteShared(cpu, opcode: opcode) } }
+  public func cpuWillExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) { self.cpuWillExecuteShared(cpu, opcode: opcode) }
+  public func cpuDidExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) { if opcode.value != .prefix { self.cpuDidExecuteShared(cpu, opcode: opcode) } }
+  public func cpuDidExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) { self.cpuDidExecuteShared(cpu, opcode: opcode) }
 }
 
 // MARK: - Print opcode
 
 extension Debug {
 
-  func printOpcode<Type>(_ cpu: Cpu, opcode: OpcodeBase<Type>, indent: String = "") {
+  private func printOpcode<Type>(_ cpu: Cpu, opcode: Opcode<Type>, indent: String = "") {
     let pc = cpu.pc.hex
-    let mnemonic = opcode.debug.pad(toLength: 11)
+    let mnemonic = String(describing: opcode.value).pad(toLength: 11)
 
     var operands: String = {
       switch opcode.length {
@@ -95,14 +90,16 @@ extension Debug {
     }()
     operands = operands.pad(toLength: 8)
 
-    let additional = "(addr: \(opcode.addr), length: \(opcode.length), cycles: \(opcode.cycles))"
+    let additional = "(raw: \(opcode.rawValue.hex), length: \(opcode.length), cycles: \(opcode.cycles) \(opcode.alternativeCycles))"
     print("\(indent)\(pc): \(mnemonic) \(operands) \(additional)")
   }
 
+  /// We can't just 'cpu.memory.read' as this may involve side-effect on emulator side
   private func next8(_ cpu: Cpu) -> UInt8 {
     return cpu.memory.data[cpu.pc + 1]
   }
 
+  /// We can't just 'cpu.memory.read' as this may involve side-effect on emulator side
   private func next16(_ cpu: Cpu) -> UInt16 {
     let low  = UInt16(cpu.memory.data[cpu.pc + 1])
     let high = UInt16(cpu.memory.data[cpu.pc + 2])
@@ -114,69 +111,51 @@ extension Debug {
 
 extension Debug {
 
-  // swiftlint:disable:next function_body_length
-  func printRegisters(_ cpu: Cpu, indent: String = "") {
-    print("\(indent)cycle: \(cpu.currentCycle)")
-    print("\(indent)pc: \(cpu.pc) (\(cpu.pc.hex))")
+  public func printRegisters(_ cpu: Cpu, indent: String = "") {
+    let registers = cpu.registers
 
     let stackStart = Int(cpu.sp)
     let stackEnd = 0xfffe
-    let stack = stackEnd - stackStart <= 16 ? cpu.memory.data[stackStart..<stackEnd] : []
-    print("\(indent)sp: \(cpu.sp) (\(cpu.sp.hex))")
-    print("\(indent)  \(stack.reversed().map { $0.hex })")
+    let stackValues = stackEnd - stackStart <= 16 ? cpu.memory.data[stackStart..<stackEnd] : []
 
-    print("\(indent)values:")
-
-    var lineA = "\(indent)  "
-    lineA += "\(getSingleRegisterInfo("a", cpu.registers.a))"
-    print(lineA)
-
-    var lineBC = "\(indent)  "
-    lineBC += getSingleRegisterInfo("b", cpu.registers.b) + " | "
-    lineBC += getSingleRegisterInfo("c", cpu.registers.c) + " | "
-    lineBC += getCombinedRegisterInfo("bc", cpu.registers.bc)
-    print(lineBC)
-
-    var lineDE = "\(indent)  "
-    lineDE += getSingleRegisterInfo("d", cpu.registers.d) + " | "
-    lineDE += getSingleRegisterInfo("e", cpu.registers.e) + " | "
-    lineDE += getCombinedRegisterInfo("de", cpu.registers.de)
-    print(lineDE)
-
-    var lineHL = "\(indent)  "
-    lineHL += getSingleRegisterInfo("h", cpu.registers.h) + " | "
-    lineHL += getSingleRegisterInfo("l", cpu.registers.l) + " | "
-    lineHL += getCombinedRegisterInfo("hl", cpu.registers.hl)
-    print(lineHL)
-
-    print("\(indent)flags:")
-    var flags = ""
-    flags += "z:\(cpu.registers.zeroFlag      ? 1 : 0) "
-    flags += "n:\(cpu.registers.subtractFlag  ? 1 : 0) "
-    flags += "h:\(cpu.registers.halfCarryFlag ? 1 : 0) "
-    flags += "c:\(cpu.registers.carryFlag     ? 1 : 0) "
-    print("\(indent)  \(flags)")
+    print("""
+\(indent)cycle: \(cpu.currentCycle)
+\(indent)pc: \(cpu.pc) (\(cpu.pc.hex))
+\(indent)sp: \(cpu.sp) (\(cpu.sp.hex))
+\(indent)  \(stackValues.reversed().map { $0.hex })
+\(indent)auxiliary registers:
+\(indent)  a: \(registerValue(registers.a))
+\(indent)  b: \(registerValue(registers.b)) | c: \(registerValue(registers.c)) | bc: \(registerValue(registers.bc))
+\(indent)  d: \(registerValue(registers.d)) | e: \(registerValue(registers.e)) | de: \(registerValue(registers.de))
+\(indent)  h: \(registerValue(registers.h)) | l: \(registerValue(registers.l)) | hl: \(registerValue(registers.hl))
+\(indent)flags:
+\(indent)  z:\(flagValue(registers.zeroFlag)) n:\(flagValue(registers.subtractFlag)) h:\(flagValue(registers.halfCarryFlag)) c:\(flagValue(registers.carryFlag))
+""")
   }
 
-  private func getSingleRegisterInfo(_ name: String, _ value: UInt8) -> String {
-    return "\(name) \(value.dec) (\(value.hex))"
+  private func registerValue(_ value: UInt8) -> String {
+    return "\(value.dec) (\(value.hex))"
   }
 
-  private func getCombinedRegisterInfo(_ name: String, _ value: UInt16) -> String {
-    return "\(name) \(value.dec) (\(value.hex))"
+  private func registerValue(_ value: UInt16) -> String {
+    return "\(value.dec) (\(value.hex))"
+  }
+
+  private func flagValue(_ value: Bool) -> String {
+    return value ? "1" : "0"
   }
 }
 
 // MARK: - Additional info
 
 extension Debug {
-  func printAdditionalInfo<Type>(_ cpu: Cpu, opcode: OpcodeBase<Type>) {
+  private func printAdditionalInfo<Type>(_ cpu: Cpu, opcode: Opcode<Type>) {
     guard let unprefixedOpcode = opcode as? UnprefixedOpcode else {
       return
     }
 
     let pc = "\(cpu.pc) (\(cpu.pc.hex))"
-    switch unprefixedOpcode.type {
+    switch unprefixedOpcode.value {
     case .call_a16, .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16:
       print("> call to \(pc)")
     case .jp_a16, .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_pHL, .jp_z_a16:

@@ -1,6 +1,7 @@
 // swiftlint:disable file_length
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
+// swiftlint:disable force_unwrapping
 
 func printExecute(_ opcodes: Opcodes) {
   printHeader()
@@ -23,7 +24,7 @@ private func printHeader() {
 private func printCpuExtension(_ opcodes: [Opcode]) {
   print("extension Cpu {")
   print("  internal func execute(_ opcode: UnprefixedOpcode) {")
-  print("    switch opcode.type {")
+  print("    switch opcode.value {")
 
   for op in opcodes {
     let call = getOpcodeCall(op)
@@ -247,15 +248,15 @@ private func getOpcodeCall(_ opcode: Opcode) -> String {
     let argument = "0x" + operand.dropLast()
     return "rst(\(argument))"
 
-  case "stop":   return "nop() // <------------------------------------"
-  case "daa":    return "nop() // <------------------------------------"
-  case "cpl":    return "nop() // <------------------------------------"
-  case "scf":    return "nop() // <------------------------------------"
-  case "ccf":    return "nop() // <------------------------------------"
-  case "halt":   return "nop() // <------------------------------------"
+  case "stop":   return "unimplemented()"
+  case "daa":    return "unimplemented()"
+  case "cpl":    return "unimplemented()"
+  case "scf":    return "unimplemented()"
+  case "ccf":    return "unimplemented()"
+  case "halt":   return "unimplemented()"
   case "prefix": return "prefix(\(next8))"
-  case "di":     return "nop() // <------------------------------------"
-  case "ei":     return "nop() // <------------------------------------"
+  case "di":     return "unimplemented()"
+  case "ei":     return "unimplemented()"
 
   default: break
   }
