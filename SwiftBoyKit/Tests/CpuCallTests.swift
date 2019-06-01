@@ -33,7 +33,7 @@ class CpuCallTests: XCTestCase {
     cpu.registers.zeroFlag = true
     cpu.call_cc_a16(.nz, 0x1234)
 
-    XCTAssertEqual(cpu.pc, 0x8000) // moves AFTER instruction, not now
+    XCTAssertEqual(cpu.pc, 0x8000 + 0x3)
     XCTAssertEqual(cpu.sp, 0xfffe)
   }
 
@@ -80,7 +80,7 @@ class CpuCallTests: XCTestCase {
     cpu.reti()
     // TODO: Interrupt tests (reti)
 
-    XCTAssertEqual(cpu.pc, 0x8000)
+    XCTAssertEqual(cpu.pc, 0x8001)
     XCTAssertEqual(cpu.sp, 0xfffe)
   }
 
@@ -112,7 +112,7 @@ class CpuCallTests: XCTestCase {
     cpu.registers.zeroFlag = true
     cpu.ret_cc(.nz)
 
-    XCTAssertEqual(cpu.pc, 0x9000)
+    XCTAssertEqual(cpu.pc, 0x9000 + 0x1)
     XCTAssertEqual(cpu.sp, 0xfffc)
   }
 
@@ -123,9 +123,9 @@ class CpuCallTests: XCTestCase {
     let cpu = Cpu()
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
-    cpu.rst(0x08)
+    cpu.rst(0x01)
 
-    XCTAssertEqual(cpu.pc, 0x0008)
+    XCTAssertEqual(cpu.pc, 0x0001)
     XCTAssertEqual(cpu.sp, 0xfffc)
     XCTAssertEqual(cpu.memory.read(0xfffd), 0x80)
     XCTAssertEqual(cpu.memory.read(0xfffc), 0x01)

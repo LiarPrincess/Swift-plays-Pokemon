@@ -3,6 +3,13 @@ private let subtractFlagPosition:  UInt16 = 6
 private let halfCarryFlagPosition: UInt16 = 5
 private let carryFlagPosition:     UInt16 = 4
 
+public enum FlagRegister {
+  case zeroFlag
+  case subtractFlag
+  case halfCarryFlag
+  case carryFlag
+}
+
 public enum SingleRegister {
   case a
   case b
@@ -45,16 +52,16 @@ public struct Registers: Codable {
   public var l: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .l, to: self.l) } }
 
   /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
-  public var zeroFlag: Bool = false
+  public var zeroFlag: Bool = false { didSet { self.delegate?.registersDidSet(f: .zeroFlag, to: self.zeroFlag) } }
 
   /// N: Set to 1 following execution of the substruction instruction, regardless of the result.
-  public var subtractFlag: Bool = false
+  public var subtractFlag: Bool = false { didSet { self.delegate?.registersDidSet(f: .subtractFlag, to: self.subtractFlag) } }
 
   /// H: Set to 1 when an operation results in carrying from or borrowing to bit 3.
-  public var halfCarryFlag: Bool = false
+  public var halfCarryFlag: Bool = false { didSet { self.delegate?.registersDidSet(f: .halfCarryFlag, to: self.halfCarryFlag) } }
 
   /// CY: Set to 1 when an operation results in carrying from or borrowing to bit 7.
-  public var carryFlag: Bool = false
+  public var carryFlag: Bool = false { didSet { self.delegate?.registersDidSet(f: .carryFlag, to: self.carryFlag) } }
 
   public weak var delegate: RegistersDelegate?
 
@@ -87,15 +94,6 @@ public struct Registers: Codable {
       self.l = UInt8(newValue & 0xff)
     }
   }
-
-//  private func get16(_ high: UInt8, _ low: UInt8) -> UInt16 {
-//    return (UInt16(high) << 8) | UInt16(low)
-//  }
-//
-//  private func set16(_ high: inout UInt8, _ low: inout UInt8, to value: UInt16) {
-//    high = UInt8((value & 0xff00) >> 8)
-//    low = UInt8(value & 0xff)
-//  }
 
   // MARK: - Addressing
 

@@ -17,6 +17,8 @@ file_length:
 force_cast:
   severity: warning
 
+# This may seem like a lot, but basically I like to write some code
+# and then enable all of the optional rules that do not break the project.
 opt_in_rules:
   - array_init
   - attributes

@@ -8,6 +8,9 @@ public class Cpu: Codable {
   /// A 16-bit register that holds the starting address of the stack area of memory.
   public var sp: UInt16 = 0
 
+  /// Current cycle incremented after each operation (counting from 0 at the start).
+  public var cycle: UInt16 = 0
+
   public var memory: Memory
   public var registers: Registers
 
@@ -41,24 +44,17 @@ public class Cpu: Codable {
       self.delegate?.cpuDidExecute(self, opcode: opcode)
 
       // ------------
-      brakepoint = brakepoint || self.currentCycle == 4_083 // self.pc == 0x003d
+      brakepoint = brakepoint || oldPc == 0x0064
       if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
         _ = 5
       }
-
-      if self.pc == 0x003E && self.registers.zeroFlag {
-        print("a: \(self.registers.a.hex), zero: \(self.registers.zeroFlag), cycle: \(self.currentCycle)")
-      }
       // ------------
-
-      // if instruction has set new PC then skip update
-      if self.pc == oldPc {
-        self.pc += UInt16(opcode.length)
-      }
 
       self.currentCycle += 1
     }
   }
+
+  func reset() { }
 
   // MARK: - Next bytes
 

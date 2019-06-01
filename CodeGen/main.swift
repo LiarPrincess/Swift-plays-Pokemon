@@ -1,3 +1,5 @@
+// swiftlint:disable force_try
+
 import Foundation
 
 let currentFile = URL(fileURLWithPath: #file)
@@ -17,8 +19,13 @@ printPrefixOpcodes(opcodes)
 
 file = frameworkDir.appendingPathComponent("Cpu+ExecuteUnprefixed.swift")
 freopen(file.path, "w", stdout)
-printExecute(opcodes)
+printExecuteExtension(opcodes)
 
 file = frameworkDir.appendingPathComponent("Cpu+ExecutePrefixed.swift")
 freopen(file.path, "w", stdout)
-printExecutePrefix(opcodes)
+printExecutePrefixExtension(opcodes)
+
+//file = frameworkDir.appendingPathComponent("Cpu+Instructions.swift")
+//let instructionsFileContent = try! String(contentsOf: file, encoding: .utf8)
+//freopen(file.path, "w", stdout)
+//modifyInstructions(opcodes, instructionsFileContent)

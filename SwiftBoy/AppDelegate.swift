@@ -18,7 +18,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
     self.debug.printRegisters(cpu, indent: "")
     print("---------------------")
 
-    cpu.run(maxCycles: 5, lastPC: 0xffff) // maxCycles: 100_000, lastPC: 0x0050
+//    cpu.run(maxCycles: 9999, lastPC: 0xffff) // maxCycles: 100_000, lastPC: 0x0050
 
 //    saveState(cpu: cpu, to: "bootrom_skipToTileMap.json")
   }
@@ -33,6 +33,10 @@ public class Debug: CpuDelegate, MemoryDelegate {
   }
 
   private let mode = Mode.full
+
+  public func registersDidSet(f: FlagRegister, to value: Bool) {
+    print("> register - setting \(f) to \(value ? 1 : 0)")
+  }
 
   public func registersDidSet(r: SingleRegister, to value: UInt8) {
     if self.mode == .full {
@@ -114,9 +118,8 @@ extension Debug {
   public func printRegisters(_ cpu: Cpu, indent: String = "") {
     let registers = cpu.registers
 
-    let stackStart = Int(cpu.sp)
-    let stackEnd = 0xfffe
-    let stackValues = stackEnd - stackStart <= 16 ? cpu.memory.data[stackStart..<stackEnd] : []
+    let stackStart = 0xff80, stackEnd = 0xfffe
+    let stackValues = Int(cpu.sp) >= stackStart ? cpu.memory.data[Int(cpu.sp)..<stackEnd] : []
 
     print("""
 \(indent)cycle: \(cpu.currentCycle)
@@ -150,6 +153,10 @@ extension Debug {
 
 extension Debug {
   private func printAdditionalInfo<Type>(_ cpu: Cpu, opcode: Opcode<Type>) {
+    if opcode.length > 1 {
+      print("> opcode - reading additional \(opcode.length - 1) byte(s) for arguments")
+    }
+
     guard let unprefixedOpcode = opcode as? UnprefixedOpcode else {
       return
     }

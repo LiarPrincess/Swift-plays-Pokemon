@@ -3,40 +3,87 @@
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable force_unwrapping
 
-func printExecute(_ opcodes: Opcodes) {
-  printHeader()
-  printCpuExtension(opcodes.unprefixed)
-}
+// MARK: - getEnumCase
 
-private func printHeader() {
-  print("// This file was auto-generated.")
-  print("// DO NOT EDIT!")
-  print("")
+func getEnumCase(_ opcode: Opcode) -> String {
+  var result = opcode.mnemonic.lowercased()
+  if result == "prefix" { return result }
+  if result == "stop"   { return result }
 
-  print("// swiftlint:disable superfluous_disable_command")
-  print("// swiftlint:disable file_length")
-  print("// swiftlint:disable function_body_length")
-  print("// swiftlint:disable cyclomatic_complexity")
-  print("// swiftlint:disable switch_case_alignment")
-  print("")
-}
-
-private func printCpuExtension(_ opcodes: [Opcode]) {
-  print("extension Cpu {")
-  print("  internal func execute(_ opcode: UnprefixedOpcode) {")
-  print("    switch opcode.value {")
-
-  for op in opcodes {
-    let call = getOpcodeCall(op)
-    print("/* \(op.addr) */ case .\(op.enumCase): self.\(call)")
+  if let operand1 = opcode.operand1 {
+    result += "_"
+    result += getOperandValue(operand1)
   }
 
-  print("    }")
-  print("  }")
-  print("}")
+  if let operand2 = opcode.operand2 {
+    result += "_"
+    result += getOperandValue(operand2)
+  }
+
+  return result
 }
 
-private func getOpcodeCall(_ opcode: Opcode) -> String {
+private func getOperandValue(_ value: String) -> String {
+  switch value {
+  case "A": return "a"
+  case "B": return "b"
+  case "C": return "c"
+  case "D": return "d"
+  case "E": return "e"
+  case "H": return "h"
+  case "L": return "l"
+
+  case "AF": return "af"
+  case "BC": return "bc"
+  case "CB": return "cb"
+  case "DE": return "de"
+  case "HL": return "hl"
+
+  case "0": return "0"
+  case "1": return "1"
+  case "2": return "2"
+  case "3": return "3"
+  case "4": return "4"
+  case "5": return "5"
+  case "6": return "6"
+  case "7": return "7"
+
+  case "00H": return "00"
+  case "08H": return "08"
+  case "10H": return "10"
+  case "18H": return "18"
+  case "20H": return "20"
+  case "28H": return "28"
+  case "30H": return "30"
+  case "38H": return "38"
+
+  case "SP":    return "sp"
+  case "SP+r8": return "spR8"
+
+  case "d8":  return "d8"
+  case "d16": return "d16"
+  case "r8":  return "r8"
+  case "a16": return "a16"
+  case "NC":  return "nc"
+  case "NZ":  return "nz"
+  case "Z":   return "z"
+
+  case "(BC)":  return "pBC"
+  case "(C)":   return "pC"
+  case "(DE)":  return "pDE"
+  case "(HL)":  return "pHL"
+  case "(HL+)": return "pHLI"
+  case "(HL-)": return "pHLD"
+  case "(a8)":  return "pA8"
+  case "(a16)": return "pA16"
+
+  default: return "Unknown value: " + value.lowercased()
+  }
+}
+
+// MARK: - getOpcodeCall
+
+func getUnprefixedOpcodeCall(_ opcode: Opcode) -> String {
   let next8 = "self.next8"
   let next16 = "self.next16"
 
@@ -248,15 +295,36 @@ private func getOpcodeCall(_ opcode: Opcode) -> String {
     let argument = "0x" + operand.dropLast()
     return "rst(\(argument))"
 
-  case "stop":   return "unimplemented()"
-  case "daa":    return "unimplemented()"
-  case "cpl":    return "unimplemented()"
-  case "scf":    return "unimplemented()"
-  case "ccf":    return "unimplemented()"
-  case "halt":   return "unimplemented()"
+  case "stop":   return "stop()"
+  case "daa":    return "daa()"
+  case "cpl":    return "cpl()"
+  case "scf":    return "scf()"
+  case "ccf":    return "ccf()"
+  case "halt":   return "halt()"
   case "prefix": return "prefix(\(next8))"
-  case "di":     return "unimplemented()"
-  case "ei":     return "unimplemented()"
+  case "di":     return "di()"
+  case "ei":     return "ei()"
+
+  default: break
+  }
+  return ""
+}
+
+func getCBPrefixedOpcodeCall(_ opcode: Opcode) -> String {
+  let mnemonic = opcode.mnemonic.lowercased()
+  switch mnemonic {
+  case "rlc", "rrc", "rl", "rr", "sla", "sra", "srl", "swap":
+    let operand = opcode.operand1!.lowercased()
+
+    if isRegister(operand) { return "\(mnemonic)_r(.\(operand))" }
+    if ispHL(operand) { return "\(mnemonic)_pHL()" }
+
+  case "bit", "res", "set":
+    let operand1 = opcode.operand1!.lowercased()
+    let operand2 = opcode.operand2!.lowercased()
+
+    if isRegister(operand2) { return "\(mnemonic)_r(\(operand1), .\(operand2))" }
+    if ispHL(operand2) { return "\(mnemonic)_pHL(\(operand1))" }
 
   default: break
   }

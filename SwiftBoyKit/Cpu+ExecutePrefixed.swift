@@ -9,7 +9,7 @@
 
 extension Cpu {
   internal func execute(_ opcode: CBPrefixedOpcode) {
-    switch opcode.type {
+    switch opcode.value {
 /* 0x0 */ case .rlc_b: self.rlc_r(.b)
 /* 0x1 */ case .rlc_c: self.rlc_r(.c)
 /* 0x2 */ case .rlc_d: self.rlc_r(.d)

@@ -17,17 +17,26 @@ extension Cpu {
   internal func ld_r_r(_ dst: SingleRegister, _ src: SingleRegister) {
     let value = self.registers.get(src)
     self.registers.set(dst, to: value)
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Loads 8-bit immediate data n into register r.
   internal func ld_r_d8(_ r: SingleRegister, _ n: UInt8) {
     self.registers.set(r, to: n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Loads the contents of memory (8 bits) specified by register pair HL into register r.
   internal func ld_r_pHL(_ r: SingleRegister) {
     let n = self.memory.read(self.registers.hl)
     self.registers.set(r, to: n)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Stores the contents of register r in memory specified by register pair HL.
@@ -35,24 +44,36 @@ extension Cpu {
     let n = self.registers.get(r)
     let hl = self.registers.hl
     self.memory.write(hl, value: n)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Loads 8-bit immediate data n into memory specified by register pair HL.
   internal func ld_pHL_d8(_ n: UInt8) {
     let hl = self.registers.hl
     self.memory.write(hl, value: n)
+
+    self.pc += 2
+    self.cycle &+= 12
   }
 
   /// Loads the contents specified by the contents of register pair BC into register A.
   internal func ld_a_pBC() {
     let bc = self.registers.bc
     self.registers.a = self.memory.read(bc)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Loads the contents specified by the contents of register pair DE into register A.
   internal func ld_a_pDE() {
     let de = self.registers.de
     self.registers.a = self.memory.read(de)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Loads into register A the contents of the internal RAM, port register,
@@ -60,6 +81,9 @@ extension Cpu {
   internal func ld_a_ffC() {
     let address = UInt16(0xff00) + UInt16(self.registers.c)
     self.registers.a = self.memory.read(address)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Loads the contents of register A in the internal RAM, port register,
@@ -68,6 +92,9 @@ extension Cpu {
     let a = self.registers.a
     let address = UInt16(0xff00) + UInt16(self.registers.c)
     self.memory.write(address, value: a)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Loads into register A the contents of the internal RAM, port register, or mode register
@@ -75,6 +102,9 @@ extension Cpu {
   internal func ld_a_pA8(_ n: UInt8) {
     let addr = 0xff00 | UInt16(n)
     self.registers.a = self.memory.read(addr)
+
+    self.pc += 2
+    self.cycle &+= 12
   }
 
   /// Loads the contents of register A to the internal RAM, port register, or mode register
@@ -82,14 +112,23 @@ extension Cpu {
   internal func ld_pA8_a(_ n: UInt8) {
     let addr = 0xff00 | UInt16(n)
     self.memory.write(addr, value: self.registers.a)
+
+    self.pc += 2
+    self.cycle &+= 12
   }
 
   internal func ld_a_pA16(_ nn: UInt16) {
     self.registers.a = self.memory.read(nn)
+
+    self.pc += 3
+    self.cycle &+= 16
   }
 
   internal func ld_pA16_a(_ nn: UInt16) {
     self.memory.write(nn, value: self.registers.a)
+
+    self.pc += 3
+    self.cycle &+= 16
   }
 
   /// Loads in register A the contents of memory specified by the contents of register pair HL
@@ -100,6 +139,9 @@ extension Cpu {
 
     let (newHL, _) = hl.addingReportingOverflow(1)
     self.registers.hl = newHL
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Loads in register A the contents of memory specified by the contents of register pair HL
@@ -110,6 +152,9 @@ extension Cpu {
 
     let (newHL, _) = hl.subtractingReportingOverflow(1)
     self.registers.hl = newHL
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Stores the contents of register A in the memory specified by register pair BC.
@@ -117,6 +162,9 @@ extension Cpu {
     let a = self.registers.a
     let bc = self.registers.bc
     self.memory.write(bc, value: a)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Stores the contents of register A in the memory specified by register pair DE.
@@ -124,6 +172,9 @@ extension Cpu {
     let a = self.registers.a
     let de = self.registers.de
     self.memory.write(de, value: a)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Stores the contents of register A in the memory specified by register pair HL
@@ -135,6 +186,9 @@ extension Cpu {
 
     let (newHL, _) = hl.addingReportingOverflow(1)
     self.registers.hl = newHL
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Stores the contents of register A in the memory specified by register pair HL
@@ -146,6 +200,9 @@ extension Cpu {
 
     let (newHL, _) = hl.subtractingReportingOverflow(1)
     self.registers.hl = newHL
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   // MARK: - 16-Bit Transfer Instructions
@@ -153,16 +210,25 @@ extension Cpu {
   /// Loads 2 bytes of immediate data to register pair dd.
   internal func ld_rr_d16(_ rr: CombinedRegister, _ nn: UInt16) {
     self.registers.set(rr, to: nn)
+
+    self.pc += 3
+    self.cycle &+= 12
   }
 
   /// Loads 2 bytes of immediate data to register pair dd.
   internal func ld_sp_d16(_ nn: UInt16) {
     self.sp = nn
+
+    self.pc += 3
+    self.cycle &+= 12
   }
 
   /// Loads the contents of register pair HL in stack pointer SP.
   internal func ld_sp_hl() {
     self.sp = self.registers.hl
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Pushes the contents of register pair qq onto the memory stack.
@@ -172,6 +238,9 @@ extension Cpu {
   internal func push(_ rr: CombinedRegister) {
     let nn = self.registers.get(rr)
     self.push16(nn)
+
+    self.pc += 1
+    self.cycle &+= 16
   }
 
   /// Pops contents from the memory stack and into register pair qq.
@@ -181,6 +250,9 @@ extension Cpu {
   internal func pop(_ rr: CombinedRegister) {
     let nn = self.pop16()
     self.registers.set(rr, to: nn)
+
+    self.pc += 1
+    self.cycle &+= 12
   }
 
   /// The 8-bit operand e is added to SP and the result is stored in HL.
@@ -196,6 +268,9 @@ extension Cpu {
     self.registers.carryFlag = value > 0xffff
 
     self.registers.hl = UInt16(value & 0xffff)
+
+    self.pc += 2
+    self.cycle &+= 12
   }
 
   /// Stores the lower byte of SP at address nn specified by the 16-bit
@@ -206,6 +281,9 @@ extension Cpu {
 
     let high = UInt8(self.sp >> 8)
     self.memory.write(nn + 1, value: high)
+
+    self.pc += 3
+    self.cycle &+= 20
   }
 
   // MARK: - 8-Bit Arithmetic and Logical Operation Instructions
@@ -216,18 +294,27 @@ extension Cpu {
   /// and stores the results in register A.
   internal func add_a_r(_ r: SingleRegister) {
     self.add_a(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Adds 8-bit immediate operand n to the contents of register A
   /// and stores the results in register A.
   internal func add_a_d8(_ n: UInt8) {
     self.add_a(n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Adds the contents of memory specified by the contents of register pair HL
   /// to the contents of register A and stores the results in register A
   internal func add_a_pHL() {
     self.add_a(self.memory.read(self.registers.hl))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   private func add_a(_ n: UInt8) {
@@ -246,17 +333,21 @@ extension Cpu {
   /// and stores the results in HL.
   internal func add_hl_r(_ r: CombinedRegister) {
     self.add_hl(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Adds the contents of register pair ss to the contents of register pair HL
   /// and stores the results in HL.
   internal func add_hl_sp() {
     self.add_hl(self.sp)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
-  /// Adds the contents of register pair ss to the contents of register pair HL
-  /// and stores the results in HL.
-  internal func add_hl(_ n: UInt16) {
+  private func add_hl(_ n: UInt16) {
     let hl = self.registers.hl
     let (newValue, overflow) = hl.addingReportingOverflow(n)
 
@@ -280,6 +371,9 @@ extension Cpu {
     self.registers.carryFlag = overflow
 
     self.sp = newValue
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   // MARK: Adc
@@ -288,18 +382,27 @@ extension Cpu {
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
   internal func adc_a_r(_ r: SingleRegister) {
     self.adc_a(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
   internal func adc_a_d8(_ n: UInt8) {
     self.adc_a(n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
   internal func adc_a_pHL() {
     self.adc_a(self.memory.read(self.registers.hl))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   private func adc_a(_ n: UInt8) {
@@ -323,18 +426,27 @@ extension Cpu {
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func sub_a_r(_ r: SingleRegister) {
     self.sub_a(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func sub_a_d8(_ n: UInt8) {
     self.sub_a(n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func sub_a_pHL() {
     self.sub_a(self.memory.read(self.registers.hl))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   private func sub_a(_ n: UInt8) {
@@ -357,21 +469,30 @@ extension Cpu {
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func sbc_a_r(_ r: SingleRegister) {
     self.sbc_a(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func sbc_a_d8(_ n: UInt8) {
     self.sbc_a(n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func sbc_a_pHL() {
     self.sbc_a(self.memory.read(self.registers.hl))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
-  internal func sbc_a(_ n: UInt8) {
+  private func sbc_a(_ n: UInt8) {
     let a = self.registers.a
     let cy: UInt8 = self.registers.carryFlag ? 1 : 0
 
@@ -395,18 +516,27 @@ extension Cpu {
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
   internal func cp_a_r(_ r: SingleRegister) {
     self.cp_a(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
   internal func cp_a_d8(_ n: UInt8) {
     self.cp_a(n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
   internal func cp_a_pHL() {
     self.cp_a(self.memory.read(self.registers.hl))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Basically sub, but without storing result
@@ -435,6 +565,9 @@ extension Cpu {
     // carryFlag - not affected
 
     self.registers.set(r, to: newValue)
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Increments the contents of register pair ss by 1.
@@ -443,6 +576,9 @@ extension Cpu {
     let (newValue, _) = n.addingReportingOverflow(1)
     // flags affected: none
     self.registers.set(r, to: newValue)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Increments by 1 the contents of memory specified by register pair HL.
@@ -458,6 +594,9 @@ extension Cpu {
     // carryFlag - not affected
 
     self.memory.write(hl, value: newValue)
+
+    self.pc += 1
+    self.cycle &+= 12
   }
 
   /// Increments the contents of register pair ss by 1.
@@ -465,6 +604,9 @@ extension Cpu {
     let (newValue, _) = self.sp.addingReportingOverflow(1)
     // flags affected: none
     self.sp = newValue
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   // MARK: Dec
@@ -482,6 +624,9 @@ extension Cpu {
     // carryFlag - not affected
 
     self.registers.set(r, to: newValue)
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Decrements the contents of register pair ss by 1.
@@ -490,6 +635,9 @@ extension Cpu {
     let (newValue, _) = n.subtractingReportingOverflow(1)
     // flags affected: none
     self.registers.set(r, to: newValue)
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   /// Decrements by 1 the contents of memory specified by register pair HL.
@@ -506,6 +654,9 @@ extension Cpu {
     // carryFlag - not affected
 
     self.memory.write(hl, value: newValue)
+
+    self.pc += 1
+    self.cycle &+= 12
   }
 
   /// Decrements the contents of register pair ss by 1.
@@ -513,6 +664,9 @@ extension Cpu {
     let (newValue, _) = self.sp.subtractingReportingOverflow(1)
     // flags affected: none
     self.sp = newValue
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   // MARK: And
@@ -521,18 +675,27 @@ extension Cpu {
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func and_a_r(_ r: SingleRegister) {
     self.and_a(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func and_a_d8(_ n: UInt8) {
     self.and_a(n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func and_a_pHL() {
     self.and_a(self.memory.read(self.registers.hl))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   private func and_a(_ n: UInt8) {
@@ -553,18 +716,27 @@ extension Cpu {
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func or_a_r(_ r: SingleRegister) {
     self.or_a(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func or_a_d8(_ n: UInt8) {
     self.or_a(n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func or_a_pHL() {
     self.or_a(self.memory.read(self.registers.hl))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   private func or_a(_ n: UInt8) {
@@ -585,18 +757,27 @@ extension Cpu {
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func xor_a_r(_ r: SingleRegister) {
     self.xor_a(self.registers.get(r))
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func xor_a_d8(_ n: UInt8) {
     self.xor_a(n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func xor_a_pHL() {
     self.xor_a(self.memory.read(self.registers.hl))
+
+    self.pc += 1
+    self.cycle &+= 8
   }
 
   private func xor_a(_ n: UInt8) {
@@ -630,6 +811,9 @@ extension Cpu {
     self.registers.carryFlag = carry == 0x1
 
     self.registers.a = newValue
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Rotates the contents of register A to the left.
@@ -645,6 +829,9 @@ extension Cpu {
     self.registers.carryFlag = carry == 0x1
 
     self.registers.a = newValue
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   // MARK: Rotate right
@@ -662,6 +849,9 @@ extension Cpu {
     self.registers.carryFlag = carry == 0x1
 
     self.registers.a = newValue
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Rotates the contents of register A to the right.
@@ -677,6 +867,9 @@ extension Cpu {
     self.registers.carryFlag = carry == 0x1
 
     self.registers.a = newValue
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   // MARK: Prefix rotate left
@@ -685,6 +878,9 @@ extension Cpu {
   internal func rlc_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rlc(n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
@@ -692,6 +888,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.rlc(n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func rlc(_ n: UInt8) -> UInt8 {
@@ -710,6 +909,9 @@ extension Cpu {
   internal func rl_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rl(n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
@@ -717,6 +919,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.rl(n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func rl(_ n: UInt8) -> UInt8 {
@@ -737,6 +942,9 @@ extension Cpu {
   internal func rrc_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rrc(n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
@@ -744,6 +952,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.rrc(n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func rrc(_ n: UInt8) -> UInt8 {
@@ -762,6 +973,9 @@ extension Cpu {
   internal func rr_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rr(n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
@@ -769,6 +983,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.rr(n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func rr(_ n: UInt8) -> UInt8 {
@@ -789,6 +1006,9 @@ extension Cpu {
   internal func sla_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.sla(n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Shifts the contents of operand m to the left.
@@ -796,6 +1016,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.sla(n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func sla(_ n: UInt8) -> UInt8 {
@@ -814,6 +1037,9 @@ extension Cpu {
   internal func sra_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.sra(n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Shifts the contents of operand m to the right.
@@ -821,6 +1047,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.sra(n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func sra(_ n: UInt8) -> UInt8 {
@@ -839,6 +1068,9 @@ extension Cpu {
   internal func srl_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.srl(n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Shifts the contents of operand m to the right.
@@ -846,6 +1078,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.srl(n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func srl(_ n: UInt8) -> UInt8 {
@@ -866,6 +1101,9 @@ extension Cpu {
   internal func swap_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.swap(n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Shifts the contents of operand m to the right.
@@ -873,6 +1111,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.swap(n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func swap(_ n: UInt8) -> UInt8 {
@@ -895,6 +1136,9 @@ extension Cpu {
   internal func bit_r(_ b: UInt8, _ r: SingleRegister) {
     let n = self.registers.get(r)
     self.bit(b, n)
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Copies the complement of the contents of the specified bit
@@ -903,6 +1147,9 @@ extension Cpu {
   internal func bit_pHL(_ b: UInt8) {
     let n = self.memory.read(self.registers.hl)
     self.bit(b, n)
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func bit(_ b: UInt8, _ n: UInt8) {
@@ -921,6 +1168,9 @@ extension Cpu {
   internal func set_r(_ b: UInt8, _ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.set(b, n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Sets to 1 the specified bit in the memory contents specified by registers H and L.
@@ -928,6 +1178,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.set(b, n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func set(_ b: UInt8, _ n: UInt8) -> UInt8 {
@@ -940,6 +1193,9 @@ extension Cpu {
   internal func res_r(_ b: UInt8, _ r: SingleRegister) {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.res(b, n))
+
+    self.pc += 2
+    self.cycle &+= 8
   }
 
   /// Resets to 0 the specified bit in the memory contents specified by registers H and L.
@@ -947,6 +1203,9 @@ extension Cpu {
     let hl = self.registers.hl
     let n = self.memory.read(hl)
     self.memory.write(hl, value: self.res(b, n))
+
+    self.pc += 2
+    self.cycle &+= 16
   }
 
   private func res(_ b: UInt8, _ n: UInt8) -> UInt8 {
@@ -961,18 +1220,24 @@ extension Cpu {
   /// nn specifies the address of the subsequently executed instruction.
   internal func jp_nn(_ nn: UInt16) {
     self.pc = nn
+    self.cycle &+= 16
   }
 
   /// Loads operand nn in the PC if condition cc and the flag status match.
   internal func jp_cc_nn(_ condition: JumpCondition, _ nn: UInt16) {
     if self.canJump(condition) {
       self.pc = nn
+      self.cycle &+= 16
+    } else {
+      self.pc += 3
+      self.cycle &+= 12
     }
   }
 
   /// Loads the contents of register pair HL in program counter PC.
   internal func jp_pHL() {
     self.pc = self.registers.hl
+    self.cycle &+= 4
   }
 
   // MARK: JR
@@ -980,23 +1245,26 @@ extension Cpu {
   /// Jumps -127 to +129 steps from the current address.
   internal func jr_e(_ e: UInt8) {
     self.jr(e)
+    self.cycle &+= 12
   }
 
   /// If condition cc and the flag status match, jumps -127 to +129 steps from the current address.
   internal func jr_cc_e(_ condition: JumpCondition, _ e: UInt8) {
     if self.canJump(condition) {
       self.jr(e)
+      self.cycle &+= 12
+    } else {
+      self.pc += 2
+      self.cycle &+= 8
     }
   }
 
   private func jr(_ e: UInt8) {
     let offset = Int8(bitPattern: e)
 
-    // Current address here would be the address for the instruction following JR.
-    let length = UInt16(2)
-    let currentAddress = self.pc + length
-
-    let pc = Int(currentAddress) + Int(offset)
+    // Current address is the address for the instruction after jr
+    let length = Int(2)
+    let pc = Int(self.pc) + length + Int(offset)
     self.pc = UInt16(pc)
   }
 
@@ -1018,6 +1286,7 @@ extension Cpu {
   /// Operand nn is then loaded in the PC.
   internal func call_a16(_ nn: UInt16) {
     self.call(nn)
+    self.cycle &+= 24
   }
 
   /// If condition cc matches the flag, the PC value corresponding to the instruction following the
@@ -1026,6 +1295,10 @@ extension Cpu {
   internal func call_cc_a16(_ condition: JumpCondition, _ nn: UInt16) {
     if self.canJump(condition) {
       self.call(nn)
+      self.cycle &+= 24
+    } else {
+      self.pc += 3
+      self.cycle &+= 12
     }
   }
 
@@ -1042,6 +1315,24 @@ extension Cpu {
   /// Pops from the memory stack the PC value pushed when the
   /// subroutine was called, returning control to the source program.
   internal func ret() {
+    self.retShared()
+    self.cycle &+= 16
+  }
+
+  /// If condition cc and the flag match, control is returned
+  /// to the source program by popping from the memory stack
+  /// the PC value pushed to the stack when the subroutine was called.
+  internal func ret_cc(_ condition: JumpCondition) {
+    if self.canJump(condition) {
+      self.retShared()
+      self.cycle &+= 20
+    } else {
+      self.pc += 1
+      self.cycle &+= 8
+    }
+  }
+
+  private func retShared() {
     self.pc = self.pop16()
   }
 
@@ -1050,15 +1341,9 @@ extension Cpu {
   internal func reti() {
     self.ret()
     self.enableInterrupts()
-  }
 
-  /// If condition cc and the flag match, control is returned
-  /// to the source program by popping from the memory stack
-  /// the PC value pushed to the stack when the subroutine was called.
-  internal func ret_cc(_ condition: JumpCondition) {
-    if canJump(condition) {
-      self.ret()
-    }
+    self.pc += 1
+    self.cycle &+= 16
   }
 
   // MARK: Rst
@@ -1067,11 +1352,12 @@ extension Cpu {
   /// the page 0 memory addresses provided by operand t.
   /// Then next instruction is fetched from the address specified by the new content of PC.
   internal func rst(_ t: UInt8) {
-    let length = UInt16(1) // the same for both 'rst'
+    let length = UInt16(1)
     let returnAddr = self.pc + length
     self.push16(returnAddr)
 
     self.pc = UInt16(t)
+    self.cycle &+= 16
   }
 
   // MARK: - General-Purpose Arithmetic Operations and CPU Control Instructions
@@ -1087,9 +1373,66 @@ extension Cpu {
 
     // there are no jumps, calls etc. in prefix instructions
     self.pc += UInt16(opcode.length)
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
-  internal func unimplemented() {
+  internal func stop() {
     fatalError("Unimplemented!")
+
+    self.pc += 1
+    self.cycle &+= 4
+  }
+
+  internal func daa() {
+    fatalError("Unimplemented!")
+
+    self.pc += 1
+    self.cycle &+= 4
+  }
+
+  internal func cpl() {
+    fatalError("Unimplemented!")
+
+    self.pc += 1
+    self.cycle &+= 4
+  }
+
+  internal func scf() {
+    fatalError("Unimplemented!")
+
+    self.pc += 1
+    self.cycle &+= 4
+  }
+
+  internal func ccf() {
+    fatalError("Unimplemented!")
+
+    self.pc += 1
+    self.cycle &+= 4
+  }
+
+  internal func halt() {
+    fatalError("Unimplemented!")
+
+    self.pc += 1
+    self.cycle &+= 4
+  }
+
+  internal func di() {
+    fatalError("Unimplemented!")
+
+    self.pc += 1
+    self.cycle &+= 4
+  }
+
+  internal func ei() {
+    fatalError("Unimplemented!")
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 }
+
+

@@ -44,9 +44,11 @@
 		90A17BB7229D59FC0027133B /* OpenOpcodesFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB1229D59FC0027133B /* OpenOpcodesFile.swift */; };
 		90A17BB8229D59FC0027133B /* PrintOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB2229D59FC0027133B /* PrintOpcodes.swift */; };
 		90A17BB9229D59FC0027133B /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB3229D59FC0027133B /* Opcode.swift */; };
-		90A17BBA229D59FC0027133B /* PrintExecuteUnprefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB4229D59FC0027133B /* PrintExecuteUnprefixed.swift */; };
-		90A17BBB229D59FC0027133B /* PrintExecuteCBPrefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB6229D59FC0027133B /* PrintExecuteCBPrefixed.swift */; };
 		90A65ADB229D6BAD00C604B3 /* RegistersDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A65ADA229D6BAD00C604B3 /* RegistersDelegate.swift */; };
+		90C2AD3D22A17F3000F5A7AF /* _MemoryRegions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD3C22A17F3000F5A7AF /* _MemoryRegions.swift */; };
+		90C2AD3F22A1DFD500F5A7AF /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD3E22A1DFD500F5A7AF /* Common.swift */; };
+		90C2AD4122A1E47000F5A7AF /* PrintExecute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD4022A1E47000F5A7AF /* PrintExecute.swift */; };
+		90C2AD4322A2699100F5A7AF /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD4222A2699100F5A7AF /* ModifyInstructions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,10 +141,12 @@
 		90A17BB1229D59FC0027133B /* OpenOpcodesFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenOpcodesFile.swift; sourceTree = "<group>"; };
 		90A17BB2229D59FC0027133B /* PrintOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintOpcodes.swift; sourceTree = "<group>"; };
 		90A17BB3229D59FC0027133B /* Opcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
-		90A17BB4229D59FC0027133B /* PrintExecuteUnprefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintExecuteUnprefixed.swift; sourceTree = "<group>"; };
 		90A17BB5229D59FC0027133B /* opcodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = opcodes.json; sourceTree = "<group>"; };
-		90A17BB6229D59FC0027133B /* PrintExecuteCBPrefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintExecuteCBPrefixed.swift; sourceTree = "<group>"; };
 		90A65ADA229D6BAD00C604B3 /* RegistersDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistersDelegate.swift; sourceTree = "<group>"; };
+		90C2AD3C22A17F3000F5A7AF /* _MemoryRegions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _MemoryRegions.swift; sourceTree = "<group>"; };
+		90C2AD3E22A1DFD500F5A7AF /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		90C2AD4022A1E47000F5A7AF /* PrintExecute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintExecute.swift; sourceTree = "<group>"; };
+		90C2AD4222A2699100F5A7AF /* ModifyInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyInstructions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +234,7 @@
 				90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */,
 				90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */,
 				90A17B83229D59D50027133B /* bootrom.swift */,
+				90C2AD3C22A17F3000F5A7AF /* _MemoryRegions.swift */,
 				90A17B85229D59D50027133B /* Memory.swift */,
 				90A17B8B229D59D50027133B /* MemoryDelegate.swift */,
 				90A17B8D229D59D50027133B /* Array+subscript.swift */,
@@ -254,10 +259,11 @@
 			children = (
 				90A17BB5229D59FC0027133B /* opcodes.json */,
 				90A17BB3229D59FC0027133B /* Opcode.swift */,
+				90C2AD3E22A1DFD500F5A7AF /* Common.swift */,
 				90A17BB1229D59FC0027133B /* OpenOpcodesFile.swift */,
 				90A17BB2229D59FC0027133B /* PrintOpcodes.swift */,
-				90A17BB4229D59FC0027133B /* PrintExecuteUnprefixed.swift */,
-				90A17BB6229D59FC0027133B /* PrintExecuteCBPrefixed.swift */,
+				90C2AD4022A1E47000F5A7AF /* PrintExecute.swift */,
+				90C2AD4222A2699100F5A7AF /* ModifyInstructions.swift */,
 				90A17B7C229D59B10027133B /* main.swift */,
 			);
 			path = CodeGen;
@@ -480,6 +486,7 @@
 				90A17B96229D59D50027133B /* CpuDelegate.swift in Sources */,
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
+				90C2AD3D22A17F3000F5A7AF /* _MemoryRegions.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
 				908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */,
 				90A65ADB229D6BAD00C604B3 /* RegistersDelegate.swift in Sources */,
@@ -515,12 +522,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90C2AD4322A2699100F5A7AF /* ModifyInstructions.swift in Sources */,
 				90A17B7D229D59B10027133B /* main.swift in Sources */,
-				90A17BBB229D59FC0027133B /* PrintExecuteCBPrefixed.swift in Sources */,
-				90A17BBA229D59FC0027133B /* PrintExecuteUnprefixed.swift in Sources */,
 				90A17BB9229D59FC0027133B /* Opcode.swift in Sources */,
 				90A17BB8229D59FC0027133B /* PrintOpcodes.swift in Sources */,
 				90A17BB7229D59FC0027133B /* OpenOpcodesFile.swift in Sources */,
+				90C2AD3F22A1DFD500F5A7AF /* Common.swift in Sources */,
+				90C2AD4122A1E47000F5A7AF /* PrintExecute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

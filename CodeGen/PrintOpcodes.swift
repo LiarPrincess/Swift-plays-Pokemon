@@ -41,7 +41,7 @@ private func printOpcodeTypeEnum(_ className: String, _ opcodes: [Opcode]) {
     let address = "0x" + String(i, radix: 16, uppercase: false)
 
     if let opcode = opcodeByAddress[address] {
-      print("  case \(opcode.enumCase) = \(opcode.addr)")
+      print("  case \(getEnumCase(opcode)) = \(opcode.addr)")
     } else {
       print("  /* \(address) - this opcode does not exists */")
     }
@@ -66,7 +66,7 @@ private func printOpcodes(_ className: String, _ variable: String, _ opcodes: [O
       continue
     }
 
-    let valueColumn = pad("value: .\(opcode.enumCase), ", toLength: 22)
+    let valueColumn = pad("value: .\(getEnumCase(opcode)), ", toLength: 22)
     let lengthColumn = "length: \(opcode.length), cycles: \(opcode.cycles)"
     print("\(addressString) \(className)(\(valueColumn)\(lengthColumn)),")
   }

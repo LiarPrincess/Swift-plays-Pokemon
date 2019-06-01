@@ -26,7 +26,7 @@ class CpuJumpTests: XCTestCase {
     cpu.pc = 0xfefe
     cpu.jp_cc_nn(.nz, 0x8000)
 
-    XCTAssertEqual(cpu.pc, 0xfefe)
+    XCTAssertEqual(cpu.pc, 0xfefe + 0x3)
   }
 
   /// When Z=1andC=0,
@@ -50,7 +50,7 @@ class CpuJumpTests: XCTestCase {
     cpu.pc = 0xfefe
     cpu.jp_cc_nn(.c, 0x8000)
 
-    XCTAssertEqual(cpu.pc, 0xfefe)
+    XCTAssertEqual(cpu.pc, 0xfefe + 0x3)
   }
 
   /// When Z=1andC=0,
@@ -77,12 +77,23 @@ class CpuJumpTests: XCTestCase {
 
   // MARK: - JR
 
-  /// Test taken from bootstrap
-  func test_jr_e() {
+  /// Test taken from bootstrap (0x000a)
+  func test_jr_cc_1() {
     let cpu = Cpu()
-    cpu.pc = 10
-    cpu.jr_e(0xfb) // -2
+    cpu.pc = 0x000a
+    cpu.registers.zeroFlag = false
+    cpu.jr_cc_e(.nz, 0xfb) // -2
 
     XCTAssertEqual(cpu.pc, 0x0007)
+  }
+
+  /// Test taken from bootstrap (0x004b)
+  func test_jr_cc_2() {
+    let cpu = Cpu()
+    cpu.pc = 0x004b
+    cpu.registers.zeroFlag = true
+    cpu.jr_cc_e(.z, 0x8) // -2
+
+    XCTAssertEqual(cpu.pc, 0x0055)
   }
 }
