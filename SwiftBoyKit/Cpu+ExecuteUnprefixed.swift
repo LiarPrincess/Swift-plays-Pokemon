@@ -9,7 +9,7 @@
 
 extension Cpu {
   internal func execute(_ opcode: UnprefixedOpcode) {
-    switch opcode.value {
+    switch opcode {
 /* 0x0 */ case .nop: self.nop()
 /* 0x1 */ case .ld_bc_d16: self.ld_rr_d16(.bc, self.next16)
 /* 0x2 */ case .ld_pBC_a: self.ld_pBC_a()

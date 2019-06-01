@@ -25,10 +25,10 @@ private func printHeader() {
 
 private typealias GetCall = (Opcode) -> String
 
-private func printCpuExtension(_ className: String, _ opcodes: [Opcode], _ getCall: GetCall) {
+private func printCpuExtension(_ enumName: String, _ opcodes: [Opcode], _ getCall: GetCall) {
   print("extension Cpu {")
-  print("  internal func execute(_ opcode: \(className)) {")
-  print("    switch opcode.value {")
+  print("  internal func execute(_ opcode: \(enumName)) {")
+  print("    switch opcode {")
 
   for opcode in opcodes {
     let call = getCall(opcode)

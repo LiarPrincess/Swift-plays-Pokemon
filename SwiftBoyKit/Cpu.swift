@@ -46,9 +46,9 @@ public class Cpu: Codable {
       }
       // ------------
 
-      let opcodeIndex = self.memory.read(self.pc)
-      guard let opcode = unprefixedOpcodes[opcodeIndex] else {
-        fatalError("Tried to execute non existing opcode '\(opcodeIndex.hex)'.")
+      let rawOpcode = self.memory.read(self.pc)
+      guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
+        fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
       }
 
       self.delegate?.cpuWillExecute(self, opcode: opcode)

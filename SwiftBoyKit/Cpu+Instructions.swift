@@ -1372,7 +1372,9 @@ extension Cpu {
 
   /// Execute one of the CBPrefixed opcodes
   internal func prefix(_ n: UInt8) {
-    let opcode = cbPrefixedOpcodes[n]
+    guard let opcode = CBPrefixedOpcode(rawValue: n) else {
+      fatalError("Tried to execute non existing cb-prefixed opcode '\(n.hex)'.")
+    }
 
     self.delegate?.cpuWillExecute(self, opcode: opcode)
     self.execute(opcode)

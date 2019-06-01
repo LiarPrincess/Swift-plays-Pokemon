@@ -1,3 +1,5 @@
+// swiftlint:disable file_length
+
 import Cocoa
 import SwiftBoyKit
 
@@ -39,27 +41,39 @@ public class Debug: CpuDelegate, MemoryDelegate {
       print("> register - setting \(f) to \(value ? 1 : 0)")
     }
   }
-
   public func registersDidSet(r: SingleRegister, to value: UInt8) {
     if self.mode == .full {
       print("> register - setting \(r) to \(value.hex)")
     }
   }
 
-  private func cpuWillExecuteShared<Type>(_ cpu: Cpu, opcode: Opcode<Type>) {
+  public func cpuWillExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) {
     if self.mode == .onlyOpcodes || self.mode == .full {
-      self.printOpcode(cpu, opcode: opcode)
+      self.printOpcode(cpu, opcode: String(describing: opcode), length: getOpcodeLength(opcode))
     }
   }
-
-  private func cpuDidExecuteShared<Type>(_ cpu: Cpu, opcode: Opcode<Type>) {
+  public func cpuWillExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) {
+    if self.mode == .onlyOpcodes || self.mode == .full {
+      self.printOpcode(cpu, opcode: String(describing: opcode), length: 2)
+    }
+  }
+  public func cpuDidExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) {
     if self.mode == .full {
       self.printAdditionalInfo(cpu, opcode: opcode)
       self.printRegisters(cpu, indent: "  ")
-      print()
-      print("---------------------")
-      print()
+      self.printSeparator()
     }
+  }
+  public func cpuDidExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) {
+    if self.mode == .full {
+      self.printRegisters(cpu, indent: "  ")
+      self.printSeparator()
+    }
+  }
+  private func printSeparator() {
+    print()
+    print("---------------------")
+    print()
   }
 
   public func memoryDidRead(_ memory: Memory, address: UInt16, value: UInt8) {
@@ -72,32 +86,22 @@ public class Debug: CpuDelegate, MemoryDelegate {
       print("> memory - writing \(value.hex) to \(address.hex)")
     }
   }
-
-  public func cpuWillExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) { if opcode.value != .prefix { self.cpuWillExecuteShared(cpu, opcode: opcode) } }
-  public func cpuWillExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) { self.cpuWillExecuteShared(cpu, opcode: opcode) }
-  public func cpuDidExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) { if opcode.value != .prefix { self.cpuDidExecuteShared(cpu, opcode: opcode) } }
-  public func cpuDidExecute(_ cpu: Cpu, opcode: CBPrefixedOpcode) { self.cpuDidExecuteShared(cpu, opcode: opcode) }
 }
 
 // MARK: - Print opcode
 
 extension Debug {
 
-  private func printOpcode<Type>(_ cpu: Cpu, opcode: Opcode<Type>, indent: String = "") {
-    let pc = cpu.pc.hex
-    let mnemonic = String(describing: opcode.value).pad(toLength: 11)
-
-    var operands: String = {
-      switch opcode.length {
+  private func printOpcode(_ cpu: Cpu, opcode: String, length: Int, indent: String = "") {
+    let operands: String = {
+      switch length {
       case 2: return self.next8(cpu).hex
       case 3: return self.next16(cpu).hex
       default: return ""
       }
     }()
-    operands = operands.pad(toLength: 8)
 
-    let additional = "(raw: \(opcode.rawValue.hex), length: \(opcode.length), cycles: \(opcode.cycles) \(opcode.alternativeCycles))"
-    print("\(indent)\(pc): \(mnemonic) \(operands) \(additional)")
+    print("\(indent)\(cpu.pc.hex): \(opcode.pad(toLength: 11)) \(operands)")
   }
 
   /// We can't just 'cpu.memory.read' as this may involve side-effect on emulator side
@@ -110,6 +114,26 @@ extension Debug {
     let low  = UInt16(cpu.memory.data[cpu.pc + 1])
     let high = UInt16(cpu.memory.data[cpu.pc + 2])
     return (high << 8) | low
+  }
+
+  private func getOpcodeLength(_ opcode: UnprefixedOpcode) -> Int {
+    switch opcode {
+    case .adc_a_d8, .add_a_d8, .add_sp_r8, .and_d8, .cp_d8,
+         .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_r8, .jr_z_r8,
+         .ld_a_d8, .ld_b_d8, .ld_c_d8, .ld_d_d8, .ld_e_d8, .ld_h_d8, .ld_hl_spR8, .ld_l_d8, .ld_pHL_d8,
+         .ldh_a_pA8, .ldh_pA8_a,
+         .sub_d8, .sbc_a_d8,
+         .or_d8, .xor_d8:
+      return 2
+
+    case .call_a16, .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16, .jp_a16,
+         .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16, .ld_a_pA16,
+         .ld_bc_d16, .ld_de_d16, .ld_hl_d16, .ld_pA16_a, .ld_pA16_sp, .ld_sp_d16:
+      return 3
+
+    default:
+      return 1
+    }
   }
 }
 
@@ -154,17 +178,14 @@ extension Debug {
 // MARK: - Additional info
 
 extension Debug {
-  private func printAdditionalInfo<Type>(_ cpu: Cpu, opcode: Opcode<Type>) {
-    if opcode.length > 1 {
-      print("> opcode - reading additional \(opcode.length - 1) byte(s) for arguments")
-    }
-
-    guard let unprefixedOpcode = opcode as? UnprefixedOpcode else {
-      return
+  private func printAdditionalInfo(_ cpu: Cpu, opcode: UnprefixedOpcode) {
+    let length = getOpcodeLength(opcode)
+    if length > 1 {
+      print("> opcode - reading additional \(length - 1) byte(s) for arguments")
     }
 
     let pc = "\(cpu.pc) (\(cpu.pc.hex))"
-    switch unprefixedOpcode.value {
+    switch opcode {
     case .call_a16, .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16:
       print("> call to \(pc)")
     case .jp_a16, .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_pHL, .jp_z_a16:
