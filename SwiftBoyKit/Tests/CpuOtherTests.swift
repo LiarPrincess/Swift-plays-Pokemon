@@ -7,11 +7,39 @@ import XCTest
 
 class CpuOtherTests: XCTestCase {
 
-  /// JP 8000h ; Jump to 8000h.
-//  func test_jp_nn() {
-//    let cpu = Cpu()
-//    cpu.jp_nn(0x8000)
-//
-//    XCTAssertEqual(cpu.pc, 0x8000)
-//  }
+  func test_nop() {
+    let cpu = Cpu()
+    cpu.pc = 0xfefe
+    cpu.nop()
+
+    XCTAssertEqual(cpu.pc, 0xfeff)
+  }
+
+  /// When A = 35h,
+  /// CPL ; A ← CAh
+  func test_cpl() {
+    let cpu = Cpu()
+    cpu.registers.a = 0x35
+    cpu.cpl()
+
+    XCTAssertEqual(cpu.registers.a, 0xca)
+  }
+
+  func test_scf() {
+    let cpu = Cpu()
+    cpu.registers.carryFlag = false
+    cpu.ccf()
+
+    XCTAssertEqual(cpu.registers.carryFlag, true)
+  }
+
+  /// When CY = 1,
+  /// CCF ; CY ← 0
+  func test_ccf() {
+    let cpu = Cpu()
+    cpu.registers.carryFlag = true
+    cpu.ccf()
+
+    XCTAssertEqual(cpu.registers.carryFlag, false)
+  }
 }

@@ -11,6 +11,15 @@ public class Cpu: Codable {
   /// Current cycle incremented after each operation (counting from 0 at the start).
   public var cycle: UInt16 = 0
 
+  /// Interrupt enabled flag
+  public var ime: Bool = false
+
+  /// True if interrupts should be enabled after next instruction
+  public var imeEnableNext: Bool = false
+
+  /// CPU halted flag
+  public var isHalted: Bool = false
+
   public var memory: Memory
   public var registers: Registers
 
@@ -24,6 +33,7 @@ public class Cpu: Codable {
     self.delegate = delegate
   }
 
+  // TODO: remove this
   public var currentCycle: UInt = 0
 
   public func run(maxCycles: UInt? = nil, lastPC: UInt16? = nil) {
@@ -97,7 +107,17 @@ public class Cpu: Codable {
   // MARK: - Interrupts
 
   internal func enableInterrupts() {
-    // TODO: Implement interrupts
+    self.ime = true
+    self.imeEnableNext = true
+  }
+
+  internal func enableInterruptsNext() {
+    self.imeEnableNext = true
+  }
+
+  internal func disableInterrupts() {
+    self.ime = false
+    self.imeEnableNext = false
   }
 
   // MARK: - Codable

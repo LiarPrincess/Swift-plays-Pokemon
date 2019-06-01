@@ -9,6 +9,7 @@ internal enum JumpCondition {
 }
 
 // This file is massive, but we need it this way so we can easier Cmd+F.
+// Source: https://ia801906.us.archive.org/19/items/GameBoyProgManVer1.1/GameBoyProgManVer1.1.pdf
 extension Cpu {
 
   // MARK: - 8-Bit Transfer and Input/Output Instructions
@@ -1362,8 +1363,14 @@ extension Cpu {
 
   // MARK: - General-Purpose Arithmetic Operations and CPU Control Instructions
 
-  internal func nop() { }
+  /// Only advances the program counter by 1;
+  /// performs no other operations that have an effect.
+  internal func nop() {
+    self.pc += 1
+    self.cycle &+= 4
+  }
 
+  /// Execute one of the CBPrefixed opcodes
   internal func prefix(_ n: UInt8) {
     let opcode = cbPrefixedOpcodes[n]
 
@@ -1378,61 +1385,76 @@ extension Cpu {
     self.cycle &+= 4
   }
 
+  /// Stop, blank the screen and wait for button press
   internal func stop() {
-    fatalError("Unimplemented!")
+    fatalError("Stop is not implemented!")
+
+//    self.pc += 1 // or maybe 2 as in docs?
+//    self.cycle &+= 4
+  }
+
+  /// The program counter is halted at the step after the HALT instruction.
+  /// If both the interrupt request flag and the corresponding interrupt enable flag are set,
+  /// HALT mode is exited, even if the interrupt master enable flag is not set.
+  internal func halt() {
+    self.isHalted = true
 
     self.pc += 1
     self.cycle &+= 4
   }
 
   internal func daa() {
-    fatalError("Unimplemented!")
+    fatalError("DAA is not implemented!")
 
-    self.pc += 1
-    self.cycle &+= 4
+//    self.pc += 1
+//    self.cycle &+= 4
   }
 
+  /// Takes the one’s complement of the contents of register A.
   internal func cpl() {
-    fatalError("Unimplemented!")
+    self.registers.a = ~self.registers.a
+
+    self.registers.subtractFlag = true
+    self.registers.halfCarryFlag = true
 
     self.pc += 1
     self.cycle &+= 4
   }
 
+  /// Sets the carry flag CY.
   internal func scf() {
-    fatalError("Unimplemented!")
+    self.registers.subtractFlag = false
+    self.registers.halfCarryFlag = false
+    self.registers.carryFlag = true
 
     self.pc += 1
     self.cycle &+= 4
   }
 
+  /// Flips the carry flag CY.
   internal func ccf() {
-    fatalError("Unimplemented!")
+    self.registers.subtractFlag = false
+    self.registers.halfCarryFlag = false
+    self.registers.carryFlag.toggle()
 
     self.pc += 1
     self.cycle &+= 4
   }
 
-  internal func halt() {
-    fatalError("Unimplemented!")
-
-    self.pc += 1
-    self.cycle &+= 4
-  }
-
+  /// Resets the interrupt master enable flag and prohibits maskable interrupts.
   internal func di() {
-    fatalError("Unimplemented!")
+    self.disableInterrupts()
 
     self.pc += 1
     self.cycle &+= 4
   }
 
+  /// Sets the interrupt master enable flag and enables maskable interrupts.
+  /// This instruction can be used in an interrupt routine to enable higher-order interrupts.
   internal func ei() {
-    fatalError("Unimplemented!")
+    self.enableInterruptsNext()
 
     self.pc += 1
     self.cycle &+= 4
   }
 }
-
-

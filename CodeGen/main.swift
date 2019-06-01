@@ -1,5 +1,3 @@
-// swiftlint:disable force_try
-
 import Foundation
 
 let currentFile = URL(fileURLWithPath: #file)

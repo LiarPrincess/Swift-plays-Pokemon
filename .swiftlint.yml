@@ -98,6 +98,8 @@ disabled_rules:
   - opening_brace      # if true { ... }
   - statement_position # else    { ... }
 
+  - redundant_optional_initialization # I like it that way
+
 included:
   - SwiftBoy
   - SwiftBoyKit

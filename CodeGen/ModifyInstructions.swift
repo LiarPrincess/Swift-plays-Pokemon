@@ -1,3 +1,6 @@
+// swiftlint:disable force_unwrapping
+// swiftlint:disable function_body_length
+
 import Foundation
 
 func modifyInstructions(_ opcodes: Opcodes, _ instructionsFileContent: String) {
@@ -71,7 +74,7 @@ private func validate(_ grouping: [FunctionName: [Opcode]]) {
     let first = opcodes.first!
     for opcode in opcodes {
       assert(opcode.length == first.length)
-      assert(opcode.cycles == opcode.cycles)
+      assert(opcode.cycles == first.cycles)
     }
   }
 }
