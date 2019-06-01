@@ -8,19 +8,18 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
   public func applicationDidFinishLaunching(_ aNotification: Notification) {
 //    let cpu = loadEmptyCpu()
-//    let cpu = loadState(from: "bootrom_skipToAudio.json")
-//    let cpu = loadState(from: "bootrom_skipToNintendoLogo.json")
-    let cpu = loadState(from: "bootrom_skipToTileMap.json")
+//    let cpu = loadState(from: "bootrom_0_skipToAudio2.json.json")
+//    let cpu = loadState(from: "bootrom_1_skipToNintendoLogo2.json")
+    let cpu = loadState(from: "bootrom_2_skipToTileMap2.json")
 
     cpu.memory.delegate = self.debug
     cpu.delegate = self.debug
 
     self.debug.printRegisters(cpu, indent: "")
     print("---------------------")
+    cpu.run(maxCycles: .max, lastPC: 0x0051)
 
-//    cpu.run(maxCycles: 9999, lastPC: 0xffff) // maxCycles: 100_000, lastPC: 0x0050
-
-//    saveState(cpu: cpu, to: "bootrom_skipToTileMap.json")
+//    saveState(cpu: cpu, to: "file.json")
   }
 }
 
@@ -30,12 +29,15 @@ public class Debug: CpuDelegate, MemoryDelegate {
     case none
     case full
     case onlyOpcodes
+    case onlyMemoryWrites
   }
 
-  private let mode = Mode.full
+  private let mode = Mode.onlyOpcodes
 
   public func registersDidSet(f: FlagRegister, to value: Bool) {
-    print("> register - setting \(f) to \(value ? 1 : 0)")
+    if self.mode == .full {
+      print("> register - setting \(f) to \(value ? 1 : 0)")
+    }
   }
 
   public func registersDidSet(r: SingleRegister, to value: UInt8) {
@@ -66,7 +68,7 @@ public class Debug: CpuDelegate, MemoryDelegate {
     }
   }
   public func memoryWillWrite(_ memory: Memory, address: UInt16, value: UInt8) {
-    if self.mode == .full {
+    if self.mode == .full || self.mode == .onlyMemoryWrites {
       print("> memory - writing \(value.hex) to \(address.hex)")
     }
   }
@@ -122,7 +124,7 @@ extension Debug {
     let stackValues = Int(cpu.sp) >= stackStart ? cpu.memory.data[Int(cpu.sp)..<stackEnd] : []
 
     print("""
-\(indent)cycle: \(cpu.currentCycle)
+\(indent)cycle: \(cpu.cycle)
 \(indent)pc: \(cpu.pc) (\(cpu.pc.hex))
 \(indent)sp: \(cpu.sp) (\(cpu.sp.hex))
 \(indent)  \(stackValues.reversed().map { $0.hex })
@@ -184,3 +186,60 @@ extension Debug {
     }
   }
 }
+
+/*
+ // swiftlint:disable:nextA function_body_length
+ private func compare(_ new: Cpu, _ old: Cpu) {
+ print("")
+ print("")
+ print("")
+ print("")
+ print("")
+ print("Starting compare")
+ let a = true
+
+ print("pc: \(new.pc) vs \(old.pc)")
+ assert(a || new.pc == old.pc)
+
+ print("sp: \(new.sp) vs \(old.sp)")
+ assert(a || new.sp == old.sp)
+
+ print("a: \(new.registers.a) vs \(old.registers.a)")
+ assert(a || new.registers.a == old.registers.a)
+
+ print("b: \(new.registers.b) vs \(old.registers.b)")
+ assert(a || new.registers.b == old.registers.b)
+
+ print("c: \(new.registers.c) vs \(old.registers.c)")
+ assert(a || new.registers.c == old.registers.c)
+
+ print("d: \(new.registers.d) vs \(old.registers.d)")
+ assert(a || new.registers.d == old.registers.d)
+
+ print("e: \(new.registers.e) vs \(old.registers.e)")
+ assert(a || new.registers.e == old.registers.e)
+
+ print("h: \(new.registers.h) vs \(old.registers.h)")
+ assert(a || new.registers.h == old.registers.h)
+
+ print("l: \(new.registers.l) vs \(old.registers.l)")
+ assert(a || new.registers.l == old.registers.l)
+
+ print("zeroFlag: \(new.registers.zeroFlag) vs \(old.registers.zeroFlag)")
+ assert(a || new.registers.zeroFlag == old.registers.zeroFlag)
+
+ print("subtractFlag: \(new.registers.subtractFlag) vs \(old.registers.subtractFlag)")
+ assert(a || new.registers.subtractFlag == old.registers.subtractFlag)
+
+ print("halfCarryFlag: \(new.registers.halfCarryFlag) vs \(old.registers.halfCarryFlag)")
+ assert(a || new.registers.halfCarryFlag == old.registers.halfCarryFlag)
+
+ print("carryFlag: \(new.registers.carryFlag) vs \(old.registers.carryFlag)")
+ assert(a || new.registers.carryFlag == old.registers.carryFlag)
+
+ print("memory")
+ assert(a || new.memory.data == old.memory.data)
+
+ print("all fine")
+ }
+*/

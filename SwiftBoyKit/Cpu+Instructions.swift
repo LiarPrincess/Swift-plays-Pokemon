@@ -1377,12 +1377,6 @@ extension Cpu {
     self.delegate?.cpuWillExecute(self, opcode: opcode)
     self.execute(opcode)
     self.delegate?.cpuDidExecute(self, opcode: opcode)
-
-    // there are no jumps, calls etc. in prefix instructions
-    self.pc += UInt16(opcode.length)
-
-    self.pc += 1
-    self.cycle &+= 4
   }
 
   /// Stop, blank the screen and wait for button press

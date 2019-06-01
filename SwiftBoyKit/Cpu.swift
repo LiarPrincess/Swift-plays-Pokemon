@@ -8,16 +8,16 @@ public class Cpu: Codable {
   /// A 16-bit register that holds the starting address of the stack area of memory.
   public var sp: UInt16 = 0
 
-  /// Current cycle incremented after each operation (counting from 0 at the start).
+  /// Current cycle incremented after each operation (starting from 0).
   public var cycle: UInt16 = 0
 
-  /// Interrupt enabled flag
+  /// Interrupt enabled flag.
   public var ime: Bool = false
 
-  /// True if interrupts should be enabled after next instruction
+  /// True if interrupts should be enabled after next instruction.
   public var imeEnableNext: Bool = false
 
-  /// CPU halted flag
+  /// Is halted flag.
   public var isHalted: Bool = false
 
   public var memory: Memory
@@ -33,16 +33,18 @@ public class Cpu: Codable {
     self.delegate = delegate
   }
 
-  // TODO: remove this
-  public var currentCycle: UInt = 0
-
-  public func run(maxCycles: UInt? = nil, lastPC: UInt16? = nil) {
-    let maxCycles = maxCycles ?? UInt.max
+  public func run(maxCycles: UInt16? = nil, lastPC: UInt16? = nil) {
+    let maxCycles = maxCycles ?? UInt16.max
     let lastPC  = lastPC ?? UInt16.max
 
     var brakepoint = false
-    while currentCycle <= maxCycles && self.pc != lastPC {
-      let oldPc = self.pc
+    while self.cycle <= maxCycles && self.pc != lastPC {
+      // ------------
+      brakepoint = brakepoint || self.pc == 0x004A
+      if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
+        _ = 5
+      }
+      // ------------
 
       let opcodeIndex = self.memory.read(self.pc)
       guard let opcode = unprefixedOpcodes[opcodeIndex] else {
@@ -52,15 +54,6 @@ public class Cpu: Codable {
       self.delegate?.cpuWillExecute(self, opcode: opcode)
       self.execute(opcode)
       self.delegate?.cpuDidExecute(self, opcode: opcode)
-
-      // ------------
-      brakepoint = brakepoint || oldPc == 0x0064
-      if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
-        _ = 5
-      }
-      // ------------
-
-      self.currentCycle += 1
     }
   }
 
@@ -125,6 +118,10 @@ public class Cpu: Codable {
   public enum CodingKeys: CodingKey {
     case pc
     case sp
+    case cycle
+    case ime
+    case imeEnableNext
+    case isHalted
     case memory
     case registers
   }

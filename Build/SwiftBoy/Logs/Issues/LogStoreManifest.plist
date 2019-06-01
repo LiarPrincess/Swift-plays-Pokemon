@@ -6,32 +6,6 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>0B06AE57-E7AD-43DE-B1FF-7546C173A0FB</key>
-		<dict>
-			<key>className</key>
-			<string>IDEActivityLogSection</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
-			<key>fileName</key>
-			<string>0B06AE57-E7AD-43DE-B1FF-7546C173A0FB.xcactivitylog</string>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>W</string>
-			</dict>
-			<key>signature</key>
-			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
-			<key>timeStartedRecording</key>
-			<real>581082073.83850396</real>
-			<key>timeStoppedRecording</key>
-			<real>581082076.30134904</real>
-			<key>title</key>
-			<string>Build target SwiftBoy</string>
-			<key>uniqueIdentifier</key>
-			<string>0B06AE57-E7AD-43DE-B1FF-7546C173A0FB</string>
-		</dict>
 		<key>1788459E-24FD-45FC-BCBC-43F5A8C06408</key>
 		<dict>
 			<key>className</key>
@@ -58,32 +32,6 @@
 			<key>uniqueIdentifier</key>
 			<string>1788459E-24FD-45FC-BCBC-43F5A8C06408</string>
 		</dict>
-		<key>2628BDE8-9FB2-4D14-AFC3-B2E2FD123666</key>
-		<dict>
-			<key>className</key>
-			<string>IDEActivityLogSection</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.framework</string>
-			<key>fileName</key>
-			<string>2628BDE8-9FB2-4D14-AFC3-B2E2FD123666.xcactivitylog</string>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>W</string>
-			</dict>
-			<key>signature</key>
-			<string>SwiftBoyKit-abzeqnrybuyschbjgynicpjneiwq</string>
-			<key>timeStartedRecording</key>
-			<real>581082072.48834002</real>
-			<key>timeStoppedRecording</key>
-			<real>581082073.83687997</real>
-			<key>title</key>
-			<string>Build target SwiftBoyKit</string>
-			<key>uniqueIdentifier</key>
-			<string>2628BDE8-9FB2-4D14-AFC3-B2E2FD123666</string>
-		</dict>
 		<key>321FD8BB-DD3F-4C8C-BFD8-1FBBE7351228</key>
 		<dict>
 			<key>className</key>
@@ -109,6 +57,58 @@
 			<string>Build target SwiftBoyKitTests</string>
 			<key>uniqueIdentifier</key>
 			<string>321FD8BB-DD3F-4C8C-BFD8-1FBBE7351228</string>
+		</dict>
+		<key>84512353-1974-43E1-B370-D81E74F30030</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.framework</string>
+			<key>fileName</key>
+			<string>84512353-1974-43E1-B370-D81E74F30030.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>signature</key>
+			<string>SwiftBoyKit-abzeqnrybuyschbjgynicpjneiwq</string>
+			<key>timeStartedRecording</key>
+			<real>581086863.20085394</real>
+			<key>timeStoppedRecording</key>
+			<real>581086864.50092399</real>
+			<key>title</key>
+			<string>Build target SwiftBoyKit</string>
+			<key>uniqueIdentifier</key>
+			<string>84512353-1974-43E1-B370-D81E74F30030</string>
+		</dict>
+		<key>B83310AD-61C2-41DD-8EF4-A9DD2F01886E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
+			<key>fileName</key>
+			<string>B83310AD-61C2-41DD-8EF4-A9DD2F01886E.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>signature</key>
+			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
+			<key>timeStartedRecording</key>
+			<real>581086933.21505904</real>
+			<key>timeStoppedRecording</key>
+			<real>581086937.17185605</real>
+			<key>title</key>
+			<string>Build target SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>B83310AD-61C2-41DD-8EF4-A9DD2F01886E</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>
