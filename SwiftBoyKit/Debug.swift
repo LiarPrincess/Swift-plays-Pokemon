@@ -8,6 +8,11 @@ private enum DebugMode {
 internal enum Debug {
   private static let mode = DebugMode.full
 
+  internal static func emulatorWillRun(_ emulator: Emulator) {
+    printRegisters(emulator.cpu)
+    printSeparator()
+  }
+
   internal static func registersDidSet(f: FlagRegister, to value: Bool) {
     if mode == .full {
       print("> register - setting \(f) to \(value ? 1 : 0)")
@@ -17,10 +22,6 @@ internal enum Debug {
     if mode == .full {
       print("> register - setting \(r) to \(value.hex)")
     }
-  }
-
-  internal static func cpuWillRun(_ cpu: Cpu) {
-    printRegisters(cpu)
   }
 
   internal static func cpuWillExecute(_ cpu: Cpu, opcode: UnprefixedOpcode) {

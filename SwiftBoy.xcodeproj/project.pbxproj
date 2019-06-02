@@ -20,7 +20,6 @@
 		90A17B7D229D59B10027133B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B7C229D59B10027133B /* main.swift */; };
 		90A17B90229D59D50027133B /* Cpu+Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B81229D59D40027133B /* Cpu+Instructions.swift */; };
 		90A17B91229D59D50027133B /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B82229D59D50027133B /* Registers.swift */; };
-		90A17B92229D59D50027133B /* bootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B83229D59D50027133B /* bootrom.swift */; };
 		90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B84229D59D50027133B /* UInt+radixFormat.swift */; };
 		90A17B94229D59D50027133B /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B85229D59D50027133B /* Memory.swift */; };
 		90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */; };
@@ -115,7 +114,6 @@
 		90A17B7C229D59B10027133B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		90A17B81229D59D40027133B /* Cpu+Instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+Instructions.swift"; sourceTree = "<group>"; };
 		90A17B82229D59D50027133B /* Registers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registers.swift; sourceTree = "<group>"; };
-		90A17B83229D59D50027133B /* bootrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bootrom.swift; sourceTree = "<group>"; };
 		90A17B84229D59D50027133B /* UInt+radixFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt+radixFormat.swift"; sourceTree = "<group>"; };
 		90A17B85229D59D50027133B /* Memory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBPrefixedOpcodes.swift; sourceTree = "<group>"; };
@@ -226,14 +224,13 @@
 				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
 				90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */,
 				90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */,
-				90A17B83229D59D50027133B /* bootrom.swift */,
 				90A17B85229D59D50027133B /* Memory.swift */,
 				90C2AD3C22A17F3000F5A7AF /* _MemoryRegions.swift */,
-				90A56A3622A3DD8D0055A013 /* Debug.swift */,
 				90A56A3422A3DD0D0055A013 /* Emulator.swift */,
 				90A17B8D229D59D50027133B /* Array+subscript.swift */,
 				90A17B84229D59D50027133B /* UInt+radixFormat.swift */,
 				908D6E0B229DDECD00523C18 /* String+pad.swift */,
+				90A56A3622A3DD8D0055A013 /* Debug.swift */,
 				90A17B5A229D59A20027133B /* SwiftBoyKit.h */,
 				90A17B5B229D59A20027133B /* Info.plist */,
 			);
@@ -489,7 +486,6 @@
 				90A56A3722A3DD8D0055A013 /* Debug.swift in Sources */,
 				90A17B9C229D59D50027133B /* Array+subscript.swift in Sources */,
 				90A17B94229D59D50027133B /* Memory.swift in Sources */,
-				90A17B92229D59D50027133B /* bootrom.swift in Sources */,
 				90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

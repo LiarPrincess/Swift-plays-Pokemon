@@ -1,10 +1,8 @@
 public class Cpu: Codable {
 
-  /// Program counter: PC.
   /// A 16-bit register that holds the address data of the program to be executed next.
   public var pc: UInt16 = 0
 
-  /// Stack pointer: SP.
   /// A 16-bit register that holds the starting address of the stack area of memory.
   public var sp: UInt16 = 0
 
@@ -28,42 +26,26 @@ public class Cpu: Codable {
     self.memory = memory ?? Memory()
   }
 
-  public func run(maxCycles: UInt16? = nil, lastPC: UInt16? = nil) {
-    Debug.cpuWillRun(self)
-    let maxCycles = maxCycles ?? UInt16.max
-    let lastPC  = lastPC ?? UInt16.max
-
-    var brakepoint = false
-    while self.cycle <= maxCycles && self.pc != lastPC {
-      // ------------
-      brakepoint = brakepoint || self.pc == 0x004A
-      if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
-        _ = 5
-      }
-      // ------------
-
-      let rawOpcode = self.memory.read(self.pc)
-      guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
-        fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
-      }
-
-      Debug.cpuWillExecute(self, opcode: opcode)
-      self.execute(opcode)
-      Debug.cpuDidExecute(self, opcode: opcode)
+  internal func tick() {
+    let rawOpcode = self.memory.read(self.pc)
+    guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
+      fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
     }
-  }
 
-  func reset() { }
+    Debug.cpuWillExecute(self, opcode: opcode)
+    self.execute(opcode)
+    Debug.cpuDidExecute(self, opcode: opcode)
+  }
 
   // MARK: - Next bytes
 
   /// Next 8 bits after pc
-  public var next8: UInt8 {
+  internal var next8: UInt8 {
     return self.memory.read(self.pc + 1)
   }
 
   /// Next 16 bits after pc
-  public var next16: UInt16 {
+  internal var next16: UInt16 {
     let low  = UInt16(self.memory.read(self.pc + 1))
     let high = UInt16(self.memory.read(self.pc + 2))
     return (high << 8) | low

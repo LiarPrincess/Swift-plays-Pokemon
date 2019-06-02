@@ -28,12 +28,6 @@ internal func saveState(cpu: Cpu, to filename: String) {
   }
 }
 
-internal func loadEmptyCpu() -> Cpu {
-  let cpu = Cpu()
-  cpu.memory.fakeEmptyCartridge()
-  return cpu
-}
-
 internal func loadState(from filename: String) -> Cpu {
   let url = getPath(filename)
 
