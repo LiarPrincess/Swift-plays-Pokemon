@@ -11,7 +11,7 @@ public class Cpu: Codable {
   /// Current cycle incremented after each operation (starting from 0).
   public var cycle: UInt16 = 0
 
-  /// Interrupt enabled flag.
+  /// Interrupt Master Enable Flag.
   public var ime: Bool = false
 
   /// True if interrupts should be enabled after next instruction.
@@ -23,17 +23,13 @@ public class Cpu: Codable {
   public var memory: Memory
   public var registers: Registers
 
-  public weak var delegate: CpuDelegate? {
-    didSet { self.registers.delegate = self.delegate }
-  }
-
-  public init(memory: Memory? = nil, delegate: CpuDelegate? = nil) {
-    self.registers = Registers(delegate: delegate)
+  public init(memory: Memory? = nil) {
+    self.registers = Registers()
     self.memory = memory ?? Memory()
-    self.delegate = delegate
   }
 
   public func run(maxCycles: UInt16? = nil, lastPC: UInt16? = nil) {
+    Debug.cpuWillRun(self)
     let maxCycles = maxCycles ?? UInt16.max
     let lastPC  = lastPC ?? UInt16.max
 
@@ -51,9 +47,9 @@ public class Cpu: Codable {
         fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
       }
 
-      self.delegate?.cpuWillExecute(self, opcode: opcode)
+      Debug.cpuWillExecute(self, opcode: opcode)
       self.execute(opcode)
-      self.delegate?.cpuDidExecute(self, opcode: opcode)
+      Debug.cpuDidExecute(self, opcode: opcode)
     }
   }
 
@@ -111,18 +107,5 @@ public class Cpu: Codable {
   internal func disableInterrupts() {
     self.ime = false
     self.imeEnableNext = false
-  }
-
-  // MARK: - Codable
-
-  public enum CodingKeys: CodingKey {
-    case pc
-    case sp
-    case cycle
-    case ime
-    case imeEnableNext
-    case isHalted
-    case memory
-    case registers
   }
 }

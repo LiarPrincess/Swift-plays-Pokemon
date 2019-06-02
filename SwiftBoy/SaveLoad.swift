@@ -29,9 +29,8 @@ internal func saveState(cpu: Cpu, to filename: String) {
 }
 
 internal func loadEmptyCpu() -> Cpu {
-  let memory = Memory()
-  let cpu = Cpu(memory: memory)
-  memory.fakeEmptyCartridge()
+  let cpu = Cpu()
+  cpu.memory.fakeEmptyCartridge()
   return cpu
 }
 

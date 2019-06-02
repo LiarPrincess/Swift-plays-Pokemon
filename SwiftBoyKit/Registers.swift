@@ -31,43 +31,37 @@ public struct Registers: Codable {
 
   /// Accumulator: A
   /// An 8-bit register for storing data and the results of arithmetic and logical operations.
-  public var a: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .a, to: self.a) } }
+  public var a: UInt8 = 0 { didSet { Debug.registersDidSet(r: .a, to: self.a) } }
 
   /// Auxiliary register: B
-  public var b: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .b, to: self.b) } }
+  public var b: UInt8 = 0 { didSet { Debug.registersDidSet(r: .b, to: self.b) } }
 
   /// Auxiliary register: C
-  public var c: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .c, to: self.c) } }
+  public var c: UInt8 = 0 { didSet { Debug.registersDidSet(r: .c, to: self.c) } }
 
   /// Auxiliary register: D
-  public var d: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .d, to: self.d) } }
+  public var d: UInt8 = 0 { didSet { Debug.registersDidSet(r: .d, to: self.d) } }
 
   /// Auxiliary register: E
-  public var e: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .e, to: self.e) } }
+  public var e: UInt8 = 0 { didSet { Debug.registersDidSet(r: .e, to: self.e) } }
 
   /// Auxiliary register: H
-  public var h: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .h, to: self.h) } }
+  public var h: UInt8 = 0 { didSet { Debug.registersDidSet(r: .h, to: self.h) } }
 
   /// Auxiliary register: L
-  public var l: UInt8 = 0 { didSet { self.delegate?.registersDidSet(r: .l, to: self.l) } }
+  public var l: UInt8 = 0 { didSet { Debug.registersDidSet(r: .l, to: self.l) } }
 
   /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
-  public var zeroFlag: Bool = false { didSet { self.delegate?.registersDidSet(f: .zeroFlag, to: self.zeroFlag) } }
+  public var zeroFlag: Bool = false { didSet { Debug.registersDidSet(f: .zeroFlag, to: self.zeroFlag) } }
 
   /// N: Set to 1 following execution of the substruction instruction, regardless of the result.
-  public var subtractFlag: Bool = false { didSet { self.delegate?.registersDidSet(f: .subtractFlag, to: self.subtractFlag) } }
+  public var subtractFlag: Bool = false { didSet { Debug.registersDidSet(f: .subtractFlag, to: self.subtractFlag) } }
 
   /// H: Set to 1 when an operation results in carrying from or borrowing to bit 3.
-  public var halfCarryFlag: Bool = false { didSet { self.delegate?.registersDidSet(f: .halfCarryFlag, to: self.halfCarryFlag) } }
+  public var halfCarryFlag: Bool = false { didSet { Debug.registersDidSet(f: .halfCarryFlag, to: self.halfCarryFlag) } }
 
   /// CY: Set to 1 when an operation results in carrying from or borrowing to bit 7.
-  public var carryFlag: Bool = false { didSet { self.delegate?.registersDidSet(f: .carryFlag, to: self.carryFlag) } }
-
-  public weak var delegate: RegistersDelegate?
-
-  internal init(delegate: RegistersDelegate? = nil) {
-    self.delegate = delegate
-  }
+  public var carryFlag: Bool = false { didSet { Debug.registersDidSet(f: .carryFlag, to: self.carryFlag) } }
 
   // MARK: - Combined registers
 
@@ -146,21 +140,5 @@ public struct Registers: Codable {
     case .de: self.de = value
     case .hl: self.hl = value
     }
-  }
-
-  // MARK: - Codable
-
-  public enum CodingKeys: CodingKey {
-    case a
-    case b
-    case c
-    case d
-    case e
-    case h
-    case l
-    case zeroFlag
-    case subtractFlag
-    case halfCarryFlag
-    case carryFlag
   }
 }

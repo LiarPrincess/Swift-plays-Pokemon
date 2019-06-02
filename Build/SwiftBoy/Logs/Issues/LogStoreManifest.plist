@@ -6,31 +6,31 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>24474358-0C7E-49A6-89A0-F2930D72434F</key>
+		<key>253A43CB-7558-48B5-A040-222E75CC9438</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
 			<key>documentTypeString</key>
 			<string>&lt;nil&gt;</string>
 			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.framework</string>
 			<key>fileName</key>
-			<string>24474358-0C7E-49A6-89A0-F2930D72434F.xcactivitylog</string>
+			<string>253A43CB-7558-48B5-A040-222E75CC9438.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
 				<string>W</string>
 			</dict>
 			<key>signature</key>
-			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
+			<string>SwiftBoyKit-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>581090408.80441499</real>
+			<real>581165532.31897795</real>
 			<key>timeStoppedRecording</key>
-			<real>581090411.38034296</real>
+			<real>581165536.15560198</real>
 			<key>title</key>
-			<string>Build target SwiftBoy</string>
+			<string>Build target SwiftBoyKit</string>
 			<key>uniqueIdentifier</key>
-			<string>24474358-0C7E-49A6-89A0-F2930D72434F</string>
+			<string>253A43CB-7558-48B5-A040-222E75CC9438</string>
 		</dict>
 		<key>39631777-6973-46BD-8A02-A2D02CAA025D</key>
 		<dict>
@@ -84,31 +84,31 @@
 			<key>uniqueIdentifier</key>
 			<string>6F6635A5-FAD1-45C3-B6AD-5FB25652C19C</string>
 		</dict>
-		<key>EB07D4F6-84AC-48EC-A158-17C25B6CB52E</key>
+		<key>9E051BCD-2D5A-4AF8-A3FD-62AA4E03B724</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
 			<key>documentTypeString</key>
 			<string>&lt;nil&gt;</string>
 			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.framework</string>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
 			<key>fileName</key>
-			<string>EB07D4F6-84AC-48EC-A158-17C25B6CB52E.xcactivitylog</string>
+			<string>9E051BCD-2D5A-4AF8-A3FD-62AA4E03B724.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
 				<string>W</string>
 			</dict>
 			<key>signature</key>
-			<string>SwiftBoyKit-abzeqnrybuyschbjgynicpjneiwq</string>
+			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>581090408.80198896</real>
+			<real>581165551.85718095</real>
 			<key>timeStoppedRecording</key>
-			<real>581090408.807814</real>
+			<real>581165552.10285604</real>
 			<key>title</key>
-			<string>Build target SwiftBoyKit</string>
+			<string>Build target SwiftBoy</string>
 			<key>uniqueIdentifier</key>
-			<string>EB07D4F6-84AC-48EC-A158-17C25B6CB52E</string>
+			<string>9E051BCD-2D5A-4AF8-A3FD-62AA4E03B724</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>

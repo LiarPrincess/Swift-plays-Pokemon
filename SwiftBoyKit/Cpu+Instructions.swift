@@ -1376,9 +1376,9 @@ extension Cpu {
       fatalError("Tried to execute non existing cb-prefixed opcode '\(n.hex)'.")
     }
 
-    self.delegate?.cpuWillExecute(self, opcode: opcode)
+    Debug.cpuWillExecute(self, opcode: opcode)
     self.execute(opcode)
-    self.delegate?.cpuDidExecute(self, opcode: opcode)
+    Debug.cpuDidExecute(self, opcode: opcode)
   }
 
   /// Stop, blank the screen and wait for button press
