@@ -1,11 +1,3 @@
-//
-//  SwiftBoyKit.h
-//  SwiftBoyKit
-//
-//  Created by Michal Matuszczyk on 28/05/2019.
-//  Copyright © 2019 NoPoint. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
 
 //! Project version number for SwiftBoyKit.

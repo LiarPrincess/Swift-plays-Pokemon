@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		904B89CE22A5C8FB00F5FEFE /* Array+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */; };
 		908D6E08229DC71A00523C18 /* SaveLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E07229DC71A00523C18 /* SaveLoad.swift */; };
 		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
@@ -26,7 +27,6 @@
 		90A17B98229D59D50027133B /* Cpu+ExecuteUnprefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */; };
 		90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */; };
 		90A17B9B229D59D50027133B /* UnprefixedOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */; };
-		90A17B9C229D59D50027133B /* Array+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8D229D59D50027133B /* Array+subscript.swift */; };
 		90A17B9D229D59D50027133B /* Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8E229D59D50027133B /* Cpu.swift */; };
 		90A17BA8229D59EE0027133B /* CpuRotateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B9F229D59EE0027133B /* CpuRotateTests.swift */; };
 		90A17BA9229D59EE0027133B /* CpuCallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BA0229D59EE0027133B /* CpuCallTests.swift */; };
@@ -96,6 +96,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+UInt.swift"; sourceTree = "<group>"; };
 		908D6E07229DC71A00523C18 /* SaveLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoad.swift; sourceTree = "<group>"; };
 		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* SwiftBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,7 +121,6 @@
 		90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+ExecuteUnprefixed.swift"; sourceTree = "<group>"; };
 		90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+ExecutePrefixed.swift"; sourceTree = "<group>"; };
 		90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnprefixedOpcodes.swift; sourceTree = "<group>"; };
-		90A17B8D229D59D50027133B /* Array+subscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+subscript.swift"; sourceTree = "<group>"; };
 		90A17B8E229D59D50027133B /* Cpu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cpu.swift; sourceTree = "<group>"; };
 		90A17B9F229D59EE0027133B /* CpuRotateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuRotateTests.swift; sourceTree = "<group>"; };
 		90A17BA0229D59EE0027133B /* CpuCallTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuCallTests.swift; sourceTree = "<group>"; };
@@ -224,10 +224,10 @@
 				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
 				90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */,
 				90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */,
-				90A17B85229D59D50027133B /* Memory.swift */,
 				90C2AD3C22A17F3000F5A7AF /* _MemoryRegions.swift */,
+				90A17B85229D59D50027133B /* Memory.swift */,
 				90A56A3422A3DD0D0055A013 /* Emulator.swift */,
-				90A17B8D229D59D50027133B /* Array+subscript.swift */,
+				904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */,
 				90A17B84229D59D50027133B /* UInt+radixFormat.swift */,
 				908D6E0B229DDECD00523C18 /* String+pad.swift */,
 				90A56A3622A3DD8D0055A013 /* Debug.swift */,
@@ -474,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
+				904B89CE22A5C8FB00F5FEFE /* Array+UInt.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90C2AD3D22A17F3000F5A7AF /* _MemoryRegions.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
@@ -484,7 +485,6 @@
 				90A17B90229D59D50027133B /* Cpu+Instructions.swift in Sources */,
 				90A17B9D229D59D50027133B /* Cpu.swift in Sources */,
 				90A56A3722A3DD8D0055A013 /* Debug.swift in Sources */,
-				90A17B9C229D59D50027133B /* Array+subscript.swift in Sources */,
 				90A17B94229D59D50027133B /* Memory.swift in Sources */,
 				90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */,
 			);

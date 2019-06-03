@@ -15,9 +15,9 @@ extension Cpu {
   // MARK: - 8-Bit Transfer and Input/Output Instructions
 
   /// Loads the contents of register r' into register r.
-  internal func ld_r_r(_ dst: SingleRegister, _ src: SingleRegister) {
-    let value = self.registers.get(src)
-    self.registers.set(dst, to: value)
+  internal func ld_r_r(_ r0: SingleRegister, _ r1: SingleRegister) {
+    let value = self.registers.get(r1)
+    self.registers.set(r0, to: value)
 
     self.pc += 1
     self.cycle &+= 4

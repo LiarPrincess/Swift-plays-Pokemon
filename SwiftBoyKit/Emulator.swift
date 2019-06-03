@@ -14,6 +14,7 @@ public class Emulator {
     self.memory = memory
   }
 
+  // TODO: State after boot should be the ssame as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
   public func run(maxCycles: UInt16? = nil, lastPC: UInt16? = nil) {
     Debug.emulatorWillRun(self)
 
@@ -29,7 +30,7 @@ public class Emulator {
       }
       // ------------
 
-      self.cpu.tick()
+      let cycles = self.cpu.tick()
     }
   }
 

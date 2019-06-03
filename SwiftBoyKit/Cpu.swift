@@ -26,15 +26,26 @@ public class Cpu: Codable {
     self.memory = memory ?? Memory()
   }
 
-  internal func tick() {
+  /// Runs 1 instruction. Returns the number of cycles it took.
+  internal func tick() -> UInt16 {
     let rawOpcode = self.memory.read(self.pc)
     guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
       fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
     }
 
     Debug.cpuWillExecute(self, opcode: opcode)
+    let oldCycle = self.cycle
     self.execute(opcode)
     Debug.cpuDidExecute(self, opcode: opcode)
+
+    return self.calculateDuration(oldCycle)
+  }
+
+  private func calculateDuration(_ oldCycle: UInt16) -> UInt16 {
+    let hasOverflow = self.cycle < oldCycle
+    return hasOverflow ?
+      self.cycle + (0xFF - oldCycle) :
+      self.cycle - oldCycle
   }
 
   // MARK: - Next bytes
