@@ -6,33 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>1FEA29BD-6B91-405D-B15D-A753C78973A3</key>
-		<dict>
-			<key>className</key>
-			<string>IDEActivityLogSection</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
-			<key>fileName</key>
-			<string>1FEA29BD-6B91-405D-B15D-A753C78973A3.xcactivitylog</string>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>W</string>
-			</dict>
-			<key>signature</key>
-			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
-			<key>timeStartedRecording</key>
-			<real>581166848.27009904</real>
-			<key>timeStoppedRecording</key>
-			<real>581166850.59278297</real>
-			<key>title</key>
-			<string>Build target SwiftBoy</string>
-			<key>uniqueIdentifier</key>
-			<string>1FEA29BD-6B91-405D-B15D-A753C78973A3</string>
-		</dict>
-		<key>39631777-6973-46BD-8A02-A2D02CAA025D</key>
+		<key>5617E919-4CCF-4FCF-8730-EE829443F791</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -41,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.target</string>
 			<key>fileName</key>
-			<string>39631777-6973-46BD-8A02-A2D02CAA025D.xcactivitylog</string>
+			<string>5617E919-4CCF-4FCF-8730-EE829443F791.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -50,13 +24,13 @@
 			<key>signature</key>
 			<string>SwiftBoyKitTests-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>581090408.78730404</real>
+			<real>581287013.46484399</real>
 			<key>timeStoppedRecording</key>
-			<real>581090416.23185599</real>
+			<real>581287014.04616201</real>
 			<key>title</key>
 			<string>Build target SwiftBoyKitTests</string>
 			<key>uniqueIdentifier</key>
-			<string>39631777-6973-46BD-8A02-A2D02CAA025D</string>
+			<string>5617E919-4CCF-4FCF-8730-EE829443F791</string>
 		</dict>
 		<key>6F6635A5-FAD1-45C3-B6AD-5FB25652C19C</key>
 		<dict>
@@ -84,7 +58,33 @@
 			<key>uniqueIdentifier</key>
 			<string>6F6635A5-FAD1-45C3-B6AD-5FB25652C19C</string>
 		</dict>
-		<key>C73531D7-B548-44A9-9A4B-BAD4B4551EDB</key>
+		<key>82F140ED-925F-4A7A-9CCF-DD8B640AA124</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
+			<key>fileName</key>
+			<string>82F140ED-925F-4A7A-9CCF-DD8B640AA124.xcactivitylog</string>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>signature</key>
+			<string>SwiftBoy-abzeqnrybuyschbjgynicpjneiwq</string>
+			<key>timeStartedRecording</key>
+			<real>581290259.05436897</real>
+			<key>timeStoppedRecording</key>
+			<real>581290262.77737999</real>
+			<key>title</key>
+			<string>Build target SwiftBoy</string>
+			<key>uniqueIdentifier</key>
+			<string>82F140ED-925F-4A7A-9CCF-DD8B640AA124</string>
+		</dict>
+		<key>E0ED1D35-D912-46DF-AC5C-D3A4F7B1C9FE</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -93,7 +93,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.framework</string>
 			<key>fileName</key>
-			<string>C73531D7-B548-44A9-9A4B-BAD4B4551EDB.xcactivitylog</string>
+			<string>E0ED1D35-D912-46DF-AC5C-D3A4F7B1C9FE.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -102,13 +102,13 @@
 			<key>signature</key>
 			<string>SwiftBoyKit-abzeqnrybuyschbjgynicpjneiwq</string>
 			<key>timeStartedRecording</key>
-			<real>581166847.18179405</real>
+			<real>581290255.77875197</real>
 			<key>timeStoppedRecording</key>
-			<real>581166848.26864505</real>
+			<real>581290259.46350801</real>
 			<key>title</key>
 			<string>Build target SwiftBoyKit</string>
 			<key>uniqueIdentifier</key>
-			<string>C73531D7-B548-44A9-9A4B-BAD4B4551EDB</string>
+			<string>E0ED1D35-D912-46DF-AC5C-D3A4F7B1C9FE</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>

@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>19B02AE1-A584-42D5-89C5-5332E7248355</key>
+		<key>1A080991-648A-45BF-BEA2-3AC5B6BF6BAC</key>
 		<dict>
 			<key>className</key>
 			<string>DBGConsoleLog</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
 			<key>fileName</key>
-			<string>19B02AE1-A584-42D5-89C5-5332E7248355.xcactivitylog</string>
+			<string>1A080991-648A-45BF-BEA2-3AC5B6BF6BAC.xcactivitylog</string>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -30,45 +30,13 @@
 			<key>signature</key>
 			<string>Debug SwiftBoy</string>
 			<key>timeStartedRecording</key>
-			<real>581165552.14852095</real>
+			<real>581287004.74311697</real>
 			<key>timeStoppedRecording</key>
-			<real>581165568.11279702</real>
+			<real>581287011.27790403</real>
 			<key>title</key>
 			<string>Debug SwiftBoy</string>
 			<key>uniqueIdentifier</key>
-			<string>19B02AE1-A584-42D5-89C5-5332E7248355</string>
-		</dict>
-		<key>21884B46-08B5-4B85-B866-1F360287BD3F</key>
-		<dict>
-			<key>className</key>
-			<string>DBGConsoleLog</string>
-			<key>documentTypeString</key>
-			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
-			<key>fileName</key>
-			<string>21884B46-08B5-4B85-B866-1F360287BD3F.xcactivitylog</string>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>S</string>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>SwiftBoy project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>CodeGen</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Debug CodeGen</string>
-			<key>timeStartedRecording</key>
-			<real>581090129.23347902</real>
-			<key>timeStoppedRecording</key>
-			<real>581090130.92660296</real>
-			<key>title</key>
-			<string>Debug CodeGen</string>
-			<key>uniqueIdentifier</key>
-			<string>21884B46-08B5-4B85-B866-1F360287BD3F</string>
+			<string>1A080991-648A-45BF-BEA2-3AC5B6BF6BAC</string>
 		</dict>
 	</dict>
 </dict>
