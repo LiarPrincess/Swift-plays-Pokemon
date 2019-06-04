@@ -1,5 +1,8 @@
 public class Cpu: Codable {
 
+  /// 4.194304MHz
+  public static let clockSpeed: UInt = 4_194_304
+
   /// A 16-bit register that holds the address data of the program to be executed next.
   public var pc: UInt16 = 0
 
@@ -27,7 +30,7 @@ public class Cpu: Codable {
   }
 
   /// Runs 1 instruction. Returns the number of cycles it took.
-  internal func tick() -> UInt16 {
+  internal func tick() -> UInt8 {
     let rawOpcode = self.memory.read(self.pc)
     guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
       fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
@@ -38,7 +41,7 @@ public class Cpu: Codable {
     self.execute(opcode)
     Debug.cpuDidExecute(self, opcode: opcode)
 
-    return self.calculateDuration(oldCycle)
+    return UInt8(self.calculateDuration(oldCycle))
   }
 
   private func calculateDuration(_ oldCycle: UInt16) -> UInt16 {
