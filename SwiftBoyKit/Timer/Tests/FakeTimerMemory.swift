@@ -1,6 +1,6 @@
 @testable import SwiftBoyKit
 
-class TestTimerMemory: TimerMemoryView {
+class FakeTimerMemory: TimerMemoryView {
   var div:  UInt8 = 0
   var tima: UInt8 = 0
   var tma:  UInt8 = 0

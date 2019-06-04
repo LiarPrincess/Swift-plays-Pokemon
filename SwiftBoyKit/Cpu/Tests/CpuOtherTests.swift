@@ -8,7 +8,8 @@ import XCTest
 class CpuOtherTests: XCTestCase {
 
   func test_nop() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.pc = 0xfefe
     cpu.nop()
 
@@ -18,7 +19,8 @@ class CpuOtherTests: XCTestCase {
   /// When A = 35h,
   /// CPL ; A ← CAh
   func test_cpl() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.a = 0x35
     cpu.cpl()
 
@@ -26,7 +28,8 @@ class CpuOtherTests: XCTestCase {
   }
 
   func test_scf() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.carryFlag = false
     cpu.ccf()
 
@@ -36,7 +39,8 @@ class CpuOtherTests: XCTestCase {
   /// When CY = 1,
   /// CCF ; CY ← 0
   func test_ccf() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.carryFlag = true
     cpu.ccf()
 

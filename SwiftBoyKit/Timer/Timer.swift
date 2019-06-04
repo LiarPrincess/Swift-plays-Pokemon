@@ -5,7 +5,7 @@ public class Timer {
 
   private var memory: TimerMemoryView
 
-  init(memory: TimerMemoryView) {
+  internal init(memory: TimerMemoryView) {
     self.memory = memory
   }
 

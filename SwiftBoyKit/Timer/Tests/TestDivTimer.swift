@@ -4,10 +4,10 @@ import XCTest
 class TestDivTimer: XCTestCase {
 
   func test_divIncrement() {
-    let memory = TestTimerMemory()
+    let memory = FakeTimerMemory()
     let timer = Timer(memory: memory)
 
-    for _ in 0..<0xff {
+    for _ in 1...0xff {
       timer.tick(cycles: 4)
       XCTAssertEqual(memory.div, 0)
     }
@@ -17,18 +17,18 @@ class TestDivTimer: XCTestCase {
   }
 
   func test_divOverflow() {
-    let memory = TestTimerMemory()
+    let memory = FakeTimerMemory()
     let timer = Timer(memory: memory)
 
     // next tick will overflow
     memory.div = 0xff
 
-    for _ in 0..<0xff {
-      timer.tick(cycles: 4)
+    for _ in 1...0xff {
+      timer.tick(cycles: 8)
       XCTAssertEqual(memory.div, 0xff)
     }
 
-    timer.tick(cycles: 4) // 256 tick
+    timer.tick(cycles: 8) // 256 tick
     XCTAssertEqual(memory.div, 0)
   }
 }

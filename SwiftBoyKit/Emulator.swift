@@ -1,17 +1,14 @@
+// TODO: Restore Codable
 public class Emulator {
 
   public let cpu: Cpu
   public let memory: Memory
+  public let timer: Timer
 
   public init() {
     self.memory = Memory()
     self.cpu = Cpu(memory: self.memory)
-  }
-
-  // TODO: Remove this ctor
-  public init(_ cpu: Cpu, _ memory: Memory) {
-    self.cpu = cpu
-    self.memory = memory
+    self.timer = Timer(memory: self.memory)
   }
 
   // TODO: State after boot should be the ssame as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html

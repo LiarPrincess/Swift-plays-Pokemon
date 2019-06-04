@@ -27,7 +27,7 @@ public enum CombinedRegister {
   case hl
 }
 
-public struct Registers: Codable {
+public struct Registers {
 
   /// Accumulator: A
   /// An 8-bit register for storing data and the results of arithmetic and logical operations.

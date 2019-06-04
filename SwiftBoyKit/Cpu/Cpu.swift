@@ -1,4 +1,4 @@
-public class Cpu: Codable {
+public class Cpu {
 
   /// 4.194304MHz
   public static let clockSpeed: UInt = 4_194_304
@@ -21,12 +21,12 @@ public class Cpu: Codable {
   /// Is halted flag.
   public var isHalted: Bool = false
 
-  public var memory: Memory
   public var registers: Registers
+  internal var memory: CpuMemoryView
 
-  public init(memory: Memory? = nil) {
+  internal init(memory: CpuMemoryView) {
     self.registers = Registers()
-    self.memory = memory ?? Memory()
+    self.memory = memory
   }
 
   /// Runs 1 instruction. Returns the number of cycles it took.

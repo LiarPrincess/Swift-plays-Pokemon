@@ -12,7 +12,8 @@ class CpuShiftTests: XCTestCase {
   /// When D = 80h, (HL) = FFh, and CY = 0,
   /// SLA D ; D←00h,CY←1,Z←1,H←0,N←0
   func test_sla_r() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.d = 0x80
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xff)
@@ -29,7 +30,8 @@ class CpuShiftTests: XCTestCase {
   /// When D = 80h, (HL) = FFh, and CY = 0,
   /// SLA (HL) ; (HL)←FEh,CY←1,Z←0,H←0,N←0
   func test_sla_pHL() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.d = 0x80
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xff)
@@ -46,7 +48,8 @@ class CpuShiftTests: XCTestCase {
   /// When A = 8Ah, (HL) = 01h, and CY = 0,
   /// SRA D ; A←C5h,CY←0,Z←0,H←0,N←0
   func test_sra_r() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.a = 0x8a
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0x01)
@@ -64,7 +67,8 @@ class CpuShiftTests: XCTestCase {
   /// When A = 8Ah, (HL) = 01h, and CY = 0,
   /// SRA (HL) ; (HL)←00h,CY←1,Z←1,H←0,N←0
   func test_sra_pHL() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.a = 0x8a
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0x01)
@@ -81,7 +85,8 @@ class CpuShiftTests: XCTestCase {
   /// When A = 01h, (HL) = FFh, CY + 0,
   /// SRL A ; A←00h,CY←1,Z←1,H←0,N←0
   func test_srl_r() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.a = 0x01
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xff)
@@ -98,7 +103,8 @@ class CpuShiftTests: XCTestCase {
   /// When A = 01h, (HL) = FFh, CY + 0,
   /// SRL (HL) ; (HL)←7Fh,CY←1,Z←0,H←0,N←0
   func test_srl_pHL() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.a = 0x01
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xff)
@@ -117,7 +123,8 @@ class CpuShiftTests: XCTestCase {
   /// When A = 00h and (HL) = F0h,
   /// SWAP A ; A←00h,Z←1,H←0,N←0,CY←0
   func test_swap_r() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.a = 0x00
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xf0)
@@ -133,7 +140,8 @@ class CpuShiftTests: XCTestCase {
   /// When A = 00h and (HL) = F0h,
   /// SWAP(HL) ; (HL)←0Fh,Z←0,H←0,N←0,CY←0
   func test_swap_pHL() {
-    let cpu = Cpu()
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
     cpu.registers.a = 0x00
     cpu.registers.hl = 0xfefe
     cpu.memory.write(0xfefe, value: 0xf0)

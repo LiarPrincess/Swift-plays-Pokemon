@@ -1,3 +1,4 @@
+/// Memory as viewied by timer.
 internal protocol TimerMemoryView {
 
   /// Divider - This register is incremented at rate of 16384Hz.
@@ -26,8 +27,6 @@ internal enum TimerMemoryAddress {
 }
 
 extension Memory: TimerMemoryView {
-
-  internal var timer: TimerMemoryView { return self }
 
   internal var div: UInt8 {
     get { return self[TimerMemoryAddress.div] }

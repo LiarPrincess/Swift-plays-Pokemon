@@ -1,4 +1,4 @@
-public class Memory: Codable {
+public class Memory {
 
   public var data = [UInt8](repeating: 0, count: 0x10000)
 
@@ -10,14 +10,13 @@ public class Memory: Codable {
 
   public func write(_ address: UInt16, value: UInt8) {
     switch address {
-// TODO: Some memory address act differently on write
-//    case 0x0000...0x8000: // read-only
-//      break
-//    case 0xe000...0xfdff: // echo also writes in C000-DDFF
-//      self[address] = value
-//      self[address - 0x2000] = value
-//    case 0xfea0...0xfeff: // restricted
-//      break
+    case 0x0000...0x8000: // read-only
+      break
+    case 0xe000...0xfdff: // echo also writes in C000-DDFF
+      self[address] = value
+      self[address - 0x2000] = value
+    case 0xfea0...0xfeff: // restricted
+      break
     case TimerMemoryAddress.div: // div should be reset to 0 on any write
       // TODO: we shoudl also invalidate internal counter in timer
       self[address] = 0
