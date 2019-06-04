@@ -7,12 +7,12 @@ class TestDivTimer: XCTestCase {
     let memory = FakeTimerMemory()
     let timer = Timer(memory: memory)
 
-    for _ in 1...0xff {
+    for _ in 1..<64 {
       timer.tick(cycles: 4)
       XCTAssertEqual(memory.div, 0)
     }
 
-    timer.tick(cycles: 4) // 256 tick
+    timer.tick(cycles: 4)
     XCTAssertEqual(memory.div, 1)
   }
 
@@ -23,12 +23,12 @@ class TestDivTimer: XCTestCase {
     // next tick will overflow
     memory.div = 0xff
 
-    for _ in 1...0xff {
-      timer.tick(cycles: 8)
+    for _ in 1..<64 {
+      timer.tick(cycles: 4)
       XCTAssertEqual(memory.div, 0xff)
     }
 
-    timer.tick(cycles: 8) // 256 tick
+    timer.tick(cycles: 4)
     XCTAssertEqual(memory.div, 0)
   }
 }

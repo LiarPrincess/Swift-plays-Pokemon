@@ -18,7 +18,7 @@ public class Memory {
     case 0xfea0...0xfeff: // restricted
       break
     case TimerMemoryAddress.div: // div should be reset to 0 on any write
-      // TODO: we shoudl also invalidate internal counter in timer
+      // TODO: we should also invalidate internal counter in timer
       self[address] = 0
     default:
       self[address] = value
