@@ -2,24 +2,24 @@ import Foundation
 
 let currentFile = URL(fileURLWithPath: #file)
 let sourcesDir = currentFile.deletingLastPathComponent().deletingLastPathComponent()
-let frameworkDir = sourcesDir.appendingPathComponent("SwiftBoyKit")
+let cpuDir = sourcesDir.appendingPathComponent("SwiftBoyKit").appendingPathComponent("Cpu")
 
 let opcodes = try openOpcodesFile()
 defer { fclose(stdout) }
 
-var file = frameworkDir.appendingPathComponent("UnprefixedOpcodes.swift")
+var file = cpuDir.appendingPathComponent("UnprefixedOpcodes.swift")
 freopen(file.path, "w", stdout)
 printOpcodes(opcodes)
 
-file = frameworkDir.appendingPathComponent("CBPrefixedOpcodes.swift")
+file = cpuDir.appendingPathComponent("CBPrefixedOpcodes.swift")
 freopen(file.path, "w", stdout)
 printPrefixOpcodes(opcodes)
 
-file = frameworkDir.appendingPathComponent("Cpu+ExecuteUnprefixed.swift")
+file = cpuDir.appendingPathComponent("Cpu+ExecuteUnprefixed.swift")
 freopen(file.path, "w", stdout)
 printExecuteExtension(opcodes)
 
-file = frameworkDir.appendingPathComponent("Cpu+ExecutePrefixed.swift")
+file = cpuDir.appendingPathComponent("Cpu+ExecutePrefixed.swift")
 freopen(file.path, "w", stdout)
 printExecutePrefixExtension(opcodes)
 
