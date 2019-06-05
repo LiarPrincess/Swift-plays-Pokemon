@@ -79,14 +79,14 @@ extension Debug {
   /// We can't just 'cpu.memory.read' as this may involve side-effect on emulator side
   private static func next8(_ cpu: Cpu) -> UInt8 {
     let memory = cpu.memory as! Memory
-    return memory[cpu.pc + 1]
+    return memory.read(cpu.pc + 1, debug: false)
   }
 
   /// We can't just 'cpu.memory.read' as this may involve side-effect on emulator side
   private static func next16(_ cpu: Cpu) -> UInt16 {
     let memory = cpu.memory as! Memory
-    let low  = UInt16(memory[cpu.pc + 1])
-    let high = UInt16(memory[cpu.pc + 2])
+    let low  = UInt16(memory.read(cpu.pc + 1, debug: false))
+    let high = UInt16(memory.read(cpu.pc + 2, debug: false))
     return (high << 8) | low
   }
 
@@ -124,7 +124,10 @@ extension Debug {
   private static func printRegisters(_ cpu: Cpu, indent: String = "") {
     let registers = cpu.registers
     let memory = cpu.memory as! Memory
-    let stackValues = memory[max(0xff80, Int(cpu.sp))..<0xfffe]
+
+    let stackStart: UInt16 = max(0xff80, cpu.sp)
+    let stackEnd:   UInt16 = 0xfffe
+    let stackValues = (stackStart...stackEnd).map { memory.highRam.read(globalAddress: $0) }
 
     print("""
       \(indent)cycle: \(cpu.cycle)

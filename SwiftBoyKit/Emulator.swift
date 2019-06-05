@@ -3,15 +3,15 @@ public class Emulator {
 
   public let cpu: Cpu
   public let memory: Memory
-  public let timer: Timer
+//  public let timer: Timer
 
   public init() {
     self.memory = Memory()
     self.cpu = Cpu(memory: self.memory)
-    self.timer = Timer(memory: self.memory)
+//    self.timer = Timer(memory: self.memory)
   }
 
-  // TODO: State after boot should be the ssame as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
+  // TODO: State after boot should be the same as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
   public func run(maxCycles: UInt16? = nil, lastPC: UInt16? = nil) {
     Debug.emulatorWillRun(self)
 
@@ -34,13 +34,17 @@ public class Emulator {
   public func fakeEmptyCartridge() {
     let bootromStart = 0x0000
     let bootromEnd = bootromStart + bootrom.count
-    self.memory.data.replaceSubrange(bootromStart..<bootromEnd, with: bootrom)
+    self.memory.rom0.data.replaceSubrange(bootromStart..<bootromEnd, with: bootrom)
 
     let logoStart = 0x0104
     let logoEnd = logoStart + nintendoLogo.count
-    self.memory.data.replaceSubrange(logoStart..<logoEnd, with: nintendoLogo)
+    self.memory.rom0.data.replaceSubrange(logoStart..<logoEnd, with: nintendoLogo)
   }
 }
+
+private let bootromStart: UInt16 = 0x00
+private let bootromEnd:   UInt16 = 0xff
+private let bootromSize:  UInt16 = bootromEnd - bootromStart + 1
 
 private let bootrom: [UInt8] = [
 /*          0     1     2     3     4     5     6     7     8     9    a      b     c     d     e     f */
