@@ -30,6 +30,8 @@ public class Memory {
   ]
 
   internal init() {
+    // If we pass region as init param to another region then it should be stored as 'unowned',
+    // not for ARC, but for semantics (memory should be the owner of all regions).
     self.rom0 = Rom0Memory()
     self.rom1 = Rom1Memory()
     self.videoRam = VideoRam()

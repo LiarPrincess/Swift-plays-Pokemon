@@ -216,7 +216,6 @@
 		904B89D522A6569700F5FEFE /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				904B89D822A65BE500F5FEFE /* Tests */,
 				904B89D122A5CB9B00F5FEFE /* Timer.swift */,
 			);
 			path = Timer;
@@ -228,7 +227,8 @@
 				904B89D922A6608D00F5FEFE /* FakeTimerMemory.swift */,
 				904B89DC22A660CB00F5FEFE /* TestDivTimer.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../Timer/Tests;
 			sourceTree = "<group>";
 		};
 		9073102522A66A2000EBC7BB /* Cpu */ = {
@@ -343,6 +343,7 @@
 		90D58EE122A7B2580076584F /* Memory */ = {
 			isa = PBXGroup;
 			children = (
+				904B89D822A65BE500F5FEFE /* Tests */,
 				90D58F0922A7CC7A0076584F /* 0000-3FFF-Rom0Memory.swift */,
 				90D58F0A22A7CC7A0076584F /* 4000-7FFF-Rom1Memory.swift */,
 				90D58F0F22A7CC7B0076584F /* 8000-9FFF-VideoRam.swift */,

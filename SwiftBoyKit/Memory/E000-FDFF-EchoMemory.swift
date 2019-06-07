@@ -8,9 +8,9 @@ public class EchoMemory: MemoryRegion {
   public static let start: UInt16 = 0xe000
   public static let end:   UInt16 = 0xfdff
 
-  private let workRam: WorkRam
+  private unowned let workRam: WorkRam
 
-  init(workRam: WorkRam) {
+  internal init(workRam: WorkRam) {
     self.workRam = workRam
   }
 
