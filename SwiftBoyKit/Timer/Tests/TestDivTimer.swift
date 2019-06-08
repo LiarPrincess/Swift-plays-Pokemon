@@ -10,32 +10,32 @@ class TestDivTimer: XCTestCase {
   /// clockSpeed/divFrequency = 4_194_304/16_384 = 256
   /// 1. 250 cycles -> no increment (<256)
   /// 2. 260 cycles -> increment (>256)
-  func test_divIncrement() {
-    let timer = TimerMemory()
+  func test_increment() {
+    let timer = DivTimer()
 
     for _ in 0..<25 {
       timer.tick(cycles: 10)
-      XCTAssertEqual(timer.div, 0)
+      XCTAssertEqual(timer.value, 0)
     }
 
     timer.tick(cycles: 10)
-    XCTAssertEqual(timer.div, 1)
+    XCTAssertEqual(timer.value, 1)
   }
 
   /// 1. Set div to 0xff
   /// 2. Overflow it
   /// 3. Should go back to 0
-  func test_divOverflow() {
-    let timer = TimerMemory()
+  func test_overflow() {
+    let timer = DivTimer()
 
-    timer.div = 0xff
+    timer.value = 0xff
 
     for _ in 0..<25 {
       timer.tick(cycles: 10)
-      XCTAssertEqual(timer.div, 0xff)
+      XCTAssertEqual(timer.value, 0xff)
     }
 
     timer.tick(cycles: 10)
-    XCTAssertEqual(timer.div, 0x00)
+    XCTAssertEqual(timer.value, 0x00)
   }
 }

@@ -7,12 +7,10 @@ public class Emulator {
 
   public let cpu: Cpu
   public let memory: Memory
-//  public let timer: Timer
 
   public init() {
     self.memory = Memory()
     self.cpu = Cpu(memory: self.memory)
-//    self.timer = Timer(memory: self.memory)
   }
 
   // TODO: State after boot should be the same as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
@@ -32,6 +30,8 @@ public class Emulator {
       // ------------
 
       let cycles = self.cpu.tick()
+      memory.divTimer.tick(cycles: cycles)
+      memory.appTimer.tick(cycles: cycles)
     }
   }
 

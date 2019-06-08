@@ -7,6 +7,7 @@ public class EchoMemory: MemoryRegion {
 
   public static let start: UInt16 = 0xe000
   public static let end:   UInt16 = 0xfdff
+  public static let size:  UInt16 = end - start + 1
 
   private unowned let workRam: WorkRam
 

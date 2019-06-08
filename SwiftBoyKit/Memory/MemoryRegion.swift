@@ -21,7 +21,7 @@ public protocol MemoryRegion: AnyObject, Codable {
 }
 
 /// Memory region that is internally backed by array
-public protocol ContinuousMemoryRegion: MemoryRegion {
+internal protocol ContinuousMemoryRegion: MemoryRegion {
 
   /// First address included in the region
   static var start: UInt16 { get }

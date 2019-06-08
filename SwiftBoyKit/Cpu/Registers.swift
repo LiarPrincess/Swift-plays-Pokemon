@@ -110,11 +110,12 @@ public struct Registers {
   public func get(_ r: CombinedRegister) -> UInt16 {
     switch r {
     case .af:
-      let zeroFlag:      UInt16 = self.zeroFlag      ? (1 << zeroFlagPosition)      : 0
-      let subtractFlag:  UInt16 = self.subtractFlag  ? (1 << subtractFlagPosition)  : 0
-      let halfCarryFlag: UInt16 = self.halfCarryFlag ? (1 << halfCarryFlagPosition) : 0
-      let carryFlag:     UInt16 = self.carryFlag     ? (1 << carryFlagPosition)     : 0
-      return zeroFlag | subtractFlag | halfCarryFlag | carryFlag
+      var result: UInt16 = 0
+      result += self.zeroFlag      ? (1 << zeroFlagPosition)      : 0
+      result += self.subtractFlag  ? (1 << subtractFlagPosition)  : 0
+      result += self.halfCarryFlag ? (1 << halfCarryFlagPosition) : 0
+      result += self.carryFlag     ? (1 << carryFlagPosition)     : 0
+      return result
     case .bc: return self.bc
     case .de: return self.de
     case .hl: return self.hl

@@ -3,30 +3,32 @@
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
 public class Memory {
+  /* 0000-3FFF     */ public let rom0: Rom0Memory
+  /* 4000-7FFF     */ public let rom1: Rom1Memory
 
-  /* 0000-3FFF */ public let rom0: Rom0Memory
-  /* 4000-7FFF */ public let rom1: Rom1Memory
+  /* 8000-9FFF     */ public let videoRam: VideoRam
+  /* A000-BFFF     */ public let externalRam: ExternalRam
+  /* C000-DFFF     */ public let workRam: WorkRam
+  /* E000-FDFF     */ public let echoMemory: EchoMemory
+  /* FE00-FE9F     */ public let oam: Oam
 
-  /* 8000-9FFF */ public let videoRam: VideoRam
-  /* A000-BFFF */ public let externalRam: ExternalRam
-  /* C000-DFFF */ public let workRam: WorkRam
-  /* E000-FDFF */ public let echoMemory: EchoMemory
-  /* FE00-FE9F */ public let oam: Oam
+  /* FF00-FF7F     */ public let ioPorts: IOPorts
+  /* FF00          */ public let joypadMemory: JoypadMemory
+  /* FF01-FF02     */ public let serialPortMemory: SerialPortMemory
 
-  /* FF00-FF7F */ public let ioPorts: IOPorts
-  /* FF00      */ public let joypadMemory: JoypadMemory
-  /* FF01-FF02 */ public let serialPortMemory: SerialPortMemory
-  /* FF04-FF07 */ public let timer: TimerMemory
+  /* FF04          */ public let divTimer: DivTimer
+  /* FF05-FF07     */ public let appTimer: AppTimer
 
   /* FF0F-and-FFFF */ public let interruptMemory: InterruptMemory
-  /* FF80-FFFE */     public let highRam: HighRam
+  /* FF80-FFFE     */ public let highRam: HighRam
 
   private lazy var allRegions: [MemoryRegion] = [
     self.rom0, self.rom1,
     self.videoRam, self.externalRam, self.workRam, self.echoMemory, self.oam,
-    self.joypadMemory, self.serialPortMemory, self.timer,
-    self.ioPorts, // this must be last (for now)
-    self.interruptMemory, self.highRam
+    self.joypadMemory, self.serialPortMemory,
+    self.divTimer, self.appTimer,
+    self.interruptMemory, self.highRam,
+    self.ioPorts
   ]
 
   internal init() {
@@ -42,7 +44,8 @@ public class Memory {
     self.ioPorts = IOPorts()
     self.joypadMemory = JoypadMemory()
     self.serialPortMemory = SerialPortMemory()
-    self.timer = TimerMemory()
+    self.divTimer = DivTimer()
+    self.appTimer = AppTimer()
     self.interruptMemory = InterruptMemory()
     self.highRam = HighRam()
   }
