@@ -52,7 +52,7 @@ extension ContinuousMemoryRegion {
     self.data[localAddress] = value
   }
 
-  private func localAddress(from address: UInt16) -> UInt16 {
+  internal func localAddress(from address: UInt16) -> UInt16 {
     return address - Self.start
   }
 }

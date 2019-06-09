@@ -9,12 +9,13 @@ public class Memory {
   /* 8000-9FFF     */ public let videoRam: VideoRam
   /* A000-BFFF     */ public let externalRam: ExternalRam
   /* C000-DFFF     */ public let workRam: WorkRam
-  /* E000-FDFF     */ public let echoMemory: EchoMemory
+  /* E000-FDFF     */ public let echo: EchoMemory
   /* FE00-FE9F     */ public let oam: Oam
 
   /* FF00-FF7F     */ public let ioPorts: IOPorts
-  /* FF00          */ public let joypadMemory: JoypadMemory
-  /* FF01-FF02     */ public let serialPortMemory: SerialPortMemory
+  /* FF00          */ public let joypad: JoypadMemory
+  /* FF01-FF02     */ public let serialPort: SerialPortMemory
+  /* FF40-FF4B     */ public let lcd: LcdMemory
 
   /* FF04          */ public let divTimer: DivTimer
   /* FF05-FF07     */ public let appTimer: AppTimer
@@ -24,8 +25,8 @@ public class Memory {
 
   private lazy var allRegions: [MemoryRegion] = [
     self.rom0, self.rom1,
-    self.videoRam, self.externalRam, self.workRam, self.echoMemory, self.oam,
-    self.joypadMemory, self.serialPortMemory,
+    self.videoRam, self.externalRam, self.workRam, self.echo, self.oam,
+    self.joypad, self.serialPort, self.lcd,
     self.divTimer, self.appTimer,
     self.interrupts, self.highRam,
     self.ioPorts
@@ -40,11 +41,12 @@ public class Memory {
     self.videoRam = VideoRam()
     self.externalRam = ExternalRam()
     self.workRam = WorkRam()
-    self.echoMemory = EchoMemory(workRam: self.workRam)
+    self.echo = EchoMemory(workRam: self.workRam)
     self.oam = Oam()
     self.ioPorts = IOPorts()
-    self.joypadMemory = JoypadMemory()
-    self.serialPortMemory = SerialPortMemory()
+    self.joypad = JoypadMemory()
+    self.serialPort = SerialPortMemory()
+    self.lcd = LcdMemory()
     self.divTimer = DivTimer()
     self.appTimer = AppTimer(interrupts: interrupts)
     self.highRam = HighRam()

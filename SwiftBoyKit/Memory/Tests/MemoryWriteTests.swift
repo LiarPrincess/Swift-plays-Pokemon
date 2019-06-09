@@ -53,17 +53,22 @@ class MemoryWriteTests: XCTestCase {
   func test_joypadMemory() {
     let memory = Memory()
     memory.write(JoypadMemory.address, value: 5)
-    XCTAssertEqual(memory.joypadMemory.value, 5)
+    XCTAssertEqual(memory.joypad.value, 5)
   }
 
   func test_serialPortMemory() {
     let memory = Memory()
 
     memory.write(SerialPortMemory.sbAddress, value: 5)
-    XCTAssertEqual(memory.serialPortMemory.sb, 5)
+    XCTAssertEqual(memory.serialPort.sb, 5)
 
     memory.write(SerialPortMemory.scAddress, value: 6)
-    XCTAssertEqual(memory.serialPortMemory.sc, 6)
+    XCTAssertEqual(memory.serialPort.sc, 6)
+  }
+
+  func test_lcdMemory() {
+    let memory = Memory()
+    self.testContinuousRegion(in: memory, region: memory.lcd)
   }
 
   func test_divTimer() {
