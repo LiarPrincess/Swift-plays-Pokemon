@@ -2,8 +2,11 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-extension StringProtocol {
+extension String {
   public func pad(toLength newLength: Int) -> String {
-    return self.padding(toLength: newLength, withPad: " ", startingAt: 0)
+    // self.count is O(n)
+    return self.count < newLength ?
+      self.padding(toLength: newLength, withPad: " ", startingAt: 0) :
+      self
   }
 }

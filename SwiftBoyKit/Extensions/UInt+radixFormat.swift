@@ -18,7 +18,7 @@ extension UInt8 {
   public var bin: String  {
     let s = String(self, radix: 2, uppercase: false)
     let padding = String(repeating: "0", count: 8 - s.count)
-    return "0x\(padding)\(s)"
+    return "0b\(padding)\(s)"
   }
 }
 
@@ -38,6 +38,6 @@ extension UInt16 {
   public var bin: String  {
     let s = String(self, radix: 2, uppercase: false)
     let padding = String(repeating: "0", count: 16 - s.count)
-    return "0x\(padding)\(s)"
+    return "0b\(padding)\(s)"
   }
 }

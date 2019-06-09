@@ -5,7 +5,7 @@
 import XCTest
 @testable import SwiftBoyKit
 
-class TestAppTimer: XCTestCase {
+class AppTimerTests: XCTestCase {
 
   private let disabled:   UInt8 = 0b000
   private let enabled:    UInt8 = 0b100

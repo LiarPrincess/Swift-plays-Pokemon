@@ -5,7 +5,7 @@
 import XCTest
 @testable import SwiftBoyKit
 
-class TestDivTimer: XCTestCase {
+class DivTimerTests: XCTestCase {
 
   /// clockSpeed/divFrequency = 4_194_304/16_384 = 256
   /// 1. 250 cycles -> no increment (<256)

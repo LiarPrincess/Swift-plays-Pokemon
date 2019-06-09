@@ -5,14 +5,16 @@
 import XCTest
 @testable import SwiftBoyKit
 
-class TestMemoryWrites: XCTestCase {
+class MemoryReadTests: XCTestCase {
 
   func test_rom0() {
-    XCTAssert(true, "'rom0' is read only")
+    let memory = Memory()
+    self.testContinuousRegion(in: memory, region: memory.rom0)
   }
 
   func test_rom1() {
-    XCTAssert(true, "'rom1' is read only")
+    let memory = Memory()
+    self.testContinuousRegion(in: memory, region: memory.rom1)
   }
 
   func test_videoRam() {
@@ -34,11 +36,11 @@ class TestMemoryWrites: XCTestCase {
     let memory = Memory()
     let dataRegion = memory.workRam
 
-    memory.write(EchoMemory.start, value: 5)
-    XCTAssertEqual(dataRegion.data[0], 5)
+    dataRegion.data[0] = 5
+    XCTAssertEqual(memory.read(EchoMemory.start), 5)
 
-    memory.write(EchoMemory.end, value: 7)
-    XCTAssertEqual(dataRegion.data[EchoMemory.size - 1], 7)
+    dataRegion.data[EchoMemory.size - 1] = 7
+    XCTAssertEqual(memory.read(EchoMemory.end), 7)
   }
 
   func test_oam() {
@@ -47,52 +49,52 @@ class TestMemoryWrites: XCTestCase {
   }
 
   func test_ioPorts() {
-    // TODO: add 'ioPorts' write tests
+    // TODO: add 'ioPorts' read tests
   }
 
   func test_joypadMemory() {
     let memory = Memory()
-    memory.write(JoypadMemory.address, value: 5)
-    XCTAssertEqual(memory.joypadMemory.value, 5)
+    memory.joypadMemory.value = 5
+    XCTAssertEqual(memory.read(JoypadMemory.address), 5)
   }
 
   func test_serialPortMemory() {
     let memory = Memory()
 
-    memory.write(SerialPortMemory.sbAddress, value: 5)
-    XCTAssertEqual(memory.serialPortMemory.sb, 5)
+    memory.serialPortMemory.sb = 5
+    XCTAssertEqual(memory.read(SerialPortMemory.sbAddress), 5)
 
-    memory.write(SerialPortMemory.scAddress, value: 6)
-    XCTAssertEqual(memory.serialPortMemory.sc, 6)
+    memory.serialPortMemory.sc = 6
+    XCTAssertEqual(memory.read(SerialPortMemory.scAddress), 6)
   }
 
   func test_divTimer() {
     let memory = Memory()
-    memory.write(DivTimer.address, value: 5)
-    XCTAssertEqual(memory.divTimer.value, 0) // should reset on write
+    memory.divTimer.value = 5
+    XCTAssertEqual(memory.read(DivTimer.address), 5)
   }
 
   func test_appTimer() {
     let memory = Memory()
 
-    memory.write(AppTimer.timaAddress, value: 5)
-    XCTAssertEqual(memory.appTimer.tima, 5)
+    memory.appTimer.tima = 5
+    XCTAssertEqual(memory.read(AppTimer.timaAddress), 5)
 
-    memory.write(AppTimer.tmaAddress, value: 6)
-    XCTAssertEqual(memory.appTimer.tma, 6)
+    memory.appTimer.tma = 6
+    XCTAssertEqual(memory.read(AppTimer.tmaAddress), 6)
 
-    memory.write(AppTimer.tacAddress, value: 7)
-    XCTAssertEqual(memory.appTimer.tac, 7)
+    memory.appTimer.tac = 7
+    XCTAssertEqual(memory.read(AppTimer.tacAddress), 7)
   }
 
   func test_interrupts() {
     let memory = Memory()
 
-    memory.write(Interrupts.ifAddress, value: 5)
-    XCTAssertEqual(memory.interrupts.if, 5)
+    memory.interrupts.if = 5
+    XCTAssertEqual(memory.read(Interrupts.ifAddress), 5)
 
-    memory.write(Interrupts.ieAddress, value: 6)
-    XCTAssertEqual(memory.interrupts.ie, 6)
+    memory.interrupts.ie = 6
+    XCTAssertEqual(memory.read(Interrupts.ieAddress), 6)
   }
 
   func test_highRam() {
@@ -101,10 +103,10 @@ class TestMemoryWrites: XCTestCase {
   }
 
   private func testContinuousRegion<T: ContinuousMemoryRegion>(in memory: Memory, region: T) {
-    memory.write(T.start, value: 5)
-    XCTAssertEqual(region.data[0], 5)
+    region.data[0] = 5
+    XCTAssertEqual(memory.read(T.start), 5)
 
-    memory.write(T.end, value: 7)
-    XCTAssertEqual(region.data[T.size - 1], 7)
+    region.data[T.size - 1] = 7
+    XCTAssertEqual(memory.read(T.end), 7)
   }
 }
