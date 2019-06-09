@@ -85,14 +85,14 @@ class TestMemoryWrites: XCTestCase {
     XCTAssertEqual(memory.appTimer.tac, 7)
   }
 
-  func test_interruptMemory() {
+  func test_interrupts() {
     let memory = Memory()
 
-    memory.write(InterruptMemory.ifAddress, value: 5)
-    XCTAssertEqual(memory.interruptMemory.if, 5)
+    memory.write(Interrupts.ifAddress, value: 5)
+    XCTAssertEqual(memory.interrupts.if, 5)
 
-    memory.write(InterruptMemory.ieAddress, value: 6)
-    XCTAssertEqual(memory.interruptMemory.ie, 6)
+    memory.write(Interrupts.ieAddress, value: 6)
+    XCTAssertEqual(memory.interrupts.ie, 6)
   }
 
   func test_highRam() {

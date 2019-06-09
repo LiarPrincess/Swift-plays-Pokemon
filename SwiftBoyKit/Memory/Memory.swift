@@ -19,7 +19,7 @@ public class Memory {
   /* FF04          */ public let divTimer: DivTimer
   /* FF05-FF07     */ public let appTimer: AppTimer
 
-  /* FF0F-and-FFFF */ public let interruptMemory: InterruptMemory
+  /* FF0F-and-FFFF */ public let interrupts: Interrupts
   /* FF80-FFFE     */ public let highRam: HighRam
 
   private lazy var allRegions: [MemoryRegion] = [
@@ -27,13 +27,14 @@ public class Memory {
     self.videoRam, self.externalRam, self.workRam, self.echoMemory, self.oam,
     self.joypadMemory, self.serialPortMemory,
     self.divTimer, self.appTimer,
-    self.interruptMemory, self.highRam,
+    self.interrupts, self.highRam,
     self.ioPorts
   ]
 
   internal init() {
     // If we pass region as init param to another region then it should be stored as 'unowned',
     // not for ARC, but for semantics (memory should be the owner of all regions).
+    self.interrupts = Interrupts()
     self.rom0 = Rom0Memory()
     self.rom1 = Rom1Memory()
     self.videoRam = VideoRam()
@@ -45,10 +46,11 @@ public class Memory {
     self.joypadMemory = JoypadMemory()
     self.serialPortMemory = SerialPortMemory()
     self.divTimer = DivTimer()
-    self.appTimer = AppTimer()
-    self.interruptMemory = InterruptMemory()
+    self.appTimer = AppTimer(interrupts: interrupts)
     self.highRam = HighRam()
   }
+
+  // MARK: - Read
 
   public func read(_ address: UInt16) -> UInt8 {
     return self.read(address, debug: true)
@@ -68,6 +70,8 @@ public class Memory {
     return value
   }
 
+  // MARK: - Write
+
   public func write(_ address: UInt16, value: UInt8) {
     self.write(address, value: value, debug: true)
   }
@@ -86,5 +90,12 @@ public class Memory {
 
   private func getRegion(forGlobalAddress address: UInt16) -> MemoryRegion? {
     return self.allRegions.first { $0.contains(globalAddress: address) }
+  }
+
+  // MARK: - Timers
+
+  internal func updateTimers(cycles: UInt8) {
+    self.divTimer.tick(cycles: cycles)
+    self.appTimer.tick(cycles: cycles)
   }
 }

@@ -24,6 +24,12 @@ public class AppTimer: MemoryRegion {
 
   private var progress: UInt = 0
 
+  private unowned let interrupts: Interrupts
+
+  internal init(interrupts: Interrupts) {
+    self.interrupts = interrupts
+  }
+
   // MARK: - Memory region
 
   public func contains(globalAddress address: UInt16) -> Bool {
@@ -80,7 +86,7 @@ public class AppTimer: MemoryRegion {
 
       if self.tima == UInt8.max {
         self.tima = self.tma
-        // request interrupt
+        self.interrupts.set(.timer)
       } else {
         self.tima += 1
       }

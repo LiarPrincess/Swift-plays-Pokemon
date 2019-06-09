@@ -4,6 +4,8 @@
 
 /// Memory as viewied by CPU.
 internal protocol CpuMemoryView {
+  var interrupts: Interrupts { get }
+
   func read(_ address: UInt16) -> UInt8
   func write(_ address: UInt16, value: UInt8)
 }

@@ -30,8 +30,9 @@ public class Emulator {
       // ------------
 
       let cycles = self.cpu.tick()
-      memory.divTimer.tick(cycles: cycles)
-      memory.appTimer.tick(cycles: cycles)
+      memory.updateTimers(cycles: cycles)
+      // UpdateGraphics(cycles)
+      self.cpu.processInterrupts()
     }
   }
 

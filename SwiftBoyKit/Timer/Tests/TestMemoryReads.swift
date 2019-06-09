@@ -87,14 +87,14 @@ class TestMemoryReads: XCTestCase {
     XCTAssertEqual(memory.read(AppTimer.tacAddress), 7)
   }
 
-  func test_interruptMemory() {
+  func test_interrupts() {
     let memory = Memory()
 
-    memory.interruptMemory.if = 5
-    XCTAssertEqual(memory.read(InterruptMemory.ifAddress), 5)
+    memory.interrupts.if = 5
+    XCTAssertEqual(memory.read(Interrupts.ifAddress), 5)
 
-    memory.interruptMemory.ie = 6
-    XCTAssertEqual(memory.read(InterruptMemory.ieAddress), 6)
+    memory.interrupts.ie = 6
+    XCTAssertEqual(memory.read(Interrupts.ieAddress), 6)
   }
 
   func test_highRam() {

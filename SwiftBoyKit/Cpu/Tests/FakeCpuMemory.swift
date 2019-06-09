@@ -6,6 +6,8 @@
 
 class FakeCpuMemory: CpuMemoryView {
 
+  let interrupts = Interrupts()
+
   var data = [UInt8](repeating: 0, count: 0x10000)
 
   func read(_ address: UInt16) -> UInt8 {

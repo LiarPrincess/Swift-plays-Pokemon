@@ -4,7 +4,7 @@
 
 public class Cpu {
 
-  /// 4.194304MHz
+  /// 4 194 304 Hz
   public static let clockSpeed: UInt = 4_194_304
 
   /// A 16-bit register that holds the address data of the program to be executed next.
@@ -33,6 +33,8 @@ public class Cpu {
     self.memory = memory
   }
 
+  // MARK: - Tick
+
   /// Runs 1 instruction. Returns the number of cycles it took.
   internal func tick() -> UInt8 {
     let rawOpcode = self.memory.read(self.pc)
@@ -53,6 +55,40 @@ public class Cpu {
     return hasOverflow ?
       self.cycle + (0xFF - oldCycle) :
       self.cycle - oldCycle
+  }
+
+  // MARK: - Interrupts
+
+  internal func processInterrupts() {
+    guard self.ime else {
+      return
+    }
+
+    let interruptTypes: [InterruptType] = [
+      .vBlank, .lcdStat, .timer, .serial, .joypad
+    ]
+
+    for type in interruptTypes {
+      let memory = self.memory.interrupts
+      if memory.isEnabled(type) && memory.isSet(type) {
+        self.processInterrupt(type: type)
+      }
+    }
+  }
+
+  private func processInterrupt(type: InterruptType) {
+    self.ime = false
+    self.memory.interrupts.reset(type)
+
+    self.push16(self.pc)
+
+    switch type {
+    case .vBlank:  self.pc = 0x40
+    case .lcdStat: self.pc = 0x48
+    case .timer:   self.pc = 0x50
+    case .serial:  self.pc = 0x58
+    case .joypad:  self.pc = 0x60
+    }
   }
 
   // MARK: - Next bytes
