@@ -86,7 +86,7 @@ public class AppTimer: MemoryRegion {
 
       if self.tima == UInt8.max {
         self.tima = self.tma
-        self.interrupts.set(.timer)
+        self.interrupts.request(.timer)
       } else {
         self.tima += 1
       }

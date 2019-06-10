@@ -6,11 +6,13 @@
 public class Emulator {
 
   public let cpu: Cpu
+  public let ppu: Ppu
   public let memory: Memory
 
   public init() {
     self.memory = Memory()
     self.cpu = Cpu(memory: self.memory)
+    self.ppu = Ppu(memory: self.memory)
   }
 
   // TODO: State after boot should be the same as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
@@ -30,8 +32,8 @@ public class Emulator {
       // ------------
 
       let cycles = self.cpu.tick()
-      memory.updateTimers(cycles: cycles)
-      // UpdateGraphics(cycles)
+      self.memory.updateTimers(cycles: cycles)
+      self.ppu.update(cycles: cycles)
       self.cpu.processInterrupts()
     }
   }

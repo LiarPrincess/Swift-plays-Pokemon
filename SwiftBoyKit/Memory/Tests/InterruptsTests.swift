@@ -57,27 +57,27 @@ class InterruptsTests: XCTestCase {
     XCTAssertEqual(interrupts.isSet(.joypad), true)
   }
 
-  func test_set() {
+  func test_request() {
     let interrupts = Interrupts()
 
     interrupts.if = 0
-    interrupts.set(.vBlank)
+    interrupts.request(.vBlank)
     XCTAssertEqual(interrupts.if, Interrupts.vBlankMask)
 
     interrupts.if = 0
-    interrupts.set(.lcdStat)
+    interrupts.request(.lcdStat)
     XCTAssertEqual(interrupts.if, Interrupts.lcdStatMask)
 
     interrupts.if = 0
-    interrupts.set(.timer)
+    interrupts.request(.timer)
     XCTAssertEqual(interrupts.if, Interrupts.timerMask)
 
     interrupts.if = 0
-    interrupts.set(.serial)
+    interrupts.request(.serial)
     XCTAssertEqual(interrupts.if, Interrupts.serialMask)
 
     interrupts.if = 0
-    interrupts.set(.joypad)
+    interrupts.request(.joypad)
     XCTAssertEqual(interrupts.if, Interrupts.joypadMask)
   }
 

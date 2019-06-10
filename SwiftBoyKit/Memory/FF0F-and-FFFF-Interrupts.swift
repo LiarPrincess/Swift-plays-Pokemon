@@ -3,11 +3,11 @@
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
 public enum InterruptType {
-  case vBlank
-  case lcdStat
-  case timer
-  case serial
-  case joypad
+  /** 0 */ case vBlank
+  /** 1 */ case lcdStat
+  /** 2 */ case timer
+  /** 3 */ case serial
+  /** 4 */ case joypad
 }
 
 /// 0xFF0F and 0xFFFF Interrupts
@@ -70,7 +70,7 @@ public class Interrupts: MemoryRegion {
   }
 
   /// Sets to 1 flag responsible for given interrupt.
-  public func set(_ type: InterruptType) {
+  public func request(_ type: InterruptType) {
     self.if |= self.getMask(type)
   }
 

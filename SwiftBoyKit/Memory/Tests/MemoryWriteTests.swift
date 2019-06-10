@@ -68,7 +68,30 @@ class MemoryWriteTests: XCTestCase {
 
   func test_lcdMemory() {
     let memory = Memory()
-    self.testContinuousRegion(in: memory, region: memory.lcd)
+
+    memory.write(LcdMemory.controlAddress, value: 5)
+    XCTAssertEqual(memory.lcd.control.byte, 5)
+
+    memory.write(LcdMemory.statusAddress, value: 6)
+    XCTAssertEqual(memory.lcd.status.byte, 6)
+
+    memory.write(LcdMemory.scrollYAddress, value: 7)
+    XCTAssertEqual(memory.lcd.scrollY, 7)
+
+    memory.write(LcdMemory.scrollXAddress, value: 8)
+    XCTAssertEqual(memory.lcd.scrollX, 8)
+
+    memory.write(LcdMemory.lineAddress, value: 9)
+    XCTAssertEqual(memory.lcd.line, 0) // line should reset
+
+    memory.write(LcdMemory.lineCompareAddress, value: 10)
+    XCTAssertEqual(memory.lcd.lineCompare, 10)
+
+    memory.write(LcdMemory.windowYAddress, value: 11)
+    XCTAssertEqual(memory.lcd.windowY, 11)
+
+    memory.write(LcdMemory.windowXAddress, value: 12)
+    XCTAssertEqual(memory.lcd.windowX, 12)
   }
 
   func test_divTimer() {

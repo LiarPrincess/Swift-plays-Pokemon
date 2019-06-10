@@ -70,7 +70,30 @@ class MemoryReadTests: XCTestCase {
 
   func test_lcdMemory() {
     let memory = Memory()
-    self.testContinuousRegion(in: memory, region: memory.lcd)
+
+    memory.lcd.control.fillFrom(5)
+    XCTAssertEqual(memory.read(LcdMemory.controlAddress), 5)
+
+    memory.lcd.status.fillFrom(6)
+    XCTAssertEqual(memory.read(LcdMemory.statusAddress), 6)
+
+    memory.lcd.scrollY = 7
+    XCTAssertEqual(memory.read(LcdMemory.scrollYAddress), 7)
+
+    memory.lcd.scrollX = 8
+    XCTAssertEqual(memory.read(LcdMemory.scrollXAddress), 8)
+
+    memory.lcd.line = 9
+    XCTAssertEqual(memory.read(LcdMemory.lineAddress), 9)
+
+    memory.lcd.lineCompare = 10
+    XCTAssertEqual(memory.read(LcdMemory.lineCompareAddress), 10)
+
+    memory.lcd.windowY = 11
+    XCTAssertEqual(memory.read(LcdMemory.windowYAddress), 11)
+
+    memory.lcd.windowX = 12
+    XCTAssertEqual(memory.read(LcdMemory.windowXAddress), 12)
   }
 
   func test_divTimer() {
