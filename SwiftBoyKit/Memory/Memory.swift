@@ -3,25 +3,28 @@
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
 public class Memory {
-  /* 0000-3FFF     */ public let rom0: Rom0Memory
-  /* 4000-7FFF     */ public let rom1: Rom1Memory
 
-  /* 8000-9FFF     */ public let videoRam: VideoRam
-  /* A000-BFFF     */ public let externalRam: ExternalRam
-  /* C000-DFFF     */ public let workRam: WorkRam
-  /* E000-FDFF     */ public let echo: EchoMemory
-  /* FE00-FE9F     */ public let oam: Oam
+  public static let dmaAddress: UInt16 = 0xff46
 
-  /* FF00-FF7F     */ public let ioPorts: IOPorts
-  /* FF00          */ public let joypad: JoypadMemory
-  /* FF01-FF02     */ public let serialPort: SerialPortMemory
-  /* FF40-FF4B     */ public let lcd: LcdMemory
+  /** 0000-3FFF     */ public let rom0: Rom0Memory
+  /** 4000-7FFF     */ public let rom1: Rom1Memory
 
-  /* FF04          */ public let divTimer: DivTimer
-  /* FF05-FF07     */ public let appTimer: AppTimer
+  /** 8000-9FFF     */ public let videoRam: VideoRam
+  /** A000-BFFF     */ public let externalRam: ExternalRam
+  /** C000-DFFF     */ public let workRam: WorkRam
+  /** E000-FDFF     */ public let echo: EchoMemory
+  /** FE00-FE9F     */ public let oam: Oam
 
-  /* FF0F-and-FFFF */ public let interrupts: Interrupts
-  /* FF80-FFFE     */ public let highRam: HighRam
+  /** FF00-FF7F     */ public let ioPorts: IOPorts
+  /** FF00          */ public let joypad: JoypadMemory
+  /** FF01-FF02     */ public let serialPort: SerialPortMemory
+  /** FF40-FF4B     */ public let lcd: LcdMemory
+
+  /** FF04          */ public let divTimer: DivTimer
+  /** FF05-FF07     */ public let appTimer: AppTimer
+
+  /** FF0F-and-FFFF */ public let interrupts: Interrupts
+  /** FF80-FFFE     */ public let highRam: HighRam
 
   private lazy var allRegions: [MemoryRegion] = [
     self.rom0, self.rom1,
@@ -48,7 +51,7 @@ public class Memory {
     self.serialPort = SerialPortMemory()
     self.lcd = LcdMemory()
     self.divTimer = DivTimer()
-    self.appTimer = AppTimer(interrupts: interrupts)
+    self.appTimer = AppTimer(interrupts: self.interrupts)
     self.highRam = HighRam()
   }
 
@@ -79,6 +82,11 @@ public class Memory {
   }
 
   internal func write(_ address: UInt16, value: UInt8, debug: Bool) {
+    guard address != Memory.dmaAddress else {
+      self.dma(writeValue: value)
+      return
+    }
+
     guard let region = self.getRegion(forGlobalAddress: address) else {
       fatalError("Attempting to write to unsupported memory address: \(address.hex).")
     }
@@ -92,6 +100,17 @@ public class Memory {
 
   private func getRegion(forGlobalAddress address: UInt16) -> MemoryRegion? {
     return self.allRegions.first { $0.contains(globalAddress: address) }
+  }
+
+  // MARK: - DMA
+
+  private func dma(writeValue: UInt8) {
+    let sourceAddress = UInt16(writeValue) << 8
+
+    for i in 0..<Oam.size {
+      let value = self.read(sourceAddress + i)
+      self.write(Oam.start + i, value: value)
+    }
   }
 
   // MARK: - Timers

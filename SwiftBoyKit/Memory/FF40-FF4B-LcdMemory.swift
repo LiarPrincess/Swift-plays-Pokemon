@@ -37,10 +37,14 @@ public class LcdMemory: MemoryRegion {
   /// FF4B - WX - Window X Position minus 7 (R/W)
   public var windowX: UInt8 = 0
 
+  // TODO: Add 'LCD Monochrome Palettes' + contains
+
   // MARK: - MemoryRegion
 
   public func contains(globalAddress address: UInt16) -> Bool {
-    return LcdMemory.controlAddress <= address && address <= LcdMemory.windowXAddress
+    typealias L = LcdMemory
+    return (L.controlAddress <= address && address <= L.lineCompareAddress)
+        || (L.windowYAddress <= address && address <= L.windowXAddress)
   }
 
   public func read(globalAddress address: UInt16) -> UInt8 {

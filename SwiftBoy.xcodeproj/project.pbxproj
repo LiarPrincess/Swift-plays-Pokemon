@@ -75,6 +75,7 @@
 		90D58F2722A7D0C40076584F /* FF00-FF7F-IOPorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F2622A7D0C40076584F /* FF00-FF7F-IOPorts.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
+		90EFDB8722B05D5D0017AEC2 /* DmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8622B05D5D0017AEC2 /* DmaTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +200,7 @@
 		90D58F2622A7D0C40076584F /* FF00-FF7F-IOPorts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FF00-FF7F-IOPorts.swift"; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
+		90EFDB8622B05D5D0017AEC2 /* DmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DmaTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +371,7 @@
 				90CBB72222AD7595004775E2 /* DivTimerTests.swift */,
 				90CBB71E22AD7594004775E2 /* AppTimerTests.swift */,
 				90CBB71F22AD7594004775E2 /* InterruptsTests.swift */,
+				90EFDB8622B05D5D0017AEC2 /* DmaTests.swift */,
 				90CBB72122AD7594004775E2 /* MemoryReadTests.swift */,
 				90CBB72022AD7594004775E2 /* MemoryWriteTests.swift */,
 			);
@@ -651,6 +654,7 @@
 			files = (
 				90A17BAE229D59EE0027133B /* CpuArithmeticTests.swift in Sources */,
 				90CBB73222AD7AE3004775E2 /* Array+UIntTests.swift in Sources */,
+				90EFDB8722B05D5D0017AEC2 /* DmaTests.swift in Sources */,
 				90A17BAD229D59EE0027133B /* CpuJumpTests.swift in Sources */,
 				9073102A22A66C1000EBC7BB /* FakeCpuMemory.swift in Sources */,
 				90CBB72C22AD7632004775E2 /* InterruptsTests.swift in Sources */,
