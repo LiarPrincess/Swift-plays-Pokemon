@@ -6,6 +6,8 @@
 public protocol PpuMemoryView: AnyObject {
   var lcd: LcdMemory { get }
   var interrupts: Interrupts { get }
+
+  func read(_ address: UInt16) -> UInt8
 }
 
 extension Memory: PpuMemoryView { }

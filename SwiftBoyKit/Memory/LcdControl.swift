@@ -2,12 +2,7 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-public enum WindowTileMap: UInt8, Codable {
-  case from9800to9bff = 0
-  case from9c00to9fff = 1
-}
-
-public enum BackgroundTileMap: UInt8, Codable {
+public enum TileMap: UInt8, Codable {
   case from9800to9bff = 0
   case from9c00to9fff = 1
 }
@@ -33,15 +28,28 @@ public class LcdControl: Codable {
   public static let isSpriteEnabledMask:     UInt8 = 1 << 1
   public static let isBackgroundVisibleMask: UInt8 = 1 << 0
 
-  public var isLcdEnabled:    Bool = false
+  /// Bit 7 - LCD Display Enable
+  public var isLcdEnabled: Bool = false
+
+  /// Bit 5 - Window Display Enable
   public var isWindowEnabled: Bool = false
 
-  public var windowTileMap:     WindowTileMap     = .from9800to9bff
-  public var backgroundTileMap: BackgroundTileMap = .from9800to9bff
-  public var tileData:          TileData          = .from8800to97ff
-  public var spriteSize:        SpriteSize        = .size8x8
+  /// Bit 6 - Window Tile Map Display Select
+  public var windowTileMap: TileMap = .from9800to9bff
 
-  public var isSpriteEnabled:     Bool = false
+  /// Bit 3 - BG Tile Map Display Select
+  public var backgroundTileMap: TileMap = .from9800to9bff
+
+  /// Bit 4 - BG & Window Tile Data Select
+  public var tileData: TileData = .from8800to97ff
+
+  /// Bit 2 - OBJ (Sprite) Size
+  public var spriteSize: SpriteSize = .size8x8
+
+  /// Bit 1 - OBJ (Sprite) Display Enable
+  public var isSpriteEnabled: Bool = false
+
+  /// Bit 0 - BG Display
   public var isBackgroundVisible: Bool = false
 
   internal var byte: UInt8 {

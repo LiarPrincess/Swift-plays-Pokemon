@@ -104,6 +104,7 @@ public class Memory {
 
   // MARK: - DMA
 
+  // TODO: DMA should have separate class (as in Castor C#)
   private func dma(writeValue: UInt8) {
     let sourceAddress = UInt16(writeValue) << 8
 

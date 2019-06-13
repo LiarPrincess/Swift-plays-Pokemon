@@ -5,11 +5,6 @@
 // This is AMAZING:
 // http://www.codeslinger.co.uk/pages/projects/gameboy/lcd.html
 
-public enum Display {
-  public static let width:  UInt8 = 160
-  public static let height: UInt8 = 144
-}
-
 /// Pixel processing unit
 public class Ppu {
 
@@ -27,6 +22,8 @@ public class Ppu {
 
   private var lineProgress: UInt16 = 0
 
+  private let drawer: LineDrawer
+
   private unowned var memory: PpuMemoryView
   private var lcd: LcdMemory { return self.memory.lcd }
   private var lcdStatus: LcdStatus { return self.lcd.status }
@@ -35,6 +32,7 @@ public class Ppu {
 
   internal init(memory: PpuMemoryView) {
     self.memory = memory
+    self.drawer = LineDrawer(memory: memory)
   }
 
   // MARK: - Update
@@ -103,5 +101,27 @@ public class Ppu {
     }
   }
 
-  private func drawLine() { }
+  // MARK: - Draw
+
+  private func drawLine() {
+    guard self.lcdControl.spriteSize == .size8x8 else {
+      // TODO: Tile size 8x16 is not yet supported.
+      fatalError("Tile size 8x16 is not yet supported.")
+    }
+
+    var frameBuffer = [UInt8]()
+    if self.lcdControl.isBackgroundVisible {
+      self.drawer.drawBackgroundLine(into: &frameBuffer)
+    }
+
+    if self.lcdControl.isWindowEnabled {
+      // stuff...
+    }
+
+    if self.lcdControl.isSpriteEnabled {
+      self.renderSprites()
+    }
+  }
+
+  private func renderSprites() { }
 }
