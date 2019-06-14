@@ -5,7 +5,9 @@
 extension Debug {
 
   internal static func emulatorWillStart() {
-    printRegisters()
-    printSeparator()
+    if mode != .none {
+      printRegisters()
+      printSeparator()
+    }
   }
 }

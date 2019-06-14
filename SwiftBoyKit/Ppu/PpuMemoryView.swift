@@ -3,7 +3,7 @@
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
 /// Memory as viewied by PPU.
-public protocol PpuMemoryView: AnyObject {
+internal protocol PpuMemoryView: AnyObject {
   var lcd: LcdMemory { get }
   var interrupts: Interrupts { get }
 

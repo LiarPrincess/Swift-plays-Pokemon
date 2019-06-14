@@ -57,7 +57,7 @@ public class Cpu {
   private func calculateDuration(_ oldCycle: UInt16) -> UInt16 {
     let hasOverflow = self.cycle < oldCycle
     return hasOverflow ?
-      self.cycle + (0xFF - oldCycle) :
+      self.cycle + (0xffff - oldCycle) :
       self.cycle - oldCycle
   }
 

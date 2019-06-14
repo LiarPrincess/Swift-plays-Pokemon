@@ -6,25 +6,25 @@ public class Memory {
 
   public static let dmaAddress: UInt16 = 0xff46
 
-  /** 0000-3FFF     */ public let rom0: Rom0Memory
-  /** 4000-7FFF     */ public let rom1: Rom1Memory
+  /** 0000-3FFF     */ internal let rom0: Rom0Memory
+  /** 4000-7FFF     */ internal let rom1: Rom1Memory
 
-  /** 8000-9FFF     */ public let videoRam: VideoRam
-  /** A000-BFFF     */ public let externalRam: ExternalRam
-  /** C000-DFFF     */ public let workRam: WorkRam
-  /** E000-FDFF     */ public let echo: EchoMemory
-  /** FE00-FE9F     */ public let oam: Oam
+  /** 8000-9FFF     */ internal let videoRam: VideoRam
+  /** A000-BFFF     */ internal let externalRam: ExternalRam
+  /** C000-DFFF     */ internal let workRam: WorkRam
+  /** E000-FDFF     */ internal let echo: EchoMemory
+  /** FE00-FE9F     */ internal let oam: Oam
 
-  /** FF00-FF7F     */ public let ioPorts: IOPorts
-  /** FF00          */ public let joypad: JoypadMemory
-  /** FF01-FF02     */ public let serialPort: SerialPortMemory
-  /** FF40-FF4B     */ public let lcd: LcdMemory
+  /** FF00-FF7F     */ internal let ioPorts: IOPorts
+  /** FF00          */ internal let joypad: JoypadMemory
+  /** FF01-FF02     */ internal let serialPort: SerialPortMemory
+  /** FF40-FF4B     */ internal let lcd: LcdMemory
 
-  /** FF04          */ public let divTimer: DivTimer
-  /** FF05-FF07     */ public let appTimer: AppTimer
+  /** FF04          */ internal let divTimer: DivTimer
+  /** FF05-FF07     */ internal let appTimer: AppTimer
 
-  /** FF0F-and-FFFF */ public let interrupts: Interrupts
-  /** FF80-FFFE     */ public let highRam: HighRam
+  /** FF0F-and-FFFF */ internal let interrupts: Interrupts
+  /** FF80-FFFE     */ internal let highRam: HighRam
 
   private lazy var allRegions: [MemoryRegion] = [
     self.rom0, self.rom1,

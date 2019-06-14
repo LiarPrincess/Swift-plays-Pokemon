@@ -9,7 +9,7 @@ public enum DebugMode {
   case onlyMemoryWrites
 }
 
-internal class Debug {
+internal enum Debug {
   internal static var mode: DebugMode = .none
 
   internal static unowned var emulator: Emulator!
