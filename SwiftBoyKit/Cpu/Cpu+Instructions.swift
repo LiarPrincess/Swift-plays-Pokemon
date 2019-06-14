@@ -1380,9 +1380,9 @@ extension Cpu {
       fatalError("Tried to execute non existing cb-prefixed opcode '\(n.hex)'.")
     }
 
-    Debug.cpuWillExecute(self, opcode: opcode)
+    Debug.cpuWillExecute(opcode: opcode)
     self.execute(opcode)
-    Debug.cpuDidExecute(self, opcode: opcode)
+    Debug.cpuDidExecute(opcode: opcode)
   }
 
   /// Stop, blank the screen and wait for button press

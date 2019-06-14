@@ -2,6 +2,7 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
+/// Central processing unit 
 public class Cpu {
 
   /// 4 194 304 Hz
@@ -25,8 +26,11 @@ public class Cpu {
   /// Is halted flag.
   public var isHalted: Bool = false
 
+  /// Register values (except for pc and sp)
   public var registers: Registers
-  internal var memory: CpuMemoryView
+
+  internal unowned var memory: CpuMemoryView
+  private var interrupts: Interrupts { return self.memory.interrupts }
 
   internal init(memory: CpuMemoryView) {
     self.registers = Registers()
@@ -42,10 +46,10 @@ public class Cpu {
       fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
     }
 
-    Debug.cpuWillExecute(self, opcode: opcode)
+    Debug.cpuWillExecute(opcode: opcode)
     let oldCycle = self.cycle
     self.execute(opcode)
-    Debug.cpuDidExecute(self, opcode: opcode)
+    Debug.cpuDidExecute(opcode: opcode)
 
     return UInt8(self.calculateDuration(oldCycle))
   }
@@ -69,8 +73,7 @@ public class Cpu {
     ]
 
     for type in interruptTypes {
-      let memory = self.memory.interrupts
-      if memory.isEnabled(type) && memory.isSet(type) {
+      if self.interrupts.isEnabled(type) && self.interrupts.isSet(type) {
         self.processInterrupt(type: type)
       }
     }
@@ -78,7 +81,7 @@ public class Cpu {
 
   private func processInterrupt(type: InterruptType) {
     self.ime = false
-    self.memory.interrupts.reset(type)
+    self.interrupts.reset(type)
 
     self.push16(self.pc)
 

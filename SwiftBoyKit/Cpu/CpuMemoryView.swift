@@ -2,8 +2,8 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/// Memory as viewied by CPU.
-internal protocol CpuMemoryView {
+/// Memory as viewied by CPU
+internal protocol CpuMemoryView: AnyObject {
   var interrupts: Interrupts { get }
 
   func read(_ address: UInt16) -> UInt8

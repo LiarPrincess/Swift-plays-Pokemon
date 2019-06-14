@@ -9,15 +9,19 @@ public class Emulator {
   public let ppu: Ppu
   public let memory: Memory
 
-  public init() {
+  public init(debugMode: DebugMode = .none) {
     self.memory = Memory()
     self.cpu = Cpu(memory: self.memory)
     self.ppu = Ppu(memory: self.memory)
+
+    // in debug we support only 1 emulator (the last one created)
+    Debug.mode = debugMode
+    Debug.emulator = self
   }
 
   // TODO: State after boot should be the same as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
   public func run(maxCycles: UInt16? = nil, lastPC: UInt16? = nil) {
-    Debug.emulatorWillRun(self)
+    Debug.emulatorWillStart()
 
     let maxCycles = maxCycles ?? UInt16.max
     let lastPC  = lastPC ?? UInt16.max

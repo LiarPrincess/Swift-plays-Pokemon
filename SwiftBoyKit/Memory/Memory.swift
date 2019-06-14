@@ -58,18 +58,18 @@ public class Memory {
   // MARK: - Read
 
   public func read(_ address: UInt16) -> UInt8 {
-    return self.read(address, debug: true)
+    return self.read(address, callDebug: true)
   }
 
-  internal func read(_ address: UInt16, debug: Bool) -> UInt8 {
+  internal func read(_ address: UInt16, callDebug: Bool) -> UInt8 {
     guard let region = self.getRegion(forGlobalAddress: address) else {
       fatalError("Attempting to read unsupported memory address: \(address.hex).")
     }
 
     let value = region.read(globalAddress: address)
 
-    if debug {
-      Debug.memoryDidRead(self, address: address, value: value)
+    if callDebug {
+      Debug.memoryDidRead(from: address, region: region, value: value)
     }
 
     return value
@@ -78,10 +78,10 @@ public class Memory {
   // MARK: - Write
 
   public func write(_ address: UInt16, value: UInt8) {
-    self.write(address, value: value, debug: true)
+    self.write(address, value: value, callDebug: true)
   }
 
-  internal func write(_ address: UInt16, value: UInt8, debug: Bool) {
+  internal func write(_ address: UInt16, value: UInt8, callDebug: Bool) {
     guard address != Memory.dmaAddress else {
       self.dma(writeValue: value)
       return
@@ -93,8 +93,8 @@ public class Memory {
 
     region.write(globalAddress: address, value: value)
 
-    if debug {
-      Debug.memoryDidWrite(self, address: address, value: value)
+    if callDebug {
+      Debug.memoryDidWrite(to: address, region: region, value: value)
     }
   }
 
