@@ -13,18 +13,16 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 //    self.testSavedState("bootrom_1_skipToNintendoLogo2.json")
 //    self.testSavedState("bootrom_2_skipToTileMap2.json")
 
-    let emulator = Emulator(debugMode: .none)
+    let emulator = Emulator()
     emulator.fakeEmptyCartridge()
     emulator.run(maxCycles: .max, lastPC: 0x0040)
-
-//    saveState(cpu: cpu, to: "file.json")
   }
 
   // swiftlint:disable:next function_body_length
   private func testSavedState(_ file: String) {
     let old = loadState(from: file)
 
-    let emulator = Emulator(debugMode: .none)
+    let emulator = Emulator()
     emulator.fakeEmptyCartridge()
     emulator.run(maxCycles: .max, lastPC: old.pc)
 

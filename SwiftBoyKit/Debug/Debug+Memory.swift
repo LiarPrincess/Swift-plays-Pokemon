@@ -5,13 +5,13 @@
 extension Debug {
 
   internal static func memoryDidRead(from address: UInt16, region: MemoryRegion, value: UInt8) {
-    if self.mode == .full {
+    if fMemoryReads {
       print("> memory - reading \(value.hex) from \(address.hex) (\(region))")
     }
   }
 
   internal static func memoryDidWrite(to address: UInt16, region: MemoryRegion, value: UInt8) {
-    if self.mode == .full || self.mode == .onlyMemoryWrites {
+    if fMemoryWrites {
       print("> memory - writing \(value.hex) to \(address.hex) (\(region))")
     }
   }

@@ -2,15 +2,33 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-public enum DebugMode {
+private enum DebugMode {
   case none
   case full
-  case onlyOpcodes
-  case onlyMemoryWrites
+  case opcodes
+  case memoryWrites
 }
 
+private let mode:  DebugMode = .opcodes
+private let minPc: UInt16    = 0x39 // start debugging only after this pc
+
 internal enum Debug {
-  internal static var mode: DebugMode = .none
+
+  internal static var fInitialState: Bool { return global && mode != .none }
+
+  internal static var fRegisterWrites: Bool { return global && mode == .full }
+  internal static var fOpcode:         Bool { return global && mode != .none }
+  internal static var fOpcodeDetails:  Bool { return global && mode == .full }
+
+  internal static var fMemoryReads:  Bool { return global && mode == .full }
+  internal static var fMemoryWrites: Bool { return global && (mode == .full || mode == .memoryWrites) }
+
+  private static var isPastMinPc = false
+
+  private static var global: Bool {
+    isPastMinPc = isPastMinPc || cpu.pc == minPc
+    return isPastMinPc
+  }
 
   internal static unowned var emulator: Emulator!
   internal static var cpu:       Cpu       { return emulator.cpu }

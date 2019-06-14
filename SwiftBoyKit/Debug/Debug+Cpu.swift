@@ -7,14 +7,14 @@
 extension Debug {
 
   internal static func registersDidSet(_ f: FlagRegister) {
-    if mode == .full {
+    if fRegisterWrites {
       let value = registers.get(f)
       print("> register - setting \(f) to \(value ? 1 : 0)")
     }
   }
 
   internal static func registersDidSet(_ r: SingleRegister) {
-    if mode == .full {
+    if fRegisterWrites {
       let value = registers.get(r)
       print("> register - setting \(r) to \(value.hex)")
     }
@@ -26,29 +26,29 @@ extension Debug {
 extension Debug {
 
   internal static func cpuWillExecute(opcode: UnprefixedOpcode) {
-    if self.mode == .onlyOpcodes || self.mode == .full {
-      self.printOpcode(opcode: String(describing: opcode), length: getOpcodeLength(opcode))
+    if fOpcode {
+      printOpcode(opcode: String(describing: opcode), length: getOpcodeLength(opcode))
     }
   }
 
   internal static func cpuWillExecute(opcode: CBPrefixedOpcode) {
-    if self.mode == .onlyOpcodes || self.mode == .full {
-      self.printOpcode(opcode: String(describing: opcode), length: 2)
+    if fOpcode {
+      printOpcode(opcode: String(describing: opcode), length: 2)
     }
   }
 
   internal static func cpuDidExecute(opcode: UnprefixedOpcode) {
-    if self.mode == .full {
-      self.printAdditionalInfo(opcode: opcode)
-      self.printRegisters(indent: "  ")
-      self.printSeparator()
+    if fOpcodeDetails {
+      printAdditionalInfo(opcode: opcode)
+      printRegisters(indent: "  ")
+      printSeparator()
     }
   }
 
   internal static func cpuDidExecute(opcode: CBPrefixedOpcode) {
-    if self.mode == .full {
-      self.printRegisters(indent: "  ")
-      self.printSeparator()
+    if fOpcodeDetails {
+      printRegisters(indent: "  ")
+      printSeparator()
     }
   }
 }

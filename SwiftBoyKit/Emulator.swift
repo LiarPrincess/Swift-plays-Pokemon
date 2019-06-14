@@ -3,23 +3,22 @@
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // TODO: Restore Codable https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types
+// TODO: State after boot should be the same as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
 public class Emulator {
 
   public let cpu: Cpu
   public let ppu: Ppu
   public let memory: Memory
 
-  public init(debugMode: DebugMode = .none) {
+  public init() {
     self.memory = Memory()
     self.cpu = Cpu(memory: self.memory)
     self.ppu = Ppu(memory: self.memory)
 
     // in debug we support only 1 emulator (the last one created)
-    Debug.mode = debugMode
     Debug.emulator = self
   }
 
-  // TODO: State after boot should be the same as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
   public func run(maxCycles: UInt16? = nil, lastPC: UInt16? = nil) {
     Debug.emulatorWillStart()
 
@@ -40,6 +39,10 @@ public class Emulator {
       self.ppu.update(cycles: cycles)
       self.cpu.processInterrupts()
     }
+
+    print("Finished because:")
+    print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
+    print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
   }
 
   public func fakeEmptyCartridge() {
