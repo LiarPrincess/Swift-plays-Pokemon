@@ -139,6 +139,7 @@ public class Ppu {
     print("Tile data: \(tileData)")
     self.drawer.dumpTileData(region: tileData)
 
-//    self.drawer.dumpWholeBackground()
+    print("Background:")
+    self.drawer.dumpBackground()
   }
 }

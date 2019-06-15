@@ -10,7 +10,7 @@ private enum DebugMode {
 }
 
 private let mode:  DebugMode = .none
-private let minPc: UInt16    = 0x0055 // start debugging only after this pc
+private let minPc: UInt16    = 0x0021 // start debugging only after this pc
 
 internal enum Debug {
 

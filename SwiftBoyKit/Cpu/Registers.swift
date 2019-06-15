@@ -149,10 +149,14 @@ public class Registers {
   public func set(_ r: CombinedRegister, to value: UInt16) {
     switch r {
     case .af:
-      self.zeroFlag      = (value & zeroFlagPosition)      == zeroFlagPosition
-      self.subtractFlag  = (value & subtractFlagPosition)  == subtractFlagPosition
-      self.halfCarryFlag = (value & halfCarryFlagPosition) == halfCarryFlagPosition
-      self.carryFlag     = (value & carryFlagPosition)     == carryFlagPosition
+      self.a = UInt8((value & 0xff00) >> 8)
+
+      let f = UInt16(value & 0xff)
+      self.zeroFlag      = (f & zeroFlagPosition)      == zeroFlagPosition
+      self.subtractFlag  = (f & subtractFlagPosition)  == subtractFlagPosition
+      self.halfCarryFlag = (f & halfCarryFlagPosition) == halfCarryFlagPosition
+      self.carryFlag     = (f & carryFlagPosition)     == carryFlagPosition
+
     case .bc: self.bc = value
     case .de: self.de = value
     case .hl: self.hl = value

@@ -2,6 +2,8 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable function_body_length
+
 private let tileRowCount:    UInt8 = 18 // 144 pixels / 8 pixels
 private let tileColumnCount: UInt8 = 20 // 160 pixels / 8 pixels
 
@@ -57,7 +59,7 @@ extension LineDrawer {
       let data2 = self.memory.read(address + 1)
 
       if data1 != 0 || data2 != 0 {
-        print("\(address.hex): \(data1.bin) & \(data2.bin) -> ", separator: "", terminator: "")
+        print("\(address.hex): \(data1.bin) & \(data2.bin) -> \(data1.hex) & \(data2.hex) -> ", separator: "", terminator: "")
         for i in 0..<8 {
           let color = self.getRawColorValue(data1, data2, bitOffset: UInt8(i))
           let sColor = color == 0 ? " " : String(describing: color)
@@ -84,15 +86,83 @@ extension LineDrawer {
 
 extension LineDrawer {
 
-  private func dumpWholeBackground() {
-    //        let bytesPerLine: UInt8 = 2
-    //        let lineInsideTile = UInt16((globalY % 8) * bytesPerLine)
-    //
-    //        let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
-    //        let data1 = self.memory.read(tileDataAddress + lineInsideTile)
-    //        let data2 = self.memory.read(tileDataAddress + lineInsideTile + 1)
-    //
-    //        let colorOffset = globalX % 8
-    //        let color = self.getRawColorValue(data1, data2, bitOffset: colorOffset)
+  internal func dumpBackground() {
+    let rowRange:    ClosedRange<UInt8> = 8...9
+    let columnRange: ClosedRange<UInt8> = 4...5 // 16 for R
+
+//    let rowRange:    ClosedRange<UInt8> = 0...tileRowCount
+//    let columnRange: ClosedRange<UInt8> = 0...tileColumnCount
+
+    let linesPerTile = 8
+
+    // horizontal markers
+    print(" t  l | " , separator: "", terminator: "")
+    for tileColumn in columnRange {
+      let text = String(describing: tileColumn)
+      let padding = String(repeating: " ", count: 8 - text.count)
+      print(padding + text, separator: "", terminator: " ")
+    }
+    print("|")
+
+    print("------+" , separator: "", terminator: "")
+    for _ in columnRange {
+      print("---------", separator: "", terminator: "")
+    }
+    print("|")
+
+    // data
+    for tileRow in rowRange {
+      for tileLine in 0..<linesPerTile {
+        let tileRowText = String(describing: tileRow)
+        let tileRowPadding = String(repeating: " ", count: 2 - tileRowText.count)
+        print(tileRowPadding + tileRowText, separator: "", terminator: " ")
+
+        let tileLineText = String(describing: tileLine)
+        let tileLinePadding = String(repeating: " ", count: 2 - tileLineText.count)
+        print(tileLinePadding + tileLineText, separator: "", terminator: " ")
+
+        print("|", separator: "", terminator: " ")
+
+        for tileColumn in columnRange {
+          self.drawTileLine(tileRow: tileRow, tileColumn: tileColumn, line: UInt8(tileLine))
+        }
+        print()
+      }
+
+      print("-------" , separator: "", terminator: "")
+      for _ in columnRange {
+        print("---------", separator: "", terminator: "")
+      }
+      print("|")
+    }
+
+// TODO: Remode
+//    for i in 0x8010..<0x819f {
+//      let value = self.memory.read(UInt16(i))
+//      print(value.hex)
+//    }
+  }
+
+  private func drawTileLine(tileRow: UInt8, tileColumn: UInt8, line: UInt8) {
+    let map = self.lcdControl.backgroundTileMap
+
+    let tileIndexAddress = self.getTileIndexAddress(from: map, tileRow: tileRow, tileColumn: tileColumn)
+    let tileIndex = self.memory.read(tileIndexAddress)
+
+    let bytesPerLine: UInt16 = 2
+    let lineInsideTile = UInt16(line) * bytesPerLine
+
+    let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
+    let data1 = self.memory.read(tileDataAddress + lineInsideTile)
+    let data2 = self.memory.read(tileDataAddress + lineInsideTile + 1)
+
+    print(tileDataAddress.hex, separator: "", terminator: ": ")
+
+    for i in 0..<8 {
+      let color = self.getRawColorValue(data1, data2, bitOffset: UInt8(i))
+      let sColor = color == 0 ? " " : String(describing: color)
+      print(sColor, separator: "", terminator: "")
+    }
+    print("|", separator: "", terminator: "")
   }
 }
