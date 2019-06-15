@@ -5,10 +5,11 @@
 // TODO: Rename (+ property in ppu)
 internal class LineDrawer {
 
-  private unowned var memory: PpuMemoryView
-  private var lcd: LcdMemory { return self.memory.lcd }
-  private var lcdStatus: LcdStatus { return self.lcd.status }
-  private var lcdControl: LcdControl { return self.lcd.control }
+  internal unowned var memory: PpuMemoryView
+  internal var lcd: LcdMemory { return self.memory.lcd }
+  internal var lcdStatus:  LcdStatus  { return self.lcd.status }
+  internal var lcdControl: LcdControl { return self.lcd.control }
+  internal var videoRam: VideoRam { return self.memory.videoRam }
 
   internal init(memory: PpuMemoryView) {
     self.memory = memory
@@ -16,10 +17,10 @@ internal class LineDrawer {
 
   internal func drawBackgroundLine(into data: inout [UInt8]) {
     let map = self.lcdControl.backgroundTileMap
+    let globalY = self.lcd.scrollY + self.lcd.line
 
-    for pixel in 0..<Display.width {
-      let globalX = self.lcd.scrollX + pixel
-      let globalY = self.lcd.scrollY + self.lcd.line
+    for x in 0..<Screen.width {
+      let globalX = self.lcd.scrollX + x
 
       let tileIndexAddress = self.getTileIndexAddress(from: map, globalX: globalX, globalY: globalY)
       let tileIndex = self.memory.read(tileIndexAddress)
@@ -31,21 +32,20 @@ internal class LineDrawer {
       let data1 = self.memory.read(tileDataAddress + lineInsideTile)
       let data2 = self.memory.read(tileDataAddress + lineInsideTile + 1)
 
-      //      let colorBit = 7 - (xPos % 8)
-      //
-      //      //int colourNum = BitGetVal(data2,colourBit) ;
-      //      //colourNum <<= 1;
-      //      //colourNum |= BitGetVal(data1,colourBit) ;
-      //
-      //      // or this:
+      let colorOffset = globalX % 8
+      let color = self.getRawColorValue(data1, data2, bitOffset: colorOffset)
     }
   }
 
   /// Tile index address (means: draw tile from this index)
-  private func getTileIndexAddress(from map: TileMap, globalX: UInt8, globalY: UInt8) -> UInt16 {
+  internal func getTileIndexAddress(from map: TileMap, globalX: UInt8, globalY: UInt8) -> UInt16 {
     let tileRow = globalY / 8
     let tileColumn = globalX / 8
+    return self.getTileIndexAddress(from: map, tileRow: tileRow, tileColumn: tileColumn)
+  }
 
+  /// Tile index address (means: draw tile from this index)
+  internal func getTileIndexAddress(from map: TileMap, tileRow: UInt8, tileColumn: UInt8) -> UInt16 {
     let tilesPerRow: UInt16 = 32
     let offset = UInt16(tileRow) * tilesPerRow + UInt16(tileColumn)
 
@@ -57,7 +57,6 @@ internal class LineDrawer {
 
   /// Start of the tile in memory
   internal func getTileDataAddress(tileIndex: UInt8) -> UInt16 {
-    // internal, so we can test it separatelly (it was hard to write)
     let tileSize: UInt16 = 16
 
     switch self.lcdControl.tileData {
@@ -70,5 +69,19 @@ internal class LineDrawer {
       let signedTileNumber = Int8(bitPattern: tileIndex)
       return UInt16(middle + Int(signedTileNumber) * Int(tileSize))
     }
+  }
+
+  /// Color before applying palette.
+  /// Bit offset is counted from left starting from 0.
+  internal func getRawColorValue(_ data1: UInt8, _ data2: UInt8, bitOffset: UInt8) -> UInt8 {
+    let shift = 7 - bitOffset
+    let data1Bit = (data1 >> shift) & 0x1
+    let data2Bit = (data2 >> shift) & 0x1
+
+    var color: UInt8 = 0
+    color |= data2Bit
+    color <<= 1
+    color |= data1Bit
+    return color
   }
 }

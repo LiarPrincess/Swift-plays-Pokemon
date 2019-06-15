@@ -51,11 +51,11 @@ public class Ppu {
       self.lineProgress -= Ppu.lineLength
       let currentLine = self.lcd.advanceLine()
 
-      if currentLine < Display.height {
+      if currentLine < Screen.height {
         self.drawLine()
-      } else if currentLine == Display.height {
+      } else if currentLine == Screen.height {
         self.interrupts.request(.vBlank)
-      } else if currentLine == Display.height + Ppu.vBlankLineCount {
+      } else if currentLine == Screen.height + Ppu.vBlankLineCount {
         self.lcd.resetLine()
       }
     }
@@ -73,7 +73,7 @@ public class Ppu {
     let previousMode = self.lcdStatus.mode
     var requestInterrupt = false
 
-    if self.lcd.line < Display.height {
+    if self.lcd.line < Screen.height {
       if self.lineProgress < Ppu.oamSearchLength {
         self.lcdStatus.mode = .searchingOamRam
         requestInterrupt = self.lcdStatus.isOamInterruptEnabled
@@ -124,4 +124,21 @@ public class Ppu {
   }
 
   private func renderSprites() { }
+
+  // MARK: - Dump
+
+  internal func dump() {
+    print("-------------")
+    print()
+
+    let backgroundTileIndices = self.lcdControl.backgroundTileMap
+    print("Tile indices: \(backgroundTileIndices)")
+    self.drawer.dumpTileIndices(from: backgroundTileIndices)
+
+    let tileData = self.lcdControl.tileData
+    print("Tile data: \(tileData)")
+    self.drawer.dumpTileData(region: tileData)
+
+//    self.drawer.dumpWholeBackground()
+  }
 }

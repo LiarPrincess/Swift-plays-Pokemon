@@ -28,7 +28,7 @@ public class Emulator {
     var brakepoint = false
     while self.cpu.cycle <= maxCycles && self.cpu.pc != lastPC {
       // ------------
-      brakepoint = brakepoint || self.cpu.pc == 0x004A
+      brakepoint = brakepoint || self.cpu.pc == 0x0039
       if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
         _ = 5
       }
@@ -40,9 +40,11 @@ public class Emulator {
       self.cpu.processInterrupts()
     }
 
-    print("Finished because:")
+    print("Finished:")
     print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
     print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
+
+    self.ppu.dump()
   }
 
   public func fakeEmptyCartridge() {

@@ -9,8 +9,8 @@ private enum DebugMode {
   case memoryWrites
 }
 
-private let mode:  DebugMode = .opcodes
-private let minPc: UInt16    = 0x39 // start debugging only after this pc
+private let mode:  DebugMode = .none
+private let minPc: UInt16    = 0x0055 // start debugging only after this pc
 
 internal enum Debug {
 
@@ -26,11 +26,13 @@ internal enum Debug {
   private static var isPastMinPc = false
 
   private static var global: Bool {
+    guard emulator != nil else { return false } // for example unit tests
+
     isPastMinPc = isPastMinPc || cpu.pc == minPc
     return isPastMinPc
   }
 
-  internal static unowned var emulator: Emulator!
+  internal static var emulator: Emulator!
   internal static var cpu:       Cpu       { return emulator.cpu }
   internal static var registers: Registers { return cpu.registers }
   internal static var memory:    Memory    { return emulator.memory }

@@ -3,6 +3,10 @@
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
 extension Array {
+  public init(repeating repeatedValue: Element, count: UInt8) {
+    self.init(repeating: repeatedValue, count: Int(count))
+  }
+
   public init(repeating repeatedValue: Element, count: UInt16) {
     self.init(repeating: repeatedValue, count: Int(count))
   }

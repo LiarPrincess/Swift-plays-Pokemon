@@ -15,7 +15,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
     let emulator = Emulator()
     emulator.fakeEmptyCartridge()
-    emulator.run(maxCycles: .max, lastPC: 0x0040)
+    emulator.run(maxCycles: .max, lastPC: 0x0068)
   }
 
   // swiftlint:disable:next function_body_length

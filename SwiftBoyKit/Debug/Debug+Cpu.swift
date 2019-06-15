@@ -19,6 +19,13 @@ extension Debug {
       print("> register - setting \(r) to \(value.hex)")
     }
   }
+
+  internal static func registersDidSet(_ r: CombinedRegister) {
+    if fRegisterWrites {
+      let value = registers.get(r)
+      print("> register - setting \(r) to \(value.hex)")
+    }
+  }
 }
 
 // MARK: - Cpu
@@ -154,18 +161,27 @@ extension Debug {
     switch opcode {
     case .call_a16, .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16:
       print("> call to \(pc)")
-    case .jp_a16, .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_pHL, .jp_z_a16:
+
+    case .jp_a16, .jp_pHL:
       print("> jump to \(pc)")
-    case .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_r8, .jr_z_r8:
+    case  .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16:
+      print("> conditional jump (don't know if taken). pc after: \(pc)")
+
+    case .jr_r8:
       print("> relative jump to \(pc)")
+    case .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_z_r8:
+      print("> relative conditional jump (don't know if taken). pc after \(pc)")
+
     case .ret, .ret_c, .ret_nc, .ret_nz, .ret_z, .reti:
       print("> return to \(pc)")
     case .rst_00, .rst_08, .rst_10, .rst_18, .rst_20, .rst_28, .rst_30, .rst_38:
       print("> rst call to \(pc)")
-      //case .push_af, .push_bc, .push_de, .push_hl:
-      //print("> push")
-      //case .pop_af, .pop_bc, .pop_de, .pop_hl:
+
+    //case .push_af, .push_bc, .push_de, .push_hl:
+    //print("> push")
+    //case .pop_af, .pop_bc, .pop_de, .pop_hl:
     //print("> pop")
+
     case .prefix:
       print("> prefix - will read additional 8 bytes")
     default:

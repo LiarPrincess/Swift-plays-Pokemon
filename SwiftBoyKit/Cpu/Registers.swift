@@ -74,6 +74,7 @@ public class Registers {
     set {
       self.b = UInt8((newValue & 0xff00) >> 8)
       self.c = UInt8(newValue & 0xff)
+      Debug.registersDidSet(.bc)
     }
   }
 
@@ -82,6 +83,7 @@ public class Registers {
     set {
       self.d = UInt8((newValue & 0xff00) >> 8)
       self.e = UInt8(newValue & 0xff)
+      Debug.registersDidSet(.de)
     }
   }
 
@@ -90,6 +92,7 @@ public class Registers {
     set {
       self.h = UInt8((newValue & 0xff00) >> 8)
       self.l = UInt8(newValue & 0xff)
+      Debug.registersDidSet(.hl)
     }
   }
 

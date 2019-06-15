@@ -4,8 +4,9 @@
 
 /// Memory as viewied by PPU.
 internal protocol PpuMemoryView: AnyObject {
-  var lcd: LcdMemory { get }
+  var lcd:        LcdMemory { get }
   var interrupts: Interrupts { get }
+  var videoRam:   VideoRam { get }
 
   func read(_ address: UInt16) -> UInt8
 }

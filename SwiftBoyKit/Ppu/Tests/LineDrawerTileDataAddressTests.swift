@@ -5,9 +5,9 @@
 import XCTest
 @testable import SwiftBoyKit
 
-class LineDrawerTests: XCTestCase {
+class LineDrawerTileDataAddressTests: XCTestCase {
 
-  func test_tileDataAddress_from8000_works() {
+  func test_tileDataAddress_from8000() {
     let memory = Memory()
     let drawer = LineDrawer(memory: memory)
 
@@ -27,7 +27,7 @@ class LineDrawerTests: XCTestCase {
     XCTAssertEqual(drawer.getTileDataAddress(tileIndex: 255), 0x8ff0)
   }
 
-  func test_tileDataAddress_from8800_works() {
+  func test_tileDataAddress_from8800() {
     let memory = Memory()
     let drawer = LineDrawer(memory: memory)
 

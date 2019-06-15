@@ -9,6 +9,11 @@ class ArrayUIntTests: XCTestCase {
 
   // MARK: - Init
 
+  func test_init_UInt8() {
+    let value = Array(repeating: 1, count: UInt8(5))
+    XCTAssertEqual(value, [1, 1, 1, 1, 1])
+  }
+
   func test_init_UInt16() {
     let value = Array(repeating: 1, count: UInt16(5))
     XCTAssertEqual(value, [1, 1, 1, 1, 1])

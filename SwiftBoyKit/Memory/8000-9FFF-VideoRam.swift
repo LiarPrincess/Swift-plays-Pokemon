@@ -10,12 +10,9 @@ public class VideoRam: ContinuousMemoryRegion {
 
   public var data = [UInt8](repeating: 0, count: VideoRam.size)
 
-  /// 8000-87FF: Tile set #1
-  public var tileSet1: ArraySlice<UInt8> { return self.data[0x0000...0x07FF] }
+  /// 8000-8FFF: Tile set #1
+  public var tileSet8000: ArraySlice<UInt8> { return self.data[0x0000...0x0FFF] }
 
-  /// 8800-8FFF: Tile set #1 #2 - shared
-  public var tileSet12: ArraySlice<UInt8> { return self.data[0x0800...0x0FFF] }
-
-  /// 9000-97FF: Tile set #2
-  public var tileSet2: ArraySlice<UInt8> { return self.data[0x1000...0x17FF] }
+  /// 8800-97FF: Tile set #2
+  public var tileSet8800: ArraySlice<UInt8> { return self.data[0x0800...0x17FF] }
 }
