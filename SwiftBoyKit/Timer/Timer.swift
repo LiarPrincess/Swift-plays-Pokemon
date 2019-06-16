@@ -9,10 +9,7 @@ public class Timer: MemoryRegion {
   public static let tmaAddress:  UInt16 = 0xff06
   public static let tacAddress:  UInt16 = 0xff07
 
-  /// FF04 - Divider register
   private let divTimer = DivTimer()
-
-  /// FF05, FF06, FF07 - App defined timer
   private let appTimer = AppTimer()
 
   // MARK: - Getters

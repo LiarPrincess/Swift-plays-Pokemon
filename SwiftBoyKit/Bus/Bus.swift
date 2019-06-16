@@ -21,24 +21,15 @@ public class Bus {
   /** FF01-FF02     */ internal let serialPort: SerialPortMemory
   /** FF40-FF4B     */ internal let lcd: LcdMemory
 
-  /** FF04-FF07     */ internal let timer: Timer
-  /** FF0F-and-FFFF */ internal let interrupts: Interrupts
+  private let timer: Timer
+  private let interruptEnable: InterruptEnable
 
   /** FF80-FFFE     */ internal let highRam: HighRam
-
-  private lazy var allRegions: [MemoryRegion] = [
-    self.rom0, self.rom1,
-    self.videoRam, self.externalRam, self.internalRam, self.internalRamEcho,
-    self.oam, self.notUsable,
-    self.joypad, self.serialPort, self.lcd,
-    self.timer, self.interrupts, self.highRam,
-    self.ioPorts
-  ]
 
   internal init(timer: Timer) {
     // If we pass region as init param to another region then it should be stored as 'unowned',
     // not for ARC, but for semantics (memory should be the owner of all regions).
-    self.interrupts = Interrupts()
+    self.interruptEnable = InterruptEnable()
     self.rom0 = Rom0Memory()
     self.rom1 = Rom1Memory()
     self.videoRam = VideoRam()
@@ -62,17 +53,18 @@ public class Bus {
   }
 
   internal func read(_ address: UInt16, callDebug: Bool) -> UInt8 {
-    guard let region = self.getRegion(forGlobalAddress: address) else {
-      fatalError("Attempting to read unsupported memory address: \(address.hex).")
-    }
-
-    let value = region.read(globalAddress: address)
-
-    if callDebug {
-      Debug.memoryDidRead(from: address, region: region, value: value)
-    }
-
-    return value
+    return 0
+//    guard let region = self.getRegion(forGlobalAddress: address) else {
+//      fatalError("Attempting to read unsupported memory address: \(address.hex).")
+//    }
+//
+//    let value = region.read(globalAddress: address)
+//
+//    if callDebug {
+//      Debug.memoryDidRead(from: address, region: region, value: value)
+//    }
+//
+//    return value
   }
 
   // MARK: - Write
@@ -82,32 +74,28 @@ public class Bus {
   }
 
   internal func write(_ address: UInt16, value: UInt8, callDebug: Bool) {
-    guard address != Bus.dmaAddress else {
-      self.dma(writeValue: value)
-      return
-    }
-
-    guard let region = self.getRegion(forGlobalAddress: address) else {
-      fatalError("Attempting to write to unsupported memory address: \(address.hex).")
-    }
-
-    region.write(globalAddress: address, value: value)
-
-    if callDebug {
-      Debug.memoryDidWrite(to: address, region: region, value: value)
-    }
-  }
-
-  private func getRegion(forGlobalAddress address: UInt16) -> MemoryRegion? {
-    return self.allRegions.first { $0.contains(globalAddress: address) }
+//    guard address != Bus.dmaAddress else {
+//      self.dma(writeValue: value)
+//      return
+//    }
+//
+//    guard let region = self.getRegion(forGlobalAddress: address) else {
+//      fatalError("Attempting to write to unsupported memory address: \(address.hex).")
+//    }
+//
+//    region.write(globalAddress: address, value: value)
+//
+//    if callDebug {
+//      Debug.memoryDidWrite(to: address, region: region, value: value)
+//    }
   }
 
   // MARK: - DMA
 
-  // TODO: DMA should have separate class (as in Castor C#)
   private func dma(writeValue: UInt8) {
     let sourceAddress = UInt16(writeValue) << 8
 
+    // move it to Oam class?
     for i in 0..<Oam.size {
       let value = self.read(sourceAddress + i)
       self.write(Oam.start + i, value: value)
@@ -117,16 +105,12 @@ public class Bus {
   // MARK: - Interrupts
 
   func isInterruptRequested(type: InterruptType) -> Bool {
-    guard self.interrupts.isEnabled(type) else {
-      return false
-    }
-
     switch type {
-    case .vBlank: return false
-    case .lcdStat: return false
-    case .timer: return self.timer.hasInterrupt
-    case .serial: return false
-    case .joypad: return false
+    case .vBlank:  return self.interruptEnable.vBlank  && false
+    case .lcdStat: return self.interruptEnable.lcdStat && false
+    case .timer:   return self.interruptEnable.timer   && self.timer.hasInterrupt
+    case .serial:  return self.interruptEnable.serial  && false
+    case .joypad:  return self.interruptEnable.joypad  && false
     }
   }
 
