@@ -10,11 +10,9 @@ public class LcdMemory: MemoryRegion {
   public static let scrollXAddress:     UInt16 = 0xff43
   public static let lineAddress:        UInt16 = 0xff44
   public static let lineCompareAddress: UInt16 = 0xff45
-
   public static let backgroundPaletteAddress: UInt16 = 0xff47
   public static let objectPalette0Address:    UInt16 = 0xff48
   public static let objectPalette1Address:    UInt16 = 0xff49
-
   public static let windowYAddress: UInt16 = 0xff4a
   public static let windowXAddress: UInt16 = 0xff4b
 
