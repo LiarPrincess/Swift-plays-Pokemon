@@ -11,8 +11,8 @@ public class Memory {
 
   /** 8000-9FFF     */ internal let videoRam: VideoRam
   /** A000-BFFF     */ internal let externalRam: ExternalRam
-  /** C000-DFFF     */ internal let workRam: WorkRam
-  /** E000-FDFF     */ internal let echo: EchoMemory
+  /** C000-DFFF     */ internal let internalRam: InternalRam
+  /** E000-FDFF     */ internal let internalRamEcho: InternalRamEcho
   /** FE00-FE9F     */ internal let oam: Oam
 
   /** FF00-FF7F     */ internal let ioPorts: IOPorts
@@ -28,7 +28,7 @@ public class Memory {
 
   private lazy var allRegions: [MemoryRegion] = [
     self.rom0, self.rom1,
-    self.videoRam, self.externalRam, self.workRam, self.echo, self.oam,
+    self.videoRam, self.externalRam, self.internalRam, self.internalRamEcho, self.oam,
     self.joypad, self.serialPort, self.lcd,
     self.divTimer, self.appTimer,
     self.interrupts, self.highRam,
@@ -43,8 +43,8 @@ public class Memory {
     self.rom1 = Rom1Memory()
     self.videoRam = VideoRam()
     self.externalRam = ExternalRam()
-    self.workRam = WorkRam()
-    self.echo = EchoMemory(workRam: self.workRam)
+    self.internalRam = InternalRam()
+    self.internalRamEcho = InternalRamEcho(internalRam: self.internalRam)
     self.oam = Oam()
     self.ioPorts = IOPorts()
     self.joypad = JoypadMemory()

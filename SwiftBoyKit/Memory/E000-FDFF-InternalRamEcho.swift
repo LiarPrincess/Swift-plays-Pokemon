@@ -3,32 +3,32 @@
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
 /// E000-FDFF Same as C000-DDFF (ECHO) (typically not used)
-public class EchoMemory: MemoryRegion {
+public class InternalRamEcho: MemoryRegion {
 
   public static let start: UInt16 = 0xe000
   public static let end:   UInt16 = 0xfdff
   public static let size:  UInt16 = end - start + 1
 
-  private unowned let workRam: WorkRam
+  private unowned let internalRam: InternalRam
 
-  internal init(workRam: WorkRam) {
-    self.workRam = workRam
+  internal init(internalRam: InternalRam) {
+    self.internalRam = internalRam
   }
 
   public func contains(globalAddress address: UInt16) -> Bool {
-    return EchoMemory.start <= address && address <= EchoMemory.end
+    return InternalRamEcho.start <= address && address <= InternalRamEcho.end
   }
 
   public func read(globalAddress address: UInt16) -> UInt8 {
     assert(self.contains(globalAddress: address))
     let mappedAddress = self.mappedAddress(from: address)
-    return self.workRam.read(globalAddress: mappedAddress)
+    return self.internalRam.read(globalAddress: mappedAddress)
   }
 
   public func write(globalAddress address: UInt16, value: UInt8) {
     assert(self.contains(globalAddress: address))
     let mappedAddress = self.mappedAddress(from: address)
-    self.workRam.write(globalAddress: mappedAddress, value: value)
+    self.internalRam.write(globalAddress: mappedAddress, value: value)
   }
 
   private func mappedAddress(from address: UInt16) -> UInt16 {
