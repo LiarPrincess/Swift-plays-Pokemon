@@ -113,4 +113,30 @@ public class Bus {
       self.write(Oam.start + i, value: value)
     }
   }
+
+  // MARK: - Interrupts
+
+  func isInterruptRequested(type: InterruptType) -> Bool {
+    guard self.interrupts.isEnabled(type) else {
+      return false
+    }
+
+    switch type {
+    case .vBlank: return false
+    case .lcdStat: return false
+    case .timer: return self.timer.hasInterrupt
+    case .serial: return false
+    case .joypad: return false
+    }
+  }
+
+  func clearInterrupt(type: InterruptType) {
+    switch type {
+    case .vBlank: break
+    case .lcdStat: break
+    case .timer: self.timer.clearInterrupt()
+    case .serial: break
+    case .joypad: break
+    }
+  }
 }

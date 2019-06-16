@@ -35,7 +35,7 @@ public class Cpu {
 
   // MARK: - Tick
 
-  /// Runs 1 instruction. Returns the number of cycles it took.
+  /// Run 1 instruction. Returns the number of cycles it took.
   internal func tick() -> UInt8 {
     let rawOpcode = self.read(self.pc)
     guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
@@ -67,34 +67,31 @@ public class Cpu {
     self.ime = false
   }
 
+  private typealias IntterruptAddress = (type: InterruptType, address: UInt16)
+
+  private static let intterruptAddresses: [IntterruptAddress] = [
+    (type: .vBlank,  address: 0x40),
+    (type: .lcdStat, address: 0x48),
+    (type: .timer,   address: 0x50),
+    (type: .serial,  address: 0x58),
+    (type: .joypad,  address: 0x60)
+  ]
+
   internal func processInterrupts() {
     guard self.ime else {
       return
     }
 
-    let interruptTypes: [InterruptType] = [
-      .vBlank, .lcdStat, .timer, .serial, .joypad
-    ]
-
-    for type in interruptTypes {
-      if self.bus.interrupts.isEnabled(type) && self.bus.interrupts.isSet(type) {
-        self.processInterrupt(type: type)
-      }
+    let requestedInterrupt = Cpu.intterruptAddresses.first {
+      self.bus.isInterruptRequested(type: $0.type)
     }
-  }
 
-  private func processInterrupt(type: InterruptType) {
-    self.ime = false
-    self.bus.interrupts.reset(type)
+    if let interrupt = requestedInterrupt {
+      self.ime = false
+      self.bus.clearInterrupt(type: interrupt.type)
 
-    self.push16(self.pc)
-
-    switch type {
-    case .vBlank:  self.pc = 0x40
-    case .lcdStat: self.pc = 0x48
-    case .timer:   self.pc = 0x50
-    case .serial:  self.pc = 0x58
-    case .joypad:  self.pc = 0x60
+      self.push16(self.pc)
+      self.pc = interrupt.address
     }
   }
 

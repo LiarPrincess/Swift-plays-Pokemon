@@ -7,7 +7,7 @@ internal class DivTimer {
   /// Frequency at which div register should be incremented.
   private static let frequency: UInt = 16_384
 
-  internal var value: UInt8 = 0x00
+  internal private(set) var value: UInt8 = 0x00
 
   private var progress: UInt = 0
 

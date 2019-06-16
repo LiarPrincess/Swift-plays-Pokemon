@@ -4,11 +4,11 @@
 
 internal class AppTimer {
 
-  internal var tima: UInt8 = 0x00
-  internal var tma:  UInt8 = 0x00
-  internal var tac:  UInt8 = 0x00
+  internal private(set) var tima: UInt8 = 0x00
+  internal private(set) var tma:  UInt8 = 0x00
+  internal private(set) var tac:  UInt8 = 0x00
 
-  internal var hasInterrupt: Bool = false
+  internal private(set) var hasInterrupt: Bool = false
 
   private var progress: UInt = 0
 
@@ -42,6 +42,12 @@ internal class AppTimer {
     default:
       fatalError("Attempting to write invalid app timer memory")
     }
+  }
+
+  // MARK: - Interrupts
+
+  internal func clearInterrupt() {
+    self.hasInterrupt = false
   }
 
   // MARK: - Tick

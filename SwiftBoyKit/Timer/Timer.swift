@@ -65,6 +65,12 @@ public class Timer: MemoryRegion {
     }
   }
 
+  // MARK: - Interrupts
+
+  internal func clearInterrupt() {
+    self.appTimer.clearInterrupt()
+  }
+
   // MARK: - Tick
 
   internal func tick(cycles: UInt8) {
