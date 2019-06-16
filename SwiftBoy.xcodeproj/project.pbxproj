@@ -60,6 +60,8 @@
 		90B0DC4122B6DB73005BBCF5 /* Bus+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4022B6DB73005BBCF5 /* Bus+init.swift */; };
 		90B0DC4422B6EC89005BBCF5 /* Lcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4322B6EC89005BBCF5 /* Lcd.swift */; };
 		90B0DC4822B6F0CD005BBCF5 /* InterruptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4722B6F0CD005BBCF5 /* InterruptType.swift */; };
+		90B0DC4B22B6F43D005BBCF5 /* Cartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */; };
+		90B0DC4D22B6F705005BBCF5 /* Cartridge+bootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4C22B6F705005BBCF5 /* Cartridge+bootrom.swift */; };
 		90BE338222B42C8100DF3953 /* Debug+Emulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338122B42C8100DF3953 /* Debug+Emulator.swift */; };
 		90BE338422B50A3B00DF3953 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338322B50A3B00DF3953 /* Screen.swift */; };
 		90BE338622B5123B00DF3953 /* LineDrawerColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338522B5123B00DF3953 /* LineDrawerColorValueTests.swift */; };
@@ -83,11 +85,11 @@
 		90CBB74422ADBA87004775E2 /* PpuMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB74322ADBA87004775E2 /* PpuMemoryView.swift */; };
 		90D404AE22AC76FC00AEF7BD /* InterruptEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */; };
 		90D58EE322A7B2780076584F /* MemoryRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58EE222A7B2780076584F /* MemoryRegion.swift */; };
-		90D58F1322A7CC7B0076584F /* 0000-3FFF-Rom0Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0922A7CC7A0076584F /* 0000-3FFF-Rom0Memory.swift */; };
-		90D58F1422A7CC7B0076584F /* 4000-7FFF-Rom1Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0A22A7CC7A0076584F /* 4000-7FFF-Rom1Memory.swift */; };
+		90D58F1322A7CC7B0076584F /* Rom0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0922A7CC7A0076584F /* Rom0.swift */; };
+		90D58F1422A7CC7B0076584F /* Rom1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0A22A7CC7A0076584F /* Rom1.swift */; };
 		90D58F1522A7CC7B0076584F /* FE00-FE9F-Oam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0B22A7CC7A0076584F /* FE00-FE9F-Oam.swift */; };
 		90D58F1722A7CC7B0076584F /* FF80-FFFE-HighRam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0D22A7CC7B0076584F /* FF80-FFFE-HighRam.swift */; };
-		90D58F1822A7CC7B0076584F /* A000-BFFF-ExternalRam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0E22A7CC7B0076584F /* A000-BFFF-ExternalRam.swift */; };
+		90D58F1822A7CC7B0076584F /* ExternalRam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0E22A7CC7B0076584F /* ExternalRam.swift */; };
 		90D58F1922A7CC7B0076584F /* 8000-9FFF-VideoRam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F0F22A7CC7B0076584F /* 8000-9FFF-VideoRam.swift */; };
 		90D58F1D22A7CCBA0076584F /* FF00-JoypadMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F1C22A7CCBA0076584F /* FF00-JoypadMemory.swift */; };
 		90D58F2222A7CE860076584F /* FF01-FF02-SerialPortMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D58F2022A7CE860076584F /* FF01-FF02-SerialPortMemory.swift */; };
@@ -204,6 +206,8 @@
 		90B0DC4022B6DB73005BBCF5 /* Bus+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+init.swift"; sourceTree = "<group>"; };
 		90B0DC4322B6EC89005BBCF5 /* Lcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lcd.swift; sourceTree = "<group>"; };
 		90B0DC4722B6F0CD005BBCF5 /* InterruptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptType.swift; sourceTree = "<group>"; };
+		90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cartridge.swift; sourceTree = "<group>"; };
+		90B0DC4C22B6F705005BBCF5 /* Cartridge+bootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cartridge+bootrom.swift"; sourceTree = "<group>"; };
 		90BE338122B42C8100DF3953 /* Debug+Emulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debug+Emulator.swift"; sourceTree = "<group>"; };
 		90BE338322B50A3B00DF3953 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		90BE338522B5123B00DF3953 /* LineDrawerColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDrawerColorValueTests.swift; sourceTree = "<group>"; };
@@ -227,11 +231,11 @@
 		90CBB74322ADBA87004775E2 /* PpuMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PpuMemoryView.swift; sourceTree = "<group>"; };
 		90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterruptEnable.swift; sourceTree = "<group>"; };
 		90D58EE222A7B2780076584F /* MemoryRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRegion.swift; sourceTree = "<group>"; };
-		90D58F0922A7CC7A0076584F /* 0000-3FFF-Rom0Memory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "0000-3FFF-Rom0Memory.swift"; sourceTree = "<group>"; };
-		90D58F0A22A7CC7A0076584F /* 4000-7FFF-Rom1Memory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "4000-7FFF-Rom1Memory.swift"; sourceTree = "<group>"; };
+		90D58F0922A7CC7A0076584F /* Rom0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rom0.swift; sourceTree = "<group>"; };
+		90D58F0A22A7CC7A0076584F /* Rom1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rom1.swift; sourceTree = "<group>"; };
 		90D58F0B22A7CC7A0076584F /* FE00-FE9F-Oam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FE00-FE9F-Oam.swift"; sourceTree = "<group>"; };
 		90D58F0D22A7CC7B0076584F /* FF80-FFFE-HighRam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FF80-FFFE-HighRam.swift"; sourceTree = "<group>"; };
-		90D58F0E22A7CC7B0076584F /* A000-BFFF-ExternalRam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "A000-BFFF-ExternalRam.swift"; sourceTree = "<group>"; };
+		90D58F0E22A7CC7B0076584F /* ExternalRam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalRam.swift; sourceTree = "<group>"; };
 		90D58F0F22A7CC7B0076584F /* 8000-9FFF-VideoRam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "8000-9FFF-VideoRam.swift"; sourceTree = "<group>"; };
 		90D58F1C22A7CCBA0076584F /* FF00-JoypadMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FF00-JoypadMemory.swift"; sourceTree = "<group>"; };
 		90D58F2022A7CE860076584F /* FF01-FF02-SerialPortMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FF01-FF02-SerialPortMemory.swift"; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 				9073102522A66A2000EBC7BB /* Cpu */,
 				90CBB73C22ADB851004775E2 /* Lcd */,
 				90B0DC3C22B6C83D005BBCF5 /* Timer */,
+				90B0DC4922B6F3EF005BBCF5 /* Cartridge */,
 				90B0DC4522B6F0B4005BBCF5 /* Interrupts */,
 				90D58EE122A7B2580076584F /* Bus */,
 				90CBB71722AD74BB004775E2 /* Extensions */,
@@ -446,6 +451,18 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		90B0DC4922B6F3EF005BBCF5 /* Cartridge */ = {
+			isa = PBXGroup;
+			children = (
+				90D58F0922A7CC7A0076584F /* Rom0.swift */,
+				90D58F0A22A7CC7A0076584F /* Rom1.swift */,
+				90D58F0E22A7CC7B0076584F /* ExternalRam.swift */,
+				90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */,
+				90B0DC4C22B6F705005BBCF5 /* Cartridge+bootrom.swift */,
+			);
+			path = Cartridge;
+			sourceTree = "<group>";
+		};
 		90C19C5622B2AEBF00A1B7A9 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,9 +536,6 @@
 			isa = PBXGroup;
 			children = (
 				90CBB71D22AD757E004775E2 /* Tests */,
-				90D58F0922A7CC7A0076584F /* 0000-3FFF-Rom0Memory.swift */,
-				90D58F0A22A7CC7A0076584F /* 4000-7FFF-Rom1Memory.swift */,
-				90D58F0E22A7CC7B0076584F /* A000-BFFF-ExternalRam.swift */,
 				9085FC2822B6720100310090 /* C000-DFFF-InternalRam.swift */,
 				9085FC2A22B6724200310090 /* E000-FDFF-InternalRamEcho.swift */,
 				9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */,
@@ -736,7 +750,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90D58F1422A7CC7B0076584F /* 4000-7FFF-Rom1Memory.swift in Sources */,
+				90D58F1422A7CC7B0076584F /* Rom1.swift in Sources */,
 				9085FC4422B6C54400310090 /* Bus.swift in Sources */,
 				90D58F2722A7D0C40076584F /* FF00-FF7F-IOPorts.swift in Sources */,
 				9085FC2B22B6724200310090 /* E000-FDFF-InternalRamEcho.swift in Sources */,
@@ -748,11 +762,12 @@
 				9085FC3922B6BBED00310090 /* CpuBus.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
-				90D58F1822A7CC7B0076584F /* A000-BFFF-ExternalRam.swift in Sources */,
+				90D58F1822A7CC7B0076584F /* ExternalRam.swift in Sources */,
 				90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */,
 				90A56A3522A3DD0D0055A013 /* Emulator.swift in Sources */,
 				90C19C5C22B3C94F00A1B7A9 /* Debug.swift in Sources */,
 				9085FC2922B6720100310090 /* C000-DFFF-InternalRam.swift in Sources */,
+				90B0DC4D22B6F705005BBCF5 /* Cartridge+bootrom.swift in Sources */,
 				908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */,
 				90BE338422B50A3B00DF3953 /* Screen.swift in Sources */,
 				90A17B98229D59D50027133B /* Cpu+ExecuteUnprefixed.swift in Sources */,
@@ -760,7 +775,7 @@
 				90D58F2222A7CE860076584F /* FF01-FF02-SerialPortMemory.swift in Sources */,
 				90D58F1522A7CC7B0076584F /* FE00-FE9F-Oam.swift in Sources */,
 				90D58F1922A7CC7B0076584F /* 8000-9FFF-VideoRam.swift in Sources */,
-				90D58F1322A7CC7B0076584F /* 0000-3FFF-Rom0Memory.swift in Sources */,
+				90D58F1322A7CC7B0076584F /* Rom0.swift in Sources */,
 				90B0DC4822B6F0CD005BBCF5 /* InterruptType.swift in Sources */,
 				90A17B9B229D59D50027133B /* UnprefixedOpcodes.swift in Sources */,
 				90CBB73E22ADB8A7004775E2 /* Ppu.swift in Sources */,
@@ -771,6 +786,7 @@
 				9085FC2D22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift in Sources */,
 				90CBB74422ADBA87004775E2 /* PpuMemoryView.swift in Sources */,
 				90B0DC3F22B6C872005BBCF5 /* Timer.swift in Sources */,
+				90B0DC4B22B6F43D005BBCF5 /* Cartridge.swift in Sources */,
 				9085FC3122B690C600310090 /* ColorPalette.swift in Sources */,
 				90CBB73622ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift in Sources */,
 				90D58F1722A7CC7B0076584F /* FF80-FFFE-HighRam.swift in Sources */,
