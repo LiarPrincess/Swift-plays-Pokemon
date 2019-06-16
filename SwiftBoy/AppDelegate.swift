@@ -5,7 +5,6 @@
 import Cocoa
 import SwiftBoyKit
 
-@NSApplicationMain
 public class AppDelegate: NSObject, NSApplicationDelegate {
 
   public func applicationDidFinishLaunching(_ aNotification: Notification) {

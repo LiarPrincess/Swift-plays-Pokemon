@@ -20,6 +20,8 @@
 		9085FC3322B693F200310090 /* ColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* ColorPaletteTests.swift */; };
 		9085FC3922B6BBED00310090 /* CpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3822B6BBED00310090 /* CpuBus.swift */; };
 		9085FC3B22B6BC7400310090 /* FakeCpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */; };
+		9085FC3D22B6BF6A00310090 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3C22B6BF6A00310090 /* main.swift */; };
+		9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */; };
 		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
 		90A17B46229D59830027133B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B45229D59830027133B /* ViewController.swift */; };
@@ -152,6 +154,8 @@
 		9085FC3222B693F200310090 /* ColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteTests.swift; sourceTree = "<group>"; };
 		9085FC3822B6BBED00310090 /* CpuBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuBus.swift; sourceTree = "<group>"; };
 		9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCpuBus.swift; sourceTree = "<group>"; };
+		9085FC3C22B6BF6A00310090 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* SwiftBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A17B43229D59830027133B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -316,7 +320,9 @@
 			children = (
 				903818D822B57967004E5281 /* PyBoy */,
 				90A17B43229D59830027133B /* AppDelegate.swift */,
+				9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */,
 				90A17B45229D59830027133B /* ViewController.swift */,
+				9085FC3C22B6BF6A00310090 /* main.swift */,
 				90A17B47229D59840027133B /* Assets.xcassets */,
 				90A17B49229D59840027133B /* Main.storyboard */,
 				90A17B4C229D59840027133B /* Info.plist */,
@@ -664,8 +670,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */,
 				90A17B46229D59830027133B /* ViewController.swift in Sources */,
 				903818DA22B57976004E5281 /* PyEmulator.swift in Sources */,
+				9085FC3D22B6BF6A00310090 /* main.swift in Sources */,
 				90A17B44229D59830027133B /* AppDelegate.swift in Sources */,
 				903818DC22B579EC004E5281 /* PyLoad.swift in Sources */,
 				903818DE22B57B8A004E5281 /* PyTest.swift in Sources */,
