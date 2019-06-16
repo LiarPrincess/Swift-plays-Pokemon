@@ -105,7 +105,6 @@ public class Ppu {
 
   private func drawLine() {
     guard self.lcdControl.spriteSize == .size8x8 else {
-      // TODO: Tile size 8x16 is not yet supported.
       fatalError("Tile size 8x16 is not yet supported.")
     }
 

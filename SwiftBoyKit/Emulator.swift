@@ -2,7 +2,6 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// TODO: Restore Codable https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types
 // TODO: State after boot should be the same as (bottom): http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
 public class Emulator {
 
@@ -36,8 +35,7 @@ public class Emulator {
 
       let cycles = self.cpu.tick()
       self.memory.updateTimers(cycles: cycles)
-// TODO: THIS TOTALLY DISABLES PPU!
-//      self.ppu.update(cycles: cycles)
+      self.ppu.update(cycles: cycles)
       self.cpu.processInterrupts()
     }
 

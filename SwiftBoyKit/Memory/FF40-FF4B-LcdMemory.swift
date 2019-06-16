@@ -10,6 +10,7 @@ public class LcdMemory: MemoryRegion {
   public static let scrollXAddress:     UInt16 = 0xff43
   public static let lineAddress:        UInt16 = 0xff44
   public static let lineCompareAddress: UInt16 = 0xff45
+
   public static let windowYAddress:     UInt16 = 0xff4a
   public static let windowXAddress:     UInt16 = 0xff4b
 
@@ -42,9 +43,8 @@ public class LcdMemory: MemoryRegion {
   // MARK: - MemoryRegion
 
   public func contains(globalAddress address: UInt16) -> Bool {
-    typealias L = LcdMemory
-    return (L.controlAddress <= address && address <= L.lineCompareAddress)
-        || (L.windowYAddress <= address && address <= L.windowXAddress)
+    return (LcdMemory.controlAddress <= address && address <= LcdMemory.lineCompareAddress)
+        || (LcdMemory.windowYAddress <= address && address <= LcdMemory.windowXAddress)
   }
 
   public func read(globalAddress address: UInt16) -> UInt8 {

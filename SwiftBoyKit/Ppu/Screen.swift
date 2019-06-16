@@ -12,7 +12,7 @@ public class Screen {
 
   private var data: [UInt8] = [UInt8](repeating: 0, count: Screen.width * Screen.height)
 
-  subscript(x: UInt8, y: UInt8) -> UInt8 {
+  internal subscript(x: UInt8, y: UInt8) -> UInt8 {
     get {
       assert(self.contains(x: x, y: y), "Index out of range")
       let index = self.index(x: x, y: y)

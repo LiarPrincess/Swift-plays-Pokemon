@@ -87,11 +87,11 @@ extension LineDrawer {
 extension LineDrawer {
 
   internal func dumpBackground() {
-    let rowRange:    ClosedRange<UInt8> = 8...9
-    let columnRange: ClosedRange<UInt8> = 4...5 // 16 for R
+//    let rowRange:    ClosedRange<UInt8> = 8...9
+//    let columnRange: ClosedRange<UInt8> = 4...5 // 16 for R
 
-//    let rowRange:    ClosedRange<UInt8> = 0...tileRowCount
-//    let columnRange: ClosedRange<UInt8> = 0...tileColumnCount
+    let rowRange:    ClosedRange<UInt8> = 0...tileRowCount
+    let columnRange: ClosedRange<UInt8> = 0...tileColumnCount
 
     let linesPerTile = 8
 
@@ -135,12 +135,6 @@ extension LineDrawer {
       }
       print("|")
     }
-
-// TODO: Remode
-//    for i in 0x8010..<0x819f {
-//      let value = self.memory.read(UInt16(i))
-//      print(value.hex)
-//    }
   }
 
   private func drawTileLine(tileRow: UInt8, tileColumn: UInt8, line: UInt8) {
@@ -155,8 +149,6 @@ extension LineDrawer {
     let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
     let data1 = self.memory.read(tileDataAddress + lineInsideTile)
     let data2 = self.memory.read(tileDataAddress + lineInsideTile + 1)
-
-    print(tileDataAddress.hex, separator: "", terminator: ": ")
 
     for i in 0..<8 {
       let color = self.getRawColorValue(data1, data2, bitOffset: UInt8(i))

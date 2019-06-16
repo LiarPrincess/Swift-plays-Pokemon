@@ -2,7 +2,7 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// TODO: catch them all for ther IO addresses
+// TODO: Remove IOPorts and use more specific regions
 
 /// FF00-FF7F I/O Ports
 public class IOPorts: ContinuousMemoryRegion {

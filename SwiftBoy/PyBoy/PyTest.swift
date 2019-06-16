@@ -38,8 +38,8 @@ func pyTest(_ p: PyEmulator) {
   (0x0104...0x0133).forEach { skipAddress.insert($0) } // nintendo logo
   (0xfea0...0xfeff).forEach { skipAddress.insert($0) } // not usable
 
-  //  let ignored: [UInt16] = [0xff04, 0xff47, 0xff48, 0xff49]
-  //  ignored.forEach { skipAddress.insert($0) }
+    let ignored: [UInt16] = [0xff47, 0xff48, 0xff49]
+    ignored.forEach { skipAddress.insert($0) }
   //    skipAddress.insert(0xff04) // div was not implemented
   //    skipAddress.insert(0xff41) // LCD Status was not implemented
 
