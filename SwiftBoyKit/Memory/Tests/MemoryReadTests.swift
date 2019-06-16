@@ -66,10 +66,10 @@ class MemoryReadTests: XCTestCase {
   func test_lcdMemory() {
     let memory = Memory()
 
-    memory.lcd.control.fillFrom(5)
+    memory.lcd.control.byte = 5
     XCTAssertEqual(memory.read(LcdMemory.controlAddress), 5)
 
-    memory.lcd.status.fillFrom(6)
+    memory.lcd.status.byte = 6
     XCTAssertEqual(memory.read(LcdMemory.statusAddress), 6)
 
     memory.lcd.scrollY = 7

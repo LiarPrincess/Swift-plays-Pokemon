@@ -46,10 +46,10 @@ public class LcdMemory: MemoryRegion {
   public var backgroundPalette = ColorPalette()
 
   /// FF48 - OBP0 - Object Palette 0 Data
-  public var objectPalette0 = ColorPalette()
+  public var objectPalette0 = TransparentColorPalette()
 
   /// FF49 - OBP1 - Object Palette 1 Data
-  public var objectPalette1 = ColorPalette()
+  public var objectPalette1 = TransparentColorPalette()
 
   // MARK: - MemoryRegion
 
