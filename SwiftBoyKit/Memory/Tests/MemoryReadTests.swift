@@ -27,29 +27,24 @@ class MemoryReadTests: XCTestCase {
     self.testContinuousRegion(in: memory, region: memory.externalRam)
   }
 
-  func test_workRam() {
+  func test_internalkRam() {
     let memory = Memory()
-    self.testContinuousRegion(in: memory, region: memory.workRam)
+    self.testContinuousRegion(in: memory, region: memory.internalRam)
   }
 
-  func test_echoMemory() {
+  func test_internalRamEcho() {
     let memory = Memory()
-    let dataRegion = memory.workRam
 
-    dataRegion.data[0] = 5
-    XCTAssertEqual(memory.read(EchoMemory.start), 5)
+    memory.internalRam.data[0] = 5
+    XCTAssertEqual(memory.read(InternalRamEcho.start), 5)
 
-    dataRegion.data[EchoMemory.size - 1] = 7
-    XCTAssertEqual(memory.read(EchoMemory.end), 7)
+    memory.internalRam.data[InternalRamEcho.size - 1] = 7
+    XCTAssertEqual(memory.read(InternalRamEcho.end), 7)
   }
 
   func test_oam() {
     let memory = Memory()
     self.testContinuousRegion(in: memory, region: memory.oam)
-  }
-
-  func test_ioPorts() {
-    // TODO: add 'ioPorts' read tests
   }
 
   func test_joypadMemory() {

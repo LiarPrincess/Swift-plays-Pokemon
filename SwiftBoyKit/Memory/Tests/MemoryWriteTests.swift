@@ -25,29 +25,24 @@ class MemoryWriteTests: XCTestCase {
     self.testContinuousRegion(in: memory, region: memory.externalRam)
   }
 
-  func test_workRam() {
+  func test_internalRam() {
     let memory = Memory()
-    self.testContinuousRegion(in: memory, region: memory.workRam)
+    self.testContinuousRegion(in: memory, region: memory.internalRam)
   }
 
   func test_echoMemory() {
     let memory = Memory()
-    let dataRegion = memory.workRam
 
-    memory.write(EchoMemory.start, value: 5)
-    XCTAssertEqual(dataRegion.data[0], 5)
+    memory.write(InternalRamEcho.start, value: 5)
+    XCTAssertEqual(memory.internalRam.data[0], 5)
 
-    memory.write(EchoMemory.end, value: 7)
-    XCTAssertEqual(dataRegion.data[EchoMemory.size - 1], 7)
+    memory.write(InternalRamEcho.end, value: 7)
+    XCTAssertEqual(memory.internalRam.data[InternalRamEcho.size - 1], 7)
   }
 
   func test_oam() {
     let memory = Memory()
     self.testContinuousRegion(in: memory, region: memory.oam)
-  }
-
-  func test_ioPorts() {
-    // TODO: add 'ioPorts' write tests
   }
 
   func test_joypadMemory() {
