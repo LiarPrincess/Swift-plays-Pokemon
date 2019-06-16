@@ -10,6 +10,8 @@ public enum InterruptType {
   /** 4 */ case joypad
 }
 
+// TODO: Remove half of this class
+
 /// 0xFF0F and 0xFFFF Interrupts
 public class Interrupts: MemoryRegion {
 

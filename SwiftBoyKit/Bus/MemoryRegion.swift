@@ -3,7 +3,7 @@
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
 /// Stand-alone part of the memory
-public protocol MemoryRegion: AnyObject, Codable {
+internal protocol MemoryRegion: AnyObject {
 
   /// Does this memory region contains this address?
   func contains(globalAddress address: UInt16) -> Bool

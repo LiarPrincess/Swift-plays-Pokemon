@@ -89,23 +89,21 @@ class WriteTests: XCTestCase {
     XCTAssertEqual(bus.lcd.windowX, 12)
   }
 
-  func test_divTimer() {
-    let bus = Bus()
-    bus.write(DivTimer.address, value: 5)
-    XCTAssertEqual(bus.divTimer.value, 0) // should reset on write
-  }
+  func test_timer() {
+    let timer = Timer()
+    let bus = Bus(timer: timer)
 
-  func test_appTimer() {
-    let bus = Bus()
+    bus.write(SwiftBoyKit.Timer.divAddress, value: 4)
+    XCTAssertEqual(timer.div, 0) // should reset on write
 
-    bus.write(AppTimer.timaAddress, value: 5)
-    XCTAssertEqual(bus.appTimer.tima, 5)
+    bus.write(SwiftBoyKit.Timer.timaAddress, value: 5)
+    XCTAssertEqual(timer.tima, 5)
 
-    bus.write(AppTimer.tmaAddress, value: 6)
-    XCTAssertEqual(bus.appTimer.tma, 6)
+    bus.write(SwiftBoyKit.Timer.tmaAddress, value: 6)
+    XCTAssertEqual(timer.tma, 6)
 
-    bus.write(AppTimer.tacAddress, value: 7)
-    XCTAssertEqual(bus.appTimer.tac, 7)
+    bus.write(SwiftBoyKit.Timer.tacAddress, value: 7)
+    XCTAssertEqual(timer.tac, 7)
   }
 
   func test_interrupts() {

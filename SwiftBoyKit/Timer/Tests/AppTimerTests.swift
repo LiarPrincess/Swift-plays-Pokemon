@@ -13,11 +13,10 @@ class AppTimerTests: XCTestCase {
   private let period1024: UInt8 = 0b00
 
   func test_period16_incrementsAt_16cycles() {
-    let interrupts = Interrupts()
-    let timer = AppTimer(interrupts: interrupts)
+    let timer = Timer()
 
     let tac = enabled | period16
-    timer.write(globalAddress: AppTimer.tacAddress, value: tac)
+    timer.write(globalAddress: Timer.tacAddress, value: tac)
 
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x00)
@@ -25,16 +24,14 @@ class AppTimerTests: XCTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x01)
 
-    XCTAssertEqual(interrupts.ie, 0)
-    XCTAssertEqual(interrupts.if, 0)
+    XCTAssertEqual(timer.hasInterrupt, false)
   }
 
   func test_period1024_incrementsAt_1024cycles() {
-    let interrupts = Interrupts()
-    let timer = AppTimer(interrupts: interrupts)
+    let timer = Timer()
 
     let tac = enabled | period1024
-    timer.write(globalAddress: AppTimer.tacAddress, value: tac)
+    timer.write(globalAddress: Timer.tacAddress, value: tac)
 
     for _ in 0..<4 {
       timer.tick(cycles: 250)
@@ -44,16 +41,14 @@ class AppTimerTests: XCTestCase {
     timer.tick(cycles: 24)
     XCTAssertEqual(timer.tima, 0x01)
 
-    XCTAssertEqual(interrupts.ie, 0)
-    XCTAssertEqual(interrupts.if, 0)
+    XCTAssertEqual(timer.hasInterrupt, false)
   }
 
   func test_disabled_doesNothing() {
-    let interrupts = Interrupts()
-    let timer = AppTimer(interrupts: interrupts)
+    let timer = Timer()
 
     let tac = disabled | period16
-    timer.write(globalAddress: AppTimer.tacAddress, value: tac)
+    timer.write(globalAddress: Timer.tacAddress, value: tac)
 
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x00)
@@ -65,20 +60,18 @@ class AppTimerTests: XCTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x00)
 
-    XCTAssertEqual(interrupts.ie, 0)
-    XCTAssertEqual(interrupts.if, 0)
+    XCTAssertEqual(timer.hasInterrupt, false)
   }
 
   func test_overflow() {
-    let interrupts = Interrupts()
-    let timer = AppTimer(interrupts: interrupts)
+    let timer = Timer()
 
     let tac = enabled | period16
-    timer.write(globalAddress: AppTimer.tacAddress, value: tac)
+    timer.write(globalAddress: Timer.tacAddress, value: tac)
 
     // this value should be set after overflow
     let tma = UInt8(0x16)
-    timer.write(globalAddress: AppTimer.tmaAddress, value: tma)
+    timer.write(globalAddress: Timer.tmaAddress, value: tma)
 
     // tick up until tima = 255
     for i in 0..<255 {
@@ -93,7 +86,6 @@ class AppTimerTests: XCTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, tma) // now!
 
-    XCTAssertEqual(interrupts.ie, 0)
-    XCTAssertEqual(interrupts.if, Interrupts.timerMask)
+    XCTAssertEqual(timer.hasInterrupt, true)
   }
 }

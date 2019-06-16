@@ -91,23 +91,22 @@ class ReadTests: XCTestCase {
     XCTAssertEqual(bus.read(LcdMemory.windowXAddress), 12)
   }
 
-  func test_divTimer() {
-    let bus = Bus()
-    bus.divTimer.value = 5
-    XCTAssertEqual(bus.read(DivTimer.address), 5)
-  }
+  // TODO: Merge bus/read write tests (as below)
+  func test_timer() {
+    let timer = Timer()
+    let bus = Bus(timer: timer)
 
-  func test_appTimer() {
-    let bus = Bus()
+    timer.write(globalAddress: SwiftBoyKit.Timer.divAddress, value: 5)
+    XCTAssertEqual(bus.read(SwiftBoyKit.Timer.divAddress), 0) // should reset on write
 
-    bus.appTimer.tima = 5
-    XCTAssertEqual(bus.read(AppTimer.timaAddress), 5)
+    timer.write(globalAddress: SwiftBoyKit.Timer.timaAddress, value: 5)
+    XCTAssertEqual(bus.read(SwiftBoyKit.Timer.timaAddress), 5)
 
-    bus.appTimer.tma = 6
-    XCTAssertEqual(bus.read(AppTimer.tmaAddress), 6)
+    timer.write(globalAddress: SwiftBoyKit.Timer.tmaAddress, value: 6)
+    XCTAssertEqual(bus.read(SwiftBoyKit.Timer.tmaAddress), 6)
 
-    bus.appTimer.tac = 7
-    XCTAssertEqual(bus.read(AppTimer.tacAddress), 7)
+    timer.write(globalAddress: SwiftBoyKit.Timer.tacAddress, value: 7)
+    XCTAssertEqual(bus.read(SwiftBoyKit.Timer.tacAddress), 7)
   }
 
   func test_interrupts() {

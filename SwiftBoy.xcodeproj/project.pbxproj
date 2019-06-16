@@ -11,8 +11,8 @@
 		903818DC22B579EC004E5281 /* PyLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DB22B579EC004E5281 /* PyLoad.swift */; };
 		903818DE22B57B8A004E5281 /* PyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DD22B57B8A004E5281 /* PyTest.swift */; };
 		904B89CE22A5C8FB00F5FEFE /* Array+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */; };
-		907235C922AB180500939949 /* FF05-FF07-AppTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907235C822AB180500939949 /* FF05-FF07-AppTimer.swift */; };
-		907235CB22AB190A00939949 /* FF04-DivTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907235CA22AB190A00939949 /* FF04-DivTimer.swift */; };
+		907235C922AB180500939949 /* AppTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907235C822AB180500939949 /* AppTimer.swift */; };
+		907235CB22AB190A00939949 /* DivTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907235CA22AB190A00939949 /* DivTimer.swift */; };
 		9085FC2922B6720100310090 /* C000-DFFF-InternalRam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2822B6720100310090 /* C000-DFFF-InternalRam.swift */; };
 		9085FC2B22B6724200310090 /* E000-FDFF-InternalRamEcho.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2A22B6724200310090 /* E000-FDFF-InternalRamEcho.swift */; };
 		9085FC2D22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */; };
@@ -56,6 +56,8 @@
 		90A17BB8229D59FC0027133B /* PrintOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB2229D59FC0027133B /* PrintOpcodes.swift */; };
 		90A17BB9229D59FC0027133B /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB3229D59FC0027133B /* Opcode.swift */; };
 		90A56A3522A3DD0D0055A013 /* Emulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A56A3422A3DD0D0055A013 /* Emulator.swift */; };
+		90B0DC3F22B6C872005BBCF5 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC3E22B6C872005BBCF5 /* Timer.swift */; };
+		90B0DC4122B6DB73005BBCF5 /* Bus+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4022B6DB73005BBCF5 /* Bus+init.swift */; };
 		90BE338222B42C8100DF3953 /* Debug+Emulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338122B42C8100DF3953 /* Debug+Emulator.swift */; };
 		90BE338422B50A3B00DF3953 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338322B50A3B00DF3953 /* Screen.swift */; };
 		90BE338622B5123B00DF3953 /* LineDrawerColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338522B5123B00DF3953 /* LineDrawerColorValueTests.swift */; };
@@ -145,8 +147,8 @@
 		903818DB22B579EC004E5281 /* PyLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyLoad.swift; sourceTree = "<group>"; };
 		903818DD22B57B8A004E5281 /* PyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyTest.swift; sourceTree = "<group>"; };
 		904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+UInt.swift"; sourceTree = "<group>"; };
-		907235C822AB180500939949 /* FF05-FF07-AppTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FF05-FF07-AppTimer.swift"; sourceTree = "<group>"; };
-		907235CA22AB190A00939949 /* FF04-DivTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FF04-DivTimer.swift"; sourceTree = "<group>"; };
+		907235C822AB180500939949 /* AppTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTimer.swift; sourceTree = "<group>"; };
+		907235CA22AB190A00939949 /* DivTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivTimer.swift; sourceTree = "<group>"; };
 		9085FC2822B6720100310090 /* C000-DFFF-InternalRam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C000-DFFF-InternalRam.swift"; sourceTree = "<group>"; };
 		9085FC2A22B6724200310090 /* E000-FDFF-InternalRamEcho.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "E000-FDFF-InternalRamEcho.swift"; sourceTree = "<group>"; };
 		9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FEA0-FEFF-NotUsableMemory.swift"; sourceTree = "<group>"; };
@@ -196,6 +198,8 @@
 		90A17BB3229D59FC0027133B /* Opcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
 		90A17BB5229D59FC0027133B /* opcodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = opcodes.json; sourceTree = "<group>"; };
 		90A56A3422A3DD0D0055A013 /* Emulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emulator.swift; sourceTree = "<group>"; };
+		90B0DC3E22B6C872005BBCF5 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		90B0DC4022B6DB73005BBCF5 /* Bus+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+init.swift"; sourceTree = "<group>"; };
 		90BE338122B42C8100DF3953 /* Debug+Emulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debug+Emulator.swift"; sourceTree = "<group>"; };
 		90BE338322B50A3B00DF3953 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		90BE338522B5123B00DF3953 /* LineDrawerColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDrawerColorValueTests.swift; sourceTree = "<group>"; };
@@ -336,6 +340,7 @@
 			children = (
 				9073102522A66A2000EBC7BB /* Cpu */,
 				90CBB73C22ADB851004775E2 /* Ppu */,
+				90B0DC3C22B6C83D005BBCF5 /* Timer */,
 				90D58EE122A7B2580076584F /* Bus */,
 				90CBB71722AD74BB004775E2 /* Extensions */,
 				90C19C5A22B3C8B900A1B7A9 /* Debug */,
@@ -386,6 +391,26 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		90B0DC3C22B6C83D005BBCF5 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				90B0DC3D22B6C857005BBCF5 /* Tests */,
+				90B0DC3E22B6C872005BBCF5 /* Timer.swift */,
+				907235CA22AB190A00939949 /* DivTimer.swift */,
+				907235C822AB180500939949 /* AppTimer.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		90B0DC3D22B6C857005BBCF5 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				90CBB72222AD7595004775E2 /* DivTimerTests.swift */,
+				90CBB71E22AD7594004775E2 /* AppTimerTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		90C19C5622B2AEBF00A1B7A9 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,13 +455,12 @@
 		90CBB71D22AD757E004775E2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				90CBB72222AD7595004775E2 /* DivTimerTests.swift */,
-				90CBB71E22AD7594004775E2 /* AppTimerTests.swift */,
 				90CBB71F22AD7594004775E2 /* InterruptsTests.swift */,
 				90EFDB8622B05D5D0017AEC2 /* DmaTests.swift */,
 				9085FC4722B6C75200310090 /* ReadTests.swift */,
 				9085FC4522B6C70F00310090 /* WriteTests.swift */,
 				9085FC3222B693F200310090 /* ColorPaletteTests.swift */,
+				90B0DC4022B6DB73005BBCF5 /* Bus+init.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -468,8 +492,6 @@
 				9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */,
 				90D58F1C22A7CCBA0076584F /* FF00-JoypadMemory.swift */,
 				90D58F2022A7CE860076584F /* FF01-FF02-SerialPortMemory.swift */,
-				907235CA22AB190A00939949 /* FF04-DivTimer.swift */,
-				907235C822AB180500939949 /* FF05-FF07-AppTimer.swift */,
 				90EFDB8222AE553A0017AEC2 /* LcdControl.swift */,
 				90EFDB8422AE55640017AEC2 /* LcdStatus.swift */,
 				9085FC3022B690C600310090 /* ColorPalette.swift */,
@@ -717,13 +739,14 @@
 				90C19C5522B2ABFC00A1B7A9 /* LineDrawer.swift in Sources */,
 				9085FC2D22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift in Sources */,
 				90CBB74422ADBA87004775E2 /* PpuMemoryView.swift in Sources */,
+				90B0DC3F22B6C872005BBCF5 /* Timer.swift in Sources */,
 				9085FC3122B690C600310090 /* ColorPalette.swift in Sources */,
 				90CBB73622ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift in Sources */,
 				90D58F1722A7CC7B0076584F /* FF80-FFFE-HighRam.swift in Sources */,
 				90BE338222B42C8100DF3953 /* Debug+Emulator.swift in Sources */,
 				90C19C6022B3CA6F00A1B7A9 /* Debug+Cpu.swift in Sources */,
-				907235C922AB180500939949 /* FF05-FF07-AppTimer.swift in Sources */,
-				907235CB22AB190A00939949 /* FF04-DivTimer.swift in Sources */,
+				907235C922AB180500939949 /* AppTimer.swift in Sources */,
+				907235CB22AB190A00939949 /* DivTimer.swift in Sources */,
 				90D58EE322A7B2780076584F /* MemoryRegion.swift in Sources */,
 				90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */,
 			);
@@ -734,6 +757,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90C19C5822B2AEE200A1B7A9 /* LineDrawerTileDataAddressTests.swift in Sources */,
+				90B0DC4122B6DB73005BBCF5 /* Bus+init.swift in Sources */,
 				90A17BAE229D59EE0027133B /* CpuArithmeticTests.swift in Sources */,
 				90CBB73222AD7AE3004775E2 /* Array+UIntTests.swift in Sources */,
 				90EFDB8722B05D5D0017AEC2 /* DmaTests.swift in Sources */,

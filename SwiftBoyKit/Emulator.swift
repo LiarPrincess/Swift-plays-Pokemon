@@ -9,9 +9,11 @@ public class Emulator {
   public let cpu: Cpu
   public let ppu: Ppu
   public let bus: Bus
+  public let timer: Timer
 
   public init() {
-    self.bus = Bus()
+    self.timer = Timer()
+    self.bus = Bus(timer: self.timer)
     self.cpu = Cpu(bus: self.bus)
     self.ppu = Ppu(memory: self.bus)
 
@@ -35,7 +37,7 @@ public class Emulator {
       // ------------
 
       let cycles = self.cpu.tick()
-      self.bus.updateTimers(cycles: cycles)
+      self.timer.tick(cycles: cycles)
       self.ppu.update(cycles: cycles)
       self.cpu.processInterrupts()
     }

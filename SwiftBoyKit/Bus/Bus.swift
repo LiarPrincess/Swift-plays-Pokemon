@@ -21,10 +21,9 @@ public class Bus {
   /** FF01-FF02     */ internal let serialPort: SerialPortMemory
   /** FF40-FF4B     */ internal let lcd: LcdMemory
 
-  /** FF04          */ internal let divTimer: DivTimer
-  /** FF05-FF07     */ internal let appTimer: AppTimer
-
+  /** FF04-FF07     */ internal let timer: Timer
   /** FF0F-and-FFFF */ internal let interrupts: Interrupts
+
   /** FF80-FFFE     */ internal let highRam: HighRam
 
   private lazy var allRegions: [MemoryRegion] = [
@@ -32,12 +31,11 @@ public class Bus {
     self.videoRam, self.externalRam, self.internalRam, self.internalRamEcho,
     self.oam, self.notUsable,
     self.joypad, self.serialPort, self.lcd,
-    self.divTimer, self.appTimer,
-    self.interrupts, self.highRam,
+    self.timer, self.interrupts, self.highRam,
     self.ioPorts
   ]
 
-  internal init() {
+  internal init(timer: Timer) {
     // If we pass region as init param to another region then it should be stored as 'unowned',
     // not for ARC, but for semantics (memory should be the owner of all regions).
     self.interrupts = Interrupts()
@@ -53,8 +51,7 @@ public class Bus {
     self.joypad = JoypadMemory()
     self.serialPort = SerialPortMemory()
     self.lcd = LcdMemory()
-    self.divTimer = DivTimer()
-    self.appTimer = AppTimer(interrupts: self.interrupts)
+    self.timer = timer
     self.highRam = HighRam()
   }
 
@@ -115,12 +112,5 @@ public class Bus {
       let value = self.read(sourceAddress + i)
       self.write(Oam.start + i, value: value)
     }
-  }
-
-  // MARK: - Timers
-
-  internal func updateTimers(cycles: UInt8) {
-    self.divTimer.tick(cycles: cycles)
-    self.appTimer.tick(cycles: cycles)
   }
 }
