@@ -16,6 +16,7 @@
 		9073102A22A66C1000EBC7BB /* FakeCpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9073102822A66C0800EBC7BB /* FakeCpuMemory.swift */; };
 		9085FC2922B6720100310090 /* C000-DFFF-InternalRam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2822B6720100310090 /* C000-DFFF-InternalRam.swift */; };
 		9085FC2B22B6724200310090 /* E000-FDFF-InternalRamEcho.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2A22B6724200310090 /* E000-FDFF-InternalRamEcho.swift */; };
+		9085FC2D22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */; };
 		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
 		90A17B46229D59830027133B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B45229D59830027133B /* ViewController.swift */; };
@@ -145,6 +146,7 @@
 		9073102822A66C0800EBC7BB /* FakeCpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCpuMemory.swift; sourceTree = "<group>"; };
 		9085FC2822B6720100310090 /* C000-DFFF-InternalRam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C000-DFFF-InternalRam.swift"; sourceTree = "<group>"; };
 		9085FC2A22B6724200310090 /* E000-FDFF-InternalRamEcho.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "E000-FDFF-InternalRamEcho.swift"; sourceTree = "<group>"; };
+		9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FEA0-FEFF-NotUsableMemory.swift"; sourceTree = "<group>"; };
 		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* SwiftBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A17B43229D59830027133B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				9085FC2822B6720100310090 /* C000-DFFF-InternalRam.swift */,
 				9085FC2A22B6724200310090 /* E000-FDFF-InternalRamEcho.swift */,
 				90D58F0B22A7CC7A0076584F /* FE00-FE9F-Oam.swift */,
+				9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */,
 				90D58F1C22A7CCBA0076584F /* FF00-JoypadMemory.swift */,
 				90D58F2022A7CE860076584F /* FF01-FF02-SerialPortMemory.swift */,
 				907235CA22AB190A00939949 /* FF04-DivTimer.swift */,
@@ -697,6 +700,7 @@
 				90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */,
 				90A17B9D229D59D50027133B /* Cpu.swift in Sources */,
 				90C19C5522B2ABFC00A1B7A9 /* LineDrawer.swift in Sources */,
+				9085FC2D22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift in Sources */,
 				90CBB74422ADBA87004775E2 /* PpuMemoryView.swift in Sources */,
 				90A17B94229D59D50027133B /* Memory.swift in Sources */,
 				90CBB73622ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift in Sources */,

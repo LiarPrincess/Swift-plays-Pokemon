@@ -2,11 +2,6 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// Source: http://bgb.bircd.org/pandocs.htm#memorymap
-// and:    http://gameboy.mongenel.com/dmg/asmmemmap.html
-
-// TODO: Implement 'FEA0-FEFF Not Usable'?
-
 /// Stand-alone part of the memory
 public protocol MemoryRegion: AnyObject, Codable {
 
