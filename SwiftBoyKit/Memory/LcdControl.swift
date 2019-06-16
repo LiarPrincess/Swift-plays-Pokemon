@@ -19,14 +19,14 @@ public enum SpriteSize: UInt8, Codable {
 
 public class LcdControl: Codable {
 
-  public static let isLcdEnabledMask:        UInt8 = 1 << 7
-  public static let isWindowEnabledMask:     UInt8 = 1 << 5
-  public static let windowTileMapMask:       UInt8 = 1 << 6
-  public static let backgroundTileMapMask:   UInt8 = 1 << 3
-  public static let tileDataMask:            UInt8 = 1 << 4
-  public static let spriteSizeMask:          UInt8 = 1 << 2
-  public static let isSpriteEnabledMask:     UInt8 = 1 << 1
-  public static let isBackgroundVisibleMask: UInt8 = 1 << 0
+  private static let isLcdEnabledMask:        UInt8 = 1 << 7
+  private static let isWindowEnabledMask:     UInt8 = 1 << 5
+  private static let windowTileMapMask:       UInt8 = 1 << 6
+  private static let backgroundTileMapMask:   UInt8 = 1 << 3
+  private static let tileDataMask:            UInt8 = 1 << 4
+  private static let spriteSizeMask:          UInt8 = 1 << 2
+  private static let isSpriteEnabledMask:     UInt8 = 1 << 1
+  private static let isBackgroundVisibleMask: UInt8 = 1 << 0
 
   /// Bit 7 - LCD Display Enable
   public var isLcdEnabled: Bool = false
@@ -52,31 +52,33 @@ public class LcdControl: Codable {
   /// Bit 0 - BG Display
   public var isBackgroundVisible: Bool = false
 
-  internal var byte: UInt8 {
-    var result: UInt8 = 0
-    result |= self.isLcdEnabled    ? LcdControl.isLcdEnabledMask : 0
-    result |= self.isWindowEnabled ? LcdControl.isWindowEnabledMask : 0
-    result |= self.windowTileMap     == .from9c00to9fff ? LcdControl.windowTileMapMask : 0
-    result |= self.backgroundTileMap == .from9c00to9fff ? LcdControl.backgroundTileMapMask : 0
-    result |= self.tileData          == .from8000to8fff ? LcdControl.tileDataMask : 0
-    result |= self.spriteSize        == .size8x16       ? LcdControl.spriteSizeMask : 0
-    result |= self.isSpriteEnabled     ? LcdControl.isSpriteEnabledMask : 0
-    result |= self.isBackgroundVisible ? LcdControl.isBackgroundVisibleMask : 0
-    return result
+  /// Raw byte
+  public var byte: UInt8 {
+    get {
+      var result: UInt8 = 0
+      result |= self.isLcdEnabled    ? LcdControl.isLcdEnabledMask : 0
+      result |= self.isWindowEnabled ? LcdControl.isWindowEnabledMask : 0
+      result |= self.windowTileMap     == .from9c00to9fff ? LcdControl.windowTileMapMask : 0
+      result |= self.backgroundTileMap == .from9c00to9fff ? LcdControl.backgroundTileMapMask : 0
+      result |= self.tileData          == .from8000to8fff ? LcdControl.tileDataMask : 0
+      result |= self.spriteSize        == .size8x16       ? LcdControl.spriteSizeMask : 0
+      result |= self.isSpriteEnabled     ? LcdControl.isSpriteEnabledMask : 0
+      result |= self.isBackgroundVisible ? LcdControl.isBackgroundVisibleMask : 0
+      return result
+    }
+    set {
+      self.isLcdEnabled    = isSet(newValue, mask: LcdControl.isLcdEnabledMask)
+      self.isWindowEnabled = isSet(newValue, mask: LcdControl.isWindowEnabledMask)
+      self.windowTileMap     = isSet(newValue, mask: LcdControl.windowTileMapMask)     ? .from9c00to9fff : .from9800to9bff
+      self.backgroundTileMap = isSet(newValue, mask: LcdControl.backgroundTileMapMask) ? .from9c00to9fff : .from9800to9bff
+      self.tileData          = isSet(newValue, mask: LcdControl.tileDataMask)          ? .from8000to8fff : .from8800to97ff
+      self.spriteSize        = isSet(newValue, mask: LcdControl.spriteSizeMask)        ? .size8x16 : .size8x8
+      self.isSpriteEnabled     = isSet(newValue, mask: LcdControl.isSpriteEnabledMask)
+      self.isBackgroundVisible = isSet(newValue, mask: LcdControl.isBackgroundVisibleMask)
+    }
   }
+}
 
-  internal func fillFrom(_ value: UInt8) {
-    self.isLcdEnabled    = self.isSet(value, mask: LcdControl.isLcdEnabledMask)
-    self.isWindowEnabled = self.isSet(value, mask: LcdControl.isWindowEnabledMask)
-    self.windowTileMap     = self.isSet(value, mask: LcdControl.windowTileMapMask)     ? .from9c00to9fff : .from9800to9bff
-    self.backgroundTileMap = self.isSet(value, mask: LcdControl.backgroundTileMapMask) ? .from9c00to9fff : .from9800to9bff
-    self.tileData          = self.isSet(value, mask: LcdControl.tileDataMask)          ? .from8000to8fff : .from8800to97ff
-    self.spriteSize        = self.isSet(value, mask: LcdControl.spriteSizeMask)        ? .size8x16 : .size8x8
-    self.isSpriteEnabled     = self.isSet(value, mask: LcdControl.isSpriteEnabledMask)
-    self.isBackgroundVisible = self.isSet(value, mask: LcdControl.isBackgroundVisibleMask)
-  }
-
-  private func isSet(_ value: UInt8, mask: UInt8) -> Bool {
-    return (value & mask) == mask
-  }
+private func isSet(_ value: UInt8, mask: UInt8) -> Bool {
+  return (value & mask) == mask
 }

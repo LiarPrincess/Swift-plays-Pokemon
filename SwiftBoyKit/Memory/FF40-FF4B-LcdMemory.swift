@@ -11,8 +11,12 @@ public class LcdMemory: MemoryRegion {
   public static let lineAddress:        UInt16 = 0xff44
   public static let lineCompareAddress: UInt16 = 0xff45
 
-  public static let windowYAddress:     UInt16 = 0xff4a
-  public static let windowXAddress:     UInt16 = 0xff4b
+  public static let backgroundPaletteAddress: UInt16 = 0xff47
+  public static let objectPalette0Address:    UInt16 = 0xff48
+  public static let objectPalette1Address:    UInt16 = 0xff49
+
+  public static let windowYAddress: UInt16 = 0xff4a
+  public static let windowXAddress: UInt16 = 0xff4b
 
   /// FF40 - LCDC - LCD Control
   public var control = LcdControl()
@@ -38,15 +42,24 @@ public class LcdMemory: MemoryRegion {
   /// FF4B - WX - Window X Position minus 7 (R/W)
   public var windowX: UInt8 = 0
 
-  // TODO: Add 'LCD Monochrome Palettes' + contains
+  /// FF47 - BGP - BG Palette Data
+  public var backgroundPalette = ColorPalette()
+
+  /// FF48 - OBP0 - Object Palette 0 Data
+  public var objectPalette0 = ColorPalette()
+
+  /// FF49 - OBP1 - Object Palette 1 Data
+  public var objectPalette1 = ColorPalette()
 
   // MARK: - MemoryRegion
 
   public func contains(globalAddress address: UInt16) -> Bool {
     return (LcdMemory.controlAddress <= address && address <= LcdMemory.lineCompareAddress)
+        || (LcdMemory.backgroundPaletteAddress <= address && address <= LcdMemory.objectPalette1Address)
         || (LcdMemory.windowYAddress <= address && address <= LcdMemory.windowXAddress)
   }
 
+  // swiftlint:disable:next cyclomatic_complexity
   public func read(globalAddress address: UInt16) -> UInt8 {
     assert(self.contains(globalAddress: address))
     switch address {
@@ -56,25 +69,32 @@ public class LcdMemory: MemoryRegion {
     case LcdMemory.scrollXAddress:     return self.scrollX
     case LcdMemory.lineAddress:        return self.line
     case LcdMemory.lineCompareAddress: return self.lineCompare
-    case LcdMemory.windowYAddress:     return self.windowY
-    case LcdMemory.windowXAddress:     return self.windowX
+    case LcdMemory.backgroundPaletteAddress: return self.backgroundPalette.byte
+    case LcdMemory.objectPalette0Address:    return self.objectPalette0.byte
+    case LcdMemory.objectPalette1Address:    return self.objectPalette1.byte
+    case LcdMemory.windowYAddress: return self.windowY
+    case LcdMemory.windowXAddress: return self.windowX
     default:
       fatalError("Attempting to read invalid lcd memory")
     }
   }
 
+  // swiftlint:disable:next cyclomatic_complexity
   public func write(globalAddress address: UInt16, value: UInt8) {
     assert(self.contains(globalAddress: address))
 
     switch address {
-    case LcdMemory.controlAddress:     self.control.fillFrom(value)
-    case LcdMemory.statusAddress:      self.status.fillFrom(value)
+    case LcdMemory.controlAddress:     self.control.byte = value
+    case LcdMemory.statusAddress:      self.status.byte = value
     case LcdMemory.scrollYAddress:     self.scrollY = value
     case LcdMemory.scrollXAddress:     self.scrollX = value
     case LcdMemory.lineAddress:        self.line = 0
     case LcdMemory.lineCompareAddress: self.lineCompare = value
-    case LcdMemory.windowYAddress:     self.windowY = value
-    case LcdMemory.windowXAddress:     self.windowX = value
+    case LcdMemory.backgroundPaletteAddress: self.backgroundPalette.byte = value
+    case LcdMemory.objectPalette0Address:    self.objectPalette0.byte = value
+    case LcdMemory.objectPalette1Address:    self.objectPalette1.byte = value
+    case LcdMemory.windowYAddress: self.windowY = value
+    case LcdMemory.windowXAddress: self.windowX = value
     default:
       fatalError("Attempting to write invalid lcd memory")
     }

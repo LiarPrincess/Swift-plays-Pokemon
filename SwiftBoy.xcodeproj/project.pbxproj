@@ -17,6 +17,8 @@
 		9085FC2922B6720100310090 /* C000-DFFF-InternalRam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2822B6720100310090 /* C000-DFFF-InternalRam.swift */; };
 		9085FC2B22B6724200310090 /* E000-FDFF-InternalRamEcho.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2A22B6724200310090 /* E000-FDFF-InternalRamEcho.swift */; };
 		9085FC2D22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */; };
+		9085FC3122B690C600310090 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* ColorPalette.swift */; };
+		9085FC3322B693F200310090 /* ColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* ColorPaletteTests.swift */; };
 		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
 		90A17B46229D59830027133B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B45229D59830027133B /* ViewController.swift */; };
@@ -147,6 +149,8 @@
 		9085FC2822B6720100310090 /* C000-DFFF-InternalRam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C000-DFFF-InternalRam.swift"; sourceTree = "<group>"; };
 		9085FC2A22B6724200310090 /* E000-FDFF-InternalRamEcho.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "E000-FDFF-InternalRamEcho.swift"; sourceTree = "<group>"; };
 		9085FC2C22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FEA0-FEFF-NotUsableMemory.swift"; sourceTree = "<group>"; };
+		9085FC3022B690C600310090 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		9085FC3222B693F200310090 /* ColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteTests.swift; sourceTree = "<group>"; };
 		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* SwiftBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A17B43229D59830027133B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -426,6 +430,7 @@
 				90EFDB8622B05D5D0017AEC2 /* DmaTests.swift */,
 				90CBB72122AD7594004775E2 /* MemoryReadTests.swift */,
 				90CBB72022AD7594004775E2 /* MemoryWriteTests.swift */,
+				9085FC3222B693F200310090 /* ColorPaletteTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				907235C822AB180500939949 /* FF05-FF07-AppTimer.swift */,
 				90EFDB8222AE553A0017AEC2 /* LcdControl.swift */,
 				90EFDB8422AE55640017AEC2 /* LcdStatus.swift */,
+				9085FC3022B690C600310090 /* ColorPalette.swift */,
 				90CBB73522ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift */,
 				90D58F2622A7D0C40076584F /* FF00-FF7F-IOPorts.swift */,
 				90D58F0D22A7CC7B0076584F /* FF80-FFFE-HighRam.swift */,
@@ -703,6 +709,7 @@
 				9085FC2D22B6735E00310090 /* FEA0-FEFF-NotUsableMemory.swift in Sources */,
 				90CBB74422ADBA87004775E2 /* PpuMemoryView.swift in Sources */,
 				90A17B94229D59D50027133B /* Memory.swift in Sources */,
+				9085FC3122B690C600310090 /* ColorPalette.swift in Sources */,
 				90CBB73622ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift in Sources */,
 				90D58F1722A7CC7B0076584F /* FF80-FFFE-HighRam.swift in Sources */,
 				90BE338222B42C8100DF3953 /* Debug+Emulator.swift in Sources */,
@@ -729,6 +736,7 @@
 				90CBB72B22AD7632004775E2 /* AppTimerTests.swift in Sources */,
 				90A17BA8229D59EE0027133B /* CpuRotateTests.swift in Sources */,
 				90A17BAA229D59EE0027133B /* CpuShiftTests.swift in Sources */,
+				9085FC3322B693F200310090 /* ColorPaletteTests.swift in Sources */,
 				90CBB72E22AD7632004775E2 /* MemoryWriteTests.swift in Sources */,
 				90CBB72922AD75B4004775E2 /* String+padTests.swift in Sources */,
 				90A17BAC229D59EE0027133B /* CpuBitTests.swift in Sources */,
