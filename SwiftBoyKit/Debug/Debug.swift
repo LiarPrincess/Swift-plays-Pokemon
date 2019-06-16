@@ -35,7 +35,7 @@ internal enum Debug {
   internal static var emulator: Emulator!
   internal static var cpu:       Cpu       { return emulator.cpu }
   internal static var registers: Registers { return cpu.registers }
-  internal static var memory:    Memory    { return emulator.memory }
+  internal static var bus:       Bus       { return emulator.bus }
 
   internal static func printSeparator() {
     print()

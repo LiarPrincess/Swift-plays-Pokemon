@@ -5,7 +5,7 @@
 func printOpcodes(_ opcodes: Opcodes) {
   printHeader()
 
-  print("/// One of standard 256 opcodes.")
+  print("/// One of the standard 256 opcodes.")
   print("/// See official \"Gameboy programming manual\" for details of each operation.")
   printOpcodeEnum("UnprefixedOpcode", opcodes.unprefixed)
 }
@@ -13,7 +13,7 @@ func printOpcodes(_ opcodes: Opcodes) {
 func printPrefixOpcodes(_ opcodes: Opcodes) {
   printHeader()
 
-  print("/// One of additional 256 opcodes that should be executed if standard opcode is 0xCB.")
+  print("/// One of the additional 256 opcodes that should be executed if standard opcode is 0xCB.")
   print("/// See official \"Gameboy programming manual\" for details of each operation.")
   printOpcodeEnum("CBPrefixedOpcode", opcodes.cbprefixed)
 }

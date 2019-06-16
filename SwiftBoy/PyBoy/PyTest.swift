@@ -48,7 +48,7 @@ func pyTest(_ p: PyEmulator) {
     guard !skipAddress.contains(address) else { continue }
 
     let pValue = p.memory.data[address]
-    let sValue = s.memory.read(address)
+    let sValue = s.bus.read(address)
 
     if sValue != pValue {
       print("  mem \(address.hex): \(sValue.hex) vs \(pValue.hex)")

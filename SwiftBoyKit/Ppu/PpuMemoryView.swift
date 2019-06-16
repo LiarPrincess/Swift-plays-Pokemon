@@ -11,4 +11,4 @@ internal protocol PpuMemoryView: AnyObject {
   func read(_ address: UInt16) -> UInt8
 }
 
-extension Memory: PpuMemoryView { }
+extension Bus: PpuMemoryView { }

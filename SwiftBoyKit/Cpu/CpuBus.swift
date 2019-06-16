@@ -10,4 +10,4 @@ internal protocol CpuBus: AnyObject {
   func write(_ address: UInt16, value: UInt8)
 }
 
-extension Memory: CpuBus { }
+extension Bus: CpuBus { }

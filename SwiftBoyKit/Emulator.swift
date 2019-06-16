@@ -8,12 +8,12 @@ public class Emulator {
 
   public let cpu: Cpu
   public let ppu: Ppu
-  public let memory: Memory
+  public let bus: Bus
 
   public init() {
-    self.memory = Memory()
-    self.cpu = Cpu(bus: self.memory)
-    self.ppu = Ppu(memory: self.memory)
+    self.bus = Bus()
+    self.cpu = Cpu(bus: self.bus)
+    self.ppu = Ppu(memory: self.bus)
 
     // in debug we support only 1 emulator (the last one created)
     Debug.emulator = self
@@ -35,7 +35,7 @@ public class Emulator {
       // ------------
 
       let cycles = self.cpu.tick()
-      self.memory.updateTimers(cycles: cycles)
+      self.bus.updateTimers(cycles: cycles)
       self.ppu.update(cycles: cycles)
       self.cpu.processInterrupts()
     }
@@ -50,11 +50,11 @@ public class Emulator {
   public func fakeEmptyCartridge() {
     let bootromStart = 0x0000
     let bootromEnd = bootromStart + bootrom.count
-    self.memory.rom0.data.replaceSubrange(bootromStart..<bootromEnd, with: bootrom)
+    self.bus.rom0.data.replaceSubrange(bootromStart..<bootromEnd, with: bootrom)
 
     let logoStart = 0x0104
     let logoEnd = logoStart + nintendoLogo.count
-    self.memory.rom0.data.replaceSubrange(logoStart..<logoEnd, with: nintendoLogo)
+    self.bus.rom0.data.replaceSubrange(logoStart..<logoEnd, with: nintendoLogo)
   }
 }
 

@@ -1,7 +1,3 @@
-// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
-// If a copy of the MPL was not distributed with this file,
-// You can obtain one at http://mozilla.org/MPL/2.0/.
-
 // This file was auto-generated.
 // DO NOT EDIT!
 
@@ -10,7 +6,7 @@
 // swiftlint:disable type_body_length
 // swiftlint:disable trailing_newline
 
-/// One of standard 256 opcodes.
+/// One of the standard 256 opcodes.
 /// See official "Gameboy programming manual" for details of each operation.
 public enum UnprefixedOpcode: UInt8, RawRepresentable {
   case nop = 0x0

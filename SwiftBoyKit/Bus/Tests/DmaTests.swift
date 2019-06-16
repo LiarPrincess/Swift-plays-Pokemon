@@ -8,7 +8,7 @@ import XCTest
 class DmaTests: XCTestCase {
 
   func test_dma() {
-    let memory = Memory()
+    let bus = Bus()
 
     // fill source (somewhere in external ram)
     let sourceStart: UInt16 = 0xab00
@@ -16,18 +16,18 @@ class DmaTests: XCTestCase {
 
     for address in sourceStart...sourceEnd {
       let value = UInt8(address & 0x00ff)
-      memory.write(address, value: value)
+      bus.write(address, value: value)
     }
 
     // dma
     let writeValue = UInt8(sourceStart >> 8)
-    memory.write(Memory.dmaAddress, value: writeValue)
+    bus.write(Bus.dmaAddress, value: writeValue)
 
     // check values at 0xfeXX
     for address in sourceStart...sourceEnd {
       let dmaAddress = 0xfe00 + address & 0x00ff
 
-      let value = memory.read(dmaAddress)
+      let value = bus.read(dmaAddress)
       let expectedValue = UInt8(address & 0x00ff)
       XCTAssertEqual(expectedValue, value)
     }

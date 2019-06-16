@@ -8,10 +8,10 @@ import XCTest
 class LineDrawerTileDataAddressTests: XCTestCase {
 
   func test_tileDataAddress_from8000() {
-    let memory = Memory()
-    let drawer = LineDrawer(memory: memory)
+    let bus = Bus()
+    let drawer = LineDrawer(memory: bus)
 
-    memory.lcd.control.tileData = .from8000to8fff
+    bus.lcd.control.tileData = .from8000to8fff
 
     // 0: 0x8000
     XCTAssertEqual(drawer.getTileDataAddress(tileIndex: 0), 0x8000)
@@ -28,10 +28,10 @@ class LineDrawerTileDataAddressTests: XCTestCase {
   }
 
   func test_tileDataAddress_from8800() {
-    let memory = Memory()
-    let drawer = LineDrawer(memory: memory)
+    let bus = Bus()
+    let drawer = LineDrawer(memory: bus)
 
-    memory.lcd.control.tileData = .from8800to97ff
+    bus.lcd.control.tileData = .from8800to97ff
 
     // 0: 0x9000
     XCTAssertEqual(drawer.getTileDataAddress(tileIndex: 0), 0x9000)

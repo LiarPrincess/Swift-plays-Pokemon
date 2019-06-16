@@ -2,7 +2,7 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-public class Memory {
+public class Bus {
 
   public static let dmaAddress: UInt16 = 0xff46
 
@@ -85,7 +85,7 @@ public class Memory {
   }
 
   internal func write(_ address: UInt16, value: UInt8, callDebug: Bool) {
-    guard address != Memory.dmaAddress else {
+    guard address != Bus.dmaAddress else {
       self.dma(writeValue: value)
       return
     }
