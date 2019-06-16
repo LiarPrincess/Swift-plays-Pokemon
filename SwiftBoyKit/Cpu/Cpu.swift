@@ -20,9 +20,6 @@ public class Cpu {
   /// Interrupt Master Enable Flag.
   public var ime: Bool = false
 
-  /// True if interrupts should be enabled after next instruction.
-  public var imeEnableNext: Bool = false
-
   /// Is halted flag.
   public var isHalted: Bool = false
 
@@ -136,15 +133,9 @@ public class Cpu {
 
   internal func enableInterrupts() {
     self.ime = true
-    self.imeEnableNext = true
-  }
-
-  internal func enableInterruptsNext() {
-    self.imeEnableNext = true
   }
 
   internal func disableInterrupts() {
     self.ime = false
-    self.imeEnableNext = false
   }
 }

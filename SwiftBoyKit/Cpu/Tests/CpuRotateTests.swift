@@ -135,6 +135,23 @@ class CpuRotateTests: XCTestCase {
     XCTAssertEqual(cpu.registers.carryFlag, true)
   }
 
+  func test_rl_r_bootrom_0x009d() {
+    let memory = FakeCpuMemory()
+    let cpu = Cpu(memory: memory)
+    cpu.registers.c = 0xce // after 0x9c
+    cpu.registers.zeroFlag = false
+    cpu.registers.subtractFlag = false
+    cpu.registers.halfCarryFlag = false
+    cpu.registers.carryFlag = true
+    cpu.rl_r(.c)
+
+    XCTAssertEqual(cpu.registers.c, 0x9d)
+    XCTAssertEqual(cpu.registers.zeroFlag, false)
+    XCTAssertEqual(cpu.registers.halfCarryFlag, false)
+    XCTAssertEqual(cpu.registers.subtractFlag, false)
+    XCTAssertEqual(cpu.registers.carryFlag, true)
+  }
+
   /// When L = 80h, (HL) = 11h, and CY = 0,
   /// RL (HL) ; (HL)←22h,CY←0,Z←0,H←0,N←0
   func test_rl_pHL() {

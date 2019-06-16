@@ -9,86 +9,143 @@ import SwiftBoyKit
 public class AppDelegate: NSObject, NSApplicationDelegate {
 
   public func applicationDidFinishLaunching(_ aNotification: Notification) {
-//    self.testSavedState("bootrom_0_skipToAudio2.json")
-//    self.testSavedState("bootrom_1_skipToNintendoLogo2.json")
-//    self.testSavedState("bootrom_2_skipToTileMap2.json")
+//    pyTest(pyLoad("pyboy_bootrom_pc_000c_before_Setup_Audio.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_001d_before_Setup_BG_palette.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0021_before_Convert_and_load_logo.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0034_before_Load_8_additional.txt"))
 
-    let emulator = Emulator()
-    emulator.fakeEmptyCartridge()
-    emulator.run(maxCycles: .max, lastPC: 0x0068)
+//    pyTestAll()
+
+//    let emulator = Emulator()
+//    emulator.fakeEmptyCartridge()
+
+    // logo decompress:  0x0032
+    // just before logo: 0x0068
+//    emulator.run(maxCycles: .max, lastPC: 0x0034)
   }
 
   // swiftlint:disable:next function_body_length
-  private func testSavedState(_ file: String) {
-    let old = loadState(from: file)
-
-    let emulator = Emulator()
-    emulator.fakeEmptyCartridge()
-    emulator.run(maxCycles: .max, lastPC: old.pc)
-
-    print("Comparing: \(file)")
-
-    let new = emulator
-    let skipAssert = false
-
-    print("  pc: \(new.cpu.pc.hex) vs \(old.pc.hex)")
-    assert(skipAssert || new.cpu.pc == old.pc)
-
-    print("  sp: \(new.cpu.sp.hex) vs \(old.sp.hex)")
-    assert(skipAssert || new.cpu.sp == old.sp)
-
-    print("  a: \(new.cpu.registers.a.hex) vs \(old.registers.a.hex)")
-    assert(skipAssert || new.cpu.registers.a == old.registers.a)
-
-    print("  b: \(new.cpu.registers.b.hex) vs \(old.registers.b.hex)")
-    assert(skipAssert || new.cpu.registers.b == old.registers.b)
-
-    print("  c: \(new.cpu.registers.c.hex) vs \(old.registers.c.hex)")
-    assert(skipAssert || new.cpu.registers.c == old.registers.c)
-
-    print("  d: \(new.cpu.registers.d.hex) vs \(old.registers.d.hex)")
-    assert(skipAssert || new.cpu.registers.d == old.registers.d)
-
-    print("  e: \(new.cpu.registers.e.hex) vs \(old.registers.e.hex)")
-    assert(skipAssert || new.cpu.registers.e == old.registers.e)
-
-    print("  h: \(new.cpu.registers.h.hex) vs \(old.registers.h.hex)")
-    assert(skipAssert || new.cpu.registers.h == old.registers.h)
-
-    print("  l: \(new.cpu.registers.l.hex) vs \(old.registers.l.hex)")
-    assert(skipAssert || new.cpu.registers.l == old.registers.l)
-
-    print("  zeroFlag: \(new.cpu.registers.zeroFlag) vs \(old.registers.zeroFlag)")
-    assert(skipAssert || new.cpu.registers.zeroFlag == old.registers.zeroFlag)
-
-    print("  subtractFlag: \(new.cpu.registers.subtractFlag) vs \(old.registers.subtractFlag)")
-    assert(skipAssert || new.cpu.registers.subtractFlag == old.registers.subtractFlag)
-
-    print("  halfCarryFlag: \(new.cpu.registers.halfCarryFlag) vs \(old.registers.halfCarryFlag)")
-    assert(skipAssert || new.cpu.registers.halfCarryFlag == old.registers.halfCarryFlag)
-
-    print("  carryFlag: \(new.cpu.registers.carryFlag) vs \(old.registers.carryFlag)")
-    assert(skipAssert || new.cpu.registers.carryFlag == old.registers.carryFlag)
-
-    print("  memory:")
-    var skipAddress = Set<UInt16>()
-    (0xfea0...0xfeff).forEach { skipAddress.insert($0) } // not usable
-    skipAddress.insert(0xff04) // div was not implemented
-    skipAddress.insert(0xff41) // LCD Status was not implemented
-
-    for addressInt in 0..<old.memory.data.count {
-      let address = UInt16(addressInt)
-      guard !skipAddress.contains(address) else { continue }
-
-      let oldValue = old.memory.data[address]
-      let newValue = new.memory.read(address)
-
-      if oldValue != newValue {
-        print("    \(address.hex): \(newValue.hex) vs \(oldValue.hex)")
-        assert(skipAssert || newValue == oldValue)
-      }
-    }
-
-    print()
+  private func pyTestAll() {
+    pyTest(pyLoad("pyboy_bootrom_pc_0x3.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x4.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x7.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x8.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0xa.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0xc.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0xf.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x11.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x13.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x14.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x15.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x16.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x18.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x19.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x1a.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x1c.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x1d.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x1f.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x21.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x24.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x27.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x28.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x95.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x96.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x98.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x99.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x9b.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x9c.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x9d.txt"))
+    pyTest(pyLoad("pyboy_bootrom_pc_0x9f.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xa0.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xa1.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xa3.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xa4.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xa5.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xa6.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xa7.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x2b.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x2e.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x2f.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x30.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x32.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x34.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x37.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x39.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x3a.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x3b.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x3c.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x3d.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x3e.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x40.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x42.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x45.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x48.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x4a.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x4b.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x4d.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x4e.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x4f.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x51.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x53.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x55.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x56.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x58.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x59.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x5b.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x5d.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x5f.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x60.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x62.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x64.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x66.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x68.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x6a.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x6b.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x6d.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x6e.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x70.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x72.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x73.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x74.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x76.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x78.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x7a.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x7c.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x7e.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x86.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x88.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x89.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x8b.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x8c.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x80.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x81.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x82.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x83.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x85.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x8e.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x8f.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x91.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x93.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xe0.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xe3.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xe6.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xe7.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xe8.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xe9.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xeb.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xec.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xed.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xef.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xf1.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xf3.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xf4.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xf5.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xf6.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xf7.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xf9.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xfa.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xfc.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0xfe.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x100.txt"))
   }
 }

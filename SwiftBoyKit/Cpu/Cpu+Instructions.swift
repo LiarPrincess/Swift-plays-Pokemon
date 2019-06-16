@@ -930,13 +930,13 @@ extension Cpu {
   }
 
   private func rl(_ n: UInt8) -> UInt8 {
-    let carry = n >> 7
-    let newValue = (n << 1) | (self.registers.carryFlag ? 0x8 : 0x0)
+    let newCarry = n >> 7
+    let newValue = (n << 1) | (self.registers.carryFlag ? 0x1 : 0x0)
 
     self.registers.zeroFlag = newValue == 0
     self.registers.subtractFlag = false
     self.registers.halfCarryFlag = false
-    self.registers.carryFlag = carry == 0x1
+    self.registers.carryFlag = newCarry == 0x1
 
     return newValue
   }
@@ -994,13 +994,13 @@ extension Cpu {
   }
 
   private func rr(_ n: UInt8) -> UInt8 {
-    let carry = n & 0x01
-    let newValue = (n >> 1) | (self.registers.carryFlag ? 0x8 : 0x0)
+    let newCarry = n & 0x1
+    let newValue = (n >> 1) | (self.registers.carryFlag ? (1 << 7) : 0x0)
 
     self.registers.zeroFlag = newValue == 0
     self.registers.subtractFlag = false
     self.registers.halfCarryFlag = false
-    self.registers.carryFlag = carry == 0x1
+    self.registers.carryFlag = newCarry == 0x1
 
     return newValue
   }
@@ -1444,7 +1444,6 @@ extension Cpu {
   /// Resets the interrupt master enable flag and prohibits maskable interrupts.
   internal func di() {
     self.disableInterrupts()
-
     self.pc += 1
     self.cycle &+= 4
   }
@@ -1452,8 +1451,7 @@ extension Cpu {
   /// Sets the interrupt master enable flag and enables maskable interrupts.
   /// This instruction can be used in an interrupt routine to enable higher-order interrupts.
   internal func ei() {
-    self.enableInterruptsNext()
-
+    self.enableInterrupts()
     self.pc += 1
     self.cycle &+= 4
   }

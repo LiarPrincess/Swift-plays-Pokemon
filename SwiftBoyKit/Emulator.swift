@@ -36,15 +36,16 @@ public class Emulator {
 
       let cycles = self.cpu.tick()
       self.memory.updateTimers(cycles: cycles)
-      self.ppu.update(cycles: cycles)
+// TODO: THIS TOTALLY DISABLES PPU!
+//      self.ppu.update(cycles: cycles)
       self.cpu.processInterrupts()
     }
 
-    print("Finished:")
-    print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
-    print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
-
-    self.ppu.dump()
+//    print("Finished:")
+//    print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
+//    print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
+//
+//    self.ppu.dump()
   }
 
   public func fakeEmptyCartridge() {
