@@ -26,19 +26,18 @@ public class Cpu {
   /// Register values (except for pc and sp)
   public var registers: Registers
 
-  internal unowned var memory: CpuMemoryView
-  private var interrupts: Interrupts { return self.memory.interrupts }
+  private unowned var bus: CpuBus
 
-  internal init(memory: CpuMemoryView) {
+  internal init(bus: CpuBus) {
     self.registers = Registers()
-    self.memory = memory
+    self.bus = bus
   }
 
   // MARK: - Tick
 
   /// Runs 1 instruction. Returns the number of cycles it took.
   internal func tick() -> UInt8 {
-    let rawOpcode = self.memory.read(self.pc)
+    let rawOpcode = self.read(self.pc)
     guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
       fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
     }
@@ -60,6 +59,14 @@ public class Cpu {
 
   // MARK: - Interrupts
 
+  internal func enableInterrupts() {
+    self.ime = true
+  }
+
+  internal func disableInterrupts() {
+    self.ime = false
+  }
+
   internal func processInterrupts() {
     guard self.ime else {
       return
@@ -70,7 +77,7 @@ public class Cpu {
     ]
 
     for type in interruptTypes {
-      if self.interrupts.isEnabled(type) && self.interrupts.isSet(type) {
+      if self.bus.interrupts.isEnabled(type) && self.bus.interrupts.isSet(type) {
         self.processInterrupt(type: type)
       }
     }
@@ -78,7 +85,7 @@ public class Cpu {
 
   private func processInterrupt(type: InterruptType) {
     self.ime = false
-    self.interrupts.reset(type)
+    self.bus.interrupts.reset(type)
 
     self.push16(self.pc)
 
@@ -95,13 +102,13 @@ public class Cpu {
 
   /// Next 8 bits after pc
   internal var next8: UInt8 {
-    return self.memory.read(self.pc + 1)
+    return self.read(self.pc + 1)
   }
 
   /// Next 16 bits after pc
   internal var next16: UInt16 {
-    let low  = UInt16(self.memory.read(self.pc + 1))
-    let high = UInt16(self.memory.read(self.pc + 2))
+    let low  = UInt16(self.read(self.pc + 1))
+    let high = UInt16(self.read(self.pc + 2))
     return (high << 8) | low
   }
 
@@ -109,7 +116,7 @@ public class Cpu {
 
   internal func push8(_ n: UInt8) {
     self.sp -= 1
-    self.memory.write(self.sp, value: n)
+    self.write(self.sp, value: n)
   }
 
   internal func push16(_ nn: UInt16) {
@@ -118,7 +125,7 @@ public class Cpu {
   }
 
   internal func pop8() -> UInt8 {
-    let n = self.memory.read(self.sp)
+    let n = self.read(self.sp)
     self.sp += 1
     return n
   }
@@ -129,13 +136,13 @@ public class Cpu {
     return (high << 8) | low
   }
 
-  // MARK: - Interrupts
+  // MARK: - Read/Write
 
-  internal func enableInterrupts() {
-    self.ime = true
+  internal func read(_ address: UInt16) -> UInt8 {
+    return self.bus.read(address)
   }
 
-  internal func disableInterrupts() {
-    self.ime = false
+  internal func write(_ address: UInt16, value: UInt8) {
+    self.bus.write(address, value: value)
   }
 }

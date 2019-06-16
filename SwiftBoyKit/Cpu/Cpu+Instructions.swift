@@ -37,7 +37,7 @@ extension Cpu {
 
   /// Loads the contents of memory (8 bits) specified by register pair HL into register r.
   internal func ld_r_pHL(_ r: SingleRegister) {
-    let n = self.memory.read(self.registers.hl)
+    let n = self.read(self.registers.hl)
     self.registers.set(r, to: n)
 
     self.pc += 1
@@ -48,7 +48,7 @@ extension Cpu {
   internal func ld_pHL_r(_ r: SingleRegister) {
     let n = self.registers.get(r)
     let hl = self.registers.hl
-    self.memory.write(hl, value: n)
+    self.write(hl, value: n)
 
     self.pc += 1
     self.cycle &+= 8
@@ -57,7 +57,7 @@ extension Cpu {
   /// Loads 8-bit immediate data n into memory specified by register pair HL.
   internal func ld_pHL_d8(_ n: UInt8) {
     let hl = self.registers.hl
-    self.memory.write(hl, value: n)
+    self.write(hl, value: n)
 
     self.pc += 2
     self.cycle &+= 12
@@ -66,7 +66,7 @@ extension Cpu {
   /// Loads the contents specified by the contents of register pair BC into register A.
   internal func ld_a_pBC() {
     let bc = self.registers.bc
-    self.registers.a = self.memory.read(bc)
+    self.registers.a = self.read(bc)
 
     self.pc += 1
     self.cycle &+= 8
@@ -75,7 +75,7 @@ extension Cpu {
   /// Loads the contents specified by the contents of register pair DE into register A.
   internal func ld_a_pDE() {
     let de = self.registers.de
-    self.registers.a = self.memory.read(de)
+    self.registers.a = self.read(de)
 
     self.pc += 1
     self.cycle &+= 8
@@ -85,7 +85,7 @@ extension Cpu {
   /// or mode register at the address in the range FF00h-FFFFh specified by register C.
   internal func ld_a_ffC() {
     let address = UInt16(0xff00) + UInt16(self.registers.c)
-    self.registers.a = self.memory.read(address)
+    self.registers.a = self.read(address)
 
     self.pc += 1
     self.cycle &+= 8
@@ -96,7 +96,7 @@ extension Cpu {
   internal func ld_ffC_a() {
     let a = self.registers.a
     let address = UInt16(0xff00) + UInt16(self.registers.c)
-    self.memory.write(address, value: a)
+    self.write(address, value: a)
 
     self.pc += 1
     self.cycle &+= 8
@@ -106,7 +106,7 @@ extension Cpu {
   /// at the address in the range FF00h-FFFFh specified by the 8-bit immediate operand n.
   internal func ld_a_pA8(_ n: UInt8) {
     let addr = 0xff00 | UInt16(n)
-    self.registers.a = self.memory.read(addr)
+    self.registers.a = self.read(addr)
 
     self.pc += 2
     self.cycle &+= 12
@@ -116,21 +116,21 @@ extension Cpu {
   /// at the address in the range FF00h-FFFFh specified by the 8-bit immediate operand n.
   internal func ld_pA8_a(_ n: UInt8) {
     let addr = 0xff00 | UInt16(n)
-    self.memory.write(addr, value: self.registers.a)
+    self.write(addr, value: self.registers.a)
 
     self.pc += 2
     self.cycle &+= 12
   }
 
   internal func ld_a_pA16(_ nn: UInt16) {
-    self.registers.a = self.memory.read(nn)
+    self.registers.a = self.read(nn)
 
     self.pc += 3
     self.cycle &+= 16
   }
 
   internal func ld_pA16_a(_ nn: UInt16) {
-    self.memory.write(nn, value: self.registers.a)
+    self.write(nn, value: self.registers.a)
 
     self.pc += 3
     self.cycle &+= 16
@@ -140,7 +140,7 @@ extension Cpu {
   /// and simultaneously increments the contents of HL.
   internal func ld_a_pHLI() {
     let hl = self.registers.hl
-    self.registers.a = self.memory.read(hl)
+    self.registers.a = self.read(hl)
 
     let (newHL, _) = hl.addingReportingOverflow(1)
     self.registers.hl = newHL
@@ -153,7 +153,7 @@ extension Cpu {
   /// and simultaneously decrements the contents of HL.
   internal func ld_a_pHLD() {
     let hl = self.registers.hl
-    self.registers.a = self.memory.read(hl)
+    self.registers.a = self.read(hl)
 
     let (newHL, _) = hl.subtractingReportingOverflow(1)
     self.registers.hl = newHL
@@ -166,7 +166,7 @@ extension Cpu {
   internal func ld_pBC_a() {
     let a = self.registers.a
     let bc = self.registers.bc
-    self.memory.write(bc, value: a)
+    self.write(bc, value: a)
 
     self.pc += 1
     self.cycle &+= 8
@@ -176,7 +176,7 @@ extension Cpu {
   internal func ld_pDE_a() {
     let a = self.registers.a
     let de = self.registers.de
-    self.memory.write(de, value: a)
+    self.write(de, value: a)
 
     self.pc += 1
     self.cycle &+= 8
@@ -187,7 +187,7 @@ extension Cpu {
   internal func ld_pHLI_a() {
     let a = self.registers.a
     let hl = self.registers.hl
-    self.memory.write(hl, value: a)
+    self.write(hl, value: a)
 
     let (newHL, _) = hl.addingReportingOverflow(1)
     self.registers.hl = newHL
@@ -201,7 +201,7 @@ extension Cpu {
   internal func ld_pHLD_a() {
     let a = self.registers.a
     let hl = self.registers.hl
-    self.memory.write(hl, value: a)
+    self.write(hl, value: a)
 
     let (newHL, _) = hl.subtractingReportingOverflow(1)
     self.registers.hl = newHL
@@ -282,10 +282,10 @@ extension Cpu {
   /// immediate operand nn and the upper byte of SP at address nn + 1.
   internal func ld_pA16_sp(_ nn: UInt16) {
     let low = UInt8(self.sp & 0xff)
-    self.memory.write(nn, value: low)
+    self.write(nn, value: low)
 
     let high = UInt8(self.sp >> 8)
-    self.memory.write(nn + 1, value: high)
+    self.write(nn + 1, value: high)
 
     self.pc += 3
     self.cycle &+= 20
@@ -316,7 +316,7 @@ extension Cpu {
   /// Adds the contents of memory specified by the contents of register pair HL
   /// to the contents of register A and stores the results in register A
   internal func add_a_pHL() {
-    self.add_a(self.memory.read(self.registers.hl))
+    self.add_a(self.read(self.registers.hl))
 
     self.pc += 1
     self.cycle &+= 8
@@ -404,7 +404,7 @@ extension Cpu {
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
   internal func adc_a_pHL() {
-    self.adc_a(self.memory.read(self.registers.hl))
+    self.adc_a(self.read(self.registers.hl))
 
     self.pc += 1
     self.cycle &+= 8
@@ -448,7 +448,7 @@ extension Cpu {
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func sub_a_pHL() {
-    self.sub_a(self.memory.read(self.registers.hl))
+    self.sub_a(self.read(self.registers.hl))
 
     self.pc += 1
     self.cycle &+= 8
@@ -491,7 +491,7 @@ extension Cpu {
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func sbc_a_pHL() {
-    self.sbc_a(self.memory.read(self.registers.hl))
+    self.sbc_a(self.read(self.registers.hl))
 
     self.pc += 1
     self.cycle &+= 8
@@ -538,7 +538,7 @@ extension Cpu {
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
   internal func cp_a_pHL() {
-    self.cp_a(self.memory.read(self.registers.hl))
+    self.cp_a(self.read(self.registers.hl))
 
     self.pc += 1
     self.cycle &+= 8
@@ -589,7 +589,7 @@ extension Cpu {
   /// Increments by 1 the contents of memory specified by register pair HL.
   internal func inc_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
+    let n = self.read(hl)
 
     let (newValue, _) = n.addingReportingOverflow(1)
 
@@ -598,7 +598,7 @@ extension Cpu {
     self.registers.halfCarryFlag = (n & 0xf) + 0x1 > 0xf
     // carryFlag - not affected
 
-    self.memory.write(hl, value: newValue)
+    self.write(hl, value: newValue)
 
     self.pc += 1
     self.cycle &+= 12
@@ -648,7 +648,7 @@ extension Cpu {
   /// Decrements by 1 the contents of memory specified by register pair HL.
   internal func dec_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
+    let n = self.read(hl)
 
     let (newValue, _) = n.subtractingReportingOverflow(1)
     let (_, halfCarry) = (n & 0xf).subtractingReportingOverflow(1)
@@ -658,7 +658,7 @@ extension Cpu {
     self.registers.halfCarryFlag = halfCarry
     // carryFlag - not affected
 
-    self.memory.write(hl, value: newValue)
+    self.write(hl, value: newValue)
 
     self.pc += 1
     self.cycle &+= 12
@@ -697,7 +697,7 @@ extension Cpu {
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func and_a_pHL() {
-    self.and_a(self.memory.read(self.registers.hl))
+    self.and_a(self.read(self.registers.hl))
 
     self.pc += 1
     self.cycle &+= 8
@@ -738,7 +738,7 @@ extension Cpu {
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func or_a_pHL() {
-    self.or_a(self.memory.read(self.registers.hl))
+    self.or_a(self.read(self.registers.hl))
 
     self.pc += 1
     self.cycle &+= 8
@@ -779,7 +779,7 @@ extension Cpu {
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
   internal func xor_a_pHL() {
-    self.xor_a(self.memory.read(self.registers.hl))
+    self.xor_a(self.read(self.registers.hl))
 
     self.pc += 1
     self.cycle &+= 8
@@ -891,8 +891,8 @@ extension Cpu {
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
   internal func rlc_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.rlc(n))
+    let n = self.read(hl)
+    self.write(hl, value: self.rlc(n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -922,8 +922,8 @@ extension Cpu {
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
   internal func rl_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.rl(n))
+    let n = self.read(hl)
+    self.write(hl, value: self.rl(n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -955,8 +955,8 @@ extension Cpu {
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
   internal func rrc_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.rrc(n))
+    let n = self.read(hl)
+    self.write(hl, value: self.rrc(n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -986,8 +986,8 @@ extension Cpu {
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
   internal func rr_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.rr(n))
+    let n = self.read(hl)
+    self.write(hl, value: self.rr(n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -1019,8 +1019,8 @@ extension Cpu {
   /// Shifts the contents of operand m to the left.
   internal func sla_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.sla(n))
+    let n = self.read(hl)
+    self.write(hl, value: self.sla(n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -1050,8 +1050,8 @@ extension Cpu {
   /// Shifts the contents of operand m to the right.
   internal func sra_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.sra(n))
+    let n = self.read(hl)
+    self.write(hl, value: self.sra(n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -1081,8 +1081,8 @@ extension Cpu {
   /// Shifts the contents of operand m to the right.
   internal func srl_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.srl(n))
+    let n = self.read(hl)
+    self.write(hl, value: self.srl(n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -1114,8 +1114,8 @@ extension Cpu {
   /// Shifts the contents of operand m to the right.
   internal func swap_pHL() {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.swap(n))
+    let n = self.read(hl)
+    self.write(hl, value: self.swap(n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -1150,7 +1150,7 @@ extension Cpu {
   /// in memory specified by the contents of register pair HL
   /// to the Z flag of the program status word (PSW).
   internal func bit_pHL(_ b: UInt8) {
-    let n = self.memory.read(self.registers.hl)
+    let n = self.read(self.registers.hl)
     self.bit(b, n)
 
     self.pc += 2
@@ -1181,8 +1181,8 @@ extension Cpu {
   /// Sets to 1 the specified bit in the memory contents specified by registers H and L.
   internal func set_pHL(_ b: UInt8) {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.set(b, n))
+    let n = self.read(hl)
+    self.write(hl, value: self.set(b, n))
 
     self.pc += 2
     self.cycle &+= 16
@@ -1206,8 +1206,8 @@ extension Cpu {
   /// Resets to 0 the specified bit in the memory contents specified by registers H and L.
   internal func res_pHL(_ b: UInt8) {
     let hl = self.registers.hl
-    let n = self.memory.read(hl)
-    self.memory.write(hl, value: self.res(b, n))
+    let n = self.read(hl)
+    self.write(hl, value: self.res(b, n))
 
     self.pc += 2
     self.cycle &+= 16

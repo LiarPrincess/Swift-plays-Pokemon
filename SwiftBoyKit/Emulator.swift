@@ -12,7 +12,7 @@ public class Emulator {
 
   public init() {
     self.memory = Memory()
-    self.cpu = Cpu(memory: self.memory)
+    self.cpu = Cpu(bus: self.memory)
     self.ppu = Ppu(memory: self.memory)
 
     // in debug we support only 1 emulator (the last one created)

@@ -4,14 +4,14 @@
 
 @testable import SwiftBoyKit
 
-class FakeCpuMemory: CpuMemoryView {
+class FakeCpuBus: CpuBus {
 
   let interrupts = Interrupts()
 
-  var data = [UInt8](repeating: 0, count: 0x10000)
+  private var data = [UInt16: UInt8]()
 
   func read(_ address: UInt16) -> UInt8 {
-    return self.data[address]
+    return self.data[address] ?? 0
   }
 
   func write(_ address: UInt16, value: UInt8) {
