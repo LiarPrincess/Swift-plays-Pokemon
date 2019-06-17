@@ -7,6 +7,26 @@
 
 import SwiftBoyKit
 
+private var checkedAddresses: Set<UInt16> {
+  var result = Set<UInt16>()
+  MemoryMap.rom0.forEach { result.insert($0) }
+  MemoryMap.rom1.forEach { result.insert($0) }
+  MemoryMap.videoRam.forEach { result.insert($0) }
+  MemoryMap.externalRam.forEach { result.insert($0) }
+  MemoryMap.internalRam.forEach { result.insert($0) }
+  MemoryMap.internalRamEcho.forEach { result.insert($0) }
+  MemoryMap.oam.forEach { result.insert($0) }
+  MemoryMap.notUsable.forEach { result.insert($0) }
+  MemoryMap.io.forEach { result.insert($0) }
+  result.insert(MemoryMap.unmapBootrom)
+  MemoryMap.highRam.forEach { result.insert($0) }
+  result.insert(MemoryMap.interruptEnable)
+  //  (0x0000...0x00ff).forEach { skipAddress.insert($0) } // bootrom
+  //  (0x0104...0x0133).forEach { skipAddress.insert($0) } // nintendo logo
+  //  (0xfea0...0xfeff).forEach { skipAddress.insert($0) } // not usable
+  return []
+}
+
 func pyTest(_ p: PyEmulator) {
   let s = Emulator()
   s.run(maxCycles: .max, lastPC: p.cpu.pc)
@@ -32,20 +52,7 @@ func pyTest(_ p: PyEmulator) {
   if sReg.halfCarryFlag != pReg.halfCarryFlag { print("  halfCarryFlag: \(sReg.halfCarryFlag) vs \(pReg.halfCarryFlag)") }
   if sReg.carryFlag     != pReg.carryFlag     { print("  carryFlag: \(sReg.carryFlag) vs \(pReg.carryFlag)") }
 
-  var skipAddress = Set<UInt16>()
-  (0x0000...0x00ff).forEach { skipAddress.insert($0) } // bootrom
-  (0x0104...0x0133).forEach { skipAddress.insert($0) } // nintendo logo
-  (0xfea0...0xfeff).forEach { skipAddress.insert($0) } // not usable
-
-    let ignored: [UInt16] = [0xff47, 0xff48, 0xff49]
-    ignored.forEach { skipAddress.insert($0) }
-  //    skipAddress.insert(0xff04) // div was not implemented
-  //    skipAddress.insert(0xff41) // LCD Status was not implemented
-
-  for addressInt in 0..<p.memory.data.count {
-    let address = UInt16(addressInt)
-    guard !skipAddress.contains(address) else { continue }
-
+  for address in checkedAddresses {
     let pValue = p.memory.data[address]
     let sValue = s.bus.read(address)
 

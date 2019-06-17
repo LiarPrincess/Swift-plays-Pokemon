@@ -43,7 +43,7 @@ extension Bus {
     }
   }
 
-  // swiftlint:disable:next cyclomatic_complexity
+  // swiftlint:disable:next function_body_length cyclomatic_complexity
   private func writeInternalIO(_ address: UInt16, value: UInt8) {
     switch address {
     case MemoryMap.IO.joypad: self.joypad.value = value
@@ -55,7 +55,29 @@ extension Bus {
     case MemoryMap.Timer.tma:  self.timer.tma = value
     case MemoryMap.Timer.tac:  self.timer.tac = value
 
-    // audio
+    case MemoryMap.Audio.nr10:          self.audio[address] = value
+    case MemoryMap.Audio.nr11:          self.audio[address] = value
+    case MemoryMap.Audio.nr12:          self.audio[address] = value
+    case MemoryMap.Audio.nr13:          self.audio[address] = value
+    case MemoryMap.Audio.nr14:          self.audio[address] = value
+    case MemoryMap.Audio.nr21:          self.audio[address] = value
+    case MemoryMap.Audio.nr22:          self.audio[address] = value
+    case MemoryMap.Audio.nr23:          self.audio[address] = value
+    case MemoryMap.Audio.nr24:          self.audio[address] = value
+    case MemoryMap.Audio.nr30:          self.audio[address] = value
+    case MemoryMap.Audio.nr31:          self.audio[address] = value
+    case MemoryMap.Audio.nr32:          self.audio[address] = value
+    case MemoryMap.Audio.nr33:          self.audio[address] = value
+    case MemoryMap.Audio.nr34:          self.audio[address] = value
+    case MemoryMap.Audio.nr41:          self.audio[address] = value
+    case MemoryMap.Audio.nr42:          self.audio[address] = value
+    case MemoryMap.Audio.nr43:          self.audio[address] = value
+    case MemoryMap.Audio.nr44:          self.audio[address] = value
+    case MemoryMap.Audio.nr50:          self.audio[address] = value
+    case MemoryMap.Audio.nr51:          self.audio[address] = value
+    case MemoryMap.Audio.nr52:          self.audio[address] = value
+    case MemoryMap.Audio.nr3_ram_start: self.audio[address] = value
+    case MemoryMap.Audio.nr3_ram_end:   self.audio[address] = value
 
     case MemoryMap.Lcd.control: self.lcd.control.value = value
     case MemoryMap.Lcd.status:  self.lcd.status.value = value

@@ -21,6 +21,9 @@ public class Bus {
   /// Catch 'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()
 
+  /// TODO: Catch 'em all for audio read/write
+  internal var audio = [UInt16:UInt8]()
+
   internal init(cartridge: Cartridge, joypad: Joypad, lcd: Lcd, timer: Timer) {
     self.lcd = lcd
     self.timer = timer

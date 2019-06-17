@@ -36,29 +36,29 @@ public enum MemoryMap {
   }
 
   public enum Audio {
-//    public static let nr10:          UInt16 = 0x10
-//    public static let nr11:          UInt16 = 0x11
-//    public static let nr12:          UInt16 = 0x12
-//    public static let nr13:          UInt16 = 0x13
-//    public static let nr14:          UInt16 = 0x14
-//    public static let nr21:          UInt16 = 0x16
-//    public static let nr22:          UInt16 = 0x17
-//    public static let nr23:          UInt16 = 0x18
-//    public static let nr24:          UInt16 = 0x19
-//    public static let nr30:          UInt16 = 0x1a
-//    public static let nr31:          UInt16 = 0x1b
-//    public static let nr32:          UInt16 = 0x1c
-//    public static let nr33:          UInt16 = 0x1d
-//    public static let nr34:          UInt16 = 0x1e
-//    public static let nr41:          UInt16 = 0x20
-//    public static let nr42:          UInt16 = 0x21
-//    public static let nr43:          UInt16 = 0x22
-//    public static let nr44:          UInt16 = 0x23
-//    public static let nr50:          UInt16 = 0x24
-//    public static let nr51:          UInt16 = 0x25
-//    public static let nr52:          UInt16 = 0x26
-//    public static let nr3_ram_start: UInt16 = 0x30
-//    public static let nr3_ram_end:   UInt16 = 0x3f
+    public static let nr10:          UInt16 = 0xff10
+    public static let nr11:          UInt16 = 0xff11
+    public static let nr12:          UInt16 = 0xff12
+    public static let nr13:          UInt16 = 0xff13
+    public static let nr14:          UInt16 = 0xff14
+    public static let nr21:          UInt16 = 0xff16
+    public static let nr22:          UInt16 = 0xff17
+    public static let nr23:          UInt16 = 0xff18
+    public static let nr24:          UInt16 = 0xff19
+    public static let nr30:          UInt16 = 0xff1a
+    public static let nr31:          UInt16 = 0xff1b
+    public static let nr32:          UInt16 = 0xff1c
+    public static let nr33:          UInt16 = 0xff1d
+    public static let nr34:          UInt16 = 0xff1e
+    public static let nr41:          UInt16 = 0xff20
+    public static let nr42:          UInt16 = 0xff21
+    public static let nr43:          UInt16 = 0xff22
+    public static let nr44:          UInt16 = 0xff23
+    public static let nr50:          UInt16 = 0xff24
+    public static let nr51:          UInt16 = 0xff25
+    public static let nr52:          UInt16 = 0xff26
+    public static let nr3_ram_start: UInt16 = 0xff30
+    public static let nr3_ram_end:   UInt16 = 0xff3f
   }
 
   public enum Lcd {

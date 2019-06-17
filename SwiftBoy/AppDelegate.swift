@@ -8,15 +8,9 @@ import SwiftBoyKit
 public class AppDelegate: NSObject, NSApplicationDelegate {
 
   public func applicationDidFinishLaunching(_ aNotification: Notification) {
-//    pyTest(pyLoad("pyboy_bootrom_pc_000c_before_Setup_Audio.txt"))
-//    pyTest(pyLoad("pyboy_bootrom_pc_001d_before_Setup_BG_palette.txt"))
-//    pyTest(pyLoad("pyboy_bootrom_pc_0021_before_Convert_and_load_logo.txt"))
-//    pyTest(pyLoad("pyboy_bootrom_pc_0034_before_Load_8_additional.txt"))
-
-//    pyTestAll()
+    pyTestAll()
 
 //    let emulator = Emulator()
-//    emulator.fakeEmptyCartridge()
 //    emulator.run(maxCycles: .max, lastPC: 0x0068)
   }
 
@@ -95,18 +89,18 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 //    pyTest(pyLoad("pyboy_bootrom_pc_0x64.txt"))
 //    pyTest(pyLoad("pyboy_bootrom_pc_0x66.txt"))
     pyTest(pyLoad("pyboy_bootrom_pc_0x68.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x6a.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x6b.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x6d.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x6e.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x70.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x72.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x73.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x74.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x76.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x78.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x7a.txt"))
-    pyTest(pyLoad("pyboy_bootrom_pc_0x7c.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x6a.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x6b.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x6d.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x6e.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x70.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x72.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x73.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x74.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x76.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x78.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x7a.txt"))
+//    pyTest(pyLoad("pyboy_bootrom_pc_0x7c.txt"))
 //    pyTest(pyLoad("pyboy_bootrom_pc_0x7e.txt"))
 //    pyTest(pyLoad("pyboy_bootrom_pc_0x86.txt"))
 //    pyTest(pyLoad("pyboy_bootrom_pc_0x88.txt"))
@@ -143,5 +137,6 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 //    pyTest(pyLoad("pyboy_bootrom_pc_0xfc.txt"))
 //    pyTest(pyLoad("pyboy_bootrom_pc_0xfe.txt"))
 //    pyTest(pyLoad("pyboy_bootrom_pc_0x100.txt"))
+    print("Finished!")
   }
 }

@@ -41,7 +41,7 @@ extension Bus {
     }
   }
 
-  // swiftlint:disable:next cyclomatic_complexity
+  // swiftlint:disable:next function_body_length cyclomatic_complexity
   private func readInternalIO(_ address: UInt16) -> UInt8 {
     switch address {
     case MemoryMap.IO.joypad: return self.joypad.value
@@ -53,7 +53,29 @@ extension Bus {
     case MemoryMap.Timer.tma:  return self.timer.tma
     case MemoryMap.Timer.tac:  return self.timer.tac
 
-    // audio
+    case MemoryMap.Audio.nr10:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr11:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr12:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr13:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr14:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr21:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr22:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr23:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr24:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr30:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr31:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr32:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr33:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr34:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr41:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr42:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr43:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr44:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr50:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr51:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr52:          return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr3_ram_start: return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr3_ram_end:   return self.audio[address] ?? 0
 
     case MemoryMap.Lcd.control: return self.lcd.control.value
     case MemoryMap.Lcd.status:  return self.lcd.status.value
