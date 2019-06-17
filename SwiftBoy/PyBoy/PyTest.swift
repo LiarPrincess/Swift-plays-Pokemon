@@ -9,7 +9,6 @@ import SwiftBoyKit
 
 func pyTest(_ p: PyEmulator) {
   let s = Emulator()
-  s.fakeEmptyCartridge()
   s.run(maxCycles: .max, lastPC: p.cpu.pc)
 
   print(p.filename)

@@ -9,11 +9,11 @@ extension Cartridge {
 
     let bootromStart = 0x0000
     let bootromEnd = bootromStart + bootromData.count
-    result.rom0.data.replaceSubrange(bootromStart..<bootromEnd, with: bootromData)
+    result.rom0.replaceSubrange(bootromStart..<bootromEnd, with: bootromData)
 
     let logoStart = 0x0104
     let logoEnd = logoStart + nintendoLogoData.count
-    result.rom0.data.replaceSubrange(logoStart..<logoEnd, with: nintendoLogoData)
+    result.rom0.replaceSubrange(logoStart..<logoEnd, with: nintendoLogoData)
 
     return result
   }

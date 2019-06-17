@@ -17,7 +17,7 @@ public class Emulator {
     self.timer = Timer()
     self.cartridge = .bootrom
 
-    self.bus = Bus(cartridge: self.cartridge, timer: self.timer)
+    self.bus = Bus(cartridge: self.cartridge, lcd: self.lcd, timer: self.timer)
     self.cpu = Cpu(bus: self.bus)
 
     // in debug we support only 1 emulator (the last one created)

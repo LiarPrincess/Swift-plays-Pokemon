@@ -4,107 +4,126 @@
 
 public class Bus {
 
-  public static let dmaAddress: UInt16 = 0xff46
-
-  /** 0000-3FFF     */ internal let rom0: Rom0Memory
-  /** 4000-7FFF     */ internal let rom1: Rom1Memory
-
-  /** 8000-9FFF     */ internal let videoRam: VideoRam
-  /** A000-BFFF     */ internal let externalRam: ExternalRam
-  /** C000-DFFF     */ internal let internalRam: InternalRam
-  /** E000-FDFF     */ internal let internalRamEcho: InternalRamEcho
-  /** FE00-FE9F     */ internal let oam: Oam
-  /** FEA0-FEFF     */ internal let notUsable: NotUsableMemory
-
-  /** FF00-FF7F     */ internal let ioPorts: IOPorts
-  /** FF00          */ internal let joypad: JoypadMemory
-  /** FF01-FF02     */ internal let serialPort: SerialPortMemory
-  /** FF40-FF4B     */ internal let lcd: LcdMemory
-
+  private let lcd: Lcd
   private let timer: Timer
+  private let cartridge: Cartridge
   private let interruptEnable: InterruptEnable
 
-  /** FF80-FFFE     */ internal let highRam: HighRam
+  /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
+  /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
+  private var ram = [UInt8](memoryRange: MemoryMap.internalRam)
 
-  internal init(timer: Timer) {
-    // If we pass region as init param to another region then it should be stored as 'unowned',
-    // not for ARC, but for semantics (memory should be the owner of all regions).
-    self.interruptEnable = InterruptEnable()
-    self.rom0 = Rom0Memory()
-    self.rom1 = Rom1Memory()
-    self.videoRam = VideoRam()
-    self.externalRam = ExternalRam()
-    self.internalRam = InternalRam()
-    self.internalRamEcho = InternalRamEcho(internalRam: self.internalRam)
-    self.oam = Oam()
-    self.notUsable = NotUsableMemory()
-    self.ioPorts = IOPorts()
-    self.joypad = JoypadMemory()
-    self.serialPort = SerialPortMemory()
-    self.lcd = LcdMemory()
+  /// FF80-FFFE High RAM (HRAM)
+  private var highRam = [UInt8](memoryRange: MemoryMap.highRam)
+
+  internal init(cartridge: Cartridge, lcd: Lcd, timer: Timer) {
+    self.lcd = lcd
     self.timer = timer
-    self.highRam = HighRam()
+    self.cartridge = cartridge
+    self.interruptEnable = InterruptEnable()
   }
 
   // MARK: - Read
 
   public func read(_ address: UInt16) -> UInt8 {
-    return self.read(address, callDebug: true)
+    let value = self.readInternal(address)
+//    Debug.memoryDidRead(from: address, region: region, value: value)
+    return value
   }
 
-  internal func read(_ address: UInt16, callDebug: Bool) -> UInt8 {
-    return 0
-//    guard let region = self.getRegion(forGlobalAddress: address) else {
-//      fatalError("Attempting to read unsupported memory address: \(address.hex).")
-//    }
-//
-//    let value = region.read(globalAddress: address)
-//
-//    if callDebug {
-//      Debug.memoryDidRead(from: address, region: region, value: value)
-//    }
-//
-//    return value
+  // swiftlint:disable:next cyclomatic_complexity
+  internal func readInternal(_ address: UInt16) -> UInt8 {
+    func read(_ region: ClosedRange<UInt16>, _ array: [UInt8]) -> UInt8 {
+      return array[address - region.lowerBound]
+    }
+
+    switch address {
+    case MemoryMap.rom0: return read(MemoryMap.rom0, self.cartridge.rom0)
+    case MemoryMap.rom1: return read(MemoryMap.rom1, self.cartridge.rom1)
+    case MemoryMap.externalRam: return read(MemoryMap.externalRam, self.cartridge.ram)
+
+    case MemoryMap.highRam: return read(MemoryMap.highRam, self.highRam)
+    case MemoryMap.internalRam: return read(MemoryMap.internalRam, self.ram)
+    case MemoryMap.internalRamEcho:
+      let ramAddress = self.convertEchoToRamAddress(address)
+      return self.ram[ramAddress - MemoryMap.internalRam.lowerBound]
+
+    case MemoryMap.videoRam: return read(MemoryMap.videoRam, self.lcd.videoRam)
+    case MemoryMap.oam: return read(MemoryMap.oam, self.lcd.oam)
+    case MemoryMap.io: return self.readInternalIO(address)
+
+    case MemoryMap.notUsable: return 0
+    case MemoryMap.unmapBootrom: return 0
+    case MemoryMap.interruptEnable: return self.interruptEnable.value
+    default:
+      fatalError("Attempting to read from unsupported memory address: \(address.hex).")
+    }
+  }
+
+  // swiftlint:disable:next cyclomatic_complexity
+  private func readInternalIO(_ address: UInt16) -> UInt8 {
+    switch address {
+    case MemoryMap.IO.joypad: return 0
+
+    case MemoryMap.IO.sb: return 0
+    case MemoryMap.IO.sc: return 0
+
+    case MemoryMap.IO.div:  return self.timer.div
+    case MemoryMap.IO.tima: return self.timer.tima
+    case MemoryMap.IO.tma:  return self.timer.tma
+    case MemoryMap.IO.tac:  return self.timer.tac
+
+    case MemoryMap.IO.interruptFlag: return 0
+
+      // audio
+
+    case MemoryMap.IO.lcdControl: return 0
+    case MemoryMap.IO.lcdStatus: return 0
+    case MemoryMap.IO.lcdScrollY: return 0
+    case MemoryMap.IO.lcdScrollX: return 0
+    case MemoryMap.IO.lcdLine: return 0
+    case MemoryMap.IO.lcdLineCompare: return 0
+    case MemoryMap.IO.dma: return 0
+    case MemoryMap.IO.lcdBackgroundPalette: return 0
+    case MemoryMap.IO.lcdObjectPalette0: return 0
+    case MemoryMap.IO.lcdObjectPalette1: return 0
+    case MemoryMap.IO.lcdWindowY: return 0
+    case MemoryMap.IO.lcdWindowX: return 0
+
+    default:
+      fatalError("Attempting to read from unsupported IO memory address: \(address.hex).")
+    }
   }
 
   // MARK: - Write
 
   public func write(_ address: UInt16, value: UInt8) {
-    self.write(address, value: value, callDebug: true)
+    self.writeInternal(address, value: value)
   }
 
-  internal func write(_ address: UInt16, value: UInt8, callDebug: Bool) {
-//    guard address != Bus.dmaAddress else {
-//      self.dma(writeValue: value)
-//      return
-//    }
-//
-//    guard let region = self.getRegion(forGlobalAddress: address) else {
-//      fatalError("Attempting to write to unsupported memory address: \(address.hex).")
-//    }
-//
-//    region.write(globalAddress: address, value: value)
-//
-//    if callDebug {
-//      Debug.memoryDidWrite(to: address, region: region, value: value)
-//    }
+  internal func writeInternal(_ address: UInt16, value: UInt8) {
+    fatalError("Attempting to write to unsupported memory address: \(address.hex).")
   }
-
-  // MARK: - DMA
 
   private func dma(writeValue: UInt8) {
-    let sourceAddress = UInt16(writeValue) << 8
+    //    let sourceAddress = UInt16(writeValue) << 8
 
     // move it to Oam class?
-    for i in 0..<Oam.size {
-      let value = self.read(sourceAddress + i)
-      self.write(Oam.start + i, value: value)
-    }
+    //    for i in 0..<Oam.count {
+    //      let value = self.read(sourceAddress + i)
+    //      self.write(Oam.start + i, value: value)
+    //    }
+  }
+
+  // MARK: - Echo
+
+  private func convertEchoToRamAddress(_ address: UInt16) -> UInt16 {
+    return address - 0x2000
   }
 
   // MARK: - Interrupts
 
-  func isInterruptRequested(type: InterruptType) -> Bool {
+  internal func isInterruptRequested(type: InterruptType) -> Bool {
     switch type {
     case .vBlank:  return self.interruptEnable.vBlank  && false
     case .lcdStat: return self.interruptEnable.lcdStat && false
@@ -114,7 +133,7 @@ public class Bus {
     }
   }
 
-  func clearInterrupt(type: InterruptType) {
+  internal func clearInterrupt(type: InterruptType) {
     switch type {
     case .vBlank: break
     case .lcdStat: break

@@ -8,6 +8,7 @@ private let timerMask:   UInt8 = 1 << 2
 private let serialMask:  UInt8 = 1 << 3
 private let joypadMask:  UInt8 = 1 << 4
 
+/// FFFF Interrupt Enable Register
 public class InterruptEnable {
 
   public static let address: UInt16 = 0xffff
@@ -18,7 +19,7 @@ public class InterruptEnable {
   public var serial:  Bool { return isSet(self.value, mask: serialMask) }
   public var joypad:  Bool { return isSet(self.value, mask: joypadMask) }
 
-  public var value: UInt8 = 0x00
+  public internal(set) var value: UInt8 = 0x00
 }
 
 private func isSet(_ value: UInt8, mask: UInt8) -> Bool {
