@@ -5,7 +5,7 @@
 import XCTest
 @testable import SwiftBoyKit
 
-class AppTimerTests: XCTestCase {
+class CustomTimerTests: XCTestCase {
 
   private let disabled:   UInt8 = 0b000
   private let enabled:    UInt8 = 0b100
@@ -14,9 +14,7 @@ class AppTimerTests: XCTestCase {
 
   func test_period16_incrementsAt_16cycles() {
     let timer = Timer()
-
-    let tac = enabled | period16
-    timer.write(globalAddress: Timer.tacAddress, value: tac)
+    timer.tac = enabled | period16
 
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x00)
@@ -29,9 +27,7 @@ class AppTimerTests: XCTestCase {
 
   func test_period1024_incrementsAt_1024cycles() {
     let timer = Timer()
-
-    let tac = enabled | period1024
-    timer.write(globalAddress: Timer.tacAddress, value: tac)
+    timer.tac = enabled | period1024
 
     for _ in 0..<4 {
       timer.tick(cycles: 250)
@@ -46,9 +42,7 @@ class AppTimerTests: XCTestCase {
 
   func test_disabled_doesNothing() {
     let timer = Timer()
-
-    let tac = disabled | period16
-    timer.write(globalAddress: Timer.tacAddress, value: tac)
+    timer.tac = disabled | period16
 
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x00)
@@ -65,13 +59,8 @@ class AppTimerTests: XCTestCase {
 
   func test_overflow() {
     let timer = Timer()
-
-    let tac = enabled | period16
-    timer.write(globalAddress: Timer.tacAddress, value: tac)
-
-    // this value should be set after overflow
-    let tma = UInt8(0x16)
-    timer.write(globalAddress: Timer.tmaAddress, value: tma)
+    timer.tac = enabled | period16
+    timer.tma = 0x16 // this value should be set after overflow
 
     // tick up until tima = 255
     for i in 0..<255 {
@@ -84,7 +73,7 @@ class AppTimerTests: XCTestCase {
     XCTAssertEqual(timer.tima, 0xff) // not yet...
 
     timer.tick(cycles: 8)
-    XCTAssertEqual(timer.tima, tma) // now!
+    XCTAssertEqual(timer.tima, timer.tma) // now!
 
     XCTAssertEqual(timer.hasInterrupt, true)
   }

@@ -6,7 +6,9 @@
 
 extension Bus {
   convenience init() {
+    let lcd = Lcd()
     let timer = Timer()
-    self.init(timer: timer)
+    let cartridge = Cartridge.bootrom
+    self.init(cartridge: cartridge, lcd: lcd, timer: timer)
   }
 }

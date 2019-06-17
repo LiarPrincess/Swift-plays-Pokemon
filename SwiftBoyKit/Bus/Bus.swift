@@ -137,7 +137,7 @@ public class Bus {
     switch type {
     case .vBlank: break
     case .lcdStat: break
-    case .timer: self.timer.clearInterrupt()
+    case .timer: self.timer.hasInterrupt = false
     case .serial: break
     case .joypad: break
     }

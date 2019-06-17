@@ -2,76 +2,108 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-public class Timer: MemoryRegion {
+// TODO: Fix directory
 
-  public static let divAddress:  UInt16 = 0xff04
-  public static let timaAddress: UInt16 = 0xff05
-  public static let tmaAddress:  UInt16 = 0xff06
-  public static let tacAddress:  UInt16 = 0xff07
-
-  private let divTimer = DivTimer()
-  private let appTimer = AppTimer()
-
-  // MARK: - Getters
-
-  /// Divider - This register is incremented at rate of 16384Hz.
-  /// Writing any value to this register resets it to 00h.
-  public var div: UInt8 { return self.divTimer.value }
-
-  /// Timer counter - This timer is incremented by a clock frequency specified by the TAC register (FF07).
-  /// When the value overflows then it will be reset to the value specified in TMA (FF06),
-  /// and an interrupt will be requested.
-  public var tima: UInt8 { return self.appTimer.tima }
-
-  /// Timer Modulo - When the TIMA overflows, this data will be loaded.
-  public var tma: UInt8 { return self.appTimer.tma }
-
-  /// Timer Control:
-  /// Bit 2    - Timer Stop;
-  /// Bits 1-0 - Input Clock Select
-  public var tac: UInt8 { return self.appTimer.tac }
-
-  /// Flag instead of 0xFF0F.
-  public var hasInterrupt: Bool { return self.appTimer.hasInterrupt }
-
-  // MARK: - MemoryRegion
-
-  internal func contains(globalAddress address: UInt16) -> Bool {
-    return Timer.divAddress <= address && address <= Timer.tacAddress
-  }
-
-  internal func read(globalAddress address: UInt16) -> UInt8 {
-    switch address {
-    case Timer.divAddress: return self.divTimer.read()
-    case Timer.timaAddress,
-         Timer.tmaAddress,
-         Timer.tacAddress: return self.appTimer.read(globalAddress: address)
-    default:
-      fatalError("Attempting to read from memory that does not belong to timer (\(address.hex)).")
-    }
-  }
-
-  internal func write(globalAddress address: UInt16, value: UInt8) {
-    switch address {
-    case Timer.divAddress: self.divTimer.write()
-    case Timer.timaAddress,
-         Timer.tmaAddress,
-         Timer.tacAddress: self.appTimer.write(globalAddress: address, value: value)
-    default:
-      fatalError("Attempting to write to memory that does not belong to timer (\(address.hex)).")
-    }
-  }
-
-  // MARK: - Interrupts
-
-  internal func clearInterrupt() {
-    self.appTimer.clearInterrupt()
-  }
+/// FF04 - Divider register;
+/// FF05, FF06, FF07 - App defined timer
+public class Timer {
 
   // MARK: - Tick
 
   internal func tick(cycles: UInt8) {
-    self.divTimer.tick(cycles: cycles)
-    self.appTimer.tick(cycles: cycles)
+    self.tickDiv(cycles: cycles)
+    self.tickCustom(cycles: cycles)
+  }
+
+  // MARK: - Div
+
+  /// Frequency at which div register should be incremented.
+  public static let divFrequency: UInt = 16_384
+
+  /// Divider - This register is incremented at rate of 16384Hz.
+  /// Writing any value to this register resets it to 00h.
+  public internal(set) var div: UInt8 {
+    get { return self.divValue }
+    set {
+      self.divValue = 0
+      self.divProgress = 0
+    }
+  }
+
+  private var divValue: UInt8 = 0
+  private var divProgress: UInt = 0
+
+  private func tickDiv(cycles: UInt8) {
+    let max = Cpu.clockSpeed / Timer.divFrequency // 256
+
+    self.divProgress += UInt(cycles)
+
+    if self.divProgress >= max {
+      self.divValue &+= 1
+      self.divProgress %= max
+    }
+  }
+
+  // MARK: - Custom timer
+
+  /// Timer counter - This timer is incremented by a clock frequency specified by the TAC register (FF07).
+  /// When the value overflows then it will be reset to the value specified in TMA (FF06),
+  /// and an interrupt will be requested.
+  public internal(set) var tima: UInt8 = 0x00
+
+  /// Timer Modulo - When the TIMA overflows, this data will be loaded.
+  public internal(set) var tma: UInt8 = 0x00
+
+  /// Timer Control:
+  /// Bit 2    - Timer Stop;
+  /// Bits 1-0 - Input Clock Select
+  public internal(set) var tac: UInt8 = 0x00 {
+    didSet {
+      let oldPeriod = self.getPeriod(tac: oldValue)
+      let newPeriod = self.getPeriod(tac: self.tac)
+
+      if oldPeriod != newPeriod {
+        self.customProgress = 0
+      }
+    }
+  }
+
+  /// Flag instead of 0xFF0F.
+  public internal(set) var hasInterrupt: Bool = false
+
+  private var customProgress: UInt = 0
+
+  private func tickCustom(cycles: UInt8) {
+    guard self.isCustomEnabled else {
+      return
+    }
+
+    self.customProgress += UInt(cycles)
+
+    let period = self.getPeriod(tac: self.tac)
+    if self.customProgress >= period {
+      self.customProgress %= period
+
+      if self.tima == UInt8.max {
+        self.tima = self.tma
+        self.hasInterrupt = true
+      } else {
+        self.tima += 1
+      }
+    }
+  }
+
+  private var isCustomEnabled: Bool {
+    return (self.tac & 0b100) == 0b100
+  }
+
+  private func getPeriod(tac: UInt8) -> UInt {
+    switch tac & 0b11 {
+    case 0b00: return Cpu.clockSpeed /   4_096 // 1024
+    case 0b01: return Cpu.clockSpeed / 262_144 //   16
+    case 0b10: return Cpu.clockSpeed /  65_536 //   64
+    case 0b11: return Cpu.clockSpeed /  16_384 //  256
+    default: fatalError("Invalid timer frequency.") // ?
+    }
   }
 }
