@@ -57,18 +57,18 @@ extension Bus {
 
     // audio
 
-//    case MemoryMap.Lcd.control: return 0
-//    case MemoryMap.Lcd.status: return 0
-//    case MemoryMap.Lcd.scrollY: return 0
-//    case MemoryMap.Lcd.scrollX: return 0
-//    case MemoryMap.Lcd.line: return 0
-//    case MemoryMap.Lcd.lineCompare: return 0
+    case MemoryMap.Lcd.control: self.lcd.control.value = value
+    case MemoryMap.Lcd.status:  self.lcd.status.value = value
+    case MemoryMap.Lcd.scrollY: self.lcd.scrollY = value
+    case MemoryMap.Lcd.scrollX: self.lcd.scrollX = value
+    case MemoryMap.Lcd.line:        self.lcd.line = value
+    case MemoryMap.Lcd.lineCompare: self.lcd.lineCompare = value
     case MemoryMap.Lcd.dma: self.dma(writeValue: value)
-//    case MemoryMap.Lcd.backgroundPalette: return 0
-//    case MemoryMap.Lcd.objectPalette0: return 0
-//    case MemoryMap.Lcd.objectPalette1: return 0
-//    case MemoryMap.Lcd.windowY: return 0
-//    case MemoryMap.Lcd.windowX: return 0
+    case MemoryMap.Lcd.backgroundPalette: self.lcd.backgroundPalette.value = value
+    case MemoryMap.Lcd.objectPalette0:    self.lcd.objectPalette0.value = value
+    case MemoryMap.Lcd.objectPalette1:    self.lcd.objectPalette1.value = value
+    case MemoryMap.Lcd.windowY: self.lcd.windowY = value
+    case MemoryMap.Lcd.windowX: self.lcd.windowX = value
 
     default:
       print("Attempting to wrtie to unsupported IO memory address: \(address.hex).")

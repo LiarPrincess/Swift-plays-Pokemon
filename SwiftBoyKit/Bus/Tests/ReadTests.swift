@@ -39,8 +39,16 @@ class ReadTests: XCTestCase {
 
   func test_internalRamEcho() {
     let bus = Bus()
-    self.fill(&bus.ram)
-    self.testReads(bus, MemoryMap.internalRamEcho, shouldEqual: bus.ram)
+    let range = MemoryMap.internalRamEcho
+
+    bus.ram[bus.ram.startIndex] = 5
+    bus.ram[bus.ram.endIndex - 1] = 6
+
+    let startValue = bus.read(range.start)
+    XCTAssertEqual(startValue, bus.ram[0])
+
+    let endValue = bus.read(range.end)
+    XCTAssertEqual(endValue, bus.ram[range.count - 1])
   }
 
   func test_oam() {
@@ -81,34 +89,57 @@ class ReadTests: XCTestCase {
     XCTAssertEqual(bus.read(MemoryMap.Timer.tac), 7)
   }
 
-// TODO: Missing IO tests (lcd + audio)
-//  func test_lcdMemory() {
-//    let bus = Bus()
-//
-//    bus.lcd.control.byte = 5
-//    XCTAssertEqual(bus.read(LcdMemory.controlAddress), 5)
-//
-//    bus.lcd.status.byte = 6
-//    XCTAssertEqual(bus.read(LcdMemory.statusAddress), 6)
-//
-//    bus.lcd.scrollY = 7
-//    XCTAssertEqual(bus.read(LcdMemory.scrollYAddress), 7)
-//
-//    bus.lcd.scrollX = 8
-//    XCTAssertEqual(bus.read(LcdMemory.scrollXAddress), 8)
-//
-//    bus.lcd.line = 9
-//    XCTAssertEqual(bus.read(LcdMemory.lineAddress), 9)
-//
-//    bus.lcd.lineCompare = 10
-//    XCTAssertEqual(bus.read(LcdMemory.lineCompareAddress), 10)
-//
-//    bus.lcd.windowY = 11
-//    XCTAssertEqual(bus.read(LcdMemory.windowYAddress), 11)
-//
-//    bus.lcd.windowX = 12
-//    XCTAssertEqual(bus.read(LcdMemory.windowXAddress), 12)
-//  }
+  // swiftlint:disable:next function_body_length
+  func test_lcdMemory() {
+    let bus = Bus()
+    var value: UInt8 = 0
+
+    bus.lcd.control.value = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.control), value)
+    value += 1
+
+    bus.lcd.status.value = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.status), value)
+    value += 1
+
+    bus.lcd.scrollY = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.scrollY), value)
+    value += 1
+
+    bus.lcd.scrollX = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.scrollX), value)
+    value += 1
+
+    bus.lcd.line = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.line), value)
+    value += 1
+
+    bus.lcd.lineCompare = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.lineCompare), value)
+    value += 1
+
+    bus.lcd.windowY = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.windowY), value)
+    value += 1
+
+    bus.lcd.windowX = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.windowX), value)
+    value += 1
+
+    bus.lcd.backgroundPalette.value = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.backgroundPalette), value)
+    value += 1
+
+    // 2 last bits are always 0
+    bus.lcd.objectPalette0.value = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.objectPalette0), value & 0xfc)
+    value += 1
+
+    // 2 last bits are always 0
+    bus.lcd.objectPalette1.value = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.objectPalette1), value & 0xfc)
+    value += 1
+  }
 
   func test_highRam() {
     let bus = Bus()
@@ -125,15 +156,26 @@ class ReadTests: XCTestCase {
   // MARK: - Helpers
 
   private func fill(_ data: inout [UInt8]) {
-    for i in 0..<data.count {
-      data[i] = UInt8(i & 0xff)
-    }
+    // use this if you have time (~0.3s):
+    // for i in 0..<data.count {
+    //   data[i] = UInt8(i & 0xff)
+    // }
+
+    data[data.startIndex] = 5
+    data[data.endIndex - 1] = 6
   }
 
   private func testReads(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldEqual data: [UInt8]) {
-    for address in range {
-      let value = bus.read(address)
-      XCTAssertEqual(value, data[address - range.start])
-    }
+    // use this if you have time (~0.3s):
+    // for address in range {
+    //   let value = bus.read(address)
+    //   XCTAssertEqual(value, data[address - range.start])
+    // }
+
+    let startValue = bus.read(range.start)
+    XCTAssertEqual(startValue, data[data.startIndex])
+
+    let endValue = bus.read(range.end)
+    XCTAssertEqual(endValue, data[data.endIndex - 1])
   }
 }

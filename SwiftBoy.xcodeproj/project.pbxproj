@@ -82,7 +82,6 @@
 		90CBB72C22AD7632004775E2 /* InterruptEnableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB71F22AD7594004775E2 /* InterruptEnableTests.swift */; };
 		90CBB73022AD7818004775E2 /* UInt+radixFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB72F22AD7818004775E2 /* UInt+radixFormatTests.swift */; };
 		90CBB73222AD7AE3004775E2 /* Array+UIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB73122AD7AE3004775E2 /* Array+UIntTests.swift */; };
-		90CBB73622ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB73522ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift */; };
 		90CBB73E22ADB8A7004775E2 /* Ppu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB73D22ADB8A7004775E2 /* Ppu.swift */; };
 		90CBB74422ADBA87004775E2 /* PpuMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB74322ADBA87004775E2 /* PpuMemoryView.swift */; };
 		90D404AE22AC76FC00AEF7BD /* InterruptEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */; };
@@ -220,7 +219,6 @@
 		90CBB72822AD75B4004775E2 /* String+padTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+padTests.swift"; sourceTree = "<group>"; };
 		90CBB72F22AD7818004775E2 /* UInt+radixFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+radixFormatTests.swift"; sourceTree = "<group>"; };
 		90CBB73122AD7AE3004775E2 /* Array+UIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+UIntTests.swift"; sourceTree = "<group>"; };
-		90CBB73522ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FF40-FF4B-LcdMemory.swift"; sourceTree = "<group>"; };
 		90CBB73D22ADB8A7004775E2 /* Ppu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Ppu.swift; path = SwiftBoyKit/Lcd/Old/Ppu.swift; sourceTree = SOURCE_ROOT; };
 		90CBB74322ADBA87004775E2 /* PpuMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PpuMemoryView.swift; sourceTree = "<group>"; };
 		90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterruptEnable.swift; sourceTree = "<group>"; };
@@ -487,7 +485,6 @@
 				90EFDB8222AE553A0017AEC2 /* LcdControl.swift */,
 				90EFDB8422AE55640017AEC2 /* LcdStatus.swift */,
 				9085FC3022B690C600310090 /* ColorPalette.swift */,
-				90CBB73522ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift */,
 				90B0DC4322B6EC89005BBCF5 /* Lcd.swift */,
 			);
 			path = Lcd;
@@ -743,7 +740,6 @@
 				90B0DC4B22B6F43D005BBCF5 /* Cartridge.swift in Sources */,
 				90B0DC5F22B78E72005BBCF5 /* Bus+interrupts.swift in Sources */,
 				9085FC3122B690C600310090 /* ColorPalette.swift in Sources */,
-				90CBB73622ADA0BA004775E2 /* FF40-FF4B-LcdMemory.swift in Sources */,
 				90BE338222B42C8100DF3953 /* Debug+Emulator.swift in Sources */,
 				90C19C6022B3CA6F00A1B7A9 /* Debug+Cpu.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,

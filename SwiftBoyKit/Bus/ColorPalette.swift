@@ -7,14 +7,14 @@ private let color1Shift: UInt8 = 2
 private let color2Shift: UInt8 = 4
 private let color3Shift: UInt8 = 6
 
-public class ColorPalette: Codable {
+public class ColorPalette {
 
-  public var color0: UInt8 = 0
-  public var color1: UInt8 = 0
-  public var color2: UInt8 = 0
-  public var color3: UInt8 = 0
+  public internal(set) var color0: UInt8 = 0
+  public internal(set) var color1: UInt8 = 0
+  public internal(set) var color2: UInt8 = 0
+  public internal(set) var color3: UInt8 = 0
 
-  public var byte: UInt8 {
+  public internal(set) var value: UInt8 {
     get {
       var result: UInt8 = 0
       result |= self.color0 << color0Shift
@@ -42,13 +42,13 @@ public class ColorPalette: Codable {
   }
 }
 
-public class TransparentColorPalette: Codable {
+public class TransparentColorPalette {
 
-  public var color1: UInt8 = 0
-  public var color2: UInt8 = 0
-  public var color3: UInt8 = 0
+  public internal(set) var color1: UInt8 = 0
+  public internal(set) var color2: UInt8 = 0
+  public internal(set) var color3: UInt8 = 0
 
-  public var byte: UInt8 {
+  public internal(set) var value: UInt8 {
     get {
       var result: UInt8 = 0
       result |= self.color1 << color1Shift

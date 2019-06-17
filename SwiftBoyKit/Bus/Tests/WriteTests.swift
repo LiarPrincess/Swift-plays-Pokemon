@@ -7,6 +7,9 @@ import XCTest
 
 class WriteTests: XCTestCase {
 
+  let startValue: UInt8 = 5
+  let endValue:   UInt8 = 6
+
   /// 'rom0' is read only
   func test_rom0() {
     let bus = Bus()
@@ -51,14 +54,13 @@ class WriteTests: XCTestCase {
 
   func test_echoMemory() {
     let bus = Bus()
+    let range = MemoryMap.internalRamEcho
 
-    for address in MemoryMap.internalRamEcho {
-      let value = self.writeValue(address)
-      bus.write(address, value: value)
+    bus.write(range.start, value: startValue)
+    bus.write(range.end,   value: endValue)
 
-      let ramAddress = address - 0x2000 - MemoryMap.internalRam.start
-      XCTAssertEqual(value, bus.ram[ramAddress])
-    }
+    XCTAssertEqual(bus.ram[0], startValue)
+    XCTAssertEqual(bus.ram[range.count - 1], endValue)
   }
 
   func test_oam() {
@@ -99,34 +101,57 @@ class WriteTests: XCTestCase {
     XCTAssertEqual(bus.timer.tac, 7)
   }
 
-// TODO: Missing IO tests (lcd + audio)
-//  func test_lcdMemory() {
-//    let bus = Bus()
-//
-//    bus.write(LcdMemory.controlAddress, value: 5)
-//    XCTAssertEqual(bus.lcd.control.byte, 5)
-//
-//    bus.write(LcdMemory.statusAddress, value: 6)
-//    XCTAssertEqual(bus.lcd.status.byte, 6)
-//
-//    bus.write(LcdMemory.scrollYAddress, value: 7)
-//    XCTAssertEqual(bus.lcd.scrollY, 7)
-//
-//    bus.write(LcdMemory.scrollXAddress, value: 8)
-//    XCTAssertEqual(bus.lcd.scrollX, 8)
-//
-//    bus.write(LcdMemory.lineAddress, value: 9)
-//    XCTAssertEqual(bus.lcd.line, 0) // line should reset
-//
-//    bus.write(LcdMemory.lineCompareAddress, value: 10)
-//    XCTAssertEqual(bus.lcd.lineCompare, 10)
-//
-//    bus.write(LcdMemory.windowYAddress, value: 11)
-//    XCTAssertEqual(bus.lcd.windowY, 11)
-//
-//    bus.write(LcdMemory.windowXAddress, value: 12)
-//    XCTAssertEqual(bus.lcd.windowX, 12)
-//  }
+  // swiftlint:disable:next function_body_length
+  func test_lcdMemory() {
+    let bus = Bus()
+    var value: UInt8 = 5
+
+    bus.write(MemoryMap.Lcd.control, value: value)
+    XCTAssertEqual(bus.lcd.control.value, value)
+    value += 1
+
+    bus.write(MemoryMap.Lcd.status, value: value)
+    XCTAssertEqual(bus.lcd.status.value, value)
+    value += 1
+
+    bus.write(MemoryMap.Lcd.scrollY, value: value)
+    XCTAssertEqual(bus.lcd.scrollY, value)
+    value += 1
+
+    bus.write(MemoryMap.Lcd.scrollX, value: value)
+    XCTAssertEqual(bus.lcd.scrollX, value)
+    value += 1
+
+    bus.write(MemoryMap.Lcd.line, value: value)
+    XCTAssertEqual(bus.lcd.line, value)
+    value += 1
+
+    bus.write(MemoryMap.Lcd.lineCompare, value: value)
+    XCTAssertEqual(bus.lcd.lineCompare, value)
+    value += 1
+
+    bus.write(MemoryMap.Lcd.windowY, value: value)
+    XCTAssertEqual(bus.lcd.windowY, value)
+    value += 1
+
+    bus.write(MemoryMap.Lcd.windowX, value: value)
+    XCTAssertEqual(bus.lcd.windowX, value)
+    value += 1
+
+    bus.write(MemoryMap.Lcd.backgroundPalette, value: value)
+    XCTAssertEqual(bus.lcd.backgroundPalette.value, value)
+    value += 1
+
+    // 2 last bits are always 0
+    bus.write(MemoryMap.Lcd.objectPalette0, value: value)
+    XCTAssertEqual(bus.lcd.objectPalette0.value, value & 0xfc)
+    value += 1
+
+    // 2 last bits are always 0
+    bus.write(MemoryMap.Lcd.objectPalette1, value: value)
+    XCTAssertEqual(bus.lcd.objectPalette1.value, value & 0xfc)
+    value += 1
+  }
 
   func test_highRam() {
     let bus = Bus()
@@ -143,18 +168,26 @@ class WriteTests: XCTestCase {
   // MARK: - Helpers
 
   private func write(_ bus: Bus, _ range: ClosedRange<UInt16>) {
-    for address in range {
-      let value = self.writeValue(address)
-      bus.write(address, value: value)
-    }
+    // use this if you have time (~0.3s):
+    // for address in range {
+    //   let value = self.writeValue(address)
+    //   bus.write(address, value: value)
+    // }
+
+    bus.write(range.start, value: startValue)
+    bus.write(range.end,   value: endValue)
   }
 
   private func testValues(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldFill data: [UInt8]) {
-    for address in range {
-      let value = data[address - range.start]
-      let expected = self.writeValue(address)
-      XCTAssertEqual(value, expected)
-    }
+    // use this if you have time (~0.3s):
+    // for address in range {
+    //   let value = data[address - range.start]
+    //   let expected = self.writeValue(address)
+    //   XCTAssertEqual(value, expected)
+    // }
+
+    XCTAssertEqual(data[data.startIndex], startValue)
+    XCTAssertEqual(data[data.endIndex - 1], endValue)
   }
 
   private func writeValue(_ address: UInt16) -> UInt8 {

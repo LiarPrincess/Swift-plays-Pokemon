@@ -15,11 +15,11 @@ class ColorPaletteTests: XCTestCase {
 
     for color in colors {
       let shift = color * 2
-      for value in possibleValues {
-        let byte = value << shift
-        palette.byte = byte
-        XCTAssertEqual(palette.getColor(tileValue: color), value)
-        XCTAssertEqual(palette.byte, byte)
+      for v in possibleValues {
+        let value = v << shift
+        palette.value = value
+        XCTAssertEqual(palette.getColor(tileValue: color), v)
+        XCTAssertEqual(palette.value, value)
       }
     }
   }
@@ -31,21 +31,21 @@ class ColorPaletteTests: XCTestCase {
     let possibleValues: [UInt8] = [0b00, 0b01, 0b10, 0b11]
 
     // transparent bits (0 and 1) should always be 0
-    for value in possibleValues {
-      let byte = value
-      palette.byte = byte
+    for v in possibleValues {
+      let value = v
+      palette.value = value
       XCTAssertEqual(palette.getColor(tileValue: 0), 0x00)
-      XCTAssertEqual(palette.byte, byte & 0b11111100)
+      XCTAssertEqual(palette.value, value & 0b11111100)
     }
 
     // color bits
     for color in colors {
       let shift = color * 2
-      for value in possibleValues {
-        let byte = value << shift
-        palette.byte = byte
-        XCTAssertEqual(palette.getColor(tileValue: color), value)
-        XCTAssertEqual(palette.byte, byte)
+      for v in possibleValues {
+        let value = v << shift
+        palette.value = value
+        XCTAssertEqual(palette.getColor(tileValue: color), v)
+        XCTAssertEqual(palette.value, value)
       }
     }
   }
