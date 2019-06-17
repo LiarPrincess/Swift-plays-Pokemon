@@ -10,14 +10,16 @@ public class Emulator {
   public let lcd: Lcd
   public let bus: Bus
   public let timer: Timer
+  public let joypad: Joypad
   public let cartridge: Cartridge
 
   public init() {
     self.lcd = Lcd()
     self.timer = Timer()
+    self.joypad = Joypad()
     self.cartridge = .bootrom
 
-    self.bus = Bus(cartridge: self.cartridge, lcd: self.lcd, timer: self.timer)
+    self.bus = Bus(cartridge: self.cartridge, joypad: self.joypad, lcd: self.lcd, timer: self.timer)
     self.cpu = Cpu(bus: self.bus)
 
     // in debug we support only 1 emulator (the last one created)

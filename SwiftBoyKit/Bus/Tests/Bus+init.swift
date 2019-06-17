@@ -8,7 +8,8 @@ extension Bus {
   convenience init() {
     let lcd = Lcd()
     let timer = Timer()
+    let joypad = Joypad()
     let cartridge = Cartridge.bootrom
-    self.init(cartridge: cartridge, lcd: lcd, timer: timer)
+    self.init(cartridge: cartridge, joypad: joypad, lcd: lcd, timer: timer)
   }
 }

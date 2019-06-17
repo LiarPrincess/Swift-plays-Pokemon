@@ -2,11 +2,14 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// TODO: Remove IOPorts and use more specific regions
 public class Bus {
 
   private let lcd: Lcd
   private let timer: Timer
+  private let joypad: Joypad
   private let cartridge: Cartridge
+  private let serialPort: SerialPort
   private let interruptEnable: InterruptEnable
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
@@ -16,10 +19,15 @@ public class Bus {
   /// FF80-FFFE High RAM (HRAM)
   private var highRam = [UInt8](memoryRange: MemoryMap.highRam)
 
-  internal init(cartridge: Cartridge, lcd: Lcd, timer: Timer) {
+  /// Catch 'em all for any invalid read/write
+  private var unmappedMemory = [UInt16:UInt8]()
+
+  internal init(cartridge: Cartridge, joypad: Joypad, lcd: Lcd, timer: Timer) {
     self.lcd = lcd
     self.timer = timer
+    self.joypad = joypad
     self.cartridge = cartridge
+    self.serialPort = SerialPort()
     self.interruptEnable = InterruptEnable()
   }
 
@@ -56,17 +64,17 @@ public class Bus {
     case MemoryMap.unmapBootrom: return 0
     case MemoryMap.interruptEnable: return self.interruptEnable.value
     default:
-      fatalError("Attempting to read from unsupported memory address: \(address.hex).")
+      print("Attempting to read from unsupported memory address: \(address.hex).")
+      return self.unmappedMemory[address] ?? 0
     }
   }
 
   // swiftlint:disable:next cyclomatic_complexity
   private func readInternalIO(_ address: UInt16) -> UInt8 {
     switch address {
-    case MemoryMap.IO.joypad: return 0
-
-    case MemoryMap.IO.sb: return 0
-    case MemoryMap.IO.sc: return 0
+    case MemoryMap.IO.joypad: return self.joypad.value
+    case MemoryMap.IO.sb: return self.serialPort.sb
+    case MemoryMap.IO.sc: return self.serialPort.sc
 
     case MemoryMap.IO.div:  return self.timer.div
     case MemoryMap.IO.tima: return self.timer.tima
@@ -75,7 +83,7 @@ public class Bus {
 
     case MemoryMap.IO.interruptFlag: return 0
 
-      // audio
+    // audio
 
     case MemoryMap.IO.lcdControl: return 0
     case MemoryMap.IO.lcdStatus: return 0
@@ -91,7 +99,8 @@ public class Bus {
     case MemoryMap.IO.lcdWindowX: return 0
 
     default:
-      fatalError("Attempting to read from unsupported IO memory address: \(address.hex).")
+      print("Attempting to read from unsupported IO memory address: \(address.hex).")
+      return self.unmappedMemory[address] ?? 0
     }
   }
 
