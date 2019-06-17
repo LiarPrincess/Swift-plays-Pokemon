@@ -7,8 +7,8 @@ import XCTest
 
 class ColorPaletteTests: XCTestCase {
 
-  func test_colorPalette() {
-    let palette = ColorPalette()
+  func test_backgroundColorPalette() {
+    let palette = BackgroundColorPalette()
 
     let colors: [UInt8] = [0, 1, 2, 3]
     let possibleValues: [UInt8] = [0b00, 0b01, 0b10, 0b11]
@@ -18,14 +18,14 @@ class ColorPaletteTests: XCTestCase {
       for v in possibleValues {
         let value = v << shift
         palette.value = value
-        XCTAssertEqual(palette.getColor(tileValue: color), v)
+        XCTAssertEqual(palette.getColor(base: color), v)
         XCTAssertEqual(palette.value, value)
       }
     }
   }
 
-  func test_transparentColorPalette() {
-    let palette = TransparentColorPalette()
+  func test_objectColorPalette() {
+    let palette = ObjectColorPalette()
 
     let colors: [UInt8] = [1, 2, 3]
     let possibleValues: [UInt8] = [0b00, 0b01, 0b10, 0b11]
@@ -34,7 +34,7 @@ class ColorPaletteTests: XCTestCase {
     for v in possibleValues {
       let value = v
       palette.value = value
-      XCTAssertEqual(palette.getColor(tileValue: 0), 0x00)
+      XCTAssertEqual(palette.getColor(base: 0), 0x00)
       XCTAssertEqual(palette.value, value & 0b11111100)
     }
 
@@ -44,7 +44,7 @@ class ColorPaletteTests: XCTestCase {
       for v in possibleValues {
         let value = v << shift
         palette.value = value
-        XCTAssertEqual(palette.getColor(tileValue: color), v)
+        XCTAssertEqual(palette.getColor(base: color), v)
         XCTAssertEqual(palette.value, value)
       }
     }

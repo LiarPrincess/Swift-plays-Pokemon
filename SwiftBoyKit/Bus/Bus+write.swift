@@ -9,33 +9,48 @@ extension Bus {
     Debug.busDidWrite(to: address, value: value)
   }
 
-  // swiftlint:disable:next cyclomatic_complexity
+  // swiftlint:disable:next function_body_length cyclomatic_complexity
   internal func writeInternal(_ address: UInt16, value: UInt8) {
     func write(_ region: ClosedRange<UInt16>, _ array: inout [UInt8]) {
       array[address - region.start] = value
     }
 
     switch address {
+
+    // cartridge
     case MemoryMap.rom0:
-      print("Attempting to wrtie to read-only rom0 memory at: \(address.hex).")
+      print("Attempting to write to read-only rom0 memory at: \(address.hex).")
     case MemoryMap.rom1:
-      print("Attempting to wrtie to read-only rom1 memory at: \(address.hex).")
+      print("Attempting to write to read-only rom1 memory at: \(address.hex).")
     case MemoryMap.externalRam:
       write(MemoryMap.externalRam, &self.cartridge.ram)
 
-    case MemoryMap.highRam: write(MemoryMap.highRam, &self.highRam)
-    case MemoryMap.internalRam: write(MemoryMap.internalRam, &self.ram)
+    // internal
+    case MemoryMap.highRam:
+      write(MemoryMap.highRam, &self.highRam)
+    case MemoryMap.internalRam:
+      write(MemoryMap.internalRam, &self.ram)
     case MemoryMap.internalRamEcho:
       let ramAddress = self.convertEchoToRamAddress(address)
       self.ram[ramAddress - MemoryMap.internalRam.start] = value
 
-    case MemoryMap.videoRam: write(MemoryMap.videoRam, &self.lcd.videoRam)
-    case MemoryMap.oam: write(MemoryMap.oam, &self.lcd.oam)
-    case MemoryMap.io: self.writeInternalIO(address, value: value)
+    // video
+    case MemoryMap.videoRam:
+      // Technically it should nop during 'pixelTransfer'
+      write(MemoryMap.videoRam, &self.lcd.videoRam)
+    case MemoryMap.oam:
+      // Technically it should nop during 'pixelTransfer' or 'oamSearch'
+      write(MemoryMap.oam, &self.lcd.oam)
+    case MemoryMap.io:
+      self.writeInternalIO(address, value: value)
 
-    case MemoryMap.notUsable: break
-    case MemoryMap.unmapBootrom: break
-    case MemoryMap.interruptEnable: self.interruptEnable.value = value
+    // other
+    case MemoryMap.notUsable:
+      break
+    case MemoryMap.unmapBootrom:
+      break
+    case MemoryMap.interruptEnable:
+      self.interruptEnable.value = value
 
     default:
       print("Attempting to write to unsupported memory address: \(address.hex).")
@@ -85,7 +100,7 @@ extension Bus {
     case MemoryMap.Lcd.scrollX: self.lcd.scrollX = value
     case MemoryMap.Lcd.line:        self.lcd.line = value
     case MemoryMap.Lcd.lineCompare: self.lcd.lineCompare = value
-    case MemoryMap.Lcd.dma: self.dma(writeValue: value)
+    case MemoryMap.Lcd.dma:         self.dma(writeValue: value)
     case MemoryMap.Lcd.backgroundPalette: self.lcd.backgroundPalette.value = value
     case MemoryMap.Lcd.objectPalette0:    self.lcd.objectPalette0.value = value
     case MemoryMap.Lcd.objectPalette1:    self.lcd.objectPalette1.value = value
@@ -102,9 +117,7 @@ extension Bus {
     let sourceStart = UInt16(writeValue) << 8
 
     for i in 0..<MemoryMap.oam.count {
-      // for performance we are going to directly write to OAM
-      // (instead of using self.write)
-
+      // [performance] write directly into OAM (instead of self.write)
       let sourceAddress = sourceStart + UInt16(i)
       self.lcd.oam[i] = self.read(sourceAddress)
     }

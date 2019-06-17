@@ -29,13 +29,13 @@ public class Lcd {
   public internal(set) var windowX: UInt8 = 0
 
   /// FF47 - BGP - BG Palette Data
-  public internal(set) var backgroundPalette = ColorPalette()
+  public internal(set) var backgroundPalette = BackgroundColorPalette()
 
   /// FF48 - OBP0 - Object Palette 0 Data
-  public internal(set) var objectPalette0 = TransparentColorPalette()
+  public internal(set) var objectPalette0 = ObjectColorPalette()
 
   /// FF49 - OBP1 - Object Palette 1 Data
-  public internal(set) var objectPalette1 = TransparentColorPalette()
+  public internal(set) var objectPalette1 = ObjectColorPalette()
 
   /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
   public internal(set) var videoRam: [UInt8]

@@ -14,7 +14,7 @@ public enum LcdMode: UInt8, RawRepresentable {
 
   /// Mode 2: The LCD controller is reading from OAM memory.
   /// The CPU <cannot> access OAM memory (FE00h-FE9Fh) during this period.
-  case searchingOamRam = 0b10
+  case oamSearch = 0b10
 
   /// Mode 3: The LCD controller is reading from both OAM and VRAM,
   /// The CPU <cannot> access OAM and VRAM during this period.

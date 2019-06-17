@@ -7,7 +7,7 @@ private let color1Shift: UInt8 = 2
 private let color2Shift: UInt8 = 4
 private let color3Shift: UInt8 = 6
 
-public class ColorPalette {
+public class BackgroundColorPalette {
 
   public internal(set) var color0: UInt8 = 0
   public internal(set) var color1: UInt8 = 0
@@ -31,8 +31,8 @@ public class ColorPalette {
     }
   }
 
-  internal func getColor(tileValue: UInt8) -> UInt8 {
-    switch tileValue {
+  internal func getColor(base: UInt8) -> UInt8 {
+    switch base {
     case 0: return self.color0
     case 1: return self.color1
     case 2: return self.color2
@@ -42,7 +42,7 @@ public class ColorPalette {
   }
 }
 
-public class TransparentColorPalette {
+public class ObjectColorPalette {
 
   public internal(set) var color1: UInt8 = 0
   public internal(set) var color2: UInt8 = 0
@@ -63,8 +63,8 @@ public class TransparentColorPalette {
     }
   }
 
-  internal func getColor(tileValue: UInt8) -> UInt8 {
-    switch tileValue {
+  internal func getColor(base: UInt8) -> UInt8 {
+    switch base {
     case 1: return self.color1
     case 2: return self.color2
     case 3: return self.color3
