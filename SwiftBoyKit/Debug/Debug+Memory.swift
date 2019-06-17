@@ -4,15 +4,15 @@
 
 extension Debug {
 
-  internal static func memoryDidRead(from address: UInt16, region: MemoryRegion, value: UInt8) {
+  internal static func busDidRead(from address: UInt16, value: UInt8) {
     if fMemoryReads {
-      print("> memory - reading \(value.hex) from \(address.hex) (\(region))")
+      print("> memory - reading \(value.hex) from \(address.hex)")
     }
   }
 
-  internal static func memoryDidWrite(to address: UInt16, region: MemoryRegion, value: UInt8) {
+  internal static func busDidWrite(to address: UInt16, value: UInt8) {
     if fMemoryWrites {
-      print("> memory - writing \(value.hex) to \(address.hex) (\(region))")
+      print("> memory - writing \(value.hex) to \(address.hex)")
     }
   }
 }
