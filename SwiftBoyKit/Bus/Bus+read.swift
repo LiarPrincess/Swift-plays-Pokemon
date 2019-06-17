@@ -48,27 +48,25 @@ extension Bus {
     case MemoryMap.IO.sb: return self.serialPort.sb
     case MemoryMap.IO.sc: return self.serialPort.sc
 
-    case MemoryMap.IO.div:  return self.timer.div
-    case MemoryMap.IO.tima: return self.timer.tima
-    case MemoryMap.IO.tma:  return self.timer.tma
-    case MemoryMap.IO.tac:  return self.timer.tac
+    case MemoryMap.Timer.div:  return self.timer.div
+    case MemoryMap.Timer.tima: return self.timer.tima
+    case MemoryMap.Timer.tma:  return self.timer.tma
+    case MemoryMap.Timer.tac:  return self.timer.tac
 
-    case MemoryMap.IO.interruptFlag: return 0
+    // audio
 
-      // audio
-
-    case MemoryMap.IO.lcdControl: return 0
-    case MemoryMap.IO.lcdStatus: return 0
-    case MemoryMap.IO.lcdScrollY: return 0
-    case MemoryMap.IO.lcdScrollX: return 0
-    case MemoryMap.IO.lcdLine: return 0
-    case MemoryMap.IO.lcdLineCompare: return 0
-    case MemoryMap.IO.dma: return 0
-    case MemoryMap.IO.lcdBackgroundPalette: return 0
-    case MemoryMap.IO.lcdObjectPalette0: return 0
-    case MemoryMap.IO.lcdObjectPalette1: return 0
-    case MemoryMap.IO.lcdWindowY: return 0
-    case MemoryMap.IO.lcdWindowX: return 0
+    case MemoryMap.Lcd.control: return 0
+    case MemoryMap.Lcd.status: return 0
+    case MemoryMap.Lcd.scrollY: return 0
+    case MemoryMap.Lcd.scrollX: return 0
+    case MemoryMap.Lcd.line: return 0
+    case MemoryMap.Lcd.lineCompare: return 0
+    case MemoryMap.Lcd.dma: return 0
+    case MemoryMap.Lcd.backgroundPalette: return 0
+    case MemoryMap.Lcd.objectPalette0: return 0
+    case MemoryMap.Lcd.objectPalette1: return 0
+    case MemoryMap.Lcd.windowY: return 0
+    case MemoryMap.Lcd.windowX: return 0
 
     default:
       print("Attempting to read from unsupported IO memory address: \(address.hex).")

@@ -1,68 +1,87 @@
-//// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
-//// If a copy of the MPL was not distributed with this file,
-//// You can obtain one at http://mozilla.org/MPL/2.0/.
-//
-//import XCTest
-//@testable import SwiftBoyKit
-//
-//class ReadTests: XCTestCase {
-//
-//  func test_rom0() {
-//    let bus = Bus()
-//    self.testContinuousRegion(bus, region: bus.rom0)
-//  }
-//
-//  func test_rom1() {
-//    let bus = Bus()
-//    self.testContinuousRegion(bus, region: bus.rom1)
-//  }
-//
-//  func test_videoRam() {
-//    let bus = Bus()
-//    self.testContinuousRegion(bus, region: bus.videoRam)
-//  }
-//
-//  func test_externalRam() {
-//    let bus = Bus()
-//    self.testContinuousRegion(bus, region: bus.externalRam)
-//  }
-//
-//  func test_internalkRam() {
-//    let bus = Bus()
-//    self.testContinuousRegion(bus, region: bus.internalRam)
-//  }
-//
-//  func test_internalRamEcho() {
-//    let bus = Bus()
-//
-//    bus.internalRam.data[0] = 5
-//    XCTAssertEqual(bus.read(InternalRamEcho.start), 5)
-//
-//    bus.internalRam.data[InternalRamEcho.size - 1] = 7
-//    XCTAssertEqual(bus.read(InternalRamEcho.end), 7)
-//  }
-//
-//  func test_oam() {
-//    let bus = Bus()
-//    self.testContinuousRegion(bus, region: bus.oam)
-//  }
-//
-//  func test_joypadMemory() {
-//    let bus = Bus()
-//    bus.joypad.value = 5
-//    XCTAssertEqual(bus.read(JoypadMemory.address), 5)
-//  }
-//
-//  func test_serialPortMemory() {
-//    let bus = Bus()
-//
-//    bus.serialPort.sb = 5
-//    XCTAssertEqual(bus.read(SerialPortMemory.sbAddress), 5)
-//
-//    bus.serialPort.sc = 6
-//    XCTAssertEqual(bus.read(SerialPortMemory.scAddress), 6)
-//  }
-//
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file,
+// You can obtain one at http://mozilla.org/MPL/2.0/.
+
+import XCTest
+@testable import SwiftBoyKit
+
+class ReadTests: XCTestCase {
+
+  func test_rom0() {
+    let bus = Bus()
+    self.fill(&bus.cartridge.rom0)
+    self.testReads(bus, MemoryMap.rom0, shouldEqual: bus.cartridge.rom0)
+  }
+
+  func test_rom1() {
+    let bus = Bus()
+    self.fill(&bus.cartridge.rom1)
+    self.testReads(bus, MemoryMap.rom1, shouldEqual: bus.cartridge.rom1)
+  }
+
+  func test_videoRam() {
+    let bus = Bus()
+    self.fill(&bus.lcd.videoRam)
+    self.testReads(bus, MemoryMap.videoRam, shouldEqual: bus.lcd.videoRam)
+  }
+
+  func test_externalRam() {
+    let bus = Bus()
+    self.fill(&bus.cartridge.ram)
+    self.testReads(bus, MemoryMap.videoRam, shouldEqual: bus.lcd.videoRam)
+  }
+
+  func test_internalkRam() {
+    let bus = Bus()
+    self.fill(&bus.ram)
+    self.testReads(bus, MemoryMap.internalRam, shouldEqual: bus.ram)
+  }
+
+  func test_internalRamEcho() {
+    let bus = Bus()
+    self.fill(&bus.ram)
+    self.testReads(bus, MemoryMap.internalRamEcho, shouldEqual: bus.ram)
+  }
+
+  func test_oam() {
+    let bus = Bus()
+    self.fill(&bus.lcd.oam)
+    self.testReads(bus, MemoryMap.oam, shouldEqual: bus.lcd.oam)
+  }
+
+  func test_joypadMemory() {
+    let bus = Bus()
+    bus.joypad.value = 5
+    XCTAssertEqual(bus.read(MemoryMap.IO.joypad), 5)
+  }
+
+  func test_serialPortMemory() {
+    let bus = Bus()
+
+    bus.serialPort.sb = 5
+    XCTAssertEqual(bus.read(MemoryMap.IO.sb), 5)
+
+    bus.serialPort.sc = 6
+    XCTAssertEqual(bus.read(MemoryMap.IO.sc), 6)
+  }
+
+  func test_timer() {
+    let bus = Bus()
+
+    bus.timer.div = 5 // write will reset it to 0
+    XCTAssertEqual(bus.read(MemoryMap.Timer.div), 0)
+
+    bus.timer.tima = 5
+    XCTAssertEqual(bus.read(MemoryMap.Timer.tima), 5)
+
+    bus.timer.tma = 6
+    XCTAssertEqual(bus.read(MemoryMap.Timer.tma), 6)
+
+    bus.timer.tac = 7
+    XCTAssertEqual(bus.read(MemoryMap.Timer.tac), 7)
+  }
+
+// TODO: Missing IO tests (lcd + audio)
 //  func test_lcdMemory() {
 //    let bus = Bus()
 //
@@ -90,45 +109,31 @@
 //    bus.lcd.windowX = 12
 //    XCTAssertEqual(bus.read(LcdMemory.windowXAddress), 12)
 //  }
-//
-//  // TODO: Merge bus/read write tests (as below)
-//  func test_timer() {
-//    let timer = Timer()
-//    let bus = Bus(timer: timer)
-//
-//    timer.write(globalAddress: SwiftBoyKit.Timer.divAddress, value: 5)
-//    XCTAssertEqual(bus.read(SwiftBoyKit.Timer.divAddress), 0) // should reset on write
-//
-//    timer.write(globalAddress: SwiftBoyKit.Timer.timaAddress, value: 5)
-//    XCTAssertEqual(bus.read(SwiftBoyKit.Timer.timaAddress), 5)
-//
-//    timer.write(globalAddress: SwiftBoyKit.Timer.tmaAddress, value: 6)
-//    XCTAssertEqual(bus.read(SwiftBoyKit.Timer.tmaAddress), 6)
-//
-//    timer.write(globalAddress: SwiftBoyKit.Timer.tacAddress, value: 7)
-//    XCTAssertEqual(bus.read(SwiftBoyKit.Timer.tacAddress), 7)
-//  }
-//
-//  func test_interrupts() {
-//    let bus = Bus()
-//
-//    bus.interrupts.if = 5
-//    XCTAssertEqual(bus.read(Interrupts.ifAddress), 5)
-//
-//    bus.interrupts.ie = 6
-//    XCTAssertEqual(bus.read(Interrupts.ieAddress), 6)
-//  }
-//
-//  func test_highRam() {
-//    let bus = Bus()
-//    self.testContinuousRegion(bus, region: bus.highRam)
-//  }
-//
-//  private func testContinuousRegion<T: ContinuousMemoryRegion>(_ bus: Bus, region: T) {
-//    region.data[0] = 5
-//    XCTAssertEqual(bus.read(T.start), 5)
-//
-//    region.data[T.size - 1] = 7
-//    XCTAssertEqual(bus.read(T.end), 7)
-//  }
-//}
+
+  func test_highRam() {
+    let bus = Bus()
+    self.fill(&bus.highRam)
+    self.testReads(bus, MemoryMap.highRam, shouldEqual: bus.highRam)
+  }
+
+  func test_interrupts() {
+    let bus = Bus()
+    bus.interruptEnable.value = 6
+    XCTAssertEqual(bus.read(MemoryMap.interruptEnable), 6)
+  }
+
+  // MARK: - Helpers
+
+  private func fill(_ data: inout [UInt8]) {
+    for i in 0..<data.count {
+      data[i] = UInt8(i & 0xff)
+    }
+  }
+
+  private func testReads(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldEqual data: [UInt8]) {
+    for address in range {
+      let value = bus.read(address)
+      XCTAssertEqual(value, data[address - range.start])
+    }
+  }
+}

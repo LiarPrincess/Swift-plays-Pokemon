@@ -50,27 +50,25 @@ extension Bus {
     case MemoryMap.IO.sb: self.serialPort.sb = value
     case MemoryMap.IO.sc: self.serialPort.sc = value
 
-    case MemoryMap.IO.div:  self.timer.div = value
-    case MemoryMap.IO.tima: self.timer.tima = value
-    case MemoryMap.IO.tma:  self.timer.tma = value
-    case MemoryMap.IO.tac:  self.timer.tac = value
+    case MemoryMap.Timer.div:  self.timer.div = value
+    case MemoryMap.Timer.tima: self.timer.tima = value
+    case MemoryMap.Timer.tma:  self.timer.tma = value
+    case MemoryMap.Timer.tac:  self.timer.tac = value
 
-//    case MemoryMap.IO.interruptFlag: return 0
-//
-//      // audio
-//
-//    case MemoryMap.IO.lcdControl: return 0
-//    case MemoryMap.IO.lcdStatus: return 0
-//    case MemoryMap.IO.lcdScrollY: return 0
-//    case MemoryMap.IO.lcdScrollX: return 0
-//    case MemoryMap.IO.lcdLine: return 0
-//    case MemoryMap.IO.lcdLineCompare: return 0
-    case MemoryMap.IO.dma: self.dma(writeValue: value)
-//    case MemoryMap.IO.lcdBackgroundPalette: return 0
-//    case MemoryMap.IO.lcdObjectPalette0: return 0
-//    case MemoryMap.IO.lcdObjectPalette1: return 0
-//    case MemoryMap.IO.lcdWindowY: return 0
-//    case MemoryMap.IO.lcdWindowX: return 0
+    // audio
+
+//    case MemoryMap.Lcd.control: return 0
+//    case MemoryMap.Lcd.status: return 0
+//    case MemoryMap.Lcd.scrollY: return 0
+//    case MemoryMap.Lcd.scrollX: return 0
+//    case MemoryMap.Lcd.line: return 0
+//    case MemoryMap.Lcd.lineCompare: return 0
+    case MemoryMap.Lcd.dma: self.dma(writeValue: value)
+//    case MemoryMap.Lcd.backgroundPalette: return 0
+//    case MemoryMap.Lcd.objectPalette0: return 0
+//    case MemoryMap.Lcd.objectPalette1: return 0
+//    case MemoryMap.Lcd.windowY: return 0
+//    case MemoryMap.Lcd.windowX: return 0
 
     default:
       print("Attempting to wrtie to unsupported IO memory address: \(address.hex).")

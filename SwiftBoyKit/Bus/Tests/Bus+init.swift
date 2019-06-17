@@ -9,7 +9,7 @@ extension Bus {
     let lcd = Lcd()
     let timer = Timer()
     let joypad = Joypad()
-    let cartridge = Cartridge.bootrom
+    let cartridge = Cartridge()
     self.init(cartridge: cartridge, joypad: joypad, lcd: lcd, timer: timer)
   }
 }

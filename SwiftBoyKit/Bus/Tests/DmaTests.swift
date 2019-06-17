@@ -21,7 +21,7 @@ class DmaTests: XCTestCase {
 
     // dma
     let writeValue = UInt8(sourceStart >> 8)
-    bus.write(MemoryMap.IO.dma, value: writeValue)
+    bus.write(MemoryMap.Lcd.dma, value: writeValue)
 
     // check values at 0xfeXX
     for address in sourceStart...sourceEnd {
