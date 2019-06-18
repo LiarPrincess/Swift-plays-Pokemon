@@ -101,7 +101,7 @@ disabled_rules:
   - redundant_optional_initialization # I like it that way
 
 included:
-  - SwiftBoy
-  - SwiftBoyKit
-  - SwiftBoyKitTests
-  - CodeGen
+  - GameBoyMac
+  - GameBoyKit
+  - GameBoyKitTests
+  - Code generation
