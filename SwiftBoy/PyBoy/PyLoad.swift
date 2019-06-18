@@ -58,7 +58,9 @@ private func fill(_ emulator: PyEmulator, from fileContent: String) {
     case "cpu_PC": cpu.pc = UInt16(value)!
     case "cpu_interrupt_master_enable": cpu.ime = value != "False"
     case "cpu_halted": cpu.isHalted = value != "False"
-//    case "cpu_stopped": break
+
+    // TODO: Import 'cpu_stopped' from py
+    case "cpu_stopped": break
 
     case "lcd_VRAM": replace(memory, from: 0x8000, to: 0x9fff, with: value)
     case "lcd_Oam": replace(memory, from: 0xfe00, to: 0xfe9f, with: value)
@@ -79,15 +81,14 @@ private func fill(_ emulator: PyEmulator, from fileContent: String) {
     case "ram_NON_IO_INTERNAL_RAM0": replace(memory, from: 0xFEA0, to: 0xFEFF, with: value)
     case "ram_IO_PORTS":             replace(memory, from: 0xFF00, to: 0xFF4B, with: value)
     case "ram_INTERNAL_RAM1":        replace(memory, from: 0xFF80, to: 0xFFFE, with: value)
-//    case "ram_NON_IO_INTERNAL_RAM1": replace(memory, from: 0xFF4C, to: 0xFF79, with: value)
+    case "ram_NON_IO_INTERNAL_RAM1": replace(memory, from: 0xFF4C, to: 0xFF79, with: value)
 
     case "ram_INTERRUPT_ENABLE_REGISTER":
       let data = value.split(separator: ",").map { UInt8($0)! }
       memory.data[0xFFFF] = data[0]
 
     default:
-//      print("Invalid line: \(line.prefix(40))")
-      break
+      print("Invalid line: \(line.prefix(40))")
     }
 
     assert(memory.data.count == 0x10000, String(property))
@@ -97,10 +98,6 @@ private func fill(_ emulator: PyEmulator, from fileContent: String) {
 private func replace(_ memory: PyMemory, from: UInt16, to: UInt16, with values: Substring) {
   // we could use 'replaceSubrange', but whatever...
   let data = values.split(separator: ",").map { UInt8($0)! }
-//  print("data: \(data.count)")
-//  print("addresses: \(to - from + 1)")
-//  assert(data.count == to - from + 1)
-
   for (index, address) in (from...to).enumerated() where memory.data[address] == 0 {
     memory.data[address] = data[index]
   }

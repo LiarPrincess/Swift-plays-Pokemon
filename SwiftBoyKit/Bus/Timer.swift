@@ -2,8 +2,6 @@
 // If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// TODO: Fix directory
-
 /// FF04 - Divider register;
 /// FF05, FF06, FF07 - App defined timer
 public class Timer {
@@ -12,7 +10,7 @@ public class Timer {
 
   internal func tick(cycles: UInt8) {
     self.tickDiv(cycles: cycles)
-    self.tickCustom(cycles: cycles)
+    self.tickTima(cycles: cycles)
   }
 
   // MARK: - Div
@@ -44,7 +42,7 @@ public class Timer {
     }
   }
 
-  // MARK: - Custom timer
+  // MARK: - Tima timer
 
   /// Timer counter - This timer is incremented by a clock frequency specified by the TAC register (FF07).
   /// When the value overflows then it will be reset to the value specified in TMA (FF06),
@@ -63,7 +61,7 @@ public class Timer {
       let newPeriod = self.getPeriod(tac: self.tac)
 
       if oldPeriod != newPeriod {
-        self.customProgress = 0
+        self.timaProgress = 0
       }
     }
   }
@@ -71,18 +69,18 @@ public class Timer {
   /// Flag instead of 0xFF0F.
   public internal(set) var hasInterrupt: Bool = false
 
-  private var customProgress: UInt = 0
+  private var timaProgress: UInt = 0
 
-  private func tickCustom(cycles: UInt8) {
+  private func tickTima(cycles: UInt8) {
     guard self.isCustomEnabled else {
       return
     }
 
-    self.customProgress += UInt(cycles)
+    self.timaProgress += UInt(cycles)
 
     let period = self.getPeriod(tac: self.tac)
-    if self.customProgress >= period {
-      self.customProgress %= period
+    if self.timaProgress >= period {
+      self.timaProgress %= period
 
       if self.tima == UInt8.max {
         self.tima = self.tma
