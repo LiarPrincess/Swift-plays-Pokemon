@@ -4,8 +4,8 @@
 
 extension Bus {
 
-  internal func isInterruptRequested(type: InterruptType) -> Bool {
-    switch type {
+  internal func hasInterrupt(_ interrupt: Interrupt) -> Bool {
+    switch interrupt {
     case .vBlank:  return self.interruptEnable.vBlank  && false
     case .lcdStat: return self.interruptEnable.lcdStat && false
     case .timer:   return self.interruptEnable.timer   && self.timer.hasInterrupt
@@ -14,8 +14,8 @@ extension Bus {
     }
   }
 
-  internal func clearInterrupt(type: InterruptType) {
-    switch type {
+  internal func clearInterrupt(_ interrupt: Interrupt) {
+    switch interrupt {
     case .vBlank: break
     case .lcdStat: break
     case .timer: self.timer.hasInterrupt = false

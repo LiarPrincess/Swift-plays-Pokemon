@@ -48,6 +48,7 @@ extension Bus {
     case MemoryMap.notUsable:
       break
     case MemoryMap.unmapBootrom:
+      fatalError("Writing to unmapBootrom (\(MemoryMap.unmapBootrom) is not yet implemented)")
       break
     case MemoryMap.interruptEnable:
       self.interruptEnable.value = value
@@ -62,8 +63,8 @@ extension Bus {
   private func writeInternalIO(_ address: UInt16, value: UInt8) {
     switch address {
     case MemoryMap.IO.joypad: self.joypad.value = value
-    case MemoryMap.IO.sb: self.serialPort.sb = value
-    case MemoryMap.IO.sc: self.serialPort.sc = value
+    case MemoryMap.IO.sb:     self.serialPort.sb = value
+    case MemoryMap.IO.sc:     self.serialPort.sc = value
 
     case MemoryMap.Timer.div:  self.timer.div = value
     case MemoryMap.Timer.tima: self.timer.tima = value

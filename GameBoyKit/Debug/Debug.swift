@@ -26,16 +26,16 @@ internal enum Debug {
   private static var isPastMinPc = false
 
   private static var global: Bool {
-    guard emulator != nil else { return false } // for example unit tests
+    guard gameBoy != nil else { return false } // for example unit tests
 
     isPastMinPc = isPastMinPc || cpu.pc == minPc
     return isPastMinPc
   }
 
-  internal static var emulator: Emulator!
-  internal static var cpu:       Cpu       { return emulator.cpu }
+  internal static var gameBoy:   GameBoy!
+  internal static var cpu:       Cpu       { return gameBoy.cpu }
   internal static var registers: Registers { return cpu.registers }
-  internal static var bus:       Bus       { return emulator.bus }
+  internal static var bus:       Bus       { return gameBoy.bus }
 
   internal static func printSeparator() {
     print()

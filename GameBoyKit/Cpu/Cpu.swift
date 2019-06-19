@@ -37,6 +37,14 @@ public class Cpu {
 
   /// Run 1 instruction. Returns the number of cycles it took.
   internal func tick() -> UInt8 {
+
+    // interrupts are the only way to escape HALT
+    self.startInterruptRoutineIfNeeded()
+
+    if self.isHalted {
+      return 0
+    }
+
     let rawOpcode = self.read(self.pc)
     guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
       fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
@@ -67,31 +75,43 @@ public class Cpu {
     self.ime = false
   }
 
-  private typealias IntterruptAddress = (type: InterruptType, address: UInt16)
-
-  private static let intterruptAddresses: [IntterruptAddress] = [
-    (type: .vBlank,  address: 0x40),
-    (type: .lcdStat, address: 0x48),
-    (type: .timer,   address: 0x50),
-    (type: .serial,  address: 0x58),
-    (type: .joypad,  address: 0x60)
-  ]
-
-  internal func processInterrupts() {
+  private func startInterruptRoutineIfNeeded() {
     guard self.ime else {
       return
     }
 
-    let requestedInterrupt = Cpu.intterruptAddresses.first {
-      self.bus.isInterruptRequested(type: $0.type)
+    guard let interrupt = self.getAwaitingInterrupt() else {
+      return
     }
 
-    if let interrupt = requestedInterrupt {
-      self.ime = false
-      self.bus.clearInterrupt(type: interrupt.type)
+    self.ime = false
+    self.bus.clearInterrupt(interrupt)
 
-      self.push16(self.pc)
-      self.pc = interrupt.address
+    // Escape HALT on return
+    if self.isHalted {
+      self.pc += 1
+    }
+
+    self.push16(self.pc)
+    self.pc = self.getInterruptHandlingRoutine(interrupt)
+  }
+
+  private func getAwaitingInterrupt() -> Interrupt? {
+    if self.bus.hasInterrupt(.vBlank)  { return .vBlank }
+    if self.bus.hasInterrupt(.lcdStat) { return .lcdStat }
+    if self.bus.hasInterrupt(.timer)   { return .timer }
+    if self.bus.hasInterrupt(.serial)  { return .serial }
+    if self.bus.hasInterrupt(.joypad)  { return .joypad }
+    return nil
+  }
+
+  private func getInterruptHandlingRoutine(_ interrupt: Interrupt) -> UInt16 {
+    switch interrupt {
+    case .vBlank:  return 0x40
+    case .lcdStat: return 0x48
+    case .timer:   return 0x50
+    case .serial:  return 0x58
+    case .joypad:  return 0x60
     }
   }
 
