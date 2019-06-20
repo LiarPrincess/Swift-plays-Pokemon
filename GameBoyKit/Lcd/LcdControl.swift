@@ -5,11 +5,25 @@
 public enum TileMap {
   case from9800to9bff
   case from9c00to9fff
+
+  public var range: ClosedRange<UInt16> {
+    switch self {
+    case .from9800to9bff: return 0x9800...0x9bff
+    case .from9c00to9fff: return 0x9c00...0x9fff
+    }
+  }
 }
 
 public enum TileData {
   case from8800to97ff
   case from8000to8fff
+
+  public var range: ClosedRange<UInt16> {
+    switch self {
+    case .from8800to97ff: return 0x8800...0x97ff
+    case .from8000to8fff: return 0x8000...0x8fff
+    }
+  }
 }
 
 public enum SpriteSize {

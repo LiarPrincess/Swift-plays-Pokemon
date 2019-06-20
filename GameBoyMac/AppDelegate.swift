@@ -8,10 +8,10 @@ import GameBoyKit
 public class AppDelegate: NSObject, NSApplicationDelegate {
 
   public func applicationDidFinishLaunching(_ aNotification: Notification) {
-    pyTestAll()
+//    pyTestAll()
 
-//    let emulator = Emulator()
-//    emulator.run(maxCycles: .max, lastPC: 0x0068)
+    let emulator = GameBoy()
+    emulator.run(maxCycles: .max, lastPC: 0x0068)
   }
 
   // swiftlint:disable:next function_body_length

@@ -121,27 +121,27 @@ public class Lcd {
   //    }
   //  }
 
-  /// Tile index address (means: draw tile from this index)
-  internal func getTileIndexAddress(from map: TileMap, globalX: UInt8, globalY: UInt8) -> UInt16 {
-    let tileRow = globalY / 8
-    let tileColumn = globalX / 8
-    return self.getTileIndexAddress(from: map, tileRow: tileRow, tileColumn: tileColumn)
-  }
+  /// Index of a tile that should be drawn on screen
+//  internal func getTileIndexAddress(from map: TileMap,
+//                             globalX:  UInt8,
+//                             globalY:  UInt8) -> UInt16 {
+//    let tileRow = globalY / 8
+//    let tileColumn = globalX / 8
+//    return self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
+//  }
 
-  /// Tile index address (means: draw tile from this index)
-  internal func getTileIndexAddress(from map: TileMap, tileRow: UInt8, tileColumn: UInt8) -> UInt16 {
+  /// Address (in vram) of a tile index at given row and column.
+  internal func getTileIndexAddress(from map: TileMap,
+                                    row:    UInt8,
+                                    column: UInt8) -> UInt16 {
     let tilesPerRow: UInt16 = 32
-    let offset = UInt16(tileRow) * tilesPerRow + UInt16(tileColumn)
-
-    switch map {
-    case .from9800to9bff: return 0x9800 + offset
-    case .from9c00to9fff: return 0x9c00 + offset
-    }
+    let offset = UInt16(row) * tilesPerRow + UInt16(column)
+    return map.range.start + offset
   }
 
-  /// Start of the tile in memory
+  /// Address (in vram) of a tile data.
   internal func getTileDataAddress(tileIndex: UInt8) -> UInt16 {
-    let tileSize: UInt16 = 16
+    let tileSize: UInt16 = 16 // bits
 
     switch self.control.tileData {
     case .from8000to8fff:
@@ -155,9 +155,16 @@ public class Lcd {
     }
   }
 
+  /// Read data from video ram.
+  internal func readVideoRam(_ address: UInt16) -> UInt8 {
+    return self.videoRam[address -  MemoryMap.videoRam.start]
+  }
+
   /// Color before applying palette.
   /// Bit offset is counted from left starting from 0.
-  internal func getRawColorValue(_ data1: UInt8, _ data2: UInt8, bitOffset: UInt8) -> UInt8 {
+  internal func getRawColorValue(_ data1: UInt8,
+                                 _ data2: UInt8,
+                                 bitOffset: UInt8) -> UInt8 {
     let shift = 7 - bitOffset
     let data1Bit = (data1 >> shift) & 0x1
     let data2Bit = (data2 >> shift) & 0x1

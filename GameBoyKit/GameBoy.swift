@@ -104,10 +104,10 @@ public class GameBoy {
 //      self.ppu.update(cycles: cycles)
     }
 
-//    print("Finished:")
-//    print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
-//    print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
-//
-//    self.ppu.dump()
+    print("Finished:")
+    print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
+    print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
+
+    self.lcd.dump()
   }
 }
