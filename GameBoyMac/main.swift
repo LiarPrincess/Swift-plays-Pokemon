@@ -7,6 +7,5 @@ import AppKit
 let isRunningTest = NSClassFromString("XCTestCase") != nil
 
 let app = NSApplication.shared
-let delegate = TestAppDelegate()
 app.delegate = isRunningTest ? TestAppDelegate() : AppDelegate()
-_ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+app.run()

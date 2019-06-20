@@ -12,6 +12,8 @@
 		903818DE22B57B8A004E5281 /* PyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DD22B57B8A004E5281 /* PyTest.swift */; };
 		903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DB22BB903A003132FA /* Lcd+Dump.swift */; };
 		903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */; };
+		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
+		903DB4E222BC0C76003132FA /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4E122BC0C76003132FA /* Shader.metal */; };
 		904B89CE22A5C8FB00F5FEFE /* Array+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */; };
 		906073A122B8452200F2766D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A022B8452200F2766D /* Timer.swift */; };
 		906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A222B8453F00F2766D /* DivTimerTests.swift */; };
@@ -27,9 +29,7 @@
 		9085FC4822B6C75200310090 /* ReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4722B6C75200310090 /* ReadTests.swift */; };
 		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
-		90A17B46229D59830027133B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B45229D59830027133B /* ViewController.swift */; };
 		90A17B48229D59840027133B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A17B47229D59840027133B /* Assets.xcassets */; };
-		90A17B4B229D59840027133B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A17B49229D59840027133B /* Main.storyboard */; };
 		90A17B61229D59A30027133B /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A17B58229D59A20027133B /* GameBoyKit.framework */; };
 		90A17B6A229D59A30027133B /* GameBoyKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 90A17B5A229D59A20027133B /* GameBoyKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90A17B6D229D59A30027133B /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A17B58229D59A20027133B /* GameBoyKit.framework */; };
@@ -141,6 +141,8 @@
 		903818DD22B57B8A004E5281 /* PyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyTest.swift; sourceTree = "<group>"; };
 		903DB4DB22BB903A003132FA /* Lcd+Dump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lcd+Dump.swift"; sourceTree = "<group>"; };
 		903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileIndexTests.swift; sourceTree = "<group>"; };
+		903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoyRenderer.swift; sourceTree = "<group>"; };
+		903DB4E122BC0C76003132FA /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+UInt.swift"; sourceTree = "<group>"; };
 		906073A022B8452200F2766D /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		906073A222B8453F00F2766D /* DivTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
@@ -157,9 +159,7 @@
 		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* GameBoyMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameBoyMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A17B43229D59830027133B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		90A17B45229D59830027133B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		90A17B47229D59840027133B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		90A17B4A229D59840027133B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		90A17B4C229D59840027133B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A17B4D229D59840027133B /* GameBoyMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameBoyMac.entitlements; sourceTree = "<group>"; };
 		90A17B58229D59A20027133B /* GameBoyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GameBoyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,13 +308,13 @@
 		90A17B42229D59830027133B /* GameBoyMac */ = {
 			isa = PBXGroup;
 			children = (
+				90A17B47229D59840027133B /* Assets.xcassets */,
 				903818D822B57967004E5281 /* PyBoy */,
 				90A17B43229D59830027133B /* AppDelegate.swift */,
 				9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */,
-				90A17B45229D59830027133B /* ViewController.swift */,
+				903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */,
 				9085FC3C22B6BF6A00310090 /* main.swift */,
-				90A17B47229D59840027133B /* Assets.xcassets */,
-				90A17B49229D59840027133B /* Main.storyboard */,
+				903DB4E122BC0C76003132FA /* Shader.metal */,
 				90A17B4C229D59840027133B /* Info.plist */,
 				90A17B4D229D59840027133B /* GameBoyMac.entitlements */,
 			);
@@ -632,7 +632,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A17B48229D59840027133B /* Assets.xcassets in Resources */,
-				90A17B4B229D59840027133B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,9 +678,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */,
-				90A17B46229D59830027133B /* ViewController.swift in Sources */,
 				903818DA22B57976004E5281 /* PyEmulator.swift in Sources */,
+				903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */,
 				9085FC3D22B6BF6A00310090 /* main.swift in Sources */,
+				903DB4E222BC0C76003132FA /* Shader.metal in Sources */,
 				90A17B44229D59830027133B /* AppDelegate.swift in Sources */,
 				903818DC22B579EC004E5281 /* PyLoad.swift in Sources */,
 				903818DE22B57B8A004E5281 /* PyTest.swift in Sources */,
@@ -794,17 +794,6 @@
 			targetProxy = 90A17B6B229D59A30027133B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		90A17B49229D59840027133B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				90A17B4A229D59840027133B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		90A17B4E229D59840027133B /* Debug */ = {
