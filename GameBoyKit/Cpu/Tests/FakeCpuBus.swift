@@ -8,12 +8,11 @@ class FakeCpuBus: CpuBus {
 
   private var data = [UInt16: UInt8]()
 
-  func isInterruptRequested(type: InterruptType) -> Bool {
+  func hasInterrupt(_ interrupt: Interrupt) -> Bool {
     return false
   }
 
-  func clearInterrupt(type: InterruptType) {
-  }
+  func clearInterrupt(_ interrupt: Interrupt) { }
 
   func read(_ address: UInt16) -> UInt8 {
     return self.data[address] ?? 0

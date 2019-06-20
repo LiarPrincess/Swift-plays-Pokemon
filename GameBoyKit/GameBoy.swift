@@ -35,17 +35,52 @@ public class GameBoy {
     // but I LOVE the simplicity of it (we ignore STAT during read/write anyway).
     // Source: https://github.com/Baekalfen/PyBoy
 
+    let vBlankEnd = Lcd.height + LcdTimings.vBlankLineCount
+
     guard self.lcd.control.isLcdEnabled else {
+      // self.window.blank_screen() // self.lcd.clear()
+      self.lcd.setMode(.vBlank)
+      self.lcd.resetLine()
+
+      for _ in 0..<vBlankEnd {
+        self.tickCpu(cycles: LcdTimings.lineLength)
+      }
+
       return
+    }
+
+    for line in 0..<Lcd.height {
+      self.lcd.startLine(line)
+
+      self.lcd.setMode(.oamSearch)
+      self.tickCpu(cycles: LcdTimings.oamSearchLength)
+
+      self.lcd.setMode(.pixelTransfer)
+      self.tickCpu(cycles: LcdTimings.pixelTransferLength)
+      self.lcd.drawLine()
+
+      self.lcd.setMode(.hBlank)
+      self.tickCpu(cycles: LcdTimings.hBlankLength)
+    }
+
+    // self.window.render_screen(self.lcd)
+
+    for line in Lcd.height..<vBlankEnd {
+      self.lcd.setMode(.vBlank)
+      self.lcd.startLine(line)
+      self.tickCpu(cycles: LcdTimings.lineLength)
     }
   }
 
-  private func tickCpu(cycles totalCycles: Int) {
-    while totalCycles > 0 {
+  private func tickCpu(cycles totalCycles: UInt16) {
+    var remainingCycles = totalCycles
+    while remainingCycles > 0 {
       let cycles = self.cpu.tick()
       self.timer.tick(cycles: cycles)
 
-      //      totalCycles -= cycles
+      // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
+
+      remainingCycles -= UInt16(cycles)
     }
   }
 
