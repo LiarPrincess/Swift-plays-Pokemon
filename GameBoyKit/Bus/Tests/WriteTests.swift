@@ -138,18 +138,18 @@ class WriteTests: XCTestCase {
     XCTAssertEqual(bus.lcd.windowX, value)
     value += 1
 
-    bus.write(MemoryMap.Lcd.backgroundPalette, value: value)
-    XCTAssertEqual(bus.lcd.backgroundPalette.value, value)
+    bus.write(MemoryMap.Lcd.backgroundColors, value: value)
+    XCTAssertEqual(bus.lcd.backgroundColors.value, value)
     value += 1
 
     // 2 last bits are always 0
-    bus.write(MemoryMap.Lcd.objectPalette0, value: value)
-    XCTAssertEqual(bus.lcd.objectPalette0.value, value & 0xfc)
+    bus.write(MemoryMap.Lcd.objectColors0, value: value)
+    XCTAssertEqual(bus.lcd.objectColors0.value, value & 0xfc)
     value += 1
 
     // 2 last bits are always 0
-    bus.write(MemoryMap.Lcd.objectPalette1, value: value)
-    XCTAssertEqual(bus.lcd.objectPalette1.value, value & 0xfc)
+    bus.write(MemoryMap.Lcd.objectColors1, value: value)
+    XCTAssertEqual(bus.lcd.objectColors1.value, value & 0xfc)
     value += 1
   }
 

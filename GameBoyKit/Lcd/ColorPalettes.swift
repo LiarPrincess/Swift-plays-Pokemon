@@ -31,13 +31,15 @@ public class BackgroundColorPalette {
     }
   }
 
-  internal func getColor(base: UInt8) -> UInt8 {
-    switch base {
-    case 0: return self.color0
-    case 1: return self.color1
-    case 2: return self.color2
-    case 3: return self.color3
-    default: return 0
+  public subscript(rawColor: UInt8) -> UInt8 {
+    get {
+      switch rawColor {
+      case 0: return self.color0
+      case 1: return self.color1
+      case 2: return self.color2
+      case 3: return self.color3
+      default: return 0
+      }
     }
   }
 }
@@ -63,12 +65,14 @@ public class ObjectColorPalette {
     }
   }
 
-  internal func getColor(base: UInt8) -> UInt8 {
-    switch base {
-    case 1: return self.color1
-    case 2: return self.color2
-    case 3: return self.color3
-    default: return 0
+  public subscript(rawColor: UInt8) -> UInt8 {
+    get {
+      switch rawColor {
+      case 1: return self.color1
+      case 2: return self.color2
+      case 3: return self.color3
+      default: return 0
+      }
     }
   }
 }

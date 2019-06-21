@@ -102,9 +102,9 @@ extension Bus {
     case MemoryMap.Lcd.line:        self.lcd.line = value
     case MemoryMap.Lcd.lineCompare: self.lcd.lineCompare = value
     case MemoryMap.Lcd.dma:         self.dma(writeValue: value)
-    case MemoryMap.Lcd.backgroundPalette: self.lcd.backgroundPalette.value = value
-    case MemoryMap.Lcd.objectPalette0:    self.lcd.objectPalette0.value = value
-    case MemoryMap.Lcd.objectPalette1:    self.lcd.objectPalette1.value = value
+    case MemoryMap.Lcd.backgroundColors: self.lcd.backgroundColors.value = value
+    case MemoryMap.Lcd.objectColors0:    self.lcd.objectColors0.value = value
+    case MemoryMap.Lcd.objectColors1:    self.lcd.objectColors1.value = value
     case MemoryMap.Lcd.windowY: self.lcd.windowY = value
     case MemoryMap.Lcd.windowX: self.lcd.windowX = value
 
@@ -115,6 +115,9 @@ extension Bus {
   }
 
   private func dma(writeValue: UInt8) {
+    // Technically not exactly correct:
+    // https://github.com/Gekkio/mooneye-gb/blob/master/docs/accuracy.markdown#what-is-the-exact-cycle-by-cycle-behaviour-of-oam-dma
+
     let sourceStart = UInt16(writeValue) << 8
 
     for i in 0..<MemoryMap.oam.count {

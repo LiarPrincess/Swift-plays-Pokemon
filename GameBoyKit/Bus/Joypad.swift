@@ -5,5 +5,5 @@
 /// FF00 - P1/JOYP
 public class Joypad {
 
-  public internal(set) var value: UInt8 = 0x00
+  public internal(set) var value: UInt8 = 0xcf
 }

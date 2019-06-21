@@ -33,5 +33,5 @@ fragment half4 fragment_shader(VertexOut          interpolated [[ stage_in ]],
   //  return half4(x, y, 0.0, 1.0);
 
   float value = tex2D.sample(sampler2D, interpolated.texcoord).r;
-  return half4(value, 0.0, 0.0, 1.0);
+  return half4(value, value, value, 1.0);
 }

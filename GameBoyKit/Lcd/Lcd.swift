@@ -35,13 +35,13 @@ public class Lcd {
   public internal(set) var windowX: UInt8 = 0
 
   /// FF47 - BGP - BG Palette Data
-  public internal(set) var backgroundPalette = BackgroundColorPalette()
+  public internal(set) var backgroundColors = BackgroundColorPalette()
 
   /// FF48 - OBP0 - Object Palette 0 Data
-  public internal(set) var objectPalette0 = ObjectColorPalette()
+  public internal(set) var objectColors0 = ObjectColorPalette()
 
   /// FF49 - OBP1 - Object Palette 1 Data
-  public internal(set) var objectPalette1 = ObjectColorPalette()
+  public internal(set) var objectColors1 = ObjectColorPalette()
 
   /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
   public internal(set) var videoRam: [UInt8]
@@ -49,8 +49,11 @@ public class Lcd {
   /// FE00-FE9F Sprite Attribute Table (OAM)
   public internal(set) var oam: [UInt8]
 
-  /// Flag instead of 0xFF0F.
+  /// Flag instead of 0xFF0F
   public internal(set) var hasInterrupt: Bool = false
+
+  /// Data thst should be put on screen
+  public internal(set) var framebuffer = Framebuffer()
 
   internal init() {
     self.videoRam = [UInt8](memoryRange: MemoryMap.videoRam)
@@ -59,9 +62,9 @@ public class Lcd {
 
   // MARK: - Tick
 
-  /// Go to the 1st line
-  internal func resetLine() {
+  internal func clear() {
     self.line = 0
+    // TODO: self.window.blank_screen()
   }
 
   internal func startLine(_ line: UInt8) {
@@ -82,53 +85,61 @@ public class Lcd {
 
   private func isInterruptEnabled(_ mode: LcdMode) -> Bool {
     switch mode {
-    case .hBlank:
-      return  self.status.isHBlankInterruptEnabled
-    case .vBlank:
-      return self.status.isVBlankInterruptEnabled
-    case .oamSearch:
-      return self.status.isOamInterruptEnabled
-    case .pixelTransfer:
-      return false
+    case .hBlank:        return self.status.isHBlankInterruptEnabled
+    case .vBlank:        return self.status.isVBlankInterruptEnabled
+    case .oamSearch:     return self.status.isOamInterruptEnabled
+    case .pixelTransfer: return false
     }
   }
 
   // MARK: - Draw
 
   internal func drawLine() {
+    guard self.control.spriteSize == .size8x8 else {
+      fatalError("Tile size 8x16 is not yet supported.")
+    }
 
+    if self.control.isBackgroundVisible {
+      self.drawBackgroundLine()
+    }
+
+//    if self.lcdControl.isWindowEnabled {
+//      self.drawWindow()
+//    }
+//
+//    if self.lcdControl.isSpriteEnabled {
+//      self.drawSprites()
+//    }
   }
 
-  //  private func drawBackgroundLine(into data: inout [UInt8]) {
-  //    let map = self.lcdControl.backgroundTileMap
-  //    let globalY = self.lcd.scrollY + self.lcd.line
-  //
-  //    for x in 0..<Screen.width {
-  //      let globalX = self.lcd.scrollX + x
-  //
-  //      let tileIndexAddress = self.getTileIndexAddress(from: map, globalX: globalX, globalY: globalY)
-  //      let tileIndex = self.memory.read(tileIndexAddress)
-  //
-  //      let bytesPerLine: UInt8 = 2
-  //      let lineInsideTile = UInt16((globalY % 8) * bytesPerLine)
-  //
-  //      let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
-  //      let data1 = self.memory.read(tileDataAddress + lineInsideTile)
-  //      let data2 = self.memory.read(tileDataAddress + lineInsideTile + 1)
-  //
-  //      let colorOffset = globalX % 8
-  //      let color = self.getRawColorValue(data1, data2, bitOffset: colorOffset)
-  //    }
-  //  }
+  private func drawBackgroundLine() {
+    let map = self.control.backgroundTileMap
+    let globalY = self.scrollY + self.line
 
-  /// Index of a tile that should be drawn on screen
-//  internal func getTileIndexAddress(from map: TileMap,
-//                             globalX:  UInt8,
-//                             globalY:  UInt8) -> UInt16 {
-//    let tileRow = globalY / 8
-//    let tileColumn = globalX / 8
-//    return self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
-//  }
+    for x in 0..<Lcd.width {
+      let globalX = self.scrollX + x
+
+      let tileWidth: UInt8 = 8
+      let tileRow    = globalY / tileWidth
+      let tileColumn = globalX / tileWidth
+
+      let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
+      let tileIndex        = self.readVideoRam(tileIndexAddress)
+
+      let bytesPerLine: UInt16 = 2
+      let lineInsideTile = UInt16(globalY % tileWidth) * bytesPerLine
+
+      let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
+      let data1 = self.readVideoRam(tileDataAddress + lineInsideTile)
+      let data2 = self.readVideoRam(tileDataAddress + lineInsideTile + 1)
+
+      let colorOffset = globalX % 8
+      let tileColor   = self.getRawColorValue(data1, data2, bitOffset: colorOffset)
+      let color       = self.backgroundColors[tileColor]
+
+      self.framebuffer[x, self.line] = color
+    }
+  }
 
   /// Address (in vram) of a tile index at given row and column.
   internal func getTileIndexAddress(from map: TileMap,

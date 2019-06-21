@@ -18,7 +18,7 @@ class ColorPaletteTests: XCTestCase {
       for v in possibleValues {
         let value = v << shift
         palette.value = value
-        XCTAssertEqual(palette.getColor(base: color), v)
+        XCTAssertEqual(palette[color], v)
         XCTAssertEqual(palette.value, value)
       }
     }
@@ -34,7 +34,7 @@ class ColorPaletteTests: XCTestCase {
     for v in possibleValues {
       let value = v
       palette.value = value
-      XCTAssertEqual(palette.getColor(base: 0), 0x00)
+      XCTAssertEqual(palette[0], 0x00)
       XCTAssertEqual(palette.value, value & 0b11111100)
     }
 
@@ -44,7 +44,7 @@ class ColorPaletteTests: XCTestCase {
       for v in possibleValues {
         let value = v << shift
         palette.value = value
-        XCTAssertEqual(palette.getColor(base: color), v)
+        XCTAssertEqual(palette[color], v)
         XCTAssertEqual(palette.value, value)
       }
     }

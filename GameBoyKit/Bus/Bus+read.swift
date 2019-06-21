@@ -102,9 +102,9 @@ extension Bus {
     case MemoryMap.Lcd.line:        return self.lcd.line
     case MemoryMap.Lcd.lineCompare: return self.lcd.lineCompare
     case MemoryMap.Lcd.dma:         return 0
-    case MemoryMap.Lcd.backgroundPalette: return self.lcd.backgroundPalette.value
-    case MemoryMap.Lcd.objectPalette0:    return self.lcd.objectPalette0.value
-    case MemoryMap.Lcd.objectPalette1:    return self.lcd.objectPalette1.value
+    case MemoryMap.Lcd.backgroundColors: return self.lcd.backgroundColors.value
+    case MemoryMap.Lcd.objectColors0:    return self.lcd.objectColors0.value
+    case MemoryMap.Lcd.objectColors1:    return self.lcd.objectColors1.value
     case MemoryMap.Lcd.windowY: return self.lcd.windowY
     case MemoryMap.Lcd.windowX: return self.lcd.windowX
 

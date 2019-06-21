@@ -126,18 +126,18 @@ class ReadTests: XCTestCase {
     XCTAssertEqual(bus.read(MemoryMap.Lcd.windowX), value)
     value += 1
 
-    bus.lcd.backgroundPalette.value = value
-    XCTAssertEqual(bus.read(MemoryMap.Lcd.backgroundPalette), value)
+    bus.lcd.backgroundColors.value = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.backgroundColors), value)
     value += 1
 
     // 2 last bits are always 0
-    bus.lcd.objectPalette0.value = value
-    XCTAssertEqual(bus.read(MemoryMap.Lcd.objectPalette0), value & 0xfc)
+    bus.lcd.objectColors0.value = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.objectColors0), value & 0xfc)
     value += 1
 
     // 2 last bits are always 0
-    bus.lcd.objectPalette1.value = value
-    XCTAssertEqual(bus.read(MemoryMap.Lcd.objectPalette1), value & 0xfc)
+    bus.lcd.objectColors1.value = value
+    XCTAssertEqual(bus.read(MemoryMap.Lcd.objectColors1), value & 0xfc)
     value += 1
   }
 

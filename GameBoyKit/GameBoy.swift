@@ -30,7 +30,8 @@ public class GameBoy {
     Debug.gameBoy = self
   }
 
-  public func tickFrame() {
+  @discardableResult
+  public func tickFrame() -> Framebuffer {
     // Technically not exactly correct (see: 'The Ultimate Game Boy Talk' 54:20),
     // but I LOVE the simplicity of it (we ignore STAT during read/write anyway).
     // Source: https://github.com/Baekalfen/PyBoy
@@ -38,15 +39,14 @@ public class GameBoy {
     let vBlankEnd = Lcd.height + LcdTimings.vBlankLineCount
 
     guard self.lcd.control.isLcdEnabled else {
-      // self.window.blank_screen() // self.lcd.clear()
       self.lcd.setMode(.vBlank)
-      self.lcd.resetLine()
+      self.lcd.clear()
 
       for _ in 0..<vBlankEnd {
         self.tickCpu(cycles: LcdTimings.lineLength)
       }
 
-      return
+      return self.lcd.framebuffer
     }
 
     for line in 0..<Lcd.height {
@@ -63,24 +63,25 @@ public class GameBoy {
       self.tickCpu(cycles: LcdTimings.hBlankLength)
     }
 
-    // self.window.render_screen(self.lcd)
-
     for line in Lcd.height..<vBlankEnd {
       self.lcd.setMode(.vBlank)
       self.lcd.startLine(line)
       self.tickCpu(cycles: LcdTimings.lineLength)
     }
+
+    return self.lcd.framebuffer
   }
 
   private func tickCpu(cycles totalCycles: UInt16) {
-    var remainingCycles = totalCycles
+    var remainingCycles = Int(totalCycles) // so we can go < 0
+
     while remainingCycles > 0 {
       let cycles = self.cpu.tick()
       self.timer.tick(cycles: cycles)
 
       // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
 
-      remainingCycles -= UInt16(cycles)
+      remainingCycles -= Int(cycles)
     }
   }
 
@@ -101,7 +102,6 @@ public class GameBoy {
 
       let cycles = self.cpu.tick()
       self.timer.tick(cycles: cycles)
-//      self.ppu.update(cycles: cycles)
     }
 
     print("Finished:")

@@ -62,17 +62,17 @@ public enum MemoryMap {
   }
 
   public enum Lcd {
-    public static let control:           UInt16 = 0xff40
-    public static let status:            UInt16 = 0xff41
-    public static let scrollY:           UInt16 = 0xff42
-    public static let scrollX:           UInt16 = 0xff43
-    public static let line:              UInt16 = 0xff44
-    public static let lineCompare:       UInt16 = 0xff45
-    public static let dma:               UInt16 = 0xff46
-    public static let backgroundPalette: UInt16 = 0xff47
-    public static let objectPalette0:    UInt16 = 0xff48
-    public static let objectPalette1:    UInt16 = 0xff49
-    public static let windowY:           UInt16 = 0xff4a
-    public static let windowX:           UInt16 = 0xff4b
+    public static let control:          UInt16 = 0xff40
+    public static let status:           UInt16 = 0xff41
+    public static let scrollY:          UInt16 = 0xff42
+    public static let scrollX:          UInt16 = 0xff43
+    public static let line:             UInt16 = 0xff44
+    public static let lineCompare:      UInt16 = 0xff45
+    public static let dma:              UInt16 = 0xff46
+    public static let backgroundColors: UInt16 = 0xff47
+    public static let objectColors0:    UInt16 = 0xff48
+    public static let objectColors1:    UInt16 = 0xff49
+    public static let windowY:          UInt16 = 0xff4a
+    public static let windowX:          UInt16 = 0xff4b
   }
 }
