@@ -27,7 +27,7 @@ private var checkedAddresses: Set<UInt16> {
   return []
 }
 
-func pyTest(_ p: PyEmulator) {
+func pyTest(_ p: PyBoy) {
   let s = GameBoy()
   s.run(maxCycles: .max, lastPC: p.cpu.pc)
 

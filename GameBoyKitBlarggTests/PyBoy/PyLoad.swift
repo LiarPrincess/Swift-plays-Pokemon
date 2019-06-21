@@ -8,28 +8,23 @@
 
 import Cocoa
 
-func pyLoad(_ filename: String) -> PyEmulator {
-  let fileContent = open(filename)
-  let emulator = PyEmulator(filename: filename)
+internal func pyLoad(_ url: URL) -> PyBoy {
+  let fileContent = open(url)
+  let emulator    = PyBoy(filename: url.lastPathComponent)
   fill(emulator, from: fileContent)
   return emulator
 }
 
-private func open(_ filename: String) -> String {
-  let documentDirs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-  guard let dir = documentDirs.first else {
-    fatalError("Unable to find document path.")
-  }
-
+private func open(_ url: URL) -> String {
   do {
-    let fileUrl = dir.appendingPathComponent(filename)
-    return try String(contentsOf: fileUrl)
+    return try String(contentsOf: url, encoding: .utf8)
   } catch let error {
-    fatalError("Error when loading: \(error.localizedDescription).")
+    let filename = url.lastPathComponent
+    fatalError("Error when opening '\(filename)': \(error.localizedDescription).")
   }
 }
 
-private func fill(_ emulator: PyEmulator, from fileContent: String) {
+private func fill(_ emulator: PyBoy, from fileContent: String) {
   let cpu = emulator.cpu
   let memory = emulator.memory
 

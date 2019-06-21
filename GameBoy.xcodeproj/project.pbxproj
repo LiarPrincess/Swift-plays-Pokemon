@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		903818DA22B57976004E5281 /* PyEmulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818D922B57976004E5281 /* PyEmulator.swift */; };
-		903818DC22B579EC004E5281 /* PyLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DB22B579EC004E5281 /* PyLoad.swift */; };
-		903818DE22B57B8A004E5281 /* PyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DD22B57B8A004E5281 /* PyTest.swift */; };
 		903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DB22BB903A003132FA /* Lcd+Dump.swift */; };
 		903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */; };
 		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
@@ -84,7 +81,12 @@
 		90CBB73222AD7AE3004775E2 /* Array+UIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB73122AD7AE3004775E2 /* Array+UIntTests.swift */; };
 		90CBD3CB22BD62B700B58461 /* Framebuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CA22BD62B700B58461 /* Framebuffer.swift */; };
 		90CBD3CD22BD6AA000B58461 /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CC22BD6AA000B58461 /* Metal.swift */; };
-		90CBD3CF22BD71FC00B58461 /* PyRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CE22BD71FC00B58461 /* PyRunTests.swift */; };
+		90CBD3D722BD81F000B58461 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3D622BD81F000B58461 /* main.swift */; };
+		90CBD3DC22BD822000B58461 /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A17B58229D59A20027133B /* GameBoyKit.framework */; };
+		90CBD3DE22BD824300B58461 /* PyBoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818D922B57976004E5281 /* PyBoy.swift */; };
+		90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DB22B579EC004E5281 /* PyLoad.swift */; };
+		90CBD3E022BD824300B58461 /* PyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DD22B57B8A004E5281 /* PyTest.swift */; };
+		90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */; };
 		90D404AE22AC76FC00AEF7BD /* InterruptEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
@@ -136,10 +138,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		90CBD3D222BD81F000B58461 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		903818D922B57976004E5281 /* PyEmulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyEmulator.swift; sourceTree = "<group>"; };
+		903818D922B57976004E5281 /* PyBoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyBoy.swift; sourceTree = "<group>"; };
 		903818DB22B579EC004E5281 /* PyLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyLoad.swift; sourceTree = "<group>"; };
 		903818DD22B57B8A004E5281 /* PyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyTest.swift; sourceTree = "<group>"; };
 		903DB4DB22BB903A003132FA /* Lcd+Dump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lcd+Dump.swift"; sourceTree = "<group>"; };
@@ -222,7 +233,9 @@
 		90CBB73122AD7AE3004775E2 /* Array+UIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+UIntTests.swift"; sourceTree = "<group>"; };
 		90CBD3CA22BD62B700B58461 /* Framebuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Framebuffer.swift; sourceTree = "<group>"; };
 		90CBD3CC22BD6AA000B58461 /* Metal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
-		90CBD3CE22BD71FC00B58461 /* PyRunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyRunTests.swift; sourceTree = "<group>"; };
+		90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBootromTests.swift; sourceTree = "<group>"; };
+		90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameBoyKitBlarggTests; sourceTree = BUILT_PRODUCTS_DIR; };
+		90CBD3D622BD81F000B58461 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterruptEnable.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
@@ -260,20 +273,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90CBD3D122BD81F000B58461 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90CBD3DC22BD822000B58461 /* GameBoyKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		903818D822B57967004E5281 /* PyBoy */ = {
-			isa = PBXGroup;
-			children = (
-				903818D922B57976004E5281 /* PyEmulator.swift */,
-				903818DB22B579EC004E5281 /* PyLoad.swift */,
-				903818DD22B57B8A004E5281 /* PyTest.swift */,
-				90CBD3CE22BD71FC00B58461 /* PyRunTests.swift */,
-			);
-			path = PyBoy;
-			sourceTree = "<group>";
-		};
 		9073102522A66A2000EBC7BB /* Cpu */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,8 +306,10 @@
 				90A17B42229D59830027133B /* GameBoyMac */,
 				90A17B59229D59A20027133B /* GameBoyKit */,
 				90A17B66229D59A30027133B /* GameBoyKitTests */,
+				90CBD3D522BD81F000B58461 /* GameBoyKitBlarggTests */,
 				90A17B7B229D59B10027133B /* Code generation */,
 				90A17B41229D59830027133B /* Products */,
+				90CBD3DB22BD822000B58461 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -308,6 +320,7 @@
 				90A17B58229D59A20027133B /* GameBoyKit.framework */,
 				90A17B60229D59A30027133B /* GameBoyKitTests.xctest */,
 				90A17B7A229D59B10027133B /* Code generation */,
+				90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -316,7 +329,6 @@
 			isa = PBXGroup;
 			children = (
 				90A17B47229D59840027133B /* Assets.xcassets */,
-				903818D822B57967004E5281 /* PyBoy */,
 				90A17B43229D59830027133B /* AppDelegate.swift */,
 				9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */,
 				903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */,
@@ -485,6 +497,33 @@
 			path = Lcd;
 			sourceTree = "<group>";
 		};
+		90CBD3D522BD81F000B58461 /* GameBoyKitBlarggTests */ = {
+			isa = PBXGroup;
+			children = (
+				90CBD3DD22BD822A00B58461 /* PyBoy */,
+				90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */,
+				90CBD3D622BD81F000B58461 /* main.swift */,
+			);
+			path = GameBoyKitBlarggTests;
+			sourceTree = "<group>";
+		};
+		90CBD3DB22BD822000B58461 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		90CBD3DD22BD822A00B58461 /* PyBoy */ = {
+			isa = PBXGroup;
+			children = (
+				903818D922B57976004E5281 /* PyBoy.swift */,
+				903818DB22B579EC004E5281 /* PyLoad.swift */,
+				903818DD22B57B8A004E5281 /* PyTest.swift */,
+			);
+			path = PyBoy;
+			sourceTree = "<group>";
+		};
 		90D58EE122A7B2580076584F /* Bus */ = {
 			isa = PBXGroup;
 			children = (
@@ -589,6 +628,23 @@
 			productReference = 90A17B7A229D59B10027133B /* Code generation */;
 			productType = "com.apple.product-type.tool";
 		};
+		90CBD3D322BD81F000B58461 /* GameBoyKitBlarggTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90CBD3D822BD81F000B58461 /* Build configuration list for PBXNativeTarget "GameBoyKitBlarggTests" */;
+			buildPhases = (
+				90CBD3D022BD81F000B58461 /* Sources */,
+				90CBD3D122BD81F000B58461 /* Frameworks */,
+				90CBD3D222BD81F000B58461 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GameBoyKitBlarggTests;
+			productName = GameBoyKitBlarggTests;
+			productReference = 90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -612,6 +668,9 @@
 					90A17B79229D59B10027133B = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
+					90CBD3D322BD81F000B58461 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 				};
 			};
 			buildConfigurationList = 90A17B3B229D59830027133B /* Build configuration list for PBXProject "GameBoy" */;
@@ -631,6 +690,7 @@
 				90A17B57229D59A20027133B /* GameBoyKit */,
 				90A17B5F229D59A30027133B /* GameBoyKitTests */,
 				90A17B79229D59B10027133B /* Code generation */,
+				90CBD3D322BD81F000B58461 /* GameBoyKitBlarggTests */,
 			);
 		};
 /* End PBXProject section */
@@ -688,14 +748,10 @@
 			files = (
 				9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */,
 				90CBD3CD22BD6AA000B58461 /* Metal.swift in Sources */,
-				903818DA22B57976004E5281 /* PyEmulator.swift in Sources */,
 				903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */,
 				9085FC3D22B6BF6A00310090 /* main.swift in Sources */,
 				903DB4E222BC0C76003132FA /* Shader.metal in Sources */,
-				90CBD3CF22BD71FC00B58461 /* PyRunTests.swift in Sources */,
 				90A17B44229D59830027133B /* AppDelegate.swift in Sources */,
-				903818DC22B579EC004E5281 /* PyLoad.swift in Sources */,
-				903818DE22B57B8A004E5281 /* PyTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +840,18 @@
 				90A17BB7229D59FC0027133B /* OpenOpcodesFile.swift in Sources */,
 				90C2AD3F22A1DFD500F5A7AF /* Common.swift in Sources */,
 				90C2AD4122A1E47000F5A7AF /* PrintExecute.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90CBD3D022BD81F000B58461 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90CBD3E022BD824300B58461 /* PyTest.swift in Sources */,
+				90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */,
+				90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */,
+				90CBD3D722BD81F000B58461 /* main.swift in Sources */,
+				90CBD3DE22BD824300B58461 /* PyBoy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1084,6 +1152,26 @@
 			};
 			name = Release;
 		};
+		90CBD3D922BD81F000B58461 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AEAQ6C3MPC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		90CBD3DA22BD81F000B58461 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AEAQ6C3MPC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1128,6 +1216,15 @@
 			buildConfigurations = (
 				90A17B7F229D59B10027133B /* Debug */,
 				90A17B80229D59B10027133B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90CBD3D822BD81F000B58461 /* Build configuration list for PBXNativeTarget "GameBoyKitBlarggTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90CBD3D922BD81F000B58461 /* Debug */,
+				90CBD3DA22BD81F000B58461 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

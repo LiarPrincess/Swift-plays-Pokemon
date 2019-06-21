@@ -104,10 +104,10 @@ public class GameBoy {
       self.timer.tick(cycles: cycles)
     }
 
-    print("Finished:")
-    print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
-    print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
-
-    self.lcd.dump()
+//    print("Finished:")
+//    print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
+//    print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
+//
+//    self.lcd.dump()
   }
 }

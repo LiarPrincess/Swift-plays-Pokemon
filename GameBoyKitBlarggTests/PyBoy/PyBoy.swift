@@ -29,7 +29,7 @@ class PyMemory {
   var data = [UInt8](repeating: 0, count: 0x10000)
 }
 
-class PyEmulator {
+class PyBoy {
   let filename: String
   let cpu    = PyCpu()
   let memory = PyMemory()
