@@ -50,7 +50,10 @@ public class Lcd {
   public internal(set) var oam: [UInt8]
 
   /// Flag instead of 0xFF0F
-  public internal(set) var hasInterrupt: Bool = false
+  public internal(set) var hasStatusInterrupt: Bool = false
+
+  /// Flag instead of 0xFF0F
+  public internal(set) var hasVBlankInterrupt: Bool = false
 
   /// Data thst should be put on screen
   public internal(set) var framebuffer = Framebuffer()
@@ -70,25 +73,26 @@ public class Lcd {
   internal func startLine(_ line: UInt8) {
     self.line = line
 
-    let interrupt = self.lineCompare == line
+    let hasInterrupt = self.lineCompare == line
 
-    self.status.isLineCompareInterrupt = interrupt
-    if interrupt && self.status.isLineCompareInterruptEnabled {
-      self.hasInterrupt = true
+    self.status.isLineCompareInterrupt = hasInterrupt
+    if hasInterrupt && self.status.isLineCompareInterruptEnabled {
+      self.hasStatusInterrupt = true
     }
   }
 
   internal func setMode(_ mode: LcdMode) {
     self.status.mode = mode
-    self.hasInterrupt = self.hasInterrupt || self.isInterruptEnabled(mode)
-  }
-
-  private func isInterruptEnabled(_ mode: LcdMode) -> Bool {
     switch mode {
-    case .hBlank:        return self.status.isHBlankInterruptEnabled
-    case .vBlank:        return self.status.isVBlankInterruptEnabled
-    case .oamSearch:     return self.status.isOamInterruptEnabled
-    case .pixelTransfer: return false
+    case .hBlank:
+      self.hasStatusInterrupt ||= self.status.isHBlankInterruptEnabled
+    case .vBlank:
+      self.hasVBlankInterrupt ||= self.status.isVBlankInterruptEnabled
+      self.hasStatusInterrupt ||= self.status.isVBlankInterruptEnabled
+    case .oamSearch:
+      self.hasStatusInterrupt ||= self.status.isOamInterruptEnabled
+    case .pixelTransfer:
+      break
     }
   }
 

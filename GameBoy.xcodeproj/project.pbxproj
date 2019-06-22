@@ -12,6 +12,8 @@
 		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
 		903DB4E222BC0C76003132FA /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4E122BC0C76003132FA /* Shader.metal */; };
 		904B89CE22A5C8FB00F5FEFE /* Array+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */; };
+		905321AA22BE378300A409B2 /* OrEqualOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321A922BE378300A409B2 /* OrEqualOperator.swift */; };
+		905321AC22BE410900A409B2 /* performanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321AB22BE410900A409B2 /* performanceTest.swift */; };
 		906073A122B8452200F2766D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A022B8452200F2766D /* Timer.swift */; };
 		906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A222B8453F00F2766D /* DivTimerTests.swift */; };
 		906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A322B8453F00F2766D /* CustomTimerTests.swift */; };
@@ -158,6 +160,8 @@
 		903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoyRenderer.swift; sourceTree = "<group>"; };
 		903DB4E122BC0C76003132FA /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+UInt.swift"; sourceTree = "<group>"; };
+		905321A922BE378300A409B2 /* OrEqualOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrEqualOperator.swift; sourceTree = "<group>"; };
+		905321AB22BE410900A409B2 /* performanceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = performanceTest.swift; sourceTree = "<group>"; };
 		906073A022B8452200F2766D /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		906073A222B8453F00F2766D /* DivTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
 		906073A322B8453F00F2766D /* CustomTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimerTests.swift; sourceTree = "<group>"; };
@@ -455,6 +459,7 @@
 				908D6E0B229DDECD00523C18 /* String+pad.swift */,
 				90A17B84229D59D50027133B /* UInt+radixFormat.swift */,
 				90A90C2822B8130C00DC833F /* Range+start+end.swift */,
+				905321A922BE378300A409B2 /* OrEqualOperator.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 			children = (
 				90CBD3DD22BD822A00B58461 /* PyBoy */,
 				90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */,
+				905321AB22BE410900A409B2 /* performanceTest.swift */,
 				90CBD3D622BD81F000B58461 /* main.swift */,
 			);
 			path = GameBoyKitBlarggTests;
@@ -788,6 +794,7 @@
 				90A17B9D229D59D50027133B /* Cpu.swift in Sources */,
 				906073A122B8452200F2766D /* Timer.swift in Sources */,
 				90B0DC4B22B6F43D005BBCF5 /* Cartridge.swift in Sources */,
+				905321AA22BE378300A409B2 /* OrEqualOperator.swift in Sources */,
 				90B0DC5F22B78E72005BBCF5 /* Bus+interrupts.swift in Sources */,
 				9085FC3122B690C600310090 /* ColorPalettes.swift in Sources */,
 				90BE338222B42C8100DF3953 /* Debug+Emulator.swift in Sources */,
@@ -847,6 +854,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				905321AC22BE410900A409B2 /* performanceTest.swift in Sources */,
 				90CBD3E022BD824300B58461 /* PyTest.swift in Sources */,
 				90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */,
 				90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */,

@@ -28,7 +28,7 @@ internal enum Debug {
   private static var global: Bool {
     guard gameBoy != nil else { return false } // for example unit tests
 
-    isPastMinPc = isPastMinPc || cpu.pc == minPc
+    isPastMinPc ||= cpu.pc == minPc
     return isPastMinPc
   }
 

@@ -63,8 +63,8 @@ public class GameBoy {
       self.tickCpu(cycles: LcdTimings.hBlankLength)
     }
 
+    self.lcd.setMode(.vBlank)
     for line in Lcd.height..<vBlankEnd {
-      self.lcd.setMode(.vBlank)
       self.lcd.startLine(line)
       self.tickCpu(cycles: LcdTimings.lineLength)
     }
@@ -85,23 +85,22 @@ public class GameBoy {
     }
   }
 
-  public func run(maxCycles: UInt16? = nil, lastPC: UInt16? = nil) {
+  public func run(maxCycles: UInt64? = nil, lastPC: UInt16? = nil) {
     Debug.emulatorWillStart()
 
-    let maxCycles = maxCycles ?? UInt16.max
+    let maxCycles = maxCycles ?? UInt64.max
     let lastPC  = lastPC ?? UInt16.max
 
     var brakepoint = false
     while self.cpu.cycle <= maxCycles && self.cpu.pc != lastPC {
       // ------------
-      brakepoint = brakepoint || self.cpu.pc == 0x0039
-      if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
-        _ = 5
-      }
+//      brakepoint ||= self.cpu.pc == 0x0039
+//      if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
+//        _ = 5
+//      }
       // ------------
 
-      let cycles = self.cpu.tick()
-      self.timer.tick(cycles: cycles)
+      _ = self.cpu.tick()
     }
 
 //    print("Finished:")

@@ -6,19 +6,24 @@ extension Bus {
 
   internal func hasInterrupt(_ interrupt: Interrupt) -> Bool {
     switch interrupt {
-    case .vBlank:  return self.interruptEnable.vBlank  && false
-    case .lcdStat: return self.interruptEnable.lcdStat && false
-    case .timer:   return self.interruptEnable.timer   && self.timer.hasInterrupt
-    case .serial:  return self.interruptEnable.serial  && false
-    case .joypad:  return self.interruptEnable.joypad  && false
+    case .vBlank:
+      return self.interruptEnable.vBlank && self.lcd.hasVBlankInterrupt
+    case .lcdStat:
+      return self.interruptEnable.lcdStat && self.lcd.hasStatusInterrupt
+    case .timer:
+      return self.interruptEnable.timer && self.timer.hasInterrupt
+    case .serial:
+      return self.interruptEnable.serial && false
+    case .joypad:
+      return self.interruptEnable.joypad && false
     }
   }
 
   internal func clearInterrupt(_ interrupt: Interrupt) {
     switch interrupt {
-    case .vBlank: break
-    case .lcdStat: break
-    case .timer: self.timer.hasInterrupt = false
+    case .vBlank:  self.lcd.hasVBlankInterrupt = false
+    case .lcdStat: self.lcd.hasStatusInterrupt = false
+    case .timer:   self.timer.hasInterrupt     = false
     case .serial: break
     case .joypad: break
     }

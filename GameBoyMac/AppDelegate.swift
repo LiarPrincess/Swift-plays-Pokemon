@@ -8,9 +8,9 @@ import GameBoyKit
 
 public class AppDelegate: NSObject, NSApplicationDelegate {
 
-  private let gameboy = GameBoy()
+  private let gameBoy = GameBoy()
   private let device  = createDevice()
-  private lazy var renderer = GameBoyRenderer(gameboy: self.gameboy, device: self.device)
+  private lazy var renderer = GameBoyRenderer(gameboy: self.gameBoy, device: self.device)
 
   private let mtkView = MTKView()
 

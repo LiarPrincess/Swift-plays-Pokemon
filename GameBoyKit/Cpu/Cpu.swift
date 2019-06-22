@@ -15,7 +15,7 @@ public class Cpu {
   public var sp: UInt16 = 0
 
   /// Current cycle incremented after each operation (starting from 0).
-  public var cycle: UInt16 = 0
+  public var cycle: UInt64 = 0
 
   /// Interrupt Master Enable Flag.
   public var ime: Bool = false
@@ -58,10 +58,10 @@ public class Cpu {
     return UInt8(self.calculateDuration(oldCycle))
   }
 
-  private func calculateDuration(_ oldCycle: UInt16) -> UInt16 {
+  private func calculateDuration(_ oldCycle: UInt64) -> UInt64 {
     let hasOverflow = self.cycle < oldCycle
     return hasOverflow ?
-      self.cycle + (0xffff - oldCycle) :
+      self.cycle + (UInt64.max - oldCycle) :
       self.cycle - oldCycle
   }
 
