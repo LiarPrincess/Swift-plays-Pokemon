@@ -6,45 +6,31 @@
 
 public class Debugger {
 
-  private var mode: DebugMode
+  internal var gameBoy:   GameBoy
+  internal var cpu:       Cpu       { return gameBoy.cpu }
+  internal var registers: Registers { return gameBoy.cpu.registers }
+  internal var bus:       Bus       { return gameBoy.bus }
 
-  internal var gameBoy: GameBoy? = nil
-  internal var cpu:       Cpu       { return gameBoy!.cpu }
-  internal var registers: Registers { return gameBoy!.cpu.registers }
-  internal var bus:       Bus       { return gameBoy!.bus }
-
-  public init(mode: DebugMode) {
-    self.mode = mode
-  }
-
-  public func attach(_ gameBoy: GameBoy) {
+  public init(gameBoy: GameBoy) {
     self.gameBoy = gameBoy
   }
 
   public func run(mode:         DebugMode = .none,
-                  cycles:       Int64     = Int64.max,
                   instructions: Int64     = Int64.max,
                   lastPC:       UInt16    = UInt16.max) {
 
-    guard self.gameBoy != nil else {
-      print("No emulator attached!")
-      return
-    }
-
-    var remainingCycles = cycles
-    var remainingInstructions = instructions
-
     var stateBefore = GameBoyState()
     var stateAfter  = GameBoyState()
+    var remainingInstructions = instructions
 
-    while remainingCycles >= 0 && remainingInstructions > 0 && self.cpu.pc != lastPC {
+    while remainingInstructions > 0 && self.cpu.pc != lastPC {
       if mode == .opcodes || mode == .opcodesAndWrites || mode == .full {
         self.printNextOpcode()
       }
 
-      self.gameBoy!.save(to: &stateBefore)
-      let cycles = self.cpu.tick()
-      self.gameBoy!.save(to: &stateAfter)
+      self.gameBoy.save(to: &stateBefore)
+      self.gameBoy.tickCpu(cycles: 1)
+      self.gameBoy.save(to: &stateAfter)
 
       if mode == .opcodesAndWrites || mode == .full {
         self.printRegiserWrites(before: stateBefore, after: stateAfter)
@@ -61,7 +47,6 @@ public class Debugger {
       }
 
       remainingInstructions -= 1
-      remainingCycles -= Int64(cycles)
     }
   }
 }

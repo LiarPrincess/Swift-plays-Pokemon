@@ -27,13 +27,8 @@ private var checkedAddresses: Set<UInt16> {
   return []
 }
 
-func pyTest(_ p: PyBoy) {
-  print("\(p.filename) <-- starting")
-
-  let s = GameBoy()
-  let debugger = Debugger(mode: .none)
-  debugger.attach(s)
-  debugger.run(lastPC: p.cpu.pc)
+func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) {
+  print("\(p.filename)")
 
   if s.cpu.pc  != p.cpu.pc  { print("  pc: \(s.cpu.pc.hex) vs \(p.cpu.pc.hex)") }
   if s.cpu.sp  != p.cpu.sp  { print("  sp: \(s.cpu.sp.hex) vs \(p.cpu.sp.hex)") }

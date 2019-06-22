@@ -4,6 +4,15 @@
 
 // Idk, it just feels more natural this way.
 
+extension Range {
+
+  /// First element included in range
+  public var start: Bound { return self.lowerBound }
+
+  /// Last element included in range
+  public var end: Bound { return self.upperBound }
+}
+
 extension ClosedRange {
 
   /// First element included in range

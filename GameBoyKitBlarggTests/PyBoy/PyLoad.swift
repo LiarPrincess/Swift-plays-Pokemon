@@ -19,8 +19,7 @@ private func open(_ url: URL) -> String {
   do {
     return try String(contentsOf: url, encoding: .utf8)
   } catch let error {
-    let filename = url.lastPathComponent
-    fatalError("Error when opening '\(filename)': \(error.localizedDescription).")
+    fatalError(error.localizedDescription)
   }
 }
 

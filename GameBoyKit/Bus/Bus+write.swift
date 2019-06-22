@@ -43,7 +43,7 @@ extension Bus {
     case MemoryMap.notUsable:
       break
     case MemoryMap.unmapBootrom:
-      fatalError("Writing to unmapBootrom (\(MemoryMap.unmapBootrom) is not yet implemented)")
+      fatalError("Writing to 'unmap bootrom' (\(MemoryMap.unmapBootrom.hex)) is not yet implemented")
       break
     case MemoryMap.interruptEnable:
       self.interruptEnable.value = value

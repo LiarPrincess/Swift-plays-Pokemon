@@ -316,7 +316,8 @@ extension Cpu {
   /// Adds the contents of memory specified by the contents of register pair HL
   /// to the contents of register A and stores the results in register A
   internal func add_a_pHL() {
-    self.add_a(self.read(self.registers.hl))
+    let value = self.read(self.registers.hl)
+    self.add_a(value)
 
     self.pc += 1
     self.cycle &+= 8
