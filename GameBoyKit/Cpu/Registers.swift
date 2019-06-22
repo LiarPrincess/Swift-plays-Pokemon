@@ -119,8 +119,8 @@ public class Registers {
     }
   }
 
-  public func get(_ r: CombinedRegister) -> UInt16 {
-    switch r {
+  public func get(_ rr: CombinedRegister) -> UInt16 {
+    switch rr {
     case .af:
       var result: UInt16 = 0
       result += self.zeroFlag      ? (1 << zeroFlagPosition)      : 0
@@ -131,6 +131,15 @@ public class Registers {
     case .bc: return self.bc
     case .de: return self.de
     case .hl: return self.hl
+    }
+  }
+
+  public func set(_ f: FlagRegister, to value: Bool) {
+    switch f {
+    case .zeroFlag:      self.zeroFlag      = value
+    case .subtractFlag:  self.subtractFlag  = value
+    case .halfCarryFlag: self.halfCarryFlag = value
+    case .carryFlag:     self.carryFlag     = value
     }
   }
 
@@ -146,8 +155,8 @@ public class Registers {
     }
   }
 
-  public func set(_ r: CombinedRegister, to value: UInt16) {
-    switch r {
+  public func set(_ rr: CombinedRegister, to value: UInt16) {
+    switch rr {
     case .af:
       self.a = UInt8((value & 0xff00) >> 8)
 
@@ -161,5 +170,37 @@ public class Registers {
     case .de: self.de = value
     case .hl: self.hl = value
     }
+  }
+}
+
+// MARK: - Restorable
+
+extension Registers: Restorable {
+  internal func save(to state: inout GameBoyState) {
+    state.cpu.a = self.a
+    state.cpu.b = self.b
+    state.cpu.c = self.c
+    state.cpu.d = self.d
+    state.cpu.e = self.e
+    state.cpu.h = self.h
+    state.cpu.l = self.l
+    state.cpu.zeroFlag      = self.zeroFlag
+    state.cpu.subtractFlag  = self.subtractFlag
+    state.cpu.halfCarryFlag = self.halfCarryFlag
+    state.cpu.carryFlag     = self.carryFlag
+  }
+
+  internal func load(from state: GameBoyState) {
+    self.a = state.cpu.a
+    self.b = state.cpu.b
+    self.c = state.cpu.c
+    self.d = state.cpu.d
+    self.e = state.cpu.e
+    self.h = state.cpu.h
+    self.l = state.cpu.l
+    self.zeroFlag      = state.cpu.zeroFlag
+    self.subtractFlag  = state.cpu.subtractFlag
+    self.halfCarryFlag = state.cpu.halfCarryFlag
+    self.carryFlag     = state.cpu.carryFlag
   }
 }

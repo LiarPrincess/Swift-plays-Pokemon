@@ -163,3 +163,25 @@ public class Cpu {
     self.bus.write(address, value: value)
   }
 }
+
+// MARK: - Restorable
+
+extension Cpu: Restorable {
+  internal func save(to state: inout GameBoyState) {
+    self.registers.save(to: &state)
+    state.cpu.pc    = self.pc
+    state.cpu.sp    = self.sp
+    state.cpu.cycle = self.cycle
+    state.cpu.ime      = self.ime
+    state.cpu.isHalted = self.isHalted
+  }
+
+  internal func load(from state: GameBoyState) {
+    self.registers.load(from: state)
+    self.pc    = state.cpu.pc
+    self.sp    = state.cpu.sp
+    self.cycle = state.cpu.cycle
+    self.ime      = state.cpu.ime
+    self.isHalted = state.cpu.isHalted
+  }
+}

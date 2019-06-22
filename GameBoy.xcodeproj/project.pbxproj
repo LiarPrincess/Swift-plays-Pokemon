@@ -18,6 +18,9 @@
 		905321B022BE46E800A409B2 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321AF22BE46E800A409B2 /* Debugger.swift */; };
 		905321B222BE479800A409B2 /* DebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B122BE479800A409B2 /* DebugMode.swift */; };
 		905321B522BE48EE00A409B2 /* Debugger+Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B422BE48EE00A409B2 /* Debugger+Cpu.swift */; };
+		905321B822BE552700A409B2 /* CpuState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B722BE552700A409B2 /* CpuState.swift */; };
+		905321BA22BE563200A409B2 /* Restorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B922BE563200A409B2 /* Restorable.swift */; };
+		905321BC22BE565D00A409B2 /* GemeBoyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321BB22BE565D00A409B2 /* GemeBoyState.swift */; };
 		906073A122B8452200F2766D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A022B8452200F2766D /* Timer.swift */; };
 		906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A222B8453F00F2766D /* DivTimerTests.swift */; };
 		906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A322B8453F00F2766D /* CustomTimerTests.swift */; };
@@ -170,6 +173,9 @@
 		905321AF22BE46E800A409B2 /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 		905321B122BE479800A409B2 /* DebugMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMode.swift; sourceTree = "<group>"; };
 		905321B422BE48EE00A409B2 /* Debugger+Cpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debugger+Cpu.swift"; sourceTree = "<group>"; };
+		905321B722BE552700A409B2 /* CpuState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuState.swift; sourceTree = "<group>"; };
+		905321B922BE563200A409B2 /* Restorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restorable.swift; sourceTree = "<group>"; };
+		905321BB22BE565D00A409B2 /* GemeBoyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemeBoyState.swift; sourceTree = "<group>"; };
 		906073A022B8452200F2766D /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		906073A222B8453F00F2766D /* DivTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
 		906073A322B8453F00F2766D /* CustomTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimerTests.swift; sourceTree = "<group>"; };
@@ -307,6 +313,16 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		905321B622BE54F600A409B2 /* Save */ = {
+			isa = PBXGroup;
+			children = (
+				905321B722BE552700A409B2 /* CpuState.swift */,
+				905321BB22BE565D00A409B2 /* GemeBoyState.swift */,
+				905321B922BE563200A409B2 /* Restorable.swift */,
+			);
+			path = Save;
+			sourceTree = "<group>";
+		};
 		9073102522A66A2000EBC7BB /* Cpu */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +389,7 @@
 				90B0DC4522B6F0B4005BBCF5 /* Interrupts */,
 				90D58EE122A7B2580076584F /* Bus */,
 				90CBB71722AD74BB004775E2 /* Extensions */,
+				905321B622BE54F600A409B2 /* Save */,
 				90C19C5A22B3C8B900A1B7A9 /* Debug */,
 				90A56A3422A3DD0D0055A013 /* GameBoy.swift */,
 				90A17B5A229D59A20027133B /* GameBoyKit.h */,
@@ -799,6 +816,7 @@
 				90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */,
 				905321B022BE46E800A409B2 /* Debugger.swift in Sources */,
 				90B0DC5D22B78E13005BBCF5 /* Bus+read.swift in Sources */,
+				905321BC22BE565D00A409B2 /* GemeBoyState.swift in Sources */,
 				90A56A3522A3DD0D0055A013 /* GameBoy.swift in Sources */,
 				90CBD3CB22BD62B700B58461 /* Framebuffer.swift in Sources */,
 				90B7E91022BAF19A00EC923E /* LcdTimings.swift in Sources */,
@@ -807,6 +825,7 @@
 				90B0DC4D22B6F705005BBCF5 /* Cartridge+bootrom.swift in Sources */,
 				908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */,
 				90A17B98229D59D50027133B /* Cpu+ExecuteUnprefixed.swift in Sources */,
+				905321BA22BE563200A409B2 /* Restorable.swift in Sources */,
 				905321B222BE479800A409B2 /* DebugMode.swift in Sources */,
 				90C19C6222B3CA8E00A1B7A9 /* Debug+Memory.swift in Sources */,
 				90B0DC4822B6F0CD005BBCF5 /* Interrupt.swift in Sources */,
@@ -823,6 +842,7 @@
 				9085FC3122B690C600310090 /* ColorPalettes.swift in Sources */,
 				90BE338222B42C8100DF3953 /* Debug+Emulator.swift in Sources */,
 				90C19C6022B3CA6F00A1B7A9 /* Debug+Cpu.swift in Sources */,
+				905321B822BE552700A409B2 /* CpuState.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,
 				90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */,
 				90B0DC4422B6EC89005BBCF5 /* Lcd.swift in Sources */,
