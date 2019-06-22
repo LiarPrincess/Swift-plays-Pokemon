@@ -90,7 +90,7 @@ internal func pyBoyBootromTests() {
 //  testBootrom(file: "pyboy_bootrom_pc_0x64.txt")
 //  testBootrom(file: "pyboy_bootrom_pc_0x66.txt")
 //  testBootrom(file: "pyboy_bootrom_pc_0x68.txt")
-  testBootrom(file: "pyboy_bootrom_pc_0x6a.txt")
+  testBootrom(file: "pyboy_bootrom_pc_0x6a.txt") // <- not working
 //  testBootrom(file: "pyboy_bootrom_pc_0x6b.txt")
 //  testBootrom(file: "pyboy_bootrom_pc_0x6d.txt")
 //  testBootrom(file: "pyboy_bootrom_pc_0x6e.txt")

@@ -6,15 +6,17 @@ import Foundation
 import GameBoyKit
 
 private let totalLines = Lcd.height + LcdTimings.vBlankLineCount
-private let fullFrame  = UInt64(totalLines) * UInt64(LcdTimings.lineLength) // 70_224
+private let fullFrame  = Int64(totalLines) * Int64(LcdTimings.lineLength) // 70_224
 
-private let frameCount: UInt64 = 60
+private let frameCount: Int64 = 60
 
 internal func performanceTest() {
   let gameBoy = GameBoy()
+  let debugger = Debugger(mode: .none)
+  debugger.attach(gameBoy)
 
   let start = DispatchTime.now()
-  gameBoy.run(maxCycles: frameCount * fullFrame, lastPC: .max)
+  debugger.run(cycles: frameCount * fullFrame, lastPC: .max)
   let end = DispatchTime.now()
 
   let timeNano = end.uptimeNanoseconds - start.uptimeNanoseconds

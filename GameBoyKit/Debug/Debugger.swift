@@ -2,43 +2,61 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable force_unwrapping
+
 public class Debugger {
+
+  private var mode: DebugMode
 
   internal var gameBoy: GameBoy? = nil
   internal var cpu:       Cpu       { return gameBoy!.cpu }
   internal var registers: Registers { return gameBoy!.cpu.registers }
   internal var bus:       Bus       { return gameBoy!.bus }
 
-  private var mode: DebugMode
-  private var isPrintEnabled:    Bool { return gameBoy != nil }
-  private var isPrintingOpcodes: Bool { return isPrintEnabled && (mode == .opcodes || mode == .full) }
-  private var isPrintingDetails: Bool { return isPrintEnabled && mode == .full }
-
   public init(mode: DebugMode) {
     self.mode = mode
   }
 
   public func attach(_ gameBoy: GameBoy) {
-    // debugger should be always weak
+    self.gameBoy = gameBoy
   }
 
-  public func run(cycles: UInt64? = nil, lastPC: UInt16? = nil) {
-    var remainingCycles = cycles ?? UInt64.max
+  public func run(cycles: Int64? = nil, lastPC: UInt16? = nil) {
+    guard self.gameBoy != nil else {
+      print("No emulator attached!")
+      return
+    }
+
+    var remainingCycles = cycles ?? Int64.max
     let lastPC          = lastPC ?? UInt16.max
 
+    var stateBefore = GameBoyState()
+    var stateAfter  = GameBoyState()
+
     while remainingCycles >= 0 && self.cpu.pc != lastPC {
-      if self.isPrintingOpcodes {
+      if mode == .opcodes || mode == .opcodesAndWrites || mode == .full {
         self.printNextOpcode()
       }
 
+      self.gameBoy!.save(to: &stateBefore)
       let cycles = self.cpu.tick()
+      self.gameBoy!.save(to: &stateAfter)
 
-      if self.isPrintingDetails {
+      if mode == .opcodesAndWrites || mode == .full {
+        self.printRegiserWrites(before: stateBefore, after: stateAfter)
+        // memory writes
+        self.printOpcodeDetails(before: stateBefore, after: stateAfter)
+      }
 
+      if mode == .full {
+        self.printRegisterValues()
+      }
+
+      if mode == .opcodesAndWrites || mode == .full {
         self.printSeparator()
       }
 
-      remainingCycles -= UInt64(cycles)
+      remainingCycles -= Int64(cycles)
     }
   }
 

@@ -4,13 +4,8 @@
 
 extension Bus {
 
-  public func write(_ address: UInt16, value: UInt8) {
-    self.writeInternal(address, value: value)
-    Debug.busDidWrite(to: address, value: value)
-  }
-
   // swiftlint:disable:next function_body_length cyclomatic_complexity
-  internal func writeInternal(_ address: UInt16, value: UInt8) {
+  public func write(_ address: UInt16, value: UInt8) {
     func write(_ region: ClosedRange<UInt16>, _ array: inout [UInt8]) {
       array[address - region.start] = value
     }

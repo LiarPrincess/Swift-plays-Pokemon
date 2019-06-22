@@ -50,10 +50,8 @@ public class Cpu {
       fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
     }
 
-    Debug.cpuWillExecute(opcode: opcode)
     let oldCycle = self.cycle
     self.execute(opcode)
-    Debug.cpuDidExecute(opcode: opcode)
 
     return UInt8(self.calculateDuration(oldCycle))
   }

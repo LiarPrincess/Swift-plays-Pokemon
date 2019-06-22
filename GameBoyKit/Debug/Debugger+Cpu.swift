@@ -4,55 +4,57 @@
 
 extension Debugger {
 
-  private var next8: UInt8 {
-    return bus.readInternal(cpu.pc + 1)
+  private func next8(pc: UInt16) -> UInt8 {
+    return bus.read(pc + 1)
   }
 
-  private var next16: UInt16 {
-    let low  = UInt16(bus.readInternal(cpu.pc + 1))
-    let high = UInt16(bus.readInternal(cpu.pc + 2))
+  private func next16(pc: UInt16) -> UInt16 {
+    let low  = UInt16(bus.read(pc + 1))
+    let high = UInt16(bus.read(pc + 2))
     return (high << 8) | low
   }
 
   private func read(_ address: UInt16) -> UInt8 {
-    return self.bus.readInternal(address)
+    return self.bus.read(address)
   }
-}
 
-// MARK: - Print opcode
+  private func opcodeAt(pc: UInt16) -> UnprefixedOpcode? {
+    let rawOpcode = self.read(pc)
+    return UnprefixedOpcode(rawValue: rawOpcode)
+  }
 
-extension Debugger {
+  // MARK: - Print opcode
 
   internal func printNextOpcode() {
-    let rawOpcode = self.read(self.cpu.pc)
-    guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
-      return
+    switch self.opcodeAt(pc: self.cpu.pc) {
+    case .none: return
+    case let .some(opcode) where opcode == .prefix: self.printPrefixOpcode()
+    case let .some(opcode): printUnprefixedOpcode(opcode)
     }
+  }
 
+  private func printUnprefixedOpcode(_ opcode: UnprefixedOpcode) {
     let operands: String = {
       switch self.getOpcodeLength(opcode) {
-      case 2: return next8.hex
-      case 3: return next16.hex
+      case 2: return self.next8(pc: self.cpu.pc).hex
+      case 3: return self.next16(pc: self.cpu.pc).hex
       default: return ""
       }
     }()
 
     let opcodeDesc = String(describing: opcode)
     print("\(cpu.pc.hex): \(opcodeDesc.padLeft(toLength: 11)) \(operands)")
-
-    if opcode == .prefix {
-      self.printPrefixOpcode()
-    }
   }
 
   private func printPrefixOpcode() {
-    guard let opcode = CBPrefixedOpcode(rawValue: self.next8) else {
+    let rawOpcode = self.next8(pc: self.cpu.pc)
+    guard let opcode = CBPrefixedOpcode(rawValue: rawOpcode) else {
       return
     }
 
     let pc = self.cpu.pc + 1
     let opcodeDesc = String(describing: opcode)
-    print("\(pc.hex): \(opcodeDesc.padLeft(toLength: 11))")
+    print("\(pc.hex): \(opcodeDesc.padLeft(toLength: 11)) (PREFIX)")
   }
 
   private func getOpcodeLength(_ opcode: UnprefixedOpcode) -> Int {
@@ -74,85 +76,117 @@ extension Debugger {
       return 1
     }
   }
+
+  // MARK: - Print opcode details
+
+  // swiftlint:disable:next function_body_length cyclomatic_complexity
+  internal func printOpcodeDetails(before: GameBoyState, after: GameBoyState) {
+    guard let opcode = self.opcodeAt(pc: before.cpu.pc) else {
+      return
+    }
+
+    let pc = "\(cpu.pc) (\(cpu.pc.hex))"
+    let next8  = self.next8(pc: before.cpu.pc)
+    let next16 = self.next16(pc: before.cpu.pc)
+
+    switch opcode {
+    case .call_a16:
+      print("> call to \(next16)")
+    case .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16:
+      let taken = after.cpu.pc == next16 ? "TAKEN" : "NOT TAKEN"
+      print("> conditional call to \(next16) \(taken)")
+
+    case .jp_a16, .jp_pHL:
+      print("> jump to \(next16)")
+    case  .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16:
+      let taken = after.cpu.pc == next16 ? "TAKEN" : "NOT TAKEN"
+      print("> conditional jump to \(next16) \(taken)")
+
+    case .jr_r8:
+      print("> relative jump to \(pc)")
+    case .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_z_r8:
+      let length = Int(2)
+      let offset = Int8(bitPattern: next8)
+      let predictedPc = Int(before.cpu.pc) + length + Int(offset)
+      let taken = after.cpu.pc == predictedPc ? "TAKEN" : "NOT TAKEN"
+      print("> relative conditional jump to \(predictedPc) \(taken)")
+
+    case .ret:
+      print("> return to \(after.cpu.pc)")
+    case .ret_c, .ret_nc, .ret_nz, .ret_z, .reti:
+      let length: UInt16 = 1
+      let taken = after.cpu.pc == before.cpu.pc + length ? "NOT TAKEN" : "TAKEN"
+      print("> conditional return \(taken)")
+
+    case .rst_00, .rst_08, .rst_10, .rst_18, .rst_20, .rst_28, .rst_30, .rst_38:
+      print("> rst call: \(opcode)")
+
+    case .push_af, .push_bc, .push_de, .push_hl:
+      print("> push")
+    case .pop_af, .pop_bc, .pop_de, .pop_hl:
+      print("> pop")
+
+    case .prefix:
+      print("> prefix instruction")
+
+    default:
+      break
+    }
+  }
+
+  // MARK: - Print register writes
+
+  // swiftlint:disable:next cyclomatic_complexity
+  internal func printRegiserWrites(before: GameBoyState, after: GameBoyState) {
+
+    let b = before.cpu
+    let a = after.cpu
+
+    if b.a != a.a { print("> cpu.a <- \(a.a)") }
+    if b.b != a.b { print("> cpu.b <- \(a.b)") }
+    if b.c != a.c { print("> cpu.c <- \(a.c)") }
+    if b.d != a.d { print("> cpu.d <- \(a.d)") }
+    if b.e != a.e { print("> cpu.e <- \(a.e)") }
+    if b.h != a.h { print("> cpu.h <- \(a.h)") }
+    if b.l != a.l { print("> cpu.l <- \(a.l)") }
+    if b.zeroFlag      != a.zeroFlag      { print("> cpu.zeroFlag      <- \(a.zeroFlag)") }
+    if b.subtractFlag  != a.subtractFlag  { print("> cpu.subtractFlag  <- \(a.subtractFlag)") }
+    if b.halfCarryFlag != a.halfCarryFlag { print("> cpu.halfCarryFlag <- \(a.halfCarryFlag)") }
+    if b.carryFlag     != a.carryFlag     { print("> cpu.carryFlag     <- \(a.carryFlag)") }
+  }
+
+  // MARK: - Print register values
+
+  internal func printRegisterValues() {
+    let stackStart: UInt16 = max(0xff80, cpu.sp)
+    let stackEnd:   UInt16 = 0xfffe
+    let stackValues = (stackStart...stackEnd).map { bus.read($0) }
+
+    let r = registers
+    print("""
+        cycle: \(cpu.cycle)
+        pc: \(cpu.pc) (\(cpu.pc.hex))
+        sp: \(cpu.sp) (\(cpu.sp.hex))
+          \(stackValues.reversed().map { $0.hex })
+        auxiliary registers:
+          a: \(registerValue(r.a))
+          b: \(registerValue(r.b)) | c: \(registerValue(r.c)) | bc: \(registerValue(r.bc))
+          d: \(registerValue(r.d)) | e: \(registerValue(r.e)) | de: \(registerValue(r.de))
+          h: \(registerValue(r.h)) | l: \(registerValue(r.l)) | hl: \(registerValue(r.hl))
+        flags:
+          z:\(flagValue(r.zeroFlag)) n:\(flagValue(r.subtractFlag)) h:\(flagValue(r.halfCarryFlag)) c:\(flagValue(r.carryFlag))
+      """)
+  }
+
+  private func registerValue(_ value: UInt8) -> String {
+    return "\(value.dec) (\(value.hex))"
+  }
+
+  private func registerValue(_ value: UInt16) -> String {
+    return "\(value.dec) (\(value.hex))"
+  }
+
+  private func flagValue(_ value: Bool) -> String {
+    return value ? "1" : "0"
+  }
 }
-
-// MARK: - Print registers
-
-//extension Debugger {
-//
-//  internal static func printRegisters(indent: String = "") {
-//    let stackStart: UInt16 = max(0xff80, cpu.sp)
-//    let stackEnd:   UInt16 = 0xfffe
-//    let stackValues = (stackStart...stackEnd).map { bus.readInternal($0) }
-//
-//    let r = registers
-//    print("""
-//      \(indent)cycle: \(cpu.cycle)
-//      \(indent)pc: \(cpu.pc) (\(cpu.pc.hex))
-//      \(indent)sp: \(cpu.sp) (\(cpu.sp.hex))
-//      \(indent)  \(stackValues.reversed().map { $0.hex })
-//      \(indent)auxiliary registers:
-//      \(indent)  a: \(registerValue(r.a))
-//      \(indent)  b: \(registerValue(r.b)) | c: \(registerValue(r.c)) | bc: \(registerValue(r.bc))
-//      \(indent)  d: \(registerValue(r.d)) | e: \(registerValue(r.e)) | de: \(registerValue(r.de))
-//      \(indent)  h: \(registerValue(r.h)) | l: \(registerValue(r.l)) | hl: \(registerValue(r.hl))
-//      \(indent)flags:
-//      \(indent)  z:\(flagValue(r.zeroFlag)) n:\(flagValue(r.subtractFlag)) h:\(flagValue(r.halfCarryFlag)) c:\(flagValue(r.carryFlag))
-//      """)
-//  }
-//
-//  private static func registerValue(_ value: UInt8) -> String {
-//    return "\(value.dec) (\(value.hex))"
-//  }
-//
-//  private static func registerValue(_ value: UInt16) -> String {
-//    return "\(value.dec) (\(value.hex))"
-//  }
-//
-//  private static func flagValue(_ value: Bool) -> String {
-//    return value ? "1" : "0"
-//  }
-//}
-
-// MARK: - Print additional info
-
-//extension Debugger {
-//
-//  private static func printAdditionalInfo(opcode: UnprefixedOpcode) {
-//    let length = getOpcodeLength(opcode)
-//    if length > 1 {
-//      print("> opcode - reading additional \(length - 1) byte(s) for arguments")
-//    }
-//
-//    let pc = "\(cpu.pc) (\(cpu.pc.hex))"
-//    switch opcode {
-//    case .call_a16, .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16:
-//      print("> call to \(pc)")
-//
-//    case .jp_a16, .jp_pHL:
-//      print("> jump to \(pc)")
-//    case  .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16:
-//      print("> conditional jump (don't know if taken). pc after: \(pc)")
-//
-//    case .jr_r8:
-//      print("> relative jump to \(pc)")
-//    case .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_z_r8:
-//      print("> relative conditional jump (don't know if taken). pc after \(pc)")
-//
-//    case .ret, .ret_c, .ret_nc, .ret_nz, .ret_z, .reti:
-//      print("> return to \(pc)")
-//    case .rst_00, .rst_08, .rst_10, .rst_18, .rst_20, .rst_28, .rst_30, .rst_38:
-//      print("> rst call to \(pc)")
-//
-//      //case .push_af, .push_bc, .push_de, .push_hl:
-//      //print("> push")
-//      //case .pop_af, .pop_bc, .pop_de, .pop_hl:
-//      //print("> pop")
-//
-//    case .prefix:
-//      print("> prefix - will read additional 8 bytes")
-//    default:
-//      break
-//    }
-//  }
-//}

@@ -31,68 +31,66 @@ public enum CombinedRegister {
   case hl
 }
 
+// TODO: To struct
 public class Registers {
 
   /// Accumulator: A
   /// An 8-bit register for storing data and the results of arithmetic and logical operations.
-  public var a: UInt8 = 0 { didSet { Debug.registersDidSet(.a) } }
+  public internal(set) var a: UInt8 = 0
 
   /// Auxiliary register: B
-  public var b: UInt8 = 0 { didSet { Debug.registersDidSet(.b) } }
+  public internal(set) var b: UInt8 = 0
 
   /// Auxiliary register: C
-  public var c: UInt8 = 0 { didSet { Debug.registersDidSet(.c) } }
+  public internal(set) var c: UInt8 = 0
 
   /// Auxiliary register: D
-  public var d: UInt8 = 0 { didSet { Debug.registersDidSet(.d) } }
+  public internal(set) var d: UInt8 = 0
 
   /// Auxiliary register: E
-  public var e: UInt8 = 0 { didSet { Debug.registersDidSet(.e) } }
+  public internal(set) var e: UInt8 = 0
 
   /// Auxiliary register: H
-  public var h: UInt8 = 0 { didSet { Debug.registersDidSet(.h) } }
+  public internal(set) var h: UInt8 = 0
 
   /// Auxiliary register: L
-  public var l: UInt8 = 0 { didSet { Debug.registersDidSet(.l) } }
+  public internal(set) var l: UInt8 = 0
 
   /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
-  public var zeroFlag: Bool = false { didSet { Debug.registersDidSet(.zeroFlag) } }
+  public internal(set) var zeroFlag: Bool = false
 
   /// N: Set to 1 following execution of the substruction instruction, regardless of the result.
-  public var subtractFlag: Bool = false { didSet { Debug.registersDidSet(.subtractFlag) } }
+  public internal(set) var subtractFlag: Bool = false
 
   /// H: Set to 1 when an operation results in carrying from or borrowing to bit 3.
-  public var halfCarryFlag: Bool = false { didSet { Debug.registersDidSet(.halfCarryFlag) } }
+  public internal(set) var halfCarryFlag: Bool = false
 
   /// CY: Set to 1 when an operation results in carrying from or borrowing to bit 7.
-  public var carryFlag: Bool = false { didSet { Debug.registersDidSet(.carryFlag) } }
+  public internal(set) var carryFlag: Bool = false
 
   // MARK: - Combined registers
 
-  public var bc: UInt16 {
+  public internal(set) var bc: UInt16 {
     get { return (UInt16(self.b) << 8) | UInt16(self.c) }
     set {
       self.b = UInt8((newValue & 0xff00) >> 8)
       self.c = UInt8(newValue & 0xff)
-      Debug.registersDidSet(.bc)
     }
   }
 
-  public var de: UInt16 {
+  public internal(set) var de: UInt16 {
     get { return (UInt16(self.d) << 8) | UInt16(self.e) }
     set {
       self.d = UInt8((newValue & 0xff00) >> 8)
       self.e = UInt8(newValue & 0xff)
-      Debug.registersDidSet(.de)
     }
   }
 
-  public var hl: UInt16 {
+  public internal(set) var hl: UInt16 {
     get { return (UInt16(self.h) << 8) | UInt16(self.l) }
     set {
       self.h = UInt8((newValue & 0xff00) >> 8)
       self.l = UInt8(newValue & 0xff)
-      Debug.registersDidSet(.hl)
     }
   }
 
@@ -134,7 +132,7 @@ public class Registers {
     }
   }
 
-  public func set(_ f: FlagRegister, to value: Bool) {
+  internal func set(_ f: FlagRegister, to value: Bool) {
     switch f {
     case .zeroFlag:      self.zeroFlag      = value
     case .subtractFlag:  self.subtractFlag  = value
@@ -143,7 +141,7 @@ public class Registers {
     }
   }
 
-  public func set(_ r: SingleRegister, to value: UInt8) {
+  internal func set(_ r: SingleRegister, to value: UInt8) {
     switch r {
     case .a: self.a = value
     case .b: self.b = value
@@ -155,7 +153,7 @@ public class Registers {
     }
   }
 
-  public func set(_ rr: CombinedRegister, to value: UInt16) {
+  internal func set(_ rr: CombinedRegister, to value: UInt16) {
     switch rr {
     case .af:
       self.a = UInt8((value & 0xff00) >> 8)

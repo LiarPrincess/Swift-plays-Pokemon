@@ -4,14 +4,8 @@
 
 extension Bus {
 
-  public func read(_ address: UInt16) -> UInt8 {
-    let value = self.readInternal(address)
-    Debug.busDidRead(from: address, value: value)
-    return value
-  }
-
   // swiftlint:disable:next function_body_length cyclomatic_complexity
-  internal func readInternal(_ address: UInt16) -> UInt8 {
+  public func read(_ address: UInt16) -> UInt8 {
     func read(_ region: ClosedRange<UInt16>, _ array: [UInt8]) -> UInt8 {
       return array[address - region.start]
     }

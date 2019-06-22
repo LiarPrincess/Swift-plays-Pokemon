@@ -10,6 +10,9 @@ public enum DebugMode {
   /// Print only executed opcodes
   case opcodes
 
+  /// Print only executed opcodes
+  case opcodesAndWrites
+
   /// Print everything
   case full
 }

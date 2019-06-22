@@ -25,9 +25,6 @@ public class GameBoy {
                    timer: self.timer)
 
     self.cpu = Cpu(bus: self.bus)
-
-    // in debug we support only 1 emulator (the last one created)
-    Debug.gameBoy = self
   }
 
   @discardableResult
