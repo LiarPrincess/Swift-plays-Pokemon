@@ -10,6 +10,12 @@ public class Lcd {
   /// 144 px = 18 tiles
   public static let height: UInt8 = 144
 
+  /// Total number of lines (lcd + vBlank)
+  internal static let totalLineCount: UInt8 = Lcd.height + LcdMode.vBlankLineCount
+
+  /// Number of cycles needed to draw the whole line
+  public static let cyclesPerLine: UInt16 = 456
+
   /// FF40 - LCDC - LCD Control
   public internal(set) var control = LcdControl()
 
@@ -58,6 +64,8 @@ public class Lcd {
   /// Data thst should be put on screen
   public internal(set) var framebuffer = Framebuffer()
 
+  private var lineProgress: UInt16 = 0
+
   internal init() {
     self.videoRam = [UInt8](memoryRange: MemoryMap.videoRam)
     self.oam = [UInt8](memoryRange: MemoryMap.oam)
@@ -65,14 +73,44 @@ public class Lcd {
 
   // MARK: - Tick
 
-  internal func clear() {
-    self.line = 0
-    // TODO: self.window.blank_screen()
+  internal func tick(cycles: UInt8) {
+    guard self.control.isLcdEnabled else {
+      // basically go to the beginning
+      self.line = 0
+      self.lineProgress = 0
+      // TODO: clear framebuffer (flag in framebuffer to avoid clear on every cycle)
+      self.status.mode = .vBlank
+      return
+    }
+
+    let previousMode = self.status.mode
+    self.advanceProgress(cycles: cycles)
+    self.updateMode()
+
+    let hasFinishedTransfer = previousMode == .pixelTransfer && self.status.mode == .hBlank
+    if hasFinishedTransfer {
+      self.drawLine()
+    }
   }
 
-  internal func startLine(_ line: UInt8) {
-    self.line = line
+  /// Advance progress (possibly moving to new line)
+  private func advanceProgress(cycles: UInt8) {
+    self.lineProgress += UInt16(cycles)
 
+    let isAdvancingLine = self.lineProgress > Lcd.cyclesPerLine
+    if isAdvancingLine {
+      self.lineProgress -= Lcd.cyclesPerLine
+
+      self.line += 1
+      if self.line > Lcd.totalLineCount {
+        self.line = 0
+      }
+
+      self.requestLineCompareInterruptIfEnabled()
+    }
+  }
+
+  private func requestLineCompareInterruptIfEnabled() {
     let hasInterrupt = self.lineCompare == line
 
     self.status.isLineCompareInterrupt = hasInterrupt
@@ -81,18 +119,39 @@ public class Lcd {
     }
   }
 
-  internal func setMode(_ mode: LcdMode) {
-    self.status.mode = mode
-    switch mode {
-    case .hBlank:
-      self.hasStatusInterrupt ||= self.status.isHBlankInterruptEnabled
-    case .vBlank:
-      self.hasVBlankInterrupt ||= self.status.isVBlankInterruptEnabled
-      self.hasStatusInterrupt ||= self.status.isVBlankInterruptEnabled
-    case .oamSearch:
-      self.hasStatusInterrupt ||= self.status.isOamInterruptEnabled
-    case .pixelTransfer:
+  /// Update STAT with new mode (after updating progress),
+  /// will also request any needed interrupt
+  private func updateMode() {
+    if self.line >= Lcd.height {
+      if self.status.mode != .vBlank {
+        self.status.mode = .vBlank
+        self.hasVBlankInterrupt ||= self.status.isVBlankInterruptEnabled
+        self.hasStatusInterrupt ||= self.status.isVBlankInterruptEnabled
+      }
+      return
+    }
+
+    let previousMode = self.status.mode
+    var requestInterrupt = false
+
+    switch self.lineProgress {
+    case LcdMode.oamSearchRange:
+      self.status.mode = .oamSearch
+      requestInterrupt = self.status.isOamInterruptEnabled
+
+    case LcdMode.pixelTransferRange:
+      self.status.mode = .pixelTransfer
+
+    case LcdMode.hBlankRange:
+      self.status.mode = .hBlank
+      requestInterrupt = self.status.isHBlankInterruptEnabled
+
+    default:
       break
+    }
+
+    if requestInterrupt && self.status.mode != previousMode {
+      self.hasStatusInterrupt = true
     }
   }
 
@@ -116,6 +175,7 @@ public class Lcd {
 //    }
   }
 
+  // TODO: process this whole tiles thing when loading carthrige
   private func drawBackgroundLine() {
     let map = self.control.backgroundTileMap
     let globalY = self.scrollY + self.line

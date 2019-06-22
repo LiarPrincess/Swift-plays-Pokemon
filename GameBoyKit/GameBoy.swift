@@ -29,52 +29,19 @@ public class GameBoy {
 
   @discardableResult
   public func tickFrame() -> Framebuffer {
-    // Technically not exactly correct (see: 'The Ultimate Game Boy Talk' 54:20),
-    // but I LOVE the simplicity of it (we ignore STAT during read/write anyway).
-    // Source: https://github.com/Baekalfen/PyBoy
-
-    let vBlankEnd = Lcd.height + LcdTimings.vBlankLineCount
-
-    guard self.lcd.control.isLcdEnabled else {
-      self.lcd.setMode(.vBlank)
-      self.lcd.clear()
-
-      for _ in 0..<vBlankEnd {
-        self.tickCpu(cycles: LcdTimings.lineLength)
-      }
-
-      return self.lcd.framebuffer
-    }
-
-    for line in 0..<Lcd.height {
-      self.lcd.startLine(line)
-
-      self.lcd.setMode(.oamSearch)
-      self.tickCpu(cycles: LcdTimings.oamSearchLength)
-
-      self.lcd.setMode(.pixelTransfer)
-      self.tickCpu(cycles: LcdTimings.pixelTransferLength)
-      self.lcd.drawLine()
-
-      self.lcd.setMode(.hBlank)
-      self.tickCpu(cycles: LcdTimings.hBlankLength)
-    }
-
-    self.lcd.setMode(.vBlank)
-    for line in Lcd.height..<vBlankEnd {
-      self.lcd.startLine(line)
-      self.tickCpu(cycles: LcdTimings.lineLength)
-    }
-
+    let lineCount = UInt32(Lcd.totalLineCount)
+    let cyclesPerLine = UInt32(Lcd.cyclesPerLine)
+    self.tickCpu(cycles: lineCount * cyclesPerLine)
     return self.lcd.framebuffer
   }
 
-  private func tickCpu(cycles totalCycles: UInt16 = 1) {
+  internal func tickCpu(cycles totalCycles: UInt32 = 1) {
     var remainingCycles = Int32(totalCycles) // so we can go < 0
 
     while remainingCycles > 0 {
       let cycles = self.cpu.tick()
       self.timer.tick(cycles: cycles)
+      self.lcd.tick(cycles: cycles)
 
       // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
 
