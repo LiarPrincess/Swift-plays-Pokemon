@@ -84,29 +84,4 @@ public class GameBoy {
       remainingCycles -= Int(cycles)
     }
   }
-
-  public func run(maxCycles: UInt64? = nil, lastPC: UInt16? = nil) {
-    Debug.emulatorWillStart()
-
-    let maxCycles = maxCycles ?? UInt64.max
-    let lastPC  = lastPC ?? UInt16.max
-
-    var brakepoint = false
-    while self.cpu.cycle <= maxCycles && self.cpu.pc != lastPC {
-      // ------------
-//      brakepoint ||= self.cpu.pc == 0x0039
-//      if brakepoint { // conditional brakepoint in lldb slows down code (by a lot)
-//        _ = 5
-//      }
-      // ------------
-
-      _ = self.cpu.tick()
-    }
-
-//    print("Finished:")
-//    print("  cycle: cpu: \(self.cpu.cycle.hex) max: \(maxCycles.hex) -> \(self.cpu.cycle > maxCycles)")
-//    print("  pc:    cpu: \(self.cpu.pc.hex) max: \(lastPC.hex) -> \(self.cpu.pc == lastPC)")
-//
-//    self.lcd.dump()
-  }
 }
