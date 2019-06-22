@@ -16,7 +16,7 @@ internal func performanceTest() {
   debugger.attach(gameBoy)
 
   let start = DispatchTime.now()
-  debugger.run(cycles: frameCount * fullFrame, lastPC: .max)
+  debugger.run(cycles: frameCount * fullFrame)
   let end = DispatchTime.now()
 
   let timeNano = end.uptimeNanoseconds - start.uptimeNanoseconds

@@ -20,9 +20,9 @@ public class GameBoy {
     self.cartridge = .bootrom
 
     self.bus = Bus(cartridge: self.cartridge,
-                   joypad: self.joypad,
-                   lcd: self.lcd,
-                   timer: self.timer)
+                   joypad:    self.joypad,
+                   lcd:       self.lcd,
+                   timer:     self.timer)
 
     self.cpu = Cpu(bus: self.bus)
   }
@@ -69,8 +69,8 @@ public class GameBoy {
     return self.lcd.framebuffer
   }
 
-  private func tickCpu(cycles totalCycles: UInt16) {
-    var remainingCycles = Int(totalCycles) // so we can go < 0
+  private func tickCpu(cycles totalCycles: UInt16 = 1) {
+    var remainingCycles = Int32(totalCycles) // so we can go < 0
 
     while remainingCycles > 0 {
       let cycles = self.cpu.tick()
@@ -78,7 +78,7 @@ public class GameBoy {
 
       // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
 
-      remainingCycles -= Int(cycles)
+      remainingCycles -= Int32(cycles)
     }
   }
 }

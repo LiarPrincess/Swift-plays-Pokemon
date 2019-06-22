@@ -54,7 +54,7 @@ extension Debugger {
 
     let pc = self.cpu.pc + 1
     let opcodeDesc = String(describing: opcode)
-    print("\(pc.hex): \(opcodeDesc.padLeft(toLength: 11)) (PREFIX)")
+    print("\(pc.hex): \(opcodeDesc.padLeft(toLength: 11))")
   }
 
   private func getOpcodeLength(_ opcode: UnprefixedOpcode) -> Int {
@@ -91,43 +91,43 @@ extension Debugger {
 
     switch opcode {
     case .call_a16:
-      print("> call to \(next16)")
+      print("  > call to \(next16)")
     case .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16:
       let taken = after.cpu.pc == next16 ? "TAKEN" : "NOT TAKEN"
-      print("> conditional call to \(next16) \(taken)")
+      print("  > conditional call to \(next16) \(taken)")
 
     case .jp_a16, .jp_pHL:
-      print("> jump to \(next16)")
+      print("  > jump to \(next16)")
     case  .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16:
       let taken = after.cpu.pc == next16 ? "TAKEN" : "NOT TAKEN"
-      print("> conditional jump to \(next16) \(taken)")
+      print("  > conditional jump to \(next16) \(taken)")
 
     case .jr_r8:
-      print("> relative jump to \(pc)")
+      print("  > relative jump to \(pc)")
     case .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_z_r8:
       let length = Int(2)
       let offset = Int8(bitPattern: next8)
       let predictedPc = Int(before.cpu.pc) + length + Int(offset)
       let taken = after.cpu.pc == predictedPc ? "TAKEN" : "NOT TAKEN"
-      print("> relative conditional jump to \(predictedPc) \(taken)")
+      print("  > relative conditional jump to \(predictedPc) \(taken)")
 
     case .ret:
-      print("> return to \(after.cpu.pc)")
+      print("  > return to \(after.cpu.pc)")
     case .ret_c, .ret_nc, .ret_nz, .ret_z, .reti:
       let length: UInt16 = 1
       let taken = after.cpu.pc == before.cpu.pc + length ? "NOT TAKEN" : "TAKEN"
-      print("> conditional return \(taken)")
+      print("  > conditional return \(taken)")
 
     case .rst_00, .rst_08, .rst_10, .rst_18, .rst_20, .rst_28, .rst_30, .rst_38:
-      print("> rst call: \(opcode)")
+      print("  > rst call: \(opcode)")
 
     case .push_af, .push_bc, .push_de, .push_hl:
-      print("> push")
+      print("  > push")
     case .pop_af, .pop_bc, .pop_de, .pop_hl:
-      print("> pop")
+      print("  > pop")
 
     case .prefix:
-      print("> prefix instruction")
+      print("  > prefix instruction")
 
     default:
       break
@@ -142,17 +142,17 @@ extension Debugger {
     let b = before.cpu
     let a = after.cpu
 
-    if b.a != a.a { print("> cpu.a <- \(a.a)") }
-    if b.b != a.b { print("> cpu.b <- \(a.b)") }
-    if b.c != a.c { print("> cpu.c <- \(a.c)") }
-    if b.d != a.d { print("> cpu.d <- \(a.d)") }
-    if b.e != a.e { print("> cpu.e <- \(a.e)") }
-    if b.h != a.h { print("> cpu.h <- \(a.h)") }
-    if b.l != a.l { print("> cpu.l <- \(a.l)") }
-    if b.zeroFlag      != a.zeroFlag      { print("> cpu.zeroFlag      <- \(a.zeroFlag)") }
-    if b.subtractFlag  != a.subtractFlag  { print("> cpu.subtractFlag  <- \(a.subtractFlag)") }
-    if b.halfCarryFlag != a.halfCarryFlag { print("> cpu.halfCarryFlag <- \(a.halfCarryFlag)") }
-    if b.carryFlag     != a.carryFlag     { print("> cpu.carryFlag     <- \(a.carryFlag)") }
+    if b.a != a.a { print("  > cpu.a <- \(a.a)") }
+    if b.b != a.b { print("  > cpu.b <- \(a.b)") }
+    if b.c != a.c { print("  > cpu.c <- \(a.c)") }
+    if b.d != a.d { print("  > cpu.d <- \(a.d)") }
+    if b.e != a.e { print("  > cpu.e <- \(a.e)") }
+    if b.h != a.h { print("  > cpu.h <- \(a.h)") }
+    if b.l != a.l { print("  > cpu.l <- \(a.l)") }
+    if b.zeroFlag      != a.zeroFlag      { print("  > cpu.zeroFlag      <- \(a.zeroFlag)") }
+    if b.subtractFlag  != a.subtractFlag  { print("  > cpu.subtractFlag  <- \(a.subtractFlag)") }
+    if b.halfCarryFlag != a.halfCarryFlag { print("  > cpu.halfCarryFlag <- \(a.halfCarryFlag)") }
+    if b.carryFlag     != a.carryFlag     { print("  > cpu.carryFlag     <- \(a.carryFlag)") }
   }
 
   // MARK: - Print register values
@@ -164,10 +164,9 @@ extension Debugger {
 
     let r = registers
     print("""
-        cycle: \(cpu.cycle)
         pc: \(cpu.pc) (\(cpu.pc.hex))
-        sp: \(cpu.sp) (\(cpu.sp.hex))
-          \(stackValues.reversed().map { $0.hex })
+        sp: \(cpu.sp) (\(cpu.sp.hex)) \(stackValues.reversed().map { $0.hex })
+        cycle: \(cpu.cycle)
         auxiliary registers:
           a: \(registerValue(r.a))
           b: \(registerValue(r.b)) | c: \(registerValue(r.c)) | bc: \(registerValue(r.bc))

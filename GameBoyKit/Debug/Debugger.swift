@@ -21,19 +21,23 @@ public class Debugger {
     self.gameBoy = gameBoy
   }
 
-  public func run(cycles: Int64? = nil, lastPC: UInt16? = nil) {
+  public func run(mode:         DebugMode = .none,
+                  cycles:       Int64     = Int64.max,
+                  instructions: Int64     = Int64.max,
+                  lastPC:       UInt16    = UInt16.max) {
+
     guard self.gameBoy != nil else {
       print("No emulator attached!")
       return
     }
 
-    var remainingCycles = cycles ?? Int64.max
-    let lastPC          = lastPC ?? UInt16.max
+    var remainingCycles = cycles
+    var remainingInstructions = instructions
 
     var stateBefore = GameBoyState()
     var stateAfter  = GameBoyState()
 
-    while remainingCycles >= 0 && self.cpu.pc != lastPC {
+    while remainingCycles >= 0 && remainingInstructions > 0 && self.cpu.pc != lastPC {
       if mode == .opcodes || mode == .opcodesAndWrites || mode == .full {
         self.printNextOpcode()
       }
@@ -53,16 +57,11 @@ public class Debugger {
       }
 
       if mode == .opcodesAndWrites || mode == .full {
-        self.printSeparator()
+        print()
       }
 
+      remainingInstructions -= 1
       remainingCycles -= Int64(cycles)
     }
-  }
-
-  private func printSeparator() {
-    print()
-    print("---------------------")
-    print()
   }
 }

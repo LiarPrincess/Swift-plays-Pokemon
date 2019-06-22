@@ -33,7 +33,7 @@ func pyTest(_ p: PyBoy) {
   let s = GameBoy()
   let debugger = Debugger(mode: .none)
   debugger.attach(s)
-  debugger.run(cycles: .max, lastPC: p.cpu.pc)
+  debugger.run(lastPC: p.cpu.pc)
 
   if s.cpu.pc  != p.cpu.pc  { print("  pc: \(s.cpu.pc.hex) vs \(p.cpu.pc.hex)") }
   if s.cpu.sp  != p.cpu.sp  { print("  sp: \(s.cpu.sp.hex) vs \(p.cpu.sp.hex)") }
