@@ -28,7 +28,6 @@
 		906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A322B8453F00F2766D /* CustomTimerTests.swift */; };
 		9085FC3122B690C600310090 /* ColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* ColorPalettes.swift */; };
 		9085FC3322B693F200310090 /* ColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* ColorPaletteTests.swift */; };
-		9085FC3922B6BBED00310090 /* CpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3822B6BBED00310090 /* CpuBus.swift */; };
 		9085FC3B22B6BC7400310090 /* FakeCpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */; };
 		9085FC3D22B6BF6A00310090 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3C22B6BF6A00310090 /* main.swift */; };
 		9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */; };
@@ -180,7 +179,6 @@
 		906073A322B8453F00F2766D /* CustomTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimerTests.swift; sourceTree = "<group>"; };
 		9085FC3022B690C600310090 /* ColorPalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalettes.swift; sourceTree = "<group>"; };
 		9085FC3222B693F200310090 /* ColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteTests.swift; sourceTree = "<group>"; };
-		9085FC3822B6BBED00310090 /* CpuBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuBus.swift; sourceTree = "<group>"; };
 		9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCpuBus.swift; sourceTree = "<group>"; };
 		9085FC3C22B6BF6A00310090 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
@@ -312,7 +310,6 @@
 				90A17BBE229D5B710027133B /* Tests */,
 				90A17B82229D59D50027133B /* Registers.swift */,
 				90A17B8E229D59D50027133B /* Cpu.swift */,
-				9085FC3822B6BBED00310090 /* CpuBus.swift */,
 				90A17B81229D59D40027133B /* Cpu+Instructions.swift */,
 				90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */,
 				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
@@ -789,7 +786,6 @@
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */,
 				90D404AE22AC76FC00AEF7BD /* InterruptEnable.swift in Sources */,
-				9085FC3922B6BBED00310090 /* CpuBus.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
 				90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */,
