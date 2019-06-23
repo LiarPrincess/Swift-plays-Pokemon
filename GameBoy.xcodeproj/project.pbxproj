@@ -46,10 +46,10 @@
 		90A17B90229D59D50027133B /* Cpu+Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B81229D59D40027133B /* Cpu+Instructions.swift */; };
 		90A17B91229D59D50027133B /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B82229D59D50027133B /* Registers.swift */; };
 		90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B84229D59D50027133B /* UInt+radixFormat.swift */; };
-		90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */; };
+		90A17B95229D59D50027133B /* CBPrefixedSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B86229D59D50027133B /* CBPrefixedSymbols.swift */; };
 		90A17B98229D59D50027133B /* Cpu+ExecuteUnprefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */; };
 		90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */; };
-		90A17B9B229D59D50027133B /* UnprefixedOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */; };
+		90A17B9B229D59D50027133B /* UnprefixedSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8C229D59D50027133B /* UnprefixedSymbols.swift */; };
 		90A17B9D229D59D50027133B /* Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B8E229D59D50027133B /* Cpu.swift */; };
 		90A17BA8229D59EE0027133B /* CpuRotateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B9F229D59EE0027133B /* CpuRotateTests.swift */; };
 		90A17BA9229D59EE0027133B /* CpuCallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BA0229D59EE0027133B /* CpuCallTests.swift */; };
@@ -61,7 +61,7 @@
 		90A17BAF229D59EE0027133B /* CpuLdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BA6229D59EE0027133B /* CpuLdTests.swift */; };
 		90A17BB0229D59EE0027133B /* CpuOtherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BA7229D59EE0027133B /* CpuOtherTests.swift */; };
 		90A17BB7229D59FC0027133B /* OpenOpcodesFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB1229D59FC0027133B /* OpenOpcodesFile.swift */; };
-		90A17BB8229D59FC0027133B /* PrintOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB2229D59FC0027133B /* PrintOpcodes.swift */; };
+		90A17BB8229D59FC0027133B /* PrintSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB2229D59FC0027133B /* PrintSymbols.swift */; };
 		90A17BB9229D59FC0027133B /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17BB3229D59FC0027133B /* Opcode.swift */; };
 		90A56A3522A3DD0D0055A013 /* GameBoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A56A3422A3DD0D0055A013 /* GameBoy.swift */; };
 		90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A90C2822B8130C00DC833F /* Range+start+end.swift */; };
@@ -203,10 +203,10 @@
 		90A17B81229D59D40027133B /* Cpu+Instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+Instructions.swift"; sourceTree = "<group>"; };
 		90A17B82229D59D50027133B /* Registers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registers.swift; sourceTree = "<group>"; };
 		90A17B84229D59D50027133B /* UInt+radixFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt+radixFormat.swift"; sourceTree = "<group>"; };
-		90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBPrefixedOpcodes.swift; sourceTree = "<group>"; };
+		90A17B86229D59D50027133B /* CBPrefixedSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBPrefixedSymbols.swift; sourceTree = "<group>"; };
 		90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+ExecuteUnprefixed.swift"; sourceTree = "<group>"; };
 		90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cpu+ExecutePrefixed.swift"; sourceTree = "<group>"; };
-		90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnprefixedOpcodes.swift; sourceTree = "<group>"; };
+		90A17B8C229D59D50027133B /* UnprefixedSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnprefixedSymbols.swift; sourceTree = "<group>"; };
 		90A17B8E229D59D50027133B /* Cpu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cpu.swift; sourceTree = "<group>"; };
 		90A17B9F229D59EE0027133B /* CpuRotateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuRotateTests.swift; sourceTree = "<group>"; };
 		90A17BA0229D59EE0027133B /* CpuCallTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuCallTests.swift; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 		90A17BA6229D59EE0027133B /* CpuLdTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuLdTests.swift; sourceTree = "<group>"; };
 		90A17BA7229D59EE0027133B /* CpuOtherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuOtherTests.swift; sourceTree = "<group>"; };
 		90A17BB1229D59FC0027133B /* OpenOpcodesFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenOpcodesFile.swift; sourceTree = "<group>"; };
-		90A17BB2229D59FC0027133B /* PrintOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintOpcodes.swift; sourceTree = "<group>"; };
+		90A17BB2229D59FC0027133B /* PrintSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintSymbols.swift; sourceTree = "<group>"; };
 		90A17BB3229D59FC0027133B /* Opcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
 		90A17BB5229D59FC0027133B /* opcodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = opcodes.json; sourceTree = "<group>"; };
 		90A56A3422A3DD0D0055A013 /* GameBoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoy.swift; sourceTree = "<group>"; };
@@ -316,8 +316,8 @@
 				90A17B81229D59D40027133B /* Cpu+Instructions.swift */,
 				90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */,
 				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
-				90A17B8C229D59D50027133B /* UnprefixedOpcodes.swift */,
-				90A17B86229D59D50027133B /* CBPrefixedOpcodes.swift */,
+				90A17B8C229D59D50027133B /* UnprefixedSymbols.swift */,
+				90A17B86229D59D50027133B /* CBPrefixedSymbols.swift */,
 			);
 			path = Cpu;
 			sourceTree = "<group>";
@@ -396,7 +396,7 @@
 				90A17BB3229D59FC0027133B /* Opcode.swift */,
 				90C2AD3E22A1DFD500F5A7AF /* Common.swift */,
 				90A17BB1229D59FC0027133B /* OpenOpcodesFile.swift */,
-				90A17BB2229D59FC0027133B /* PrintOpcodes.swift */,
+				90A17BB2229D59FC0027133B /* PrintSymbols.swift */,
 				90C2AD4022A1E47000F5A7AF /* PrintExecute.swift */,
 				90C2AD4222A2699100F5A7AF /* ModifyInstructions.swift */,
 				90A17B7C229D59B10027133B /* main.swift */,
@@ -807,7 +807,7 @@
 				905321BA22BE563200A409B2 /* Restorable.swift in Sources */,
 				905321B222BE479800A409B2 /* DebugMode.swift in Sources */,
 				90B0DC4822B6F0CD005BBCF5 /* Interrupt.swift in Sources */,
-				90A17B9B229D59D50027133B /* UnprefixedOpcodes.swift in Sources */,
+				90A17B9B229D59D50027133B /* UnprefixedSymbols.swift in Sources */,
 				905321B522BE48EE00A409B2 /* Debugger+Cpu.swift in Sources */,
 				90A17B90229D59D50027133B /* Cpu+Instructions.swift in Sources */,
 				90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */,
@@ -824,7 +824,7 @@
 				905321B822BE552700A409B2 /* CpuState.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,
 				902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */,
-				90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */,
+				90A17B95229D59D50027133B /* CBPrefixedSymbols.swift in Sources */,
 				90B0DC4422B6EC89005BBCF5 /* Lcd.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,7 +867,7 @@
 				90C2AD4322A2699100F5A7AF /* ModifyInstructions.swift in Sources */,
 				90A17B7D229D59B10027133B /* main.swift in Sources */,
 				90A17BB9229D59FC0027133B /* Opcode.swift in Sources */,
-				90A17BB8229D59FC0027133B /* PrintOpcodes.swift in Sources */,
+				90A17BB8229D59FC0027133B /* PrintSymbols.swift in Sources */,
 				90A17BB7229D59FC0027133B /* OpenOpcodesFile.swift in Sources */,
 				90C2AD3F22A1DFD500F5A7AF /* Common.swift in Sources */,
 				90C2AD4122A1E47000F5A7AF /* PrintExecute.swift in Sources */,

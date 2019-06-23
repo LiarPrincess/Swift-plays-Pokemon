@@ -5,13 +5,13 @@
 // This file was auto-generated.
 // DO NOT EDIT!
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 // swiftlint:disable trailing_newline
 
-/// One of the additional 256 opcodes that should be executed if standard opcode is 0xCB.
-/// See official "Gameboy programming manual" for details of each operation.
+/// One of the 256 opcodes that should be executed if opcode is 0xCB.
+/// See official "Gameboy programming manual" for details.
+/// (Because of performance this enum should be used only for debug.)
 public enum CBPrefixedOpcode: UInt8, RawRepresentable {
   case rlc_b = 0x0
   case rlc_c = 0x1

@@ -1375,15 +1375,6 @@ extension Cpu {
     self.cycle &+= 4
   }
 
-  /// Execute one of the CBPrefixed opcodes
-  internal func prefix(_ n: UInt8) {
-    guard let opcode = CBPrefixedOpcode(rawValue: n) else {
-      fatalError("Tried to execute non existing cb-prefixed opcode '\(n.hex)'.")
-    }
-
-    self.execute(opcode)
-  }
-
   /// Stop, blank the screen and wait for button press
   internal func stop() {
     fatalError("Stop is not implemented!")

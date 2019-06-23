@@ -2,20 +2,22 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-func printOpcodes(_ opcodes: Opcodes) {
+func printSymbols(_ opcodes: Opcodes) {
   printHeader()
 
   print("/// One of the standard 256 opcodes.")
-  print("/// See official \"Gameboy programming manual\" for details of each operation.")
-  printOpcodeEnum("UnprefixedOpcode", opcodes.unprefixed)
+  print("/// See official \"Gameboy programming manual\" for details.")
+  print("/// (Because of performance this enum should be used only for debug.)")
+  printSymbolEnum("UnprefixedOpcode", opcodes.unprefixed)
 }
 
-func printPrefixOpcodes(_ opcodes: Opcodes) {
+func printPrefixSymbols(_ opcodes: Opcodes) {
   printHeader()
 
-  print("/// One of the additional 256 opcodes that should be executed if standard opcode is 0xCB.")
-  print("/// See official \"Gameboy programming manual\" for details of each operation.")
-  printOpcodeEnum("CBPrefixedOpcode", opcodes.cbprefixed)
+  print("/// One of the 256 opcodes that should be executed if opcode is 0xCB.")
+  print("/// See official \"Gameboy programming manual\" for details.")
+  print("/// (Because of performance this enum should be used only for debug.)")
+  printSymbolEnum("CBPrefixedOpcode", opcodes.cbprefixed)
 }
 
 // MARK: - Printing
@@ -37,8 +39,8 @@ private func printHeader() {
   print("")
 }
 
-private func printOpcodeEnum(_ className: String, _ opcodes: [Opcode]) {
-  print("public enum \(className): UInt8, RawRepresentable {")
+private func printSymbolEnum(_ enumName: String, _ opcodes: [Opcode]) {
+  print("public enum \(enumName): UInt8, RawRepresentable {")
 
   // Some opcodes are missing
   let opcodeByAddress = byAddress(opcodes)

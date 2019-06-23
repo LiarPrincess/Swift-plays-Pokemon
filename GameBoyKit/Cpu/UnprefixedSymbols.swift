@@ -5,13 +5,13 @@
 // This file was auto-generated.
 // DO NOT EDIT!
 
-// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 // swiftlint:disable trailing_newline
 
 /// One of the standard 256 opcodes.
-/// See official "Gameboy programming manual" for details of each operation.
+/// See official "Gameboy programming manual" for details.
+/// (Because of performance this enum should be used only for debug.)
 public enum UnprefixedOpcode: UInt8, RawRepresentable {
   case nop = 0x0
   case ld_bc_d16 = 0x1

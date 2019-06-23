@@ -45,13 +45,10 @@ public class Cpu {
       return 0
     }
 
-    let rawOpcode = self.read(self.pc)
-    guard let opcode = UnprefixedOpcode(rawValue: rawOpcode) else {
-      fatalError("Tried to execute non existing opcode '\(rawOpcode.hex)'.")
-    }
-
     let oldCycle = self.cycle
-    self.execute(opcode)
+
+    let opcode = self.read(self.pc)
+    self.executeUnprefixed(opcode)
 
     return UInt8(self.calculateDuration(oldCycle))
   }

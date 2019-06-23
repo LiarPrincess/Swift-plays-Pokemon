@@ -11,13 +11,13 @@ let cpuDir = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathCompon
 let opcodes = try openOpcodesFile()
 defer { fclose(stdout) }
 
-var file = cpuDir.appendingPathComponent("UnprefixedOpcodes.swift")
+var file = cpuDir.appendingPathComponent("UnprefixedSymbols.swift")
 freopen(file.path, "w", stdout)
-printOpcodes(opcodes)
+printSymbols(opcodes)
 
-file = cpuDir.appendingPathComponent("CBPrefixedOpcodes.swift")
+file = cpuDir.appendingPathComponent("CBPrefixedSymbols.swift")
 freopen(file.path, "w", stdout)
-printPrefixOpcodes(opcodes)
+printPrefixSymbols(opcodes)
 
 file = cpuDir.appendingPathComponent("Cpu+ExecuteUnprefixed.swift")
 freopen(file.path, "w", stdout)

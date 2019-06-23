@@ -305,7 +305,7 @@ func getUnprefixedOpcodeCall(_ opcode: Opcode) -> String {
   case "scf":    return "scf()"
   case "ccf":    return "ccf()"
   case "halt":   return "halt()"
-  case "prefix": return "prefix(\(next8))"
+  case "prefix": return "executePrefixed(\(next8))"
   case "di":     return "di()"
   case "ei":     return "ei()"
 
