@@ -7,8 +7,10 @@
 
 import GameBoyKit
 
-private var checkedAddresses: Set<UInt16> {
+private var checkedAddresses: Set<UInt16> = {
   var result = Set<UInt16>()
+
+  // add all interesting regions
   MemoryMap.rom0.forEach { result.insert($0) }
   MemoryMap.rom1.forEach { result.insert($0) }
   MemoryMap.videoRam.forEach { result.insert($0) }
@@ -17,15 +19,58 @@ private var checkedAddresses: Set<UInt16> {
   MemoryMap.internalRamEcho.forEach { result.insert($0) }
   MemoryMap.oam.forEach { result.insert($0) }
   MemoryMap.notUsable.forEach { result.insert($0) }
-  MemoryMap.io.forEach { result.insert($0) }
+  result.insert(MemoryMap.IO.joypad)
+  result.insert(MemoryMap.IO.sb)
+  result.insert(MemoryMap.IO.sc)
+  result.insert(MemoryMap.Timer.div)
+  result.insert(MemoryMap.Timer.tima)
+  result.insert(MemoryMap.Timer.tma)
+  result.insert(MemoryMap.Timer.tac)
+  result.insert(MemoryMap.Audio.nr10)
+  result.insert(MemoryMap.Audio.nr11)
+  result.insert(MemoryMap.Audio.nr12)
+  result.insert(MemoryMap.Audio.nr13)
+  result.insert(MemoryMap.Audio.nr14)
+  result.insert(MemoryMap.Audio.nr21)
+  result.insert(MemoryMap.Audio.nr22)
+  result.insert(MemoryMap.Audio.nr23)
+  result.insert(MemoryMap.Audio.nr24)
+  result.insert(MemoryMap.Audio.nr30)
+  result.insert(MemoryMap.Audio.nr31)
+  result.insert(MemoryMap.Audio.nr32)
+  result.insert(MemoryMap.Audio.nr33)
+  result.insert(MemoryMap.Audio.nr34)
+  result.insert(MemoryMap.Audio.nr41)
+  result.insert(MemoryMap.Audio.nr42)
+  result.insert(MemoryMap.Audio.nr43)
+  result.insert(MemoryMap.Audio.nr44)
+  result.insert(MemoryMap.Audio.nr50)
+  result.insert(MemoryMap.Audio.nr51)
+  result.insert(MemoryMap.Audio.nr52)
+  result.insert(MemoryMap.Audio.nr3_ram_start)
+  result.insert(MemoryMap.Audio.nr3_ram_end)
+  result.insert(MemoryMap.Lcd.control)
+  result.insert(MemoryMap.Lcd.status)
+  result.insert(MemoryMap.Lcd.scrollY)
+  result.insert(MemoryMap.Lcd.scrollX)
+  result.insert(MemoryMap.Lcd.line)
+  result.insert(MemoryMap.Lcd.lineCompare)
+  result.insert(MemoryMap.Lcd.dma)
+  result.insert(MemoryMap.Lcd.backgroundColors)
+  result.insert(MemoryMap.Lcd.objectColors0)
+  result.insert(MemoryMap.Lcd.objectColors1)
+  result.insert(MemoryMap.Lcd.windowY)
+  result.insert(MemoryMap.Lcd.windowX)
   result.insert(MemoryMap.unmapBootrom)
   MemoryMap.highRam.forEach { result.insert($0) }
   result.insert(MemoryMap.interruptEnable)
-  //  (0x0000...0x00ff).forEach { skipAddress.insert($0) } // bootrom
-  //  (0x0104...0x0133).forEach { skipAddress.insert($0) } // nintendo logo
-  //  (0xfea0...0xfeff).forEach { skipAddress.insert($0) } // not usable
+
+  // and remove some of them
+  (0x0000...0x00ff).forEach { result.remove($0) } // bootrom
+  (0x0104...0x014f).forEach { result.remove($0) } // nintendo logo + checksum
+
   return result
-}
+}()
 
 func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) {
   print("\(p.filename)")
@@ -54,7 +99,8 @@ func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) {
     let sValue = s.bus.read(address)
 
     if sValue != pValue {
-      print("  mem \(address.hex): \(sValue.hex) vs \(pValue.hex)")
+      let desc = MemoryMap.describe(address: address)
+      print("  memory \(address.hex): \(sValue.hex) vs \(pValue.hex) (\(desc))")
     }
   }
 }

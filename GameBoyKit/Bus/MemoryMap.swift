@@ -76,3 +76,72 @@ public enum MemoryMap {
     public static let windowX:          UInt16 = 0xff4b
   }
 }
+
+extension MemoryMap {
+
+  public static func describe(address: UInt16) -> String {
+    switch address {
+    case rom0:            return "rom0"
+    case rom1:            return "rom1"
+    case videoRam:        return "videoRam"
+    case externalRam:     return "externalRam"
+    case internalRam:     return "internalRam"
+    case internalRamEcho: return "internalRamEcho"
+    case oam:             return "oam"
+    case notUsable:       return "notUsable"
+    case io:              return describeIO(address: address)
+    case unmapBootrom:    return "unmapBootrom"
+    case highRam:         return "highRam"
+    case interruptEnable: return "interruptEnable"
+    default: return "unknown"
+    }
+  }
+
+  private static func describeIO(address: UInt16) -> String {
+    switch address {
+    case IO.joypad: return "IO.joypad"
+    case IO.sb:     return "IO.sb"
+    case IO.sc:     return "IO.sc"
+    case Timer.div:  return "Timer.div"
+    case Timer.tima: return "Timer.tima"
+    case Timer.tma:  return "Timer.tma"
+    case Timer.tac:  return "Timer.tac"
+    case Audio.nr10:          return "Audio.nr10"
+    case Audio.nr11:          return "Audio.nr11"
+    case Audio.nr12:          return "Audio.nr12"
+    case Audio.nr13:          return "Audio.nr13"
+    case Audio.nr14:          return "Audio.nr14"
+    case Audio.nr21:          return "Audio.nr21"
+    case Audio.nr22:          return "Audio.nr22"
+    case Audio.nr23:          return "Audio.nr23"
+    case Audio.nr24:          return "Audio.nr24"
+    case Audio.nr30:          return "Audio.nr30"
+    case Audio.nr31:          return "Audio.nr31"
+    case Audio.nr32:          return "Audio.nr32"
+    case Audio.nr33:          return "Audio.nr33"
+    case Audio.nr34:          return "Audio.nr34"
+    case Audio.nr41:          return "Audio.nr41"
+    case Audio.nr42:          return "Audio.nr42"
+    case Audio.nr43:          return "Audio.nr43"
+    case Audio.nr44:          return "Audio.nr44"
+    case Audio.nr50:          return "Audio.nr50"
+    case Audio.nr51:          return "Audio.nr51"
+    case Audio.nr52:          return "Audio.nr52"
+    case Audio.nr3_ram_start: return "Audio.nr3_ram_start"
+    case Audio.nr3_ram_end:   return "Audio.nr3_ram_end"
+    case Lcd.control: return "Lcd.control"
+    case Lcd.status:  return "Lcd.status"
+    case Lcd.scrollY: return "Lcd.scrollY"
+    case Lcd.scrollX: return "Lcd.scrollX"
+    case Lcd.line:        return "Lcd.line"
+    case Lcd.lineCompare: return "Lcd.lineCompare"
+    case Lcd.dma:         return "Lcd.dma"
+    case Lcd.backgroundColors: return "Lcd.backgroundColors"
+    case Lcd.objectColors0:    return "Lcd.objectColors0"
+    case Lcd.objectColors1:    return "Lcd.objectColors1"
+    case Lcd.windowY: return "Lcd.windowY"
+    case Lcd.windowX: return "Lcd.windowX"
+    default: return "unknown IO"
+    }
+  }
+}
