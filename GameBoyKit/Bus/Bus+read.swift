@@ -6,8 +6,8 @@ extension Bus {
 
   // swiftlint:disable:next function_body_length cyclomatic_complexity
   public func read(_ address: UInt16) -> UInt8 {
-    func read(_ region: ClosedRange<UInt16>, _ array: [UInt8]) -> UInt8 {
-      return array[address - region.start]
+    func read(_ region: ClosedRange<UInt16>, _ data: Data) -> UInt8 {
+      return data[address - region.start]
     }
 
     switch address {

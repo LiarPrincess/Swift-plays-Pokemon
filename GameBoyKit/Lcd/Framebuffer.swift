@@ -14,9 +14,9 @@ public class Framebuffer {
   // so that we can upload it to gpu.
 
   /// Data that should be put on screen
-  public private(set) lazy var data: [UInt8] = {
-    let count = UInt16(Lcd.width) * UInt16(Lcd.height)
-    return [UInt8](repeating: 0, count: count)
+  public private(set) lazy var data: Data = {
+    let count = Int(Lcd.width) * Int(Lcd.height)
+    return Data(count: count)
   }()
 
   public internal(set) subscript(x: UInt8, y: UInt8) -> UInt8 {

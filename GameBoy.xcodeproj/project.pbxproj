@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96A22BF825B00026960 /* Data+initFromRange.swift */; };
+		902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96C22BF85B600026960 /* Data+UInt.swift */; };
 		903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DB22BB903A003132FA /* Lcd+Dump.swift */; };
 		903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */; };
 		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
 		903DB4E222BC0C76003132FA /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4E122BC0C76003132FA /* Shader.metal */; };
-		904B89CE22A5C8FB00F5FEFE /* Array+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */; };
 		905321AA22BE378300A409B2 /* OrEqualOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321A922BE378300A409B2 /* OrEqualOperator.swift */; };
 		905321AC22BE410900A409B2 /* performanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321AB22BE410900A409B2 /* performanceTest.swift */; };
 		905321B022BE46E800A409B2 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321AF22BE46E800A409B2 /* Debugger.swift */; };
@@ -83,7 +84,7 @@
 		90CBB72922AD75B4004775E2 /* String+padTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB72822AD75B4004775E2 /* String+padTests.swift */; };
 		90CBB72C22AD7632004775E2 /* InterruptEnableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB71F22AD7594004775E2 /* InterruptEnableTests.swift */; };
 		90CBB73022AD7818004775E2 /* UInt+radixFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB72F22AD7818004775E2 /* UInt+radixFormatTests.swift */; };
-		90CBB73222AD7AE3004775E2 /* Array+UIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB73122AD7AE3004775E2 /* Array+UIntTests.swift */; };
+		90CBB73222AD7AE3004775E2 /* Data+UIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */; };
 		90CBD3CB22BD62B700B58461 /* Framebuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CA22BD62B700B58461 /* Framebuffer.swift */; };
 		90CBD3CD22BD6AA000B58461 /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CC22BD6AA000B58461 /* Metal.swift */; };
 		90CBD3D722BD81F000B58461 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3D622BD81F000B58461 /* main.swift */; };
@@ -155,6 +156,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		902CA96A22BF825B00026960 /* Data+initFromRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+initFromRange.swift"; sourceTree = "<group>"; };
+		902CA96C22BF85B600026960 /* Data+UInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UInt.swift"; sourceTree = "<group>"; };
 		903818D922B57976004E5281 /* PyBoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyBoy.swift; sourceTree = "<group>"; };
 		903818DB22B579EC004E5281 /* PyLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyLoad.swift; sourceTree = "<group>"; };
 		903818DD22B57B8A004E5281 /* PyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyTest.swift; sourceTree = "<group>"; };
@@ -162,7 +165,6 @@
 		903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileIndexTests.swift; sourceTree = "<group>"; };
 		903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoyRenderer.swift; sourceTree = "<group>"; };
 		903DB4E122BC0C76003132FA /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
-		904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+UInt.swift"; sourceTree = "<group>"; };
 		905321A922BE378300A409B2 /* OrEqualOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrEqualOperator.swift; sourceTree = "<group>"; };
 		905321AB22BE410900A409B2 /* performanceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = performanceTest.swift; sourceTree = "<group>"; };
 		905321AF22BE46E800A409B2 /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
@@ -240,7 +242,7 @@
 		90CBB71F22AD7594004775E2 /* InterruptEnableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterruptEnableTests.swift; sourceTree = "<group>"; };
 		90CBB72822AD75B4004775E2 /* String+padTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+padTests.swift"; sourceTree = "<group>"; };
 		90CBB72F22AD7818004775E2 /* UInt+radixFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+radixFormatTests.swift"; sourceTree = "<group>"; };
-		90CBB73122AD7AE3004775E2 /* Array+UIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+UIntTests.swift"; sourceTree = "<group>"; };
+		90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UIntTests.swift"; sourceTree = "<group>"; };
 		90CBD3CA22BD62B700B58461 /* Framebuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Framebuffer.swift; sourceTree = "<group>"; };
 		90CBD3CC22BD6AA000B58461 /* Metal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
 		90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBootromTests.swift; sourceTree = "<group>"; };
@@ -472,9 +474,10 @@
 			isa = PBXGroup;
 			children = (
 				90CBB71822AD74D3004775E2 /* Tests */,
-				904B89CD22A5C8FB00F5FEFE /* Array+UInt.swift */,
 				908D6E0B229DDECD00523C18 /* String+pad.swift */,
 				90A17B84229D59D50027133B /* UInt+radixFormat.swift */,
+				902CA96A22BF825B00026960 /* Data+initFromRange.swift */,
+				902CA96C22BF85B600026960 /* Data+UInt.swift */,
 				90A90C2822B8130C00DC833F /* Range+start+end.swift */,
 				905321A922BE378300A409B2 /* OrEqualOperator.swift */,
 			);
@@ -484,7 +487,7 @@
 		90CBB71822AD74D3004775E2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				90CBB73122AD7AE3004775E2 /* Array+UIntTests.swift */,
+				90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */,
 				90CBB72822AD75B4004775E2 /* String+padTests.swift */,
 				90CBB72F22AD7818004775E2 /* UInt+radixFormatTests.swift */,
 			);
@@ -786,7 +789,6 @@
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */,
 				90D404AE22AC76FC00AEF7BD /* InterruptEnable.swift in Sources */,
-				904B89CE22A5C8FB00F5FEFE /* Array+UInt.swift in Sources */,
 				9085FC3922B6BBED00310090 /* CpuBus.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
@@ -818,8 +820,10 @@
 				905321BE22BE649C00A409B2 /* Debugger+Memory.swift in Sources */,
 				905321C822BE99A300A409B2 /* LcdMode.swift in Sources */,
 				9085FC3122B690C600310090 /* ColorPalettes.swift in Sources */,
+				902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */,
 				905321B822BE552700A409B2 /* CpuState.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,
+				902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */,
 				90A17B95229D59D50027133B /* CBPrefixedOpcodes.swift in Sources */,
 				90B0DC4422B6EC89005BBCF5 /* Lcd.swift in Sources */,
 			);
@@ -832,7 +836,7 @@
 				90C19C5822B2AEE200A1B7A9 /* LcdTileDataTests.swift in Sources */,
 				90B0DC4122B6DB73005BBCF5 /* Bus+init.swift in Sources */,
 				90A17BAE229D59EE0027133B /* CpuArithmeticTests.swift in Sources */,
-				90CBB73222AD7AE3004775E2 /* Array+UIntTests.swift in Sources */,
+				90CBB73222AD7AE3004775E2 /* Data+UIntTests.swift in Sources */,
 				90EFDB8722B05D5D0017AEC2 /* DmaTests.swift in Sources */,
 				90A17BAD229D59EE0027133B /* CpuJumpTests.swift in Sources */,
 				90CBB72C22AD7632004775E2 /* InterruptEnableTests.swift in Sources */,

@@ -24,7 +24,7 @@ private var checkedAddresses: Set<UInt16> {
   //  (0x0000...0x00ff).forEach { skipAddress.insert($0) } // bootrom
   //  (0x0104...0x0133).forEach { skipAddress.insert($0) } // nintendo logo
   //  (0xfea0...0xfeff).forEach { skipAddress.insert($0) } // not usable
-  return []
+  return result
 }
 
 func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) {
@@ -50,7 +50,7 @@ func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) {
   if sReg.carryFlag     != pReg.carryFlag     { print("  carryFlag: \(sReg.carryFlag) vs \(pReg.carryFlag)") }
 
   for address in checkedAddresses {
-    let pValue = p.memory.data[address]
+    let pValue = p.memory.data[Int(address)]
     let sValue = s.bus.read(address)
 
     if sValue != pValue {

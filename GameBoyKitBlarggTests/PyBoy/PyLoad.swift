@@ -89,7 +89,7 @@ private func fill(_ emulator: PyBoy, from fileContent: String) {
   }
 }
 
-private func replace(_ memory: PyMemory, from: UInt16, to: UInt16, with values: Substring) {
+private func replace(_ memory: PyMemory, from: Int, to: Int, with values: Substring) {
   // we could use 'replaceSubrange', but whatever...
   let data = values.split(separator: ",").map { UInt8($0)! }
   for (index, address) in (from...to).enumerated() where memory.data[address] == 0 {

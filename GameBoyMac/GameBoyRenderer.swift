@@ -57,11 +57,10 @@ public class GameBoyRenderer: NSObject, MTKViewDelegate {
   }
 
   private func updateFramebuffer(from framebuffer: Framebuffer) {
-    let region    = MTLRegionMake2D(0, 0, framebufferWidth, framebufferHeight)
-    let dataCount = framebuffer.data.count * MemoryLayout<UInt8>.size
-    let rawData   = Data(bytes: framebuffer.data, count: dataCount)
+    let data   = framebuffer.data
+    let region = MTLRegionMake2D(0, 0, framebufferWidth, framebufferHeight)
 
-    rawData.withUnsafeBytes { ptr in
+    data.withUnsafeBytes { ptr in
       texture.replace(
         region:      region,
         mipmapLevel: 0,

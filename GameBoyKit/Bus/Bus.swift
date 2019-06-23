@@ -14,10 +14,14 @@ public class Bus {
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
-  internal var ram = [UInt8](memoryRange: MemoryMap.internalRam)
+  internal lazy var ram = {
+    return Data(memoryRange: MemoryMap.internalRam)
+  }()
 
   /// FF80-FFFE High RAM (HRAM)
-  internal var highRam = [UInt8](memoryRange: MemoryMap.highRam)
+  internal lazy var highRam = {
+    return Data(memoryRange: MemoryMap.highRam)
+  }()
 
   /// Catch 'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()

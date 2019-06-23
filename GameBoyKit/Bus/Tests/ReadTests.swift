@@ -155,7 +155,7 @@ class ReadTests: XCTestCase {
 
   // MARK: - Helpers
 
-  private func fill(_ data: inout [UInt8]) {
+  private func fill(_ data: inout Data) {
     // use this if you have time (~0.3s):
     // for i in 0..<data.count {
     //   data[i] = UInt8(i & 0xff)
@@ -165,7 +165,7 @@ class ReadTests: XCTestCase {
     data[data.endIndex - 1] = 6
   }
 
-  private func testReads(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldEqual data: [UInt8]) {
+  private func testReads(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldEqual data: Data) {
     // use this if you have time (~0.3s):
     // for address in range {
     //   let value = bus.read(address)

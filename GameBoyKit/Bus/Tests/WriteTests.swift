@@ -178,7 +178,7 @@ class WriteTests: XCTestCase {
     bus.write(range.end,   value: endValue)
   }
 
-  private func testValues(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldFill data: [UInt8]) {
+  private func testValues(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldFill data: Data) {
     // use this if you have time (~0.3s):
     // for address in range {
     //   let value = data[address - range.start]

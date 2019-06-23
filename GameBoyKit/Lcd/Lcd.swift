@@ -50,10 +50,14 @@ public class Lcd {
   public internal(set) var objectColors1 = ObjectColorPalette()
 
   /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
-  public internal(set) var videoRam: [UInt8]
+  public internal(set) lazy var videoRam: Data = {
+    return Data(memoryRange: MemoryMap.videoRam)
+  }()
 
   /// FE00-FE9F Sprite Attribute Table (OAM)
-  public internal(set) var oam: [UInt8]
+  public internal(set) lazy var oam: Data = {
+    return Data(memoryRange: MemoryMap.oam)
+  }()
 
   /// Flag instead of 0xFF0F
   public internal(set) var hasStatusInterrupt: Bool = false
@@ -65,11 +69,6 @@ public class Lcd {
   public internal(set) var framebuffer = Framebuffer()
 
   private var lineProgress: UInt16 = 0
-
-  internal init() {
-    self.videoRam = [UInt8](memoryRange: MemoryMap.videoRam)
-    self.oam = [UInt8](memoryRange: MemoryMap.oam)
-  }
 
   // MARK: - Tick
 
@@ -200,9 +199,9 @@ public class Lcd {
 
       var xOffset = globalX % tilePixelWidth
       while xOffset < 8 {
-        let colorBit = (globalX + xOffset) % 8
-        let tileColor   = self.getColorValue(data1, data2, bitOffset: colorBit)
-        let color       = self.backgroundColors[tileColor]
+        let colorBit  = (globalX + xOffset) % 8
+        let tileColor = self.getColorValue(data1, data2, bitOffset: colorBit)
+        let color     = self.backgroundColors[tileColor]
         self.framebuffer[x + xOffset, self.line] = color
         xOffset += 1
       }
