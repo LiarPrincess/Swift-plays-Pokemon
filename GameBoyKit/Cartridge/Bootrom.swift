@@ -2,24 +2,62 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-extension Cartridge {
+public class Bootrom {
 
-  public static var bootrom: Cartridge {
-    let result = Cartridge()
+  /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00)
+  public let data: Data
 
-    let bootromStart = 0x0000
-    let bootromEnd = bootromStart + bootromData.count
-    result.rom0.replaceSubrange(bootromStart..<bootromEnd, with: bootromData)
-
-    let logoStart = 0x0104
-    let logoEnd = logoStart + nintendoLogoData.count
-    result.rom0.replaceSubrange(logoStart..<logoEnd, with: nintendoLogoData)
-
-    return result
+  public init(data: Data) {
+    self.data = data
   }
 }
 
-private let bootromData: [UInt8] = [
+// MARK: - Predefined bootroms
+
+extension Bootrom {
+
+  /// Skip directly to the game.
+  public static var skip: Bootrom {
+
+    // Source: https://github.com/Baekalfen/PyBoy
+    var data = Data(memoryRange: MemoryMap.rom0)
+
+    // Set stack pointer
+    data[0x00] = 0x31
+    data[0x01] = 0xfe
+    data[0x02] = 0xff
+
+    // Inject jump to 0xFC
+    data[0x03] = 0xc3
+    data[0x04] = 0xfc
+    data[0x05] = 0x00
+
+    // Inject code to disable boot-ROM
+    data[0xfc] = 0x3e
+    data[0xfd] = 0x01
+    data[0xfe] = 0xe0
+    data[0xff] = 0x50
+
+    return Bootrom(data: data)
+  }
+
+  /// Bootrom that shows Nintendo logo.
+  public static var dmg: Bootrom {
+    var data = Data(memoryRange: MemoryMap.rom0)
+
+    let bootromStart = 0x0000
+    let bootromEnd = bootromStart + dmgData.count
+    data.replaceSubrange(bootromStart..<bootromEnd, with: dmgData)
+
+    let logoStart = 0x0104
+    let logoEnd = logoStart + dmgLogo.count
+    data.replaceSubrange(logoStart..<logoEnd, with: dmgLogo)
+
+    return Bootrom(data: data)
+  }
+}
+
+private let dmgData: [UInt8] = [
 /*          0     1     2     3     4     5     6     7     8     9    a      b     c     d     e     f */
 /* 00 */ 0x31, 0xfe, 0xff, 0xaf, 0x21, 0xff, 0x9f, 0x32, 0xcb, 0x7c, 0x20, 0xfb, 0x21, 0x26, 0xff, 0x0e,
 /* 10 */ 0x11, 0x3e, 0x80, 0x32, 0xe2, 0x0c, 0x3e, 0xf3, 0xe2, 0x32, 0x3e, 0x77, 0x77, 0x3e, 0xfc, 0xe0,
@@ -40,7 +78,7 @@ private let bootromData: [UInt8] = [
 ]
 
 // swiftlint:disable collection_alignment
-private let nintendoLogoData: [UInt8] = [
+private let dmgLogo: [UInt8] = [
 /*           0     1     2     3     4     5     6     7     8     9    a      b     c     d     e     f */
 /* 100 */                         0xce, 0xed, 0x66, 0x66, 0xcc, 0x0d, 0x00, 0x0b, 0x03, 0x73, 0x00, 0x83,
 /* 110 */ 0x00, 0x0c, 0x00, 0x0d, 0x00, 0x08, 0x11, 0x1f, 0x88, 0x89, 0x00, 0x0e, 0xdc, 0xcc, 0x6e, 0xe6,

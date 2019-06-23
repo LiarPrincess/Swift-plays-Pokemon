@@ -14,9 +14,10 @@ extension Bus {
 
     // cartridge
     case MemoryMap.rom0:
-      return read(MemoryMap.rom0, self.cartridge.rom0)
+      let data = self.hasFinishedBootrom ? self.cartridge.data : self.bootrom.data
+      return data[address]
     case MemoryMap.rom1:
-      return read(MemoryMap.rom1, self.cartridge.rom1)
+      return self.cartridge.data[address]
     case MemoryMap.externalRam:
       return read(MemoryMap.externalRam, self.cartridge.ram)
 

@@ -9,15 +9,17 @@ public class GameBoy {
   public let bus: Bus
   public let timer: Timer
   public let joypad: Joypad
-  public let cartridge: Cartridge
 
-  public init() {
+  public init(bootrom: Bootrom = .skip) {
     self.lcd = Lcd()
     self.timer = Timer()
     self.joypad = Joypad()
-    self.cartridge = .bootrom
 
-    self.bus = Bus(cartridge: self.cartridge,
+    let dataSize = MemoryMap.rom0.count + MemoryMap.rom1.count
+    let cartridge = Cartridge(data: Data(count: dataSize))
+
+    self.bus = Bus(bootrom:   bootrom,
+                   cartridge: cartridge,
                    joypad:    self.joypad,
                    lcd:       self.lcd,
                    timer:     self.timer)

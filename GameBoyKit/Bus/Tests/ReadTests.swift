@@ -7,64 +7,111 @@ import XCTest
 
 class ReadTests: XCTestCase {
 
+  private static let startValue: UInt8 = 5
+  private static let endValue:   UInt8 = 6
+
+  func test_bootrom() {
+    let range = MemoryMap.rom0
+
+    var data = Data(count: MemoryMap.rom0.count)
+    data[range.start] = ReadTests.startValue
+    data[range.end]   = ReadTests.endValue
+
+    let bootrom = Bootrom(data: data)
+    let bus = self.createBus(bootrom: bootrom)
+    // 'bus.hasFinishedBootrom' should be false by default
+
+    XCTAssertEqual(bus.read(range.start), ReadTests.startValue)
+    XCTAssertEqual(bus.read(range.end), ReadTests.endValue)
+  }
+
   func test_rom0() {
-    let bus = Bus()
-    self.fill(&bus.cartridge.rom0)
-    self.testReads(bus, MemoryMap.rom0, shouldEqual: bus.cartridge.rom0)
+    let range = MemoryMap.rom0
+
+    let dataSize = MemoryMap.rom0.count + MemoryMap.rom1.count
+    var data = Data(count: dataSize)
+    data[range.start] = ReadTests.startValue
+    data[range.end]   = ReadTests.endValue
+
+    let cartridge = Cartridge(data: data)
+    let bus = self.createBus(cartridge: cartridge)
+    bus.hasFinishedBootrom = true
+
+    XCTAssertEqual(bus.read(range.start), ReadTests.startValue)
+    XCTAssertEqual(bus.read(range.end), ReadTests.endValue)
   }
 
   func test_rom1() {
-    let bus = Bus()
-    self.fill(&bus.cartridge.rom1)
-    self.testReads(bus, MemoryMap.rom1, shouldEqual: bus.cartridge.rom1)
+    let range = MemoryMap.rom1
+
+    let dataSize = MemoryMap.rom0.count + MemoryMap.rom1.count
+    var data = Data(count: dataSize)
+    data[range.start] = ReadTests.startValue
+    data[range.end]   = ReadTests.endValue
+
+    let cartridge = Cartridge(data: data)
+    let bus = self.createBus(cartridge: cartridge)
+    bus.hasFinishedBootrom = true
+
+    XCTAssertEqual(bus.read(range.start), ReadTests.startValue)
+    XCTAssertEqual(bus.read(range.end), ReadTests.endValue)
   }
 
   func test_videoRam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.fill(&bus.lcd.videoRam)
-    self.testReads(bus, MemoryMap.videoRam, shouldEqual: bus.lcd.videoRam)
+
+    let range = MemoryMap.videoRam
+    self.testStartValue(bus, range)
+    self.testEndValue(bus, range)
   }
 
   func test_externalRam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.fill(&bus.cartridge.ram)
-    self.testReads(bus, MemoryMap.videoRam, shouldEqual: bus.lcd.videoRam)
+
+    let range = MemoryMap.externalRam
+    self.testStartValue(bus, range)
+    self.testEndValue(bus, range)
   }
 
-  func test_internalkRam() {
-    let bus = Bus()
+  func test_internalRam() {
+    let bus = self.createBus()
     self.fill(&bus.ram)
-    self.testReads(bus, MemoryMap.internalRam, shouldEqual: bus.ram)
+
+    let range = MemoryMap.internalRam
+    self.testStartValue(bus, range)
+    self.testEndValue(bus, range)
   }
 
   func test_internalRamEcho() {
-    let bus = Bus()
+    let bus = self.createBus()
     let range = MemoryMap.internalRamEcho
 
-    bus.ram[bus.ram.startIndex] = 5
-    bus.ram[bus.ram.endIndex - 1] = 6
+    bus.ram[bus.ram.startIndex] = ReadTests.startValue
+    bus.ram[bus.ram.startIndex + range.count - 1] = ReadTests.endValue
 
-    let startValue = bus.read(range.start)
-    XCTAssertEqual(startValue, bus.ram[0])
-
-    let endValue = bus.read(range.end)
-    XCTAssertEqual(endValue, bus.ram[range.count - 1])
+    XCTAssertEqual(bus.read(range.start), ReadTests.startValue)
+    XCTAssertEqual(bus.read(range.end), ReadTests.endValue)
   }
 
   func test_oam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.fill(&bus.lcd.oam)
-    self.testReads(bus, MemoryMap.oam, shouldEqual: bus.lcd.oam)
+
+    let range = MemoryMap.oam
+    self.testStartValue(bus, range)
+    self.testEndValue(bus, range)
   }
 
   func test_joypadMemory() {
-    let bus = Bus()
+    let bus = self.createBus()
     bus.joypad.value = 5
     XCTAssertEqual(bus.read(MemoryMap.IO.joypad), 5)
   }
 
   func test_serialPortMemory() {
-    let bus = Bus()
+    let bus = self.createBus()
 
     bus.serialPort.sb = 5
     XCTAssertEqual(bus.read(MemoryMap.IO.sb), 5)
@@ -74,7 +121,7 @@ class ReadTests: XCTestCase {
   }
 
   func test_timer() {
-    let bus = Bus()
+    let bus = self.createBus()
 
     bus.timer.div = 5 // write will reset it to 0
     XCTAssertEqual(bus.read(MemoryMap.Timer.div), 0)
@@ -91,7 +138,7 @@ class ReadTests: XCTestCase {
 
   // swiftlint:disable:next function_body_length
   func test_lcdMemory() {
-    let bus = Bus()
+    let bus = self.createBus()
     var value: UInt8 = 0
 
     bus.lcd.control.value = value
@@ -142,13 +189,16 @@ class ReadTests: XCTestCase {
   }
 
   func test_highRam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.fill(&bus.highRam)
-    self.testReads(bus, MemoryMap.highRam, shouldEqual: bus.highRam)
+
+    let range = MemoryMap.highRam
+    self.testStartValue(bus, range)
+    self.testEndValue(bus, range)
   }
 
   func test_interrupts() {
-    let bus = Bus()
+    let bus = self.createBus()
     bus.interruptEnable.value = 6
     XCTAssertEqual(bus.read(MemoryMap.interruptEnable), 6)
   }
@@ -156,26 +206,25 @@ class ReadTests: XCTestCase {
   // MARK: - Helpers
 
   private func fill(_ data: inout Data) {
-    // use this if you have time (~0.3s):
-    // for i in 0..<data.count {
-    //   data[i] = UInt8(i & 0xff)
-    // }
-
-    data[data.startIndex] = 5
-    data[data.endIndex - 1] = 6
+    data[data.startIndex]   = ReadTests.startValue
+    data[data.endIndex - 1] = ReadTests.endValue
   }
 
-  private func testReads(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldEqual data: Data) {
-    // use this if you have time (~0.3s):
-    // for address in range {
-    //   let value = bus.read(address)
-    //   XCTAssertEqual(value, data[address - range.start])
-    // }
+  private func testStartValue(_ bus:   Bus,
+                              _ range: ClosedRange<UInt16>,
+                              file:    StaticString = #file,
+                              line:    UInt = #line) {
 
-    let startValue = bus.read(range.start)
-    XCTAssertEqual(startValue, data[data.startIndex])
+    let value = bus.read(range.start)
+    XCTAssertEqual(value, ReadTests.startValue, file: file, line: line)
+  }
 
-    let endValue = bus.read(range.end)
-    XCTAssertEqual(endValue, data[data.endIndex - 1])
+  private func testEndValue(_ bus:   Bus,
+                            _ range: ClosedRange<UInt16>,
+                            file:    StaticString = #file,
+                            line:    UInt = #line) {
+
+    let value = bus.read(range.end)
+    XCTAssertEqual(value, ReadTests.endValue, file: file, line: line)
   }
 }

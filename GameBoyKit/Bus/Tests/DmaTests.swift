@@ -8,7 +8,7 @@ import XCTest
 class DmaTests: XCTestCase {
 
   func test_dma() {
-    let bus = Bus()
+    let bus = self.createBus()
 
     // fill source (somewhere in external ram)
     let sourceStart: UInt16 = 0xab00

@@ -7,13 +7,29 @@ import XCTest
 
 class WriteTests: XCTestCase {
 
-  let startValue: UInt8 = 5
-  let endValue:   UInt8 = 6
+  private static let startValue: UInt8 = 5
+  private static let endValue:   UInt8 = 6
+
+  /// 'bootrom' is read only
+  func test_bootrom() {
+    let bus = self.createBus()
+    let range = MemoryMap.rom0
+
+    // 'bus.hasFinishedBootrom' should be false by default
+
+    bus.write(range.start, value: 5)
+    XCTAssertEqual(bus.cartridge.rom0.first, 0)
+
+    bus.write(range.end, value: 6)
+    XCTAssertEqual(bus.cartridge.rom0.last, 0)
+  }
 
   /// 'rom0' is read only
   func test_rom0() {
-    let bus = Bus()
+    let bus = self.createBus()
     let range = MemoryMap.rom0
+
+    bus.hasFinishedBootrom = true
 
     bus.write(range.start, value: 5)
     XCTAssertEqual(bus.cartridge.rom0.first, 0)
@@ -24,7 +40,7 @@ class WriteTests: XCTestCase {
 
   /// 'rom1' is read only
   func test_rom1() {
-    let bus = Bus()
+    let bus = self.createBus()
     let range = MemoryMap.rom1
 
     bus.write(range.start, value: 5)
@@ -35,48 +51,60 @@ class WriteTests: XCTestCase {
   }
 
   func test_videoRam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.write(bus, MemoryMap.videoRam)
-    self.testValues(bus, MemoryMap.videoRam, shouldFill: bus.lcd.videoRam)
+
+    let data = bus.lcd.videoRam
+    self.testStartValue(data)
+    self.testEndValue(data)
   }
 
   func test_externalRam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.write(bus, MemoryMap.externalRam)
-    self.testValues(bus, MemoryMap.externalRam, shouldFill: bus.cartridge.ram)
+
+    let data = bus.cartridge.ram
+    self.testStartValue(data)
+    self.testEndValue(data)
   }
 
   func test_internalRam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.write(bus, MemoryMap.internalRam)
-    self.testValues(bus, MemoryMap.internalRam, shouldFill: bus.ram)
+
+    let data = bus.ram
+    self.testStartValue(data)
+    self.testEndValue(data)
   }
 
   func test_echoMemory() {
-    let bus = Bus()
+    let bus = self.createBus()
     let range = MemoryMap.internalRamEcho
 
-    bus.write(range.start, value: startValue)
-    bus.write(range.end,   value: endValue)
+    bus.write(range.start, value: WriteTests.startValue)
+    bus.write(range.end,   value: WriteTests.endValue)
 
-    XCTAssertEqual(bus.ram[0], startValue)
-    XCTAssertEqual(bus.ram[range.count - 1], endValue)
+    XCTAssertEqual(bus.ram[0], WriteTests.startValue)
+    XCTAssertEqual(bus.ram[range.count - 1], WriteTests.endValue)
   }
 
   func test_oam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.write(bus, MemoryMap.oam)
-    self.testValues(bus, MemoryMap.oam, shouldFill: bus.lcd.oam)
+
+    let data = bus.lcd.oam
+    self.testStartValue(data)
+    self.testEndValue(data)
   }
 
   func test_joypadMemory() {
-    let bus = Bus()
+    let bus = self.createBus()
     bus.write(MemoryMap.IO.joypad, value: 5)
     XCTAssertEqual(bus.joypad.value, 5)
   }
 
   func test_serialPortMemory() {
-    let bus = Bus()
+    let bus = self.createBus()
 
     bus.write(MemoryMap.IO.sb, value: 5)
     XCTAssertEqual(bus.serialPort.sb, 5)
@@ -86,7 +114,7 @@ class WriteTests: XCTestCase {
   }
 
   func test_timer() {
-    let bus = Bus()
+    let bus = self.createBus()
 
     bus.write(MemoryMap.Timer.div, value: 4)
     XCTAssertEqual(bus.timer.div, 0) // should reset on write
@@ -103,7 +131,7 @@ class WriteTests: XCTestCase {
 
   // swiftlint:disable:next function_body_length
   func test_lcdMemory() {
-    let bus = Bus()
+    let bus = self.createBus()
     var value: UInt8 = 5
 
     bus.write(MemoryMap.Lcd.control, value: value)
@@ -154,13 +182,16 @@ class WriteTests: XCTestCase {
   }
 
   func test_highRam() {
-    let bus = Bus()
+    let bus = self.createBus()
     self.write(bus, MemoryMap.highRam)
-    self.testValues(bus, MemoryMap.highRam, shouldFill: bus.highRam)
+
+    let data = bus.highRam
+    self.testStartValue(data)
+    self.testEndValue(data)
   }
 
   func test_interrupts() {
-    let bus = Bus()
+    let bus = self.createBus()
     bus.write(MemoryMap.interruptEnable, value: 6)
     XCTAssertEqual(bus.interruptEnable.value, 6)
   }
@@ -168,29 +199,23 @@ class WriteTests: XCTestCase {
   // MARK: - Helpers
 
   private func write(_ bus: Bus, _ range: ClosedRange<UInt16>) {
-    // use this if you have time (~0.3s):
-    // for address in range {
-    //   let value = self.writeValue(address)
-    //   bus.write(address, value: value)
-    // }
-
-    bus.write(range.start, value: startValue)
-    bus.write(range.end,   value: endValue)
+    bus.write(range.start, value: WriteTests.startValue)
+    bus.write(range.end,   value: WriteTests.endValue)
   }
 
-  private func testValues(_ bus: Bus, _ range: ClosedRange<UInt16>, shouldFill data: Data) {
-    // use this if you have time (~0.3s):
-    // for address in range {
-    //   let value = data[address - range.start]
-    //   let expected = self.writeValue(address)
-    //   XCTAssertEqual(value, expected)
-    // }
+  private func testStartValue(_ data: Data,
+                              file:   StaticString = #file,
+                              line:   UInt = #line) {
 
-    XCTAssertEqual(data[data.startIndex], startValue)
-    XCTAssertEqual(data[data.endIndex - 1], endValue)
+    let value = data[data.startIndex]
+    XCTAssertEqual(value, WriteTests.startValue, file: file, line: line)
   }
 
-  private func writeValue(_ address: UInt16) -> UInt8 {
-    return UInt8(address & 0xff)
+  private func testEndValue(_ data: Data,
+                            file:   StaticString = #file,
+                            line:   UInt = #line) {
+
+    let value = data[data.endIndex - 1]
+    XCTAssertEqual(value, WriteTests.endValue, file: file, line: line)
   }
 }

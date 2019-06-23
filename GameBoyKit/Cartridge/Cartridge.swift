@@ -4,14 +4,20 @@
 
 public class Cartridge {
 
+  internal let data: Data
+
   /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00)
-  public internal(set) lazy var rom0 = Data(memoryRange: MemoryMap.rom0)
+  public private(set) lazy var rom0 = self.data[MemoryMap.rom0]
 
   /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
-  public internal(set) lazy var rom1 = Data(memoryRange: MemoryMap.rom1)
+  public private(set) lazy var rom1 = self.data[MemoryMap.rom1]
 
   /// A000-BFFF 8KB External RAM (in cartridge, switchable bank, if any)
   public internal(set) lazy var ram = Data(memoryRange: MemoryMap.externalRam)
+
+  public init(data: Data) {
+    self.data = data
+  }
 
 /*
   /// 0000-00FF Restart and Interrupt Vectors

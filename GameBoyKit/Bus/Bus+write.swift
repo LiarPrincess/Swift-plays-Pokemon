@@ -14,9 +14,13 @@ extension Bus {
 
     // cartridge
     case MemoryMap.rom0:
-      print("Attempting to write to read-only rom0 memory at: \(address.hex).")
+      if self.hasFinishedBootrom {
+        print("Attempting to write to read-only rom0 at: \(address.hex).")
+      } else {
+        print("Attempting to write to read-only bootrom at: \(address.hex).")
+      }
     case MemoryMap.rom1:
-      print("Attempting to write to read-only rom1 memory at: \(address.hex).")
+      print("Attempting to write to read-only rom1 at: \(address.hex).")
     case MemoryMap.externalRam:
       write(MemoryMap.externalRam, &self.cartridge.ram)
 
@@ -43,7 +47,7 @@ extension Bus {
     case MemoryMap.notUsable:
       break
     case MemoryMap.unmapBootrom:
-      fatalError("Writing to 'unmap bootrom' (\(MemoryMap.unmapBootrom.hex)) is not yet implemented")
+      self.hasFinishedBootrom = true
     case MemoryMap.interruptEnable:
       self.interruptEnable.value = value
 

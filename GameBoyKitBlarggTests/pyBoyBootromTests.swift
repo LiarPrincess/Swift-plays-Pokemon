@@ -26,7 +26,7 @@ private var programCounters: [String] = [
 ]
 
 internal func pyBoyBootromTests() {
-  let gameBoy = GameBoy()
+  let gameBoy = GameBoy(bootrom: .dmg)
   let debugger = Debugger(gameBoy: gameBoy)
 
   let currentFile = URL(fileURLWithPath: #file)

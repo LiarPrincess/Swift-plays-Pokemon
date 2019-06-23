@@ -7,9 +7,13 @@ public class Bus {
   internal let lcd: Lcd
   internal let timer: Timer
   internal let joypad: Joypad
-  internal let cartridge: Cartridge
   internal let serialPort: SerialPort
   internal let interruptEnable: InterruptEnable
+
+  internal let bootrom: Bootrom
+  internal let cartridge: Cartridge
+
+  internal var hasFinishedBootrom = false
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
@@ -24,13 +28,20 @@ public class Bus {
   /// TODO: Catch 'em all for audio read/write
   internal var audio = [UInt16:UInt8]()
 
-  internal init(cartridge: Cartridge, joypad: Joypad, lcd: Lcd, timer: Timer) {
+  internal init(bootrom:   Bootrom,
+                cartridge: Cartridge,
+                joypad:    Joypad,
+                lcd:       Lcd,
+                timer:     Timer) {
+
     self.lcd = lcd
     self.timer = timer
     self.joypad = joypad
-    self.cartridge = cartridge
     self.serialPort = SerialPort()
     self.interruptEnable = InterruptEnable()
+
+    self.bootrom = bootrom
+    self.cartridge = cartridge
   }
 
   // MARK: - Helpers
