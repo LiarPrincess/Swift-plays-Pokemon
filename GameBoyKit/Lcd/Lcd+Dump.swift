@@ -85,7 +85,7 @@ extension Lcd {
       if data1 != 0 || data2 != 0 {
         print("\(address.hex): \(data1.bin) & \(data2.bin) -> ", separator: "", terminator: "")
         for i in 0..<8 {
-          let color = self.getRawColorValue(data1, data2, bitOffset: UInt8(i))
+          let color = self.getColorValue(data1, data2, bitOffset: UInt8(i))
           let sColor = color == 0 ? " " : String(describing: color)
           print(sColor, separator: "", terminator: "")
         }
@@ -166,7 +166,7 @@ extension Lcd {
     let data2 = self.readVideoRam(tileDataAddress + lineInsideTile + 1)
 
     for i in 0..<8 {
-      let color = self.getRawColorValue(data1, data2, bitOffset: UInt8(i))
+      let color = self.getColorValue(data1, data2, bitOffset: UInt8(i))
       let sColor = color == 0 ? " " : String(describing: color)
       print(sColor, separator: "", terminator: "")
     }

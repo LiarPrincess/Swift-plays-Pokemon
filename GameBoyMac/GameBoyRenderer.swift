@@ -10,15 +10,15 @@ internal let framebufferHeight = Int(Framebuffer.height)
 
 public class GameBoyRenderer: NSObject, MTKViewDelegate {
 
-  private let gameboy: GameBoy
+  private let gameBoy: GameBoy
 
   private let pipeline:     MTLRenderPipelineState
   private let commandQueue: MTLCommandQueue
   private let vertexBuffer: MTLBuffer
   private var texture:      MTLTexture
 
-  public init(gameboy: GameBoy, device: MTLDevice) {
-    self.gameboy = gameboy
+  public init(gameBoy: GameBoy, device: MTLDevice) {
+    self.gameBoy = gameBoy
 
     let library       = makeLibrary(device: device)
     self.pipeline     = makePipeline(device: device, library: library)
@@ -32,7 +32,7 @@ public class GameBoyRenderer: NSObject, MTKViewDelegate {
   public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) { }
 
   public func draw(in view: MTKView) {
-    let frame = self.gameboy.tickFrame()
+    let frame = self.gameBoy.tickFrame()
     self.updateFramebuffer(from: frame)
 
     guard let drawable = view.currentDrawable,
@@ -63,9 +63,9 @@ public class GameBoyRenderer: NSObject, MTKViewDelegate {
 
     rawData.withUnsafeBytes { ptr in
       texture.replace(
-        region: region,
+        region:      region,
         mipmapLevel: 0,
-        withBytes: ptr.baseAddress!,
+        withBytes:   ptr.baseAddress!,
         bytesPerRow: framebufferWidth * MemoryLayout<UInt8>.size
       )
     }

@@ -10,7 +10,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
   private let gameBoy = GameBoy()
   private let device  = createDevice()
-  private lazy var renderer = GameBoyRenderer(gameboy: self.gameBoy, device: self.device)
+  private lazy var renderer = GameBoyRenderer(gameBoy: self.gameBoy, device: self.device)
 
   private let mtkView = MTKView()
 

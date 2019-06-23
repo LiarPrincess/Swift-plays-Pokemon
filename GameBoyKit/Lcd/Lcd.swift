@@ -178,30 +178,36 @@ public class Lcd {
   // TODO: process this whole tiles thing when loading carthrige
   private func drawBackgroundLine() {
     let map = self.control.backgroundTileMap
+
+    let tilePixelWidth: UInt8 = 8
+    let bytesPerTileLine: UInt16 = 2
+
     let globalY = self.scrollY + self.line
+    let tileRow = globalY / tilePixelWidth
+    let tileDataOffset = UInt16(globalY % tilePixelWidth) * bytesPerTileLine
 
-    for x in 0..<Lcd.width {
+    var x: UInt8 = 0
+    while x < Lcd.width {
       let globalX = self.scrollX + x
-
-      let tileWidth: UInt8 = 8
-      let tileRow    = globalY / tileWidth
-      let tileColumn = globalX / tileWidth
+      let tileColumn = globalX / tilePixelWidth
 
       let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
       let tileIndex        = self.readVideoRam(tileIndexAddress)
 
-      let bytesPerLine: UInt16 = 2
-      let lineInsideTile = UInt16(globalY % tileWidth) * bytesPerLine
-
       let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
-      let data1 = self.readVideoRam(tileDataAddress + lineInsideTile)
-      let data2 = self.readVideoRam(tileDataAddress + lineInsideTile + 1)
+      let data1 = self.readVideoRam(tileDataAddress + tileDataOffset)
+      let data2 = self.readVideoRam(tileDataAddress + tileDataOffset + 1)
 
-      let colorOffset = globalX % 8
-      let tileColor   = self.getRawColorValue(data1, data2, bitOffset: colorOffset)
-      let color       = self.backgroundColors[tileColor]
+      var xOffset = globalX % tilePixelWidth
+      while xOffset < 8 {
+        let colorBit = (globalX + xOffset) % 8
+        let tileColor   = self.getColorValue(data1, data2, bitOffset: colorBit)
+        let color       = self.backgroundColors[tileColor]
+        self.framebuffer[x + xOffset, self.line] = color
+        xOffset += 1
+      }
 
-      self.framebuffer[x, self.line] = color
+      x += xOffset
     }
   }
 
@@ -237,9 +243,9 @@ public class Lcd {
 
   /// Color before applying palette.
   /// Bit offset is counted from left starting from 0.
-  internal func getRawColorValue(_ data1: UInt8,
-                                 _ data2: UInt8,
-                                 bitOffset: UInt8) -> UInt8 {
+  internal func getColorValue(_ data1: UInt8,
+                               _ data2: UInt8,
+                               bitOffset: UInt8) -> UInt8 {
     let shift = 7 - bitOffset
     let data1Bit = (data1 >> shift) & 0x1
     let data2Bit = (data2 >> shift) & 0x1
