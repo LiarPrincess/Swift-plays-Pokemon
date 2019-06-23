@@ -26,9 +26,9 @@ public class Cpu {
   /// Register values (except for pc and sp)
   public var registers: Registers
 
-  private unowned var bus: Bus
+  private unowned var bus: CpuBus
 
-  internal init(bus: Bus) {
+  internal init(bus: CpuBus) {
     self.registers = Registers()
     self.bus = bus
   }

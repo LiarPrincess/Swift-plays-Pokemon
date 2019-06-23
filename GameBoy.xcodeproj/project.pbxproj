@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96A22BF825B00026960 /* Data+initFromRange.swift */; };
 		902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96C22BF85B600026960 /* Data+UInt.swift */; };
+		902CA96F22BFA63C00026960 /* CpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96E22BFA63C00026960 /* CpuBus.swift */; };
 		903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DB22BB903A003132FA /* Lcd+Dump.swift */; };
 		903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */; };
 		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
@@ -157,6 +158,7 @@
 /* Begin PBXFileReference section */
 		902CA96A22BF825B00026960 /* Data+initFromRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+initFromRange.swift"; sourceTree = "<group>"; };
 		902CA96C22BF85B600026960 /* Data+UInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UInt.swift"; sourceTree = "<group>"; };
+		902CA96E22BFA63C00026960 /* CpuBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuBus.swift; sourceTree = "<group>"; };
 		903818D922B57976004E5281 /* PyBoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyBoy.swift; sourceTree = "<group>"; };
 		903818DB22B579EC004E5281 /* PyLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyLoad.swift; sourceTree = "<group>"; };
 		903818DD22B57B8A004E5281 /* PyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyTest.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				90A17BBE229D5B710027133B /* Tests */,
 				90A17B82229D59D50027133B /* Registers.swift */,
 				90A17B8E229D59D50027133B /* Cpu.swift */,
+				902CA96E22BFA63C00026960 /* CpuBus.swift */,
 				90A17B81229D59D40027133B /* Cpu+Instructions.swift */,
 				90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */,
 				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
@@ -792,6 +795,7 @@
 				90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */,
 				90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */,
 				905321B022BE46E800A409B2 /* Debugger.swift in Sources */,
+				902CA96F22BFA63C00026960 /* CpuBus.swift in Sources */,
 				90B0DC5D22B78E13005BBCF5 /* Bus+read.swift in Sources */,
 				905321BC22BE565D00A409B2 /* GemeBoyState.swift in Sources */,
 				90A56A3522A3DD0D0055A013 /* GameBoy.swift in Sources */,

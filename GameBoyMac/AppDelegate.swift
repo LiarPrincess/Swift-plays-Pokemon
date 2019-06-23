@@ -32,6 +32,9 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
 
     self.window.makeKeyAndOrderFront(nil)
     self.window.makeMain()
+
+    print("Press ENTER to start...")
+    _ = readLine()
   }
 
   private func initWindow() {

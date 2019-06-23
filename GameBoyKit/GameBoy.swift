@@ -36,7 +36,7 @@ public class GameBoy {
   }
 
   internal func tickCpu(cycles totalCycles: UInt32 = 1) {
-    var remainingCycles = Int32(totalCycles) // so we can go < 0
+    var remainingCycles = Int64(totalCycles) // so we can go < 0
 
     while remainingCycles > 0 {
       let cycles = self.cpu.tick()
@@ -45,7 +45,7 @@ public class GameBoy {
 
       // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
 
-      remainingCycles -= Int32(cycles)
+      remainingCycles -= Int64(cycles)
     }
   }
 }

@@ -253,11 +253,6 @@ public class Lcd {
     let shift = 7 - bitOffset
     let data1Bit = (data1 >> shift) & 0x1
     let data2Bit = (data2 >> shift) & 0x1
-
-    var color: UInt8 = 0
-    color |= data2Bit
-    color <<= 1
-    color |= data1Bit
-    return color
+    return (data2Bit << 1) | data1Bit
   }
 }
