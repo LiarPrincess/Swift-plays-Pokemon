@@ -4,9 +4,9 @@
 
 // swiftlint:disable function_body_length
 
-private let tileSize:        UInt8 = 8 // pixels
-private let tileRowCount:    UInt8 = Lcd.width  / tileSize // 18
-private let tileColumnCount: UInt8 = Lcd.height / tileSize // 20
+private let tileSize:        Int = 8 // pixels
+private let tileRowCount:    Int = Int(Lcd.width)  / tileSize // 18
+private let tileColumnCount: Int = Int(Lcd.height) / tileSize // 20
 
 extension Lcd {
 
@@ -76,16 +76,16 @@ extension Lcd {
     let region = region ?? self.control.tileData
 
     let range = region.range
-    var address = range.start
+    var address = Int(range.start)
 
     while address < range.end {
       let data1 = self.readVideoRam(address)
       let data2 = self.readVideoRam(address + 1)
 
       if data1 != 0 || data2 != 0 {
-        print("\(address.hex): \(data1.bin) & \(data2.bin) -> ", separator: "", terminator: "")
+        print("\(UInt16(address).hex): \(data1.bin) & \(data2.bin) -> ", separator: "", terminator: "")
         for i in 0..<8 {
-          let color = self.getColorValue(data1, data2, bitOffset: UInt8(i))
+          let color = self.getColorValue(data1, data2, bitOffset: i)
           let sColor = color == 0 ? " " : String(describing: color)
           print(sColor, separator: "", terminator: "")
         }
@@ -102,11 +102,11 @@ extension Lcd {
 extension Lcd {
 
   internal func dumpBackground() {
-    //    let rowRange:    ClosedRange<UInt8> = 8...9
-    //    let columnRange: ClosedRange<UInt8> = 4...5 // 16 for R
+    //    let rowRange:    ClosedRange<Int> = 8...9
+    //    let columnRange: ClosedRange<Int> = 4...5 // 16 for R
 
-    let rowRange:    ClosedRange<UInt8> = 0...tileRowCount
-    let columnRange: ClosedRange<UInt8> = 0...tileColumnCount
+    let rowRange:    ClosedRange<Int> = 0...tileRowCount
+    let columnRange: ClosedRange<Int> = 0...tileColumnCount
 
     let linesPerTile = 8
 
@@ -139,7 +139,7 @@ extension Lcd {
         print("|", separator: "", terminator: " ")
 
         for tileColumn in columnRange {
-          self.drawTileLine(tileRow: tileRow, tileColumn: tileColumn, line: UInt8(tileLine))
+          self.drawTileLine(tileRow: tileRow, tileColumn: tileColumn, line: tileLine)
         }
         print()
       }
@@ -152,21 +152,21 @@ extension Lcd {
     }
   }
 
-  private func drawTileLine(tileRow: UInt8, tileColumn: UInt8, line: UInt8) {
+  private func drawTileLine(tileRow: Int, tileColumn: Int, line: Int) {
     let map = self.control.backgroundTileMap
 
     let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
     let tileIndex        = self.readVideoRam(tileIndexAddress)
 
-    let bytesPerLine: UInt16 = 2
-    let lineInsideTile = UInt16(line) * bytesPerLine
+    let bytesPerLine = 2
+    let lineInsideTile = line * bytesPerLine
 
     let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
     let data1 = self.readVideoRam(tileDataAddress + lineInsideTile)
     let data2 = self.readVideoRam(tileDataAddress + lineInsideTile + 1)
 
     for i in 0..<8 {
-      let color = self.getColorValue(data1, data2, bitOffset: UInt8(i))
+      let color = self.getColorValue(data1, data2, bitOffset: i)
       let sColor = color == 0 ? " " : String(describing: color)
       print(sColor, separator: "", terminator: "")
     }

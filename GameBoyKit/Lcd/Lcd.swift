@@ -176,18 +176,22 @@ public class Lcd {
 
   // TODO: process this whole tiles thing when loading carthrige
   private func drawBackgroundLine() {
+    // [Performance] Use Int for all, so that writing to framebuffer is faster.
+    // Avoiding conversions in framebuffer subscripts gives us ~10% boost.
+
     let map = self.control.backgroundTileMap
 
-    let tilePixelWidth: UInt8 = 8
-    let bytesPerTileLine: UInt16 = 2
+    let tilePixelWidth = 8
+    let bytesPerTileLine = 2
 
-    let globalY = self.scrollY + self.line
+    let line = Int(self.line)
+    let globalY = Int(self.scrollY) + line
     let tileRow = globalY / tilePixelWidth
-    let tileDataOffset = UInt16(globalY % tilePixelWidth) * bytesPerTileLine
+    let tileDataOffset = (globalY % tilePixelWidth) * bytesPerTileLine
 
-    var x: UInt8 = 0
-    while x < Lcd.width {
-      let globalX = self.scrollX + x
+    var x = 0
+    while x < Int(Lcd.width) {
+      let globalX = Int(self.scrollX) + x
       let tileColumn = globalX / tilePixelWidth
 
       let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
@@ -202,7 +206,7 @@ public class Lcd {
         let colorBit  = (globalX + xOffset) % 8
         let tileColor = self.getColorValue(data1, data2, bitOffset: colorBit)
         let color     = self.backgroundColors[tileColor]
-        self.framebuffer[x + xOffset, self.line] = color
+        self.framebuffer[x + xOffset, line] = color
         xOffset += 1
       }
 
@@ -212,39 +216,40 @@ public class Lcd {
 
   /// Address (in vram) of a tile index at given row and column.
   internal func getTileIndexAddress(from map: TileMap,
-                                    row:    UInt8,
-                                    column: UInt8) -> UInt16 {
-    let tilesPerRow: UInt16 = 32
-    let offset = UInt16(row) * tilesPerRow + UInt16(column)
-    return map.range.start + offset
+                                    row:      Int,
+                                    column:   Int) -> Int {
+    let tilesPerRow = 32
+    let offset = row * tilesPerRow + column
+    return Int(map.range.start) + offset
   }
 
   /// Address (in vram) of a tile data.
-  internal func getTileDataAddress(tileIndex: UInt8) -> UInt16 {
-    let tileSize: UInt16 = 16 // bits
+  internal func getTileDataAddress(tileIndex: UInt8) -> Int {
+    let tileSize: Int = 16 // bits
 
     switch self.control.tileData {
     case .from8000to8fff:
-      let start: UInt16 = 0x8000
-      return start + UInt16(tileIndex) * tileSize
+      let start = 0x8000
+      return start + Int(tileIndex) * tileSize
 
     case .from8800to97ff:
       let middle: Int = 0x9000
       let signedTileNumber = Int8(bitPattern: tileIndex)
-      return UInt16(middle + Int(signedTileNumber) * Int(tileSize))
+      return middle + Int(signedTileNumber) * tileSize
     }
   }
 
   /// Read data from video ram.
-  internal func readVideoRam(_ address: UInt16) -> UInt8 {
-    return self.videoRam[address -  MemoryMap.videoRam.start]
+  internal func readVideoRam(_ address: Int) -> UInt8 {
+    let start = Int(MemoryMap.videoRam.start)
+    return self.videoRam[address - start]
   }
 
   /// Color before applying palette.
   /// Bit offset is counted from left starting from 0.
-  internal func getColorValue(_ data1: UInt8,
-                               _ data2: UInt8,
-                               bitOffset: UInt8) -> UInt8 {
+  internal func getColorValue(_ data1:  UInt8,
+                              _ data2:  UInt8,
+                              bitOffset: Int) -> UInt8 {
     let shift = 7 - bitOffset
     let data1Bit = (data1 >> shift) & 0x1
     let data2Bit = (data2 >> shift) & 0x1
