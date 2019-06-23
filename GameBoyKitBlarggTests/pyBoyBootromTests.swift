@@ -22,12 +22,12 @@ private var programCounters: [String] = [
   "0xe0", "0xe3", "0xe6", "0xe7", "0xe8", "0xe9", "0xeb",
   "0xec", "0xed", "0xef",
   "0xf1", "0xf3", "0xf4", "0xf5", "0xf6", "0xf7", "0xf9", "0xfa", "0xfc", "0xfe",
-  "0x100"
+  /* "0x100" */
 ]
 
 internal func pyBoyBootromTests() {
-  let gameboy = GameBoy()
-  let debugger = Debugger(gameBoy: gameboy)
+  let gameBoy = GameBoy()
+  let debugger = Debugger(gameBoy: gameBoy)
 
   let currentFile = URL(fileURLWithPath: #file)
   let mainDir     = currentFile.deletingLastPathComponent()
@@ -39,6 +39,71 @@ internal func pyBoyBootromTests() {
     let pyBoy = pyLoad(fileUrl)
 
     debugger.run(mode: .none, lastPC: pyBoy.cpu.pc)
-    pyTest(pyBoy: pyBoy, swiftBoy: gameboy)
+    pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+  }
+
+  testStateBeforeUnmappingBootrom(gameBoy)
+}
+
+// source: http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
+private func testStateBeforeUnmappingBootrom(_ s: GameBoy) {
+  print("Final state")
+
+  if s.cpu.pc != 0x0100 { print("  pc: \(s.cpu.pc.hex) vs 0x0100") }
+  if s.cpu.sp != 0xfffe { print("  sp: \(s.cpu.sp.hex) vs 0xfffe") }
+
+  let sReg = s.cpu.registers
+  if sReg.a != 0x01 { print("  a: \(sReg.a.hex) vs 0x01") }
+  if sReg.b != 0x00 { print("  b: \(sReg.b.hex) vs 0x00") }
+  if sReg.c != 0x13 { print("  c: \(sReg.c.hex) vs 0x13") }
+  if sReg.d != 0x00 { print("  d: \(sReg.d.hex) vs 0x00") }
+  if sReg.e != 0xd8 { print("  e: \(sReg.e.hex) vs 0xd8") }
+  if sReg.h != 0x01 { print("  h: \(sReg.h.hex) vs 0x01") }
+  if sReg.l != 0x4d { print("  l: \(sReg.l.hex) vs 0x4d") }
+
+  // 0xb0 = 0b10110000
+  if sReg.zeroFlag      != true  { print("  zeroFlag: \(sReg.zeroFlag) vs true") }
+  if sReg.subtractFlag  != false { print("  subtractFlag: \(sReg.subtractFlag) vs false") }
+  if sReg.halfCarryFlag != true  { print("  halfCarryFlag: \(sReg.halfCarryFlag) vs true") }
+  if sReg.carryFlag     != true  { print("  carryFlag: \(sReg.carryFlag) vs true") }
+
+  checkMemory(s, address: 0xff05, value: 0x00)
+  checkMemory(s, address: 0xff06, value: 0x00)
+  checkMemory(s, address: 0xff07, value: 0x00)
+  checkMemory(s, address: 0xff10, value: 0x80)
+  checkMemory(s, address: 0xff11, value: 0xbf)
+  checkMemory(s, address: 0xff12, value: 0xf3)
+  checkMemory(s, address: 0xff14, value: 0xbf)
+  checkMemory(s, address: 0xff16, value: 0x3f)
+  checkMemory(s, address: 0xff17, value: 0x00)
+  checkMemory(s, address: 0xff19, value: 0xbf)
+  checkMemory(s, address: 0xff1a, value: 0x7f)
+  checkMemory(s, address: 0xff1b, value: 0xff)
+  checkMemory(s, address: 0xff1c, value: 0x9f)
+  checkMemory(s, address: 0xff1e, value: 0xbf)
+  checkMemory(s, address: 0xff20, value: 0xff)
+  checkMemory(s, address: 0xff21, value: 0x00)
+  checkMemory(s, address: 0xff22, value: 0x00)
+  checkMemory(s, address: 0xff23, value: 0xbf)
+  checkMemory(s, address: 0xff24, value: 0x77)
+  checkMemory(s, address: 0xff25, value: 0xf3)
+  checkMemory(s, address: 0xff26, value: 0xf1)
+  checkMemory(s, address: 0xff40, value: 0x91)
+  checkMemory(s, address: 0xff42, value: 0x00)
+  checkMemory(s, address: 0xff43, value: 0x00)
+  checkMemory(s, address: 0xff45, value: 0x00)
+  checkMemory(s, address: 0xff47, value: 0xfc)
+  checkMemory(s, address: 0xff48, value: 0xff)
+  checkMemory(s, address: 0xff49, value: 0xff)
+  checkMemory(s, address: 0xff4a, value: 0x00)
+  checkMemory(s, address: 0xff4b, value: 0x00)
+  checkMemory(s, address: 0xffff, value: 0x00)
+}
+
+private func checkMemory(_ s: GameBoy, address: UInt16, value: UInt8) {
+  let sValue = s.bus.read(address)
+  if sValue != value {
+    let desc = MemoryMap.describe(address: address)
+    print("  memory \(address.hex): \(sValue.hex) vs \(value.hex) (\(desc))")
   }
 }
