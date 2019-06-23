@@ -50,14 +50,10 @@ public class Lcd {
   public internal(set) var objectColors1 = ObjectColorPalette()
 
   /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
-  public internal(set) lazy var videoRam: Data = {
-    return Data(memoryRange: MemoryMap.videoRam)
-  }()
+  public internal(set) lazy var videoRam = Data(memoryRange: MemoryMap.videoRam)
 
   /// FE00-FE9F Sprite Attribute Table (OAM)
-  public internal(set) lazy var oam: Data = {
-    return Data(memoryRange: MemoryMap.oam)
-  }()
+  public internal(set) lazy var oam = Data(memoryRange: MemoryMap.oam)
 
   /// Flag instead of 0xFF0F
   public internal(set) var hasStatusInterrupt: Bool = false
@@ -77,7 +73,7 @@ public class Lcd {
       // basically go to the beginning
       self.line = 0
       self.lineProgress = 0
-      // TODO: clear framebuffer (flag in framebuffer to avoid clear on every cycle)
+      self.framebuffer.clear()
       self.status.mode = .vBlank
       return
     }
