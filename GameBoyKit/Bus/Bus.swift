@@ -2,7 +2,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// TODO: Rename to memory (+ whole dir and mode some to IO dir)
 public class Bus {
 
   internal let lcd: Lcd
@@ -14,14 +13,10 @@ public class Bus {
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
-  internal lazy var ram = {
-    return Data(memoryRange: MemoryMap.internalRam)
-  }()
+  internal lazy var ram = Data(memoryRange: MemoryMap.internalRam)
 
   /// FF80-FFFE High RAM (HRAM)
-  internal lazy var highRam = {
-    return Data(memoryRange: MemoryMap.highRam)
-  }()
+  internal lazy var highRam = Data(memoryRange: MemoryMap.highRam)
 
   /// Catch 'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()

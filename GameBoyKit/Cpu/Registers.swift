@@ -31,8 +31,7 @@ public enum CombinedRegister {
   case hl
 }
 
-// TODO: To struct
-public class Registers {
+public struct Registers {
 
   /// Accumulator: A
   /// An 8-bit register for storing data and the results of arithmetic and logical operations.
@@ -132,7 +131,7 @@ public class Registers {
     }
   }
 
-  internal func set(_ f: FlagRegister, to value: Bool) {
+  internal mutating func set(_ f: FlagRegister, to value: Bool) {
     switch f {
     case .zeroFlag:      self.zeroFlag      = value
     case .subtractFlag:  self.subtractFlag  = value
@@ -141,7 +140,7 @@ public class Registers {
     }
   }
 
-  internal func set(_ r: SingleRegister, to value: UInt8) {
+  internal mutating func set(_ r: SingleRegister, to value: UInt8) {
     switch r {
     case .a: self.a = value
     case .b: self.b = value
@@ -153,7 +152,7 @@ public class Registers {
     }
   }
 
-  internal func set(_ rr: CombinedRegister, to value: UInt16) {
+  internal mutating func set(_ rr: CombinedRegister, to value: UInt16) {
     switch rr {
     case .af:
       self.a = UInt8((value & 0xff00) >> 8)
@@ -188,7 +187,7 @@ extension Registers: Restorable {
     state.cpu.carryFlag     = self.carryFlag
   }
 
-  internal func load(from state: GameBoyState) {
+  internal mutating func load(from state: GameBoyState) {
     self.a = state.cpu.a
     self.b = state.cpu.b
     self.c = state.cpu.c

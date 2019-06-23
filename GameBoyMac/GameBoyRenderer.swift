@@ -61,10 +61,11 @@ public class GameBoyRenderer: NSObject, MTKViewDelegate {
     let region = MTLRegionMake2D(0, 0, framebufferWidth, framebufferHeight)
 
     data.withUnsafeBytes { ptr in
+      guard let baseAddress = ptr.baseAddress else { return }
       texture.replace(
         region:      region,
         mipmapLevel: 0,
-        withBytes:   ptr.baseAddress!,
+        withBytes:   baseAddress,
         bytesPerRow: framebufferWidth * MemoryLayout<UInt8>.size
       )
     }

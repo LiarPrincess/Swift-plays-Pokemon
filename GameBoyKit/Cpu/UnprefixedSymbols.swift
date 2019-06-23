@@ -5,6 +5,7 @@
 // This file was auto-generated.
 // DO NOT EDIT!
 
+// swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 // swiftlint:disable trailing_newline

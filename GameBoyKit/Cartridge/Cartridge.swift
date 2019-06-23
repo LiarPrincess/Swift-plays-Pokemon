@@ -5,19 +5,13 @@
 public class Cartridge {
 
   /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00)
-  public internal(set) lazy var rom0: Data = {
-    return Data(memoryRange: MemoryMap.rom0)
-  }()
+  public internal(set) lazy var rom0 = Data(memoryRange: MemoryMap.rom0)
 
   /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
-  public internal(set) lazy var rom1: Data = {
-    return Data(memoryRange: MemoryMap.rom1)
-  }()
+  public internal(set) lazy var rom1 = Data(memoryRange: MemoryMap.rom1)
 
   /// A000-BFFF 8KB External RAM (in cartridge, switchable bank, if any)
-  public internal(set) lazy var ram: Data = {
-    return Data(memoryRange: MemoryMap.externalRam)
-  }()
+  public internal(set) lazy var ram = Data(memoryRange: MemoryMap.externalRam)
 
 /*
   /// 0000-00FF Restart and Interrupt Vectors

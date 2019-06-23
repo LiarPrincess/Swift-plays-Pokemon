@@ -4,9 +4,9 @@
 
 // swiftlint:disable function_body_length
 
-private let tileSize:        Int = 8 // pixels
-private let tileRowCount:    Int = Int(Lcd.width)  / tileSize // 18
-private let tileColumnCount: Int = Int(Lcd.height) / tileSize // 20
+private let tileSize        = 8 // pixels
+private let tileRowCount    = Int(Lcd.width)  / tileSize // 18
+private let tileColumnCount = Int(Lcd.height) / tileSize // 20
 
 extension Lcd {
 

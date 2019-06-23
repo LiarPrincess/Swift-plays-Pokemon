@@ -4,5 +4,5 @@
 
 internal protocol Restorable {
   func save(to state: inout GameBoyState)
-  func load(from state: GameBoyState)
+  mutating func load(from state: GameBoyState)
 }
