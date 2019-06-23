@@ -5,8 +5,8 @@
 import MetalKit
 import GameBoyKit
 
-internal let framebufferWidth  = Int(Framebuffer.width)
-internal let framebufferHeight = Int(Framebuffer.height)
+internal let framebufferWidth  = Int(Lcd.width)
+internal let framebufferHeight = Int(Lcd.height)
 
 public class GameBoyRenderer: NSObject, MTKViewDelegate {
 

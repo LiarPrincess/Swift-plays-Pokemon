@@ -79,6 +79,7 @@ public enum MemoryMap {
 
 extension MemoryMap {
 
+  // swiftlint:disable cyclomatic_complexity
   public static func describe(address: UInt16) -> String {
     switch address {
     case rom0:            return "rom0"
@@ -97,6 +98,7 @@ extension MemoryMap {
     }
   }
 
+  // swiftlint:disable function_body_length cyclomatic_complexity
   private static func describeIO(address: UInt16) -> String {
     switch address {
     case IO.joypad: return "IO.joypad"
