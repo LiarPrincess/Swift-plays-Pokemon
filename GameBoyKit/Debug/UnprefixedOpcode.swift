@@ -13,7 +13,7 @@
 /// One of the standard 256 opcodes.
 /// See official "Gameboy programming manual" for details.
 /// (Because of performance this enum should be used only for debug.)
-public enum UnprefixedOpcode: UInt8, RawRepresentable {
+internal enum UnprefixedOpcode: UInt8, RawRepresentable {
   case nop = 0x0
   case ld_bc_d16 = 0x1
   case ld_pBC_a = 0x2

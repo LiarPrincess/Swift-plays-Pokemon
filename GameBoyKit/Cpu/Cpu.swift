@@ -9,22 +9,22 @@ public class Cpu {
   public static let clockSpeed: UInt = 4_194_304
 
   /// A 16-bit register that holds the address data of the program to be executed next.
-  public var pc: UInt16 = 0
+  public internal(set) var pc: UInt16 = 0
 
   /// A 16-bit register that holds the starting address of the stack area of memory.
-  public var sp: UInt16 = 0
+  public internal(set) var sp: UInt16 = 0
 
   /// Current cycle incremented after each operation (starting from 0).
-  public var cycle: UInt64 = 0
+  public internal(set) var cycle: UInt64 = 0
 
   /// Interrupt Master Enable Flag.
-  public var ime: Bool = false
+  public internal(set) var ime: Bool = false
 
   /// Is halted flag.
-  public var isHalted: Bool = false
+  public internal(set) var isHalted: Bool = false
 
   /// Register values (except for pc and sp)
-  public var registers: Registers
+  public internal(set) var registers: Registers
 
   private unowned var bus: CpuBus
 

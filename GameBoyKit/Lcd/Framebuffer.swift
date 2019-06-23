@@ -24,7 +24,7 @@ public class Framebuffer {
     self.data.deallocate()
   }
 
-  public internal(set) subscript(x: Int, y: Int) -> UInt8 {
+  internal subscript(x: Int, y: Int) -> UInt8 {
     get {
       // for performance we have to disable range checks (even in debug)
       let index = y * lcdWidth + x

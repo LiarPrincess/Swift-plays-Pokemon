@@ -6,26 +6,33 @@ import Foundation
 
 let currentFile = URL(fileURLWithPath: #file)
 let sourcesDir = currentFile.deletingLastPathComponent().deletingLastPathComponent()
-let cpuDir = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathComponent("Cpu")
+let cpuDir   = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathComponent("Cpu")
+let debugDir = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathComponent("Debug")
 
 let opcodes = try openOpcodesFile()
 defer { fclose(stdout) }
 
-var file = cpuDir.appendingPathComponent("UnprefixedSymbols.swift")
-freopen(file.path, "w", stdout)
-printSymbols(opcodes)
+// MARK: - Execute
 
-file = cpuDir.appendingPathComponent("CBPrefixedSymbols.swift")
-freopen(file.path, "w", stdout)
-printPrefixSymbols(opcodes)
-
-file = cpuDir.appendingPathComponent("Cpu+ExecuteUnprefixed.swift")
+var file = cpuDir.appendingPathComponent("Cpu+ExecuteUnprefixed.swift")
 freopen(file.path, "w", stdout)
 printExecuteExtension(opcodes)
 
 file = cpuDir.appendingPathComponent("Cpu+ExecutePrefixed.swift")
 freopen(file.path, "w", stdout)
 printExecutePrefixExtension(opcodes)
+
+// MARK: - Symbols
+
+file = debugDir.appendingPathComponent("UnprefixedOpcode.swift")
+freopen(file.path, "w", stdout)
+printOpcodes(opcodes)
+
+file = debugDir.appendingPathComponent("CBPrefixedOpcode.swift")
+freopen(file.path, "w", stdout)
+printPrefixOpcodes(opcodes)
+
+// MARK: - Modify cpu instructions
 
 //file = frameworkDir.appendingPathComponent("Cpu+Instructions.swift")
 //let instructionsFileContent = try! String(contentsOf: file, encoding: .utf8)

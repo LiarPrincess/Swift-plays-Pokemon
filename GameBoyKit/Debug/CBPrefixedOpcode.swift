@@ -13,7 +13,7 @@
 /// One of the 256 opcodes that should be executed if opcode is 0xCB.
 /// See official "Gameboy programming manual" for details.
 /// (Because of performance this enum should be used only for debug.)
-public enum CBPrefixedOpcode: UInt8, RawRepresentable {
+internal enum CBPrefixedOpcode: UInt8, RawRepresentable {
   case rlc_b = 0x0
   case rlc_c = 0x1
   case rlc_d = 0x2

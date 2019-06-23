@@ -9,10 +9,10 @@ private let color3Shift: UInt8 = 6
 
 public class BackgroundColorPalette {
 
-  public internal(set) var color0: UInt8 = 0
-  public internal(set) var color1: UInt8 = 0
-  public internal(set) var color2: UInt8 = 0
-  public internal(set) var color3: UInt8 = 0
+  private var color0: UInt8 = 0
+  private var color1: UInt8 = 0
+  private var color2: UInt8 = 0
+  private var color3: UInt8 = 0
 
   public internal(set) var value: UInt8 {
     get {
@@ -44,9 +44,9 @@ public class BackgroundColorPalette {
 
 public class ObjectColorPalette {
 
-  public internal(set) var color1: UInt8 = 0
-  public internal(set) var color2: UInt8 = 0
-  public internal(set) var color3: UInt8 = 0
+  private var color1: UInt8 = 0
+  private var color2: UInt8 = 0
+  private var color3: UInt8 = 0
 
   public internal(set) var value: UInt8 {
     get {

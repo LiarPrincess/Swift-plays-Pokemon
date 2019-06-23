@@ -5,7 +5,7 @@
 extension Bus {
 
   // swiftlint:disable:next function_body_length cyclomatic_complexity
-  public func write(_ address: UInt16, value: UInt8) {
+  internal func write(_ address: UInt16, value: UInt8) {
     func write(_ region: ClosedRange<UInt16>, _ data: inout Data) {
       data[address - region.start] = value
     }

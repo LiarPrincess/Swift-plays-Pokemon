@@ -3,6 +3,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 extension String {
+
   public func padLeft(toLength newLength: Int) -> String {
     // self.count is O(n)
     let currentCount = self.count

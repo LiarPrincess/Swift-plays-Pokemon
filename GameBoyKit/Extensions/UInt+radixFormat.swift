@@ -3,6 +3,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 extension UInt8 {
+
   public var dec: String {
     let s = String(self, radix: 10, uppercase: false)
     let padding = String(repeating: " ", count: 3 - s.count)
@@ -23,6 +24,7 @@ extension UInt8 {
 }
 
 extension UInt16 {
+
   public var dec: String {
     let s = String(self, radix: 10, uppercase: false)
     let padding = String(repeating: " ", count: 5 - s.count)
