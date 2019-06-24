@@ -26,11 +26,13 @@ public class Cpu {
   /// Register values (except for pc and sp).
   public internal(set) var registers: Registers
 
-  private unowned var bus: CpuBus
+  private let bus: CpuBus
+  private let interrupts: Interrupts
 
-  internal init(bus: CpuBus) {
+  internal init(bus: CpuBus, interrupts: Interrupts) {
     self.registers = Registers()
     self.bus = bus
+    self.interrupts = interrupts
   }
 
   // MARK: - Tick
@@ -75,12 +77,39 @@ public class Cpu {
       return
     }
 
-    guard let interrupt = self.getAwaitingInterrupt() else {
+    if self.interrupts.isVBlankEnabled && self.interrupts.vBlank {
+      self.interrupts.vBlank = false
+      self.processInterrupt(0x40)
       return
     }
 
+    if self.interrupts.isLcdStatEnabled && self.interrupts.lcdStat {
+      self.interrupts.lcdStat = false
+      self.processInterrupt(0x48)
+      return
+    }
+
+    if self.interrupts.isTimerEnabled && self.interrupts.timer {
+      self.interrupts.timer = false
+      self.processInterrupt(0x50)
+      return
+    }
+
+    if self.interrupts.isSerialEnabled && self.interrupts.serial {
+      self.interrupts.serial = false
+      self.processInterrupt(0x58)
+      return
+    }
+
+    if self.interrupts.isJoypadEnabled && self.interrupts.joypad {
+      self.interrupts.joypad = false
+      self.processInterrupt(0x60)
+      return
+    }
+  }
+
+  private func processInterrupt(_ handlingRoutineAddress: UInt16) {
     self.ime = false
-    self.bus.clearInterrupt(interrupt)
 
     // Escape HALT on return
     if self.isHalted {
@@ -88,26 +117,7 @@ public class Cpu {
     }
 
     self.push16(self.pc)
-    self.pc = self.getInterruptHandlingRoutine(interrupt)
-  }
-
-  private func getAwaitingInterrupt() -> Interrupt? {
-    if self.bus.hasInterrupt(.vBlank)  { return .vBlank }
-    if self.bus.hasInterrupt(.lcdStat) { return .lcdStat }
-    if self.bus.hasInterrupt(.timer)   { return .timer }
-    if self.bus.hasInterrupt(.serial)  { return .serial }
-    if self.bus.hasInterrupt(.joypad)  { return .joypad }
-    return nil
-  }
-
-  private func getInterruptHandlingRoutine(_ interrupt: Interrupt) -> UInt16 {
-    switch interrupt {
-    case .vBlank:  return 0x40
-    case .lcdStat: return 0x48
-    case .timer:   return 0x50
-    case .serial:  return 0x58
-    case .joypad:  return 0x60
-    }
+    self.pc = handlingRoutineAddress
   }
 
   // MARK: - Next bytes

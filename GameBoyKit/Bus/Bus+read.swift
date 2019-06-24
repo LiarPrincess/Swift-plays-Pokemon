@@ -54,7 +54,7 @@ extension Bus {
     case MemoryMap.unmapBootrom:
       return 0
     case MemoryMap.interruptEnable:
-      return self.interruptEnable.value
+      return self.interrupts.enable
 
     default:
       print("Attempting to read from unsupported memory address: \(address.hex).")
@@ -67,6 +67,7 @@ extension Bus {
     case MemoryMap.IO.joypad: return self.joypad.value
     case MemoryMap.IO.sb:     return self.serialPort.sb
     case MemoryMap.IO.sc:     return self.serialPort.sc
+    case MemoryMap.IO.interruptFlag: return self.interrupts.flag
 
     case MemoryMap.Timer.div:  return self.timer.div
     case MemoryMap.Timer.tima: return self.timer.tima

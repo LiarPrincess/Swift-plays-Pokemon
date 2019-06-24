@@ -2,6 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable trailing_comma
+
 import Foundation
 import GameBoyKit
 
@@ -45,8 +47,9 @@ internal func pyBoyBootromTests() {
   testStateBeforeUnmappingBootrom(gameBoy)
 }
 
-// source: http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
+// swiftlint:disable:next function_body_length cyclomatic_complexity
 private func testStateBeforeUnmappingBootrom(_ s: GameBoy) {
+  // source: http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
   print("Final state")
 
   if s.cpu.pc != 0x0100 { print("  pc: \(s.cpu.pc.hex) vs 0x0100") }

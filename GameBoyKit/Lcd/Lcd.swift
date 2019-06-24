@@ -57,16 +57,16 @@ public class Lcd {
   /// FE00-FE9F Sprite Attribute Table (OAM)
   public internal(set) lazy var oam = Data(memoryRange: MemoryMap.oam)
 
-  /// Flag instead of 0xFF0F
-  internal var hasStatusInterrupt: Bool = false
-
-  /// Flag instead of 0xFF0F
-  internal var hasVBlankInterrupt: Bool = false
-
   /// Data that should be put on screen
   public internal(set) var framebuffer = Framebuffer()
 
   private var lineProgress: UInt16 = 0
+
+  private let interrupts: Interrupts
+
+  internal init(interrupts: Interrupts) {
+    self.interrupts = interrupts
+  }
 
   // MARK: - Tick
 
@@ -112,7 +112,7 @@ public class Lcd {
 
     self.status.isLineCompareInterrupt = hasInterrupt
     if hasInterrupt && self.status.isLineCompareInterruptEnabled {
-      self.hasStatusInterrupt = true
+      self.interrupts.lcdStat = true
     }
   }
 
@@ -122,8 +122,8 @@ public class Lcd {
     if self.line >= Lcd.height {
       if self.status.mode != .vBlank {
         self.status.mode = .vBlank
-        self.hasVBlankInterrupt ||= self.status.isVBlankInterruptEnabled
-        self.hasStatusInterrupt ||= self.status.isVBlankInterruptEnabled
+        self.interrupts.vBlank  ||= self.status.isVBlankInterruptEnabled
+        self.interrupts.lcdStat ||= self.status.isVBlankInterruptEnabled
       }
       return
     }
@@ -148,7 +148,7 @@ public class Lcd {
     }
 
     if requestInterrupt && self.status.mode != previousMode {
-      self.hasStatusInterrupt = true
+      self.interrupts.lcdStat = true
     }
   }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		902BDD9E22C1544000632BA7 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDD9D22C1544000632BA7 /* Interrupts.swift */; };
 		902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96A22BF825B00026960 /* Data+initFromRange.swift */; };
 		902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96C22BF85B600026960 /* Data+UInt.swift */; };
 		902CA96F22BFA63C00026960 /* CpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96E22BFA63C00026960 /* CpuBus.swift */; };
@@ -70,14 +71,12 @@
 		90A56A3522A3DD0D0055A013 /* GameBoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A56A3422A3DD0D0055A013 /* GameBoy.swift */; };
 		90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A90C2822B8130C00DC833F /* Range+start+end.swift */; };
 		90B0DC4422B6EC89005BBCF5 /* Lcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4322B6EC89005BBCF5 /* Lcd.swift */; };
-		90B0DC4822B6F0CD005BBCF5 /* Interrupt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4722B6F0CD005BBCF5 /* Interrupt.swift */; };
 		90B0DC4B22B6F43D005BBCF5 /* Cartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */; };
 		90B0DC5122B76E59005BBCF5 /* MemoryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5022B76E59005BBCF5 /* MemoryMap.swift */; };
 		90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5422B78927005BBCF5 /* Joypad.swift */; };
 		90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5622B789D0005BBCF5 /* SerialPort.swift */; };
 		90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */; };
 		90B0DC5D22B78E13005BBCF5 /* Bus+read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */; };
-		90B0DC5F22B78E72005BBCF5 /* Bus+interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5E22B78E72005BBCF5 /* Bus+interrupts.swift */; };
 		90BE338622B5123B00DF3953 /* LcdColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */; };
 		90C19C5822B2AEE200A1B7A9 /* LcdTileDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */; };
 		90C2AD3F22A1DFD500F5A7AF /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD3E22A1DFD500F5A7AF /* Common.swift */; };
@@ -95,7 +94,6 @@
 		90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DB22B579EC004E5281 /* PyLoad.swift */; };
 		90CBD3E022BD824300B58461 /* PyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DD22B57B8A004E5281 /* PyTest.swift */; };
 		90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */; };
-		90D404AE22AC76FC00AEF7BD /* InterruptEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
 		90EFDB8722B05D5D0017AEC2 /* BusDmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */; };
@@ -158,6 +156,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		902BDD9D22C1544000632BA7 /* Interrupts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Interrupts.swift; path = ../Interrupts/Interrupts.swift; sourceTree = "<group>"; };
 		902CA96A22BF825B00026960 /* Data+initFromRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+initFromRange.swift"; sourceTree = "<group>"; };
 		902CA96C22BF85B600026960 /* Data+UInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UInt.swift"; sourceTree = "<group>"; };
 		902CA96E22BFA63C00026960 /* CpuBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuBus.swift; sourceTree = "<group>"; };
@@ -230,14 +229,12 @@
 		90A56A3422A3DD0D0055A013 /* GameBoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoy.swift; sourceTree = "<group>"; };
 		90A90C2822B8130C00DC833F /* Range+start+end.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+start+end.swift"; sourceTree = "<group>"; };
 		90B0DC4322B6EC89005BBCF5 /* Lcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lcd.swift; sourceTree = "<group>"; };
-		90B0DC4722B6F0CD005BBCF5 /* Interrupt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interrupt.swift; sourceTree = "<group>"; };
 		90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cartridge.swift; sourceTree = "<group>"; };
 		90B0DC5022B76E59005BBCF5 /* MemoryMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMap.swift; sourceTree = "<group>"; };
 		90B0DC5422B78927005BBCF5 /* Joypad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joypad.swift; sourceTree = "<group>"; };
 		90B0DC5622B789D0005BBCF5 /* SerialPort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
 		90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+write.swift"; sourceTree = "<group>"; };
 		90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+read.swift"; sourceTree = "<group>"; };
-		90B0DC5E22B78E72005BBCF5 /* Bus+interrupts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+interrupts.swift"; sourceTree = "<group>"; };
 		90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorValueTests.swift; sourceTree = "<group>"; };
 		90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileDataTests.swift; sourceTree = "<group>"; };
 		90C2AD3E22A1DFD500F5A7AF /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -252,7 +249,6 @@
 		90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBootromTests.swift; sourceTree = "<group>"; };
 		90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameBoyKitBlarggTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		90CBD3D622BD81F000B58461 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterruptEnable.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
 		90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDmaTests.swift; sourceTree = "<group>"; };
@@ -380,7 +376,6 @@
 				9073102522A66A2000EBC7BB /* Cpu */,
 				90CBB73C22ADB851004775E2 /* Lcd */,
 				90B0DC4922B6F3EF005BBCF5 /* Cartridge */,
-				90B0DC4522B6F0B4005BBCF5 /* Interrupts */,
 				90D58EE122A7B2580076584F /* Bus */,
 				90CBB71722AD74BB004775E2 /* Extensions */,
 				905321B622BE54F600A409B2 /* Save */,
@@ -437,15 +432,6 @@
 				90A17B7C229D59B10027133B /* main.swift */,
 			);
 			path = "Code generation";
-			sourceTree = "<group>";
-		};
-		90B0DC4522B6F0B4005BBCF5 /* Interrupts */ = {
-			isa = PBXGroup;
-			children = (
-				90B0DC4722B6F0CD005BBCF5 /* Interrupt.swift */,
-				90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */,
-			);
-			path = Interrupts;
 			sourceTree = "<group>";
 		};
 		90B0DC4922B6F3EF005BBCF5 /* Cartridge */ = {
@@ -531,11 +517,11 @@
 				90B0DC5422B78927005BBCF5 /* Joypad.swift */,
 				90B0DC5622B789D0005BBCF5 /* SerialPort.swift */,
 				906073A022B8452200F2766D /* Timer.swift */,
+				902BDD9D22C1544000632BA7 /* Interrupts.swift */,
 				90B0DC5022B76E59005BBCF5 /* MemoryMap.swift */,
 				9085FC4322B6C54400310090 /* Bus.swift */,
 				90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */,
 				90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */,
-				90B0DC5E22B78E72005BBCF5 /* Bus+interrupts.swift */,
 			);
 			path = Bus;
 			sourceTree = "<group>";
@@ -768,7 +754,6 @@
 				9085FC4422B6C54400310090 /* Bus.swift in Sources */,
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */,
-				90D404AE22AC76FC00AEF7BD /* InterruptEnable.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
 				90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */,
@@ -787,7 +772,7 @@
 				902CA97122BFFD8D00026960 /* UnprefixedOpcode.swift in Sources */,
 				905321BA22BE563200A409B2 /* Restorable.swift in Sources */,
 				905321B222BE479800A409B2 /* DebugMode.swift in Sources */,
-				90B0DC4822B6F0CD005BBCF5 /* Interrupt.swift in Sources */,
+				902BDD9E22C1544000632BA7 /* Interrupts.swift in Sources */,
 				905321B522BE48EE00A409B2 /* Debugger+Cpu.swift in Sources */,
 				90A17B90229D59D50027133B /* Cpu+Instructions.swift in Sources */,
 				90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */,
@@ -797,7 +782,6 @@
 				906073A122B8452200F2766D /* Timer.swift in Sources */,
 				90B0DC4B22B6F43D005BBCF5 /* Cartridge.swift in Sources */,
 				905321AA22BE378300A409B2 /* OrEqualOperator.swift in Sources */,
-				90B0DC5F22B78E72005BBCF5 /* Bus+interrupts.swift in Sources */,
 				905321BE22BE649C00A409B2 /* Debugger+Memory.swift in Sources */,
 				905321C822BE99A300A409B2 /* LcdMode.swift in Sources */,
 				9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */,

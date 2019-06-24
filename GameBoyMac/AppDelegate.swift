@@ -2,15 +2,17 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable implicitly_unwrapped_optional
+
 import AppKit
 import MetalKit
 import GameBoyKit
 
 public class AppDelegate: NSObject, NSApplicationDelegate {
 
-  private let gameBoy = GameBoy()
-  private let device  = createDevice()
-  private lazy var renderer = GameBoyRenderer(gameBoy: self.gameBoy, device: self.device)
+  private var gameBoy:  GameBoy!
+  private var device:   MTLDevice!
+  private var renderer: GameBoyRenderer!
 
   private let mtkView = MTKView()
 
@@ -27,14 +29,17 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
   }()
 
   public func applicationDidFinishLaunching(_ aNotification: Notification) {
+    let args = parseArguments()
+
+    self.gameBoy  = GameBoy(bootrom: args.bootrom, cartridge: args.rom)
+    self.device   = createDevice()
+    self.renderer = GameBoyRenderer(gameBoy: self.gameBoy, device: self.device)
+
     self.initWindow()
     self.initView()
 
     self.window.makeKeyAndOrderFront(nil)
     self.window.makeMain()
-
-    print("Press ENTER to start...")
-    _ = readLine()
   }
 
   private func initWindow() {

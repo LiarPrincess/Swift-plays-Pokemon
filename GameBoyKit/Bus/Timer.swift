@@ -6,6 +6,12 @@
 /// FF05, FF06, FF07 - App defined timer
 public class Timer {
 
+  private let interrupts: Interrupts
+
+  internal init(interrupts: Interrupts) {
+    self.interrupts = interrupts
+  }
+
   // MARK: - Tick
 
   internal func tick(cycles: UInt8) {
@@ -68,9 +74,6 @@ public class Timer {
     }
   }
 
-  /// Flag instead of 0xFF0F.
-  internal var hasInterrupt: Bool = false
-
   private var timaProgress: UInt = 0
 
   private func tickTima(cycles: UInt8) {
@@ -86,7 +89,7 @@ public class Timer {
 
       if self.tima == UInt8.max {
         self.tima = self.tma
-        self.hasInterrupt = true
+        self.interrupts.timer = true
       } else {
         self.tima += 1
       }

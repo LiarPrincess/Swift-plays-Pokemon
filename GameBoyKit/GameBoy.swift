@@ -12,21 +12,20 @@ public class GameBoy {
   public let timer: Timer
   public let joypad: Joypad
 
-  public init(bootrom: Bootrom = .skip) {
-    self.lcd = Lcd()
-    self.timer = Timer()
+  public init(bootrom: Bootrom = .skip, cartridge: Cartridge) {
+    let interrupts = Interrupts()
+    self.lcd = Lcd(interrupts: interrupts)
+    self.timer = Timer(interrupts: interrupts)
     self.joypad = Joypad()
-
-    let dataSize = MemoryMap.rom0.count + MemoryMap.rom1.count
-    let cartridge = Cartridge(data: Data(count: dataSize))
 
     self.bus = Bus(bootrom:   bootrom,
                    cartridge: cartridge,
                    joypad:    self.joypad,
                    lcd:       self.lcd,
-                   timer:     self.timer)
+                   timer:     self.timer,
+                   interrupts: interrupts)
 
-    self.cpu = Cpu(bus: self.bus)
+    self.cpu = Cpu(bus: self.bus, interrupts: interrupts)
   }
 
   @discardableResult

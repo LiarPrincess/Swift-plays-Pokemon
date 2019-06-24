@@ -18,10 +18,22 @@ internal func createDevice() -> MTLDevice {
 }
 
 internal func makeLibrary(device: MTLDevice) -> MTLLibrary {
+
+  // 1. Try to take library from bundle (SPM)
+  if let libraryFile = Bundle.main.path(forResource: "Shader", ofType: "metallib") {
+    do {
+      return try device.makeLibrary(filepath: libraryFile)
+    } catch {
+      /* fallback to default */
+    }
+  }
+
+  // 2. Just use default (XCode)
   if let library = device.makeDefaultLibrary() {
     return library
   }
 
+  // 3. Nope
   fatalError("Error when initializing Metal: unable to load library.")
 }
 

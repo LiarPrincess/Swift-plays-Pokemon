@@ -3,7 +3,8 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // swiftlint:disable strict_fileprivate
-// swiftlint:disable force_unwrapping
+
+// TODO: https://www.enekoalonso.com/articles/parsing-command-line-arguments-with-swift-package-manager-argument-parser
 
 import Foundation
 import GameBoyKit

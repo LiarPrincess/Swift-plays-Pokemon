@@ -10,7 +10,7 @@ public class Bus {
   internal let timer: Timer
   internal let joypad: Joypad
   internal let serialPort: SerialPort
-  internal let interruptEnable: InterruptEnable
+  internal let interrupts: Interrupts
 
   internal let bootrom: Bootrom
   internal let cartridge: Cartridge
@@ -30,17 +30,18 @@ public class Bus {
   /// TODO: Catch 'em all for audio read/write
   internal var audio = [UInt16:UInt8]()
 
-  internal init(bootrom:   Bootrom,
-                cartridge: Cartridge,
-                joypad:    Joypad,
-                lcd:       Lcd,
-                timer:     Timer) {
+  internal init(bootrom:    Bootrom,
+                cartridge:  Cartridge,
+                joypad:     Joypad,
+                lcd:        Lcd,
+                timer:      Timer,
+                interrupts: Interrupts) {
 
     self.lcd = lcd
     self.timer = timer
     self.joypad = joypad
     self.serialPort = SerialPort()
-    self.interruptEnable = InterruptEnable()
+    self.interrupts = interrupts
 
     self.bootrom = bootrom
     self.cartridge = cartridge

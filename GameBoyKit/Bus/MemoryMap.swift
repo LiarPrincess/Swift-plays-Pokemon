@@ -24,9 +24,7 @@ public enum MemoryMap {
     public static let joypad: UInt16 = 0xff00
     public static let sb:     UInt16 = 0xff01
     public static let sc:     UInt16 = 0xff02
-
-    // this one is not used, we have flag in each component instead
-    // public static let interruptFlag: UInt16 = 0xff0f
+    public static let interruptFlag: UInt16 = 0xff0f
   }
 
   public enum Timer {
@@ -105,6 +103,7 @@ extension MemoryMap {
     case IO.joypad: return "IO.joypad"
     case IO.sb:     return "IO.sb"
     case IO.sc:     return "IO.sc"
+    case IO.interruptFlag: return "IO.interruptFlag"
     case Timer.div:  return "Timer.div"
     case Timer.tima: return "Timer.tima"
     case Timer.tma:  return "Timer.tma"
