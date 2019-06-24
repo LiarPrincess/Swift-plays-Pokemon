@@ -17,7 +17,7 @@ class CpuRotateTests: XCTestCase {
   /// RLCA ; A←0Ah,CY←1,Z←0,H←0,N←0
   func disabled_test_rlca() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x85
     cpu.registers.carryFlag = false
     cpu.rlca()
@@ -33,7 +33,7 @@ class CpuRotateTests: XCTestCase {
   /// RLA ; A ←2Bh,C←1,Z←0,H←0,N←0
   func test_rla() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x95
     cpu.registers.carryFlag = true
     cpu.rla()
@@ -51,7 +51,7 @@ class CpuRotateTests: XCTestCase {
   /// RRCA ; A←9Dh,CY←1,Z←0,H←0,N←0
   func test_rrca() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x3b
     cpu.registers.carryFlag = false
     cpu.rrca()
@@ -67,7 +67,7 @@ class CpuRotateTests: XCTestCase {
   /// RRA ; A←40h,CY←1,Z←0,H←0,N←0
   func test_rra() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x81
     cpu.registers.carryFlag = false
     cpu.rra()
@@ -85,7 +85,7 @@ class CpuRotateTests: XCTestCase {
   /// RLC B ; B←0Bh,CY←1,Z←0,H←0,N←0
   func test_rlc_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.b = 0x85
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0)
@@ -103,7 +103,7 @@ class CpuRotateTests: XCTestCase {
   /// RLC (HL) ; (HL)←00h,CY←0,Z←1,H←0,N←0
   func test_rlc_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.b = 0x85
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0)
@@ -121,7 +121,7 @@ class CpuRotateTests: XCTestCase {
   /// RL L ; L←00h,CY←1,Z←1,H←0,N←0
   func test_rl_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.b = 0x80 // we use 'b' instead of 'l'
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x11)
@@ -137,7 +137,7 @@ class CpuRotateTests: XCTestCase {
 
   func test_rl_r_bootrom_0x009d() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.c = 0xce // after 0x9c
     cpu.registers.zeroFlag = false
     cpu.registers.subtractFlag = false
@@ -156,7 +156,7 @@ class CpuRotateTests: XCTestCase {
   /// RL (HL) ; (HL)←22h,CY←0,Z←0,H←0,N←0
   func test_rl_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.b = 0x80 // we use 'b' instead of 'l'
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x11)
@@ -176,7 +176,7 @@ class CpuRotateTests: XCTestCase {
   /// RRC C ; C←80h,CY←1,Z←0,H←0,N←0
   func test_rrc_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.c = 0x01
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0)
@@ -194,7 +194,7 @@ class CpuRotateTests: XCTestCase {
   /// RRC (HL) ; (HL)←00h,CY←0,Z←1,H←0,N←0
   func test_rrc_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.c = 0x01
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0)
@@ -212,7 +212,7 @@ class CpuRotateTests: XCTestCase {
   /// RR A ; A←00h,CY←1,Z←1,H←0,N←0
   func test_rr_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x01
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)
@@ -230,7 +230,7 @@ class CpuRotateTests: XCTestCase {
   /// RR (HL) ; (HL)←45h,CY←0,Z←0,H←0,N←0
   func test_rr_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x01
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)

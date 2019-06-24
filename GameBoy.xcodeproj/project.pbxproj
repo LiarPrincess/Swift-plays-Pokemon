@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		902BDD9E22C1544000632BA7 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDD9D22C1544000632BA7 /* Interrupts.swift */; };
+		902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */; };
+		902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */; };
+		902BDDA622C1643400632BA7 /* XCTestCase+createTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA522C1643400632BA7 /* XCTestCase+createTimer.swift */; };
 		902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96A22BF825B00026960 /* Data+initFromRange.swift */; };
 		902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96C22BF85B600026960 /* Data+UInt.swift */; };
 		902CA96F22BFA63C00026960 /* CpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96E22BFA63C00026960 /* CpuBus.swift */; };
@@ -157,6 +160,9 @@
 
 /* Begin PBXFileReference section */
 		902BDD9D22C1544000632BA7 /* Interrupts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Interrupts.swift; path = ../Interrupts/Interrupts.swift; sourceTree = "<group>"; };
+		902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcd.swift"; sourceTree = "<group>"; };
+		902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createCpu.swift"; sourceTree = "<group>"; };
+		902BDDA522C1643400632BA7 /* XCTestCase+createTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createTimer.swift"; sourceTree = "<group>"; };
 		902CA96A22BF825B00026960 /* Data+initFromRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+initFromRange.swift"; sourceTree = "<group>"; };
 		902CA96C22BF85B600026960 /* Data+UInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UInt.swift"; sourceTree = "<group>"; };
 		902CA96E22BFA63C00026960 /* CpuBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuBus.swift; sourceTree = "<group>"; };
@@ -323,6 +329,9 @@
 			isa = PBXGroup;
 			children = (
 				9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */,
+				902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */,
+				902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */,
+				902BDDA522C1643400632BA7 /* XCTestCase+createTimer.swift */,
 				902CA97C22C0204800026960 /* XCTestCase+createBus.swift */,
 			);
 			path = Helpers;
@@ -801,6 +810,7 @@
 				90A17BAE229D59EE0027133B /* CpuArithmeticTests.swift in Sources */,
 				90CBB73222AD7AE3004775E2 /* Data+UIntTests.swift in Sources */,
 				90EFDB8722B05D5D0017AEC2 /* BusDmaTests.swift in Sources */,
+				902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */,
 				90A17BAD229D59EE0027133B /* CpuJumpTests.swift in Sources */,
 				90CBB72C22AD7632004775E2 /* InterruptEnableTests.swift in Sources */,
 				90A17BA9229D59EE0027133B /* CpuCallTests.swift in Sources */,
@@ -809,10 +819,12 @@
 				90A17BAA229D59EE0027133B /* CpuShiftTests.swift in Sources */,
 				9085FC3322B693F200310090 /* LcdColorPaletteTests.swift in Sources */,
 				906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */,
+				902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */,
 				902CA97D22C0204800026960 /* XCTestCase+createBus.swift in Sources */,
 				9085FC4822B6C75200310090 /* BusReadTests.swift in Sources */,
 				9085FC4622B6C71000310090 /* BusWriteTests.swift in Sources */,
 				90CBB72922AD75B4004775E2 /* String+padTests.swift in Sources */,
+				902BDDA622C1643400632BA7 /* XCTestCase+createTimer.swift in Sources */,
 				90A17BAC229D59EE0027133B /* CpuBitTests.swift in Sources */,
 				9085FC3B22B6BC7400310090 /* FakeCpuBus.swift in Sources */,
 				90A17BB0229D59EE0027133B /* CpuOtherTests.swift in Sources */,

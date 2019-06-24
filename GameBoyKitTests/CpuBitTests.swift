@@ -17,7 +17,7 @@ class CpuBitTests: XCTestCase {
   /// BIT 7, A ; Z←0,H←1,N←0
   func test_bit_r_1() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0xef
     cpu.bit_r(7, .a)
@@ -31,7 +31,7 @@ class CpuBitTests: XCTestCase {
   /// BIT 4, L ; Z←1,H←1,N←0
   func test_bit_r_2() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0xef
     cpu.bit_r(4, .l)
@@ -45,7 +45,7 @@ class CpuBitTests: XCTestCase {
   /// BIT 0, (HL) ; Z←1,H←1,N←0
   func test_bit_pHL_1() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xfe)
     cpu.bit_pHL(0)
@@ -59,7 +59,7 @@ class CpuBitTests: XCTestCase {
   /// BIT 1, (HL) ; Z←0,H←1,N←0
   func test_bit_pHL_2() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xfe)
     cpu.bit_pHL(1)
@@ -75,7 +75,7 @@ class CpuBitTests: XCTestCase {
   /// SET 3, A ; A←0x84
   func test_set_r_1() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
     cpu.set_r(3, .a)
@@ -88,7 +88,7 @@ class CpuBitTests: XCTestCase {
   /// SET 7, L ; L←0xBB
   func test_set_r_2() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
     cpu.set_r(7, .l)
@@ -100,7 +100,7 @@ class CpuBitTests: XCTestCase {
   /// SET 3, (HL) ; (HL) ← 04H
   func test_set_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x00)
     cpu.set_pHL(3)
@@ -115,7 +115,7 @@ class CpuBitTests: XCTestCase {
   /// RES 7,A;A←00h
   func test_res_r_1() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
     cpu.res_r(7, .a)
@@ -127,7 +127,7 @@ class CpuBitTests: XCTestCase {
   /// RES 1, L ; L ← 39h
   func test_res_r_2() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
     cpu.res_r(1, .l)
@@ -139,7 +139,7 @@ class CpuBitTests: XCTestCase {
   /// RES 3, (HL) ; (HL) ← F7h
   func test_res_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
     cpu.res_pHL(3)

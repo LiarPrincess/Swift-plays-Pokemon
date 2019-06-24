@@ -17,7 +17,7 @@ class CpuShiftTests: XCTestCase {
   /// SLA D ; D←00h,CY←1,Z←1,H←0,N←0
   func test_sla_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.d = 0x80
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
@@ -35,7 +35,7 @@ class CpuShiftTests: XCTestCase {
   /// SLA (HL) ; (HL)←FEh,CY←1,Z←0,H←0,N←0
   func test_sla_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.d = 0x80
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
@@ -53,7 +53,7 @@ class CpuShiftTests: XCTestCase {
   /// SRA D ; A←C5h,CY←0,Z←0,H←0,N←0
   func test_sra_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x8a
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x01)
@@ -72,7 +72,7 @@ class CpuShiftTests: XCTestCase {
   /// SRA (HL) ; (HL)←00h,CY←1,Z←1,H←0,N←0
   func test_sra_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x8a
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x01)
@@ -90,7 +90,7 @@ class CpuShiftTests: XCTestCase {
   /// SRL A ; A←00h,CY←1,Z←1,H←0,N←0
   func test_srl_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x01
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
@@ -108,7 +108,7 @@ class CpuShiftTests: XCTestCase {
   /// SRL (HL) ; (HL)←7Fh,CY←1,Z←0,H←0,N←0
   func test_srl_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x01
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
@@ -128,7 +128,7 @@ class CpuShiftTests: XCTestCase {
   /// SWAP A ; A←00h,Z←1,H←0,N←0,CY←0
   func test_swap_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x00
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xf0)
@@ -145,7 +145,7 @@ class CpuShiftTests: XCTestCase {
   /// SWAP(HL) ; (HL)←0Fh,Z←0,H←0,N←0,CY←0
   func test_swap_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x00
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xf0)

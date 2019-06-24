@@ -7,28 +7,53 @@ import XCTest
 
 class InterruptsTests: XCTestCase {
 
-  func test_isEnabled() {
-    let isEnabled = InterruptEnable()
+  func test_flag() {
+    let interrupts = Interrupts()
 
-    XCTAssertEqual(isEnabled.vBlank,  false)
-    XCTAssertEqual(isEnabled.lcdStat, false)
-    XCTAssertEqual(isEnabled.timer,   false)
-    XCTAssertEqual(isEnabled.serial,  false)
-    XCTAssertEqual(isEnabled.joypad,  false)
+    XCTAssertEqual(interrupts.vBlank,  false)
+    XCTAssertEqual(interrupts.lcdStat, false)
+    XCTAssertEqual(interrupts.timer,   false)
+    XCTAssertEqual(interrupts.serial,  false)
+    XCTAssertEqual(interrupts.joypad,  false)
 
-    isEnabled.value = 1 << 0
-    XCTAssertEqual(isEnabled.vBlank, true)
+    interrupts.flag = 1 << 0
+    XCTAssertEqual(interrupts.vBlank, true)
 
-    isEnabled.value = 1 << 1
-    XCTAssertEqual(isEnabled.lcdStat, true)
+    interrupts.flag = 1 << 1
+    XCTAssertEqual(interrupts.lcdStat, true)
 
-    isEnabled.value = 1 << 2
-    XCTAssertEqual(isEnabled.timer, true)
+    interrupts.flag = 1 << 2
+    XCTAssertEqual(interrupts.timer, true)
 
-    isEnabled.value = 1 << 3
-    XCTAssertEqual(isEnabled.serial, true)
+    interrupts.flag = 1 << 3
+    XCTAssertEqual(interrupts.serial, true)
 
-    isEnabled.value = 1 << 4
-    XCTAssertEqual(isEnabled.joypad, true)
+    interrupts.flag = 1 << 4
+    XCTAssertEqual(interrupts.joypad, true)
+  }
+
+  func test_enabled() {
+    let interrupts = Interrupts()
+
+    XCTAssertEqual(interrupts.isVBlankEnabled,  false)
+    XCTAssertEqual(interrupts.isLcdStatEnabled, false)
+    XCTAssertEqual(interrupts.isTimerEnabled,   false)
+    XCTAssertEqual(interrupts.isSerialEnabled,  false)
+    XCTAssertEqual(interrupts.isJoypadEnabled,  false)
+
+    interrupts.enable = 1 << 0
+    XCTAssertEqual(interrupts.isVBlankEnabled, true)
+
+    interrupts.enable = 1 << 1
+    XCTAssertEqual(interrupts.isLcdStatEnabled, true)
+
+    interrupts.enable = 1 << 2
+    XCTAssertEqual(interrupts.isTimerEnabled, true)
+
+    interrupts.enable = 1 << 3
+    XCTAssertEqual(interrupts.isSerialEnabled, true)
+
+    interrupts.enable = 1 << 4
+    XCTAssertEqual(interrupts.isJoypadEnabled, true)
   }
 }

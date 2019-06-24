@@ -193,9 +193,14 @@ class BusWriteTests: XCTestCase {
   }
 
   func test_interrupts() {
-    let bus = self.createBus()
-    bus.write(MemoryMap.interruptEnable, value: 6)
-    XCTAssertEqual(bus.interruptEnable.value, 6)
+    let interrupts = Interrupts()
+    let bus = self.createBus(interrupts: interrupts)
+
+    bus.write(MemoryMap.interruptEnable, value: 5)
+    bus.write(MemoryMap.IO.interruptFlag, value: 6)
+
+    XCTAssertEqual(interrupts.enable, 5)
+    XCTAssertEqual(interrupts.flag, 6)
   }
 
   // MARK: - Helpers

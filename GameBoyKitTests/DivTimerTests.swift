@@ -8,7 +8,7 @@ import XCTest
 class DivTimerTests: XCTestCase {
 
   func test_increment() {
-    let timer = Timer()
+    let timer = self.createTimer()
 
     // 250 cycles -> no increment (<256)
     for _ in 0..<25 {
@@ -22,7 +22,7 @@ class DivTimerTests: XCTestCase {
   }
 
   func test_overflow() {
-    let timer = Timer()
+    let timer = self.createTimer()
 
     // Set div to 0xff
     for i in 0..<0xff {

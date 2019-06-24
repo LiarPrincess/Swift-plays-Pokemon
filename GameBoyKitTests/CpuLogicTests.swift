@@ -17,7 +17,7 @@ class CpuLogicTests: XCTestCase {
   /// AND L ; A←1Ah,Z←0,H←1,N←0 CY←0
   func test_and_a_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x5a
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
@@ -35,7 +35,7 @@ class CpuLogicTests: XCTestCase {
   /// AND 38h ; A←18h,Z←0,H←1,N←0 CY←0
   func test_and_a_d8() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x5a
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
@@ -53,7 +53,7 @@ class CpuLogicTests: XCTestCase {
   /// AND (HL) ; A←00h,Z←1,H←1,N←0 CY←0
   func test_and_a_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x5a
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
@@ -73,7 +73,7 @@ class CpuLogicTests: XCTestCase {
   /// OR A ; A←5Ah,Z←0
   func test_or_a_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x0f)
@@ -90,7 +90,7 @@ class CpuLogicTests: XCTestCase {
   /// OR 3 ; A←5Bh,Z←0
   func test_or_a_d8() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x0f)
@@ -107,7 +107,7 @@ class CpuLogicTests: XCTestCase {
   /// OR (HL); A←5Fh,Z←0
   func test_or_a_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x0f)
@@ -126,7 +126,7 @@ class CpuLogicTests: XCTestCase {
   /// XOR A ; A←00h,Z←1
   func test_xor_a_r() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)
@@ -143,7 +143,7 @@ class CpuLogicTests: XCTestCase {
   /// XOR 0x0F ; A←F0h,Z←0
   func test_xor_a_d8() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)
@@ -160,7 +160,7 @@ class CpuLogicTests: XCTestCase {
   /// XOR (HL) ; A←75h,Z←0
   func test_xor_a_pHL() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)

@@ -6,7 +6,8 @@
 
 public enum MemoryMap {
 
-  public static let bootrom:         ClosedRange<UInt16> = 0x0000...0x00ff
+  public static let bootrom: ClosedRange<UInt16> = 0x0000...0x00ff
+
   public static let rom0:            ClosedRange<UInt16> = 0x0000...0x3fff
   public static let rom1:            ClosedRange<UInt16> = 0x4000...0x7fff
   public static let videoRam:        ClosedRange<UInt16> = 0x8000...0x9fff
@@ -15,8 +16,7 @@ public enum MemoryMap {
   public static let internalRamEcho: ClosedRange<UInt16> = 0xe000...0xfdff
   public static let oam:             ClosedRange<UInt16> = 0xfe00...0xfe9f
   public static let notUsable:       ClosedRange<UInt16> = 0xfea0...0xfeff
-  public static let io:              ClosedRange<UInt16> = 0xff00...0xff4b
-  public static let unmapBootrom:    UInt16 = 0xff50
+  public static let io:              ClosedRange<UInt16> = 0xff00...0xff7f
   public static let highRam:         ClosedRange<UInt16> = 0xff80...0xfffe
   public static let interruptEnable: UInt16 = 0xffff
 
@@ -24,6 +24,7 @@ public enum MemoryMap {
     public static let joypad: UInt16 = 0xff00
     public static let sb:     UInt16 = 0xff01
     public static let sc:     UInt16 = 0xff02
+    public static let unmapBootrom:    UInt16 = 0xff50
     public static let interruptFlag: UInt16 = 0xff0f
   }
 
@@ -90,7 +91,6 @@ extension MemoryMap {
     case oam:             return "oam"
     case notUsable:       return "notUsable"
     case io:              return describeIO(address: address)
-    case unmapBootrom:    return "unmapBootrom"
     case highRam:         return "highRam"
     case interruptEnable: return "interruptEnable"
     default: return "unknown"
@@ -103,6 +103,7 @@ extension MemoryMap {
     case IO.joypad: return "IO.joypad"
     case IO.sb:     return "IO.sb"
     case IO.sc:     return "IO.sc"
+    case IO.unmapBootrom:  return "IO.unmapBootrom"
     case IO.interruptFlag: return "IO.interruptFlag"
     case Timer.div:  return "Timer.div"
     case Timer.tima: return "Timer.tima"

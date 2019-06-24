@@ -13,7 +13,8 @@ class CustomTimerTests: XCTestCase {
   private let period1024: UInt8 = 0b00
 
   func test_period16_incrementsAt_16cycles() {
-    let timer = Timer()
+    let interrupts = Interrupts()
+    let timer = self.createTimer(interrupts: interrupts)
     timer.tac = enabled | period16
 
     timer.tick(cycles: 8)
@@ -22,11 +23,12 @@ class CustomTimerTests: XCTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x01)
 
-    XCTAssertEqual(timer.hasInterrupt, false)
+    XCTAssertEqual(interrupts.timer, false)
   }
 
   func test_period1024_incrementsAt_1024cycles() {
-    let timer = Timer()
+    let interrupts = Interrupts()
+    let timer = self.createTimer(interrupts: interrupts)
     timer.tac = enabled | period1024
 
     for _ in 0..<4 {
@@ -37,11 +39,12 @@ class CustomTimerTests: XCTestCase {
     timer.tick(cycles: 24)
     XCTAssertEqual(timer.tima, 0x01)
 
-    XCTAssertEqual(timer.hasInterrupt, false)
+    XCTAssertEqual(interrupts.timer, false)
   }
 
   func test_disabled_doesNothing() {
-    let timer = Timer()
+    let interrupts = Interrupts()
+    let timer = self.createTimer(interrupts: interrupts)
     timer.tac = disabled | period16
 
     timer.tick(cycles: 8)
@@ -54,11 +57,12 @@ class CustomTimerTests: XCTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x00)
 
-    XCTAssertEqual(timer.hasInterrupt, false)
+    XCTAssertEqual(interrupts.timer, false)
   }
 
   func test_overflow() {
-    let timer = Timer()
+    let interrupts = Interrupts()
+    let timer = self.createTimer(interrupts: interrupts)
     timer.tac = enabled | period16
     timer.tma = 0x16 // this value should be set after overflow
 
@@ -75,6 +79,6 @@ class CustomTimerTests: XCTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, timer.tma) // now!
 
-    XCTAssertEqual(timer.hasInterrupt, true)
+    XCTAssertEqual(interrupts.timer, true)
   }
 }

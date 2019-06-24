@@ -8,7 +8,7 @@ import XCTest
 class LcdTileIndexTests: XCTestCase {
 
   func test_from9800to9bff() {
-    let lcd = Lcd()
+    let lcd = self.createLcd()
     let map = TileMap.from9800to9bff
 
     XCTAssertEqual(lcd.getTileIndexAddress(from: map, row:  0, column:  0), 0x9800)
@@ -18,7 +18,7 @@ class LcdTileIndexTests: XCTestCase {
   }
 
   func test_from9c00to9fff() {
-    let lcd = Lcd()
+    let lcd = self.createLcd()
     let map = TileMap.from9c00to9fff
 
     XCTAssertEqual(lcd.getTileIndexAddress(from: map, row:  0, column:  0), 0x9c00)

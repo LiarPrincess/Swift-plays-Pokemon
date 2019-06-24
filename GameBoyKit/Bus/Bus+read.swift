@@ -51,8 +51,6 @@ extension Bus {
     // other
     case MemoryMap.notUsable:
       return 0
-    case MemoryMap.unmapBootrom:
-      return 0
     case MemoryMap.interruptEnable:
       return self.interrupts.enable
 
@@ -67,6 +65,7 @@ extension Bus {
     case MemoryMap.IO.joypad: return self.joypad.value
     case MemoryMap.IO.sb:     return self.serialPort.sb
     case MemoryMap.IO.sc:     return self.serialPort.sc
+    case MemoryMap.IO.unmapBootrom:  return 0
     case MemoryMap.IO.interruptFlag: return self.interrupts.flag
 
     case MemoryMap.Timer.div:  return self.timer.div
@@ -112,8 +111,8 @@ extension Bus {
     case MemoryMap.Lcd.windowX: return self.lcd.windowX
 
     default:
-      print("Attempting to read from unsupported IO memory address: \(address.hex).")
-      return self.unmappedMemory[address] ?? 0
+      let index = address - MemoryMap.io.start
+      return self.ioMemory[index]
     }
   }
 }

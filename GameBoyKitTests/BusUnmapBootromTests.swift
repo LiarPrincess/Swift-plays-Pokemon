@@ -22,7 +22,7 @@ class BusUnmapBootromTests: XCTestCase {
     let cartridge = Cartridge(data: data)
     let bus = self.createBus(cartridge: cartridge)
 
-    bus.write(MemoryMap.unmapBootrom, value: 1) // <-- this
+    bus.write(MemoryMap.IO.unmapBootrom, value: 1) // <-- this
 
     XCTAssertEqual(bus.read(range.start), BusUnmapBootromTests.startValue)
     XCTAssertEqual(bus.read(range.end), BusUnmapBootromTests.endValue)

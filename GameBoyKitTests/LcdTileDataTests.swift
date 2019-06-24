@@ -8,7 +8,7 @@ import XCTest
 class LineDrawerTileDataAddressTests: XCTestCase {
 
   func test_tileDataAddress_from8000() {
-    let lcd = Lcd()
+    let lcd = self.createLcd()
     lcd.control.tileData = .from8000to8fff
 
     // 0: 0x8000
@@ -26,7 +26,7 @@ class LineDrawerTileDataAddressTests: XCTestCase {
   }
 
   func test_tileDataAddress_from8800() {
-    let lcd = Lcd()
+    let lcd = self.createLcd()
     lcd.control.tileData = .from8800to97ff
 
     // 0: 0x9000

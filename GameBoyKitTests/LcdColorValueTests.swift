@@ -9,7 +9,7 @@ class LineDrawerColorValueTests: XCTestCase {
   /// Source: http://www.codeslinger.co.uk/pages/projects/gameboy/graphics.html
   /// Section: 'How to draw a tile/sprite from memory'
   func test_rawColorValue() {
-    let lcd = Lcd()
+    let lcd = self.createLcd()
 
     let data2: UInt8 = 0b1010_1110
     let data1: UInt8 = 0b0011_0101

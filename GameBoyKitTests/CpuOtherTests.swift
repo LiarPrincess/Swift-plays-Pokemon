@@ -13,7 +13,7 @@ class CpuOtherTests: XCTestCase {
 
   func test_nop() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.pc = 0xfefe
     cpu.nop()
 
@@ -24,7 +24,7 @@ class CpuOtherTests: XCTestCase {
   /// CPL ; A ← CAh
   func test_cpl() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x35
     cpu.cpl()
 
@@ -33,7 +33,7 @@ class CpuOtherTests: XCTestCase {
 
   func test_scf() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.carryFlag = false
     cpu.ccf()
 
@@ -44,7 +44,7 @@ class CpuOtherTests: XCTestCase {
   /// CCF ; CY ← 0
   func test_ccf() {
     let bus = FakeCpuBus()
-    let cpu = Cpu(bus: bus)
+    let cpu = self.createCpu(bus: bus)
     cpu.registers.carryFlag = true
     cpu.ccf()
 
