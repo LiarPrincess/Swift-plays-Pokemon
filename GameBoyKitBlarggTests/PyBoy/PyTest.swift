@@ -7,7 +7,7 @@
 
 import GameBoyKit
 
-private var checkedAddresses: Set<UInt16> = {
+var checkedAddresses: [UInt16] = {
   var result = Set<UInt16>()
 
   // add all interesting regions
@@ -22,6 +22,7 @@ private var checkedAddresses: Set<UInt16> = {
   result.insert(MemoryMap.IO.joypad)
   result.insert(MemoryMap.IO.sb)
   result.insert(MemoryMap.IO.sc)
+  result.insert(MemoryMap.IO.unmapBootrom)
   result.insert(MemoryMap.Timer.div)
   result.insert(MemoryMap.Timer.tima)
   result.insert(MemoryMap.Timer.tma)
@@ -61,7 +62,6 @@ private var checkedAddresses: Set<UInt16> = {
   result.insert(MemoryMap.Lcd.objectColors1)
   result.insert(MemoryMap.Lcd.windowY)
   result.insert(MemoryMap.Lcd.windowX)
-  result.insert(MemoryMap.unmapBootrom)
   MemoryMap.highRam.forEach { result.insert($0) }
   result.insert(MemoryMap.interruptEnable)
 
@@ -69,7 +69,7 @@ private var checkedAddresses: Set<UInt16> = {
   (0x0000...0x00ff).forEach { result.remove($0) } // bootrom
   (0x0104...0x014f).forEach { result.remove($0) } // nintendo logo + checksum
 
-  return result
+  return [UInt16](result).sorted()
 }()
 
 func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) {

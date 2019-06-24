@@ -28,8 +28,9 @@ private var programCounters: [String] = [
 ]
 
 internal func pyBoyBootromTests() {
-  let gameBoy = GameBoy(bootrom: .dmg)
-  let debugger = Debugger(gameBoy: gameBoy)
+  let cartridge = createCartridge()
+  let gameBoy   = GameBoy(bootrom: .dmg, cartridge: cartridge)
+  let debugger  = Debugger(gameBoy: gameBoy)
 
   let currentFile = URL(fileURLWithPath: #file)
   let mainDir     = currentFile.deletingLastPathComponent()
@@ -47,9 +48,31 @@ internal func pyBoyBootromTests() {
   testStateBeforeUnmappingBootrom(gameBoy)
 }
 
+private func createCartridge() -> Cartridge {
+  let count = MemoryMap.rom0.count + MemoryMap.rom1.count
+  var data = Data(count: count)
+
+  let logoStart = 0x0104
+  let logoEnd = logoStart + nintendoLogo.count
+  data.replaceSubrange(logoStart..<logoEnd, with: nintendoLogo)
+
+  return Cartridge(data: data)
+}
+
+// swiftlint:disable collection_alignment
+private let nintendoLogo: [UInt8] = [
+/*           0     1     2     3     4     5     6     7     8     9    a      b     c     d     e     f */
+/* 100 */                         0xce, 0xed, 0x66, 0x66, 0xcc, 0x0d, 0x00, 0x0b, 0x03, 0x73, 0x00, 0x83,
+/* 110 */ 0x00, 0x0c, 0x00, 0x0d, 0x00, 0x08, 0x11, 0x1f, 0x88, 0x89, 0x00, 0x0e, 0xdc, 0xcc, 0x6e, 0xe6,
+/* 120 */ 0xdd, 0xdd, 0xd9, 0x99, 0xbb, 0xbb, 0x67, 0x63, 0x6e, 0x0e, 0xec, 0xcc, 0xdd, 0xdc, 0x99, 0x9f,
+/* 130 */ 0xbb, 0xb9, 0x33, 0x3e, /* checksum starts here */
+                                  0x50, 0x4f, 0x4b, 0x45, 0x4d, 0x4f, 0x4e, 0x20, 0x42, 0x4c, 0x55, 0x45,
+/* 140 */ 0x00, 0x00, 0x00, 0x00, 0x30, 0x31, 0x03, 0x13, 0x05, 0x03, 0x01, 0x33, 0x00, 0xd3, 0x9d, 0x0a
+]
+
 // swiftlint:disable:next function_body_length cyclomatic_complexity
 private func testStateBeforeUnmappingBootrom(_ s: GameBoy) {
-  // source: http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
+// source: http://www.codeslinger.co.uk/pages/projects/gameboy/hardware.html
   print("Final state")
 
   if s.cpu.pc != 0x0100 { print("  pc: \(s.cpu.pc.hex) vs 0x0100") }
@@ -70,43 +93,52 @@ private func testStateBeforeUnmappingBootrom(_ s: GameBoy) {
   if sReg.halfCarryFlag != true  { print("  halfCarryFlag: \(sReg.halfCarryFlag) vs true") }
   if sReg.carryFlag     != true  { print("  carryFlag: \(sReg.carryFlag) vs true") }
 
-  checkMemory(s, address: 0xff05, value: 0x00)
-  checkMemory(s, address: 0xff06, value: 0x00)
-  checkMemory(s, address: 0xff07, value: 0x00)
-  checkMemory(s, address: 0xff10, value: 0x80)
-  checkMemory(s, address: 0xff11, value: 0xbf)
-  checkMemory(s, address: 0xff12, value: 0xf3)
-  checkMemory(s, address: 0xff14, value: 0xbf)
-  checkMemory(s, address: 0xff16, value: 0x3f)
-  checkMemory(s, address: 0xff17, value: 0x00)
-  checkMemory(s, address: 0xff19, value: 0xbf)
-  checkMemory(s, address: 0xff1a, value: 0x7f)
-  checkMemory(s, address: 0xff1b, value: 0xff)
-  checkMemory(s, address: 0xff1c, value: 0x9f)
-  checkMemory(s, address: 0xff1e, value: 0xbf)
-  checkMemory(s, address: 0xff20, value: 0xff)
-  checkMemory(s, address: 0xff21, value: 0x00)
-  checkMemory(s, address: 0xff22, value: 0x00)
-  checkMemory(s, address: 0xff23, value: 0xbf)
-  checkMemory(s, address: 0xff24, value: 0x77)
-  checkMemory(s, address: 0xff25, value: 0xf3)
-  checkMemory(s, address: 0xff26, value: 0xf1)
-  checkMemory(s, address: 0xff40, value: 0x91)
-  checkMemory(s, address: 0xff42, value: 0x00)
-  checkMemory(s, address: 0xff43, value: 0x00)
-  checkMemory(s, address: 0xff45, value: 0x00)
-  checkMemory(s, address: 0xff47, value: 0xfc)
-  checkMemory(s, address: 0xff48, value: 0xff)
-  checkMemory(s, address: 0xff49, value: 0xff)
-  checkMemory(s, address: 0xff4a, value: 0x00)
-  checkMemory(s, address: 0xff4b, value: 0x00)
-  checkMemory(s, address: 0xffff, value: 0x00)
-}
+  let values: [UInt16: UInt8] = [
+    0xff05: 0x00,
+    0xff06: 0x00,
+    0xff07: 0x00,
+    0xff10: 0x80,
+    0xff11: 0xbf,
+    0xff12: 0xf3,
+    0xff14: 0xbf,
+    0xff16: 0x3f,
+    0xff17: 0x00,
+    0xff19: 0xbf,
+    0xff1a: 0x7f,
+    0xff1b: 0xff,
+    0xff1c: 0x9f,
+    0xff1e: 0xbf,
+    0xff20: 0xff,
+    0xff21: 0x00,
+    0xff22: 0x00,
+    0xff23: 0xbf,
+    0xff24: 0x77,
+    0xff25: 0xf3,
+    0xff26: 0xf1,
+    0xff40: 0x91,
+    0xff42: 0x00,
+    0xff43: 0x00,
+    0xff45: 0x00,
+    0xff47: 0xfc,
+    0xff48: 0xff,
+    0xff49: 0xff,
+    0xff4a: 0x00,
+    0xff4b: 0x00,
+    0xffff: 0x00
+  ]
 
-private func checkMemory(_ s: GameBoy, address: UInt16, value: UInt8) {
-  let sValue = s.bus.read(address)
-  if sValue != value {
-    let desc = MemoryMap.describe(address: address)
-    print("  memory \(address.hex): \(sValue.hex) vs \(value.hex) (\(desc))")
+  for address in checkedAddresses {
+    // this does not really matter
+    if MemoryMap.videoRam.contains(address) {
+      continue
+    }
+
+    let value = s.bus.read(address)
+    let expected = values[address] ?? 0x00
+
+    if value != expected {
+      let desc = MemoryMap.describe(address: address)
+      print("  memory \(address.hex): \(value.hex) vs \(expected.hex) (\(desc))")
+    }
   }
 }
