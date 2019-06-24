@@ -8,10 +8,10 @@ public class Cpu {
   /// 4 194 304 Hz
   public static let clockSpeed: UInt = 4_194_304
 
-  /// A 16-bit register that holds the address data of the program to be executed next.
+  /// A 16-bit register that holds the address of the next executed instruction.
   public internal(set) var pc: UInt16 = 0
 
-  /// A 16-bit register that holds the starting address of the stack area of memory.
+  /// A 16-bit register that holds the starting address of the stack.
   public internal(set) var sp: UInt16 = 0
 
   /// Current cycle incremented after each operation (starting from 0).
@@ -23,7 +23,7 @@ public class Cpu {
   /// Is halted flag.
   public internal(set) var isHalted: Bool = false
 
-  /// Register values (except for pc and sp)
+  /// Register values (except for pc and sp).
   public internal(set) var registers: Registers
 
   private unowned var bus: CpuBus

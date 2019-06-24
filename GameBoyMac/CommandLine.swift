@@ -3,12 +3,15 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import Foundation
+import GameBoyKit
 
 internal struct Arguments {
-  internal let bootrom: Data
+  internal let bootrom: Bootrom?
 }
 
 private struct RawArguments {
+
+  // swiftlint:disable:next strict_fileprivate
   fileprivate var bootrom: String? = nil
 }
 
@@ -20,7 +23,7 @@ internal func parseArguments() -> Arguments {
   }
 
   return Arguments(
-    bootrom: openRom(bootromPath)
+    bootrom: Bootrom(data: open(bootromPath))
   )
 }
 
@@ -49,7 +52,7 @@ private func parseRawArguments() -> RawArguments {
   return result
 }
 
-private func openRom(_ path: String) -> Data {
+private func open(_ path: String) -> Data {
   do {
     let url = URL(fileURLWithPath: path, isDirectory: false)
     return try Data(contentsOf: url)

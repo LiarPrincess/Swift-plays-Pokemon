@@ -15,7 +15,7 @@ public class GameBoyRenderer: NSObject, MTKViewDelegate {
   private let pipeline:     MTLRenderPipelineState
   private let commandQueue: MTLCommandQueue
   private let vertexBuffer: MTLBuffer
-  private var texture:      MTLTexture
+  private let texture:      MTLTexture
 
   public init(gameBoy: GameBoy, device: MTLDevice) {
     self.gameBoy = gameBoy

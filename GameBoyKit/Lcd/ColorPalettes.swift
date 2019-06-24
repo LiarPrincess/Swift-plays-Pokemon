@@ -7,7 +7,7 @@ private let color1Shift: UInt8 = 2
 private let color2Shift: UInt8 = 4
 private let color3Shift: UInt8 = 6
 
-public class BackgroundColorPalette {
+public struct BackgroundColorPalette {
 
   private var color0: UInt8 = 0
   private var color1: UInt8 = 0
@@ -42,7 +42,7 @@ public class BackgroundColorPalette {
   }
 }
 
-public class ObjectColorPalette {
+public struct ObjectColorPalette {
 
   private var color1: UInt8 = 0
   private var color2: UInt8 = 0

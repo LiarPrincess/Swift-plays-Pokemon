@@ -7,14 +7,14 @@ private let subtractFlagPosition:  UInt16 = 6
 private let halfCarryFlagPosition: UInt16 = 5
 private let carryFlagPosition:     UInt16 = 4
 
-public enum FlagRegister {
+internal enum FlagRegister {
   case zeroFlag
   case subtractFlag
   case halfCarryFlag
   case carryFlag
 }
 
-public enum SingleRegister {
+internal enum SingleRegister {
   case a
   case b
   case c
@@ -24,7 +24,7 @@ public enum SingleRegister {
   case l
 }
 
-public enum CombinedRegister {
+internal enum CombinedRegister {
   case af
   case bc
   case de
@@ -33,8 +33,8 @@ public enum CombinedRegister {
 
 public struct Registers {
 
-  /// Accumulator: A
-  /// An 8-bit register for storing data and the results of arithmetic and logical operations.
+  /// Accumulator. An 8-bit register for storing data
+  /// and the results of arithmetic and logical operations.
   public internal(set) var a: UInt8 = 0
 
   /// Auxiliary register: B
@@ -58,17 +58,21 @@ public struct Registers {
   /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
   public internal(set) var zeroFlag: Bool = false
 
-  /// N: Set to 1 following execution of the substruction instruction, regardless of the result.
+  /// N: Set to 1 following execution of the
+  /// substruction instruction, regardless of the result.
   public internal(set) var subtractFlag: Bool = false
 
-  /// H: Set to 1 when an operation results in carrying from or borrowing to bit 3.
+  /// H: Set to 1 when an operation results
+  /// in carrying from or borrowing to bit 3.
   public internal(set) var halfCarryFlag: Bool = false
 
-  /// CY: Set to 1 when an operation results in carrying from or borrowing to bit 7.
+  /// CY: Set to 1 when an operation results
+  /// in carrying from or borrowing to bit 7.
   public internal(set) var carryFlag: Bool = false
 
   // MARK: - Combined registers
 
+  /// Merge of B and C registers.
   public internal(set) var bc: UInt16 {
     get { return (UInt16(self.b) << 8) | UInt16(self.c) }
     set {
@@ -77,6 +81,7 @@ public struct Registers {
     }
   }
 
+  /// Merge of D and E registers.
   public internal(set) var de: UInt16 {
     get { return (UInt16(self.d) << 8) | UInt16(self.e) }
     set {
@@ -85,6 +90,7 @@ public struct Registers {
     }
   }
 
+  /// Merge of H and L registers.
   public internal(set) var hl: UInt16 {
     get { return (UInt16(self.h) << 8) | UInt16(self.l) }
     set {
@@ -95,7 +101,7 @@ public struct Registers {
 
   // MARK: - Addressing
 
-  public func get(_ f: FlagRegister) -> Bool {
+  internal func get(_ f: FlagRegister) -> Bool {
     switch f {
     case .zeroFlag:      return self.zeroFlag
     case .subtractFlag:  return self.subtractFlag
@@ -104,7 +110,7 @@ public struct Registers {
     }
   }
 
-  public func get(_ r: SingleRegister) -> UInt8 {
+  internal func get(_ r: SingleRegister) -> UInt8 {
     switch r {
     case .a: return self.a
     case .b: return self.b
@@ -116,7 +122,7 @@ public struct Registers {
     }
   }
 
-  public func get(_ rr: CombinedRegister) -> UInt16 {
+  internal func get(_ rr: CombinedRegister) -> UInt16 {
     switch rr {
     case .af:
       var result: UInt16 = 0

@@ -18,7 +18,8 @@ public class Timer {
   /// Frequency at which div register should be incremented.
   public static let divFrequency: UInt = 16_384
 
-  /// Divider - This register is incremented at rate of 16384Hz.
+  /// FF04 - DIV - Divider Register.
+  /// This register is incremented at rate of 16384Hz.
   /// Writing any value to this register resets it to 00h.
   public internal(set) var div: UInt8 {
     get { return self.divValue }
@@ -44,17 +45,18 @@ public class Timer {
 
   // MARK: - Tima timer
 
-  /// Timer counter - This timer is incremented by a clock frequency specified by the TAC register (FF07).
-  /// When the value overflows then it will be reset to the value specified in TMA (FF06),
-  /// and an interrupt will be requested.
+  /// FF05 - TIMA - Timer counter.
+  /// This timer is incremented by a clock frequency specified by the TAC
+  /// register (FF07). When the value overflows then it will be reset to the
+  /// value specified in TMA (FF06), and an interrupt will be requested.
   public internal(set) var tima: UInt8 = 0x00
 
-  /// Timer Modulo - When the TIMA overflows, this data will be loaded.
+  /// FF06 - TMA - Timer Modulo.
+  /// When the TIMA overflows, this data will be loaded.
   public internal(set) var tma: UInt8 = 0x00
 
-  /// Timer Control:
-  /// Bit 2    - Timer Stop;
-  /// Bits 1-0 - Input Clock Select
+  /// FF07 - TAC - Timer Control.
+  /// Bit 2 - stop timer, bits 1 and 0 - select clock
   public internal(set) var tac: UInt8 = 0x00 {
     didSet {
       let oldPeriod = self.getPeriod(tac: oldValue)
@@ -67,7 +69,7 @@ public class Timer {
   }
 
   /// Flag instead of 0xFF0F.
-  public internal(set) var hasInterrupt: Bool = false
+  internal var hasInterrupt: Bool = false
 
   private var timaProgress: UInt = 0
 

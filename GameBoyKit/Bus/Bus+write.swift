@@ -2,9 +2,11 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
+
 extension Bus {
 
-  // swiftlint:disable:next function_body_length cyclomatic_complexity
   internal func write(_ address: UInt16, value: UInt8) {
     func write(_ region: ClosedRange<UInt16>, _ data: inout Data) {
       data[address - region.start] = value
@@ -57,7 +59,6 @@ extension Bus {
     }
   }
 
-  // swiftlint:disable:next function_body_length cyclomatic_complexity
   private func writeInternalIO(_ address: UInt16, value: UInt8) {
     switch address {
     case MemoryMap.IO.joypad: self.joypad.value = value

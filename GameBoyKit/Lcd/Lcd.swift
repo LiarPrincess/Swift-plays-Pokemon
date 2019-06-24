@@ -56,12 +56,12 @@ public class Lcd {
   public internal(set) lazy var oam = Data(memoryRange: MemoryMap.oam)
 
   /// Flag instead of 0xFF0F
-  public internal(set) var hasStatusInterrupt: Bool = false
+  internal var hasStatusInterrupt: Bool = false
 
   /// Flag instead of 0xFF0F
-  public internal(set) var hasVBlankInterrupt: Bool = false
+  internal var hasVBlankInterrupt: Bool = false
 
-  /// Data thst should be put on screen
+  /// Data that should be put on screen
   public internal(set) var framebuffer = Framebuffer()
 
   private var lineProgress: UInt16 = 0
