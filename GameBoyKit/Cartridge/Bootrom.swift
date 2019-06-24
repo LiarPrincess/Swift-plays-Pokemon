@@ -2,6 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import Foundation
+
 /// Code that will be ran when gameboy is started. You can find
 /// different bootroms [here](http://gbdev.gg8.se/files/roms/bootroms/).
 public class Bootrom {

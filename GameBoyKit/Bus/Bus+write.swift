@@ -5,6 +5,8 @@
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
 
+import Foundation
+
 extension Bus {
 
   internal func write(_ address: UInt16, value: UInt8) {

@@ -5,7 +5,7 @@
 import XCTest
 @testable import GameBoyKit
 
-class ReadTests: XCTestCase {
+class BusReadTests: XCTestCase {
 
   private static let startValue: UInt8 = 5
   private static let endValue:   UInt8 = 6
@@ -14,15 +14,15 @@ class ReadTests: XCTestCase {
     let range = MemoryMap.bootrom
 
     var data = Data(count: MemoryMap.rom0.count)
-    data[range.start] = ReadTests.startValue
-    data[range.end]   = ReadTests.endValue
+    data[range.start] = BusReadTests.startValue
+    data[range.end]   = BusReadTests.endValue
 
     let bootrom = Bootrom(data: data)
     let bus = self.createBus(bootrom: bootrom)
     // 'bus.hasFinishedBootrom' should be false by default
 
-    XCTAssertEqual(bus.read(range.start), ReadTests.startValue)
-    XCTAssertEqual(bus.read(range.end), ReadTests.endValue)
+    XCTAssertEqual(bus.read(range.start), BusReadTests.startValue)
+    XCTAssertEqual(bus.read(range.end), BusReadTests.endValue)
   }
 
   func test_rom0() {
@@ -30,15 +30,15 @@ class ReadTests: XCTestCase {
 
     let dataSize = MemoryMap.rom0.count + MemoryMap.rom1.count
     var data = Data(count: dataSize)
-    data[range.start] = ReadTests.startValue
-    data[range.end]   = ReadTests.endValue
+    data[range.start] = BusReadTests.startValue
+    data[range.end]   = BusReadTests.endValue
 
     let cartridge = Cartridge(data: data)
     let bus = self.createBus(cartridge: cartridge)
     bus.hasFinishedBootrom = true
 
-    XCTAssertEqual(bus.read(range.start), ReadTests.startValue)
-    XCTAssertEqual(bus.read(range.end), ReadTests.endValue)
+    XCTAssertEqual(bus.read(range.start), BusReadTests.startValue)
+    XCTAssertEqual(bus.read(range.end), BusReadTests.endValue)
   }
 
   func test_rom1() {
@@ -46,15 +46,15 @@ class ReadTests: XCTestCase {
 
     let dataSize = MemoryMap.rom0.count + MemoryMap.rom1.count
     var data = Data(count: dataSize)
-    data[range.start] = ReadTests.startValue
-    data[range.end]   = ReadTests.endValue
+    data[range.start] = BusReadTests.startValue
+    data[range.end]   = BusReadTests.endValue
 
     let cartridge = Cartridge(data: data)
     let bus = self.createBus(cartridge: cartridge)
     bus.hasFinishedBootrom = true
 
-    XCTAssertEqual(bus.read(range.start), ReadTests.startValue)
-    XCTAssertEqual(bus.read(range.end), ReadTests.endValue)
+    XCTAssertEqual(bus.read(range.start), BusReadTests.startValue)
+    XCTAssertEqual(bus.read(range.end), BusReadTests.endValue)
   }
 
   func test_videoRam() {
@@ -88,11 +88,11 @@ class ReadTests: XCTestCase {
     let bus = self.createBus()
     let range = MemoryMap.internalRamEcho
 
-    bus.ram[bus.ram.startIndex] = ReadTests.startValue
-    bus.ram[bus.ram.startIndex + range.count - 1] = ReadTests.endValue
+    bus.ram[bus.ram.startIndex] = BusReadTests.startValue
+    bus.ram[bus.ram.startIndex + range.count - 1] = BusReadTests.endValue
 
-    XCTAssertEqual(bus.read(range.start), ReadTests.startValue)
-    XCTAssertEqual(bus.read(range.end), ReadTests.endValue)
+    XCTAssertEqual(bus.read(range.start), BusReadTests.startValue)
+    XCTAssertEqual(bus.read(range.end), BusReadTests.endValue)
   }
 
   func test_oam() {
@@ -206,8 +206,8 @@ class ReadTests: XCTestCase {
   // MARK: - Helpers
 
   private func fill(_ data: inout Data) {
-    data[data.startIndex]   = ReadTests.startValue
-    data[data.endIndex - 1] = ReadTests.endValue
+    data[data.startIndex]   = BusReadTests.startValue
+    data[data.endIndex - 1] = BusReadTests.endValue
   }
 
   private func testStartValue(_ bus:   Bus,
@@ -216,7 +216,7 @@ class ReadTests: XCTestCase {
                               line:    UInt = #line) {
 
     let value = bus.read(range.start)
-    XCTAssertEqual(value, ReadTests.startValue, file: file, line: line)
+    XCTAssertEqual(value, BusReadTests.startValue, file: file, line: line)
   }
 
   private func testEndValue(_ bus:   Bus,
@@ -225,6 +225,6 @@ class ReadTests: XCTestCase {
                             line:    UInt = #line) {
 
     let value = bus.read(range.end)
-    XCTAssertEqual(value, ReadTests.endValue, file: file, line: line)
+    XCTAssertEqual(value, BusReadTests.endValue, file: file, line: line)
   }
 }

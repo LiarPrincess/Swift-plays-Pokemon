@@ -16,7 +16,7 @@
 		902CA97722C00C7300026960 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97622C00C7300026960 /* Arguments.swift */; };
 		902CA97922C0159C00026960 /* Bootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97822C0159C00026960 /* Bootrom.swift */; };
 		902CA97D22C0204800026960 /* XCTestCase+createBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97C22C0204800026960 /* XCTestCase+createBus.swift */; };
-		902CA98022C031D200026960 /* UnmapBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97E22C031CD00026960 /* UnmapBootromTests.swift */; };
+		902CA98022C031D200026960 /* BusUnmapBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97E22C031CD00026960 /* BusUnmapBootromTests.swift */; };
 		903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DB22BB903A003132FA /* Lcd+Dump.swift */; };
 		903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */; };
 		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
@@ -34,14 +34,14 @@
 		906073A122B8452200F2766D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A022B8452200F2766D /* Timer.swift */; };
 		906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A222B8453F00F2766D /* DivTimerTests.swift */; };
 		906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A322B8453F00F2766D /* CustomTimerTests.swift */; };
-		9085FC3122B690C600310090 /* ColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* ColorPalettes.swift */; };
-		9085FC3322B693F200310090 /* ColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* ColorPaletteTests.swift */; };
+		9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* LcdColorPalettes.swift */; };
+		9085FC3322B693F200310090 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */; };
 		9085FC3B22B6BC7400310090 /* FakeCpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */; };
 		9085FC3D22B6BF6A00310090 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3C22B6BF6A00310090 /* main.swift */; };
 		9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */; };
 		9085FC4422B6C54400310090 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4322B6C54400310090 /* Bus.swift */; };
-		9085FC4622B6C71000310090 /* WriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4522B6C70F00310090 /* WriteTests.swift */; };
-		9085FC4822B6C75200310090 /* ReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4722B6C75200310090 /* ReadTests.swift */; };
+		9085FC4622B6C71000310090 /* BusWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4522B6C70F00310090 /* BusWriteTests.swift */; };
+		9085FC4822B6C75200310090 /* BusReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4722B6C75200310090 /* BusReadTests.swift */; };
 		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
 		90A17B48229D59840027133B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A17B47229D59840027133B /* Assets.xcassets */; };
@@ -98,7 +98,7 @@
 		90D404AE22AC76FC00AEF7BD /* InterruptEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
-		90EFDB8722B05D5D0017AEC2 /* DmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8622B05D5D0017AEC2 /* DmaTests.swift */; };
+		90EFDB8722B05D5D0017AEC2 /* BusDmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,7 +167,7 @@
 		902CA97622C00C7300026960 /* Arguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
 		902CA97822C0159C00026960 /* Bootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootrom.swift; sourceTree = "<group>"; };
 		902CA97C22C0204800026960 /* XCTestCase+createBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createBus.swift"; sourceTree = "<group>"; };
-		902CA97E22C031CD00026960 /* UnmapBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmapBootromTests.swift; sourceTree = "<group>"; };
+		902CA97E22C031CD00026960 /* BusUnmapBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusUnmapBootromTests.swift; sourceTree = "<group>"; };
 		903818D922B57976004E5281 /* PyBoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyBoy.swift; sourceTree = "<group>"; };
 		903818DB22B579EC004E5281 /* PyLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyLoad.swift; sourceTree = "<group>"; };
 		903818DD22B57B8A004E5281 /* PyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyTest.swift; sourceTree = "<group>"; };
@@ -188,14 +188,14 @@
 		906073A022B8452200F2766D /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		906073A222B8453F00F2766D /* DivTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
 		906073A322B8453F00F2766D /* CustomTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimerTests.swift; sourceTree = "<group>"; };
-		9085FC3022B690C600310090 /* ColorPalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalettes.swift; sourceTree = "<group>"; };
-		9085FC3222B693F200310090 /* ColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteTests.swift; sourceTree = "<group>"; };
+		9085FC3022B690C600310090 /* LcdColorPalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcdColorPalettes.swift; sourceTree = "<group>"; };
+		9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorPaletteTests.swift; sourceTree = "<group>"; };
 		9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCpuBus.swift; sourceTree = "<group>"; };
 		9085FC3C22B6BF6A00310090 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		9085FC4322B6C54400310090 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
-		9085FC4522B6C70F00310090 /* WriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteTests.swift; sourceTree = "<group>"; };
-		9085FC4722B6C75200310090 /* ReadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadTests.swift; sourceTree = "<group>"; };
+		9085FC4522B6C70F00310090 /* BusWriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusWriteTests.swift; sourceTree = "<group>"; };
+		9085FC4722B6C75200310090 /* BusReadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusReadTests.swift; sourceTree = "<group>"; };
 		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* GameBoyMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameBoyMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A17B43229D59830027133B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 		90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterruptEnable.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
-		90EFDB8622B05D5D0017AEC2 /* DmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DmaTests.swift; sourceTree = "<group>"; };
+		90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDmaTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,7 +313,6 @@
 		9073102522A66A2000EBC7BB /* Cpu */ = {
 			isa = PBXGroup;
 			children = (
-				90A17BBE229D5B710027133B /* Tests */,
 				90A17B82229D59D50027133B /* Registers.swift */,
 				90A17B8E229D59D50027133B /* Cpu.swift */,
 				902CA96E22BFA63C00026960 /* CpuBus.swift */,
@@ -322,6 +321,15 @@
 				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
 			);
 			path = Cpu;
+			sourceTree = "<group>";
+		};
+		9083ECFF22C12DE1009E4AAB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */,
+				902CA97C22C0204800026960 /* XCTestCase+createBus.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		90A17B37229D59830027133B = {
@@ -387,6 +395,30 @@
 		90A17B66229D59A30027133B /* GameBoyKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				9083ECFF22C12DE1009E4AAB /* Helpers */,
+				90A17BA6229D59EE0027133B /* CpuLdTests.swift */,
+				90A17BA5229D59EE0027133B /* CpuArithmeticTests.swift */,
+				90A17BA2229D59EE0027133B /* CpuLogicTests.swift */,
+				90A17BA3229D59EE0027133B /* CpuBitTests.swift */,
+				90A17B9F229D59EE0027133B /* CpuRotateTests.swift */,
+				90A17BA1229D59EE0027133B /* CpuShiftTests.swift */,
+				90A17BA4229D59EE0027133B /* CpuJumpTests.swift */,
+				90A17BA0229D59EE0027133B /* CpuCallTests.swift */,
+				90A17BA7229D59EE0027133B /* CpuOtherTests.swift */,
+				9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */,
+				90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */,
+				903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */,
+				90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */,
+				90CBB71F22AD7594004775E2 /* InterruptEnableTests.swift */,
+				906073A222B8453F00F2766D /* DivTimerTests.swift */,
+				906073A322B8453F00F2766D /* CustomTimerTests.swift */,
+				90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */,
+				902CA97E22C031CD00026960 /* BusUnmapBootromTests.swift */,
+				9085FC4722B6C75200310090 /* BusReadTests.swift */,
+				9085FC4522B6C70F00310090 /* BusWriteTests.swift */,
+				90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */,
+				90CBB72822AD75B4004775E2 /* String+padTests.swift */,
+				90CBB72F22AD7818004775E2 /* UInt+radixFormatTests.swift */,
 				90A17B69229D59A30027133B /* Info.plist */,
 			);
 			path = GameBoyKitTests;
@@ -407,39 +439,13 @@
 			path = "Code generation";
 			sourceTree = "<group>";
 		};
-		90A17BBE229D5B710027133B /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				90A17BA6229D59EE0027133B /* CpuLdTests.swift */,
-				90A17BA5229D59EE0027133B /* CpuArithmeticTests.swift */,
-				90A17BA2229D59EE0027133B /* CpuLogicTests.swift */,
-				90A17BA3229D59EE0027133B /* CpuBitTests.swift */,
-				90A17B9F229D59EE0027133B /* CpuRotateTests.swift */,
-				90A17BA1229D59EE0027133B /* CpuShiftTests.swift */,
-				90A17BA4229D59EE0027133B /* CpuJumpTests.swift */,
-				90A17BA0229D59EE0027133B /* CpuCallTests.swift */,
-				90A17BA7229D59EE0027133B /* CpuOtherTests.swift */,
-				9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		90B0DC4522B6F0B4005BBCF5 /* Interrupts */ = {
 			isa = PBXGroup;
 			children = (
-				90B0DC4622B6F0C2005BBCF5 /* Tests */,
 				90B0DC4722B6F0CD005BBCF5 /* Interrupt.swift */,
 				90D404AD22AC76FC00AEF7BD /* InterruptEnable.swift */,
 			);
 			path = Interrupts;
-			sourceTree = "<group>";
-		};
-		90B0DC4622B6F0C2005BBCF5 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				90CBB71F22AD7594004775E2 /* InterruptEnableTests.swift */,
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 		90B0DC4922B6F3EF005BBCF5 /* Cartridge */ = {
@@ -449,17 +455,6 @@
 				90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */,
 			);
 			path = Cartridge;
-			sourceTree = "<group>";
-		};
-		90C19C5622B2AEBF00A1B7A9 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				9085FC3222B693F200310090 /* ColorPaletteTests.swift */,
-				90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */,
-				903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */,
-				90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */,
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 		90C19C5A22B3C8B900A1B7A9 /* Debug */ = {
@@ -478,7 +473,6 @@
 		90CBB71722AD74BB004775E2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				90CBB71822AD74D3004775E2 /* Tests */,
 				908D6E0B229DDECD00523C18 /* String+pad.swift */,
 				90A17B84229D59D50027133B /* UInt+radixFormat.swift */,
 				902CA96A22BF825B00026960 /* Data+initFromRange.swift */,
@@ -489,38 +483,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		90CBB71822AD74D3004775E2 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */,
-				90CBB72822AD75B4004775E2 /* String+padTests.swift */,
-				90CBB72F22AD7818004775E2 /* UInt+radixFormatTests.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		90CBB71D22AD757E004775E2 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				906073A222B8453F00F2766D /* DivTimerTests.swift */,
-				906073A322B8453F00F2766D /* CustomTimerTests.swift */,
-				90EFDB8622B05D5D0017AEC2 /* DmaTests.swift */,
-				902CA97E22C031CD00026960 /* UnmapBootromTests.swift */,
-				9085FC4722B6C75200310090 /* ReadTests.swift */,
-				9085FC4522B6C70F00310090 /* WriteTests.swift */,
-				902CA97C22C0204800026960 /* XCTestCase+createBus.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		90CBB73C22ADB851004775E2 /* Lcd */ = {
 			isa = PBXGroup;
 			children = (
-				90C19C5622B2AEBF00A1B7A9 /* Tests */,
 				905321C522BE999400A409B2 /* LcdMode.swift */,
 				90EFDB8222AE553A0017AEC2 /* LcdControl.swift */,
 				90EFDB8422AE55640017AEC2 /* LcdStatus.swift */,
-				9085FC3022B690C600310090 /* ColorPalettes.swift */,
+				9085FC3022B690C600310090 /* LcdColorPalettes.swift */,
 				90CBD3CA22BD62B700B58461 /* Framebuffer.swift */,
 				90B0DC4322B6EC89005BBCF5 /* Lcd.swift */,
 				903DB4DB22BB903A003132FA /* Lcd+Dump.swift */,
@@ -559,7 +528,6 @@
 		90D58EE122A7B2580076584F /* Bus */ = {
 			isa = PBXGroup;
 			children = (
-				90CBB71D22AD757E004775E2 /* Tests */,
 				90B0DC5422B78927005BBCF5 /* Joypad.swift */,
 				90B0DC5622B789D0005BBCF5 /* SerialPort.swift */,
 				906073A022B8452200F2766D /* Timer.swift */,
@@ -832,7 +800,7 @@
 				90B0DC5F22B78E72005BBCF5 /* Bus+interrupts.swift in Sources */,
 				905321BE22BE649C00A409B2 /* Debugger+Memory.swift in Sources */,
 				905321C822BE99A300A409B2 /* LcdMode.swift in Sources */,
-				9085FC3122B690C600310090 /* ColorPalettes.swift in Sources */,
+				9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */,
 				902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */,
 				905321B822BE552700A409B2 /* CpuState.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,
@@ -848,18 +816,18 @@
 				90C19C5822B2AEE200A1B7A9 /* LcdTileDataTests.swift in Sources */,
 				90A17BAE229D59EE0027133B /* CpuArithmeticTests.swift in Sources */,
 				90CBB73222AD7AE3004775E2 /* Data+UIntTests.swift in Sources */,
-				90EFDB8722B05D5D0017AEC2 /* DmaTests.swift in Sources */,
+				90EFDB8722B05D5D0017AEC2 /* BusDmaTests.swift in Sources */,
 				90A17BAD229D59EE0027133B /* CpuJumpTests.swift in Sources */,
 				90CBB72C22AD7632004775E2 /* InterruptEnableTests.swift in Sources */,
 				90A17BA9229D59EE0027133B /* CpuCallTests.swift in Sources */,
-				902CA98022C031D200026960 /* UnmapBootromTests.swift in Sources */,
+				902CA98022C031D200026960 /* BusUnmapBootromTests.swift in Sources */,
 				90A17BA8229D59EE0027133B /* CpuRotateTests.swift in Sources */,
 				90A17BAA229D59EE0027133B /* CpuShiftTests.swift in Sources */,
-				9085FC3322B693F200310090 /* ColorPaletteTests.swift in Sources */,
+				9085FC3322B693F200310090 /* LcdColorPaletteTests.swift in Sources */,
 				906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */,
 				902CA97D22C0204800026960 /* XCTestCase+createBus.swift in Sources */,
-				9085FC4822B6C75200310090 /* ReadTests.swift in Sources */,
-				9085FC4622B6C71000310090 /* WriteTests.swift in Sources */,
+				9085FC4822B6C75200310090 /* BusReadTests.swift in Sources */,
+				9085FC4622B6C71000310090 /* BusWriteTests.swift in Sources */,
 				90CBB72922AD75B4004775E2 /* String+padTests.swift in Sources */,
 				90A17BAC229D59EE0027133B /* CpuBitTests.swift in Sources */,
 				9085FC3B22B6BC7400310090 /* FakeCpuBus.swift in Sources */,

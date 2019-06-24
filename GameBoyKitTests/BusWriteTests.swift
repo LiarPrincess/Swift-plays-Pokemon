@@ -5,7 +5,7 @@
 import XCTest
 @testable import GameBoyKit
 
-class WriteTests: XCTestCase {
+class BusWriteTests: XCTestCase {
 
   private static let startValue: UInt8 = 5
   private static let endValue:   UInt8 = 6
@@ -83,11 +83,11 @@ class WriteTests: XCTestCase {
     let bus = self.createBus()
     let range = MemoryMap.internalRamEcho
 
-    bus.write(range.start, value: WriteTests.startValue)
-    bus.write(range.end,   value: WriteTests.endValue)
+    bus.write(range.start, value:  BusWriteTests.startValue)
+    bus.write(range.end,   value:  BusWriteTests.endValue)
 
-    XCTAssertEqual(bus.ram[0], WriteTests.startValue)
-    XCTAssertEqual(bus.ram[range.count - 1], WriteTests.endValue)
+    XCTAssertEqual(bus.ram[0],  BusWriteTests.startValue)
+    XCTAssertEqual(bus.ram[range.count - 1],  BusWriteTests.endValue)
   }
 
   func test_oam() {
@@ -201,8 +201,8 @@ class WriteTests: XCTestCase {
   // MARK: - Helpers
 
   private func write(_ bus: Bus, _ range: ClosedRange<UInt16>) {
-    bus.write(range.start, value: WriteTests.startValue)
-    bus.write(range.end,   value: WriteTests.endValue)
+    bus.write(range.start, value:  BusWriteTests.startValue)
+    bus.write(range.end,   value:  BusWriteTests.endValue)
   }
 
   private func testStartValue(_ data: Data,
@@ -210,7 +210,7 @@ class WriteTests: XCTestCase {
                               line:   UInt = #line) {
 
     let value = data[data.startIndex]
-    XCTAssertEqual(value, WriteTests.startValue, file: file, line: line)
+    XCTAssertEqual(value,  BusWriteTests.startValue, file: file, line: line)
   }
 
   private func testEndValue(_ data: Data,
@@ -218,6 +218,6 @@ class WriteTests: XCTestCase {
                             line:   UInt = #line) {
 
     let value = data[data.endIndex - 1]
-    XCTAssertEqual(value, WriteTests.endValue, file: file, line: line)
+    XCTAssertEqual(value,  BusWriteTests.endValue, file: file, line: line)
   }
 }

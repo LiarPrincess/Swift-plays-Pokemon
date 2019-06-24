@@ -5,6 +5,8 @@
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
 
+import Foundation
+
 extension Bus {
 
   /// Read any from any address in memory.

@@ -5,7 +5,7 @@
 import XCTest
 @testable import GameBoyKit
 
-class DmaTests: XCTestCase {
+class BusDmaTests: XCTestCase {
 
   func test_dma() {
     let bus = self.createBus()

@@ -104,4 +104,5 @@ included:
   - GameBoyMac
   - GameBoyKit
   - GameBoyKitTests
+  - GameBoyKitBlarggTests
   - Code generation
