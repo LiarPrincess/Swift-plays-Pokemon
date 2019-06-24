@@ -10,12 +10,12 @@ extension XCTestCase {
   internal func createBus(bootrom:   Bootrom?   = nil,
                           cartridge: Cartridge? = nil) -> Bus {
 
+    let bootromCount = MemoryMap.bootrom.count
     let cartridgeCount = MemoryMap.rom0.count + MemoryMap.rom1.count
-    let cartridgeData  = Data(count: cartridgeCount)
 
     return Bus(
-      bootrom:   bootrom ?? .skip,
-      cartridge: cartridge ?? Cartridge(data: cartridgeData),
+      bootrom:   bootrom   ?? Bootrom(data: Data(count: bootromCount)),
+      cartridge: cartridge ?? Cartridge(data: Data(count: cartridgeCount)),
       joypad:    Joypad(),
       lcd:       Lcd(),
       timer:     Timer()

@@ -11,7 +11,7 @@ class ReadTests: XCTestCase {
   private static let endValue:   UInt8 = 6
 
   func test_bootrom() {
-    let range = MemoryMap.rom0
+    let range = MemoryMap.bootrom
 
     var data = Data(count: MemoryMap.rom0.count)
     data[range.start] = ReadTests.startValue

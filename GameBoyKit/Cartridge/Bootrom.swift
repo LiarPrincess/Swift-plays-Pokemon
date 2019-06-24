@@ -2,10 +2,11 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+/// Code that will be ran when gameboy is started. You can find
+/// different bootroms [here](http://gbdev.gg8.se/files/roms/bootroms/).
 public class Bootrom {
 
-  /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00)
-  public let data: Data
+  internal let data: Data
 
   public init(data: Data) {
     self.data = data
@@ -17,10 +18,9 @@ public class Bootrom {
 extension Bootrom {
 
   /// Skip directly to the game.
+  /// Source: https://github.com/Baekalfen/PyBoy
   public static var skip: Bootrom {
-
-    // Source: https://github.com/Baekalfen/PyBoy
-    var data = Data(memoryRange: MemoryMap.rom0)
+    var data = Data(memoryRange: MemoryMap.bootrom)
 
     // Set stack pointer
     data[0x00] = 0x31
@@ -41,18 +41,11 @@ extension Bootrom {
     return Bootrom(data: data)
   }
 
-  /// Bootrom that shows Nintendo logo.
+  /// This is the most common version of the boot ROM
+  /// found in the original DMG-01 model of Gameboy.
+  /// Source: http://gbdev.gg8.se/files/roms/bootroms/
   public static var dmg: Bootrom {
-    var data = Data(memoryRange: MemoryMap.rom0)
-
-    let bootromStart = 0x0000
-    let bootromEnd = bootromStart + dmgData.count
-    data.replaceSubrange(bootromStart..<bootromEnd, with: dmgData)
-
-    let logoStart = 0x0104
-    let logoEnd = logoStart + dmgLogo.count
-    data.replaceSubrange(logoStart..<logoEnd, with: dmgLogo)
-
+    let data = Data(dmgData)
     return Bootrom(data: data)
   }
 }
@@ -75,15 +68,4 @@ private let dmgData: [UInt8] = [
 /* d0 */ 0xdd, 0xdc, 0x99, 0x9f, 0xbb, 0xb9, 0x33, 0x3e, 0x3c, 0x42, 0xb9, 0xa5, 0xb9, 0xa5, 0x42, 0x3c,
 /* e0 */ 0x21, 0x04, 0x01, 0x11, 0xa8, 0x00, 0x1a, 0x13, 0xbe, 0x20, 0xfe, 0x23, 0x7d, 0xfe, 0x34, 0x20,
 /* f0 */ 0xf5, 0x06, 0x19, 0x78, 0x86, 0x23, 0x05, 0x20, 0xfb, 0x86, 0x20, 0xfe, 0x3e, 0x01, 0xe0, 0x50
-]
-
-// swiftlint:disable collection_alignment
-private let dmgLogo: [UInt8] = [
-/*           0     1     2     3     4     5     6     7     8     9    a      b     c     d     e     f */
-/* 100 */                         0xce, 0xed, 0x66, 0x66, 0xcc, 0x0d, 0x00, 0x0b, 0x03, 0x73, 0x00, 0x83,
-/* 110 */ 0x00, 0x0c, 0x00, 0x0d, 0x00, 0x08, 0x11, 0x1f, 0x88, 0x89, 0x00, 0x0e, 0xdc, 0xcc, 0x6e, 0xe6,
-/* 120 */ 0xdd, 0xdd, 0xd9, 0x99, 0xbb, 0xbb, 0x67, 0x63, 0x6e, 0x0e, 0xec, 0xcc, 0xdd, 0xdc, 0x99, 0x9f,
-/* 130 */ 0xbb, 0xb9, 0x33, 0x3e, /* checksum starts here */
-                                  0x50, 0x4f, 0x4b, 0x45, 0x4d, 0x4f, 0x4e, 0x20, 0x42, 0x4c, 0x55, 0x45,
-/* 140 */ 0x00, 0x00, 0x00, 0x00, 0x30, 0x31, 0x03, 0x13, 0x05, 0x03, 0x01, 0x33, 0x00, 0xd3, 0x9d, 0x0a
 ]

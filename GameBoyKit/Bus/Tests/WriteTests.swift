@@ -13,14 +13,16 @@ class WriteTests: XCTestCase {
   /// 'bootrom' is read only
   func test_bootrom() {
     let bus = self.createBus()
-    let range = MemoryMap.rom0
+    let range = MemoryMap.bootrom
 
     // 'bus.hasFinishedBootrom' should be false by default
 
     bus.write(range.start, value: 5)
+    XCTAssertEqual(bus.bootrom.data.first, 0)
     XCTAssertEqual(bus.cartridge.rom0.first, 0)
 
     bus.write(range.end, value: 6)
+    XCTAssertEqual(bus.bootrom.data.last, 0)
     XCTAssertEqual(bus.cartridge.rom0.last, 0)
   }
 

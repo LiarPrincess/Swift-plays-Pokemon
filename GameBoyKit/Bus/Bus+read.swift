@@ -15,10 +15,13 @@ extension Bus {
 
     switch address {
 
-    // cartridge
-    case MemoryMap.rom0:
+    // bootrom/cartridge
+    case MemoryMap.bootrom:
       let data = self.hasFinishedBootrom ? self.cartridge.data : self.bootrom.data
       return data[address]
+    case MemoryMap.rom0:
+      // overlaps with bootrom, so 'case' order matters
+      return self.cartridge.data[address]
     case MemoryMap.rom1:
       return self.cartridge.data[address]
     case MemoryMap.externalRam:

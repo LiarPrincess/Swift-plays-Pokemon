@@ -6,6 +6,7 @@
 
 public enum MemoryMap {
 
+  public static let bootrom:         ClosedRange<UInt16> = 0x0000...0x00ff
   public static let rom0:            ClosedRange<UInt16> = 0x0000...0x3fff
   public static let rom1:            ClosedRange<UInt16> = 0x4000...0x7fff
   public static let videoRam:        ClosedRange<UInt16> = 0x8000...0x9fff

@@ -14,13 +14,16 @@ extension Bus {
 
     switch address {
 
-    // cartridge
-    case MemoryMap.rom0:
+    // bootrom, cartridge
+    case MemoryMap.bootrom:
       if self.hasFinishedBootrom {
         print("Attempting to write to read-only rom0 at: \(address.hex).")
       } else {
         print("Attempting to write to read-only bootrom at: \(address.hex).")
       }
+    case MemoryMap.rom0:
+      // overlaps with bootrom, so 'case' order matters
+      print("Attempting to write to read-only rom0 at: \(address.hex).")
     case MemoryMap.rom1:
       print("Attempting to write to read-only rom1 at: \(address.hex).")
     case MemoryMap.externalRam:

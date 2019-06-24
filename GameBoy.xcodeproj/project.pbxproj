@@ -13,7 +13,7 @@
 		902CA97122BFFD8D00026960 /* UnprefixedOpcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97022BFFD8D00026960 /* UnprefixedOpcode.swift */; };
 		902CA97322BFFDA700026960 /* CBPrefixedOpcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97222BFFDA700026960 /* CBPrefixedOpcode.swift */; };
 		902CA97522C001B600026960 /* PrintOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97422C001B600026960 /* PrintOpcodes.swift */; };
-		902CA97722C00C7300026960 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97622C00C7300026960 /* CommandLine.swift */; };
+		902CA97722C00C7300026960 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97622C00C7300026960 /* Arguments.swift */; };
 		902CA97922C0159C00026960 /* Bootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97822C0159C00026960 /* Bootrom.swift */; };
 		902CA97D22C0204800026960 /* XCTestCase+createBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97C22C0204800026960 /* XCTestCase+createBus.swift */; };
 		902CA98022C031D200026960 /* UnmapBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97E22C031CD00026960 /* UnmapBootromTests.swift */; };
@@ -164,7 +164,7 @@
 		902CA97022BFFD8D00026960 /* UnprefixedOpcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnprefixedOpcode.swift; sourceTree = "<group>"; };
 		902CA97222BFFDA700026960 /* CBPrefixedOpcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBPrefixedOpcode.swift; sourceTree = "<group>"; };
 		902CA97422C001B600026960 /* PrintOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintOpcodes.swift; sourceTree = "<group>"; };
-		902CA97622C00C7300026960 /* CommandLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLine.swift; sourceTree = "<group>"; };
+		902CA97622C00C7300026960 /* Arguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
 		902CA97822C0159C00026960 /* Bootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootrom.swift; sourceTree = "<group>"; };
 		902CA97C22C0204800026960 /* XCTestCase+createBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createBus.swift"; sourceTree = "<group>"; };
 		902CA97E22C031CD00026960 /* UnmapBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmapBootromTests.swift; sourceTree = "<group>"; };
@@ -355,7 +355,7 @@
 				90A17B47229D59840027133B /* Assets.xcassets */,
 				90A17B43229D59830027133B /* AppDelegate.swift */,
 				9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */,
-				902CA97622C00C7300026960 /* CommandLine.swift */,
+				902CA97622C00C7300026960 /* Arguments.swift */,
 				903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */,
 				90CBD3CC22BD6AA000B58461 /* Metal.swift */,
 				9085FC3C22B6BF6A00310090 /* main.swift */,
@@ -788,7 +788,7 @@
 				903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */,
 				9085FC3D22B6BF6A00310090 /* main.swift in Sources */,
 				903DB4E222BC0C76003132FA /* Shader.metal in Sources */,
-				902CA97722C00C7300026960 /* CommandLine.swift in Sources */,
+				902CA97722C00C7300026960 /* Arguments.swift in Sources */,
 				90A17B44229D59830027133B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

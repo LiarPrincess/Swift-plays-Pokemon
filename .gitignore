@@ -1,6 +1,8 @@
 Build
 .build
+
 ROMs
+!ROMs/.gitkeep
 
 .DS_Store
 /*.xcodeproj
