@@ -10,32 +10,29 @@ import Foundation
 extension Bus {
 
   internal func write(_ address: UInt16, value: UInt8) {
-    func write(_ region: ClosedRange<UInt16>, _ data: inout Data) {
-      data[address - region.start] = value
-    }
-
     switch address {
 
-    // bootrom, cartridge
+    // bootrom,
     case MemoryMap.bootrom:
       if self.hasFinishedBootrom {
-        print("Attempting to write to read-only rom0 at: \(address.hex).")
+        self.cartridge.writeRomBank0(address, value: value)
       } else {
-        print("Attempting to write to read-only bootrom at: \(address.hex).")
+        self.bootrom.write(address, value: value)
       }
+
+    // cartridge
     case MemoryMap.rom0:
-      // overlaps with bootrom, so 'case' order matters
-      print("Attempting to write to read-only rom0 at: \(address.hex).")
+      self.cartridge.writeRomBank0(address, value: value)
     case MemoryMap.rom1:
-      print("Attempting to write to read-only rom1 at: \(address.hex).")
+      self.cartridge.writeRomBankN(address, value: value)
     case MemoryMap.externalRam:
       self.cartridge.writeRam(address, value: value)
 
     // internal
     case MemoryMap.highRam:
-      write(MemoryMap.highRam, &self.highRam)
+      self.highRam[address - MemoryMap.highRam.start] = value
     case MemoryMap.internalRam:
-      write(MemoryMap.internalRam, &self.ram)
+      self.ram[address - MemoryMap.internalRam.start] = value
     case MemoryMap.internalRamEcho:
       let ramAddress = self.convertEchoToRamAddress(address)
       self.ram[ramAddress - MemoryMap.internalRam.start] = value
@@ -43,10 +40,10 @@ extension Bus {
     // video
     case MemoryMap.videoRam:
       // Technically it should nop during 'pixelTransfer'
-      write(MemoryMap.videoRam, &self.lcd.videoRam)
+      self.lcd.videoRam[address - MemoryMap.videoRam.start] = value
     case MemoryMap.oam:
       // Technically it should nop during 'pixelTransfer' or 'oamSearch'
-      write(MemoryMap.oam, &self.lcd.oam)
+      self.lcd.oam[address - MemoryMap.oam.start] = value
     case MemoryMap.io:
       self.writeInternalIO(address, value: value)
 
@@ -115,19 +112,6 @@ extension Bus {
     default:
       let index = address - MemoryMap.io.start
       return self.ioMemory[index] = value
-    }
-  }
-
-  private func dma(writeValue: UInt8) {
-    // Technically not exactly correct:
-    // https://github.com/Gekkio/mooneye-gb/blob/master/docs/accuracy.markdown#what-is-the-exact-cycle-by-cycle-behaviour-of-oam-dma
-
-    let sourceStart = UInt16(writeValue) << 8
-
-    for i in 0..<MemoryMap.oam.count {
-      // [performance] write directly into OAM (instead of self.write)
-      let sourceAddress = sourceStart + UInt16(i)
-      self.lcd.oam[i] = self.read(sourceAddress)
     }
   }
 }

@@ -7,49 +7,53 @@ import XCTest
 
 class BusWriteTests: XCTestCase {
 
-  private static let startValue: UInt8 = 5
-  private static let endValue:   UInt8 = 6
+  private let startValue: UInt8 = 5
+  private let endValue:   UInt8 = 6
 
-  /// 'bootrom' is read only
   func test_bootrom() {
-    let bus = self.createBus()
     let range = MemoryMap.bootrom
+
+    let bootrom = FakeBusBootrom()
+    let cartridge = FakeBusCartridge()
+    let bus = self.createBus(bootrom: bootrom, cartridge: cartridge)
 
     // 'bus.hasFinishedBootrom' should be false by default
 
-    bus.write(range.start, value: 5)
-    XCTAssertEqual(bus.bootrom.data.first, 0)
-    XCTAssertEqual(bus.cartridge.rom0.first, 0)
+    bus.write(range.start, value: startValue)
+    XCTAssertEqual(bootrom.data.first, startValue)
+    XCTAssertEqual(cartridge.rom[MemoryMap.rom0.start], 0)
 
-    bus.write(range.end, value: 6)
-    XCTAssertEqual(bus.bootrom.data.last, 0)
-    XCTAssertEqual(bus.cartridge.rom0.last, 0)
+    bus.write(range.end, value: endValue)
+    XCTAssertEqual(bootrom.data.last, endValue)
+    XCTAssertEqual(cartridge.rom[MemoryMap.rom0.end], 0)
   }
 
-  /// 'rom0' is read only
   func test_rom0() {
-    let bus = self.createBus()
     let range = MemoryMap.rom0
+
+    let cartridge = FakeBusCartridge()
+    let bus = self.createBus(cartridge: cartridge)
 
     bus.hasFinishedBootrom = true
 
-    bus.write(range.start, value: 5)
-    XCTAssertEqual(bus.cartridge.rom0.first, 0)
+    bus.write(range.start, value: startValue)
+    XCTAssertEqual(cartridge.rom[MemoryMap.rom0.start], startValue)
 
-    bus.write(range.end, value: 6)
-    XCTAssertEqual(bus.cartridge.rom0.last, 0)
+    bus.write(range.end, value: endValue)
+    XCTAssertEqual(cartridge.rom[MemoryMap.rom0.end], endValue)
   }
 
-  /// 'rom1' is read only
   func test_rom1() {
-    let bus = self.createBus()
     let range = MemoryMap.rom1
 
-    bus.write(range.start, value: 5)
-    XCTAssertEqual(bus.cartridge.rom1.first, 0)
+    let cartridge = FakeBusCartridge()
+    let bus = self.createBus(cartridge: cartridge)
 
-    bus.write(range.end, value: 6)
-    XCTAssertEqual(bus.cartridge.rom1.last, 0)
+    bus.write(range.start, value: startValue)
+    XCTAssertEqual(cartridge.rom[MemoryMap.rom1.start], startValue)
+
+    bus.write(range.end, value: endValue)
+    XCTAssertEqual(cartridge.rom[MemoryMap.rom1.end], endValue)
   }
 
   func test_videoRam() {
@@ -62,12 +66,13 @@ class BusWriteTests: XCTestCase {
   }
 
   func test_externalRam() {
-    let bus = self.createBus()
+    let cartridge = FakeBusCartridge()
+    let bus = self.createBus(cartridge: cartridge)
+
     self.write(bus, MemoryMap.externalRam)
 
-    let data = bus.cartridge.ram
-    self.testStartValue(data)
-    self.testEndValue(data)
+    self.testStartValue(cartridge.ram)
+    self.testEndValue(cartridge.ram)
   }
 
   func test_internalRam() {
@@ -83,11 +88,11 @@ class BusWriteTests: XCTestCase {
     let bus = self.createBus()
     let range = MemoryMap.internalRamEcho
 
-    bus.write(range.start, value:  BusWriteTests.startValue)
-    bus.write(range.end,   value:  BusWriteTests.endValue)
+    bus.write(range.start, value:  startValue)
+    bus.write(range.end,   value:  endValue)
 
-    XCTAssertEqual(bus.ram[0],  BusWriteTests.startValue)
-    XCTAssertEqual(bus.ram[range.count - 1],  BusWriteTests.endValue)
+    XCTAssertEqual(bus.ram[0],  startValue)
+    XCTAssertEqual(bus.ram[range.count - 1], endValue)
   }
 
   func test_oam() {
@@ -206,8 +211,8 @@ class BusWriteTests: XCTestCase {
   // MARK: - Helpers
 
   private func write(_ bus: Bus, _ range: ClosedRange<UInt16>) {
-    bus.write(range.start, value:  BusWriteTests.startValue)
-    bus.write(range.end,   value:  BusWriteTests.endValue)
+    bus.write(range.start, value:  startValue)
+    bus.write(range.end,   value:  endValue)
   }
 
   private func testStartValue(_ data: Data,
@@ -215,7 +220,7 @@ class BusWriteTests: XCTestCase {
                               line:   UInt = #line) {
 
     let value = data[data.startIndex]
-    XCTAssertEqual(value,  BusWriteTests.startValue, file: file, line: line)
+    XCTAssertEqual(value,  startValue, file: file, line: line)
   }
 
   private func testEndValue(_ data: Data,
@@ -223,6 +228,6 @@ class BusWriteTests: XCTestCase {
                             line:   UInt = #line) {
 
     let value = data[data.endIndex - 1]
-    XCTAssertEqual(value,  BusWriteTests.endValue, file: file, line: line)
+    XCTAssertEqual(value,  endValue, file: file, line: line)
   }
 }

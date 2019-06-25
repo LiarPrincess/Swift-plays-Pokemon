@@ -11,31 +11,27 @@ extension Bus {
 
   /// Read from any address in memory.
   public func read(_ address: UInt16) -> UInt8 {
-    func read(_ region: ClosedRange<UInt16>, _ data: Data) -> UInt8 {
-      return data[address - region.start]
-    }
-
     switch address {
 
-    // bootrom/cartridge
+    // bootrom
     case MemoryMap.bootrom:
-      if !self.hasFinishedBootrom {
-        return self.bootrom.data[address]
-      }
-      fallthrough
+      return self.hasFinishedBootrom ?
+        self.cartridge.readRomBank0(address) :
+        self.bootrom.read(address)
 
+    // cartridge
     case MemoryMap.rom0:
-      return self.cartridge.rom.readBank0(address)
+      return self.cartridge.readRomBank0(address)
     case MemoryMap.rom1:
-      return self.cartridge.rom.readBankN(address)
+      return self.cartridge.readRomBankN(address)
     case MemoryMap.externalRam:
       return self.cartridge.readRam(address)
 
     // internal
     case MemoryMap.highRam:
-      return read(MemoryMap.highRam, self.highRam)
+      return self.highRam[address - MemoryMap.highRam.start]
     case MemoryMap.internalRam:
-      return read(MemoryMap.internalRam, self.ram)
+      return self.ram[address - MemoryMap.internalRam.start]
     case MemoryMap.internalRamEcho:
       let ramAddress = self.convertEchoToRamAddress(address)
       return self.ram[ramAddress - MemoryMap.internalRam.start]
@@ -43,10 +39,10 @@ extension Bus {
     // video
     case MemoryMap.videoRam:
       // Technically it should return 0xff during 'pixelTransfer'
-      return read(MemoryMap.videoRam, self.lcd.videoRam)
+      return self.lcd.videoRam[address - MemoryMap.videoRam.start]
     case MemoryMap.oam:
       // Technically it should return 0xff during 'pixelTransfer' or 'oamSearch'
-      return read(MemoryMap.oam, self.lcd.oam)
+      return self.lcd.oam[address - MemoryMap.oam.start]
     case MemoryMap.io:
       return self.readInternalIO(address)
 

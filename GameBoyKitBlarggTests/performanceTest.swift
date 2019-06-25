@@ -8,9 +8,7 @@ import GameBoyKit
 private let frameCount: Int64 = 60
 
 internal func performanceTest() {
-  let emptyCartridgeCount = MemoryMap.rom0.count + MemoryMap.rom1.count
-  let emptyCartridge = Cartridge(data: Data(count: emptyCartridgeCount))
-  let gameBoy = GameBoy(bootrom: .dmg, cartridge: emptyCartridge)
+  let gameBoy = GameBoy(bootrom: .dmg, cartridge: createCartridge())
 
   let start = DispatchTime.now()
   for _ in 0..<frameCount {
@@ -33,4 +31,12 @@ Finished
   Per cycle:    \(timeMs / Double(gameBoy.cpu.cycle)) ms
 
 """)
+}
+
+private func createCartridge() -> Cartridge {
+  let count = MemoryMap.rom0.count + MemoryMap.rom1.count
+  var rom = Data(count: count)
+  rom[0x014d] = 231 // just to make checksum happy
+
+  return try! Cartridge(rom: rom)
 }

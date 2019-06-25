@@ -17,7 +17,7 @@ public class Rom {
 
   public let data: Data
 
-  internal var selectedRamBank: UInt16 = 0
+  internal var selectedRamBank: UInt16 = 1
 
   internal init(data: Data) {
     self.data = data

@@ -14,16 +14,14 @@ class BusUnmapBootromTests: XCTestCase {
   func test_unmapBootrom() {
     let range = MemoryMap.rom0
 
-    let dataSize = MemoryMap.rom0.count + MemoryMap.rom1.count
-    var data = Data(count: dataSize)
-    data[range.start] = BusUnmapBootromTests.startValue
-    data[range.end]   = BusUnmapBootromTests.endValue
+    let cartridge = FakeBusCartridge()
+    cartridge.rom[range.start] = BusUnmapBootromTests.startValue
+    cartridge.rom[range.end]   = BusUnmapBootromTests.endValue
 
-    let cartridge = Cartridge(data: data)
     let bus = self.createBus(cartridge: cartridge)
-
     bus.write(MemoryMap.IO.unmapBootrom, value: 1) // <-- this
 
+    // cartridge.rom instead of bootrom
     XCTAssertEqual(bus.read(range.start), BusUnmapBootromTests.startValue)
     XCTAssertEqual(bus.read(range.end), BusUnmapBootromTests.endValue)
   }

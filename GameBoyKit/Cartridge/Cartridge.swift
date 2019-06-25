@@ -38,6 +38,24 @@ public class Cartridge {
     }
   }
 
+  // MARK: - Rom
+
+  internal func readRomBank0(_ address: UInt16) -> UInt8 {
+    return self.rom.readBank0(address)
+  }
+
+  internal func readRomBankN(_ address: UInt16) -> UInt8 {
+    return self.rom.readBankN(address)
+  }
+
+  internal func writeRomBank0(_ address: UInt16, value: UInt8) {
+    self.rom.writeBank0(address, value: value)
+  }
+
+  internal func writeRomBankN(_ address: UInt16, value: UInt8) {
+    self.rom.writeBankN(address, value: value)
+  }
+
   // MARK: - Ram
 
   public func readRam(_ address: UInt16) -> UInt8 {

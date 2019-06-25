@@ -12,8 +12,8 @@ public class Bus {
   internal let serialPort: SerialPort
   internal let interrupts: Interrupts
 
-  internal let bootrom: Bootrom
-  internal let cartridge: Cartridge
+  internal let bootrom: BusBootrom
+  internal let cartridge: BusCartridge
 
   internal var hasFinishedBootrom = false
 
@@ -27,14 +27,14 @@ public class Bus {
   /// FF80-FFFE High RAM (HRAM)
   internal lazy var highRam = Data(memoryRange: MemoryMap.highRam)
 
-  /// Catch 'em all for any invalid read/write
+  /// Catch'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()
 
-  /// TODO: Catch 'em all for audio read/write
+  /// TODO: Catch'em all for audio read/write
   internal var audio = [UInt16:UInt8]()
 
-  internal init(bootrom:    Bootrom,
-                cartridge:  Cartridge,
+  internal init(bootrom:    BusBootrom,
+                cartridge:  BusCartridge,
                 joypad:     Joypad,
                 lcd:        Lcd,
                 timer:      Timer,
@@ -51,6 +51,20 @@ public class Bus {
   }
 
   // MARK: - Helpers
+
+  internal func dma(writeValue: UInt8) {
+    // Technically not exactly correct:
+    // https://github.com/Gekkio/mooneye-gb/blob/master/docs/accuracy.markdown
+    // -> What is the exact cycle-by-cycle behaviour of OAM DMA?
+
+    let sourceStart = UInt16(writeValue) << 8
+
+    for i in 0..<MemoryMap.oam.count {
+      // [performance] write directly into OAM (instead of self.write)
+      let sourceAddress = sourceStart + UInt16(i)
+      self.lcd.oam[i] = self.read(sourceAddress)
+    }
+  }
 
   internal func convertEchoToRamAddress(_ address: UInt16) -> UInt16 {
     return address - 0x2000
