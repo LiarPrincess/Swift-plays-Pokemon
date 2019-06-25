@@ -11,7 +11,7 @@
 		90059A3F22C24AC700803B48 /* CartridgeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A3E22C24AC700803B48 /* CartridgeDestination.swift */; };
 		90059A4922C2673900803B48 /* CartridgeInitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4822C2673900803B48 /* CartridgeInitError.swift */; };
 		90059A4B22C2676A00803B48 /* BootromInitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4A22C2676A00803B48 /* BootromInitError.swift */; };
-		90059A4D22C2693400803B48 /* Cartridge+readRom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4C22C2693400803B48 /* Cartridge+readRom.swift */; };
+		90059A4D22C2693400803B48 /* CartridgeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4C22C2693400803B48 /* CartridgeHeader.swift */; };
 		902BDD9E22C1544000632BA7 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDD9D22C1544000632BA7 /* Interrupts.swift */; };
 		902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */; };
 		902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */; };
@@ -168,7 +168,7 @@
 		90059A3E22C24AC700803B48 /* CartridgeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartridgeDestination.swift; sourceTree = "<group>"; };
 		90059A4822C2673900803B48 /* CartridgeInitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartridgeInitError.swift; sourceTree = "<group>"; };
 		90059A4A22C2676A00803B48 /* BootromInitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BootromInitError.swift; sourceTree = "<group>"; };
-		90059A4C22C2693400803B48 /* Cartridge+readRom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cartridge+readRom.swift"; sourceTree = "<group>"; };
+		90059A4C22C2693400803B48 /* CartridgeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeHeader.swift; sourceTree = "<group>"; };
 		902BDD9D22C1544000632BA7 /* Interrupts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Interrupts.swift; path = ../Interrupts/Interrupts.swift; sourceTree = "<group>"; };
 		902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcd.swift"; sourceTree = "<group>"; };
 		902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createCpu.swift"; sourceTree = "<group>"; };
@@ -459,7 +459,7 @@
 				902CA97822C0159C00026960 /* Bootrom.swift */,
 				90059A4A22C2676A00803B48 /* BootromInitError.swift */,
 				90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */,
-				90059A4C22C2693400803B48 /* Cartridge+readRom.swift */,
+				90059A4C22C2693400803B48 /* CartridgeHeader.swift */,
 				90059A4822C2673900803B48 /* CartridgeInitError.swift */,
 				90059A3C22C24A6300803B48 /* CartridgeType.swift */,
 				90059A3E22C24AC700803B48 /* CartridgeDestination.swift */,
@@ -795,7 +795,7 @@
 				902CA97922C0159C00026960 /* Bootrom.swift in Sources */,
 				908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */,
 				90A17B98229D59D50027133B /* Cpu+ExecuteUnprefixed.swift in Sources */,
-				90059A4D22C2693400803B48 /* Cartridge+readRom.swift in Sources */,
+				90059A4D22C2693400803B48 /* CartridgeHeader.swift in Sources */,
 				902CA97122BFFD8D00026960 /* UnprefixedOpcode.swift in Sources */,
 				905321BA22BE563200A409B2 /* Restorable.swift in Sources */,
 				905321B222BE479800A409B2 /* DebugMode.swift in Sources */,

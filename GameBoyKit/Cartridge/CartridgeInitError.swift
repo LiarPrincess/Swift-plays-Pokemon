@@ -5,8 +5,8 @@
 public enum CartridgeInitError: Error, CustomStringConvertible {
   case invalidSize
   case invalidChecksum(UInt8)
-//  case invalidRomBankCount(UInt8)
-//  case invalidRamBankCount(UInt8)
+  case invalidRomBankCount(UInt8)
+  case invalidRamBankCount(UInt8)
   case unsupportedType(CartridgeType)
 
   // fatalError("Invalid ROM size, it should be at least \(minSize) bytes long.")
@@ -18,14 +18,14 @@ public enum CartridgeInitError: Error, CustomStringConvertible {
 
     case let .invalidChecksum(value):
       let range = CartridgeMap.headerChecksumRange
-      let compare = Cartridge.checksumCompare
+      let compare = CartridgeHeader.checksumCompare
       return "ROM checksum (bytes: \(range.start.hex)-\(range.end.hex)) is not valid (it is \(value.hex), but it should be \(compare.hex))."
 
-//    case let .invalidRomBankCount(count):
-//      return "XXX"
-//
-//    case let .invalidRamBankCount(count):
-//      return "XXX"
+    case let .invalidRomBankCount(count):
+      return "XXX"
+
+    case let .invalidRamBankCount(count):
+      return "XXX"
 
     case let .unsupportedType(type):
       return "Unsupported ROM type: '\(type)'."

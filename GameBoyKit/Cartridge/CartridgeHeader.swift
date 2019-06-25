@@ -4,16 +4,18 @@
 
 import Foundation
 
+internal enum ChecksumResult {
+  case valid
+  case invalid(UInt8)
+}
+
 // Basically:
 // http://bgb.bircd.org/pandocs.htm#thecartridgeheader
-extension Cartridge {
+internal enum CartridgeHeader {
 
   // MARK: - Checksum
 
-  internal enum ChecksumResult {
-    case valid
-    case invalid(UInt8)
-  }
+  internal static let checksumCompare: UInt8 = 0
 
   /// Code from bootrom: 0x00f1 to 0x00fa:
   /// if 0x19 + bytes from 0x0134-0x014d don't add to 0 ->  lock up
@@ -124,8 +126,28 @@ extension Cartridge {
     return rom[CartridgeMap.romSize]
   }
 
-  internal static func getRamSize(rom: Data) -> UInt8 {
-    return rom[CartridgeMap.ramSize]
+  // Size of the RAM (in bytes).
+  internal static func getRamSize(rom: Data) throws -> Int {
+    // When using a MBC2 chip 00h must be specified in this entry,
+    // even though the MBC2 includes a built-in RAM of 512 x 4 bits.
+
+    let type = getType(rom: rom)
+
+    let isMbc2 = type == .mbc2 || type == .mbc2Battery
+    if isMbc2 {
+      return 512 * 4 / 8 // 256
+    }
+
+    let bankCount = rom[CartridgeMap.ramSize]
+    switch bankCount {
+    case 0x00: return   0 * 1_024 //     None
+    case 0x01: return   2 * 1_024 //   2 KBytes
+    case 0x02: return   8 * 1_024 //   8 Kbytes
+    case 0x03: return  32 * 1_024 //  32 KBytes ( 4 banks of 8KBytes each)
+    case 0x04: return 128 * 1_024 // 128 KBytes (16 banks of 8KBytes each)
+    default:
+      throw CartridgeInitError.invalidRamBankCount(bankCount)
+    }
   }
 
   internal static func getHeaderChecksum(rom: Data) -> UInt8 {

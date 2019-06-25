@@ -9,7 +9,7 @@ import Foundation
 
 extension Bus {
 
-  /// Read any from any address in memory.
+  /// Read from any address in memory.
   public func read(_ address: UInt16) -> UInt8 {
     func read(_ region: ClosedRange<UInt16>, _ data: Data) -> UInt8 {
       return data[address - region.start]
