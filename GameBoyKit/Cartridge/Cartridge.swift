@@ -4,23 +4,21 @@
 
 import Foundation
 
-// TODO: Implement ROM banking
-// TODO: Implement RAM banking
-
 public class Cartridge {
 
   internal static let minSize = MemoryMap.rom0.count
 
-  /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00)
-//  public private(set) lazy var rom0 = self.rom[MemoryMap.rom0]
+  /// Size of single unit of ram (8 KBytes).
+  public static let ramBankSizeInBytes = 8 * 1_024
 
+  /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00);
   /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
-//  public private(set) lazy var rom1 = self.rom[MemoryMap.rom1]
-
-  public let rom: Data
+  public let rom: Rom
 
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
-  public internal(set) var ram: Data
+  public private(set) var ramBanks: [Data]
+
+  private var selectedRamBank: Int = 0
 
   public init(rom: Data) throws {
     guard rom.count >= Cartridge.minSize else {
@@ -32,31 +30,49 @@ public class Cartridge {
       throw CartridgeInitError.invalidChecksum(value)
     }
 
-    self.rom = rom
+    self.rom = try RomFactory.create(rom)
 
-    let ramSize = try CartridgeHeader.getRamSize(rom: rom)
-    self.ram = Data(count: ramSize)
+    let ramBankCount = try CartridgeHeader.getRamBankCount(rom: rom)
+    self.ramBanks = (0..<ramBankCount).map { _ in
+      Data(count: Cartridge.ramBankSizeInBytes)
+    }
+  }
+
+  // MARK: - Ram
+
+  public func readRam(_ address: UInt16) -> UInt8 {
+    // TODO: RTC?
+    // if self.rtc_enabled and 0x08 <= self.rambank_selected <= 0x0C:
+    //   return self.rtc.getregister(self.rambank_selected)
+
+    let addr = address - MemoryMap.externalRam.start
+    return self.ramBanks[self.selectedRamBank][addr]
+  }
+
+  internal func writeRam(_ address: UInt16, value: UInt8) {
+    let addr = address - MemoryMap.externalRam.start
+    self.ramBanks[self.selectedRamBank][addr] = value
   }
 
   // MARK: - Header
 
   /// 0134-0143 - Title (Uppercase ASCII)
   public var title: String? {
-    return CartridgeHeader.getTitle(rom: self.rom)
+    return CartridgeHeader.getTitle(rom: self.rom.data)
   }
 
   /// 013F-0142 - Manufacturer Code
   public var manufacturerCode: String? {
-    return CartridgeHeader.getManufacturerCode(rom: self.rom)
+    return CartridgeHeader.getManufacturerCode(rom: self.rom.data)
   }
 
   /// 0147 - Cartridge Type
   public var type: CartridgeType {
-    return CartridgeHeader.getType(rom: self.rom)
+    return CartridgeHeader.getType(rom: self.rom.data)
   }
 
   /// 014A - Destination Code
   public var destination: CartridgeDestination {
-    return CartridgeHeader.getDestination(rom: self.rom)
+    return CartridgeHeader.getDestination(rom: self.rom.data)
   }
 }

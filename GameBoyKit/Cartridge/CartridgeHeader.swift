@@ -126,25 +126,24 @@ internal enum CartridgeHeader {
     return rom[CartridgeMap.romSize]
   }
 
-  // Size of the RAM (in bytes).
-  internal static func getRamSize(rom: Data) throws -> Int {
+  // Number of banks in RAM (1 bank = 8 KBytes).
+  internal static func getRamBankCount(rom: Data) throws -> Int {
     // When using a MBC2 chip 00h must be specified in this entry,
     // even though the MBC2 includes a built-in RAM of 512 x 4 bits.
-
     let type = getType(rom: rom)
 
     let isMbc2 = type == .mbc2 || type == .mbc2Battery
     if isMbc2 {
-      return 512 * 4 / 8 // 256
+      return 1 // over-allocation
     }
 
     let bankCount = rom[CartridgeMap.ramSize]
     switch bankCount {
-    case 0x00: return   0 * 1_024 //     None
-    case 0x01: return   2 * 1_024 //   2 KBytes
-    case 0x02: return   8 * 1_024 //   8 Kbytes
-    case 0x03: return  32 * 1_024 //  32 KBytes ( 4 banks of 8KBytes each)
-    case 0x04: return 128 * 1_024 // 128 KBytes (16 banks of 8KBytes each)
+    case 0x00: return  1 //       None (over-allocation)
+    case 0x01: return  1 //   2 KBytes (over-allocation)
+    case 0x02: return  1 //   8 Kbytes (over-allocation)
+    case 0x03: return  4 //  32 KBytes ( 4 banks of 8KBytes each)
+    case 0x04: return 16 // 128 KBytes (16 banks of 8KBytes each)
     default:
       throw CartridgeInitError.invalidRamBankCount(bankCount)
     }

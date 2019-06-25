@@ -102,6 +102,9 @@
 		90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DB22B579EC004E5281 /* PyLoad.swift */; };
 		90CBD3E022BD824300B58461 /* PyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DD22B57B8A004E5281 /* PyTest.swift */; };
 		90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */; };
+		90EDD2A522C2860B00003E9E /* RomFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A422C2860B00003E9E /* RomFactory.swift */; };
+		90EDD2A722C2861300003E9E /* Rom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A622C2861300003E9E /* Rom.swift */; };
+		90EDD2A922C2864100003E9E /* RomOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A822C2864100003E9E /* RomOnly.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
 		90EFDB8722B05D5D0017AEC2 /* BusDmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */; };
@@ -265,6 +268,9 @@
 		90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBootromTests.swift; sourceTree = "<group>"; };
 		90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameBoyKitBlarggTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		90CBD3D622BD81F000B58461 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		90EDD2A422C2860B00003E9E /* RomFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomFactory.swift; sourceTree = "<group>"; };
+		90EDD2A622C2861300003E9E /* Rom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rom.swift; sourceTree = "<group>"; };
+		90EDD2A822C2864100003E9E /* RomOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomOnly.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
 		90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDmaTests.swift; sourceTree = "<group>"; };
@@ -463,6 +469,9 @@
 				90059A4822C2673900803B48 /* CartridgeInitError.swift */,
 				90059A3C22C24A6300803B48 /* CartridgeType.swift */,
 				90059A3E22C24AC700803B48 /* CartridgeDestination.swift */,
+				90EDD2A622C2861300003E9E /* Rom.swift */,
+				90EDD2A422C2860B00003E9E /* RomFactory.swift */,
+				90EDD2A822C2864100003E9E /* RomOnly.swift */,
 			);
 			path = Cartridge;
 			sourceTree = "<group>";
@@ -775,9 +784,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90EDD2A722C2861300003E9E /* Rom.swift in Sources */,
 				90059A4B22C2676A00803B48 /* BootromInitError.swift in Sources */,
 				9085FC4422B6C54400310090 /* Bus.swift in Sources */,
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
+				90EDD2A922C2864100003E9E /* RomOnly.swift in Sources */,
 				90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
@@ -813,6 +824,7 @@
 				90059A3D22C24A6300803B48 /* CartridgeType.swift in Sources */,
 				905321C822BE99A300A409B2 /* LcdMode.swift in Sources */,
 				9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */,
+				90EDD2A522C2860B00003E9E /* RomFactory.swift in Sources */,
 				902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */,
 				905321B822BE552700A409B2 /* CpuState.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,

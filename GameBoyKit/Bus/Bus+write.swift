@@ -29,7 +29,7 @@ extension Bus {
     case MemoryMap.rom1:
       print("Attempting to write to read-only rom1 at: \(address.hex).")
     case MemoryMap.externalRam:
-      write(MemoryMap.externalRam, &self.cartridge.ram)
+      self.cartridge.writeRam(address, value: value)
 
     // internal
     case MemoryMap.highRam:
