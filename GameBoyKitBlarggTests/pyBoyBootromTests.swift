@@ -59,7 +59,7 @@ private func createCartridge() -> Cartridge {
   rom.replaceSubrange(logoStart..<logoEnd, with: nintendoLogo)
 
   // swiftlint:disable:next force_try
-  return try! Cartridge(rom: rom)
+  return try! CartridgeFactory.fromData(rom)
 }
 
 // swiftlint:disable collection_alignment

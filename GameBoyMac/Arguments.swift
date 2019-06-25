@@ -41,7 +41,7 @@ private func openBootrom(path: String?) -> Bootrom {
 
     let url = URL(fileURLWithPath: path, isDirectory: false)
     let data = try Data(contentsOf: url)
-    return try Bootrom(data: data)
+    return try BootromFactory.fromData(data)
   } catch let error as BootromInitError {
     print("Error when opening Boot-ROM: \(error.description)")
     exit(1)
@@ -62,7 +62,7 @@ private func openRom(path: String?) -> Cartridge {
 
     let url = URL(fileURLWithPath: path, isDirectory: false)
     let data = try Data(contentsOf: url)
-    return try Cartridge(rom: data)
+    return try CartridgeFactory.fromData(data)
   } catch let error as CartridgeInitError {
     print("Error when opening ROM: \(error.description)")
     exit(1)

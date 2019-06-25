@@ -2,17 +2,22 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-internal enum RomFactory {
+public enum CartridgeFactory {
 
   // swiftlint:disable:next function_body_length cyclomatic_complexity
-  internal static func create(_ data: Data) throws -> Rom {
+  public static func fromData(_ data: Data) throws -> Cartridge {
+    let checksum = CartridgeHeader.isChecksumValid(data)
+    if case let ChecksumResult.invalid(value) = checksum {
+      throw CartridgeInitError.invalidChecksum(value)
+    }
+
     let type = CartridgeHeader.getType(rom: data)
     switch type {
-    case .romOnly: return RomOnly(data: data)
+    case .romOnly: return try RomOnly(rom: data)
 
-    case .mbc1: break
-    case .mbc1Ram: break
-    case .mbc1RamBattery: break
+    case .mbc1: return try MBC1(rom: data)
+    case .mbc1Ram: return try MBC1(rom: data)
+    case .mbc1RamBattery: return try MBC1(rom: data)
 
     case .mbc2: break
     case .mbc2Battery: break

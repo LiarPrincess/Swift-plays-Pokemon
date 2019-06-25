@@ -6,31 +6,27 @@ import Foundation
 
 public class Cartridge {
 
-  internal static let minSize = MemoryMap.rom0.count
+  /// Size of single unit of rom (16 KBytes).
+  public static let romBankSizeInBytes = 16 * 1_024
 
   /// Size of single unit of ram (8 KBytes).
   public static let ramBankSizeInBytes = 8 * 1_024
 
   /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00);
   /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
-  public let rom: Rom
+  public let rom: Data
 
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
-  public private(set) var ramBanks: [Data]
+  public internal(set) var ramBanks: [Data]
 
-  private var selectedRamBank: Int = 0
+  internal var selectedRomBank = 1
+  internal var selectedRamBank = 0
 
-  public init(rom: Data) throws {
-    guard rom.count >= Cartridge.minSize else {
-      throw CartridgeInitError.invalidSize
-    }
+  // this will be ignored anyway, but for consistency we have to have it
+  internal var isRamBankEnabled = false
 
-    let checksum = CartridgeHeader.isChecksumValid(rom)
-    if case let ChecksumResult.invalid(value) = checksum {
-      throw CartridgeInitError.invalidChecksum(value)
-    }
-
-    self.rom = try RomFactory.create(rom)
+  internal init(rom: Data) throws {
+    self.rom = rom
 
     let ramBankCount = try CartridgeHeader.getRamBankCount(rom: rom)
     self.ramBanks = (0..<ramBankCount).map { _ in
@@ -40,20 +36,24 @@ public class Cartridge {
 
   // MARK: - Rom
 
-  internal func readRomBank0(_ address: UInt16) -> UInt8 {
-    return self.rom.readBank0(address)
+  internal func readRom(_ address: UInt16) -> UInt8 {
+    switch address {
+    case MemoryMap.rom0:
+      return self.rom[address]
+
+    case MemoryMap.rom1:
+      let bankStart = self.selectedRomBank * Cartridge.romBankSizeInBytes
+      let bankOffset = address - MemoryMap.rom1.start
+      return self.rom[bankStart + Int(bankOffset)]
+
+    default:
+      print("Reading from invalid ROM address: \(address.hex).")
+      return 0
+    }
   }
 
-  internal func readRomBankN(_ address: UInt16) -> UInt8 {
-    return self.rom.readBankN(address)
-  }
-
-  internal func writeRomBank0(_ address: UInt16, value: UInt8) {
-    self.rom.writeBank0(address, value: value)
-  }
-
-  internal func writeRomBankN(_ address: UInt16, value: UInt8) {
-    self.rom.writeBankN(address, value: value)
+  internal func writeRom(_ address: UInt16, value: UInt8) {
+    // to override
   }
 
   // MARK: - Ram
@@ -68,29 +68,28 @@ public class Cartridge {
   }
 
   internal func writeRam(_ address: UInt16, value: UInt8) {
-    let addr = address - MemoryMap.externalRam.start
-    self.ramBanks[self.selectedRamBank][addr] = value
+    // to override
   }
 
   // MARK: - Header
 
   /// 0134-0143 - Title (Uppercase ASCII)
   public var title: String? {
-    return CartridgeHeader.getTitle(rom: self.rom.data)
+    return CartridgeHeader.getTitle(rom: self.rom)
   }
 
   /// 013F-0142 - Manufacturer Code
   public var manufacturerCode: String? {
-    return CartridgeHeader.getManufacturerCode(rom: self.rom.data)
+    return CartridgeHeader.getManufacturerCode(rom: self.rom)
   }
 
   /// 0147 - Cartridge Type
   public var type: CartridgeType {
-    return CartridgeHeader.getType(rom: self.rom.data)
+    return CartridgeHeader.getType(rom: self.rom)
   }
 
   /// 014A - Destination Code
   public var destination: CartridgeDestination {
-    return CartridgeHeader.getDestination(rom: self.rom.data)
+    return CartridgeHeader.getDestination(rom: self.rom)
   }
 }

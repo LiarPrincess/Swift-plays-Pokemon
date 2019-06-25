@@ -8,12 +8,13 @@ import GameBoyKit
 func blarggTests() {
   let romUrl = instructionRoms[0]
   let cartridge = openRom(romUrl)
+  let gameBoy = GameBoy(bootrom: .skip, cartridge: cartridge)
 }
 
 private func openRom(_ url: URL) -> Cartridge {
   do {
     let data = try Data(contentsOf: url)
-    return try Cartridge(rom: data)
+    return try CartridgeFactory.fromData(data)
   } catch let error as CartridgeInitError {
     print("Error when opening ROM: \(error.description)")
     exit(1)

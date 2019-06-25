@@ -16,14 +16,12 @@ extension Bus {
     // bootrom
     case MemoryMap.bootrom:
       return self.hasFinishedBootrom ?
-        self.cartridge.readRomBank0(address) :
+        self.cartridge.readRom(address) :
         self.bootrom.read(address)
 
     // cartridge
-    case MemoryMap.rom0:
-      return self.cartridge.readRomBank0(address)
-    case MemoryMap.rom1:
-      return self.cartridge.readRomBankN(address)
+    case MemoryMap.rom0, MemoryMap.rom1:
+      return self.cartridge.readRom(address)
     case MemoryMap.externalRam:
       return self.cartridge.readRam(address)
 

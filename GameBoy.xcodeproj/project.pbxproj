@@ -102,8 +102,6 @@
 		90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DB22B579EC004E5281 /* PyLoad.swift */; };
 		90CBD3E022BD824300B58461 /* PyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DD22B57B8A004E5281 /* PyTest.swift */; };
 		90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */; };
-		90EDD2A522C2860B00003E9E /* RomFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A422C2860B00003E9E /* RomFactory.swift */; };
-		90EDD2A722C2861300003E9E /* Rom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A622C2861300003E9E /* Rom.swift */; };
 		90EDD2A922C2864100003E9E /* RomOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A822C2864100003E9E /* RomOnly.swift */; };
 		90EDD2AF22C29F6200003E9E /* BusCartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2AE22C29F6200003E9E /* BusCartridge.swift */; };
 		90EDD2B322C2A33F00003E9E /* FakeBusCartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2B222C2A33F00003E9E /* FakeBusCartridge.swift */; };
@@ -111,6 +109,9 @@
 		90EDD2B922C2A63600003E9E /* FakeBusBootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2B822C2A63600003E9E /* FakeBusBootrom.swift */; };
 		90EDD2BB22C2C00200003E9E /* blarggTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2BA22C2C00200003E9E /* blarggTests.swift */; };
 		90EDD2C022C2C22700003E9E /* BlarggRoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2BF22C2C22700003E9E /* BlarggRoms.swift */; };
+		90EDD2C422C2C71800003E9E /* CartridgeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */; };
+		90EDD2C622C2CCB700003E9E /* MBC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C522C2CCB700003E9E /* MBC1.swift */; };
+		90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C922C2D50E00003E9E /* BootromFactory.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
 		90EFDB8722B05D5D0017AEC2 /* BusDmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */; };
@@ -274,8 +275,6 @@
 		90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBootromTests.swift; sourceTree = "<group>"; };
 		90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameBoyKitBlarggTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		90CBD3D622BD81F000B58461 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		90EDD2A422C2860B00003E9E /* RomFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomFactory.swift; sourceTree = "<group>"; };
-		90EDD2A622C2861300003E9E /* Rom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rom.swift; sourceTree = "<group>"; };
 		90EDD2A822C2864100003E9E /* RomOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomOnly.swift; sourceTree = "<group>"; };
 		90EDD2AE22C29F6200003E9E /* BusCartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusCartridge.swift; sourceTree = "<group>"; };
 		90EDD2B222C2A33F00003E9E /* FakeBusCartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBusCartridge.swift; sourceTree = "<group>"; };
@@ -283,6 +282,9 @@
 		90EDD2B822C2A63600003E9E /* FakeBusBootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBusBootrom.swift; sourceTree = "<group>"; };
 		90EDD2BA22C2C00200003E9E /* blarggTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blarggTests.swift; sourceTree = "<group>"; };
 		90EDD2BF22C2C22700003E9E /* BlarggRoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggRoms.swift; sourceTree = "<group>"; };
+		90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeFactory.swift; sourceTree = "<group>"; };
+		90EDD2C522C2CCB700003E9E /* MBC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC1.swift; sourceTree = "<group>"; };
+		90EDD2C922C2D50E00003E9E /* BootromFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromFactory.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
 		90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDmaTests.swift; sourceTree = "<group>"; };
@@ -477,15 +479,16 @@
 			isa = PBXGroup;
 			children = (
 				902CA97822C0159C00026960 /* Bootrom.swift */,
+				90EDD2C922C2D50E00003E9E /* BootromFactory.swift */,
 				90059A4A22C2676A00803B48 /* BootromInitError.swift */,
 				90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */,
 				90059A4C22C2693400803B48 /* CartridgeHeader.swift */,
+				90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */,
 				90059A4822C2673900803B48 /* CartridgeInitError.swift */,
 				90059A3C22C24A6300803B48 /* CartridgeType.swift */,
 				90059A3E22C24AC700803B48 /* CartridgeDestination.swift */,
-				90EDD2A622C2861300003E9E /* Rom.swift */,
-				90EDD2A422C2860B00003E9E /* RomFactory.swift */,
 				90EDD2A822C2864100003E9E /* RomOnly.swift */,
+				90EDD2C522C2CCB700003E9E /* MBC1.swift */,
 			);
 			path = Cartridge;
 			sourceTree = "<group>";
@@ -810,7 +813,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90EDD2A722C2861300003E9E /* Rom.swift in Sources */,
 				90059A4B22C2676A00803B48 /* BootromInitError.swift in Sources */,
 				9085FC4422B6C54400310090 /* Bus.swift in Sources */,
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
@@ -822,6 +824,7 @@
 				90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */,
 				90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */,
 				905321B022BE46E800A409B2 /* Debugger.swift in Sources */,
+				90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */,
 				90059A4922C2673900803B48 /* CartridgeInitError.swift in Sources */,
 				902CA96F22BFA63C00026960 /* CpuBus.swift in Sources */,
 				90B0DC5D22B78E13005BBCF5 /* Bus+read.swift in Sources */,
@@ -852,13 +855,14 @@
 				90059A3D22C24A6300803B48 /* CartridgeType.swift in Sources */,
 				905321C822BE99A300A409B2 /* LcdMode.swift in Sources */,
 				9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */,
-				90EDD2A522C2860B00003E9E /* RomFactory.swift in Sources */,
 				902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */,
 				905321B822BE552700A409B2 /* CpuState.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,
+				90EDD2C422C2C71800003E9E /* CartridgeFactory.swift in Sources */,
 				902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */,
 				90B0DC4422B6EC89005BBCF5 /* Lcd.swift in Sources */,
 				90059A3F22C24AC700803B48 /* CartridgeDestination.swift in Sources */,
+				90EDD2C622C2CCB700003E9E /* MBC1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

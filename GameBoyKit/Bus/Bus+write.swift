@@ -15,16 +15,14 @@ extension Bus {
     // bootrom,
     case MemoryMap.bootrom:
       if self.hasFinishedBootrom {
-        self.cartridge.writeRomBank0(address, value: value)
+        self.cartridge.writeRom(address, value: value)
       } else {
         self.bootrom.write(address, value: value)
       }
 
     // cartridge
-    case MemoryMap.rom0:
-      self.cartridge.writeRomBank0(address, value: value)
-    case MemoryMap.rom1:
-      self.cartridge.writeRomBankN(address, value: value)
+    case MemoryMap.rom0, MemoryMap.rom1:
+      self.cartridge.writeRom(address, value: value)
     case MemoryMap.externalRam:
       self.cartridge.writeRam(address, value: value)
 
