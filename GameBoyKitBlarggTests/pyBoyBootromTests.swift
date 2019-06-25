@@ -58,6 +58,7 @@ private func createCartridge() -> Cartridge {
   let logoEnd = logoStart + nintendoLogo.count
   rom.replaceSubrange(logoStart..<logoEnd, with: nintendoLogo)
 
+  // swiftlint:disable:next force_try
   return try! Cartridge(rom: rom)
 }
 

@@ -7,7 +7,7 @@ import Foundation
 public class Rom {
 
   /// Size of single unit of rom (16 KBytes).
-  public static let romBankSizeInBytes: UInt16 = 16 * 1_024
+  internal static let romBankSizeInBytes: UInt16 = 16 * 1_024
 
   /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00)
   //  public private(set) lazy var rom0 = self.rom[MemoryMap.rom0]
@@ -17,7 +17,7 @@ public class Rom {
 
   public let data: Data
 
-  internal var selectedRamBank: UInt16 = 1
+  internal var selectedRomBank: UInt16 = 1
 
   internal init(data: Data) {
     self.data = data
@@ -28,7 +28,7 @@ public class Rom {
   }
 
   internal func readBankN(_ address: UInt16) -> UInt8 {
-    let bankStart = self.selectedRamBank * Rom.romBankSizeInBytes
+    let bankStart = self.selectedRomBank * Rom.romBankSizeInBytes
     let bankOffset = address - MemoryMap.rom1.start
     return self.data[bankStart + bankOffset]
   }

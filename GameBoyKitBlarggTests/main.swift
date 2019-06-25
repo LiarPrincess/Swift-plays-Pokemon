@@ -5,4 +5,7 @@ import GameBoyKit
 //pyBoyBootromTests()
 
 // Show single frame performance
-performanceTest()
+//performanceTest()
+
+// Run Blargg tests
+blarggTests()

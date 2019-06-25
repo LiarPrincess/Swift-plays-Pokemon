@@ -38,5 +38,6 @@ private func createCartridge() -> Cartridge {
   var rom = Data(count: count)
   rom[0x014d] = 231 // just to make checksum happy
 
+  // swiftlint:disable:next force_try
   return try! Cartridge(rom: rom)
 }

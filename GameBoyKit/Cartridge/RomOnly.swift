@@ -6,7 +6,7 @@ internal class RomOnly: Rom {
 
   internal override func writeBank0(_ address: UInt16, value: UInt8) {
     if 0x2000 <= address && address <= 0x3fff {
-      self.selectedRamBank = max(1, UInt16(value))
+      self.selectedRomBank = max(1, UInt16(value))
     }
   }
 

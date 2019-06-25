@@ -1,8 +1,9 @@
-Build
-.build
+/Build
+/.build
 
-ROMs
-!ROMs/.gitkeep
+/ROMs/*
+/GameBoyKitBlarggTests/ROMs/*
+!/GameBoyKitBlarggTests/ROMs/.gitkeep
 
 .DS_Store
 /*.xcodeproj
