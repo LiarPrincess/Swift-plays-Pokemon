@@ -8,9 +8,11 @@ import Foundation
 /// different bootroms [here](http://gbdev.gg8.se/files/roms/bootroms/).
 public class Bootrom {
 
-  internal let data: Data
+  internal static let size = MemoryMap.bootrom.count
 
-  public init(data: Data) {
+  public let data: Data
+
+  internal init(data: Data) {
     self.data = data
   }
 }
@@ -22,6 +24,7 @@ extension Bootrom {
   /// Skip directly to the game.
   /// Source: https://github.com/Baekalfen/PyBoy
   public static var skip: Bootrom {
+    // TODO: Use pandocs (end) instead
     var data = Data(memoryRange: MemoryMap.bootrom)
 
     // Set stack pointer

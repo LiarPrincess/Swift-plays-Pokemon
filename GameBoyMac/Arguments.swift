@@ -22,29 +22,39 @@ private struct RawArguments {
 internal func parseArguments() -> Arguments {
   let rawArguments = parseRawArguments()
 
-  let bootrom: Bootrom = {
-    switch rawArguments.bootromPath {
-    case .none:
-      print("Boot-ROM not found. Using default one.")
-      return .skip
-    case let .some(path):
-      return Bootrom(data: open(path))
-    }
-  }()
-
-  let rom: Cartridge = {
-    switch rawArguments.romPath {
-    case .none:
-      fatalError("Unable to locate rom file.")
-    case let .some(path):
-      return Cartridge(data: open(path))
-    }
-  }()
+//  let rom: Cartridge = {
+//    switch rawArguments.romPath {
+//    case .none:
+//      fatalError("Unable to locate rom file.")
+//    case let .some(path):
+//      return Cartridge(data: open(path))
+//    }
+//  }()
+  let cartCount = MemoryMap.rom0.count + MemoryMap.rom1.count
 
   return Arguments(
-    bootrom: bootrom,
-    rom: rom
+    bootrom: openBootrom(path: rawArguments.bootromPath),
+    rom: Cartridge(data: Data(count: cartCount))
   )
+}
+
+private func openBootrom(path: String?) -> Bootrom {
+  guard let path = path else {
+    print("Boot-ROM not found. Using default one.")
+    return Bootrom.skip
+  }
+
+  do {
+    let url = URL(fileURLWithPath: path, isDirectory: false)
+    let data = try Data(contentsOf: url)
+    return try BootromFactory.fromData(data)
+  } catch let error as BootromCreationError {
+    print("Error when opening Boot-ROM: \(error.description)")
+    exit(1)
+  } catch {
+    print("Error when opening Boot-ROM: \(error.localizedDescription)")
+    exit(1)
+  }
 }
 
 private func parseRawArguments() -> RawArguments {
@@ -75,19 +85,9 @@ private func parseRawArguments() -> RawArguments {
       index += 2
 
     default:
-      print("Unknown argument '\(arguments[index])'")
       index += 1
     }
   }
 
   return result
-}
-
-private func open(_ path: String) -> Data {
-  do {
-    let url = URL(fileURLWithPath: path, isDirectory: false)
-    return try Data(contentsOf: url)
-  } catch {
-    fatalError(error.localizedDescription)
-  }
 }

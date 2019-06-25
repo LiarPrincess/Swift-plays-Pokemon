@@ -11,6 +11,8 @@
 		902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */; };
 		902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */; };
 		902BDDA622C1643400632BA7 /* XCTestCase+createTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA522C1643400632BA7 /* XCTestCase+createTimer.swift */; };
+		902BDDBA22C18E3E00632BA7 /* BootromFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDB922C18E3E00632BA7 /* BootromFactory.swift */; };
+		902BDDC822C239F100632BA7 /* BootromCreationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDC722C239F100632BA7 /* BootromCreationError.swift */; };
 		902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96A22BF825B00026960 /* Data+initFromRange.swift */; };
 		902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96C22BF85B600026960 /* Data+UInt.swift */; };
 		902CA96F22BFA63C00026960 /* CpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96E22BFA63C00026960 /* CpuBus.swift */; };
@@ -163,6 +165,8 @@
 		902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcd.swift"; sourceTree = "<group>"; };
 		902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createCpu.swift"; sourceTree = "<group>"; };
 		902BDDA522C1643400632BA7 /* XCTestCase+createTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createTimer.swift"; sourceTree = "<group>"; };
+		902BDDB922C18E3E00632BA7 /* BootromFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromFactory.swift; sourceTree = "<group>"; };
+		902BDDC722C239F100632BA7 /* BootromCreationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromCreationError.swift; sourceTree = "<group>"; };
 		902CA96A22BF825B00026960 /* Data+initFromRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+initFromRange.swift"; sourceTree = "<group>"; };
 		902CA96C22BF85B600026960 /* Data+UInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UInt.swift"; sourceTree = "<group>"; };
 		902CA96E22BFA63C00026960 /* CpuBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuBus.swift; sourceTree = "<group>"; };
@@ -447,6 +451,8 @@
 			isa = PBXGroup;
 			children = (
 				902CA97822C0159C00026960 /* Bootrom.swift */,
+				902BDDB922C18E3E00632BA7 /* BootromFactory.swift */,
+				902BDDC722C239F100632BA7 /* BootromCreationError.swift */,
 				90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */,
 			);
 			path = Cartridge;
@@ -764,6 +770,8 @@
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
+				902BDDBA22C18E3E00632BA7 /* BootromFactory.swift in Sources */,
+				902BDDC822C239F100632BA7 /* BootromCreationError.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
 				90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */,
 				90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */,
