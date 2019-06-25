@@ -33,7 +33,7 @@ public class AppDelegate: NSObject, NSApplicationDelegate {
   public func applicationDidFinishLaunching(_ aNotification: Notification) {
     let args = parseArguments()
 
-    self.gameBoy  = GameBoy(bootrom: args.bootrom, cartridge: args.rom)
+    self.gameBoy  = GameBoy(bootrom: args.bootrom, cartridge: args.cartridge)
     self.device   = createDevice()
     self.renderer = GameBoyRenderer(gameBoy: self.gameBoy, device: self.device)
 

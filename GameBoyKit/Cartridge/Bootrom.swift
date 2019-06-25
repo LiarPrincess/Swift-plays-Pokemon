@@ -12,7 +12,11 @@ public class Bootrom {
 
   public let data: Data
 
-  internal init(data: Data) {
+  public init(data: Data) throws {
+    guard data.count == Bootrom.size else {
+      throw BootromInitError.invalidSize
+    }
+
     self.data = data
   }
 }
@@ -43,7 +47,8 @@ extension Bootrom {
     data[0xfe] = 0xe0
     data[0xff] = 0x50
 
-    return Bootrom(data: data)
+    // swiftlint:disable:next force_try
+    return try! Bootrom(data: data)
   }
 
   /// This is the most common version of the boot ROM
@@ -51,7 +56,9 @@ extension Bootrom {
   /// Source: http://gbdev.gg8.se/files/roms/bootroms/
   public static var dmg: Bootrom {
     let data = Data(dmgData)
-    return Bootrom(data: data)
+
+    // swiftlint:disable:next force_try
+    return try! Bootrom(data: data)
   }
 }
 

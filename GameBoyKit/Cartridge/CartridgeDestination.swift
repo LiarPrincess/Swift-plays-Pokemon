@@ -2,10 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-public enum BootromCreationError: Error, CustomStringConvertible {
-  case invalidSize
-
-  public var description: String {
-    return "Boot-ROM should have exactly \(Bootrom.size) bytes."
-  }
+public enum CartridgeDestination {
+  /** 00h */ case japanese
+  /** 01h */ case nonJapanese
+  case unknown
 }

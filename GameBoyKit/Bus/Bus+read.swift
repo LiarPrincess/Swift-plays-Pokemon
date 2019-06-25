@@ -19,13 +19,13 @@ extension Bus {
 
     // bootrom/cartridge
     case MemoryMap.bootrom:
-      let data = self.hasFinishedBootrom ? self.cartridge.data : self.bootrom.data
+      let data = self.hasFinishedBootrom ? self.cartridge.rom : self.bootrom.data
       return data[address]
     case MemoryMap.rom0:
       // overlaps with bootrom, so 'case' order matters
-      return self.cartridge.data[address]
+      return self.cartridge.rom[address]
     case MemoryMap.rom1:
-      return self.cartridge.data[address]
+      return self.cartridge.rom[address]
     case MemoryMap.externalRam:
       return read(MemoryMap.externalRam, self.cartridge.ram)
 
