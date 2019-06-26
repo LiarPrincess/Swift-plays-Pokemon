@@ -4,6 +4,8 @@
 
 import Foundation
 
+// swiftlint:disable file_length
+
 public class Lcd {
 
   /// 160 px = 20 tiles
@@ -252,5 +254,55 @@ public class Lcd {
     let data1Bit = (data1 >> shift) & 0x1
     let data2Bit = (data2 >> shift) & 0x1
     return (data2Bit << 1) | data1Bit
+  }
+}
+
+// MARK: - Restorable
+
+extension Lcd: Restorable {
+  internal func save(to state: inout GameBoyState) {
+    state.lcd.control = self.control.value
+    state.lcd.status = self.status.value
+
+    state.lcd.scrollY = self.scrollY
+    state.lcd.scrollX = self.scrollX
+
+    state.lcd.line = self.line
+    state.lcd.lineCompare = self.lineCompare
+
+    state.lcd.windowY = self.windowY
+    state.lcd.windowX = self.windowX
+
+    state.lcd.backgroundColors = self.backgroundColors.value
+    state.lcd.objectColors0 = self.objectColors0.value
+    state.lcd.objectColors1 = self.objectColors1.value
+
+    state.lcd.lineProgress = self.lineProgress
+
+    state.lcd.videoRam = self.videoRam
+    state.lcd.oam = self.oam
+  }
+
+  internal func load(from state: GameBoyState) {
+    self.control.value = state.lcd.control
+    self.status.value = state.lcd.status
+
+    self.scrollY = state.lcd.scrollY
+    self.scrollX = state.lcd.scrollX
+
+    self.line = state.lcd.line
+    self.lineCompare = state.lcd.lineCompare
+
+    self.windowY = state.lcd.windowY
+    self.windowX = state.lcd.windowX
+
+    self.backgroundColors.value = state.lcd.backgroundColors
+    self.objectColors0.value = state.lcd.objectColors0
+    self.objectColors1.value = state.lcd.objectColors1
+
+    self.lineProgress = state.lcd.lineProgress
+
+    self.videoRam = state.lcd.videoRam
+    self.oam = state.lcd.oam
   }
 }

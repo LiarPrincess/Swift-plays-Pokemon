@@ -32,15 +32,12 @@ public class Debugger {
 
       if mode == .opcodesAndWrites || mode == .full {
         self.printRegiserWrites(before: stateBefore, after: stateAfter)
-        // memory writes
+        self.printMemoryWrites(before: stateBefore, after: stateAfter)
         self.printOpcodeDetails(before: stateBefore, after: stateAfter)
       }
 
       if mode == .full {
         self.printRegisterValues()
-      }
-
-      if mode == .opcodesAndWrites || mode == .full {
         print()
       }
 

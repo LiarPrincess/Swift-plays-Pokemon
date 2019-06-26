@@ -10,7 +10,7 @@ private let tileColumnCount = Int(Lcd.height) / tileSize // 20
 
 extension Lcd {
 
-  internal func dump() {
+  public func dump() {
     print("-------------")
     print()
 
@@ -31,7 +31,7 @@ extension Lcd {
 
 extension Lcd {
 
-  internal func dumpTileIndices(from map: TileMap? = nil) {
+  public func dumpTileIndices(from map: TileMap? = nil) {
     let map = map ?? self.control.backgroundTileMap
 
     // horizontal markers
@@ -72,7 +72,7 @@ extension Lcd {
 
 extension Lcd {
 
-  internal func dumpTileData(region: TileData? = nil) {
+  public func dumpTileData(region: TileData? = nil) {
     let region = region ?? self.control.tileData
 
     let range = region.range
@@ -101,7 +101,7 @@ extension Lcd {
 
 extension Lcd {
 
-  internal func dumpBackground() {
+  public func dumpBackground() {
     //    let rowRange:    ClosedRange<Int> = 8...9
     //    let columnRange: ClosedRange<Int> = 4...5 // 16 for R
 

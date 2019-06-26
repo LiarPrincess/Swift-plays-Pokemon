@@ -43,7 +43,7 @@ extension Debugger {
     }()
 
     let opcodeDesc = String(describing: opcode)
-    print("\(cpu.pc.hex): \(opcodeDesc.padLeft(toLength: 11)) \(operands)")
+    print("\(cpu.pc.hex): \(opcodeDesc.padRight(toLength: 11)) \(operands)")
   }
 
   private func printPrefixOpcode() {
@@ -91,16 +91,16 @@ extension Debugger {
 
     switch opcode {
     case .call_a16:
-      print("  > call to \(next16)")
+      print("  > call to \(next16.hex)")
     case .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16:
       let taken = after.cpu.pc == next16 ? "TAKEN" : "NOT TAKEN"
-      print("  > conditional call to \(next16) \(taken)")
+      print("  > conditional call to \(next16.hex) \(taken)")
 
     case .jp_a16, .jp_pHL:
-      print("  > jump to \(next16)")
+      print("  > jump to \(next16.hex)")
     case  .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16:
       let taken = after.cpu.pc == next16 ? "TAKEN" : "NOT TAKEN"
-      print("  > conditional jump to \(next16) \(taken)")
+      print("  > conditional jump to \(next16.hex) \(taken)")
 
     case .jr_r8:
       print("  > relative jump to \(pc)")
@@ -122,9 +122,9 @@ extension Debugger {
       print("  > rst call: \(opcode)")
 
     case .push_af, .push_bc, .push_de, .push_hl:
-      print("  > push")
+      print("  > push - \(opcode)")
     case .pop_af, .pop_bc, .pop_de, .pop_hl:
-      print("  > pop")
+      print("  > pop - \(opcode)")
 
     case .prefix:
       print("  > prefix instruction")
@@ -158,14 +158,20 @@ extension Debugger {
   // MARK: - Print register values
 
   internal func printRegisterValues() {
-    let stackStart: UInt16 = max(0xff80, cpu.sp)
-    let stackEnd:   UInt16 = 0xfffe
+    let stackStart: UInt16 = self.cpu.sp
+    var stackEnd:   UInt16 = 0xfffe
+
+    let stackCount = stackEnd - stackStart
+    if stackCount > 20 {
+      stackEnd = stackStart + 20
+    }
+
     let stackValues = (stackStart...stackEnd).map { bus.read($0) }
 
     let r = registers
     print("""
         pc: \(cpu.pc) (\(cpu.pc.hex))
-        sp: \(cpu.sp) (\(cpu.sp.hex)) \(stackValues.reversed().map { $0.hex })
+        sp: \(cpu.sp) (\(cpu.sp.hex)) \(stackValues.map { $0.hex })
         cycle: \(cpu.cycle)
         auxiliary registers:
           a: \(registerValue(r.a))

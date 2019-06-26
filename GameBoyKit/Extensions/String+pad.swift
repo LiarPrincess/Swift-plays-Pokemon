@@ -5,14 +5,22 @@
 extension String {
 
   public func padLeft(toLength newLength: Int) -> String {
+    return self.createPadding(newLength) + self
+  }
+
+  public func padRight(toLength newLength: Int) -> String {
+    return self + self.createPadding(newLength)
+  }
+
+  private func createPadding(_ newLength: Int) -> String {
     // self.count is O(n)
     let currentCount = self.count
 
     if currentCount >= newLength {
-      return self
+      return ""
     }
 
     let padCount = newLength - currentCount
-    return String(repeating: " ", count: padCount) + self
+    return String(repeating: " ", count: padCount)
   }
 }
