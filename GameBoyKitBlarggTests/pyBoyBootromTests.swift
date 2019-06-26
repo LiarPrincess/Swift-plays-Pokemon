@@ -2,8 +2,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// swiftlint:disable trailing_comma
-
 import Foundation
 import GameBoyKit
 
@@ -24,7 +22,7 @@ private var programCounters: [String] = [
   "0xe0", "0xe3", "0xe6", "0xe7", "0xe8", "0xe9", "0xeb",
   "0xec", "0xed", "0xef",
   "0xf1", "0xf3", "0xf4", "0xf5", "0xf6", "0xf7", "0xf9", "0xfa", "0xfc", "0xfe",
-  /* "0x100" */
+  "0x100"
 ]
 
 internal func pyBoyBootromTests() {

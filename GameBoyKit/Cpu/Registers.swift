@@ -2,10 +2,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-private let zeroFlagPosition:      UInt16 = 7
-private let subtractFlagPosition:  UInt16 = 6
-private let halfCarryFlagPosition: UInt16 = 5
-private let carryFlagPosition:     UInt16 = 4
+private let zeroFlagMask:      UInt8 = 1 << 7
+private let subtractFlagMask:  UInt8 = 1 << 6
+private let halfCarryFlagMask: UInt8 = 1 << 5
+private let carryFlagMask:     UInt8 = 1 << 4
 
 internal enum FlagRegister {
   case zeroFlag
@@ -20,6 +20,7 @@ internal enum SingleRegister {
   case c
   case d
   case e
+  case f
   case h
   case l
 }
@@ -55,6 +56,24 @@ public struct Registers {
   /// Auxiliary register: L
   public internal(set) var l: UInt8 = 0
 
+  /// Flag register: F (lower 4 bits are always zero)
+  public internal(set) var f: UInt8 {
+    get {
+      var result: UInt8 = 0
+      result |= self.zeroFlag      ? zeroFlagMask      : 0
+      result |= self.subtractFlag  ? subtractFlagMask  : 0
+      result |= self.halfCarryFlag ? halfCarryFlagMask : 0
+      result |= self.carryFlag     ? carryFlagMask     : 0
+      return result
+    }
+    set {
+      self.zeroFlag      = isSet(newValue, mask: zeroFlagMask)
+      self.subtractFlag  = isSet(newValue, mask: subtractFlagMask)
+      self.halfCarryFlag = isSet(newValue, mask: halfCarryFlagMask)
+      self.carryFlag     = isSet(newValue, mask: carryFlagMask)
+    }
+  }
+
   /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
   public internal(set) var zeroFlag: Bool = false
 
@@ -71,6 +90,15 @@ public struct Registers {
   public internal(set) var carryFlag: Bool = false
 
   // MARK: - Combined registers
+
+  /// Merge of A and F registers.
+  public internal(set) var af: UInt16 {
+    get { return (UInt16(self.a) << 8) | UInt16(self.f) }
+    set {
+      self.a = UInt8((newValue & 0xff00) >> 8)
+      self.f = UInt8(newValue & 0xff)
+    }
+  }
 
   /// Merge of B and C registers.
   public internal(set) var bc: UInt16 {
@@ -117,6 +145,7 @@ public struct Registers {
     case .c: return self.c
     case .d: return self.d
     case .e: return self.e
+    case .f: return self.f
     case .h: return self.h
     case .l: return self.l
     }
@@ -124,13 +153,7 @@ public struct Registers {
 
   internal func get(_ rr: CombinedRegister) -> UInt16 {
     switch rr {
-    case .af:
-      var result: UInt16 = 0
-      result += self.zeroFlag      ? (1 << zeroFlagPosition)      : 0
-      result += self.subtractFlag  ? (1 << subtractFlagPosition)  : 0
-      result += self.halfCarryFlag ? (1 << halfCarryFlagPosition) : 0
-      result += self.carryFlag     ? (1 << carryFlagPosition)     : 0
-      return result
+    case .af: return self.af
     case .bc: return self.bc
     case .de: return self.de
     case .hl: return self.hl
@@ -153,6 +176,7 @@ public struct Registers {
     case .c: self.c = value
     case .d: self.d = value
     case .e: self.e = value
+    case .f: self.f = value
     case .h: self.h = value
     case .l: self.l = value
     }
@@ -160,15 +184,7 @@ public struct Registers {
 
   internal mutating func set(_ rr: CombinedRegister, to value: UInt16) {
     switch rr {
-    case .af:
-      self.a = UInt8((value & 0xff00) >> 8)
-
-      let f = UInt16(value & 0xff)
-      self.zeroFlag      = (f & zeroFlagPosition)      == zeroFlagPosition
-      self.subtractFlag  = (f & subtractFlagPosition)  == subtractFlagPosition
-      self.halfCarryFlag = (f & halfCarryFlagPosition) == halfCarryFlagPosition
-      self.carryFlag     = (f & carryFlagPosition)     == carryFlagPosition
-
+    case .af: self.af = value
     case .bc: self.bc = value
     case .de: self.de = value
     case .hl: self.hl = value
@@ -206,4 +222,8 @@ extension Registers: Restorable {
     self.halfCarryFlag = state.cpu.halfCarryFlag
     self.carryFlag     = state.cpu.carryFlag
   }
+}
+
+private func isSet(_ value: UInt8, mask: UInt8) -> Bool {
+  return (value & mask) == mask
 }

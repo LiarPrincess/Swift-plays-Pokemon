@@ -55,6 +55,7 @@
 		909DA69B22C3C47E007B7C8E /* LcdState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909DA69A22C3C47E007B7C8E /* LcdState.swift */; };
 		909DA69D22C3C9E8007B7C8E /* BusState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909DA69C22C3C9E8007B7C8E /* BusState.swift */; };
 		909DA69F22C3CEA2007B7C8E /* CartridgeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909DA69E22C3CEA2007B7C8E /* CartridgeState.swift */; };
+		909DA6A122C3DDEC007B7C8E /* CpuRegistersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909DA6A022C3DDEC007B7C8E /* CpuRegistersTests.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
 		90A17B48229D59840027133B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A17B47229D59840027133B /* Assets.xcassets */; };
 		90A17B61229D59A30027133B /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A17B58229D59A20027133B /* GameBoyKit.framework */; };
@@ -228,6 +229,7 @@
 		909DA69A22C3C47E007B7C8E /* LcdState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdState.swift; sourceTree = "<group>"; };
 		909DA69C22C3C9E8007B7C8E /* BusState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusState.swift; sourceTree = "<group>"; };
 		909DA69E22C3CEA2007B7C8E /* CartridgeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeState.swift; sourceTree = "<group>"; };
+		909DA6A022C3DDEC007B7C8E /* CpuRegistersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuRegistersTests.swift; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* GameBoyMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameBoyMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A17B43229D59830027133B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90A17B47229D59840027133B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				9083ECFF22C12DE1009E4AAB /* Helpers */,
+				909DA6A022C3DDEC007B7C8E /* CpuRegistersTests.swift */,
 				90A17BA6229D59EE0027133B /* CpuLdTests.swift */,
 				90A17BA5229D59EE0027133B /* CpuArithmeticTests.swift */,
 				90A17BA2229D59EE0027133B /* CpuLogicTests.swift */,
@@ -909,6 +912,7 @@
 				90BE338622B5123B00DF3953 /* LcdColorValueTests.swift in Sources */,
 				90A17BAB229D59EE0027133B /* CpuLogicTests.swift in Sources */,
 				906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */,
+				909DA6A122C3DDEC007B7C8E /* CpuRegistersTests.swift in Sources */,
 				903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */,
 				90EDD2B922C2A63600003E9E /* FakeBusBootrom.swift in Sources */,
 				90A17BAF229D59EE0027133B /* CpuLdTests.swift in Sources */,
