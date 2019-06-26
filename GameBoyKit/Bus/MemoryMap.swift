@@ -50,7 +50,7 @@ public enum MemoryMap {
     public static let joypad: UInt16 = 0xff00
     public static let sb:     UInt16 = 0xff01
     public static let sc:     UInt16 = 0xff02
-    public static let unmapBootrom:    UInt16 = 0xff50
+    public static let unmapBootrom:  UInt16 = 0xff50
     public static let interruptFlag: UInt16 = 0xff0f
   }
 

@@ -3,7 +3,6 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 public enum CartridgeInitError: Error, CustomStringConvertible {
-  case invalidSize
   case invalidChecksum(UInt8)
   case invalidRomBankCount(UInt8)
   case invalidRamBankCount(UInt8)
@@ -13,9 +12,6 @@ public enum CartridgeInitError: Error, CustomStringConvertible {
   // fatalError("Unable to parse ROM size \(value) (address: \(romSizeAddress.hex).")
   public var description: String {
     switch self {
-    case .invalidSize:
-      return "XXX"
-
     case let .invalidChecksum(value):
       let range = CartridgeMap.headerChecksumRange
       let compare = CartridgeHeader.checksumCompare

@@ -16,19 +16,11 @@ class FakeBusCartridge: BusCartridge {
     return Data(count: count)
   }()
 
-  func readRomBank0(_ address: UInt16) -> UInt8 {
+  func readRom(_ address: UInt16) -> UInt8 {
     return self.rom[address - MemoryMap.rom0.start]
   }
 
-  func readRomBankN(_ address: UInt16) -> UInt8 {
-    return self.rom[address - MemoryMap.rom0.start]
-  }
-
-  func writeRomBank0(_ address: UInt16, value: UInt8) {
-    self.rom[address - MemoryMap.rom0.start] = value
-  }
-
-  func writeRomBankN(_ address: UInt16, value: UInt8) {
+  func writeRom(_ address: UInt16, value: UInt8) {
     self.rom[address - MemoryMap.rom0.start] = value
   }
 

@@ -34,7 +34,7 @@ class BusWriteTests: XCTestCase {
     let cartridge = FakeBusCartridge()
     let bus = self.createBus(cartridge: cartridge)
 
-    bus.hasFinishedBootrom = true
+    bus.unmapBootrom = 0x01
 
     bus.write(range.start, value: startValue)
     XCTAssertEqual(cartridge.rom[MemoryMap.rom0.start], startValue)

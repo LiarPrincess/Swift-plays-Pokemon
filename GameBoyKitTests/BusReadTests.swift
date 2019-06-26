@@ -32,7 +32,7 @@ class BusReadTests: XCTestCase {
     cartridge.rom[range.end]   = endValue
 
     let bus = self.createBus(cartridge: cartridge)
-    bus.hasFinishedBootrom = true
+    bus.unmapBootrom = 0x01
 
     XCTAssertEqual(bus.read(range.start), startValue)
     XCTAssertEqual(bus.read(range.end), endValue)
@@ -46,7 +46,7 @@ class BusReadTests: XCTestCase {
     cartridge.rom[range.end]   = endValue
 
     let bus = self.createBus(cartridge: cartridge)
-    bus.hasFinishedBootrom = true
+    bus.unmapBootrom = 0x01
 
     XCTAssertEqual(bus.read(range.start), startValue)
     XCTAssertEqual(bus.read(range.end), endValue)

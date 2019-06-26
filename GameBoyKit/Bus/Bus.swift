@@ -70,3 +70,25 @@ public class Bus {
     return address - 0x2000
   }
 }
+
+// MARK: - Restorable
+
+extension Bus: Restorable {
+  internal func save(to state: inout GameBoyState) {
+    state.bus.ram = self.ram
+    state.bus.ioMemory = self.ioMemory
+    state.bus.highRam = self.highRam
+    state.bus.audio = self.audio
+    state.bus.unmappedMemory = self.unmappedMemory
+    state.bus.unmapBootrom = self.unmapBootrom
+  }
+
+  internal func load(from state: GameBoyState) {
+    self.ram = state.bus.ram
+    self.ioMemory = state.bus.ioMemory
+    self.highRam = state.bus.highRam
+    self.audio = state.bus.audio
+    self.unmappedMemory = state.bus.unmappedMemory
+    self.unmapBootrom = state.bus.unmapBootrom
+  }
+}
