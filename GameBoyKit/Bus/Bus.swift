@@ -15,8 +15,6 @@ public class Bus {
   internal let bootrom: BusBootrom
   internal let cartridge: BusCartridge
 
-  internal var hasFinishedBootrom = false
-
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
   internal lazy var ram = Data(memoryRange: MemoryMap.internalRam)
@@ -32,6 +30,11 @@ public class Bus {
 
   /// TODO: Catch'em all for audio read/write
   internal var audio = [UInt16:UInt8]()
+
+  /// If > 0 then we have finished bootrom.
+  internal var unmapBootrom: UInt8 = 0
+
+  internal var hasFinishedBootrom: Bool { return self.unmapBootrom > 0 }
 
   internal init(bootrom:    BusBootrom,
                 cartridge:  BusCartridge,
