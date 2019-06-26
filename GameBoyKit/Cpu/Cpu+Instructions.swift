@@ -865,9 +865,9 @@ extension Cpu {
     let a = self.registers.a
 
     let carry = a & 0x1
-    let newValue = (a >> 1) | (self.registers.carryFlag ? 0x8 : 0x0)
+    let newValue = (a >> 1) | (self.registers.carryFlag ? 0b10000000 : 0x0)
 
-    self.registers.zeroFlag = false
+    self.registers.zeroFlag = newValue == 0
     self.registers.subtractFlag = false
     self.registers.halfCarryFlag = false
     self.registers.carryFlag = carry == 0x1
@@ -1394,10 +1394,29 @@ extension Cpu {
   }
 
   internal func daa() {
-    fatalError("DAA is not implemented!")
+    var a = self.registers.a
 
-//    self.pc += 1
-//    self.cycle &+= 4
+    var adjust: UInt8 = 0
+    adjust |= self.registers.carryFlag     ? 0x60 : 0x00
+    adjust |= self.registers.halfCarryFlag ? 0x06 : 0x00
+
+    if self.registers.subtractFlag {
+      a &-= adjust
+    } else {
+      if  a         > 0x99 { adjust |= 0x60 }
+      if (a & 0x0f) > 0x09 { adjust |= 0x06 }
+
+      a &+= adjust
+    }
+
+    self.registers.zeroFlag = a == 0
+    self.registers.halfCarryFlag = false
+    self.registers.carryFlag = adjust >= 0x60
+
+    self.registers.a = a
+
+    self.pc += 1
+    self.cycle &+= 4
   }
 
   /// Takes the one’s complement of the contents of register A.

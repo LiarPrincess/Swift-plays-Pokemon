@@ -55,10 +55,6 @@ extension Debugger {
       let bv = b[index]
       let av = a[index]
 
-      if address == 0xdff8 {
-        print("> internalRam \(address.hex): \(bv) -> \(av)")
-      }
-
       if bv != av { print("  > memory \(address.hex): \(bv) -> \(av)") }
     }
   }

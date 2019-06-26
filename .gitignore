@@ -1,9 +1,16 @@
+# build
 /Build
 /.build
 
+# roms
 /ROMs/*
 /GameBoyKitBlarggTests/ROMs/*
 !/GameBoyKitBlarggTests/ROMs/.gitkeep
 
+# py test files
+/GameBoyKitBlarggTests/PyBlarggFiles01
+/GameBoyKitBlarggTests/PyBootromFiles
+
+# mac
 .DS_Store
 /*.xcodeproj

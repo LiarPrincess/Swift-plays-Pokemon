@@ -142,13 +142,13 @@ extension Debugger {
     let b = before.cpu
     let a = after.cpu
 
-    if b.a != a.a { print("  > cpu.a <- \(a.a)") }
-    if b.b != a.b { print("  > cpu.b <- \(a.b)") }
-    if b.c != a.c { print("  > cpu.c <- \(a.c)") }
-    if b.d != a.d { print("  > cpu.d <- \(a.d)") }
-    if b.e != a.e { print("  > cpu.e <- \(a.e)") }
-    if b.h != a.h { print("  > cpu.h <- \(a.h)") }
-    if b.l != a.l { print("  > cpu.l <- \(a.l)") }
+    if b.a != a.a { print("  > cpu.a <- \(a.a.hex)") }
+    if b.b != a.b { print("  > cpu.b <- \(a.b.hex)") }
+    if b.c != a.c { print("  > cpu.c <- \(a.c.hex)") }
+    if b.d != a.d { print("  > cpu.d <- \(a.d.hex)") }
+    if b.e != a.e { print("  > cpu.e <- \(a.e.hex)") }
+    if b.h != a.h { print("  > cpu.h <- \(a.h.hex)") }
+    if b.l != a.l { print("  > cpu.l <- \(a.l.hex)") }
     if b.zeroFlag      != a.zeroFlag      { print("  > cpu.zeroFlag      <- \(a.zeroFlag)") }
     if b.subtractFlag  != a.subtractFlag  { print("  > cpu.subtractFlag  <- \(a.subtractFlag)") }
     if b.halfCarryFlag != a.halfCarryFlag { print("  > cpu.halfCarryFlag <- \(a.halfCarryFlag)") }

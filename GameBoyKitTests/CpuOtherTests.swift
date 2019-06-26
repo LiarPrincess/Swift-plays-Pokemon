@@ -11,6 +11,38 @@ import XCTest
 
 class CpuOtherTests: XCTestCase {
 
+  /// When A = 45h and B = 38h,
+  /// ADD A,B ; A←7Dh,N←0
+  /// DAA     ; A←7Dh+06h(83h), CY←0
+  /// SUB A,B ; A←83h–38h(4Bh), N←1
+  /// DAA     ; A←4Bh+FAh(45h)
+  func test_daa() {
+    let bus = FakeCpuBus()
+    let cpu = self.createCpu(bus: bus)
+    cpu.registers.a = 0x45
+    cpu.registers.b = 0x38
+
+    cpu.add_a_r(.b)
+    XCTAssertEqual(cpu.registers.a, 0x7d)
+    XCTAssertEqual(cpu.registers.subtractFlag, false)
+
+    cpu.daa() // CY: 0, H: 0
+    XCTAssertEqual(cpu.registers.a, 0x83)
+    XCTAssertEqual(cpu.registers.carryFlag,     false)
+    XCTAssertEqual(cpu.registers.halfCarryFlag, false) // by me
+    XCTAssertEqual(cpu.registers.zeroFlag,      false) // by me
+
+    cpu.sub_a_r(.b)
+    XCTAssertEqual(cpu.registers.a, 0x4b)
+    XCTAssertEqual(cpu.registers.subtractFlag, true)
+
+    cpu.daa() // CY: 0, H: 1
+    XCTAssertEqual(cpu.registers.a, 0x45)
+    XCTAssertEqual(cpu.registers.carryFlag,     false) // by me
+    XCTAssertEqual(cpu.registers.halfCarryFlag, false) // by me
+    XCTAssertEqual(cpu.registers.zeroFlag,      false) // by me
+  }
+
   func test_nop() {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)

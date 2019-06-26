@@ -34,13 +34,19 @@ internal func pyBoyBootromTests() {
   let mainDir     = currentFile.deletingLastPathComponent()
   let bootromPath = mainDir.appendingPathComponent("PyBootromFiles")
 
-  for pc in programCounters {
+  for (index, pc) in programCounters.enumerated() {
     let fileName = "pyboy_bootrom_pc_\(pc).txt"
+    print("\(index) - \(fileName)")
+
     let fileUrl = bootromPath.appendingPathComponent(fileName)
     let pyBoy = pyLoad(fileUrl)
 
     debugger.run(mode: .none, lastPC: pyBoy.cpu.pc)
-    pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+    let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+
+    if hasError {
+      fatalError("Blargg - cpu instrs 01 - error on \(fileName)")
+    }
   }
 
   testStateBeforeUnmappingBootrom(gameBoy)

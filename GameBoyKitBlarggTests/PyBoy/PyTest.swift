@@ -11,19 +11,19 @@ var checkedAddresses: [UInt16] = {
   var result = Set<UInt16>()
 
   // add all interesting regions
-  MemoryMap.rom0.forEach { result.insert($0) }
-  MemoryMap.rom1.forEach { result.insert($0) }
+//  MemoryMap.rom0.forEach { result.insert($0) }
+//  MemoryMap.rom1.forEach { result.insert($0) }
   MemoryMap.videoRam.forEach { result.insert($0) }
   MemoryMap.externalRam.forEach { result.insert($0) }
   MemoryMap.internalRam.forEach { result.insert($0) }
-  MemoryMap.internalRamEcho.forEach { result.insert($0) }
+//  MemoryMap.internalRamEcho.forEach { result.insert($0) }
   MemoryMap.oam.forEach { result.insert($0) }
   MemoryMap.notUsable.forEach { result.insert($0) }
   result.insert(MemoryMap.IO.joypad)
   result.insert(MemoryMap.IO.sb)
   result.insert(MemoryMap.IO.sc)
   result.insert(MemoryMap.IO.unmapBootrom)
-  result.insert(MemoryMap.Timer.div)
+//  result.insert(MemoryMap.Timer.div) // pyBoy?
   result.insert(MemoryMap.Timer.tima)
   result.insert(MemoryMap.Timer.tma)
   result.insert(MemoryMap.Timer.tac)
@@ -51,15 +51,15 @@ var checkedAddresses: [UInt16] = {
   result.insert(MemoryMap.Audio.nr3_ram_start)
   result.insert(MemoryMap.Audio.nr3_ram_end)
   result.insert(MemoryMap.Lcd.control)
-  result.insert(MemoryMap.Lcd.status)
+//  result.insert(MemoryMap.Lcd.status) // pyBoy?
   result.insert(MemoryMap.Lcd.scrollY)
   result.insert(MemoryMap.Lcd.scrollX)
-  result.insert(MemoryMap.Lcd.line)
+//  result.insert(MemoryMap.Lcd.line) // pyBoy?
   result.insert(MemoryMap.Lcd.lineCompare)
   result.insert(MemoryMap.Lcd.dma)
-  result.insert(MemoryMap.Lcd.backgroundColors)
-  result.insert(MemoryMap.Lcd.objectColors0)
-  result.insert(MemoryMap.Lcd.objectColors1)
+//  result.insert(MemoryMap.Lcd.backgroundColors) // pyBoy?
+//  result.insert(MemoryMap.Lcd.objectColors0) // pyBoy?
+//  result.insert(MemoryMap.Lcd.objectColors1) // pyBoy?
   result.insert(MemoryMap.Lcd.windowY)
   result.insert(MemoryMap.Lcd.windowX)
   MemoryMap.highRam.forEach { result.insert($0) }
@@ -72,27 +72,27 @@ var checkedAddresses: [UInt16] = {
   return [UInt16](result).sorted()
 }()
 
-func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) {
-  print("\(p.filename)")
+func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) -> Bool {
+  var e = false // has error
 
-  if s.cpu.pc  != p.cpu.pc  { print("  pc: \(s.cpu.pc.hex) vs \(p.cpu.pc.hex)") }
-  if s.cpu.sp  != p.cpu.sp  { print("  sp: \(s.cpu.sp.hex) vs \(p.cpu.sp.hex)") }
-  if s.cpu.ime != p.cpu.ime { print("  ime: \(s.cpu.ime) vs \(p.cpu.ime)") }
+  if s.cpu.pc  != p.cpu.pc  { print("Invalid pc: \(s.cpu.pc.hex) vs \(p.cpu.pc.hex)"); e = true }
+  if s.cpu.sp  != p.cpu.sp  { print("Invalid sp: \(s.cpu.sp.hex) vs \(p.cpu.sp.hex)"); e = true }
+  if s.cpu.ime != p.cpu.ime { print("Invalid ime: \(s.cpu.ime) vs \(p.cpu.ime)"); e = true }
 
   let pReg = p.cpu.registers
   let sReg = s.cpu.registers
-  if sReg.a != pReg.a { print("  a: \(sReg.a.hex) vs \(pReg.a.hex)") }
-  if sReg.b != pReg.b { print("  b: \(sReg.b.hex) vs \(pReg.b.hex)") }
-  if sReg.c != pReg.c { print("  c: \(sReg.c.hex) vs \(pReg.c.hex)") }
-  if sReg.d != pReg.d { print("  d: \(sReg.d.hex) vs \(pReg.d.hex)") }
-  if sReg.e != pReg.e { print("  e: \(sReg.e.hex) vs \(pReg.e.hex)") }
-  if sReg.h != pReg.h { print("  h: \(sReg.h.hex) vs \(pReg.h.hex)") }
-  if sReg.l != pReg.l { print("  l: \(sReg.l.hex) vs \(pReg.l.hex)") }
+  if sReg.a != pReg.a { print("Invalid a: \(sReg.a.hex) vs \(pReg.a.hex)"); e = true }
+  if sReg.b != pReg.b { print("Invalid b: \(sReg.b.hex) vs \(pReg.b.hex)"); e = true }
+  if sReg.c != pReg.c { print("Invalid c: \(sReg.c.hex) vs \(pReg.c.hex)"); e = true }
+  if sReg.d != pReg.d { print("Invalid d: \(sReg.d.hex) vs \(pReg.d.hex)"); e = true }
+  if sReg.e != pReg.e { print("Invalid e: \(sReg.e.hex) vs \(pReg.e.hex)"); e = true }
+  if sReg.h != pReg.h { print("Invalid h: \(sReg.h.hex) vs \(pReg.h.hex)"); e = true }
+  if sReg.l != pReg.l { print("Invalid l: \(sReg.l.hex) vs \(pReg.l.hex)"); e = true }
 
-  if sReg.zeroFlag      != pReg.zeroFlag      { print("  zeroFlag: \(sReg.zeroFlag) vs \(pReg.zeroFlag)") }
-  if sReg.subtractFlag  != pReg.subtractFlag  { print("  subtractFlag: \(sReg.subtractFlag) vs \(pReg.subtractFlag)") }
-  if sReg.halfCarryFlag != pReg.halfCarryFlag { print("  halfCarryFlag: \(sReg.halfCarryFlag) vs \(pReg.halfCarryFlag)") }
-  if sReg.carryFlag     != pReg.carryFlag     { print("  carryFlag: \(sReg.carryFlag) vs \(pReg.carryFlag)") }
+  if sReg.zeroFlag      != pReg.zeroFlag      { print("Invalid zeroFlag: \(sReg.zeroFlag) vs \(pReg.zeroFlag)"); e = true }
+  if sReg.subtractFlag  != pReg.subtractFlag  { print("Invalid subtractFlag: \(sReg.subtractFlag) vs \(pReg.subtractFlag)"); e = true }
+  if sReg.halfCarryFlag != pReg.halfCarryFlag { print("Invalid halfCarryFlag: \(sReg.halfCarryFlag) vs \(pReg.halfCarryFlag)"); e = true }
+  if sReg.carryFlag     != pReg.carryFlag     { print("Invalid carryFlag: \(sReg.carryFlag) vs \(pReg.carryFlag)"); e = true }
 
   for address in checkedAddresses {
     let pValue = p.memory.data[Int(address)]
@@ -100,7 +100,10 @@ func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) {
 
     if sValue != pValue {
       let desc = MemoryMap.describe(address: address)
-      print("  memory \(address.hex): \(sValue.hex) vs \(pValue.hex) (\(desc))")
+      print("Invalid memory \(address.hex): \(sValue.hex) vs \(pValue.hex) (\(desc))")
+      e = true
     }
   }
+
+  return e
 }
