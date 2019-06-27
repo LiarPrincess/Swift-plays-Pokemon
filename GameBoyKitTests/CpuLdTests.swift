@@ -287,11 +287,11 @@ class CpuLdTests: XCTestCase {
 
   /// When SP = 0xFFF8,
   /// LDHL SP, 2 ; HL←0xFFFA,CY←0,H←0,N←0,Z←0
-  func disabled_test_ld_hl_sp_plus_e() {
+  func test_ldhl_sp_plus_e() {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.sp = 0xfff8
-    cpu.ld_hl_sp_plus_e(2)
+    cpu.ldhl_sp_plus_e(2)
 
     XCTAssertEqual(cpu.registers.hl, 0xfffa)
     XCTAssertEqual(cpu.registers.zeroFlag, false)

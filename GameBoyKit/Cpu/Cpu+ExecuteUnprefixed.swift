@@ -251,7 +251,7 @@ extension Cpu {
     case 0xf5: self.push(.af)
     case 0xf6: self.or_a_d8(self.next8)
     case 0xf7: self.rst(0x30)
-    case 0xf8: self.ld_hl_sp_plus_e(self.next8)
+    case 0xf8: self.ldhl_sp_plus_e(self.next8)
     case 0xf9: self.ld_sp_hl()
     case 0xfa: self.ld_a_pA16(self.next16)
     case 0xfb: self.ei()

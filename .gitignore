@@ -8,8 +8,18 @@
 !/GameBoyKitBlarggTests/ROMs/.gitkeep
 
 # py test files
-/GameBoyKitBlarggTests/PyBlarggFiles01
 /GameBoyKitBlarggTests/PyBootromFiles
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_01
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_02
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_03
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_04
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_05
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_06
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_07
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_08
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_09
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_10
+/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_11
 
 # mac
 .DS_Store

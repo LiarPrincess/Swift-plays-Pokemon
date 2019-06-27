@@ -4,14 +4,35 @@
 
 import Foundation
 
-var romsDir: URL = {
-  let currentFile = URL(fileURLWithPath: #file)
-  let mainDir = currentFile.deletingLastPathComponent().deletingLastPathComponent()
-  return mainDir.appendingPathComponent("ROMs")
-}()
+enum BlarggRoms {
 
-var cpuInstrs01special: URL = {
-  let cpuInstrsDir = romsDir.appendingPathComponent("cpu_instrs")
-  let individualDir = cpuInstrsDir.appendingPathComponent("individual")
-  return individualDir.appendingPathComponent("01-special.gb")
-}()
+  private static var romsDir: URL = {
+    let currentFile = URL(fileURLWithPath: #file)
+    let mainDir = currentFile.deletingLastPathComponent().deletingLastPathComponent()
+    return mainDir.appendingPathComponent("ROMs")
+  }()
+
+  static var cpuInstrs01: URL {
+    let cpuInstrsDir = romsDir.appendingPathComponent("cpu_instrs")
+    let individualDir = cpuInstrsDir.appendingPathComponent("individual")
+    return individualDir.appendingPathComponent("01-special.gb")
+  }
+
+  static var cpuInstrs03: URL {
+    let cpuInstrsDir = romsDir.appendingPathComponent("cpu_instrs")
+    let individualDir = cpuInstrsDir.appendingPathComponent("individual")
+    return individualDir.appendingPathComponent("03-op sp,hl.gb")
+  }
+
+  // 01-special.gb
+  // 02-interrupts.gb
+  // 03-op sp,hl.gb
+  // 04-op r,imm.gb
+  // 05-op rp.gb
+  // 06-ld r,r.gb
+  // 07-jr,jp,call,ret,rst.gb
+  // 08-misc instrs.gb
+  // 09-op r,r.gb
+  // 10-bit ops.gb
+  // 11-op a,(hl).gb
+}

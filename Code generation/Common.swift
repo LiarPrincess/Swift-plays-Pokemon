@@ -112,7 +112,7 @@ func getUnprefixedOpcodeCall(_ opcode: Opcode) -> String {
     case "0xe2": return "ld_ffC_a()"
     case "0xea": return "ld_pA16_a(\(next16))"
     case "0xf2": return "ld_a_ffC()"
-    case "0xf8": return "ld_hl_sp_plus_e(\(next8))"
+    case "0xf8": return "ldhl_sp_plus_e(\(next8))"
     case "0xf9": return "ld_sp_hl()"
     case "0xfa": return "ld_a_pA16(\(next16))"
     default:

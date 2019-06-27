@@ -17,6 +17,11 @@ public class Debugger {
                   instructions: Int64     = Int64.max,
                   lastPC:       UInt16    = UInt16.max) {
 
+    if mode == .none {
+      self.runDebugNone(instructions: instructions, lastPC: lastPC)
+      return
+    }
+
     var stateBefore = GameBoyState()
     var stateAfter  = GameBoyState()
     var remainingInstructions = instructions
@@ -41,6 +46,18 @@ public class Debugger {
         print()
       }
 
+      remainingInstructions -= 1
+    }
+  }
+
+  // Waaaaay faster than normal debug
+  private func runDebugNone(instructions: Int64     = Int64.max,
+                            lastPC:       UInt16    = UInt16.max) {
+
+    var remainingInstructions = instructions
+
+    while remainingInstructions > 0 && self.cpu.pc != lastPC {
+      self.gameBoy.tickCpu(cycles: 1)
       remainingInstructions -= 1
     }
   }

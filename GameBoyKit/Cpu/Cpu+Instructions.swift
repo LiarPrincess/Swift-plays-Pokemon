@@ -261,18 +261,17 @@ extension Cpu {
   }
 
   /// The 8-bit operand e is added to SP and the result is stored in HL.
-  internal func ld_hl_sp_plus_e(_ n: UInt8) {
-    // look at how it was solver in jr
-    let e = Int8(n)
-    let value = Int(self.sp) + Int(e)
+  internal func ldhl_sp_plus_e(_ n: UInt8) {
+    let sigN = Int(Int8(bitPattern: n))
+    let sp = Int(self.sp)
 
-    fatalError("implement half carry for 'ld_hl_sp_plus_e' + enable test")
     self.registers.zeroFlag = false
-    self.registers.halfCarryFlag = false
     self.registers.subtractFlag = false
-    self.registers.carryFlag = value > 0xffff
+    self.registers.halfCarryFlag = (sigN &  0xf) + (sp &  0xf) >  0xf
+    self.registers.carryFlag     = (sigN & 0xff) + (sp & 0xff) > 0xff
 
-    self.registers.hl = UInt16(value & 0xffff)
+    let newValue = sp + sigN
+    self.registers.hl = UInt16(newValue & 0xffff)
 
     self.pc += 2
     self.cycle &+= 12
@@ -809,7 +808,7 @@ extension Cpu {
     let carry = a >> 7
     let newValue = (a << 1)
 
-    fatalError("possibly: | carry + enable test")
+    fatalError("Add '| carry' (and fix this damned test)?")
 
     self.registers.zeroFlag = false
     self.registers.subtractFlag = false
@@ -867,7 +866,7 @@ extension Cpu {
     let carry = a & 0x1
     let newValue = (a >> 1) | (self.registers.carryFlag ? 0b10000000 : 0x0)
 
-    self.registers.zeroFlag = newValue == 0
+    self.registers.zeroFlag = false
     self.registers.subtractFlag = false
     self.registers.halfCarryFlag = false
     self.registers.carryFlag = carry == 0x1

@@ -12,8 +12,9 @@
 		90059A4922C2673900803B48 /* CartridgeInitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4822C2673900803B48 /* CartridgeInitError.swift */; };
 		90059A4B22C2676A00803B48 /* BootromInitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4A22C2676A00803B48 /* BootromInitError.swift */; };
 		90059A4D22C2693400803B48 /* CartridgeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4C22C2693400803B48 /* CartridgeHeader.swift */; };
-		90293E4E22C400EE00165888 /* pyBoyBlarggCpuInstrs01.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E4D22C400EE00165888 /* pyBoyBlarggCpuInstrs01.swift */; };
 		90293E5022C4013200165888 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E4F22C4013200165888 /* Helpers.swift */; };
+		90293E5622C427EF00165888 /* pyBoyBlargg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E5522C427EF00165888 /* pyBoyBlargg.swift */; };
+		90293E5822C4287C00165888 /* PyFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E5722C4287C00165888 /* PyFiles.swift */; };
 		902BDD9E22C1544000632BA7 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDD9D22C1544000632BA7 /* Interrupts.swift */; };
 		902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */; };
 		902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */; };
@@ -184,8 +185,9 @@
 		90059A4822C2673900803B48 /* CartridgeInitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartridgeInitError.swift; sourceTree = "<group>"; };
 		90059A4A22C2676A00803B48 /* BootromInitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BootromInitError.swift; sourceTree = "<group>"; };
 		90059A4C22C2693400803B48 /* CartridgeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeHeader.swift; sourceTree = "<group>"; };
-		90293E4D22C400EE00165888 /* pyBoyBlarggCpuInstrs01.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pyBoyBlarggCpuInstrs01.swift; sourceTree = "<group>"; };
 		90293E4F22C4013200165888 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		90293E5522C427EF00165888 /* pyBoyBlargg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBlargg.swift; sourceTree = "<group>"; };
+		90293E5722C4287C00165888 /* PyFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PyFiles.swift; path = GameBoyKitBlarggTests/Blargg/PyFiles.swift; sourceTree = SOURCE_ROOT; };
 		902BDD9D22C1544000632BA7 /* Interrupts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Interrupts.swift; path = ../Interrupts/Interrupts.swift; sourceTree = "<group>"; };
 		902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcd.swift"; sourceTree = "<group>"; };
 		902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createCpu.swift"; sourceTree = "<group>"; };
@@ -553,7 +555,7 @@
 				90EDD2BE22C2C1EE00003E9E /* Blargg */,
 				90CBD3DD22BD822A00B58461 /* PyBoy */,
 				90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */,
-				90293E4D22C400EE00165888 /* pyBoyBlarggCpuInstrs01.swift */,
+				90293E5522C427EF00165888 /* pyBoyBlargg.swift */,
 				905321AB22BE410900A409B2 /* performanceTest.swift */,
 				90293E4F22C4013200165888 /* Helpers.swift */,
 				90CBD3D622BD81F000B58461 /* main.swift */,
@@ -574,6 +576,7 @@
 				903818D922B57976004E5281 /* PyBoy.swift */,
 				903818DB22B579EC004E5281 /* PyLoad.swift */,
 				903818DD22B57B8A004E5281 /* PyTest.swift */,
+				90293E5722C4287C00165888 /* PyFiles.swift */,
 			);
 			path = PyBoy;
 			sourceTree = "<group>";
@@ -941,13 +944,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				905321AC22BE410900A409B2 /* performanceTest.swift in Sources */,
+				90293E5822C4287C00165888 /* PyFiles.swift in Sources */,
 				90CBD3E022BD824300B58461 /* PyTest.swift in Sources */,
 				90EDD2C022C2C22700003E9E /* BlarggRoms.swift in Sources */,
 				90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */,
 				90293E5022C4013200165888 /* Helpers.swift in Sources */,
 				90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */,
-				90293E4E22C400EE00165888 /* pyBoyBlarggCpuInstrs01.swift in Sources */,
 				90CBD3D722BD81F000B58461 /* main.swift in Sources */,
+				90293E5622C427EF00165888 /* pyBoyBlargg.swift in Sources */,
 				90CBD3DE22BD824300B58461 /* PyBoy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -33,7 +33,7 @@ public enum CartridgeFactory {
     case .mbc3TimerRamBattery: break
     case .mbc3: break
     case .mbc3Ram: break
-    case .mbc3RamBattery: break
+    case .mbc3RamBattery: return try MBC1(rom: data) // TODO: for bootrom tests
 
     case .mbc4: break
     case .mbc4Ram: break
