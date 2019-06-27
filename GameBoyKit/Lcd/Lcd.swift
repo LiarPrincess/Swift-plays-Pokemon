@@ -32,8 +32,16 @@ public class Lcd {
   /// FF43 - SCX - Scroll X
   public internal(set) var scrollX: UInt8 = 0
 
+  private var _line: UInt8 = 0
+
   /// FF44 - LY - LCDC Y-Coordinate (R)
-  public internal(set) var line: UInt8 = 0
+  public internal(set) var line: UInt8 {
+    get { return self._line }
+    set {
+      self._line = 0
+      self.lineProgress = 0
+    }
+  }
 
   /// FF45 - LYC - LY Compare (R/W)
   public internal(set) var lineCompare: UInt8 = 0
@@ -96,13 +104,14 @@ public class Lcd {
   private func advanceProgress(cycles: UInt8) {
     self.lineProgress += UInt16(cycles)
 
-    let isAdvancingLine = self.lineProgress > Lcd.cyclesPerLine
+    let isAdvancingLine = self.lineProgress >= Lcd.cyclesPerLine
     if isAdvancingLine {
       self.lineProgress -= Lcd.cyclesPerLine
 
-      self.line += 1
+      // '_line' instead of 'line' to preserve lineProgress
+      self._line += 1
       if self.line > Lcd.totalLineCount {
-        self.line = 0
+        self._line = 0
       }
 
       self.requestLineCompareInterruptIfEnabled()
@@ -110,7 +119,7 @@ public class Lcd {
   }
 
   private func requestLineCompareInterruptIfEnabled() {
-    let hasInterrupt = self.lineCompare == line
+    let hasInterrupt = self.lineCompare == self.line
 
     self.status.isLineCompareInterrupt = hasInterrupt
     if hasInterrupt && self.status.isLineCompareInterruptEnabled {
