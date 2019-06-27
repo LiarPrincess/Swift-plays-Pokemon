@@ -9,25 +9,23 @@
 import Cocoa
 
 internal func pyLoad(_ url: URL) -> PyBoy {
-  let fileContent = open(url)
   let emulator    = PyBoy(filename: url.lastPathComponent)
-  fill(emulator, from: fileContent)
+  fill(emulator, from: url)
   return emulator
 }
 
-private func open(_ url: URL) -> String {
-  do {
-    return try String(contentsOf: url, encoding: .utf8)
-  } catch let error {
-    fatalError(error.localizedDescription)
+private func fill(_ emulator: PyBoy, from fileUrl: URL) {
+  guard let stream = StreamReader(url: fileUrl, encoding: .utf8) else {
+    print("Unable to open: '\(fileUrl.lastPathComponent)'")
+    exit(1)
   }
-}
 
-private func fill(_ emulator: PyBoy, from fileContent: String) {
+  defer { stream.close() }
+
   let cpu = emulator.cpu
   let memory = emulator.memory
 
-  for line in fileContent.split(separator: "\n") {
+  while let line = stream.nextLine() {
     let split = line.split(separator: ":")
     let property = split[0]
     let value = split[1]

@@ -2,11 +2,11 @@ import Foundation
 import GameBoyKit
 
 // Test whole bootrom according to PyBoy dump
-//pyBoyBootromTests()
+pyBoyBootromTests()
 
 // Run Blargg tests according to PyBoy dump
 //pyBoyBlarggCpuInstrs01()
-pyBoyBlarggCpuInstrs03()
+//pyBoyBlarggCpuInstrs03()
 
 // Show single frame performance
 //performanceTest()

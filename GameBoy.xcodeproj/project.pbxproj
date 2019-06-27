@@ -15,6 +15,7 @@
 		90293E5022C4013200165888 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E4F22C4013200165888 /* Helpers.swift */; };
 		90293E5622C427EF00165888 /* pyBoyBlargg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E5522C427EF00165888 /* pyBoyBlargg.swift */; };
 		90293E5822C4287C00165888 /* PyFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E5722C4287C00165888 /* PyFiles.swift */; };
+		90293E5C22C4D20100165888 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E5B22C4D20100165888 /* StreamReader.swift */; };
 		902BDD9E22C1544000632BA7 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDD9D22C1544000632BA7 /* Interrupts.swift */; };
 		902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */; };
 		902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */; };
@@ -188,6 +189,7 @@
 		90293E4F22C4013200165888 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		90293E5522C427EF00165888 /* pyBoyBlargg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBlargg.swift; sourceTree = "<group>"; };
 		90293E5722C4287C00165888 /* PyFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PyFiles.swift; path = GameBoyKitBlarggTests/Blargg/PyFiles.swift; sourceTree = SOURCE_ROOT; };
+		90293E5B22C4D20100165888 /* StreamReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
 		902BDD9D22C1544000632BA7 /* Interrupts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Interrupts.swift; path = ../Interrupts/Interrupts.swift; sourceTree = "<group>"; };
 		902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcd.swift"; sourceTree = "<group>"; };
 		902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createCpu.swift"; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 				903818DB22B579EC004E5281 /* PyLoad.swift */,
 				903818DD22B57B8A004E5281 /* PyTest.swift */,
 				90293E5722C4287C00165888 /* PyFiles.swift */,
+				90293E5B22C4D20100165888 /* StreamReader.swift */,
 			);
 			path = PyBoy;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				90293E5822C4287C00165888 /* PyFiles.swift in Sources */,
 				90CBD3E022BD824300B58461 /* PyTest.swift in Sources */,
 				90EDD2C022C2C22700003E9E /* BlarggRoms.swift in Sources */,
+				90293E5C22C4D20100165888 /* StreamReader.swift in Sources */,
 				90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */,
 				90293E5022C4013200165888 /* Helpers.swift in Sources */,
 				90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */,
