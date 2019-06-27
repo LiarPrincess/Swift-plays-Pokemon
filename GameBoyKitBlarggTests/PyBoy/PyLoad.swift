@@ -7,6 +7,7 @@
 // swiftlint:disable force_unwrapping
 
 import Cocoa
+import GameBoyKit
 
 internal func pyLoad(_ url: URL) -> PyBoy {
   let emulator    = PyBoy(filename: url.lastPathComponent)
@@ -54,8 +55,8 @@ private func fill(_ emulator: PyBoy, from fileUrl: URL) {
     // TODO: Import 'cpu_stopped' from py
     case "cpu_stopped": break
 
-    case "lcd_VRAM": replace(memory, from: 0x8000, to: 0x9fff, with: value)
-    case "lcd_Oam": replace(memory, from: 0xfe00, to: 0xfe9f, with: value)
+    case "lcd_VRAM": replace(memory, in: MemoryMap.videoRam, with: value)
+    case "lcd_Oam": replace(memory, in: MemoryMap.oam, with: value)
 
     case "lcd_LY" :   memory.data[0xFF44] = UInt8(value)!
     case "lcd_LYC" :  memory.data[0xFF45] = UInt8(value)!
@@ -69,10 +70,10 @@ private func fill(_ emulator: PyBoy, from fileUrl: URL) {
     case "lcd_WY":    memory.data[0xFF4A] = UInt8(value)!
     case "lcd_WX":    memory.data[0xFF4B] = UInt8(value)!
 
-    case "ram_INTERNAL_RAM0":        replace(memory, from: 0xC000, to: 0xDFFF, with: value)
-    case "ram_NON_IO_INTERNAL_RAM0": replace(memory, from: 0xFEA0, to: 0xFEFF, with: value)
+    case "ram_INTERNAL_RAM0":        replace(memory, in: MemoryMap.internalRam, with: value)
+    case "ram_NON_IO_INTERNAL_RAM0": replace(memory, in: MemoryMap.notUsable, with: value)
+    case "ram_INTERNAL_RAM1":        replace(memory, in: MemoryMap.highRam, with: value)
     case "ram_IO_PORTS":             replace(memory, from: 0xFF00, to: 0xFF4B, with: value)
-    case "ram_INTERNAL_RAM1":        replace(memory, from: 0xFF80, to: 0xFFFE, with: value)
     case "ram_NON_IO_INTERNAL_RAM1": replace(memory, from: 0xFF4C, to: 0xFF79, with: value)
 
     case "ram_INTERRUPT_ENABLE_REGISTER":
@@ -87,10 +88,42 @@ private func fill(_ emulator: PyBoy, from fileUrl: URL) {
   }
 }
 
+private func replace(_ memory: PyMemory, in range: ClosedRange<UInt16>, with values: Substring) {
+  let start = Int(range.start)
+  let end = Int(range.end)
+  replace(memory, from: start, to: end, with: values)
+}
+
 private func replace(_ memory: PyMemory, from: Int, to: Int, with values: Substring) {
-  // we could use 'replaceSubrange', but whatever...
-  let data = values.split(separator: ",").map { UInt8($0)! }
-  for (index, address) in (from...to).enumerated() where memory.data[address] == 0 {
-    memory.data[address] = data[index]
+  var addressOffset = 0
+  split(values, by: ",") { s in
+    guard !s.isEmpty else { return } // we have ',' after last value
+
+    let address = from + addressOffset
+    guard memory.data[address] == 0 else { return } // prevent overriding IO
+
+    memory.data[address] = UInt8(s)!
+    addressOffset += 1
   }
+}
+
+// we could create separate class that implements Sequence, but whatever...
+private func split(_ s:          Substring,
+                   by separator: Character = ",",
+                   with f:       (Substring) -> ()) {
+
+  var index = s.startIndex
+  var startIndex = s.startIndex
+
+  while index != s.endIndex {
+    if s[index] == separator {
+      f(s[startIndex..<index])
+      startIndex = s.index(after: index)
+    }
+
+    index = s.index(after: index)
+  }
+
+  // last value (after last separator)
+  f(s[startIndex..<s.endIndex])
 }
