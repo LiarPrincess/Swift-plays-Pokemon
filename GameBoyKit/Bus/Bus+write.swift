@@ -60,7 +60,9 @@ extension Bus {
   private func writeInternalIO(_ address: UInt16, value: UInt8) {
     switch address {
     case MemoryMap.IO.joypad: self.joypad.value = value
-    case MemoryMap.IO.sb:     self.serialPort.sb = value
+    case MemoryMap.IO.sb:
+      self.linkCable.append(value)
+      self.serialPort.sb = value
     case MemoryMap.IO.sc:     self.serialPort.sc = value
     case MemoryMap.IO.unmapBootrom:  self.unmapBootrom = value
     case MemoryMap.IO.interruptFlag: self.interrupts.flag = value

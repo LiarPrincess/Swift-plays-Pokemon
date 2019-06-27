@@ -11,11 +11,11 @@ func pyBoyBlarggCpuInstrs01() {
   pyBoyBlargg(rom: rom, pyFiles: pyFiles)
 }
 
-// TODO: there is an error somewhere there
+// TODO: not working
 func pyBoyBlarggCpuInstrs03() {
   let rom = BlarggRoms.cpuInstrs03
   let pyFiles = PyFiles.cpuInstrs03
-  pyBoyBlarggWorking(rom: rom, pyFiles: pyFiles)
+  pyBoyBlarggWorking3(rom: rom, pyFiles: pyFiles)
 }
 
 func pyBoyBlarggCpuInstrs04() {
@@ -30,13 +30,14 @@ func pyBoyBlarggCpuInstrs05() {
   pyBoyBlargg(rom: rom, pyFiles: pyFiles)
 }
 
+// TODO: not working
 func pyBoyBlarggCpuInstrs06() {
   let rom = BlarggRoms.cpuInstrs06
   let pyFiles = PyFiles.cpuInstrs06
   pyBoyBlarggWorking6(rom: rom, pyFiles: pyFiles)
 }
 
-// TODO: there is an error somewhere there
+// TODO: not working
 func pyBoyBlarggCpuInstrs07() {
   let rom = BlarggRoms.cpuInstrs07
   let pyFiles = PyFiles.cpuInstrs07
@@ -57,13 +58,14 @@ private func pyBoyBlargg(rom: URL, pyFiles: [URL]) {
     debugger.run(mode: .none, untilPC: pyBoy.cpu.pc)
     let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
 
-    let serial = gameBoy.bus.serialBuffer
-    print(String(bytes: serial, encoding: .ascii))
-
     if hasError {
       fatalError()
     }
   }
+
+  print("---")
+  print(String(bytes: gameBoy.linkCable, encoding: .ascii) ?? "")
+  print("---")
 }
 
 // ----------------------------------
@@ -122,7 +124,7 @@ var debugFileURLs6: [URL] = {
 
 // ----------------------------------
 
-private func pyBoyBlarggWorking(rom: URL, pyFiles: [URL]) {
+private func pyBoyBlarggWorking3(rom: URL, pyFiles: [URL]) {
   let cartridge = Helpers.openRom(url: rom)
   let gameBoy   = GameBoy(bootrom: .skip, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
@@ -146,7 +148,7 @@ private func pyBoyBlarggWorking(rom: URL, pyFiles: [URL]) {
     }
   }
 
-  let pyFiles2 = debugFileURLs // PyFiles.cpuInstrs03Debug
+  let pyFiles2 = debugFileURLs3 // PyFiles.cpuInstrs03Debug
   for (index, pyUrl) in pyFiles2.enumerated() {
     let fileName = pyUrl.lastPathComponent
     print("\(index)/\(pyFiles2.count) - \(fileName)")
@@ -167,7 +169,7 @@ private func pyBoyBlarggWorking(rom: URL, pyFiles: [URL]) {
   }
 }
 
-var debugFileURLs: [URL] = {
+var debugFileURLs3: [URL] = {
   let currentFile = URL(fileURLWithPath: #file)
   let mainDir     = currentFile.deletingLastPathComponent()
   let debugDir    = mainDir.appendingPathComponent("PyBlarggFiles_cpu_instr_03_debug")

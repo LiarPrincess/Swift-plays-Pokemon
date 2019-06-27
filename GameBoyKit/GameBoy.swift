@@ -12,6 +12,11 @@ public class GameBoy {
   public let timer: Timer
   public let joypad: Joypad
 
+  public var linkCable: Data {
+    return self.bus.linkCable
+  }
+
+  // swiftlint:disable:next function_default_parameter_at_end
   public init(bootrom: Bootrom = .skip, cartridge: Cartridge) {
     let interrupts = Interrupts()
     self.lcd = Lcd(interrupts: interrupts)

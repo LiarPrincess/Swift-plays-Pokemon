@@ -25,6 +25,9 @@ public class Bus {
   /// FF80-FFFE High RAM (HRAM)
   internal lazy var highRam = Data(memoryRange: MemoryMap.highRam)
 
+  /// FF01 - SB - Data send using serial transfer
+  internal var linkCable = Data()
+
   /// Catch'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()
 
