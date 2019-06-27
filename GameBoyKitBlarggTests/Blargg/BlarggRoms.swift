@@ -33,9 +33,21 @@ enum BlarggRoms {
     return individualDir.appendingPathComponent("04-op r,imm.gb")
   }
 
-  /// 02-interrupts.gb
   /// 05-op rp.gb
+  static var cpuInstrs05: URL {
+    let cpuInstrsDir = romsDir.appendingPathComponent("cpu_instrs")
+    let individualDir = cpuInstrsDir.appendingPathComponent("individual")
+    return individualDir.appendingPathComponent("05-op rp.gb")
+  }
+
   /// 06-ld r,r.gb
+  static var cpuInstrs06: URL {
+    let cpuInstrsDir = romsDir.appendingPathComponent("cpu_instrs")
+    let individualDir = cpuInstrsDir.appendingPathComponent("individual")
+    return individualDir.appendingPathComponent("06-ld r,r.gb")
+  }
+
+  /// 02-interrupts.gb
   /// 07-jr,jp,call,ret,rst.gb
   /// 08-misc instrs.gb
   /// 09-op r,r.gb
