@@ -17,7 +17,7 @@ internal func pyBoyBootromTests() {
     let pyBoy = pyLoad(pyUrl)
 
     let debugMode: DebugMode = .none // index >= 113 ? .opcodes : .none
-    debugger.run(mode: debugMode, lastPC: pyBoy.cpu.pc)
+    debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
     let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
 
     if hasError {

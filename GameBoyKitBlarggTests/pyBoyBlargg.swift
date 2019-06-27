@@ -30,10 +30,16 @@ func pyBoyBlarggCpuInstrs05() {
   pyBoyBlargg(rom: rom, pyFiles: pyFiles)
 }
 
-// TODO: there is an error somewhere there
 func pyBoyBlarggCpuInstrs06() {
   let rom = BlarggRoms.cpuInstrs06
   let pyFiles = PyFiles.cpuInstrs06
+  pyBoyBlarggWorking6(rom: rom, pyFiles: pyFiles)
+}
+
+// TODO: there is an error somewhere there
+func pyBoyBlarggCpuInstrs07() {
+  let rom = BlarggRoms.cpuInstrs07
+  let pyFiles = PyFiles.cpuInstrs07
   pyBoyBlargg(rom: rom, pyFiles: pyFiles)
 }
 
@@ -48,8 +54,52 @@ private func pyBoyBlargg(rom: URL, pyFiles: [URL]) {
 
     let pyBoy = pyLoad(pyUrl)
 
-    let debugMode: DebugMode = index >= 273 ? .none : .none // opcodes
-    debugger.run(mode: debugMode, lastPC: pyBoy.cpu.pc)
+    debugger.run(mode: .none, untilPC: pyBoy.cpu.pc)
+    let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+
+    let serial = gameBoy.bus.serialBuffer
+    print(String(bytes: serial, encoding: .ascii))
+
+    if hasError {
+      fatalError()
+    }
+  }
+}
+
+// ----------------------------------
+
+//272/666 - pyboy_cpu_instr_06_pc_0xc8d5.txt
+//273/666 - pyboy_cpu_instr_06_pc_0xc8d8.txt
+private func pyBoyBlarggWorking6(rom: URL, pyFiles: [URL]) {
+  let cartridge = Helpers.openRom(url: rom)
+  let gameBoy   = GameBoy(bootrom: .skip, cartridge: cartridge)
+  let debugger  = Debugger(gameBoy: gameBoy)
+
+  for (index, pyUrl) in pyFiles[0..<273].enumerated() {
+    let fileName = pyUrl.lastPathComponent
+    print("\(index)/\(pyFiles.count - 1) - \(fileName)")
+
+    let pyBoy = pyLoad(pyUrl)
+
+    let debugMode: DebugMode = index >= 660 ? .none : .none // opcodes
+    debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
+    let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+
+//    if hasError {
+//      fatalError()
+//    }
+  }
+
+  let pyFiles2 = debugFileURLs6
+  for (index, pyUrl) in pyFiles2.enumerated() {
+    let fileName = pyUrl.lastPathComponent
+    print("\(index)/\(pyFiles2.count) - \(fileName)")
+
+    let pyBoy = pyLoad(pyUrl)
+
+    let debugMode: DebugMode = index >= 7 ? .full : .none
+
+    debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
     let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
 
     if hasError {
@@ -57,6 +107,18 @@ private func pyBoyBlargg(rom: URL, pyFiles: [URL]) {
     }
   }
 }
+
+var debugFileURLs6: [URL] = {
+  let currentFile = URL(fileURLWithPath: #file)
+  let mainDir     = currentFile.deletingLastPathComponent()
+  let debugDir    = mainDir.appendingPathComponent("PyBlarggFiles_cpu_instr_06_debug")
+
+  let programCounters = 1...4029
+  return programCounters.map { pc in
+    return debugDir.appendingPathComponent("pyboy_cpu_instrs_06_pc_0xc8d5_\(pc).txt")
+  }
+}()
+
 
 // ----------------------------------
 
@@ -72,7 +134,7 @@ private func pyBoyBlarggWorking(rom: URL, pyFiles: [URL]) {
     let pyBoy = pyLoad(pyUrl)
 
     let debugMode: DebugMode = index >= 660 ? .none : .none // opcodes
-    debugger.run(mode: debugMode, lastPC: pyBoy.cpu.pc)
+    debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
     let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
 
     if fileName == "pyboy_cpu_instr_03_pc_0xc507" {
@@ -92,7 +154,7 @@ private func pyBoyBlarggWorking(rom: URL, pyFiles: [URL]) {
     let pyBoy = pyLoad(pyUrl)
 
     let debugMode: DebugMode = index >= 170 ? .none : .none
-    debugger.run(mode: debugMode, lastPC: pyBoy.cpu.pc)
+    debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
     let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
 
     if fileName == "pyboy_cpu_instr_03_pc_0xc507" {

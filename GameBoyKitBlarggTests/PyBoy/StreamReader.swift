@@ -57,16 +57,16 @@ class StreamReader  {
       }
 
       let tmpData = fileHandle.readData(ofLength: self.bufferSize)
-      if tmpData.count > 0 {
-        self.buffer.append(tmpData)
-      } else {
+      if tmpData.isEmpty {
         self.isEof = true
         // Buffer contains last line in file (not terminated by delimiter)
-        if self.buffer.count > 0 {
+        if !self.buffer.isEmpty {
           let line = String(data: buffer as Data, encoding: encoding)
           buffer.count = 0
           return line
         }
+      } else {
+        self.buffer.append(tmpData)
       }
     }
 

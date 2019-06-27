@@ -9,36 +9,37 @@ public class Debugger {
   internal var registers: Registers { return gameBoy.cpu.registers }
   internal var bus:       Bus       { return gameBoy.bus }
 
+  private var stateBefore = GameBoyState()
+  private var stateAfter  = GameBoyState()
+
   public init(gameBoy: GameBoy) {
     self.gameBoy = gameBoy
   }
 
   public func run(mode:         DebugMode = .none,
-                  instructions: Int64     = Int64.max,
-                  lastPC:       UInt16    = UInt16.max) {
+                  instructions: Int64     = .max,
+                  untilPC pc:   UInt16    = .max) {
 
     if mode == .none {
-      self.runDebugNone(instructions: instructions, lastPC: lastPC)
+      self.runDebugNone(instructions: instructions, untilPC: pc)
       return
     }
 
-    var stateBefore = GameBoyState()
-    var stateAfter  = GameBoyState()
     var remainingInstructions = instructions
 
-    while remainingInstructions > 0 && self.cpu.pc != lastPC {
+    while remainingInstructions > 0 && self.cpu.pc != pc {
       if mode == .opcodes || mode == .opcodesAndWrites || mode == .full {
         self.printNextOpcode()
       }
 
-      self.gameBoy.save(to: &stateBefore)
+      self.gameBoy.save(to: &self.stateBefore)
       self.gameBoy.tickCpu(cycles: 1)
-      self.gameBoy.save(to: &stateAfter)
+      self.gameBoy.save(to: &self.stateAfter)
 
       if mode == .opcodesAndWrites || mode == .full {
-        self.printRegiserWrites(before: stateBefore, after: stateAfter)
-        self.printMemoryWrites(before: stateBefore, after: stateAfter)
-        self.printOpcodeDetails(before: stateBefore, after: stateAfter)
+        self.printRegiserWrites(before: self.stateBefore, after: stateAfter)
+        self.printMemoryWrites(before: self.stateBefore, after: stateAfter)
+        self.printOpcodeDetails(before: self.stateBefore, after: stateAfter)
       }
 
       if mode == .full {
@@ -51,12 +52,12 @@ public class Debugger {
   }
 
   // Waaaaay faster than normal debug
-  private func runDebugNone(instructions: Int64     = Int64.max,
-                            lastPC:       UInt16    = UInt16.max) {
+  private func runDebugNone(instructions: Int64  = .max,
+                            untilPC pc:   UInt16 = .max) {
 
     var remainingInstructions = instructions
 
-    while remainingInstructions > 0 && self.cpu.pc != lastPC {
+    while remainingInstructions > 0 && self.cpu.pc != pc {
       self.gameBoy.tickCpu(cycles: 1)
       remainingInstructions -= 1
     }
