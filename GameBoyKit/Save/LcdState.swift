@@ -20,7 +20,7 @@ internal struct LcdState {
   internal var objectColors0: UInt8 = 0
   internal var objectColors1: UInt8 = 0
 
-  internal var lineProgress: UInt16 = 0
+  internal var frameProgress: Int = 0
 
   internal var videoRam = Data(memoryRange: MemoryMap.videoRam)
   internal var oam      = Data(memoryRange: MemoryMap.oam)

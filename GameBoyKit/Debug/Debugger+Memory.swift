@@ -27,7 +27,7 @@ extension Debugger {
     if b.objectColors0    != a.objectColors0    { print("  > lcd.objectColors0: \(b.objectColors0) -> \(a.objectColors0)") }
     if b.objectColors1    != a.objectColors1    { print("  > lcd.objectColors1: \(b.objectColors1) -> \(a.objectColors1)") }
 
-    if b.lineProgress != a.lineProgress { print("  > lcd.lineProgress: \(b.lineProgress) -> \(a.lineProgress)") }
+    if b.frameProgress != a.frameProgress { print("  > lcd.frameProgress: \(b.frameProgress) -> \(a.frameProgress)") }
 
     self.printWrites(memory: MemoryMap.videoRam, b: b.videoRam, a: a.videoRam)
     self.printWrites(memory: MemoryMap.oam, b: b.oam, a: a.oam)

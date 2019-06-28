@@ -93,6 +93,7 @@
 		90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5622B789D0005BBCF5 /* SerialPort.swift */; };
 		90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */; };
 		90B0DC5D22B78E13005BBCF5 /* Bus+read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */; };
+		90BD8BD522C630B3004376BD /* LcdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BD8BD422C630B3004376BD /* LcdConstants.swift */; };
 		90BE338622B5123B00DF3953 /* LcdColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */; };
 		90C19C5822B2AEE200A1B7A9 /* LcdTileDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */; };
 		90C2AD3F22A1DFD500F5A7AF /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD3E22A1DFD500F5A7AF /* Common.swift */; };
@@ -276,6 +277,7 @@
 		90B0DC5622B789D0005BBCF5 /* SerialPort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
 		90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+write.swift"; sourceTree = "<group>"; };
 		90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+read.swift"; sourceTree = "<group>"; };
+		90BD8BD422C630B3004376BD /* LcdConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdConstants.swift; sourceTree = "<group>"; };
 		90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorValueTests.swift; sourceTree = "<group>"; };
 		90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileDataTests.swift; sourceTree = "<group>"; };
 		90C2AD3E22A1DFD500F5A7AF /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 				90CBD3CA22BD62B700B58461 /* Framebuffer.swift */,
 				90B0DC4322B6EC89005BBCF5 /* Lcd.swift */,
 				903DB4DB22BB903A003132FA /* Lcd+Dump.swift */,
+				90BD8BD422C630B3004376BD /* LcdConstants.swift */,
 			);
 			path = Lcd;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 				90B0DC4422B6EC89005BBCF5 /* Lcd.swift in Sources */,
 				90059A3F22C24AC700803B48 /* CartridgeDestination.swift in Sources */,
 				90EDD2C622C2CCB700003E9E /* MBC1.swift in Sources */,
+				90BD8BD522C630B3004376BD /* LcdConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

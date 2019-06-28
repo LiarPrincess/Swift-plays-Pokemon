@@ -15,13 +15,13 @@ class LineDrawerColorValueTests: XCTestCase {
     let data1: UInt8 = 0b0011_0101
     //         expected: 2031_2321
 
-    XCTAssertEqual(lcd.getColorValue(data1, data2, bitOffset: 0), 0b10)
-    XCTAssertEqual(lcd.getColorValue(data1, data2, bitOffset: 1), 0b00)
-    XCTAssertEqual(lcd.getColorValue(data1, data2, bitOffset: 2), 0b11)
-    XCTAssertEqual(lcd.getColorValue(data1, data2, bitOffset: 3), 0b01)
-    XCTAssertEqual(lcd.getColorValue(data1, data2, bitOffset: 4), 0b10)
-    XCTAssertEqual(lcd.getColorValue(data1, data2, bitOffset: 5), 0b11)
-    XCTAssertEqual(lcd.getColorValue(data1, data2, bitOffset: 6), 0b10)
-    XCTAssertEqual(lcd.getColorValue(data1, data2, bitOffset: 7), 0b01)
+    XCTAssertEqual(lcd.getColorValue(data1, data2, bit: 0), 0b10)
+    XCTAssertEqual(lcd.getColorValue(data1, data2, bit: 1), 0b00)
+    XCTAssertEqual(lcd.getColorValue(data1, data2, bit: 2), 0b11)
+    XCTAssertEqual(lcd.getColorValue(data1, data2, bit: 3), 0b01)
+    XCTAssertEqual(lcd.getColorValue(data1, data2, bit: 4), 0b10)
+    XCTAssertEqual(lcd.getColorValue(data1, data2, bit: 5), 0b11)
+    XCTAssertEqual(lcd.getColorValue(data1, data2, bit: 6), 0b10)
+    XCTAssertEqual(lcd.getColorValue(data1, data2, bit: 7), 0b01)
   }
 }

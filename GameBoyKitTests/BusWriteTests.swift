@@ -158,7 +158,7 @@ class BusWriteTests: XCTestCase {
     value += 1
 
     bus.write(MemoryMap.Lcd.line, value: value)
-    XCTAssertEqual(bus.lcd.line, value)
+    XCTAssertEqual(bus.lcd.line, 0) // reset on write
     value += 1
 
     bus.write(MemoryMap.Lcd.lineCompare, value: value)

@@ -9,16 +9,10 @@ import Foundation
 public class Lcd {
 
   /// 160 px = 20 tiles
-  public static let width: UInt8 = 160
+  public static let width = LcdConstants.width
 
   /// 144 px = 18 tiles
-  public static let height: UInt8 = 144
-
-  /// Total number of lines (lcd + vBlank)
-  internal static let totalLineCount: UInt8 = Lcd.height + LcdMode.vBlankLineCount
-
-  /// Number of cycles needed to draw the whole line
-  public static let cyclesPerLine: UInt16 = 456
+  public static let height = LcdConstants.height
 
   /// FF40 - LCDC - LCD Control
   public internal(set) var control = LcdControl()
@@ -32,24 +26,19 @@ public class Lcd {
   /// FF43 - SCX - Scroll X
   public internal(set) var scrollX: UInt8 = 0
 
-  private var _line: UInt8 = 0
-
-  /// FF44 - LY - LCDC Y-Coordinate (R)
+  /// FF44 - LY - LCDC Y-Coordinate
   public internal(set) var line: UInt8 {
-    get { return self._line }
-    set {
-      self._line = 0
-      self.lineProgress = 0
-    }
+    get { return UInt8(self.frameProgress / LcdConstants.cyclesPerLine) }
+    set { self.frameProgress = 0 }
   }
 
-  /// FF45 - LYC - LY Compare (R/W)
+  /// FF45 - LYC - LY Compare
   public internal(set) var lineCompare: UInt8 = 0
 
-  /// FF4A - WY - Window Y Position (R/W)
+  /// FF4A - WY - Window Y Position
   public internal(set) var windowY: UInt8 = 0
 
-  /// FF4B - WX - Window X Position minus 7 (R/W)
+  /// FF4B - WX - Window X Position minus 7
   public internal(set) var windowX: UInt8 = 0
 
   /// FF47 - BGP - BG Palette Data
@@ -70,7 +59,8 @@ public class Lcd {
   /// Data that should be put on screen
   public internal(set) var framebuffer = Framebuffer()
 
-  private var lineProgress: UInt16 = 0
+  /// Progress in the current frame (in cycles)
+  private var frameProgress: Int = 0
 
   private let interrupts: Interrupts
 
@@ -83,15 +73,14 @@ public class Lcd {
   internal func tick(cycles: UInt8) {
     guard self.control.isLcdEnabled else {
       // basically go to the beginning
-      self.line = 0
-      self.lineProgress = 0
+      self.frameProgress = 0
       self.framebuffer.clear()
-      self.status.mode = .vBlank
+      self.status.mode = .hBlank
       return
     }
 
     let previousMode = self.status.mode
-    self.advanceProgress(cycles: cycles)
+    self.advanceFrameProgress(cycles: cycles)
     self.updateMode()
 
     let hasFinishedTransfer = previousMode == .pixelTransfer && self.status.mode == .hBlank
@@ -100,19 +89,20 @@ public class Lcd {
     }
   }
 
-  /// Advance progress (possibly moving to new line)
-  private func advanceProgress(cycles: UInt8) {
-    self.lineProgress += UInt16(cycles)
+  /// Advance progress (possibly moving to new line/frame)
+  /// Will also request LYC interrupt if needed.
+  private func advanceFrameProgress(cycles: UInt8) {
+    let previousLine = self.line
 
-    let isAdvancingLine = self.lineProgress >= Lcd.cyclesPerLine
-    if isAdvancingLine {
-      self.lineProgress -= Lcd.cyclesPerLine
+    self.frameProgress += Int(cycles)
+    if self.frameProgress >= LcdConstants.cyclesPerFrame {
+      self.frameProgress -= LcdConstants.cyclesPerFrame
+    }
 
-      // '_line' instead of 'line' to preserve lineProgress
-      self._line += 1
-      if self.line > Lcd.totalLineCount {
-        self._line = 0
-      }
+    let currentLine = self.line
+    if previousLine != currentLine {
+      // TODO: PyBoy is wrong? we reset line progress on every new line?
+      self.frameProgress = Int(currentLine) * LcdConstants.cyclesPerLine
 
       self.requestLineCompareInterruptIfEnabled()
     }
@@ -127,8 +117,8 @@ public class Lcd {
     }
   }
 
-  /// Update STAT with new mode (after updating progress),
-  /// will also request any needed interrupt
+  /// Update STAT with new mode (after updating progress).
+  /// Will also request any needed interrupt.
   private func updateMode() {
     if self.line >= Lcd.height {
       if self.status.mode != .vBlank {
@@ -139,23 +129,19 @@ public class Lcd {
       return
     }
 
+    let lineProgress = self.frameProgress % LcdConstants.cyclesPerLine
+
     let previousMode = self.status.mode
     var requestInterrupt = false
 
-    switch self.lineProgress {
-    case LcdMode.oamSearchRange:
+    if lineProgress < LcdConstants.oamSearchEnd {
       self.status.mode = .oamSearch
       requestInterrupt = self.status.isOamInterruptEnabled
-
-    case LcdMode.pixelTransferRange:
+    } else if lineProgress < LcdConstants.pixelTransferEnd {
       self.status.mode = .pixelTransfer
-
-    case LcdMode.hBlankRange:
+    } else {
       self.status.mode = .hBlank
       requestInterrupt = self.status.isHBlankInterruptEnabled
-
-    default:
-      break
     }
 
     if requestInterrupt && self.status.mode != previousMode {
@@ -185,24 +171,20 @@ public class Lcd {
 
   // TODO: process this whole tiles thing when loading carthrige
   private func drawBackgroundLine() {
-    // [Performance] Use Int for all, so that writing to framebuffer is faster.
-    // Avoiding conversions in framebuffer subscripts gives us ~10% boost.
-
-    let map = self.control.backgroundTileMap
-
-    let tilePixelWidth = 8
+    let tileSizeInPixels = 8 // width = height = 8 pixels
     let bytesPerTileLine = 2
 
     let line = Int(self.line)
     let globalY = Int(self.scrollY) + line
-    let tileRow = globalY / tilePixelWidth
-    let tileDataOffset = (globalY % tilePixelWidth) * bytesPerTileLine
+    let tileRow = globalY / tileSizeInPixels
+    let tileDataOffset = (globalY % tileSizeInPixels) * bytesPerTileLine
 
     var x = 0
     while x < Int(Lcd.width) {
       let globalX = Int(self.scrollX) + x
-      let tileColumn = globalX / tilePixelWidth
+      let tileColumn = globalX / tileSizeInPixels
 
+      let map = self.control.backgroundTileMap
       let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
       let tileIndex        = self.readVideoRam(tileIndexAddress)
 
@@ -210,16 +192,14 @@ public class Lcd {
       let data1 = self.readVideoRam(tileDataAddress + tileDataOffset)
       let data2 = self.readVideoRam(tileDataAddress + tileDataOffset + 1)
 
-      var xOffset = globalX % tilePixelWidth
-      while xOffset < 8 {
-        let colorBit  = (globalX + xOffset) % 8
-        let tileColor = self.getColorValue(data1, data2, bitOffset: colorBit)
+      let startPixel = globalX % tileSizeInPixels
+      for pixel in startPixel..<tileSizeInPixels {
+        let tileColor = self.getColorValue(data1, data2, bit: pixel)
         let color     = self.backgroundColors[tileColor]
-        self.framebuffer[x + xOffset, line] = color
-        xOffset += 1
+        self.framebuffer[x + pixel, line] = color
       }
 
-      x += xOffset
+      x += (tileSizeInPixels - startPixel)
     }
   }
 
@@ -258,8 +238,8 @@ public class Lcd {
   /// Bit offset is counted from left starting from 0.
   internal func getColorValue(_ data1:  UInt8,
                               _ data2:  UInt8,
-                              bitOffset: Int) -> UInt8 {
-    let shift = 7 - bitOffset
+                              bit:      Int) -> UInt8 {
+    let shift = 7 - bit
     let data1Bit = (data1 >> shift) & 0x1
     let data2Bit = (data2 >> shift) & 0x1
     return (data2Bit << 1) | data1Bit
@@ -286,7 +266,7 @@ extension Lcd: Restorable {
     state.lcd.objectColors0 = self.objectColors0.value
     state.lcd.objectColors1 = self.objectColors1.value
 
-    state.lcd.lineProgress = self.lineProgress
+    state.lcd.frameProgress = self.frameProgress
 
     state.lcd.videoRam = self.videoRam
     state.lcd.oam = self.oam
@@ -309,7 +289,7 @@ extension Lcd: Restorable {
     self.objectColors0.value = state.lcd.objectColors0
     self.objectColors1.value = state.lcd.objectColors1
 
-    self.lineProgress = state.lcd.lineProgress
+    self.frameProgress = state.lcd.frameProgress
 
     self.videoRam = state.lcd.videoRam
     self.oam = state.lcd.oam

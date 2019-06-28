@@ -19,16 +19,4 @@ public enum LcdMode: UInt8, RawRepresentable {
   /// Mode 3: The LCD controller is reading from both OAM and VRAM,
   /// The CPU <cannot> access OAM and VRAM during this period.
   case pixelTransfer = 0b11
-
-  /// Line period (in cycles) in which we do OAM search
-  public static let oamSearchRange: Range<UInt16> = 0..<80
-
-  /// Line period (in cycles) in which we do pixel transfer
-  public static let pixelTransferRange: Range<UInt16> = oamSearchRange.end..<(oamSearchRange.end + 175)
-
-  /// Line period (in cycles) for H-Blank
-  public static let hBlankRange: Range<UInt16> = pixelTransferRange.end..<Lcd.cyclesPerLine
-
-  /// Length of vBlank period (in lines, where 1 line = 'lineLength' cycles)
-  public static let vBlankLineCount: UInt8 = 10
 }

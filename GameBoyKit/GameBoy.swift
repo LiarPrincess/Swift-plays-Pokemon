@@ -35,14 +35,16 @@ public class GameBoy {
 
   @discardableResult
   public func tickFrame() -> Framebuffer {
-    let lineCount = UInt32(Lcd.totalLineCount)
-    let cyclesPerLine = UInt32(Lcd.cyclesPerLine)
+
+    let lineCount = LcdConstants.totalLineCount
+    let cyclesPerLine = LcdConstants.cyclesPerLine
     self.tickCpu(cycles: lineCount * cyclesPerLine)
+
     return self.lcd.framebuffer
   }
 
-  internal func tickCpu(cycles totalCycles: UInt32 = 1) {
-    var remainingCycles = Int64(totalCycles) // so we can go < 0
+  internal func tickCpu(cycles totalCycles: Int = 1) {
+    var remainingCycles = totalCycles // so we can go < 0
 
     while remainingCycles > 0 {
       let cycles = self.cpu.tick()
@@ -51,7 +53,7 @@ public class GameBoy {
 
       // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
 
-      remainingCycles -= Int64(cycles)
+      remainingCycles -= Int(cycles)
     }
   }
 }

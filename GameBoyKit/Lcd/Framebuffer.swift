@@ -2,8 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-private let lcdWidth = Int(Lcd.width)
-private let framebufferSize = Int(Lcd.width) * Int(Lcd.height)
+private let lcdWidth = LcdConstants.width
+private let framebufferSize = LcdConstants.width * LcdConstants.height
 
 // TODO: Check memory leaks (after we implement loading cartridge)
 
@@ -34,7 +34,7 @@ public class Framebuffer {
       // for performance we have to disable range checks (even in debug)
       let index = y * lcdWidth + x
       self.data[index] = newValue
-      self.isClear = false // faster than checking if == 0
+      self.isClear = false // faster than checking if newValue == 0
     }
   }
 
