@@ -34,15 +34,17 @@ private typealias GetCall = (Opcode) -> String
 
 private func printCpuExtension(_ functionName: String, _ opcodes: [Opcode], _ getCall: GetCall) {
   print("extension Cpu {")
-  print("  internal func \(functionName)(_ opcode: UInt8) {")
+  print("")
+  print("  /// Executes the instruction, returns the number of cycles it took.")
+  print("  internal func \(functionName)(_ opcode: UInt8) -> UInt8 {")
   print("    switch opcode {")
 
   for opcode in opcodes {
     let call = getCall(opcode)
-    print("    case \(opcode.addr): self.\(call)")
+    print("    case \(opcode.addr): return self.\(call)")
   }
 
-  print("    default: fatalError(\"Tried to execute non existing opcode: \\(opcode).\")")
+  print("    default: fatalError(\"Tried to execute non existing opcode: \\(opcode.hex).\")")
   print("    }")
   print("  }")
   print("}")

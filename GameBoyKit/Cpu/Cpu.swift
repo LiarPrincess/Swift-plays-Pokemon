@@ -47,19 +47,11 @@ public class Cpu {
       return 0
     }
 
-    let oldCycle = self.cycle
-
     let opcode = self.read(self.pc)
-    self.executeUnprefixed(opcode)
+    let cycles = self.executeUnprefixed(opcode)
+    self.cycle &+= UInt64(cycles)
 
-    return UInt8(self.calculateDuration(oldCycle))
-  }
-
-  private func calculateDuration(_ oldCycle: UInt64) -> UInt64 {
-    let hasOverflow = self.cycle < oldCycle
-    return hasOverflow ?
-      self.cycle + (UInt64.max - oldCycle) :
-      self.cycle - oldCycle
+    return cycles
   }
 
   // MARK: - Interrupts
