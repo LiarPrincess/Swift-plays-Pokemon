@@ -38,7 +38,7 @@ public class Cpu {
   // MARK: - Tick
 
   /// Run 1 instruction. Returns the number of cycles it took.
-  internal func tick() -> UInt8 {
+  internal func tick() -> Int {
 
     // interrupts are the only way to escape HALT
     self.startInterruptRoutineIfNeeded()
@@ -51,7 +51,8 @@ public class Cpu {
     let cycles = self.executeUnprefixed(opcode)
     self.cycle &+= UInt64(cycles)
 
-    return cycles
+    // TODO: make executeUnprefixed return Int
+    return Int(cycles)
   }
 
   // MARK: - Interrupts

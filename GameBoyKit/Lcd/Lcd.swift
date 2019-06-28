@@ -62,6 +62,10 @@ public class Lcd {
   /// Progress in the current frame (in cycles)
   private var frameProgress: Int = 0
 
+  /// We can enable/disable diplay only an the end of the frame.
+  /// See: http://bgb.bircd.org/pandocs.htm#lcdcontrolregister
+  private var isLcdEnabledInCurrentFrame: Bool = false
+
   private let interrupts: Interrupts
 
   internal init(interrupts: Interrupts) {
@@ -70,17 +74,21 @@ public class Lcd {
 
   // MARK: - Tick
 
-  internal func tick(cycles: UInt8) {
-    guard self.control.isLcdEnabled else {
-      // basically go to the beginning
-      self.frameProgress = 0
+  internal func startFrame() {
+    self.frameProgress = 0
+    self.isLcdEnabledInCurrentFrame = self.control.isLcdEnabled
+  }
+
+  internal func tick(cycles: Int) {
+    self.advanceFrameProgress(cycles: cycles)
+
+    guard self.isLcdEnabledInCurrentFrame else {
       self.framebuffer.clear()
       self.status.mode = .hBlank
       return
     }
 
     let previousMode = self.status.mode
-    self.advanceFrameProgress(cycles: cycles)
     self.updateMode()
 
     let hasFinishedTransfer = previousMode == .pixelTransfer && self.status.mode == .hBlank
@@ -91,29 +99,22 @@ public class Lcd {
 
   /// Advance progress (possibly moving to new line/frame)
   /// Will also request LYC interrupt if needed.
-  private func advanceFrameProgress(cycles: UInt8) {
+  private func advanceFrameProgress(cycles: Int) {
     let previousLine = self.line
 
-    self.frameProgress += Int(cycles)
-    if self.frameProgress >= LcdConstants.cyclesPerFrame {
-      self.frameProgress -= LcdConstants.cyclesPerFrame
-    }
+    self.frameProgress += cycles
 
     let currentLine = self.line
-    if previousLine != currentLine {
+    if currentLine != previousLine {
       // TODO: PyBoy is wrong? we reset line progress on every new line?
       self.frameProgress = Int(currentLine) * LcdConstants.cyclesPerLine
 
-      self.requestLineCompareInterruptIfEnabled()
-    }
-  }
+      let hasInterrupt = currentLine == self.lineCompare
 
-  private func requestLineCompareInterruptIfEnabled() {
-    let hasInterrupt = self.lineCompare == self.line
-
-    self.status.isLineCompareInterrupt = hasInterrupt
-    if hasInterrupt && self.status.isLineCompareInterruptEnabled {
-      self.interrupts.lcdStat = true
+      self.status.isLineCompareInterrupt = hasInterrupt
+      if hasInterrupt && self.status.isLineCompareInterruptEnabled {
+        self.interrupts.lcdStat = true
+      }
     }
   }
 

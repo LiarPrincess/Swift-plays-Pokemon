@@ -12,6 +12,9 @@ public class GameBoy {
   public let timer: Timer
   public let joypad: Joypad
 
+  /// Number of cycles that elapsed since we started current frame.
+  private var frameProgress: Int = 0
+
   public var linkCable: Data {
     return self.bus.linkCable
   }
@@ -31,29 +34,43 @@ public class GameBoy {
                    interrupts: interrupts)
 
     self.cpu = Cpu(bus: self.bus, interrupts: interrupts)
+
+    // prepare for 1st frame
+    self.lcd.startFrame()
   }
 
   @discardableResult
   public func tickFrame() -> Framebuffer {
+    let cycles = LcdConstants.cyclesPerFrame - self.frameProgress
 
-    let lineCount = LcdConstants.totalLineCount
-    let cyclesPerLine = LcdConstants.cyclesPerLine
-    self.tickCpu(cycles: lineCount * cyclesPerLine)
+    self.tickCpu(cycles: cycles)
+
+    // if we stopped at the last cycle of the frame, then
+    // run 1 bonus instruction to actually 'tick' it
+    if self.frameProgress == LcdConstants.cyclesPerFrame {
+      self.tickCpu(cycles: 1)
+    }
 
     return self.lcd.framebuffer
   }
 
   internal func tickCpu(cycles totalCycles: Int = 1) {
-    var remainingCycles = totalCycles // so we can go < 0
+    var remainingCycles = totalCycles
 
     while remainingCycles > 0 {
       let cycles = self.cpu.tick()
-      self.timer.tick(cycles: cycles)
+      remainingCycles -= cycles
+
+      self.frameProgress += cycles
+      if self.frameProgress > LcdConstants.cyclesPerFrame {
+        self.frameProgress -= LcdConstants.cyclesPerFrame
+        self.lcd.startFrame()
+      }
+
+      self.timer.tick(cycles: UInt8(cycles))
       self.lcd.tick(cycles: cycles)
 
       // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
-
-      remainingCycles -= Int(cycles)
     }
   }
 }

@@ -43,9 +43,7 @@ private let isBackgroundVisibleMask: UInt8 = 1 << 0
 public class LcdControl {
 
   /// Bit 7 - LCD Display Enable
-  public internal(set) var isLcdEnabled: Bool = false {
-    didSet { print("--> ENABLE CHANGED (\(self.isLcdEnabled)) <--") }
-  }
+  public internal(set) var isLcdEnabled: Bool = false
 
   /// Bit 5 - Window Display Enable
   public internal(set) var isWindowEnabled: Bool = false

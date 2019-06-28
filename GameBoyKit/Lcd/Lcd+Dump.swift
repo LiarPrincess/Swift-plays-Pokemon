@@ -11,8 +11,6 @@ private let tileColumnCount = Int(Lcd.height) / tileSize // 20
 extension Lcd {
 
   public func dump() {
-    print()
-
     let backgroundTileIndices = self.control.backgroundTileMap
     print("Tile indices: \(backgroundTileIndices)")
     self.dumpTileIndices(from: backgroundTileIndices)
