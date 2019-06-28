@@ -8,7 +8,6 @@ import GameBoyKit
 internal enum Helpers {
   internal static func openRom(url: URL) -> Cartridge {
     do {
-      print("ROM: \(url)")
       let data = try Data(contentsOf: url)
       return try CartridgeFactory.fromData(data)
     } catch let error as CartridgeInitError {

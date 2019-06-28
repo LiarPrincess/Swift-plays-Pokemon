@@ -56,7 +56,7 @@ private func pyBoyBlargg(rom: URL, pyFiles: [URL]) {
     let pyBoy = pyLoad(pyUrl)
 
     debugger.run(mode: .none, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+    let hasError = pyTest(py: pyBoy, swift: gameBoy)
 
     if hasError {
       fatalError()
@@ -85,7 +85,7 @@ private func pyBoyBlarggWorking6(rom: URL, pyFiles: [URL]) {
 
     let debugMode: DebugMode = index >= 660 ? .none : .none // opcodes
     debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+    let hasError = pyTest(py: pyBoy, swift: gameBoy)
 
 //    if hasError {
 //      fatalError()
@@ -102,7 +102,7 @@ private func pyBoyBlarggWorking6(rom: URL, pyFiles: [URL]) {
     let debugMode: DebugMode = index >= 7 ? .full : .none
 
     debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+    let hasError = pyTest(py: pyBoy, swift: gameBoy)
 
     if hasError {
       fatalError()
@@ -137,7 +137,7 @@ private func pyBoyBlarggWorking3(rom: URL, pyFiles: [URL]) {
 
     let debugMode: DebugMode = index >= 660 ? .none : .none // opcodes
     debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+    let hasError = pyTest(py: pyBoy, swift: gameBoy)
 
     if fileName == "pyboy_cpu_instr_03_pc_0xc507" {
       break
@@ -157,7 +157,7 @@ private func pyBoyBlarggWorking3(rom: URL, pyFiles: [URL]) {
 
     let debugMode: DebugMode = index >= 170 ? .none : .none
     debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(pyBoy: pyBoy, swiftBoy: gameBoy)
+    let hasError = pyTest(py: pyBoy, swift: gameBoy)
 
     if fileName == "pyboy_cpu_instr_03_pc_0xc507" {
       break

@@ -72,7 +72,7 @@ var checkedAddresses: [UInt16] = {
   return [UInt16](result).sorted()
 }()
 
-func pyTest(pyBoy p: PyBoy, swiftBoy s: GameBoy) -> Bool {
+func pyTest(py p: PyBoy, swift s: GameBoy) -> Bool {
   var e = false // has error
 
   if s.cpu.pc  != p.cpu.pc  { print("Invalid pc: \(s.cpu.pc.hex) vs \(p.cpu.pc.hex)"); e = true }
