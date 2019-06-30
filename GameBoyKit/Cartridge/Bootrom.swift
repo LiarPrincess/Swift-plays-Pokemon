@@ -23,36 +23,8 @@ public class Bootrom {
   func write(_ address: UInt16, value: UInt8) {
     print("Attempting to write to read-only bootrom at: \(address.hex).")
   }
-}
 
-// MARK: - Predefined bootroms
-
-extension Bootrom {
-
-  /// Skip directly to the game.
-  /// Source: https://github.com/Baekalfen/PyBoy
-  public static var skip: Bootrom {
-    // TODO: Use pandocs (end) instead
-    var data = Data(memoryRange: MemoryMap.bootrom)
-
-    // Set stack pointer
-    data[0x00] = 0x31
-    data[0x01] = 0xfe
-    data[0x02] = 0xff
-
-    // Inject jump to 0xFC
-    data[0x03] = 0xc3
-    data[0x04] = 0xfc
-    data[0x05] = 0x00
-
-    // Inject code to disable boot-ROM
-    data[0xfc] = 0x3e
-    data[0xfd] = 0x01
-    data[0xfe] = 0xe0
-    data[0xff] = 0x50
-
-    return Bootrom(data: data)
-  }
+  // MARK: - Predefined bootrom
 
   /// This is the most common version of the boot ROM
   /// found in the original DMG-01 model of Gameboy.

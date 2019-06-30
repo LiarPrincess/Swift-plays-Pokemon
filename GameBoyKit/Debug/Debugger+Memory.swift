@@ -40,7 +40,7 @@ extension Debugger {
 
     self.printWrites(b: b.audio, a: a.audio)
     self.printWrites(b: b.unmappedMemory, a: a.unmappedMemory)
-    if b.unmapBootrom != a.unmapBootrom { print("  > bus.unmapBootrom <- \(a.unmapBootrom)") }
+    if b.hasFinishedBootrom != a.hasFinishedBootrom { print("  > bus.unmapBootrom <- \(a.hasFinishedBootrom)") }
   }
 
   private func printCartridgeWrites(b: CartridgeState, a: CartridgeState) {

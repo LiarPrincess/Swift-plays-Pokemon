@@ -15,9 +15,10 @@ extension Bus {
 
     // bootrom
     case MemoryMap.bootrom:
-      return self.hasFinishedBootrom ?
-        self.cartridge.readRom(address) :
-        self.bootrom.read(address)
+      switch self.bootrom {
+      case let .executing(bootrom): return bootrom.read(address)
+      case .finished:               return self.cartridge.readRom(address)
+      }
 
     // cartridge
     case MemoryMap.rom0, MemoryMap.rom1:
@@ -61,7 +62,7 @@ extension Bus {
     case MemoryMap.IO.joypad: return self.joypad.value
     case MemoryMap.IO.sb:     return self.serialPort.sb
     case MemoryMap.IO.sc:     return self.serialPort.sc
-    case MemoryMap.IO.unmapBootrom:  return self.unmapBootrom
+    case MemoryMap.IO.unmapBootrom:  return 0
     case MemoryMap.IO.interruptFlag: return self.interrupts.flag
 
     case MemoryMap.Timer.div:  return self.timer.div

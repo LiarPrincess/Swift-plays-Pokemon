@@ -13,7 +13,7 @@ func runTestCpuInstrs01() {
 
 private func runTest(rom: URL, dumpFiles urls: [URL]) {
   let cartridge = openRom(url: rom)
-  let gameBoy   = GameBoy(bootrom: .skip, cartridge: cartridge)
+  let gameBoy   = GameBoy(bootrom: nil, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
   for (index, url) in urls.enumerated() {

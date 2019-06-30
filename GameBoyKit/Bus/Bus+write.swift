@@ -14,10 +14,9 @@ extension Bus {
 
     // bootrom,
     case MemoryMap.bootrom:
-      if self.hasFinishedBootrom {
-        self.cartridge.writeRom(address, value: value)
-      } else {
-        self.bootrom.write(address, value: value)
+      switch self.bootrom {
+      case let .executing(bootrom): bootrom.write(address, value: value)
+      case .finished:               self.cartridge.writeRom(address, value: value)
       }
 
     // cartridge
@@ -64,7 +63,7 @@ extension Bus {
       self.linkCable.append(value)
       self.serialPort.sb = value
     case MemoryMap.IO.sc:     self.serialPort.sc = value
-    case MemoryMap.IO.unmapBootrom:  self.unmapBootrom = value
+    case MemoryMap.IO.unmapBootrom:  self.bootrom = .finished
     case MemoryMap.IO.interruptFlag: self.interrupts.flag = value
 
     case MemoryMap.Timer.div:  self.timer.div = value

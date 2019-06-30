@@ -4,6 +4,11 @@
 
 import Foundation
 
+internal enum BootromState {
+  case executing(BusBootrom)
+  case finished
+}
+
 public class Bus {
 
   internal let lcd: Lcd
@@ -12,7 +17,7 @@ public class Bus {
   internal let serialPort: SerialPort
   internal let interrupts: Interrupts
 
-  internal let bootrom: BusBootrom
+  internal var bootrom: BootromState
   internal let cartridge: BusCartridge
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
@@ -34,12 +39,7 @@ public class Bus {
   /// TODO: Catch'em all for audio read/write
   internal var audio = [UInt16:UInt8]()
 
-  /// If > 0 then we have finished bootrom.
-  internal var unmapBootrom: UInt8 = 0
-
-  internal var hasFinishedBootrom: Bool { return self.unmapBootrom > 0 }
-
-  internal init(bootrom:    BusBootrom,
+  internal init(bootrom:    BusBootrom?,
                 cartridge:  BusCartridge,
                 joypad:     Joypad,
                 lcd:        Lcd,
@@ -52,7 +52,7 @@ public class Bus {
     self.serialPort = SerialPort()
     self.interrupts = interrupts
 
-    self.bootrom = bootrom
+    self.bootrom = bootrom != nil ? .executing(bootrom!) : .finished
     self.cartridge = cartridge
   }
 
@@ -86,7 +86,11 @@ extension Bus: Restorable {
     state.bus.highRam = self.highRam
     state.bus.audio = self.audio
     state.bus.unmappedMemory = self.unmappedMemory
-    state.bus.unmapBootrom = self.unmapBootrom
+
+    switch self.bootrom {
+    case .finished:               state.bus.hasFinishedBootrom = true
+    case let .executing(bootrom): state.bus.hasFinishedBootrom = false
+    }
   }
 
   internal func load(from state: GameBoyState) {
@@ -95,6 +99,5 @@ extension Bus: Restorable {
     self.highRam = state.bus.highRam
     self.audio = state.bus.audio
     self.unmappedMemory = state.bus.unmappedMemory
-    self.unmapBootrom = state.bus.unmapBootrom
   }
 }

@@ -10,5 +10,5 @@ internal class BusState {
 
   internal var audio          = [UInt16:UInt8]()
   internal var unmappedMemory = [UInt16:UInt8]()
-  internal var unmapBootrom: UInt8 = 0
+  internal var hasFinishedBootrom: Bool = false
 }
