@@ -3,12 +3,13 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 private let isLineCompareInterruptEnabledMask: UInt8 = 1 << 6
-private let isOamInterruptEnabledMask: UInt8 = 1 << 5
+private let isOamInterruptEnabledMask:    UInt8 = 1 << 5
 private let isVBlankInterruptEnabledMask: UInt8 = 1 << 4
 private let isHBlankInterruptEnabledMask: UInt8 = 1 << 3
-private let isLineCompareInterruptMask: UInt8 = 1 << 2
+private let isLineCompareInterruptMask:   UInt8 = 1 << 2
 private let modeMask: UInt8 = 0b11
 
+// TODO: Store byte and use masks? because cpu does not matter. (struct)
 public class LcdStatus {
 
   /// Bit 6 - LYC=LY Coincidence Interrupt

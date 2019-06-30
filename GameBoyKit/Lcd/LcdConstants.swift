@@ -12,6 +12,9 @@ internal enum LcdConstants {
   /// 144 px = 18 tiles
   internal static let height = 144
 
+  /// Total number of lines (lcd + vBlank)
+  internal static let heightWithVBlank = 154
+
   // MARK: - Line phase
 
   /// Cycle in which we end OAM search
@@ -22,14 +25,6 @@ internal enum LcdConstants {
 
   /// Cycle in which we end H-Blank
   internal static let hBlankEnd = cyclesPerLine
-
-  // MARK: - Line count
-
-  /// Length of vBlank period (in lines, where 1 line = 'lineLength' cycles)
-  public static let vBlankLineCount = 10
-
-  /// Total number of lines (lcd + vBlank)
-  internal static let totalLineCount = height + vBlankLineCount
 
   // MARK: - Cycles
 

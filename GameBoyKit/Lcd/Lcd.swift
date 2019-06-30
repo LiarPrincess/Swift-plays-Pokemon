@@ -28,7 +28,10 @@ public class Lcd {
 
   /// FF44 - LY - LCDC Y-Coordinate
   public internal(set) var line: UInt8 {
-    get { return UInt8(self.frameProgress / LcdConstants.cyclesPerLine) }
+    get { return self.isLcdEnabledInCurrentFrame ?
+      UInt8(self.frameProgress / LcdConstants.cyclesPerLine) :
+      0
+    }
     set { self.frameProgress = 0 }
   }
 

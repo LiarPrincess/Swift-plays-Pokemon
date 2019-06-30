@@ -12,5 +12,8 @@ enum BlarggRomDumps {
     return mainDir.appendingPathComponent("Dumps")
   }()
 
-
+  static var cpuInstrs01: URL {
+    let dumps = dumpsDir.appendingPathComponent("cpu_instr_01")
+    return dumps.appendingPathComponent("pyboy_cpu_instr_01_pc_0x100.txt")
+  }
 }

@@ -26,6 +26,8 @@ private func fill(_ emulator: SavedState, from fileUrl: URL) {
   let memory = emulator.memory
 
   while let line = stream.nextLine() {
+    if line.isEmpty { continue }
+
     let split = line.split(separator: ":")
     let property = split[0]
     let value = split[1]
@@ -78,6 +80,9 @@ private func fill(_ emulator: SavedState, from fileUrl: URL) {
     case "ram_INTERRUPT_ENABLE_REGISTER":
       let data = value.split(separator: ",").map { UInt8($0)! }
       memory.data[0xFFFF] = data[0]
+
+    case "memory":
+      replace(memory, from: 0x0000, to: 0xffff, with: value)
 
     default:
       print("Invalid line: \(line.prefix(40))")

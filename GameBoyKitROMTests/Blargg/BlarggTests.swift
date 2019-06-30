@@ -5,58 +5,25 @@
 import Foundation
 import GameBoyKit
 
-/*
-func pyBoyBlarggCpuInstrs01() {
+func runTestCpuInstrs01() {
   let rom = BlarggRoms.cpuInstrs01
-  let pyFiles = PyFiles.cpuInstrs01
-  pyBoyBlargg(rom: rom, pyFiles: pyFiles)
+  let url = BlarggRomDumps.cpuInstrs01
+  runTest(rom: rom, dumpFiles: [url])
 }
 
-// TODO: not working
-func pyBoyBlarggCpuInstrs03() {
-  let rom = BlarggRoms.cpuInstrs03
-  let pyFiles = PyFiles.cpuInstrs03
-  pyBoyBlarggWorking3(rom: rom, pyFiles: pyFiles)
-}
-
-func pyBoyBlarggCpuInstrs04() {
-  let rom = BlarggRoms.cpuInstrs04
-  let pyFiles = PyFiles.cpuInstrs04
-  pyBoyBlargg(rom: rom, pyFiles: pyFiles)
-}
-
-func pyBoyBlarggCpuInstrs05() {
-  let rom = BlarggRoms.cpuInstrs05
-  let pyFiles = PyFiles.cpuInstrs05
-  pyBoyBlargg(rom: rom, pyFiles: pyFiles)
-}
-
-func pyBoyBlarggCpuInstrs06() {
-  let rom = BlarggRoms.cpuInstrs06
-  let pyFiles = PyFiles.cpuInstrs06
-  pyBoyBlargg(rom: rom, pyFiles: pyFiles)
-}
-
-// TODO: not working
-func pyBoyBlarggCpuInstrs07() {
-  let rom = BlarggRoms.cpuInstrs07
-  let pyFiles = PyFiles.cpuInstrs07
-  pyBoyBlargg(rom: rom, pyFiles: pyFiles)
-}
-
-private func pyBoyBlargg(rom: URL, pyFiles: [URL]) {
-  let cartridge = Helpers.openRom(url: rom)
+private func runTest(rom: URL, dumpFiles urls: [URL]) {
+  let cartridge = openRom(url: rom)
   let gameBoy   = GameBoy(bootrom: .skip, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
-  for (index, pyUrl) in pyFiles.enumerated() {
-    let fileName = pyUrl.lastPathComponent
-    print("\(index)/\(pyFiles.count - 1) - \(fileName)")
+  for (index, url) in urls.enumerated() {
+    let fileName = url.lastPathComponent
+    print("\(index)/\(urls.count - 1) - \(fileName)")
 
-    let pyBoy = pyLoad(pyUrl)
+    let state = loadState(url)
 
-    debugger.run(mode: .none, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(py: pyBoy, swift: gameBoy)
+    debugger.run(mode: .none, untilPC: state.cpu.pc)
+    let hasError = compare(saved: state, gameboy: gameBoy)
 
     //    if hasError {
     //      fatalError()
@@ -68,22 +35,59 @@ private func pyBoyBlargg(rom: URL, pyFiles: [URL]) {
   print("---")
 }
 
- private func openRom(url: URL) -> Cartridge {
- do {
- let data = try Data(contentsOf: url)
- return try CartridgeFactory.fromData(data)
- } catch let error as CartridgeInitError {
- print("Error when opening ROM: \(error.description)")
- exit(1)
- } catch {
- print("Error when opening ROM: \(error.localizedDescription)")
- exit(1)
- }
- }
+private func openRom(url: URL) -> Cartridge {
+  do {
+    let data = try Data(contentsOf: url)
+    return try CartridgeFactory.fromData(data)
+  } catch let error as CartridgeInitError {
+    print("Error when opening ROM: \(error.description)")
+    exit(1)
+  } catch {
+    print("Error when opening ROM: \(error.localizedDescription)")
+    exit(1)
+  }
+}
+
+
+
+
+
+/*
+// TODO: not working
+func runTestCpuInstrs03() {
+  let rom = BlarggRoms.cpuInstrs03
+  let pyFiles = PyFiles.cpuInstrs03
+  runTestWorking3(rom: rom, pyFiles: pyFiles)
+}
+
+func runTestCpuInstrs04() {
+  let rom = BlarggRoms.cpuInstrs04
+  let pyFiles = PyFiles.cpuInstrs04
+  runTest(rom: rom, pyFiles: pyFiles)
+}
+
+func runTestCpuInstrs05() {
+  let rom = BlarggRoms.cpuInstrs05
+  let pyFiles = PyFiles.cpuInstrs05
+  runTest(rom: rom, pyFiles: pyFiles)
+}
+
+func runTestCpuInstrs06() {
+  let rom = BlarggRoms.cpuInstrs06
+  let pyFiles = PyFiles.cpuInstrs06
+  runTest(rom: rom, pyFiles: pyFiles)
+}
+
+// TODO: not working
+func runTestCpuInstrs07() {
+  let rom = BlarggRoms.cpuInstrs07
+  let pyFiles = PyFiles.cpuInstrs07
+  runTest(rom: rom, pyFiles: pyFiles)
+}
 
 // ----------------------------------
 
-private func pyBoyBlarggWorking3(rom: URL, pyFiles: [URL]) {
+private func runTestWorking3(rom: URL, pyFiles: [URL]) {
   let cartridge = Helpers.openRom(url: rom)
   let gameBoy   = GameBoy(bootrom: .skip, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)

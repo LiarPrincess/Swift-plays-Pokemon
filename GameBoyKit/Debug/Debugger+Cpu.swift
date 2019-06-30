@@ -42,8 +42,9 @@ extension Debugger {
       }
     }()
 
-    let opcodeDesc = String(describing: opcode)
-    print("\(cpu.pc.hex): \(opcodeDesc.padRight(toLength: 11)) \(operands)")
+    let cycle = gameBoy.cpu.cycle
+    let opcodeDesc = String(describing: opcode).padRight(toLength: 11)
+    print("\(cpu.pc.hex): \(opcodeDesc) \(operands) (cycle: \(cycle))")
   }
 
   private func printPrefixOpcode() {
