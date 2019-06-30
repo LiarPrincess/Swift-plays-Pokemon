@@ -72,31 +72,31 @@ var checkedAddresses: [UInt16] = {
   return [UInt16](result).sorted()
 }()
 
-func pyTest(py p: PyBoy, swift s: GameBoy) -> Bool {
+func compare(saved p: SavedState, gameboy g: GameBoy) -> Bool {
   var e = false // has error
 
-  if s.cpu.pc  != p.cpu.pc  { print("Invalid pc: \(s.cpu.pc.hex) vs \(p.cpu.pc.hex)"); e = true }
-  if s.cpu.sp  != p.cpu.sp  { print("Invalid sp: \(s.cpu.sp.hex) vs \(p.cpu.sp.hex)"); e = true }
-  if s.cpu.ime != p.cpu.ime { print("Invalid ime: \(s.cpu.ime) vs \(p.cpu.ime)"); e = true }
+  if g.cpu.pc  != p.cpu.pc  { print("Invalid pc: \(g.cpu.pc.hex) vs \(p.cpu.pc.hex)"); e = true }
+  if g.cpu.sp  != p.cpu.sp  { print("Invalid sp: \(g.cpu.sp.hex) vs \(p.cpu.sp.hex)"); e = true }
+  if g.cpu.ime != p.cpu.ime { print("Invalid ime: \(g.cpu.ime) vs \(p.cpu.ime)"); e = true }
 
   let pReg = p.cpu.registers
-  let sReg = s.cpu.registers
-  if sReg.a != pReg.a { print("Invalid a: \(sReg.a.hex) vs \(pReg.a.hex)"); e = true }
-  if sReg.b != pReg.b { print("Invalid b: \(sReg.b.hex) vs \(pReg.b.hex)"); e = true }
-  if sReg.c != pReg.c { print("Invalid c: \(sReg.c.hex) vs \(pReg.c.hex)"); e = true }
-  if sReg.d != pReg.d { print("Invalid d: \(sReg.d.hex) vs \(pReg.d.hex)"); e = true }
-  if sReg.e != pReg.e { print("Invalid e: \(sReg.e.hex) vs \(pReg.e.hex)"); e = true }
-  if sReg.h != pReg.h { print("Invalid h: \(sReg.h.hex) vs \(pReg.h.hex)"); e = true }
-  if sReg.l != pReg.l { print("Invalid l: \(sReg.l.hex) vs \(pReg.l.hex)"); e = true }
+  let gReg = g.cpu.registers
+  if gReg.a != pReg.a { print("Invalid a: \(gReg.a.hex) vs \(pReg.a.hex)"); e = true }
+  if gReg.b != pReg.b { print("Invalid b: \(gReg.b.hex) vs \(pReg.b.hex)"); e = true }
+  if gReg.c != pReg.c { print("Invalid c: \(gReg.c.hex) vs \(pReg.c.hex)"); e = true }
+  if gReg.d != pReg.d { print("Invalid d: \(gReg.d.hex) vs \(pReg.d.hex)"); e = true }
+  if gReg.e != pReg.e { print("Invalid e: \(gReg.e.hex) vs \(pReg.e.hex)"); e = true }
+  if gReg.h != pReg.h { print("Invalid h: \(gReg.h.hex) vs \(pReg.h.hex)"); e = true }
+  if gReg.l != pReg.l { print("Invalid l: \(gReg.l.hex) vs \(pReg.l.hex)"); e = true }
 
-  if sReg.zeroFlag      != pReg.zeroFlag      { print("Invalid zeroFlag: \(sReg.zeroFlag) vs \(pReg.zeroFlag)"); e = true }
-  if sReg.subtractFlag  != pReg.subtractFlag  { print("Invalid subtractFlag: \(sReg.subtractFlag) vs \(pReg.subtractFlag)"); e = true }
-  if sReg.halfCarryFlag != pReg.halfCarryFlag { print("Invalid halfCarryFlag: \(sReg.halfCarryFlag) vs \(pReg.halfCarryFlag)"); e = true }
-  if sReg.carryFlag     != pReg.carryFlag     { print("Invalid carryFlag: \(sReg.carryFlag) vs \(pReg.carryFlag)"); e = true }
+  if gReg.zeroFlag      != pReg.zeroFlag      { print("Invalid zeroFlag: \(gReg.zeroFlag) vs \(pReg.zeroFlag)"); e = true }
+  if gReg.subtractFlag  != pReg.subtractFlag  { print("Invalid subtractFlag: \(gReg.subtractFlag) vs \(pReg.subtractFlag)"); e = true }
+  if gReg.halfCarryFlag != pReg.halfCarryFlag { print("Invalid halfCarryFlag: \(gReg.halfCarryFlag) vs \(pReg.halfCarryFlag)"); e = true }
+  if gReg.carryFlag     != pReg.carryFlag     { print("Invalid carryFlag: \(gReg.carryFlag) vs \(pReg.carryFlag)"); e = true }
 
   for address in checkedAddresses {
     let pValue = p.memory.data[Int(address)]
-    let sValue = s.bus.read(address)
+    let sValue = g.bus.read(address)
 
     if sValue != pValue {
       let desc = MemoryMap.describe(address: address)

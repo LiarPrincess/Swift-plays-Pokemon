@@ -5,20 +5,27 @@
 import Foundation
 import GameBoyKit
 
-internal func pyBoyBootromTests() {
-  let cartridge = createBootromCartridge()
+private var dumpDir: URL = {
+  return URL(fileURLWithPath: #file)
+    .deletingLastPathComponent()
+    .appendingPathComponent("Dump")
+}()
+
+internal func runBootromTests() {
+  let cartridge = createDummyCartridge()
   let gameBoy   = GameBoy(bootrom: .dmg, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
-  for (index, pyUrl) in PyFiles.bootrom.enumerated() {
+  let states = listStates(dir: dumpDir)
+  for (index, pyUrl) in states.enumerated() {
     let fileName = pyUrl.lastPathComponent
     print("\(index) - \(fileName)")
 
-    let pyBoy = pyLoad(pyUrl)
+    let state = loadState(pyUrl)
 
     let debugMode: DebugMode = .none // index >= 113 ? .opcodes : .none
-    debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(py: pyBoy, swift: gameBoy)
+    debugger.run(mode: debugMode, untilPC: state.cpu.pc)
+    let hasError = compare(saved: state, gameboy: gameBoy)
 
 //    if hasError {
 //      fatalError()
@@ -28,7 +35,7 @@ internal func pyBoyBootromTests() {
   testStateBeforeUnmappingBootrom(gameBoy)
 }
 
-private func createBootromCartridge() -> Cartridge {
+private func createDummyCartridge() -> Cartridge {
   let count = MemoryMap.rom0.count + MemoryMap.rom1.count
   var rom = Data(count: count)
   rom[0x0147] = 0 //
@@ -125,4 +132,3 @@ private func testStateBeforeUnmappingBootrom(_ s: GameBoy) {
     }
   }
 }
-

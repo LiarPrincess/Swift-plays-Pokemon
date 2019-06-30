@@ -7,15 +7,14 @@
 // swiftlint:disable force_unwrapping
 
 import Cocoa
-import GameBoyKit
 
-internal func pyLoad(_ url: URL) -> PyBoy {
-  let emulator    = PyBoy(filename: url.lastPathComponent)
-  fill(emulator, from: url)
-  return emulator
+internal func loadState(_ url: URL) -> SavedState {
+  let state = SavedState(filename: url.lastPathComponent)
+  fill(state, from: url)
+  return state
 }
 
-private func fill(_ emulator: PyBoy, from fileUrl: URL) {
+private func fill(_ emulator: SavedState, from fileUrl: URL) {
   guard let stream = StreamReader(url: fileUrl, encoding: .utf8) else {
     print("Unable to open: '\(fileUrl.lastPathComponent)'")
     exit(1)
@@ -55,8 +54,8 @@ private func fill(_ emulator: PyBoy, from fileUrl: URL) {
     // TODO: Import 'cpu_stopped' from py
     case "cpu_stopped": break
 
-    case "lcd_VRAM": replace(memory, in: MemoryMap.videoRam, with: value)
-    case "lcd_Oam": replace(memory, in: MemoryMap.oam, with: value)
+    case "lcd_VRAM": replace(memory, from: 0x8000, to: 0x9fff, with: value)
+    case "lcd_Oam": replace(memory, from: 0xfe00, to: 0xfe9f, with: value)
 
     case "lcd_LY" :   memory.data[0xFF44] = UInt8(value)!
     case "lcd_LYC" :  memory.data[0xFF45] = UInt8(value)!
@@ -70,11 +69,11 @@ private func fill(_ emulator: PyBoy, from fileUrl: URL) {
     case "lcd_WY":    memory.data[0xFF4A] = UInt8(value)!
     case "lcd_WX":    memory.data[0xFF4B] = UInt8(value)!
 
-    case "ram_INTERNAL_RAM0":        replace(memory, in: MemoryMap.internalRam, with: value)
-    case "ram_NON_IO_INTERNAL_RAM0": replace(memory, in: MemoryMap.notUsable, with: value)
-    case "ram_INTERNAL_RAM1":        replace(memory, in: MemoryMap.highRam, with: value)
-    case "ram_IO_PORTS":             replace(memory, from: 0xFF00, to: 0xFF4B, with: value)
-    case "ram_NON_IO_INTERNAL_RAM1": replace(memory, from: 0xFF4C, to: 0xFF79, with: value)
+    case "ram_INTERNAL_RAM0":        replace(memory, from: 0xc000, to: 0xdfff, with: value)
+    case "ram_NON_IO_INTERNAL_RAM0": replace(memory, from: 0xfea0, to: 0xfeff, with: value)
+    case "ram_IO_PORTS":             replace(memory, from: 0xff00, to: 0xff4b, with: value)
+    case "ram_NON_IO_INTERNAL_RAM1": replace(memory, from: 0xff4c, to: 0xff79, with: value)
+    case "ram_INTERNAL_RAM1":        replace(memory, from: 0xff80, to: 0xfffe, with: value)
 
     case "ram_INTERRUPT_ENABLE_REGISTER":
       let data = value.split(separator: ",").map { UInt8($0)! }
@@ -88,13 +87,7 @@ private func fill(_ emulator: PyBoy, from fileUrl: URL) {
   }
 }
 
-private func replace(_ memory: PyMemory, in range: ClosedRange<UInt16>, with values: Substring) {
-  let start = Int(range.start)
-  let end = Int(range.end)
-  replace(memory, from: start, to: end, with: values)
-}
-
-private func replace(_ memory: PyMemory, from: Int, to: Int, with values: Substring) {
+private func replace(_ memory: SavedMemory, from: Int, to: Int, with values: Substring) {
   var addressOffset = 0
   split(values, by: ",") { s in
     guard !s.isEmpty else { return } // we have ',' after last value

@@ -12,10 +12,6 @@
 		90059A4922C2673900803B48 /* CartridgeInitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4822C2673900803B48 /* CartridgeInitError.swift */; };
 		90059A4B22C2676A00803B48 /* BootromInitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4A22C2676A00803B48 /* BootromInitError.swift */; };
 		90059A4D22C2693400803B48 /* CartridgeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90059A4C22C2693400803B48 /* CartridgeHeader.swift */; };
-		90293E5022C4013200165888 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E4F22C4013200165888 /* Helpers.swift */; };
-		90293E5622C427EF00165888 /* pyBoyBlargg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E5522C427EF00165888 /* pyBoyBlargg.swift */; };
-		90293E5822C4287C00165888 /* PyFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E5722C4287C00165888 /* PyFiles.swift */; };
-		90293E5C22C4D20100165888 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90293E5B22C4D20100165888 /* StreamReader.swift */; };
 		902BDD9E22C1544000632BA7 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDD9D22C1544000632BA7 /* Interrupts.swift */; };
 		902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */; };
 		902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */; };
@@ -35,7 +31,6 @@
 		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
 		903DB4E222BC0C76003132FA /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4E122BC0C76003132FA /* Shader.metal */; };
 		905321AA22BE378300A409B2 /* OrEqualOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321A922BE378300A409B2 /* OrEqualOperator.swift */; };
-		905321AC22BE410900A409B2 /* performanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321AB22BE410900A409B2 /* performanceTest.swift */; };
 		905321B022BE46E800A409B2 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321AF22BE46E800A409B2 /* Debugger.swift */; };
 		905321B222BE479800A409B2 /* DebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B122BE479800A409B2 /* DebugMode.swift */; };
 		905321B522BE48EE00A409B2 /* Debugger+Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B422BE48EE00A409B2 /* Debugger+Cpu.swift */; };
@@ -93,6 +88,18 @@
 		90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5622B789D0005BBCF5 /* SerialPort.swift */; };
 		90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */; };
 		90B0DC5D22B78E13005BBCF5 /* Bus+read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */; };
+		90B2230A22C8FA2E0023F38D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2230922C8FA2E0023F38D /* main.swift */; };
+		90B2230E22C8FA480023F38D /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A17B58229D59A20027133B /* GameBoyKit.framework */; };
+		90B2231222C8FABC0023F38D /* BlarggRomDumps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2231022C8FABC0023F38D /* BlarggRomDumps.swift */; };
+		90B2231322C8FABC0023F38D /* BlarggRoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2231122C8FABC0023F38D /* BlarggRoms.swift */; };
+		90B2231622C905B40023F38D /* SavedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2231522C905B40023F38D /* SavedState.swift */; };
+		90B2231822C906100023F38D /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2231722C906100023F38D /* StreamReader.swift */; };
+		90B2231A22C9061E0023F38D /* loadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2231922C9061E0023F38D /* loadState.swift */; };
+		90B2231C22C908E80023F38D /* compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2231B22C908E80023F38D /* compare.swift */; };
+		90B2231E22C909F10023F38D /* BlarggTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2231D22C909F10023F38D /* BlarggTests.swift */; };
+		90B2232122C90A960023F38D /* BootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2232022C90A960023F38D /* BootromTests.swift */; };
+		90B2232322C90AB70023F38D /* performanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2232222C90AB70023F38D /* performanceTest.swift */; };
+		90B2232722C90C8E0023F38D /* listStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2232622C90C8E0023F38D /* listStates.swift */; };
 		90BD8BD522C630B3004376BD /* LcdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BD8BD422C630B3004376BD /* LcdConstants.swift */; };
 		90BE338622B5123B00DF3953 /* LcdColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */; };
 		90C19C5822B2AEE200A1B7A9 /* LcdTileDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */; };
@@ -105,18 +112,11 @@
 		90CBB73222AD7AE3004775E2 /* Data+UIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */; };
 		90CBD3CB22BD62B700B58461 /* Framebuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CA22BD62B700B58461 /* Framebuffer.swift */; };
 		90CBD3CD22BD6AA000B58461 /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CC22BD6AA000B58461 /* Metal.swift */; };
-		90CBD3D722BD81F000B58461 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3D622BD81F000B58461 /* main.swift */; };
-		90CBD3DC22BD822000B58461 /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A17B58229D59A20027133B /* GameBoyKit.framework */; };
-		90CBD3DE22BD824300B58461 /* PyBoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818D922B57976004E5281 /* PyBoy.swift */; };
-		90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DB22B579EC004E5281 /* PyLoad.swift */; };
-		90CBD3E022BD824300B58461 /* PyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903818DD22B57B8A004E5281 /* PyTest.swift */; };
-		90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */; };
 		90EDD2A922C2864100003E9E /* RomOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A822C2864100003E9E /* RomOnly.swift */; };
 		90EDD2AF22C29F6200003E9E /* BusCartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2AE22C29F6200003E9E /* BusCartridge.swift */; };
 		90EDD2B322C2A33F00003E9E /* FakeBusCartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2B222C2A33F00003E9E /* FakeBusCartridge.swift */; };
 		90EDD2B722C2A4AC00003E9E /* BusBootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2B622C2A4AC00003E9E /* BusBootrom.swift */; };
 		90EDD2B922C2A63600003E9E /* FakeBusBootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2B822C2A63600003E9E /* FakeBusBootrom.swift */; };
-		90EDD2C022C2C22700003E9E /* BlarggRoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2BF22C2C22700003E9E /* BlarggRoms.swift */; };
 		90EDD2C422C2C71800003E9E /* CartridgeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */; };
 		90EDD2C622C2CCB700003E9E /* MBC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C522C2CCB700003E9E /* MBC1.swift */; };
 		90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C922C2D50E00003E9E /* BootromFactory.swift */; };
@@ -170,7 +170,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		90CBD3D222BD81F000B58461 /* CopyFiles */ = {
+		90B2230522C8FA2E0023F38D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -187,10 +187,6 @@
 		90059A4822C2673900803B48 /* CartridgeInitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartridgeInitError.swift; sourceTree = "<group>"; };
 		90059A4A22C2676A00803B48 /* BootromInitError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BootromInitError.swift; sourceTree = "<group>"; };
 		90059A4C22C2693400803B48 /* CartridgeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeHeader.swift; sourceTree = "<group>"; };
-		90293E4F22C4013200165888 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		90293E5522C427EF00165888 /* pyBoyBlargg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBlargg.swift; sourceTree = "<group>"; };
-		90293E5722C4287C00165888 /* PyFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PyFiles.swift; path = GameBoyKitBlarggTests/Blargg/PyFiles.swift; sourceTree = SOURCE_ROOT; };
-		90293E5B22C4D20100165888 /* StreamReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
 		902BDD9D22C1544000632BA7 /* Interrupts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Interrupts.swift; path = ../Interrupts/Interrupts.swift; sourceTree = "<group>"; };
 		902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcd.swift"; sourceTree = "<group>"; };
 		902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createCpu.swift"; sourceTree = "<group>"; };
@@ -205,15 +201,11 @@
 		902CA97822C0159C00026960 /* Bootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootrom.swift; sourceTree = "<group>"; };
 		902CA97C22C0204800026960 /* XCTestCase+createBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createBus.swift"; sourceTree = "<group>"; };
 		902CA97E22C031CD00026960 /* BusUnmapBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusUnmapBootromTests.swift; sourceTree = "<group>"; };
-		903818D922B57976004E5281 /* PyBoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyBoy.swift; sourceTree = "<group>"; };
-		903818DB22B579EC004E5281 /* PyLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyLoad.swift; sourceTree = "<group>"; };
-		903818DD22B57B8A004E5281 /* PyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyTest.swift; sourceTree = "<group>"; };
 		903DB4DB22BB903A003132FA /* Lcd+Dump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lcd+Dump.swift"; sourceTree = "<group>"; };
 		903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileIndexTests.swift; sourceTree = "<group>"; };
 		903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoyRenderer.swift; sourceTree = "<group>"; };
 		903DB4E122BC0C76003132FA /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		905321A922BE378300A409B2 /* OrEqualOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrEqualOperator.swift; sourceTree = "<group>"; };
-		905321AB22BE410900A409B2 /* performanceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = performanceTest.swift; sourceTree = "<group>"; };
 		905321AF22BE46E800A409B2 /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 		905321B122BE479800A409B2 /* DebugMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMode.swift; sourceTree = "<group>"; };
 		905321B422BE48EE00A409B2 /* Debugger+Cpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debugger+Cpu.swift"; sourceTree = "<group>"; };
@@ -277,6 +269,18 @@
 		90B0DC5622B789D0005BBCF5 /* SerialPort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
 		90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+write.swift"; sourceTree = "<group>"; };
 		90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+read.swift"; sourceTree = "<group>"; };
+		90B2230722C8FA2E0023F38D /* GameBoyKitROMTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameBoyKitROMTests; sourceTree = BUILT_PRODUCTS_DIR; };
+		90B2230922C8FA2E0023F38D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		90B2231022C8FABC0023F38D /* BlarggRomDumps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlarggRomDumps.swift; sourceTree = "<group>"; };
+		90B2231122C8FABC0023F38D /* BlarggRoms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlarggRoms.swift; sourceTree = "<group>"; };
+		90B2231522C905B40023F38D /* SavedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedState.swift; sourceTree = "<group>"; };
+		90B2231722C906100023F38D /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
+		90B2231922C9061E0023F38D /* loadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadState.swift; sourceTree = "<group>"; };
+		90B2231B22C908E80023F38D /* compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = compare.swift; sourceTree = "<group>"; };
+		90B2231D22C909F10023F38D /* BlarggTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggTests.swift; sourceTree = "<group>"; };
+		90B2232022C90A960023F38D /* BootromTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BootromTests.swift; sourceTree = "<group>"; };
+		90B2232222C90AB70023F38D /* performanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = performanceTest.swift; sourceTree = "<group>"; };
+		90B2232622C90C8E0023F38D /* listStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listStates.swift; sourceTree = "<group>"; };
 		90BD8BD422C630B3004376BD /* LcdConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdConstants.swift; sourceTree = "<group>"; };
 		90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorValueTests.swift; sourceTree = "<group>"; };
 		90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileDataTests.swift; sourceTree = "<group>"; };
@@ -289,15 +293,11 @@
 		90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UIntTests.swift"; sourceTree = "<group>"; };
 		90CBD3CA22BD62B700B58461 /* Framebuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Framebuffer.swift; sourceTree = "<group>"; };
 		90CBD3CC22BD6AA000B58461 /* Metal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
-		90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pyBoyBootromTests.swift; sourceTree = "<group>"; };
-		90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameBoyKitBlarggTests; sourceTree = BUILT_PRODUCTS_DIR; };
-		90CBD3D622BD81F000B58461 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		90EDD2A822C2864100003E9E /* RomOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomOnly.swift; sourceTree = "<group>"; };
 		90EDD2AE22C29F6200003E9E /* BusCartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusCartridge.swift; sourceTree = "<group>"; };
 		90EDD2B222C2A33F00003E9E /* FakeBusCartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBusCartridge.swift; sourceTree = "<group>"; };
 		90EDD2B622C2A4AC00003E9E /* BusBootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBootrom.swift; sourceTree = "<group>"; };
 		90EDD2B822C2A63600003E9E /* FakeBusBootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBusBootrom.swift; sourceTree = "<group>"; };
-		90EDD2BF22C2C22700003E9E /* BlarggRoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggRoms.swift; sourceTree = "<group>"; };
 		90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeFactory.swift; sourceTree = "<group>"; };
 		90EDD2C522C2CCB700003E9E /* MBC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC1.swift; sourceTree = "<group>"; };
 		90EDD2C922C2D50E00003E9E /* BootromFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromFactory.swift; sourceTree = "<group>"; };
@@ -337,11 +337,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		90CBD3D122BD81F000B58461 /* Frameworks */ = {
+		90B2230422C8FA2E0023F38D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90CBD3DC22BD822000B58461 /* GameBoyKit.framework in Frameworks */,
+				90B2230E22C8FA480023F38D /* GameBoyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +394,7 @@
 				90A17B42229D59830027133B /* GameBoyMac */,
 				90A17B59229D59A20027133B /* GameBoyKit */,
 				90A17B66229D59A30027133B /* GameBoyKitTests */,
-				90CBD3D522BD81F000B58461 /* GameBoyKitBlarggTests */,
+				90B2230822C8FA2E0023F38D /* GameBoyKitROMTests */,
 				90A17B7B229D59B10027133B /* Code generation */,
 				90A17B41229D59830027133B /* Products */,
 				90CBD3DB22BD822000B58461 /* Frameworks */,
@@ -408,7 +408,7 @@
 				90A17B58229D59A20027133B /* GameBoyKit.framework */,
 				90A17B60229D59A30027133B /* GameBoyKitTests.xctest */,
 				90A17B7A229D59B10027133B /* Code generation */,
-				90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */,
+				90B2230722C8FA2E0023F38D /* GameBoyKitROMTests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -513,6 +513,48 @@
 			path = Cartridge;
 			sourceTree = "<group>";
 		};
+		90B2230822C8FA2E0023F38D /* GameBoyKitROMTests */ = {
+			isa = PBXGroup;
+			children = (
+				90B2231F22C90A270023F38D /* Bootrom */,
+				90B2230F22C8FA860023F38D /* Blargg */,
+				90B2231422C8FB160023F38D /* State */,
+				90B2230922C8FA2E0023F38D /* main.swift */,
+				90B2232222C90AB70023F38D /* performanceTest.swift */,
+			);
+			path = GameBoyKitROMTests;
+			sourceTree = "<group>";
+		};
+		90B2230F22C8FA860023F38D /* Blargg */ = {
+			isa = PBXGroup;
+			children = (
+				90B2231122C8FABC0023F38D /* BlarggRoms.swift */,
+				90B2231022C8FABC0023F38D /* BlarggRomDumps.swift */,
+				90B2231D22C909F10023F38D /* BlarggTests.swift */,
+			);
+			path = Blargg;
+			sourceTree = "<group>";
+		};
+		90B2231422C8FB160023F38D /* State */ = {
+			isa = PBXGroup;
+			children = (
+				90B2231522C905B40023F38D /* SavedState.swift */,
+				90B2231922C9061E0023F38D /* loadState.swift */,
+				90B2232622C90C8E0023F38D /* listStates.swift */,
+				90B2231B22C908E80023F38D /* compare.swift */,
+				90B2231722C906100023F38D /* StreamReader.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		90B2231F22C90A270023F38D /* Bootrom */ = {
+			isa = PBXGroup;
+			children = (
+				90B2232022C90A960023F38D /* BootromTests.swift */,
+			);
+			path = Bootrom;
+			sourceTree = "<group>";
+		};
 		90C19C5A22B3C8B900A1B7A9 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,37 +596,11 @@
 			path = Lcd;
 			sourceTree = "<group>";
 		};
-		90CBD3D522BD81F000B58461 /* GameBoyKitBlarggTests */ = {
-			isa = PBXGroup;
-			children = (
-				90EDD2BE22C2C1EE00003E9E /* Blargg */,
-				90CBD3DD22BD822A00B58461 /* PyBoy */,
-				90CBD3CE22BD71FC00B58461 /* pyBoyBootromTests.swift */,
-				90293E5522C427EF00165888 /* pyBoyBlargg.swift */,
-				905321AB22BE410900A409B2 /* performanceTest.swift */,
-				90293E4F22C4013200165888 /* Helpers.swift */,
-				90CBD3D622BD81F000B58461 /* main.swift */,
-			);
-			path = GameBoyKitBlarggTests;
-			sourceTree = "<group>";
-		};
 		90CBD3DB22BD822000B58461 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		90CBD3DD22BD822A00B58461 /* PyBoy */ = {
-			isa = PBXGroup;
-			children = (
-				903818D922B57976004E5281 /* PyBoy.swift */,
-				903818DB22B579EC004E5281 /* PyLoad.swift */,
-				903818DD22B57B8A004E5281 /* PyTest.swift */,
-				90293E5722C4287C00165888 /* PyFiles.swift */,
-				90293E5B22C4D20100165888 /* StreamReader.swift */,
-			);
-			path = PyBoy;
 			sourceTree = "<group>";
 		};
 		90D58EE122A7B2580076584F /* Bus */ = {
@@ -602,14 +618,6 @@
 				90EDD2B622C2A4AC00003E9E /* BusBootrom.swift */,
 			);
 			path = Bus;
-			sourceTree = "<group>";
-		};
-		90EDD2BE22C2C1EE00003E9E /* Blargg */ = {
-			isa = PBXGroup;
-			children = (
-				90EDD2BF22C2C22700003E9E /* BlarggRoms.swift */,
-			);
-			path = Blargg;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -700,21 +708,21 @@
 			productReference = 90A17B7A229D59B10027133B /* Code generation */;
 			productType = "com.apple.product-type.tool";
 		};
-		90CBD3D322BD81F000B58461 /* GameBoyKitBlarggTests */ = {
+		90B2230622C8FA2E0023F38D /* GameBoyKitROMTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90CBD3D822BD81F000B58461 /* Build configuration list for PBXNativeTarget "GameBoyKitBlarggTests" */;
+			buildConfigurationList = 90B2230B22C8FA2E0023F38D /* Build configuration list for PBXNativeTarget "GameBoyKitROMTests" */;
 			buildPhases = (
-				90CBD3D022BD81F000B58461 /* Sources */,
-				90CBD3D122BD81F000B58461 /* Frameworks */,
-				90CBD3D222BD81F000B58461 /* CopyFiles */,
+				90B2230322C8FA2E0023F38D /* Sources */,
+				90B2230422C8FA2E0023F38D /* Frameworks */,
+				90B2230522C8FA2E0023F38D /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = GameBoyKitBlarggTests;
-			productName = GameBoyKitBlarggTests;
-			productReference = 90CBD3D422BD81F000B58461 /* GameBoyKitBlarggTests */;
+			name = GameBoyKitROMTests;
+			productName = GameBoyKitROMTests;
+			productReference = 90B2230722C8FA2E0023F38D /* GameBoyKitROMTests */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -745,7 +753,7 @@
 					90A17B79229D59B10027133B = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
-					90CBD3D322BD81F000B58461 = {
+					90B2230622C8FA2E0023F38D = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
@@ -767,7 +775,7 @@
 				90A17B57229D59A20027133B /* GameBoyKit */,
 				90A17B5F229D59A30027133B /* GameBoyKitTests */,
 				90A17B79229D59B10027133B /* Code generation */,
-				90CBD3D322BD81F000B58461 /* GameBoyKitBlarggTests */,
+				90B2230622C8FA2E0023F38D /* GameBoyKitROMTests */,
 			);
 		};
 /* End PBXProject section */
@@ -946,21 +954,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		90CBD3D022BD81F000B58461 /* Sources */ = {
+		90B2230322C8FA2E0023F38D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				905321AC22BE410900A409B2 /* performanceTest.swift in Sources */,
-				90293E5822C4287C00165888 /* PyFiles.swift in Sources */,
-				90CBD3E022BD824300B58461 /* PyTest.swift in Sources */,
-				90EDD2C022C2C22700003E9E /* BlarggRoms.swift in Sources */,
-				90293E5C22C4D20100165888 /* StreamReader.swift in Sources */,
-				90CBD3E122BD824300B58461 /* pyBoyBootromTests.swift in Sources */,
-				90293E5022C4013200165888 /* Helpers.swift in Sources */,
-				90CBD3DF22BD824300B58461 /* PyLoad.swift in Sources */,
-				90CBD3D722BD81F000B58461 /* main.swift in Sources */,
-				90293E5622C427EF00165888 /* pyBoyBlargg.swift in Sources */,
-				90CBD3DE22BD824300B58461 /* PyBoy.swift in Sources */,
+				90B2231822C906100023F38D /* StreamReader.swift in Sources */,
+				90B2231A22C9061E0023F38D /* loadState.swift in Sources */,
+				90B2230A22C8FA2E0023F38D /* main.swift in Sources */,
+				90B2231322C8FABC0023F38D /* BlarggRoms.swift in Sources */,
+				90B2231222C8FABC0023F38D /* BlarggRomDumps.swift in Sources */,
+				90B2231622C905B40023F38D /* SavedState.swift in Sources */,
+				90B2232722C90C8E0023F38D /* listStates.swift in Sources */,
+				90B2231E22C909F10023F38D /* BlarggTests.swift in Sources */,
+				90B2231C22C908E80023F38D /* compare.swift in Sources */,
+				90B2232322C90AB70023F38D /* performanceTest.swift in Sources */,
+				90B2232122C90A960023F38D /* BootromTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1259,7 +1267,7 @@
 			};
 			name = Release;
 		};
-		90CBD3D922BD81F000B58461 /* Debug */ = {
+		90B2230C22C8FA2E0023F38D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1269,7 +1277,7 @@
 			};
 			name = Debug;
 		};
-		90CBD3DA22BD81F000B58461 /* Release */ = {
+		90B2230D22C8FA2E0023F38D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1327,11 +1335,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90CBD3D822BD81F000B58461 /* Build configuration list for PBXNativeTarget "GameBoyKitBlarggTests" */ = {
+		90B2230B22C8FA2E0023F38D /* Build configuration list for PBXNativeTarget "GameBoyKitROMTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				90CBD3D922BD81F000B58461 /* Debug */,
-				90CBD3DA22BD81F000B58461 /* Release */,
+				90B2230C22C8FA2E0023F38D /* Debug */,
+				90B2230D22C8FA2E0023F38D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

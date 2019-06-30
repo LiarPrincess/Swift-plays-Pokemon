@@ -2,7 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-class PyRegisters {
+class SavedRegisters {
   var a: UInt8 = 0
   var c: UInt8 = 0
   var b: UInt8 = 0
@@ -16,23 +16,23 @@ class PyRegisters {
   var carryFlag:     Bool = false
 }
 
-class PyCpu {
+class SavedCpu {
   var pc:    UInt16 = 0
   var sp:    UInt16 = 0
   var cycle: UInt16 = 0
   var ime:      Bool = false
   var isHalted: Bool = false
-  var registers = PyRegisters()
+  var registers = SavedRegisters()
 }
 
-class PyMemory {
+class SavedMemory {
   var data = [UInt8](repeating: 0, count: 0x10000)
 }
 
-class PyBoy {
+class SavedState {
   let filename: String
-  let cpu    = PyCpu()
-  let memory = PyMemory()
+  var cpu    = SavedCpu()
+  var memory = SavedMemory()
 
   init(filename: String) {
     self.filename = filename

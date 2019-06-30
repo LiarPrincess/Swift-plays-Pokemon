@@ -8,7 +8,7 @@ enum BlarggRoms {
 
   private static var romsDir: URL = {
     let currentFile = URL(fileURLWithPath: #file)
-    let mainDir = currentFile.deletingLastPathComponent().deletingLastPathComponent()
+    let mainDir = currentFile.deletingLastPathComponent()
     return mainDir.appendingPathComponent("ROMs")
   }()
 

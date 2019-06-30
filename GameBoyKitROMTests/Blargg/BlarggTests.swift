@@ -5,6 +5,7 @@
 import Foundation
 import GameBoyKit
 
+/*
 func pyBoyBlarggCpuInstrs01() {
   let rom = BlarggRoms.cpuInstrs01
   let pyFiles = PyFiles.cpuInstrs01
@@ -57,15 +58,28 @@ private func pyBoyBlargg(rom: URL, pyFiles: [URL]) {
     debugger.run(mode: .none, untilPC: pyBoy.cpu.pc)
     let hasError = pyTest(py: pyBoy, swift: gameBoy)
 
-//    if hasError {
-//      fatalError()
-//    }
+    //    if hasError {
+    //      fatalError()
+    //    }
   }
 
   print("---")
   print(String(bytes: gameBoy.linkCable, encoding: .ascii) ?? "")
   print("---")
 }
+
+ private func openRom(url: URL) -> Cartridge {
+ do {
+ let data = try Data(contentsOf: url)
+ return try CartridgeFactory.fromData(data)
+ } catch let error as CartridgeInitError {
+ print("Error when opening ROM: \(error.description)")
+ exit(1)
+ } catch {
+ print("Error when opening ROM: \(error.localizedDescription)")
+ exit(1)
+ }
+ }
 
 // ----------------------------------
 
@@ -126,3 +140,4 @@ var debugFileURLs3: [URL] = {
 }()
 
 // ----------------------------------
+*/

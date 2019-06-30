@@ -7,22 +7,10 @@
 /GameBoyKitBlarggTests/ROMs/*
 !/GameBoyKitBlarggTests/ROMs/.gitkeep
 
-# py test files
-/GameBoyKitBlarggTests/PyBootromFiles
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_01
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_02
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_03
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_03_debug
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_03_debug_bad
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_04
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_05
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_06
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_06_debug
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_07
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_08
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_09
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_10
-/GameBoyKitBlarggTests/PyBlarggFiles_cpu_instr_11
+# ROM test files
+/GameBoyKitROMTests/Bootrom/Dump
+/GameBoyKitROMTests/Blargg/Dumps
+/GameBoyKitROMTests/Blargg/ROMs
 
 # mac
 .DS_Store

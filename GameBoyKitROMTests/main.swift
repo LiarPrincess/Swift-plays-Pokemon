@@ -3,11 +3,11 @@ import GameBoyKit
 
 // PyFiles.printFormatted(PyFiles.cpuInstrs07)
 
-// Test whole bootrom according to PyBoy dump
-//pyBoyBootromTests()
+// Test whole bootrom
+runBootromTests()
 
 // Run Blargg tests according to PyBoy dump
-//pyBoyBlarggCpuInstrs01(); printSpace()
+//pyBoyBlarggCpuInstrs01()
 // 2 does not work in PyBoy
 //pyBoyBlarggCpuInstrs03()
 //pyBoyBlarggCpuInstrs04()
@@ -20,3 +20,7 @@ import GameBoyKit
 
 // Run Blargg tests
 //blarggTests()
+
+//for file in PyFiles.bootrom {
+//  print(file.lastPathComponent)
+//}
