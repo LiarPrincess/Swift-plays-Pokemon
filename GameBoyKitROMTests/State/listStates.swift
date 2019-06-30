@@ -12,5 +12,7 @@ func listStates(dir: URL) -> [URL] {
     exit(1)
   }
 
-  return reader.map { dir.appendingPathComponent($0) }
+  return reader
+    .filter { !$0.isEmpty }
+    .map { dir.appendingPathComponent($0) }
 }

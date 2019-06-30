@@ -7,11 +7,72 @@ import GameBoyKit
 
 func runTestCpuInstrs01() {
   let rom = BlarggRoms.cpuInstrs01
-  let url = BlarggRomDumps.cpuInstrs01
-  runTest(rom: rom, dumpFiles: [url])
+  let dump = BlarggRomDumps.cpuInstrs01
+  runTest(rom: rom, dump: dump)
 }
 
-private func runTest(rom: URL, dumpFiles urls: [URL]) {
+func runTestCpuInstrs02() {
+  let rom = BlarggRoms.cpuInstrs02
+  let dump = BlarggRomDumps.cpuInstrs02
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs03() {
+  let rom = BlarggRoms.cpuInstrs03
+  let dump = BlarggRomDumps.cpuInstrs03
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs04() {
+  let rom = BlarggRoms.cpuInstrs04
+  let dump = BlarggRomDumps.cpuInstrs04
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs05() {
+  let rom = BlarggRoms.cpuInstrs05
+  let dump = BlarggRomDumps.cpuInstrs05
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs06() {
+  let rom = BlarggRoms.cpuInstrs06
+  let dump = BlarggRomDumps.cpuInstrs06
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs07() {
+  let rom = BlarggRoms.cpuInstrs07
+  let dump = BlarggRomDumps.cpuInstrs07
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs08() {
+  let rom = BlarggRoms.cpuInstrs08
+  let dump = BlarggRomDumps.cpuInstrs08
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs09() {
+  let rom = BlarggRoms.cpuInstrs09
+  let dump = BlarggRomDumps.cpuInstrs09
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs10() {
+  let rom = BlarggRoms.cpuInstrs10
+  let dump = BlarggRomDumps.cpuInstrs10
+  runTest(rom: rom, dump: dump)
+}
+
+func runTestCpuInstrs11() {
+  let rom = BlarggRoms.cpuInstrs11
+  let dump = BlarggRomDumps.cpuInstrs11
+  runTest(rom: rom, dump: dump)
+
+}
+
+private func runTest(rom: URL, dump urls: [URL]) {
   let cartridge = openRom(url: rom)
   let gameBoy   = GameBoy(bootrom: nil, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
@@ -47,101 +108,3 @@ private func openRom(url: URL) -> Cartridge {
     exit(1)
   }
 }
-
-
-
-
-
-/*
-// TODO: not working
-func runTestCpuInstrs03() {
-  let rom = BlarggRoms.cpuInstrs03
-  let pyFiles = PyFiles.cpuInstrs03
-  runTestWorking3(rom: rom, pyFiles: pyFiles)
-}
-
-func runTestCpuInstrs04() {
-  let rom = BlarggRoms.cpuInstrs04
-  let pyFiles = PyFiles.cpuInstrs04
-  runTest(rom: rom, pyFiles: pyFiles)
-}
-
-func runTestCpuInstrs05() {
-  let rom = BlarggRoms.cpuInstrs05
-  let pyFiles = PyFiles.cpuInstrs05
-  runTest(rom: rom, pyFiles: pyFiles)
-}
-
-func runTestCpuInstrs06() {
-  let rom = BlarggRoms.cpuInstrs06
-  let pyFiles = PyFiles.cpuInstrs06
-  runTest(rom: rom, pyFiles: pyFiles)
-}
-
-// TODO: not working
-func runTestCpuInstrs07() {
-  let rom = BlarggRoms.cpuInstrs07
-  let pyFiles = PyFiles.cpuInstrs07
-  runTest(rom: rom, pyFiles: pyFiles)
-}
-
-// ----------------------------------
-
-private func runTestWorking3(rom: URL, pyFiles: [URL]) {
-  let cartridge = Helpers.openRom(url: rom)
-  let gameBoy   = GameBoy(bootrom: .skip, cartridge: cartridge)
-  let debugger  = Debugger(gameBoy: gameBoy)
-
-  for (index, pyUrl) in pyFiles[0..<660].enumerated() {
-    let fileName = pyUrl.lastPathComponent
-    print("\(index)/\(pyFiles.count - 1) - \(fileName)")
-
-    let pyBoy = pyLoad(pyUrl)
-
-    let debugMode: DebugMode = index >= 660 ? .none : .none // opcodes
-    debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(py: pyBoy, swift: gameBoy)
-
-    if fileName == "pyboy_cpu_instr_03_pc_0xc507" {
-      break
-    }
-
-    if hasError {
-      fatalError()
-    }
-  }
-
-  let pyFiles2 = debugFileURLs3 // PyFiles.cpuInstrs03Debug
-  for (index, pyUrl) in pyFiles2.enumerated() {
-    let fileName = pyUrl.lastPathComponent
-    print("\(index)/\(pyFiles2.count) - \(fileName)")
-
-    let pyBoy = pyLoad(pyUrl)
-
-    let debugMode: DebugMode = index >= 170 ? .none : .none
-    debugger.run(mode: debugMode, untilPC: pyBoy.cpu.pc)
-    let hasError = pyTest(py: pyBoy, swift: gameBoy)
-
-    if fileName == "pyboy_cpu_instr_03_pc_0xc507" {
-      break
-    }
-
-    if hasError {
-      fatalError()
-    }
-  }
-}
-
-var debugFileURLs3: [URL] = {
-  let currentFile = URL(fileURLWithPath: #file)
-  let mainDir     = currentFile.deletingLastPathComponent()
-  let debugDir    = mainDir.appendingPathComponent("PyBlarggFiles_cpu_instr_03_debug")
-
-  let programCounters = 1...1853
-  return programCounters.map { pc in
-    return debugDir.appendingPathComponent("pyboy_cpu_instrs_03_pc_0xc505_\(pc).txt")
-  }
-}()
-
-// ----------------------------------
-*/

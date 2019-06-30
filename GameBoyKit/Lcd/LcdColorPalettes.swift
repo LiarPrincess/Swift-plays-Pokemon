@@ -14,16 +14,13 @@ public struct BackgroundColorPalette {
   private var color2: UInt8 = 0
   private var color3: UInt8 = 0
 
-  public internal(set) var value: UInt8 {
-    get {
-      var result: UInt8 = 0
-      result |= self.color0 << color0Shift
-      result |= self.color1 << color1Shift
-      result |= self.color2 << color2Shift
-      result |= self.color3 << color3Shift
-      return result
-    }
+  private var _value: UInt8 = 0
+
+  public internal(set) var value: UInt8
+  {
+    get { return self._value }
     set {
+      self._value = newValue
       self.color0 = (newValue >> color0Shift) & 0b11
       self.color1 = (newValue >> color1Shift) & 0b11
       self.color2 = (newValue >> color2Shift) & 0b11
@@ -48,15 +45,12 @@ public struct ObjectColorPalette {
   private var color2: UInt8 = 0
   private var color3: UInt8 = 0
 
+  private var _value: UInt8 = 0
+
   public internal(set) var value: UInt8 {
-    get {
-      var result: UInt8 = 0
-      result |= self.color1 << color1Shift
-      result |= self.color2 << color2Shift
-      result |= self.color3 << color3Shift
-      return result
-    }
+    get { return self._value }
     set {
+      self._value = newValue
       self.color1 = (newValue >> color1Shift) & 0b11
       self.color2 = (newValue >> color2Shift) & 0b11
       self.color3 = (newValue >> color3Shift) & 0b11
