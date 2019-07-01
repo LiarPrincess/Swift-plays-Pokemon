@@ -51,17 +51,17 @@ class ColorPaletteTests: XCTestCase {
     value = 0b01
     palette.value = value
     XCTAssertEqual(palette[color], 0) // always 0
-    XCTAssertEqual(palette.value, 0) // not even saved
+    XCTAssertEqual(palette.value, value) // not even saved
 
     value = 0b10
     palette.value = value
     XCTAssertEqual(palette[color], 0) // always 0
-    XCTAssertEqual(palette.value, 0) // not even saved
+    XCTAssertEqual(palette.value, value) // not even saved
 
     value = 0b11
     palette.value = value
     XCTAssertEqual(palette[color], 0) // always 0
-    XCTAssertEqual(palette.value, 0) // not even saved
+    XCTAssertEqual(palette.value, value) // not even saved
   }
 
   func test_objectColorPalette_colors123() {

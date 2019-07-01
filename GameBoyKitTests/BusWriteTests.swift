@@ -34,7 +34,7 @@ class BusWriteTests: XCTestCase {
     let cartridge = FakeBusCartridge()
     let bus = self.createBus(cartridge: cartridge)
 
-    bus.unmapBootrom = 0x01
+    bus.bootrom = .finished
 
     bus.write(range.start, value: startValue)
     XCTAssertEqual(cartridge.rom[MemoryMap.rom0.start], startValue)
@@ -179,12 +179,12 @@ class BusWriteTests: XCTestCase {
 
     // 2 last bits are always 0
     bus.write(MemoryMap.Lcd.objectColors0, value: value)
-    XCTAssertEqual(bus.lcd.objectColors0.value, value & 0xfc)
+    XCTAssertEqual(bus.lcd.objectColors0.value, value)
     value += 1
 
     // 2 last bits are always 0
     bus.write(MemoryMap.Lcd.objectColors1, value: value)
-    XCTAssertEqual(bus.lcd.objectColors1.value, value & 0xfc)
+    XCTAssertEqual(bus.lcd.objectColors1.value, value)
     value += 1
   }
 
