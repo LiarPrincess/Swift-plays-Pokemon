@@ -8,17 +8,17 @@ import GameBoyKit
 //runBootromTests()
 
 // Run Blargg tests
-runTestCpuInstrs01() // [X] no problems except line
+//runTestCpuInstrs01() // [X]
 //runTestCpuInstrs02() // [ ] hangs at 312
-//runTestCpuInstrs03() // [ ] problems in internalRam
-//runTestCpuInstrs04() // [X] minor internal ram errors
-//runTestCpuInstrs05() // [X] minor internal ram errors
-//runTestCpuInstrs06() // [X] minor internal ram errors
+//runTestCpuInstrs03() // [x]
+//runTestCpuInstrs04() // [X]
+//runTestCpuInstrs05() // [X]
+//runTestCpuInstrs06() // [X]
 //runTestCpuInstrs07() // [ ] hangs at 377
-//runTestCpuInstrs08() // [X] minor internal ram errors
-//runTestCpuInstrs09() // [ ] Unable to open: 'pc_0xc507.txt'
-//runTestCpuInstrs10() // [ ] Unable to open: 'pc_0xc507.txt'
-//runTestCpuInstrs11() // [ ] problems in internalRam
+//runTestCpuInstrs08() // [X]
+//runTestCpuInstrs09() // [ ] unimplemented instr
+//runTestCpuInstrs10() // [x] Long
+//runTestCpuInstrs11() // [x] Long
 
 // Show single frame performance
 //performanceTest()

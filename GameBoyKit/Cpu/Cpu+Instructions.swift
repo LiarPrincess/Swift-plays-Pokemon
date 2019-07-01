@@ -398,16 +398,16 @@ extension Cpu {
   /// Adds the contents of the 8-bit immediate operand e and SP and stores the results in SP.
   @discardableResult
   internal func add_sp_r8(_ n: UInt8) -> UInt8 {
-    let sp = self.sp
-    let nn = UInt16(n)
-    let (newValue, overflow) = sp.addingReportingOverflow(nn)
+    let sp = Int(self.sp)
+    let nn = Int(Int8(bitPattern: n))
 
     self.registers.zeroFlag = false
     self.registers.subtractFlag = false
-    self.registers.halfCarryFlag = (sp & 0xf) + (nn & 0xf) > 0xf
-    self.registers.carryFlag = overflow
+    self.registers.halfCarryFlag = (sp &  0xf) + (nn &  0xf) >  0xf
+    self.registers.carryFlag     = (sp & 0xff) + (nn & 0xff) > 0xff
 
-    self.sp = newValue
+    let newValue = sp + nn
+    self.sp = UInt16(newValue & 0xffff)
 
     self.pc += 2
     return 16
