@@ -15,6 +15,14 @@ internal enum LcdConstants {
   /// Total number of lines (lcd + vBlank)
   internal static let heightWithVBlank = 154
 
+  /// 256x256 pixels BG map (32x32 tiles).
+  /// See: The Ultimate Game Boy Talk - 32:07.
+  internal static let backgroundMapWidth = 256
+
+  /// 256x256 pixels BG map (32x32 tiles).
+  /// See: The Ultimate Game Boy Talk - 32:07.
+  internal static let backgroundMapHeight = 256
+
   // MARK: - Line phase
 
   /// Cycle in which we end OAM search

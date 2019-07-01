@@ -13,7 +13,7 @@ private let bootromArgument = "--bootrom"
 private let romArgument = "--rom" // or just last one
 
 internal struct Arguments {
-  internal let bootrom:   Bootrom
+  internal let bootrom:   Bootrom?
   internal let cartridge: Cartridge
 }
 
@@ -30,10 +30,10 @@ internal func parseArguments() -> Arguments {
   )
 }
 
-private func openBootrom(path: String?) -> Bootrom {
+private func openBootrom(path: String?) -> Bootrom? {
   guard let path = path else {
     print("Boot-ROM not provided. Using default one.")
-    return Bootrom.skip
+    return nil
   }
 
   do {

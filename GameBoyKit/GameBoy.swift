@@ -69,7 +69,6 @@ public class GameBoy {
       if self.frameProgress > LcdConstants.cyclesPerFrame {
         self.frameProgress -= LcdConstants.cyclesPerFrame
         self.lcd.startFrame()
-        print("--- Starting frame ---")
       }
 
       self.timer.tick(cycles: UInt8(cycles))
@@ -79,6 +78,7 @@ public class GameBoy {
     }
   }
 
+  // swiftlint:disable:next function_body_length
   private func skipBootrom() {
     // Source: http://bgb.bircd.org/pandocs.htm#powerupsequence
 

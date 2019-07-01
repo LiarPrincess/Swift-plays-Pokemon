@@ -1,11 +1,14 @@
 import Foundation
 import GameBoyKit
 
+//print("Press enter...")
+//_ = readLine()
+
 // Test bootrom
 //runBootromTests()
 
 // Run Blargg tests
-//runTestCpuInstrs01() // [X] no problems except line
+runTestCpuInstrs01() // [X] no problems except line
 //runTestCpuInstrs02() // [ ] hangs at 312
 //runTestCpuInstrs03() // [ ] problems in internalRam
 //runTestCpuInstrs04() // [X] minor internal ram errors

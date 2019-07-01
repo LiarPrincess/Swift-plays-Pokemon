@@ -83,7 +83,10 @@ private func fill(_ emulator: SavedState, from fileUrl: URL) {
     else if property == cpu_halted                   { cpu.isHalted = parseBool(value) }
     else if property == cpu_stopped { } // TODO: Import 'cpu_stopped' from py
 
-    else if property == memoryD { replace(memory, from: 0x0000, to: 0xffff, with: value) }
+    else if property == memoryD {
+      replace(memory, from: 0x0000, to: 0xffff, with: value)
+      assert(memory.data.count == 0x10000, String(bytes: property, encoding: .ascii)!)
+    }
 
     else {
       print("Invalid line: \(String(bytes: property, encoding: .ascii)!)...")
@@ -127,8 +130,6 @@ private func replace(_ memory: SavedMemory, from: Int, to: Int, with data: Data)
 
   let expectedOffset = to - from + 1
   assert(addressOffset == expectedOffset)
-
-  assert(memory.data.count == 0x10000, String(bytes: property, encoding: .ascii)!)
 }
 
 // we could create separate class that implements Sequence, but whatever...

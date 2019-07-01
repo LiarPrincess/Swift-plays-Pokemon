@@ -178,14 +178,14 @@ public class Lcd {
     let tileSizeInPixels = 8 // width = height = 8 pixels
     let bytesPerTileLine = 2
 
-    let line = Int(self.line)
-    let globalY = Int(self.scrollY) + line
+    let line    = Int(self.line)
+    let globalY = (Int(self.scrollY) + line) % LcdConstants.backgroundMapHeight
     let tileRow = globalY / tileSizeInPixels
     let tileDataOffset = (globalY % tileSizeInPixels) * bytesPerTileLine
 
     var x = 0
     while x < Int(Lcd.width) {
-      let globalX = Int(self.scrollX) + x
+      let globalX = (Int(self.scrollX) + x) % LcdConstants.backgroundMapWidth
       let tileColumn = globalX / tileSizeInPixels
 
       let map = self.control.backgroundTileMap
