@@ -73,6 +73,40 @@ class StreamReader  {
     return nil
   }
 
+  /// Return next line, or nil on EOF.
+  func nextLineData() -> Data? {
+    if self.isEof {
+      return nil
+    }
+
+    guard let fileHandle = self.fileHandle else {
+      return nil
+    }
+
+    while !self.isEof {
+      if let range = self.buffer.range(of: self.delimiter) {
+        let data = buffer.subdata(in: 0..<range.lowerBound)
+        buffer.removeSubrange(0..<range.upperBound)
+        return data
+      }
+
+      let tmpData = fileHandle.readData(ofLength: self.bufferSize)
+      if tmpData.isEmpty {
+        self.isEof = true
+        // Buffer contains last line in file (not terminated by delimiter)
+        if !self.buffer.isEmpty {
+          let data = buffer as Data
+          buffer.count = 0
+          return data
+        }
+      } else {
+        self.buffer.append(tmpData)
+      }
+    }
+
+    return nil
+  }
+
   /// Start reading from the beginning of file.
   func rewind() {
     self.fileHandle?.seek(toFileOffset: 0)

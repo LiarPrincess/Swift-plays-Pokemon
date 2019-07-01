@@ -43,6 +43,42 @@ public class GameBoy {
     self.lcd.startFrame()
   }
 
+  @discardableResult
+  public func tickFrame() -> Framebuffer {
+    let cycles = LcdConstants.cyclesPerFrame - self.frameProgress
+
+    self.tickCpu(cycles: cycles)
+
+    // if we stopped at the last cycle of the frame, then
+    // run 1 bonus instruction to actually 'tick' it
+    if self.frameProgress == LcdConstants.cyclesPerFrame {
+      self.tickCpu(cycles: 1)
+    }
+
+    return self.lcd.framebuffer
+  }
+
+  internal func tickCpu(cycles totalCycles: Int = 1) {
+    var remainingCycles = totalCycles
+
+    while remainingCycles > 0 {
+      let cycles = self.cpu.tick()
+      remainingCycles -= cycles
+
+      self.frameProgress += cycles
+      if self.frameProgress > LcdConstants.cyclesPerFrame {
+        self.frameProgress -= LcdConstants.cyclesPerFrame
+        self.lcd.startFrame()
+        print("--- Starting frame ---")
+      }
+
+      self.timer.tick(cycles: UInt8(cycles))
+      self.lcd.tick(cycles: cycles)
+
+      // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
+    }
+  }
+
   private func skipBootrom() {
     // Source: http://bgb.bircd.org/pandocs.htm#powerupsequence
 
@@ -85,41 +121,6 @@ public class GameBoy {
     self.bus.write(0xff4a, value: 0x00) // WY
     self.bus.write(0xff4b, value: 0x00) // WX
     self.bus.write(0xffff, value: 0x00) // IE
-  }
-
-  @discardableResult
-  public func tickFrame() -> Framebuffer {
-    let cycles = LcdConstants.cyclesPerFrame - self.frameProgress
-
-    self.tickCpu(cycles: cycles)
-
-    // if we stopped at the last cycle of the frame, then
-    // run 1 bonus instruction to actually 'tick' it
-    if self.frameProgress == LcdConstants.cyclesPerFrame {
-      self.tickCpu(cycles: 1)
-    }
-
-    return self.lcd.framebuffer
-  }
-
-  internal func tickCpu(cycles totalCycles: Int = 1) {
-    var remainingCycles = totalCycles
-
-    while remainingCycles > 0 {
-      let cycles = self.cpu.tick()
-      remainingCycles -= cycles
-
-      self.frameProgress += cycles
-      if self.frameProgress > LcdConstants.cyclesPerFrame {
-        self.frameProgress -= LcdConstants.cyclesPerFrame
-        self.lcd.startFrame()
-      }
-
-      self.timer.tick(cycles: UInt8(cycles))
-      self.lcd.tick(cycles: cycles)
-
-      // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
-    }
   }
 }
 
