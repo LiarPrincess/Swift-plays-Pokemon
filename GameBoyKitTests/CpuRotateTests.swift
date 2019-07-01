@@ -15,14 +15,17 @@ class CpuRotateTests: XCTestCase {
 
   /// When A = 85h and CY = 0,
   /// RLCA ; A←0Ah,CY←1,Z←0,H←0,N←0
-  func disabled_test_rlca() {
+  func test_rlca() {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x85
     cpu.registers.carryFlag = false
     cpu.rlca()
 
-    XCTAssertEqual(cpu.registers.a, 0x0a)
+    // test is incorrect: lowest bit should be taken from carry, which is 1,
+    // so instead of 0b00001010 we have 0b00001011
+    print(UInt8(0x0a).bin)
+    XCTAssertEqual(cpu.registers.a, 0x0b)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
     XCTAssertEqual(cpu.registers.halfCarryFlag, false)
     XCTAssertEqual(cpu.registers.subtractFlag, false)

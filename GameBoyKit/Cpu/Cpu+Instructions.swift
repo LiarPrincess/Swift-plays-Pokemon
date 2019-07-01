@@ -868,9 +868,7 @@ extension Cpu {
     let a = self.registers.a
 
     let carry = a >> 7
-    let newValue = (a << 1)
-
-    fatalError("Add '| carry' (and fix this damned test)?")
+    let newValue = (a << 1) | carry
 
     self.registers.zeroFlag = false
     self.registers.subtractFlag = false
