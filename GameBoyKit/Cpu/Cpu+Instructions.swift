@@ -1439,10 +1439,8 @@ extension Cpu {
   /// The master interrupt enable flag is returned to its pre-interrupt status.
   @discardableResult
   internal func reti() -> UInt8 {
-    self.ret()
+    self.pc = self.pop16()
     self.enableInterrupts()
-
-    self.pc += 1
     return 16
   }
 

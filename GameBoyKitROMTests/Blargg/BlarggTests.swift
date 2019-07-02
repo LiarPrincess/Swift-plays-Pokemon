@@ -5,72 +5,20 @@
 import Foundation
 import GameBoyKit
 
-func runTestCpuInstrs01() {
-  let rom = BlarggRoms.cpuInstrs01
-  let dump = BlarggRomDumps.cpuInstrs01
-  runTest(rom: rom, dump: dump)
-}
+private typealias Roms = BlarggRoms
+private typealias Dumps = BlarggRomDumps
 
-func runTestCpuInstrs02() {
-  let rom = BlarggRoms.cpuInstrs02
-  let dump = BlarggRomDumps.cpuInstrs02
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs03() {
-  let rom = BlarggRoms.cpuInstrs03
-  let dump = BlarggRomDumps.cpuInstrs03
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs04() {
-  let rom = BlarggRoms.cpuInstrs04
-  let dump = BlarggRomDumps.cpuInstrs04
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs05() {
-  let rom = BlarggRoms.cpuInstrs05
-  let dump = BlarggRomDumps.cpuInstrs05
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs06() {
-  let rom = BlarggRoms.cpuInstrs06
-  let dump = BlarggRomDumps.cpuInstrs06
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs07() {
-  let rom = BlarggRoms.cpuInstrs07
-  let dump = BlarggRomDumps.cpuInstrs07
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs08() {
-  let rom = BlarggRoms.cpuInstrs08
-  let dump = BlarggRomDumps.cpuInstrs08
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs09() {
-  let rom = BlarggRoms.cpuInstrs09
-  let dump = BlarggRomDumps.cpuInstrs09
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs10() {
-  let rom = BlarggRoms.cpuInstrs10
-  let dump = BlarggRomDumps.cpuInstrs10
-  runTest(rom: rom, dump: dump)
-}
-
-func runTestCpuInstrs11() {
-  let rom = BlarggRoms.cpuInstrs11
-  let dump = BlarggRomDumps.cpuInstrs11
-  runTest(rom: rom, dump: dump)
-
-}
+func runTestCpuInstrs01() { runTest(rom: Roms.cpuInstrs01, dump: Dumps.cpuInstrs01) }
+func runTestCpuInstrs02() { runTest(rom: Roms.cpuInstrs02, dump: Dumps.cpuInstrs02) }
+func runTestCpuInstrs03() { runTest(rom: Roms.cpuInstrs03, dump: Dumps.cpuInstrs03) }
+func runTestCpuInstrs04() { runTest(rom: Roms.cpuInstrs04, dump: Dumps.cpuInstrs04) }
+func runTestCpuInstrs05() { runTest(rom: Roms.cpuInstrs05, dump: Dumps.cpuInstrs05) }
+func runTestCpuInstrs06() { runTest(rom: Roms.cpuInstrs06, dump: Dumps.cpuInstrs06) }
+func runTestCpuInstrs07() { runTest(rom: Roms.cpuInstrs07, dump: Dumps.cpuInstrs07) }
+func runTestCpuInstrs08() { runTest(rom: Roms.cpuInstrs08, dump: Dumps.cpuInstrs08) }
+func runTestCpuInstrs09() { runTest(rom: Roms.cpuInstrs09, dump: Dumps.cpuInstrs09) }
+func runTestCpuInstrs10() { runTest(rom: Roms.cpuInstrs10, dump: Dumps.cpuInstrs10) }
+func runTestCpuInstrs11() { runTest(rom: Roms.cpuInstrs11, dump: Dumps.cpuInstrs11) }
 
 private func runTest(rom: URL, dump urls: [URL]) {
   let cartridge = openRom(url: rom)
