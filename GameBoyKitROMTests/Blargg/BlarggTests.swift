@@ -81,14 +81,16 @@ private func runTest(rom: URL, dump urls: [URL]) {
     let fileName = url.lastPathComponent
     print("\(index)/\(urls.count - 1) - \(fileName)")
 
-    let state = loadState(url)
+    // https://swiftrocks.com/autoreleasepool-in-2019-swift.html
+    autoreleasepool {
+      let state = loadState(url)
+      debugger.run(mode: .none, untilPC: state.cpu.pc)
+      let hasError = compare(saved: state, gameboy: gameBoy)
 
-    debugger.run(mode: .none, untilPC: state.cpu.pc)
-    let hasError = compare(saved: state, gameboy: gameBoy)
-
-    //    if hasError {
-    //      fatalError()
-    //    }
+//      if hasError {
+//        fatalError()
+//      }
+    }
   }
 
   print("---")
