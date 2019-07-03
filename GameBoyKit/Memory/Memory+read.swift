@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Bus {
+extension Memory {
 
   /// Read from any address in memory.
   public func read(_ address: UInt16) -> UInt8 {

@@ -121,7 +121,7 @@ private func testStateBeforeUnmappingBootrom(_ s: GameBoy) {
       continue
     }
 
-    let value = s.bus.read(address)
+    let value = s.memory.read(address)
     let expected = values[address] ?? 0x00
 
     if value != expected {

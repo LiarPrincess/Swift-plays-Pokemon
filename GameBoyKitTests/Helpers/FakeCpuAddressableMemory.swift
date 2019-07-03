@@ -4,7 +4,7 @@
 
 @testable import GameBoyKit
 
-class FakeCpuBus: CpuBus {
+class FakeCpuAddressableMemory: CpuAddressableMemory {
 
   private var data = [UInt16: UInt8]()
 

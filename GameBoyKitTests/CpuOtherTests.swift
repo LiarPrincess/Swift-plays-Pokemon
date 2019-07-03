@@ -13,8 +13,8 @@ class CpuOtherTests: XCTestCase {
   /// SUB A,B ; A←83h–38h(4Bh), N←1
   /// DAA     ; A←4Bh+FAh(45h)
   func test_daa() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x45
     cpu.registers.b = 0x38
 
@@ -40,8 +40,8 @@ class CpuOtherTests: XCTestCase {
   }
 
   func test_nop() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.pc = 0xfefe
     _ = cpu.nop()
 
@@ -51,8 +51,8 @@ class CpuOtherTests: XCTestCase {
   /// When A = 35h,
   /// CPL ; A ← CAh
   func test_cpl() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x35
     _ = cpu.cpl()
 
@@ -60,8 +60,8 @@ class CpuOtherTests: XCTestCase {
   }
 
   func test_scf() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.carryFlag = false
     _ = cpu.ccf()
 
@@ -71,8 +71,8 @@ class CpuOtherTests: XCTestCase {
   /// When CY = 1,
   /// CCF ; CY ← 0
   func test_ccf() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.carryFlag = true
     _ = cpu.ccf()
 

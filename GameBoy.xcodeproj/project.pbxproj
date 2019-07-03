@@ -18,14 +18,11 @@
 		902BDDA622C1643400632BA7 /* XCTestCase+createTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902BDDA522C1643400632BA7 /* XCTestCase+createTimer.swift */; };
 		902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96A22BF825B00026960 /* Data+initFromRange.swift */; };
 		902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96C22BF85B600026960 /* Data+UInt.swift */; };
-		902CA96F22BFA63C00026960 /* CpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA96E22BFA63C00026960 /* CpuBus.swift */; };
 		902CA97122BFFD8D00026960 /* UnprefixedOpcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97022BFFD8D00026960 /* UnprefixedOpcode.swift */; };
 		902CA97322BFFDA700026960 /* CBPrefixedOpcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97222BFFDA700026960 /* CBPrefixedOpcode.swift */; };
 		902CA97522C001B600026960 /* PrintOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97422C001B600026960 /* PrintOpcodes.swift */; };
 		902CA97722C00C7300026960 /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97622C00C7300026960 /* Arguments.swift */; };
 		902CA97922C0159C00026960 /* Bootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97822C0159C00026960 /* Bootrom.swift */; };
-		902CA97D22C0204800026960 /* XCTestCase+createBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97C22C0204800026960 /* XCTestCase+createBus.swift */; };
-		902CA98022C031D200026960 /* BusUnmapBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97E22C031CD00026960 /* BusUnmapBootromTests.swift */; };
 		903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DB22BB903A003132FA /* Lcd+Dump.swift */; };
 		903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */; };
 		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
@@ -40,14 +37,21 @@
 		906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A222B8453F00F2766D /* DivTimerTests.swift */; };
 		906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A322B8453F00F2766D /* CustomTimerTests.swift */; };
 		906791E422CCCB39003869A9 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791E322CCCB39003869A9 /* DebugState.swift */; };
+		906791E722CCEDB0003869A9 /* Memory+write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791E522CCEDB0003869A9 /* Memory+write.swift */; };
+		906791E822CCEDB0003869A9 /* Memory+read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791E622CCEDB0003869A9 /* Memory+read.swift */; };
+		906791EA22CCEDBD003869A9 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791E922CCEDBD003869A9 /* Memory.swift */; };
+		906791EC22CCF1A8003869A9 /* FakeBootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791EB22CCF1A8003869A9 /* FakeBootromMemory.swift */; };
+		906791F022CCF1C8003869A9 /* FakeCartridgeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791EF22CCF1C8003869A9 /* FakeCartridgeMemory.swift */; };
+		906791F222CCF201003869A9 /* XCTestCase+createMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791F122CCF200003869A9 /* XCTestCase+createMemory.swift */; };
+		906791F422CCF327003869A9 /* FakeCpuAddressableMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791F322CCF326003869A9 /* FakeCpuAddressableMemory.swift */; };
+		906791F622CCF3EB003869A9 /* DmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791F522CCF3EB003869A9 /* DmaTests.swift */; };
+		906791F822CCF43A003869A9 /* UnmapBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791F722CCF439003869A9 /* UnmapBootromTests.swift */; };
+		906791FB22CCF4AB003869A9 /* MemoryReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791F922CCF4AB003869A9 /* MemoryReadTests.swift */; };
+		906791FC22CCF4AB003869A9 /* MemoryWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791FA22CCF4AB003869A9 /* MemoryWriteTests.swift */; };
 		9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* LcdColorPalettes.swift */; };
 		9085FC3322B693F200310090 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */; };
-		9085FC3B22B6BC7400310090 /* FakeCpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */; };
 		9085FC3D22B6BF6A00310090 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3C22B6BF6A00310090 /* main.swift */; };
 		9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */; };
-		9085FC4422B6C54400310090 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4322B6C54400310090 /* Bus.swift */; };
-		9085FC4622B6C71000310090 /* BusWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4522B6C70F00310090 /* BusWriteTests.swift */; };
-		9085FC4822B6C75200310090 /* BusReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC4722B6C75200310090 /* BusReadTests.swift */; };
 		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
 		909DA6A122C3DDEC007B7C8E /* CpuRegistersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909DA6A022C3DDEC007B7C8E /* CpuRegistersTests.swift */; };
 		90A17B44229D59830027133B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A17B43229D59830027133B /* AppDelegate.swift */; };
@@ -81,8 +85,6 @@
 		90B0DC5122B76E59005BBCF5 /* MemoryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5022B76E59005BBCF5 /* MemoryMap.swift */; };
 		90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5422B78927005BBCF5 /* Joypad.swift */; };
 		90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5622B789D0005BBCF5 /* SerialPort.swift */; };
-		90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */; };
-		90B0DC5D22B78E13005BBCF5 /* Bus+read.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */; };
 		90B2230A22C8FA2E0023F38D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2230922C8FA2E0023F38D /* main.swift */; };
 		90B2230E22C8FA480023F38D /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A17B58229D59A20027133B /* GameBoyKit.framework */; };
 		90B2231222C8FABC0023F38D /* BlarggRomDumps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2231022C8FABC0023F38D /* BlarggRomDumps.swift */; };
@@ -108,16 +110,11 @@
 		90CBD3CB22BD62B700B58461 /* Framebuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CA22BD62B700B58461 /* Framebuffer.swift */; };
 		90CBD3CD22BD6AA000B58461 /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CC22BD6AA000B58461 /* Metal.swift */; };
 		90EDD2A922C2864100003E9E /* RomOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A822C2864100003E9E /* RomOnly.swift */; };
-		90EDD2AF22C29F6200003E9E /* BusCartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2AE22C29F6200003E9E /* BusCartridge.swift */; };
-		90EDD2B322C2A33F00003E9E /* FakeBusCartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2B222C2A33F00003E9E /* FakeBusCartridge.swift */; };
-		90EDD2B722C2A4AC00003E9E /* BusBootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2B622C2A4AC00003E9E /* BusBootrom.swift */; };
-		90EDD2B922C2A63600003E9E /* FakeBusBootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2B822C2A63600003E9E /* FakeBusBootrom.swift */; };
 		90EDD2C422C2C71800003E9E /* CartridgeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */; };
 		90EDD2C622C2CCB700003E9E /* MBC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C522C2CCB700003E9E /* MBC1.swift */; };
 		90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C922C2D50E00003E9E /* BootromFactory.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
-		90EFDB8722B05D5D0017AEC2 /* BusDmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,14 +185,11 @@
 		902BDDA522C1643400632BA7 /* XCTestCase+createTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createTimer.swift"; sourceTree = "<group>"; };
 		902CA96A22BF825B00026960 /* Data+initFromRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+initFromRange.swift"; sourceTree = "<group>"; };
 		902CA96C22BF85B600026960 /* Data+UInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UInt.swift"; sourceTree = "<group>"; };
-		902CA96E22BFA63C00026960 /* CpuBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuBus.swift; sourceTree = "<group>"; };
 		902CA97022BFFD8D00026960 /* UnprefixedOpcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnprefixedOpcode.swift; sourceTree = "<group>"; };
 		902CA97222BFFDA700026960 /* CBPrefixedOpcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBPrefixedOpcode.swift; sourceTree = "<group>"; };
 		902CA97422C001B600026960 /* PrintOpcodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintOpcodes.swift; sourceTree = "<group>"; };
 		902CA97622C00C7300026960 /* Arguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
 		902CA97822C0159C00026960 /* Bootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootrom.swift; sourceTree = "<group>"; };
-		902CA97C22C0204800026960 /* XCTestCase+createBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createBus.swift"; sourceTree = "<group>"; };
-		902CA97E22C031CD00026960 /* BusUnmapBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusUnmapBootromTests.swift; sourceTree = "<group>"; };
 		903DB4DB22BB903A003132FA /* Lcd+Dump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lcd+Dump.swift"; sourceTree = "<group>"; };
 		903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileIndexTests.swift; sourceTree = "<group>"; };
 		903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoyRenderer.swift; sourceTree = "<group>"; };
@@ -210,14 +204,21 @@
 		906073A222B8453F00F2766D /* DivTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
 		906073A322B8453F00F2766D /* CustomTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimerTests.swift; sourceTree = "<group>"; };
 		906791E322CCCB39003869A9 /* DebugState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
+		906791E522CCEDB0003869A9 /* Memory+write.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Memory+write.swift"; sourceTree = "<group>"; };
+		906791E622CCEDB0003869A9 /* Memory+read.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Memory+read.swift"; sourceTree = "<group>"; };
+		906791E922CCEDBD003869A9 /* Memory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		906791EB22CCF1A8003869A9 /* FakeBootromMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeBootromMemory.swift; sourceTree = "<group>"; };
+		906791EF22CCF1C8003869A9 /* FakeCartridgeMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCartridgeMemory.swift; sourceTree = "<group>"; };
+		906791F122CCF200003869A9 /* XCTestCase+createMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createMemory.swift"; sourceTree = "<group>"; };
+		906791F322CCF326003869A9 /* FakeCpuAddressableMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCpuAddressableMemory.swift; sourceTree = "<group>"; };
+		906791F522CCF3EB003869A9 /* DmaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DmaTests.swift; sourceTree = "<group>"; };
+		906791F722CCF439003869A9 /* UnmapBootromTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnmapBootromTests.swift; sourceTree = "<group>"; };
+		906791F922CCF4AB003869A9 /* MemoryReadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryReadTests.swift; sourceTree = "<group>"; };
+		906791FA22CCF4AB003869A9 /* MemoryWriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWriteTests.swift; sourceTree = "<group>"; };
 		9085FC3022B690C600310090 /* LcdColorPalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcdColorPalettes.swift; sourceTree = "<group>"; };
 		9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorPaletteTests.swift; sourceTree = "<group>"; };
-		9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCpuBus.swift; sourceTree = "<group>"; };
 		9085FC3C22B6BF6A00310090 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
-		9085FC4322B6C54400310090 /* Bus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
-		9085FC4522B6C70F00310090 /* BusWriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusWriteTests.swift; sourceTree = "<group>"; };
-		9085FC4722B6C75200310090 /* BusReadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusReadTests.swift; sourceTree = "<group>"; };
 		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
 		909DA6A022C3DDEC007B7C8E /* CpuRegistersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuRegistersTests.swift; sourceTree = "<group>"; };
 		90A17B40229D59830027133B /* GameBoyMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameBoyMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,8 +258,6 @@
 		90B0DC5022B76E59005BBCF5 /* MemoryMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMap.swift; sourceTree = "<group>"; };
 		90B0DC5422B78927005BBCF5 /* Joypad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joypad.swift; sourceTree = "<group>"; };
 		90B0DC5622B789D0005BBCF5 /* SerialPort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
-		90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+write.swift"; sourceTree = "<group>"; };
-		90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bus+read.swift"; sourceTree = "<group>"; };
 		90B2230722C8FA2E0023F38D /* GameBoyKitROMTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameBoyKitROMTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		90B2230922C8FA2E0023F38D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		90B2231022C8FABC0023F38D /* BlarggRomDumps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlarggRomDumps.swift; sourceTree = "<group>"; };
@@ -284,16 +283,11 @@
 		90CBD3CA22BD62B700B58461 /* Framebuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Framebuffer.swift; sourceTree = "<group>"; };
 		90CBD3CC22BD6AA000B58461 /* Metal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
 		90EDD2A822C2864100003E9E /* RomOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomOnly.swift; sourceTree = "<group>"; };
-		90EDD2AE22C29F6200003E9E /* BusCartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusCartridge.swift; sourceTree = "<group>"; };
-		90EDD2B222C2A33F00003E9E /* FakeBusCartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBusCartridge.swift; sourceTree = "<group>"; };
-		90EDD2B622C2A4AC00003E9E /* BusBootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBootrom.swift; sourceTree = "<group>"; };
-		90EDD2B822C2A63600003E9E /* FakeBusBootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBusBootrom.swift; sourceTree = "<group>"; };
 		90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeFactory.swift; sourceTree = "<group>"; };
 		90EDD2C522C2CCB700003E9E /* MBC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC1.swift; sourceTree = "<group>"; };
 		90EDD2C922C2D50E00003E9E /* BootromFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromFactory.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
-		90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusDmaTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,7 +337,6 @@
 			children = (
 				90A17B82229D59D50027133B /* Registers.swift */,
 				90A17B8E229D59D50027133B /* Cpu.swift */,
-				902CA96E22BFA63C00026960 /* CpuBus.swift */,
 				90A17B81229D59D40027133B /* Cpu+Instructions.swift */,
 				90A17B89229D59D50027133B /* Cpu+ExecuteUnprefixed.swift */,
 				90A17B8A229D59D50027133B /* Cpu+ExecutePrefixed.swift */,
@@ -354,13 +347,13 @@
 		9083ECFF22C12DE1009E4AAB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */,
-				90EDD2B822C2A63600003E9E /* FakeBusBootrom.swift */,
-				90EDD2B222C2A33F00003E9E /* FakeBusCartridge.swift */,
+				906791F322CCF326003869A9 /* FakeCpuAddressableMemory.swift */,
+				906791EB22CCF1A8003869A9 /* FakeBootromMemory.swift */,
+				906791EF22CCF1C8003869A9 /* FakeCartridgeMemory.swift */,
 				902BDDA322C1604200632BA7 /* XCTestCase+createCpu.swift */,
 				902BDDA122C15FD600632BA7 /* XCTestCase+createLcd.swift */,
 				902BDDA522C1643400632BA7 /* XCTestCase+createTimer.swift */,
-				902CA97C22C0204800026960 /* XCTestCase+createBus.swift */,
+				906791F122CCF200003869A9 /* XCTestCase+createMemory.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -413,7 +406,7 @@
 				9073102522A66A2000EBC7BB /* Cpu */,
 				90CBB73C22ADB851004775E2 /* Lcd */,
 				90B0DC4922B6F3EF005BBCF5 /* Cartridge */,
-				90D58EE122A7B2580076584F /* Bus */,
+				90D58EE122A7B2580076584F /* Memory */,
 				90CBB71722AD74BB004775E2 /* Extensions */,
 				90C19C5A22B3C8B900A1B7A9 /* Debug */,
 				90A56A3422A3DD0D0055A013 /* GameBoy.swift */,
@@ -444,10 +437,10 @@
 				90CBB71F22AD7594004775E2 /* InterruptEnableTests.swift */,
 				906073A222B8453F00F2766D /* DivTimerTests.swift */,
 				906073A322B8453F00F2766D /* CustomTimerTests.swift */,
-				90EFDB8622B05D5D0017AEC2 /* BusDmaTests.swift */,
-				902CA97E22C031CD00026960 /* BusUnmapBootromTests.swift */,
-				9085FC4722B6C75200310090 /* BusReadTests.swift */,
-				9085FC4522B6C70F00310090 /* BusWriteTests.swift */,
+				906791F522CCF3EB003869A9 /* DmaTests.swift */,
+				906791F722CCF439003869A9 /* UnmapBootromTests.swift */,
+				906791F922CCF4AB003869A9 /* MemoryReadTests.swift */,
+				906791FA22CCF4AB003869A9 /* MemoryWriteTests.swift */,
 				90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */,
 				90CBB72822AD75B4004775E2 /* String+padTests.swift */,
 				90CBB72F22AD7818004775E2 /* UInt+radixFormatTests.swift */,
@@ -478,10 +471,10 @@
 				90EDD2C922C2D50E00003E9E /* BootromFactory.swift */,
 				90059A4A22C2676A00803B48 /* BootromInitError.swift */,
 				90B0DC4A22B6F43D005BBCF5 /* Cartridge.swift */,
+				90059A3C22C24A6300803B48 /* CartridgeType.swift */,
 				90059A4C22C2693400803B48 /* CartridgeHeader.swift */,
 				90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */,
 				90059A4822C2673900803B48 /* CartridgeInitError.swift */,
-				90059A3C22C24A6300803B48 /* CartridgeType.swift */,
 				90059A3E22C24AC700803B48 /* CartridgeDestination.swift */,
 				90EDD2A822C2864100003E9E /* RomOnly.swift */,
 				90EDD2C522C2CCB700003E9E /* MBC1.swift */,
@@ -580,21 +573,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		90D58EE122A7B2580076584F /* Bus */ = {
+		90D58EE122A7B2580076584F /* Memory */ = {
 			isa = PBXGroup;
 			children = (
 				90B0DC5422B78927005BBCF5 /* Joypad.swift */,
 				90B0DC5622B789D0005BBCF5 /* SerialPort.swift */,
 				906073A022B8452200F2766D /* Timer.swift */,
 				902BDD9D22C1544000632BA7 /* Interrupts.swift */,
+				906791E922CCEDBD003869A9 /* Memory.swift */,
+				906791E622CCEDB0003869A9 /* Memory+read.swift */,
+				906791E522CCEDB0003869A9 /* Memory+write.swift */,
 				90B0DC5022B76E59005BBCF5 /* MemoryMap.swift */,
-				9085FC4322B6C54400310090 /* Bus.swift */,
-				90B0DC5C22B78E13005BBCF5 /* Bus+read.swift */,
-				90B0DC5A22B78DFE005BBCF5 /* Bus+write.swift */,
-				90EDD2AE22C29F6200003E9E /* BusCartridge.swift */,
-				90EDD2B622C2A4AC00003E9E /* BusBootrom.swift */,
 			);
-			path = Bus;
+			path = Memory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -823,21 +814,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				90059A4B22C2676A00803B48 /* BootromInitError.swift in Sources */,
-				9085FC4422B6C54400310090 /* Bus.swift in Sources */,
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90EDD2A922C2864100003E9E /* RomOnly.swift in Sources */,
 				90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
-				90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */,
 				90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */,
 				906791E422CCCB39003869A9 /* DebugState.swift in Sources */,
 				90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */,
 				905321B022BE46E800A409B2 /* Debugger.swift in Sources */,
 				90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */,
+				906791EA22CCEDBD003869A9 /* Memory.swift in Sources */,
 				90059A4922C2673900803B48 /* CartridgeInitError.swift in Sources */,
-				902CA96F22BFA63C00026960 /* CpuBus.swift in Sources */,
-				90B0DC5D22B78E13005BBCF5 /* Bus+read.swift in Sources */,
 				90A56A3522A3DD0D0055A013 /* GameBoy.swift in Sources */,
 				90CBD3CB22BD62B700B58461 /* Framebuffer.swift in Sources */,
 				90B0DC5122B76E59005BBCF5 /* MemoryMap.swift in Sources */,
@@ -846,13 +834,13 @@
 				90A17B98229D59D50027133B /* Cpu+ExecuteUnprefixed.swift in Sources */,
 				90059A4D22C2693400803B48 /* CartridgeHeader.swift in Sources */,
 				902CA97122BFFD8D00026960 /* UnprefixedOpcode.swift in Sources */,
-				90EDD2B722C2A4AC00003E9E /* BusBootrom.swift in Sources */,
 				905321B222BE479800A409B2 /* DebugMode.swift in Sources */,
 				902BDD9E22C1544000632BA7 /* Interrupts.swift in Sources */,
 				905321B522BE48EE00A409B2 /* Debugger+Cpu.swift in Sources */,
-				90EDD2AF22C29F6200003E9E /* BusCartridge.swift in Sources */,
 				90A17B90229D59D50027133B /* Cpu+Instructions.swift in Sources */,
+				906791E722CCEDB0003869A9 /* Memory+write.swift in Sources */,
 				90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */,
+				906791E822CCEDB0003869A9 /* Memory+read.swift in Sources */,
 				903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */,
 				902CA97322BFFDA700026960 /* CBPrefixedOpcode.swift in Sources */,
 				90A17B9D229D59D50027133B /* Cpu.swift in Sources */,
@@ -881,33 +869,33 @@
 				90C19C5822B2AEE200A1B7A9 /* LcdTileDataTests.swift in Sources */,
 				90A17BAE229D59EE0027133B /* CpuArithmeticTests.swift in Sources */,
 				90CBB73222AD7AE3004775E2 /* Data+UIntTests.swift in Sources */,
-				90EFDB8722B05D5D0017AEC2 /* BusDmaTests.swift in Sources */,
+				906791EC22CCF1A8003869A9 /* FakeBootromMemory.swift in Sources */,
 				902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */,
 				90A17BAD229D59EE0027133B /* CpuJumpTests.swift in Sources */,
+				906791F222CCF201003869A9 /* XCTestCase+createMemory.swift in Sources */,
 				90CBB72C22AD7632004775E2 /* InterruptEnableTests.swift in Sources */,
+				906791F822CCF43A003869A9 /* UnmapBootromTests.swift in Sources */,
 				90A17BA9229D59EE0027133B /* CpuCallTests.swift in Sources */,
-				902CA98022C031D200026960 /* BusUnmapBootromTests.swift in Sources */,
+				906791F422CCF327003869A9 /* FakeCpuAddressableMemory.swift in Sources */,
 				90A17BA8229D59EE0027133B /* CpuRotateTests.swift in Sources */,
 				90A17BAA229D59EE0027133B /* CpuShiftTests.swift in Sources */,
+				906791F622CCF3EB003869A9 /* DmaTests.swift in Sources */,
 				9085FC3322B693F200310090 /* LcdColorPaletteTests.swift in Sources */,
 				906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */,
 				902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */,
-				902CA97D22C0204800026960 /* XCTestCase+createBus.swift in Sources */,
-				9085FC4822B6C75200310090 /* BusReadTests.swift in Sources */,
-				9085FC4622B6C71000310090 /* BusWriteTests.swift in Sources */,
 				90CBB72922AD75B4004775E2 /* String+padTests.swift in Sources */,
+				906791FC22CCF4AB003869A9 /* MemoryWriteTests.swift in Sources */,
 				902BDDA622C1643400632BA7 /* XCTestCase+createTimer.swift in Sources */,
 				90A17BAC229D59EE0027133B /* CpuBitTests.swift in Sources */,
-				90EDD2B322C2A33F00003E9E /* FakeBusCartridge.swift in Sources */,
-				9085FC3B22B6BC7400310090 /* FakeCpuBus.swift in Sources */,
 				90A17BB0229D59EE0027133B /* CpuOtherTests.swift in Sources */,
 				90CBB73022AD7818004775E2 /* UInt+radixFormatTests.swift in Sources */,
+				906791FB22CCF4AB003869A9 /* MemoryReadTests.swift in Sources */,
+				906791F022CCF1C8003869A9 /* FakeCartridgeMemory.swift in Sources */,
 				90BE338622B5123B00DF3953 /* LcdColorValueTests.swift in Sources */,
 				90A17BAB229D59EE0027133B /* CpuLogicTests.swift in Sources */,
 				906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */,
 				909DA6A122C3DDEC007B7C8E /* CpuRegistersTests.swift in Sources */,
 				903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */,
-				90EDD2B922C2A63600003E9E /* FakeBusBootrom.swift in Sources */,
 				90A17BAF229D59EE0027133B /* CpuLdTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,14 +7,14 @@ import XCTest
 
 extension XCTestCase {
 
-  internal func createBus(bootrom:    BusBootrom?   = nil,
-                          cartridge:  BusCartridge? = nil,
-                          interrupts: Interrupts?   = nil) -> Bus {
+  internal func createMemory(bootrom:    BootromMemory?   = nil,
+                             cartridge:  CartridgeMemory? = nil,
+                             interrupts: Interrupts?      = nil) -> Memory {
 
     let ints = interrupts ?? Interrupts()
-    return Bus(
-      bootrom:   bootrom   ?? FakeBusBootrom(),
-      cartridge: cartridge ?? FakeBusCartridge(),
+    return Memory(
+      bootrom:   bootrom   ?? FakeBootromMemory(),
+      cartridge: cartridge ?? FakeCartridgeMemory(),
       joypad:    Joypad(),
       lcd:       Lcd(interrupts: ints),
       timer:     Timer(interrupts: ints),

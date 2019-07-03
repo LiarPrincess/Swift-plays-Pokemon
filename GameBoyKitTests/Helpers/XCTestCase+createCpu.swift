@@ -7,10 +7,10 @@ import XCTest
 
 extension XCTestCase {
 
-  internal func createCpu(bus:        CpuBus?     = nil,
+  internal func createCpu(memory:     CpuAddressableMemory? = nil,
                           interrupts: Interrupts? = nil) -> Cpu {
     return Cpu(
-      bus: bus ?? FakeCpuBus(),
+      memory: memory ?? FakeCpuAddressableMemory(),
       interrupts: interrupts ?? Interrupts()
     )
   }

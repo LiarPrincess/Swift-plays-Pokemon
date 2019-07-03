@@ -2,6 +2,11 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+internal protocol CpuAddressableMemory: AnyObject {
+  func read(_ address: UInt16) -> UInt8
+  func write(_ address: UInt16, value: UInt8)
+}
+
 /// Central processing unit 
 public class Cpu {
 
@@ -26,12 +31,12 @@ public class Cpu {
   /// Register values (except for pc and sp).
   public internal(set) var registers: Registers
 
-  private let bus: CpuBus
+  private let memory: CpuAddressableMemory
   private let interrupts: Interrupts
 
-  internal init(bus: CpuBus, interrupts: Interrupts) {
+  internal init(memory: CpuAddressableMemory, interrupts: Interrupts) {
     self.registers = Registers()
-    self.bus = bus
+    self.memory = memory
     self.interrupts = interrupts
   }
 
@@ -153,10 +158,10 @@ public class Cpu {
   // MARK: - Read/Write
 
   internal func read(_ address: UInt16) -> UInt8 {
-    return self.bus.read(address)
+    return self.memory.read(address)
   }
 
   internal func write(_ address: UInt16, value: UInt8) {
-    self.bus.write(address, value: value)
+    self.memory.write(address, value: value)
   }
 }

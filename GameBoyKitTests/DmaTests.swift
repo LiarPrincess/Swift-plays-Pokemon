@@ -5,10 +5,10 @@
 import XCTest
 @testable import GameBoyKit
 
-class BusDmaTests: XCTestCase {
+class DmaTests: XCTestCase {
 
   func test_dma() {
-    let bus = self.createBus()
+    let memory = self.createMemory()
 
     // fill source (somewhere in external ram)
     let sourceStart: UInt16 = 0xab00
@@ -16,18 +16,18 @@ class BusDmaTests: XCTestCase {
 
     for address in sourceStart...sourceEnd {
       let value = UInt8(address & 0x00ff)
-      bus.write(address, value: value)
+      memory.write(address, value: value)
     }
 
     // dma
     let writeValue = UInt8(sourceStart >> 8)
-    bus.write(MemoryMap.Lcd.dma, value: writeValue)
+    memory.write(MemoryMap.Lcd.dma, value: writeValue)
 
     // check values at 0xfeXX
     for address in sourceStart...sourceEnd {
       let dmaAddress = MemoryMap.oam.start + address & 0x00ff
 
-      let value = bus.read(dmaAddress)
+      let value = memory.read(dmaAddress)
       let expectedValue = UInt8(address & 0x00ff)
       XCTAssertEqual(expectedValue, value)
     }

@@ -12,12 +12,12 @@ class CpuLogicTests: XCTestCase {
   /// When A = 5Ah, L = 3Fh and (HL) = 0h,
   /// AND L ; A←1Ah,Z←0,H←1,N←0 CY←0
   func test_and_a_r() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x5a
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x00)
+    memory.write(0xfefe, value: 0x00)
     _ = cpu.and_a_r(.e)
 
     XCTAssertEqual(cpu.registers.a, 0x1a)
@@ -30,12 +30,12 @@ class CpuLogicTests: XCTestCase {
   /// When A = 5Ah, L = 3Fh and (HL) = 0h,
   /// AND 38h ; A←18h,Z←0,H←1,N←0 CY←0
   func test_and_a_d8() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x5a
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x00)
+    memory.write(0xfefe, value: 0x00)
     _ = cpu.and_a_d8(0x38)
 
     XCTAssertEqual(cpu.registers.a, 0x18)
@@ -48,12 +48,12 @@ class CpuLogicTests: XCTestCase {
   /// When A = 5Ah, L = 3Fh and (HL) = 0h,
   /// AND (HL) ; A←00h,Z←1,H←1,N←0 CY←0
   func test_and_a_pHL() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x5a
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x00)
+    memory.write(0xfefe, value: 0x00)
     _ = cpu.and_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x00)
@@ -68,11 +68,11 @@ class CpuLogicTests: XCTestCase {
   /// When A = 5Ah, (HL) = 0Fh,
   /// OR A ; A←5Ah,Z←0
   func test_or_a_r() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x0f)
+    memory.write(0xfefe, value: 0x0f)
     _ = cpu.or_a_r(.a)
 
     XCTAssertEqual(cpu.registers.a, 0x5a)
@@ -85,11 +85,11 @@ class CpuLogicTests: XCTestCase {
   /// When A = 5Ah, (HL) = 0Fh,
   /// OR 3 ; A←5Bh,Z←0
   func test_or_a_d8() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x0f)
+    memory.write(0xfefe, value: 0x0f)
     _ = cpu.or_a_d8(0x03)
 
     XCTAssertEqual(cpu.registers.a, 0x5b)
@@ -102,11 +102,11 @@ class CpuLogicTests: XCTestCase {
   /// When A = 5Ah, (HL) = 0Fh,
   /// OR (HL); A←5Fh,Z←0
   func test_or_a_pHL() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x0f)
+    memory.write(0xfefe, value: 0x0f)
     _ = cpu.or_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x5f)
@@ -121,11 +121,11 @@ class CpuLogicTests: XCTestCase {
   /// When A = FFh and (HL) = 8Ah,
   /// XOR A ; A←00h,Z←1
   func test_xor_a_r() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x8a)
+    memory.write(0xfefe, value: 0x8a)
     _ = cpu.xor_a_r(.a)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
@@ -138,11 +138,11 @@ class CpuLogicTests: XCTestCase {
   /// When A = FFh and (HL) = 8Ah,
   /// XOR 0x0F ; A←F0h,Z←0
   func test_xor_a_d8() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x8a)
+    memory.write(0xfefe, value: 0x8a)
     _ = cpu.xor_a_d8(0x0f)
 
     XCTAssertEqual(cpu.registers.a, 0xf0)
@@ -155,11 +155,11 @@ class CpuLogicTests: XCTestCase {
   /// When A = FFh and (HL) = 8Ah,
   /// XOR (HL) ; A←75h,Z←0
   func test_xor_a_pHL() {
-    let bus = FakeCpuBus()
-    let cpu = self.createCpu(bus: bus)
+    let memory = FakeCpuAddressableMemory()
+    let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
-    bus.write(0xfefe, value: 0x8a)
+    memory.write(0xfefe, value: 0x8a)
     _ = cpu.xor_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x75)

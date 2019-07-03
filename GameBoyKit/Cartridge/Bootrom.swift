@@ -6,7 +6,7 @@ import Foundation
 
 /// Code that will be ran when gameboy is started. You can find
 /// different bootroms [here](http://gbdev.gg8.se/files/roms/bootroms/).
-public class Bootrom {
+public class Bootrom: BootromMemory {
 
   internal static let size = MemoryMap.bootrom.count
 

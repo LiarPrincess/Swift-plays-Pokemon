@@ -4,7 +4,7 @@
 
 import Foundation
 
-public class Cartridge {
+public class Cartridge: CartridgeMemory {
 
   /// Size of single unit of rom (16 KBytes).
   public static let romBankSizeInBytes = 16 * 1_024

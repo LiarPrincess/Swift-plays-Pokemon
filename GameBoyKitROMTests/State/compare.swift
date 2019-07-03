@@ -98,7 +98,7 @@ func compare(saved p: SavedState, gameboy g: GameBoy) -> Bool {
 
   for address in checkedAddresses {
     let pValue = p.memory.data[Int(address)]
-    let sValue = g.bus.read(address)
+    let sValue = g.memory.read(address)
 
     if sValue != pValue {
       let desc = MemoryMap.describe(address: address)

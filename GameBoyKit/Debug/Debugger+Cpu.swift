@@ -5,17 +5,17 @@
 extension Debugger {
 
   private func next8(pc: UInt16) -> UInt8 {
-    return bus.read(pc + 1)
+    return self.memory.read(pc + 1)
   }
 
   private func next16(pc: UInt16) -> UInt16 {
-    let low  = UInt16(bus.read(pc + 1))
-    let high = UInt16(bus.read(pc + 2))
+    let low  = UInt16(self.memory.read(pc + 1))
+    let high = UInt16(self.memory.read(pc + 2))
     return (high << 8) | low
   }
 
   private func read(_ address: UInt16) -> UInt8 {
-    return self.bus.read(address)
+    return self.memory.read(address)
   }
 
   private func opcodeAt(pc: UInt16) -> UnprefixedOpcode? {
@@ -170,9 +170,9 @@ extension Debugger {
       stackEnd = stackStart + 20
     }
 
-    let stackValues = (stackStart...stackEnd).map { bus.read($0) }
+    let stackValues = (stackStart...stackEnd).map { self.memory.read($0) }
 
-    let r = registers
+    let r = self.cpu.registers
     print("""
         pc: \(cpu.pc) (\(cpu.pc.hex))
         sp: \(cpu.sp) (\(cpu.sp.hex)) \(stackValues.map { $0.hex })

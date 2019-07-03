@@ -5,9 +5,8 @@
 public class Debugger {
 
   internal var gameBoy:   GameBoy
-  internal var cpu:       Cpu       { return gameBoy.cpu }
-  internal var registers: Registers { return gameBoy.cpu.registers }
-  internal var bus:       Bus       { return gameBoy.bus }
+  internal var cpu:       Cpu    { return gameBoy.cpu }
+  internal var memory:    Memory { return gameBoy.memory }
 
   private var stateBefore = DebugState()
   private var stateAfter  = DebugState()
@@ -79,80 +78,80 @@ extension Debugger {
   }
 
   private func fillCpu(cpu: inout DebugCpuState) {
-    cpu.a = self.gameBoy.cpu.registers.a
-    cpu.b = self.gameBoy.cpu.registers.b
-    cpu.c = self.gameBoy.cpu.registers.c
-    cpu.d = self.gameBoy.cpu.registers.d
-    cpu.e = self.gameBoy.cpu.registers.e
-    cpu.h = self.gameBoy.cpu.registers.h
-    cpu.l = self.gameBoy.cpu.registers.l
+    cpu.a = self.cpu.registers.a
+    cpu.b = self.cpu.registers.b
+    cpu.c = self.cpu.registers.c
+    cpu.d = self.cpu.registers.d
+    cpu.e = self.cpu.registers.e
+    cpu.h = self.cpu.registers.h
+    cpu.l = self.cpu.registers.l
 
-    cpu.zeroFlag      = self.gameBoy.cpu.registers.zeroFlag
-    cpu.subtractFlag  = self.gameBoy.cpu.registers.subtractFlag
-    cpu.halfCarryFlag = self.gameBoy.cpu.registers.halfCarryFlag
-    cpu.carryFlag     = self.gameBoy.cpu.registers.carryFlag
+    cpu.zeroFlag      = self.cpu.registers.zeroFlag
+    cpu.subtractFlag  = self.cpu.registers.subtractFlag
+    cpu.halfCarryFlag = self.cpu.registers.halfCarryFlag
+    cpu.carryFlag     = self.cpu.registers.carryFlag
 
-    cpu.pc = self.gameBoy.cpu.pc
-    cpu.sp = self.gameBoy.cpu.sp
+    cpu.pc = self.cpu.pc
+    cpu.sp = self.cpu.sp
   }
 
   private func fillIO(io: inout DebugIOState) {
-    io.joypad = self.gameBoy.bus.read(MemoryMap.IO.joypad)
-    io.sb     = self.gameBoy.bus.read(MemoryMap.IO.sb)
-    io.sc     = self.gameBoy.bus.read(MemoryMap.IO.sc)
-    io.unmapBootrom = self.gameBoy.bus.read(MemoryMap.IO.unmapBootrom)
+    io.joypad = self.memory.read(MemoryMap.IO.joypad)
+    io.sb     = self.memory.read(MemoryMap.IO.sb)
+    io.sc     = self.memory.read(MemoryMap.IO.sc)
+    io.unmapBootrom = self.memory.read(MemoryMap.IO.unmapBootrom)
   }
 
   private func fillTimer(timer: inout DebugTimerState) {
-    timer.div  = self.gameBoy.bus.read(MemoryMap.Timer.div)
-    timer.tima = self.gameBoy.bus.read(MemoryMap.Timer.tima)
-    timer.tma  = self.gameBoy.bus.read(MemoryMap.Timer.tma)
-    timer.tac  = self.gameBoy.bus.read(MemoryMap.Timer.tac)
+    timer.div  = self.memory.read(MemoryMap.Timer.div)
+    timer.tima = self.memory.read(MemoryMap.Timer.tima)
+    timer.tma  = self.memory.read(MemoryMap.Timer.tma)
+    timer.tac  = self.memory.read(MemoryMap.Timer.tac)
   }
 
   private func fillAudio(audio: inout DebugAudioState) {
-    audio.nr10 = self.gameBoy.bus.read(MemoryMap.Audio.nr10)
-    audio.nr11 = self.gameBoy.bus.read(MemoryMap.Audio.nr11)
-    audio.nr12 = self.gameBoy.bus.read(MemoryMap.Audio.nr12)
-    audio.nr13 = self.gameBoy.bus.read(MemoryMap.Audio.nr13)
-    audio.nr14 = self.gameBoy.bus.read(MemoryMap.Audio.nr14)
-    audio.nr21 = self.gameBoy.bus.read(MemoryMap.Audio.nr21)
-    audio.nr22 = self.gameBoy.bus.read(MemoryMap.Audio.nr22)
-    audio.nr23 = self.gameBoy.bus.read(MemoryMap.Audio.nr23)
-    audio.nr24 = self.gameBoy.bus.read(MemoryMap.Audio.nr24)
-    audio.nr30 = self.gameBoy.bus.read(MemoryMap.Audio.nr30)
-    audio.nr31 = self.gameBoy.bus.read(MemoryMap.Audio.nr31)
-    audio.nr32 = self.gameBoy.bus.read(MemoryMap.Audio.nr32)
-    audio.nr33 = self.gameBoy.bus.read(MemoryMap.Audio.nr33)
-    audio.nr34 = self.gameBoy.bus.read(MemoryMap.Audio.nr34)
-    audio.nr41 = self.gameBoy.bus.read(MemoryMap.Audio.nr41)
-    audio.nr42 = self.gameBoy.bus.read(MemoryMap.Audio.nr42)
-    audio.nr43 = self.gameBoy.bus.read(MemoryMap.Audio.nr43)
-    audio.nr44 = self.gameBoy.bus.read(MemoryMap.Audio.nr44)
-    audio.nr50 = self.gameBoy.bus.read(MemoryMap.Audio.nr50)
-    audio.nr51 = self.gameBoy.bus.read(MemoryMap.Audio.nr51)
-    audio.nr52 = self.gameBoy.bus.read(MemoryMap.Audio.nr52)
-    audio.nr3_ram_start = self.gameBoy.bus.read(MemoryMap.Audio.nr3_ram_start)
-    audio.nr3_ram_end   = self.gameBoy.bus.read(MemoryMap.Audio.nr3_ram_end)
+    audio.nr10 = self.memory.read(MemoryMap.Audio.nr10)
+    audio.nr11 = self.memory.read(MemoryMap.Audio.nr11)
+    audio.nr12 = self.memory.read(MemoryMap.Audio.nr12)
+    audio.nr13 = self.memory.read(MemoryMap.Audio.nr13)
+    audio.nr14 = self.memory.read(MemoryMap.Audio.nr14)
+    audio.nr21 = self.memory.read(MemoryMap.Audio.nr21)
+    audio.nr22 = self.memory.read(MemoryMap.Audio.nr22)
+    audio.nr23 = self.memory.read(MemoryMap.Audio.nr23)
+    audio.nr24 = self.memory.read(MemoryMap.Audio.nr24)
+    audio.nr30 = self.memory.read(MemoryMap.Audio.nr30)
+    audio.nr31 = self.memory.read(MemoryMap.Audio.nr31)
+    audio.nr32 = self.memory.read(MemoryMap.Audio.nr32)
+    audio.nr33 = self.memory.read(MemoryMap.Audio.nr33)
+    audio.nr34 = self.memory.read(MemoryMap.Audio.nr34)
+    audio.nr41 = self.memory.read(MemoryMap.Audio.nr41)
+    audio.nr42 = self.memory.read(MemoryMap.Audio.nr42)
+    audio.nr43 = self.memory.read(MemoryMap.Audio.nr43)
+    audio.nr44 = self.memory.read(MemoryMap.Audio.nr44)
+    audio.nr50 = self.memory.read(MemoryMap.Audio.nr50)
+    audio.nr51 = self.memory.read(MemoryMap.Audio.nr51)
+    audio.nr52 = self.memory.read(MemoryMap.Audio.nr52)
+    audio.nr3_ram_start = self.memory.read(MemoryMap.Audio.nr3_ram_start)
+    audio.nr3_ram_end   = self.memory.read(MemoryMap.Audio.nr3_ram_end)
   }
 
   private func fillLcd(lcd: inout DebugLcdState) {
-    lcd.control          = self.gameBoy.bus.read(MemoryMap.Lcd.control)
-    lcd.status           = self.gameBoy.bus.read(MemoryMap.Lcd.status)
-    lcd.scrollY          = self.gameBoy.bus.read(MemoryMap.Lcd.scrollY)
-    lcd.scrollX          = self.gameBoy.bus.read(MemoryMap.Lcd.scrollX)
-    lcd.line             = self.gameBoy.bus.read(MemoryMap.Lcd.line)
-    lcd.lineCompare      = self.gameBoy.bus.read(MemoryMap.Lcd.lineCompare)
-    lcd.dma              = self.gameBoy.bus.read(MemoryMap.Lcd.dma)
-    lcd.backgroundColors = self.gameBoy.bus.read(MemoryMap.Lcd.backgroundColors)
-    lcd.objectColors0    = self.gameBoy.bus.read(MemoryMap.Lcd.objectColors0)
-    lcd.objectColors1    = self.gameBoy.bus.read(MemoryMap.Lcd.objectColors1)
-    lcd.windowY          = self.gameBoy.bus.read(MemoryMap.Lcd.windowY)
-    lcd.windowX          = self.gameBoy.bus.read(MemoryMap.Lcd.windowX)
+    lcd.control          = self.memory.read(MemoryMap.Lcd.control)
+    lcd.status           = self.memory.read(MemoryMap.Lcd.status)
+    lcd.scrollY          = self.memory.read(MemoryMap.Lcd.scrollY)
+    lcd.scrollX          = self.memory.read(MemoryMap.Lcd.scrollX)
+    lcd.line             = self.memory.read(MemoryMap.Lcd.line)
+    lcd.lineCompare      = self.memory.read(MemoryMap.Lcd.lineCompare)
+    lcd.dma              = self.memory.read(MemoryMap.Lcd.dma)
+    lcd.backgroundColors = self.memory.read(MemoryMap.Lcd.backgroundColors)
+    lcd.objectColors0    = self.memory.read(MemoryMap.Lcd.objectColors0)
+    lcd.objectColors1    = self.memory.read(MemoryMap.Lcd.objectColors1)
+    lcd.windowY          = self.memory.read(MemoryMap.Lcd.windowY)
+    lcd.windowX          = self.memory.read(MemoryMap.Lcd.windowX)
   }
 
   private func fillInterrupts(interrupts: inout DebugInterruptState) {
-    interrupts.enable = self.gameBoy.bus.read(MemoryMap.interruptEnable)
-    interrupts.flag   = self.gameBoy.bus.read(MemoryMap.IO.interruptFlag)
+    interrupts.enable = self.memory.read(MemoryMap.interruptEnable)
+    interrupts.flag   = self.memory.read(MemoryMap.IO.interruptFlag)
   }
 }

@@ -4,12 +4,27 @@
 
 import Foundation
 
+internal protocol BootromMemory: AnyObject {
+
+  func read(_ address: UInt16) -> UInt8
+  func write(_ address: UInt16, value: UInt8)
+}
+
+internal protocol CartridgeMemory: AnyObject {
+
+  func readRom(_ address: UInt16) -> UInt8
+  func writeRom(_ address: UInt16, value: UInt8)
+
+  func readRam(_ address: UInt16) -> UInt8
+  func writeRam(_ address: UInt16, value: UInt8)
+}
+
 internal enum BootromState {
-  case executing(BusBootrom)
+  case executing(BootromMemory)
   case finished
 }
 
-public class Bus {
+public class Memory: CpuAddressableMemory {
 
   internal let lcd: Lcd
   internal let timer: Timer
@@ -18,7 +33,7 @@ public class Bus {
   internal let interrupts: Interrupts
 
   internal var bootrom: BootromState
-  internal let cartridge: BusCartridge
+  internal let cartridge: CartridgeMemory
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
@@ -38,8 +53,8 @@ public class Bus {
 
   internal var audio = [UInt16:UInt8]()
 
-  internal init(bootrom:    BusBootrom?,
-                cartridge:  BusCartridge,
+  internal init(bootrom:    BootromMemory?,
+                cartridge:  CartridgeMemory,
                 joypad:     Joypad,
                 lcd:        Lcd,
                 timer:      Timer,

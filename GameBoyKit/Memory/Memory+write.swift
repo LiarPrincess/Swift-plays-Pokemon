@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Bus {
+extension Memory {
 
   internal func write(_ address: UInt16, value: UInt8) {
     switch address {

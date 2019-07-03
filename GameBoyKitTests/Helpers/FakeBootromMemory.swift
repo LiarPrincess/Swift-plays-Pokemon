@@ -4,7 +4,7 @@
 
 @testable import GameBoyKit
 
-class FakeBusBootrom: BusBootrom {
+class FakeBootromMemory: BootromMemory {
 
   lazy var data: Data = {
     Data(count: MemoryMap.bootrom.count)

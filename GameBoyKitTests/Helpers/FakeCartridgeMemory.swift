@@ -4,7 +4,7 @@
 
 @testable import GameBoyKit
 
-class FakeBusCartridge: BusCartridge {
+class FakeCartridgeMemory: CartridgeMemory {
 
   lazy var rom: Data = {
     let count = MemoryMap.rom0.count + MemoryMap.rom1.count
