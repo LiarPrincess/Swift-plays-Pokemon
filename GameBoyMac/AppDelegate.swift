@@ -4,8 +4,6 @@
 
 // swiftlint:disable implicitly_unwrapped_optional
 
-// TODO: Take care of fatalErrors
-
 import AppKit
 import MetalKit
 import GameBoyKit

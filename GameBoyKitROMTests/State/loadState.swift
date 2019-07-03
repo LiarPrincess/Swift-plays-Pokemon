@@ -8,32 +8,31 @@
 
 import Cocoa
 
-private func data(_ s: String) -> Data { return s.data(using: .ascii)! }
+private func toData(_ s: String) -> Data { return s.data(using: .ascii)! }
 
-private var cpu_A:  Data = { return data("cpu_A") }()
-private var cpu_B:  Data = { return data("cpu_B") }()
-private var cpu_C:  Data = { return data("cpu_C") }()
-private var cpu_D:  Data = { return data("cpu_D") }()
-private var cpu_E:  Data = { return data("cpu_E") }()
-private var cpu_HL: Data = { return data("cpu_HL") }()
+private var cpu_A  = toData("cpu_A")
+private var cpu_B  = toData("cpu_B")
+private var cpu_C  = toData("cpu_C")
+private var cpu_D  = toData("cpu_D")
+private var cpu_E  = toData("cpu_E")
+private var cpu_HL = toData("cpu_HL")
 
-private var cpu_c_carry:     Data = { return data("cpu_c_carry") }()
-private var cpu_h_halfcarry: Data = { return data("cpu_h_halfcarry") }()
-private var cpu_n_substract: Data = { return data("cpu_n_substract") }()
-private var cpu_z_zero:      Data = { return data("cpu_z_zero") }()
+private var cpu_c_carry     = toData("cpu_c_carry")
+private var cpu_h_halfcarry = toData("cpu_h_halfcarry")
+private var cpu_n_substract = toData("cpu_n_substract")
+private var cpu_z_zero      = toData("cpu_z_zero")
 
-private var cpu_SP: Data = { return data("cpu_SP") }()
-private var cpu_PC: Data = { return data("cpu_PC") }()
+private var cpu_SP = toData("cpu_SP")
+private var cpu_PC = toData("cpu_PC")
 
-private var cpu_interrupt_master_enable: Data = { return data("cpu_interrupt_master_enable") }()
-private var cpu_halted:  Data = { return data("cpu_halted") }()
-private var cpu_stopped: Data = { return data("cpu_stopped") }()
+private var cpu_interrupt_master_enable = toData("cpu_interrupt_master_enable")
+private var cpu_halted  = toData("cpu_halted")
+private var cpu_stopped = toData("cpu_stopped")
 
-private var memoryD: Data = { return data("memory") }()
-private var falseD:  Data = { return data("False") }()
+private var memory = toData("memory")
 
-private var colon: UInt8 = { return /* : */ 58 }()
-private var comma: UInt8 = { return /* , */ 44 }()
+private var colon: UInt8 = 58 // ascii for ':'
+private var comma: UInt8 = 44 // ascii for ','
 
 internal func loadState(_ url: URL) -> SavedState {
   let state = SavedState(filename: url.lastPathComponent)
@@ -50,7 +49,6 @@ private func fill(_ emulator: SavedState, from fileUrl: URL) {
   defer { stream.close() }
 
   let cpu = emulator.cpu
-  let memory = emulator.memory
 
   while let line = stream.nextLineData() {
     guard let splitIndex = line.firstIndex(of: colon) else {
@@ -81,11 +79,13 @@ private func fill(_ emulator: SavedState, from fileUrl: URL) {
 
     else if property == cpu_interrupt_master_enable  { cpu.ime      = parseBool(value) }
     else if property == cpu_halted                   { cpu.isHalted = parseBool(value) }
-    else if property == cpu_stopped { } // TODO: Import 'cpu_stopped' from py
+    else if property == cpu_stopped { } // TODO: Import 'cpu_stopped' from file
 
-    else if property == memoryD {
-      replace(memory, from: 0x0000, to: 0xffff, with: value)
-      assert(memory.data.count == 0x10000, String(bytes: property, encoding: .ascii)!)
+    else if property == memory {
+      replace(emulator.memory, from: 0x0000, to: 0xffff, with: value)
+
+      let count = emulator.memory.data.count
+      assert(count == 0x10000, String(bytes: property, encoding: .ascii)!)
     }
 
     else {
@@ -95,7 +95,7 @@ private func fill(_ emulator: SavedState, from fileUrl: URL) {
 }
 
 private func parseBool(_ data: Data) -> Bool {
-  return data != falseD
+  return data != toData("False")
 }
 
 private func parseUInt8(_ data: Data) -> UInt8 {

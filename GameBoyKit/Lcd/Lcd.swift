@@ -4,8 +4,6 @@
 
 import Foundation
 
-// swiftlint:disable file_length
-
 public class Lcd {
 
   /// 160 px = 20 tiles
@@ -109,9 +107,6 @@ public class Lcd {
 
     let currentLine = self.line
     if currentLine != previousLine {
-      // TODO: PyBoy is wrong? we reset line progress on every new line?
-      self.frameProgress = Int(currentLine) * LcdConstants.cyclesPerLine
-
       let hasInterrupt = currentLine == self.lineCompare
 
       self.status.isLineCompareInterrupt = hasInterrupt
@@ -173,7 +168,6 @@ public class Lcd {
 //    }
   }
 
-  // TODO: process this whole tiles thing when loading carthrige
   private func drawBackgroundLine() {
     let tileSizeInPixels = 8 // width = height = 8 pixels
     let bytesPerTileLine = 2

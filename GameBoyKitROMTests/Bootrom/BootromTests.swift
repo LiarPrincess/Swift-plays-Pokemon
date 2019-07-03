@@ -5,11 +5,9 @@
 import Foundation
 import GameBoyKit
 
-private var dumpDir: URL = {
-  return URL(fileURLWithPath: #file)
-    .deletingLastPathComponent()
-    .appendingPathComponent("Dump")
-}()
+private let dumpDir = URL(fileURLWithPath: #file)
+                        .deletingLastPathComponent()
+                        .appendingPathComponent("Dump")
 
 internal func runBootromTests() {
   let cartridge = createDummyCartridge()
@@ -114,7 +112,7 @@ private func testStateBeforeUnmappingBootrom(_ s: GameBoy) {
     0xff49: 0xff, // obp1
     0xff4a: 0x00, // wy
     0xff4b: 0x00, // wx
-    0xffff: 0x00, // ie
+    0xffff: 0x00  // ie
   ]
 
   for address in checkedAddresses {

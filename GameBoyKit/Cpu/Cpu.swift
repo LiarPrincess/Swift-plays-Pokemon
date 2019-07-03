@@ -51,7 +51,6 @@ public class Cpu {
     let cycles = self.executeUnprefixed(opcode)
     self.cycle &+= UInt64(cycles)
 
-    // TODO: make executeUnprefixed return Int + remove @discardedResult
     return Int(cycles)
   }
 

@@ -2,10 +2,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
-// swiftlint:disable type_body_length
-
 import XCTest
 @testable import GameBoyKit
 
@@ -76,8 +72,7 @@ class CpuCallTests: XCTestCase {
     XCTAssertEqual(cpu.sp, 0xfffe)
   }
 
-  /// 0040h
-  /// RETI ; Pops the stack and returns to address 8001h.
+  /// 0040h RETI ; Pops the stack and returns to address 8001h.
   /// 8000H INC L :An external interrupt occurs here.
   /// 8001H
   func test_reti() {
@@ -85,12 +80,13 @@ class CpuCallTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0x0040
     cpu.sp = 0xfffe
-    cpu.push16(0x8000)
+    cpu.push16(0x8001) // interrupt after 0x8000 -> 0x8001 is the next instr
+    cpu.ime = false
     cpu.reti()
-    // TODO: Interrupt tests (reti)
 
     XCTAssertEqual(cpu.pc, 0x8001)
     XCTAssertEqual(cpu.sp, 0xfffe)
+    XCTAssertEqual(cpu.ime, true)
   }
 
   /// 8000h CALL 9000h

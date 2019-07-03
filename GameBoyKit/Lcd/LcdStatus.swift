@@ -9,7 +9,6 @@ private let isHBlankInterruptEnabledMask: UInt8 = 1 << 3
 private let isLineCompareInterruptMask:   UInt8 = 1 << 2
 private let modeMask: UInt8 = 0b11
 
-// TODO: Store byte and use masks? because cpu does not matter. (struct)
 public class LcdStatus {
 
   /// Bit 6 - LYC=LY Coincidence Interrupt
@@ -49,8 +48,13 @@ public class LcdStatus {
       self.isHBlankInterruptEnabled      = isSet(newValue, mask: isHBlankInterruptEnabledMask)
       self.isLineCompareInterrupt        = isSet(newValue, mask: isLineCompareInterruptMask)
 
-      // swiftlint:disable:next force_unwrapping
-      self.mode = LcdMode(rawValue: newValue & modeMask)!
+      switch newValue & modeMask {
+      case 0b00: self.mode = .hBlank
+      case 0b01: self.mode = .vBlank
+      case 0b10: self.mode = .oamSearch
+      case 0b11: self.mode = .pixelTransfer
+      default:break
+      }
     }
   }
 }

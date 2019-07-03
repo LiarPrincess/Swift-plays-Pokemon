@@ -61,13 +61,13 @@ extension Debugger {
 
     if b.nr3_ram_start != a.nr3_ram_start {
       print("  > audio.nr3_ram_start <- \(a.nr3_ram_start)")
-
     }
     if b.nr3_ram_end != a.nr3_ram_end {
       print("  > audio.nr3_ram_end <- \(a.nr3_ram_end)")
     }
   }
 
+  // swiftlint:disable:next cyclomatic_complexity
   private func printLcdWrites(before b: DebugLcdState,
                               after  a: DebugLcdState) {
 

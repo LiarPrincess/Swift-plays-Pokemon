@@ -21,7 +21,7 @@ class StreamReader  {
   init?(url:        URL,
         delimiter:  String = "\n",
         encoding:   String.Encoding = .utf8,
-        bufferSize: Int = 4096) {
+        bufferSize: Int = 4_096) {
 
     guard let fileHandle = FileHandle(forReadingAtPath: url.path),
           let delimiterData = delimiter.data(using: encoding) else {
@@ -123,8 +123,6 @@ class StreamReader  {
 
 extension StreamReader : Sequence {
   func makeIterator() -> AnyIterator<String> {
-    return AnyIterator {
-      return self.nextLine()
-    }
+    return AnyIterator { self.nextLine() }
   }
 }

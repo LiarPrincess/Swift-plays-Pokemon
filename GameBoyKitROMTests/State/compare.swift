@@ -2,7 +2,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// swiftlint:disable closure_body_length
 // swiftlint:disable cyclomatic_complexity
 
 import GameBoyKit
@@ -62,7 +61,7 @@ var checkedAddresses: [UInt16] = {
   result.insert(MemoryMap.Lcd.scrollX)
   result.insert(MemoryMap.Lcd.line)
   result.insert(MemoryMap.Lcd.lineCompare)
-  result.insert(MemoryMap.Lcd.dma)
+//  result.insert(MemoryMap.Lcd.dma)
   result.insert(MemoryMap.Lcd.backgroundColors)
   result.insert(MemoryMap.Lcd.objectColors0)
   result.insert(MemoryMap.Lcd.objectColors1)

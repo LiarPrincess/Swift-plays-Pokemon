@@ -2,10 +2,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
-// swiftlint:disable type_body_length
-
 import XCTest
 @testable import GameBoyKit
 
@@ -80,7 +76,10 @@ class CpuBitTests: XCTestCase {
     cpu.registers.l = 0x3b
     cpu.set_r(3, .a)
 
-    // TODO: Error in documentation? 0x84
+    // Error in documentation (or they count from 1):
+    // Before: 1000 0000 (0x80)
+    // After:  1000 1000 (0x88)
+
     XCTAssertEqual(cpu.registers.a, 0x88)
   }
 
@@ -105,7 +104,10 @@ class CpuBitTests: XCTestCase {
     bus.write(0xfefe, value: 0x00)
     cpu.set_pHL(3)
 
-    // TODO: Error in documentation? 0x04
+    // Error in documentation (or they count from 1):
+    // Before: 0000 0000 (0x00)
+    // After:  0000 1000 (0x08)
+
     XCTAssertEqual(bus.read(0xfefe), 0x08)
   }
 

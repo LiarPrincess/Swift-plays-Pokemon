@@ -76,7 +76,7 @@ opt_in_rules:
   - required_enum_case
   - sorted_first_last
   - static_operator
-  - strict_fileprivate
+  # - strict_fileprivate
   - toggle_bool
   - trailing_closure
   - unavailable_function

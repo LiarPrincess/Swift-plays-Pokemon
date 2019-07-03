@@ -9,7 +9,6 @@ internal enum BootromState {
   case finished
 }
 
-// TODO: Rename to memory + CpuView to MMu
 public class Bus {
 
   internal let lcd: Lcd
@@ -37,7 +36,6 @@ public class Bus {
   /// Catch'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()
 
-  /// TODO: Catch'em all for audio read/write
   internal var audio = [UInt16:UInt8]()
 
   internal init(bootrom:    BusBootrom?,
@@ -53,6 +51,7 @@ public class Bus {
     self.serialPort = SerialPort()
     self.interrupts = interrupts
 
+    // swiftlint:disable:next force_unwrapping
     self.bootrom = bootrom != nil ? .executing(bootrom!) : .finished
     self.cartridge = cartridge
   }
