@@ -32,7 +32,6 @@
 		905321B222BE479800A409B2 /* DebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B122BE479800A409B2 /* DebugMode.swift */; };
 		905321B522BE48EE00A409B2 /* Debugger+Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B422BE48EE00A409B2 /* Debugger+Cpu.swift */; };
 		905321BE22BE649C00A409B2 /* Debugger+Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321BD22BE649C00A409B2 /* Debugger+Memory.swift */; };
-		905321C822BE99A300A409B2 /* LcdMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321C522BE999400A409B2 /* LcdMode.swift */; };
 		906073A122B8452200F2766D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A022B8452200F2766D /* Timer.swift */; };
 		906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A222B8453F00F2766D /* DivTimerTests.swift */; };
 		906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A322B8453F00F2766D /* CustomTimerTests.swift */; };
@@ -48,6 +47,7 @@
 		906791F822CCF43A003869A9 /* UnmapBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791F722CCF439003869A9 /* UnmapBootromTests.swift */; };
 		906791FB22CCF4AB003869A9 /* MemoryReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791F922CCF4AB003869A9 /* MemoryReadTests.swift */; };
 		906791FC22CCF4AB003869A9 /* MemoryWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791FA22CCF4AB003869A9 /* MemoryWriteTests.swift */; };
+		906791FE22CCF829003869A9 /* CartridgeMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791FD22CCF829003869A9 /* CartridgeMap.swift */; };
 		9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* LcdColorPalettes.swift */; };
 		9085FC3322B693F200310090 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */; };
 		9085FC3D22B6BF6A00310090 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3C22B6BF6A00310090 /* main.swift */; };
@@ -199,7 +199,6 @@
 		905321B122BE479800A409B2 /* DebugMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMode.swift; sourceTree = "<group>"; };
 		905321B422BE48EE00A409B2 /* Debugger+Cpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debugger+Cpu.swift"; sourceTree = "<group>"; };
 		905321BD22BE649C00A409B2 /* Debugger+Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debugger+Memory.swift"; sourceTree = "<group>"; };
-		905321C522BE999400A409B2 /* LcdMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdMode.swift; sourceTree = "<group>"; };
 		906073A022B8452200F2766D /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		906073A222B8453F00F2766D /* DivTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
 		906073A322B8453F00F2766D /* CustomTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimerTests.swift; sourceTree = "<group>"; };
@@ -215,6 +214,7 @@
 		906791F722CCF439003869A9 /* UnmapBootromTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnmapBootromTests.swift; sourceTree = "<group>"; };
 		906791F922CCF4AB003869A9 /* MemoryReadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryReadTests.swift; sourceTree = "<group>"; };
 		906791FA22CCF4AB003869A9 /* MemoryWriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWriteTests.swift; sourceTree = "<group>"; };
+		906791FD22CCF829003869A9 /* CartridgeMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeMap.swift; sourceTree = "<group>"; };
 		9085FC3022B690C600310090 /* LcdColorPalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcdColorPalettes.swift; sourceTree = "<group>"; };
 		9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorPaletteTests.swift; sourceTree = "<group>"; };
 		9085FC3C22B6BF6A00310090 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -476,6 +476,7 @@
 				90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */,
 				90059A4822C2673900803B48 /* CartridgeInitError.swift */,
 				90059A3E22C24AC700803B48 /* CartridgeDestination.swift */,
+				906791FD22CCF829003869A9 /* CartridgeMap.swift */,
 				90EDD2A822C2864100003E9E /* RomOnly.swift */,
 				90EDD2C522C2CCB700003E9E /* MBC1.swift */,
 			);
@@ -554,7 +555,6 @@
 		90CBB73C22ADB851004775E2 /* Lcd */ = {
 			isa = PBXGroup;
 			children = (
-				905321C522BE999400A409B2 /* LcdMode.swift */,
 				90EFDB8222AE553A0017AEC2 /* LcdControl.swift */,
 				90EFDB8422AE55640017AEC2 /* LcdStatus.swift */,
 				9085FC3022B690C600310090 /* LcdColorPalettes.swift */,
@@ -813,6 +813,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				906791FE22CCF829003869A9 /* CartridgeMap.swift in Sources */,
 				90059A4B22C2676A00803B48 /* BootromInitError.swift in Sources */,
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90EDD2A922C2864100003E9E /* RomOnly.swift in Sources */,
@@ -849,7 +850,6 @@
 				905321AA22BE378300A409B2 /* OrEqualOperator.swift in Sources */,
 				905321BE22BE649C00A409B2 /* Debugger+Memory.swift in Sources */,
 				90059A3D22C24A6300803B48 /* CartridgeType.swift in Sources */,
-				905321C822BE99A300A409B2 /* LcdMode.swift in Sources */,
 				9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */,
 				902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,

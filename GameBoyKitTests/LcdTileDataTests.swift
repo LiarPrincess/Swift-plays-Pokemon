@@ -5,41 +5,29 @@
 import XCTest
 @testable import GameBoyKit
 
-class LineDrawerTileDataAddressTests: XCTestCase {
+class LcdTileDataTests: XCTestCase {
 
   func test_tileDataAddress_from8000() {
     let lcd = self.createLcd()
-    lcd.control.tileData = .from8000to8fff
+    lcd.control.value = 1 << 4
 
-    // 0: 0x8000
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 0), 0x8000)
-    // 1: 0x8010
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 1), 0x8010)
-    // 127: 0x87f0
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 127), 0x87f0)
-    // 128: 0x8800
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 128), 0x8800)
-    // 254: 0x8fe0
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 254), 0x8fe0)
-    // 255: 0x8ff0
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 255), 0x8ff0)
   }
 
   func test_tileDataAddress_from8800() {
     let lcd = self.createLcd()
-    lcd.control.tileData = .from8800to97ff
+    lcd.control.value = 0
 
-    // 0: 0x9000
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 0), 0x9000)
-    // 1: 0x9010
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 1), 0x9010)
-    // 127: 0x97f0
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 127), 0x97f0)
-    // 128: 0x8800
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 128), 0x8800)
-    // 254: 0x8fe0
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 254), 0x8fe0)
-    // 255: 0x8ff0
     XCTAssertEqual(lcd.getTileDataAddress(tileIndex: 255), 0x8ff0)
   }
 }

@@ -9,6 +9,25 @@ private let isHBlankInterruptEnabledMask: UInt8 = 1 << 3
 private let isLineCompareInterruptMask:   UInt8 = 1 << 2
 private let modeMask: UInt8 = 0b11
 
+public enum LcdMode {
+
+  /// Mode 0: The LCD controller is in the H-Blank period.
+  /// CPU can access both the display RAM (8000h-9FFFh) and OAM (FE00h-FE9Fh)
+  case hBlank
+
+  /// Mode 1: The LCD contoller is in the V-Blank period (or the display is disabled).
+  /// CPU can access both the display RAM (8000h-9FFFh) and OAM (FE00h-FE9Fh)
+  case vBlank
+
+  /// Mode 2: The LCD controller is reading from OAM memory.
+  /// The CPU <cannot> access OAM memory (FE00h-FE9Fh) during this period.
+  case oamSearch
+
+  /// Mode 3: The LCD controller is reading from both OAM and VRAM,
+  /// The CPU <cannot> access OAM and VRAM during this period.
+  case pixelTransfer
+}
+
 public class LcdStatus {
 
   /// Bit 6 - LYC=LY Coincidence Interrupt
@@ -29,19 +48,14 @@ public class LcdStatus {
   /// Bit 1-0 - Mode Flag
   public internal(set) var mode: LcdMode = .hBlank
 
+  private var _value: UInt8 = 0
+
   /// Raw byte
   public internal(set) var value: UInt8 {
-    get {
-      var result: UInt8 = 0
-      result |= self.isLineCompareInterruptEnabled ? isLineCompareInterruptEnabledMask : 0
-      result |= self.isOamInterruptEnabled         ? isOamInterruptEnabledMask : 0
-      result |= self.isVBlankInterruptEnabled      ? isVBlankInterruptEnabledMask : 0
-      result |= self.isHBlankInterruptEnabled      ? isHBlankInterruptEnabledMask : 0
-      result |= self.isLineCompareInterrupt        ? isLineCompareInterruptMask : 0
-      result |= self.mode.rawValue
-      return result
-    }
+    get { return self._value }
     set {
+      self._value = newValue
+
       self.isLineCompareInterruptEnabled = isSet(newValue, mask: isLineCompareInterruptEnabledMask)
       self.isOamInterruptEnabled         = isSet(newValue, mask: isOamInterruptEnabledMask)
       self.isVBlankInterruptEnabled      = isSet(newValue, mask: isVBlankInterruptEnabledMask)

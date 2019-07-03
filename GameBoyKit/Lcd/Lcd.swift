@@ -98,7 +98,7 @@ public class Lcd {
     }
   }
 
-  /// Advance progress (possibly moving to new line/frame)
+  /// Advance progress (possibly moving to new line).
   /// Will also request LYC interrupt if needed.
   private func advanceFrameProgress(cycles: Int) {
     let previousLine = self.line
@@ -205,9 +205,17 @@ public class Lcd {
   internal func getTileIndexAddress(from map: TileMap,
                                     row:      Int,
                                     column:   Int) -> Int {
+    let start: Int = {
+      switch map {
+      case .from9800to9bff: return 0x9800
+      case .from9c00to9fff: return 0x9c00
+      }
+    }()
+
     let tilesPerRow = 32
     let offset = row * tilesPerRow + column
-    return Int(map.range.start) + offset
+
+    return start + offset
   }
 
   /// Address (in vram) of a tile data.

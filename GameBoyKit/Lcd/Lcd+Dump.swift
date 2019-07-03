@@ -11,13 +11,11 @@ private let tileColumnCount = Int(Lcd.height) / tileSize // 20
 extension Lcd {
 
   public func dump() {
-    let backgroundTileIndices = self.control.backgroundTileMap
-    print("Tile indices: \(backgroundTileIndices)")
-    self.dumpTileIndices(from: backgroundTileIndices)
+    print("Background tile indices: \(self.control.backgroundTileMap)")
+    self.dumpBackgroundTileIndices()
 
-    let tileData = self.control.tileData
-    print("Tile data: \(tileData)")
-    self.dumpTileData(region: tileData)
+    print("Tile data: \(self.control.tileData)")
+    self.dumpTileData()
 
     print("Background:")
     self.dumpBackground()
@@ -28,9 +26,7 @@ extension Lcd {
 
 extension Lcd {
 
-  public func dumpTileIndices(from map: TileMap? = nil) {
-    let map = map ?? self.control.backgroundTileMap
-
+  public func dumpBackgroundTileIndices() {
     // horizontal markers
     print("    | " , separator: "", terminator: "")
     for tileColumn in 0..<tileColumnCount {
@@ -53,6 +49,7 @@ extension Lcd {
       print("\(rowPadding) \(rowText) |", separator: "", terminator: " ")
 
       for tileColumn in 0..<tileColumnCount {
+        let map = self.control.backgroundTileMap
         let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
         let tileIndex        = self.readVideoRam(tileIndexAddress)
 
@@ -69,11 +66,11 @@ extension Lcd {
 
 extension Lcd {
 
-  public func dumpTileData(region: TileData? = nil) {
-    let region = region ?? self.control.tileData
+  public func dumpTileData() {
+    let region = self.control.tileData
+    let range = self.range(region: region)
 
-    let range = region.range
-    var address = Int(range.start)
+    var address = range.start
 
     while address < range.end {
       let data1 = self.readVideoRam(address)
@@ -90,6 +87,13 @@ extension Lcd {
       }
 
       address += 2
+    }
+  }
+
+  private func range(region: TileData) -> ClosedRange<Int> {
+    switch region {
+    case .from8800to97ff: return 0x8800...0x97ff
+    case .from8000to8fff: return 0x8000...0x8fff
     }
   }
 }
@@ -151,7 +155,6 @@ extension Lcd {
 
   private func drawTileLine(tileRow: Int, tileColumn: Int, line: Int) {
     let map = self.control.backgroundTileMap
-
     let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
     let tileIndex        = self.readVideoRam(tileIndexAddress)
 

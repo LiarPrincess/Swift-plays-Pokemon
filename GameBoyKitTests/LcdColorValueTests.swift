@@ -4,7 +4,7 @@
 import XCTest
 @testable import GameBoyKit
 
-class LineDrawerColorValueTests: XCTestCase {
+class LcdColorValueTests: XCTestCase {
 
   /// Source: http://www.codeslinger.co.uk/pages/projects/gameboy/graphics.html
   /// Section: 'How to draw a tile/sprite from memory'
