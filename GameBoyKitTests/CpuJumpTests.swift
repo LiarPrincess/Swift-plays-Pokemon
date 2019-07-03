@@ -13,7 +13,7 @@ class CpuJumpTests: XCTestCase {
   func test_jp_nn() {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
-    cpu.jp_nn(0x8000)
+    _ = cpu.jp_nn(0x8000)
 
     XCTAssertEqual(cpu.pc, 0x8000)
   }
@@ -26,7 +26,7 @@ class CpuJumpTests: XCTestCase {
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
     cpu.pc = 0xfefe
-    cpu.jp_cc_nn(.nz, 0x8000)
+    _ = cpu.jp_cc_nn(.nz, 0x8000)
 
     XCTAssertEqual(cpu.pc, 0xfefe + 0x3)
   }
@@ -39,7 +39,7 @@ class CpuJumpTests: XCTestCase {
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
     cpu.pc = 0xfefe
-    cpu.jp_cc_nn(.z, 0x8000)
+    _ = cpu.jp_cc_nn(.z, 0x8000)
 
     XCTAssertEqual(cpu.pc, 0x8000)
   }
@@ -52,7 +52,7 @@ class CpuJumpTests: XCTestCase {
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
     cpu.pc = 0xfefe
-    cpu.jp_cc_nn(.c, 0x8000)
+    _ = cpu.jp_cc_nn(.c, 0x8000)
 
     XCTAssertEqual(cpu.pc, 0xfefe + 0x3)
   }
@@ -65,7 +65,7 @@ class CpuJumpTests: XCTestCase {
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
     cpu.pc = 0xfefe
-    cpu.jp_cc_nn(.nc, 0x8000)
+    _ = cpu.jp_cc_nn(.nc, 0x8000)
 
     XCTAssertEqual(cpu.pc, 0x8000)
   }
@@ -76,7 +76,7 @@ class CpuJumpTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0x8000
-    cpu.jp_pHL()
+    _ = cpu.jp_pHL()
 
     XCTAssertEqual(cpu.pc, 0x8000)
   }
@@ -89,7 +89,7 @@ class CpuJumpTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0x000a
     cpu.registers.zeroFlag = false
-    cpu.jr_cc_e(.nz, 0xfb) // -2
+    _ = cpu.jr_cc_e(.nz, 0xfb) // -2
 
     XCTAssertEqual(cpu.pc, 0x0007)
   }
@@ -100,7 +100,7 @@ class CpuJumpTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0x004b
     cpu.registers.zeroFlag = true
-    cpu.jr_cc_e(.z, 0x8) // -2
+    _ = cpu.jr_cc_e(.z, 0x8) // -2
 
     XCTAssertEqual(cpu.pc, 0x0055)
   }

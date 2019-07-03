@@ -17,7 +17,7 @@ class CpuCallTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
-    cpu.call_a16(0x1234)
+    _ = cpu.call_a16(0x1234)
 
     XCTAssertEqual(cpu.pc, 0x1234)
     XCTAssertEqual(cpu.sp, 0xfffc)
@@ -33,7 +33,7 @@ class CpuCallTests: XCTestCase {
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.registers.zeroFlag = true
-    cpu.call_cc_a16(.nz, 0x1234)
+    _ = cpu.call_cc_a16(.nz, 0x1234)
 
     XCTAssertEqual(cpu.pc, 0x8000 + 0x3)
     XCTAssertEqual(cpu.sp, 0xfffe)
@@ -47,7 +47,7 @@ class CpuCallTests: XCTestCase {
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
     cpu.registers.zeroFlag = true
-    cpu.call_cc_a16(.z, 0x1234)
+    _ = cpu.call_cc_a16(.z, 0x1234)
 
     XCTAssertEqual(cpu.pc, 0x1234)
     XCTAssertEqual(cpu.sp, 0xfffc)
@@ -65,8 +65,8 @@ class CpuCallTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
-    cpu.call_a16(0x9000)
-    cpu.ret()
+    _ = cpu.call_a16(0x9000)
+    _ = cpu.ret()
 
     XCTAssertEqual(cpu.pc, 0x8003)
     XCTAssertEqual(cpu.sp, 0xfffe)
@@ -82,7 +82,7 @@ class CpuCallTests: XCTestCase {
     cpu.sp = 0xfffe
     cpu.push16(0x8001) // interrupt after 0x8000 -> 0x8001 is the next instr
     cpu.ime = false
-    cpu.reti()
+    _ = cpu.reti()
 
     XCTAssertEqual(cpu.pc, 0x8001)
     XCTAssertEqual(cpu.sp, 0xfffe)
@@ -98,9 +98,9 @@ class CpuCallTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
-    cpu.call_a16(0x9000)
+    _ = cpu.call_a16(0x9000)
     cpu.registers.zeroFlag = true
-    cpu.ret_cc(.z)
+    _ = cpu.ret_cc(.z)
 
     XCTAssertEqual(cpu.pc, 0x8003)
     XCTAssertEqual(cpu.sp, 0xfffe)
@@ -115,9 +115,9 @@ class CpuCallTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
-    cpu.call_a16(0x9000)
+    _ = cpu.call_a16(0x9000)
     cpu.registers.zeroFlag = true
-    cpu.ret_cc(.nz)
+    _ = cpu.ret_cc(.nz)
 
     XCTAssertEqual(cpu.pc, 0x9000 + 0x1)
     XCTAssertEqual(cpu.sp, 0xfffc)
@@ -131,7 +131,7 @@ class CpuCallTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0x8000
     cpu.sp = 0xfffe
-    cpu.rst(0x01)
+    _ = cpu.rst(0x01)
 
     XCTAssertEqual(cpu.pc, 0x0001)
     XCTAssertEqual(cpu.sp, 0xfffc)

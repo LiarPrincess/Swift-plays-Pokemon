@@ -18,32 +18,32 @@ class CpuOtherTests: XCTestCase {
     cpu.registers.a = 0x45
     cpu.registers.b = 0x38
 
-    cpu.add_a_r(.b)
+    _ = cpu.add_a_r(.b)
     XCTAssertEqual(cpu.registers.a, 0x7d)
     XCTAssertEqual(cpu.registers.subtractFlag, false)
 
-    cpu.daa() // CY: 0, H: 0
+    _ = cpu.daa() // CY: 0, H: 0
     XCTAssertEqual(cpu.registers.a, 0x83)
     XCTAssertEqual(cpu.registers.carryFlag,     false)
-    XCTAssertEqual(cpu.registers.halfCarryFlag, false) // by me
-    XCTAssertEqual(cpu.registers.zeroFlag,      false) // by me
+    XCTAssertEqual(cpu.registers.halfCarryFlag, false) // added by me
+    XCTAssertEqual(cpu.registers.zeroFlag,      false) // added by me
 
-    cpu.sub_a_r(.b)
+    _ = cpu.sub_a_r(.b)
     XCTAssertEqual(cpu.registers.a, 0x4b)
     XCTAssertEqual(cpu.registers.subtractFlag, true)
 
-    cpu.daa() // CY: 0, H: 1
+    _ = cpu.daa() // CY: 0, H: 1
     XCTAssertEqual(cpu.registers.a, 0x45)
-    XCTAssertEqual(cpu.registers.carryFlag,     false) // by me
-    XCTAssertEqual(cpu.registers.halfCarryFlag, false) // by me
-    XCTAssertEqual(cpu.registers.zeroFlag,      false) // by me
+    XCTAssertEqual(cpu.registers.carryFlag,     false) // added by me
+    XCTAssertEqual(cpu.registers.halfCarryFlag, false) // added by me
+    XCTAssertEqual(cpu.registers.zeroFlag,      false) // added by me
   }
 
   func test_nop() {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.pc = 0xfefe
-    cpu.nop()
+    _ = cpu.nop()
 
     XCTAssertEqual(cpu.pc, 0xfeff)
   }
@@ -54,7 +54,7 @@ class CpuOtherTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x35
-    cpu.cpl()
+    _ = cpu.cpl()
 
     XCTAssertEqual(cpu.registers.a, 0xca)
   }
@@ -63,7 +63,7 @@ class CpuOtherTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.carryFlag = false
-    cpu.ccf()
+    _ = cpu.ccf()
 
     XCTAssertEqual(cpu.registers.carryFlag, true)
   }
@@ -74,7 +74,7 @@ class CpuOtherTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.carryFlag = true
-    cpu.ccf()
+    _ = cpu.ccf()
 
     XCTAssertEqual(cpu.registers.carryFlag, false)
   }

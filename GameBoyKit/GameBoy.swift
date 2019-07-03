@@ -71,7 +71,7 @@ public class GameBoy {
         self.lcd.startFrame()
       }
 
-      self.timer.tick(cycles: UInt8(cycles))
+      self.timer.tick(cycles: cycles)
       self.lcd.tick(cycles: cycles)
 
       // TODO: Handle HALT somehow (return nil -> loop until next interrupt)

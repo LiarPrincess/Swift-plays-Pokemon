@@ -6,7 +6,7 @@
 public class Cpu {
 
   /// 4 194 304 Hz
-  public static let clockSpeed: UInt = 4_194_304
+  public static let clockSpeed = 4_194_304
 
   /// A 16-bit register that holds the address of the next executed instruction.
   public internal(set) var pc: UInt16 = 0
@@ -51,7 +51,7 @@ public class Cpu {
     let cycles = self.executeUnprefixed(opcode)
     self.cycle &+= UInt64(cycles)
 
-    return Int(cycles)
+    return cycles
   }
 
   // MARK: - Interrupts

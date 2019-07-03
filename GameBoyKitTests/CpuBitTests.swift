@@ -16,7 +16,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0xef
-    cpu.bit_r(7, .a)
+    _ = cpu.bit_r(7, .a)
 
     XCTAssertEqual(cpu.registers.zeroFlag, false)
     XCTAssertEqual(cpu.registers.halfCarryFlag, true)
@@ -30,7 +30,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0xef
-    cpu.bit_r(4, .l)
+    _ = cpu.bit_r(4, .l)
 
     XCTAssertEqual(cpu.registers.zeroFlag, true)
     XCTAssertEqual(cpu.registers.halfCarryFlag, true)
@@ -44,7 +44,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xfe)
-    cpu.bit_pHL(0)
+    _ = cpu.bit_pHL(0)
 
     XCTAssertEqual(cpu.registers.zeroFlag, true)
     XCTAssertEqual(cpu.registers.halfCarryFlag, true)
@@ -58,7 +58,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xfe)
-    cpu.bit_pHL(1)
+    _ = cpu.bit_pHL(1)
 
     XCTAssertEqual(cpu.registers.zeroFlag, false)
     XCTAssertEqual(cpu.registers.halfCarryFlag, true)
@@ -74,7 +74,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
-    cpu.set_r(3, .a)
+    _ = cpu.set_r(3, .a)
 
     // Error in documentation (or they count from 1):
     // Before: 1000 0000 (0x80)
@@ -90,7 +90,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
-    cpu.set_r(7, .l)
+    _ = cpu.set_r(7, .l)
 
     XCTAssertEqual(cpu.registers.l, 0xbb)
   }
@@ -102,7 +102,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x00)
-    cpu.set_pHL(3)
+    _ = cpu.set_pHL(3)
 
     // Error in documentation (or they count from 1):
     // Before: 0000 0000 (0x00)
@@ -120,7 +120,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
-    cpu.res_r(7, .a)
+    _ = cpu.res_r(7, .a)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
   }
@@ -132,7 +132,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x80
     cpu.registers.l = 0x3b
-    cpu.res_r(1, .l)
+    _ = cpu.res_r(1, .l)
 
     XCTAssertEqual(cpu.registers.l, 0x39)
   }
@@ -144,7 +144,7 @@ class CpuBitTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
-    cpu.res_pHL(3)
+    _ = cpu.res_pHL(3)
 
     XCTAssertEqual(bus.read(0xfefe), 0xf7)
   }

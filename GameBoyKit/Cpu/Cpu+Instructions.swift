@@ -18,8 +18,7 @@ extension Cpu {
   // MARK: - 8-Bit Transfer and Input/Output Instructions
 
   /// Loads the contents of register r' into register r.
-  @discardableResult
-  internal func ld_r_r(_ r0: SingleRegister, _ r1: SingleRegister) -> UInt8 {
+  internal func ld_r_r(_ r0: SingleRegister, _ r1: SingleRegister) -> Int {
     let value = self.registers.get(r1)
     self.registers.set(r0, to: value)
 
@@ -28,8 +27,7 @@ extension Cpu {
   }
 
   /// Loads 8-bit immediate data n into register r.
-  @discardableResult
-  internal func ld_r_d8(_ r: SingleRegister, _ n: UInt8) -> UInt8 {
+  internal func ld_r_d8(_ r: SingleRegister, _ n: UInt8) -> Int {
     self.registers.set(r, to: n)
 
     self.pc += 2
@@ -37,8 +35,7 @@ extension Cpu {
   }
 
   /// Loads the contents of memory (8 bits) specified by register pair HL into register r.
-  @discardableResult
-  internal func ld_r_pHL(_ r: SingleRegister) -> UInt8 {
+  internal func ld_r_pHL(_ r: SingleRegister) -> Int {
     let n = self.read(self.registers.hl)
     self.registers.set(r, to: n)
 
@@ -47,8 +44,7 @@ extension Cpu {
   }
 
   /// Stores the contents of register r in memory specified by register pair HL.
-  @discardableResult
-  internal func ld_pHL_r(_ r: SingleRegister) -> UInt8 {
+  internal func ld_pHL_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     let hl = self.registers.hl
     self.write(hl, value: n)
@@ -58,8 +54,7 @@ extension Cpu {
   }
 
   /// Loads 8-bit immediate data n into memory specified by register pair HL.
-  @discardableResult
-  internal func ld_pHL_d8(_ n: UInt8) -> UInt8 {
+  internal func ld_pHL_d8(_ n: UInt8) -> Int {
     let hl = self.registers.hl
     self.write(hl, value: n)
 
@@ -68,8 +63,7 @@ extension Cpu {
   }
 
   /// Loads the contents specified by the contents of register pair BC into register A.
-  @discardableResult
-  internal func ld_a_pBC() -> UInt8 {
+  internal func ld_a_pBC() -> Int {
     let bc = self.registers.bc
     self.registers.a = self.read(bc)
 
@@ -78,8 +72,7 @@ extension Cpu {
   }
 
   /// Loads the contents specified by the contents of register pair DE into register A.
-  @discardableResult
-  internal func ld_a_pDE() -> UInt8 {
+  internal func ld_a_pDE() -> Int {
     let de = self.registers.de
     self.registers.a = self.read(de)
 
@@ -89,8 +82,7 @@ extension Cpu {
 
   /// Loads into register A the contents of the internal RAM, port register,
   /// or mode register at the address in the range FF00h-FFFFh specified by register C.
-  @discardableResult
-  internal func ld_a_ffC() -> UInt8 {
+  internal func ld_a_ffC() -> Int {
     let address = UInt16(0xff00) + UInt16(self.registers.c)
     self.registers.a = self.read(address)
 
@@ -100,8 +92,7 @@ extension Cpu {
 
   /// Loads the contents of register A in the internal RAM, port register,
   /// or mode register at the address in the range FF00h-FFFFh specified by register C.
-  @discardableResult
-  internal func ld_ffC_a() -> UInt8 {
+  internal func ld_ffC_a() -> Int {
     let a = self.registers.a
     let address = UInt16(0xff00) + UInt16(self.registers.c)
     self.write(address, value: a)
@@ -112,8 +103,7 @@ extension Cpu {
 
   /// Loads into register A the contents of the internal RAM, port register, or mode register
   /// at the address in the range FF00h-FFFFh specified by the 8-bit immediate operand n.
-  @discardableResult
-  internal func ld_a_pA8(_ n: UInt8) -> UInt8 {
+  internal func ld_a_pA8(_ n: UInt8) -> Int {
     let addr = 0xff00 | UInt16(n)
     self.registers.a = self.read(addr)
 
@@ -123,8 +113,7 @@ extension Cpu {
 
   /// Loads the contents of register A to the internal RAM, port register, or mode register
   /// at the address in the range FF00h-FFFFh specified by the 8-bit immediate operand n.
-  @discardableResult
-  internal func ld_pA8_a(_ n: UInt8) -> UInt8 {
+  internal func ld_pA8_a(_ n: UInt8) -> Int {
     let addr = 0xff00 | UInt16(n)
     self.write(addr, value: self.registers.a)
 
@@ -132,16 +121,14 @@ extension Cpu {
     return 12
   }
 
-  @discardableResult
-  internal func ld_a_pA16(_ nn: UInt16) -> UInt8 {
+  internal func ld_a_pA16(_ nn: UInt16) -> Int {
     self.registers.a = self.read(nn)
 
     self.pc += 3
     return 16
   }
 
-  @discardableResult
-  internal func ld_pA16_a(_ nn: UInt16) -> UInt8 {
+  internal func ld_pA16_a(_ nn: UInt16) -> Int {
     self.write(nn, value: self.registers.a)
 
     self.pc += 3
@@ -150,8 +137,7 @@ extension Cpu {
 
   /// Loads in register A the contents of memory specified by the contents of register pair HL
   /// and simultaneously increments the contents of HL.
-  @discardableResult
-  internal func ld_a_pHLI() -> UInt8 {
+  internal func ld_a_pHLI() -> Int {
     let hl = self.registers.hl
     self.registers.a = self.read(hl)
 
@@ -164,8 +150,7 @@ extension Cpu {
 
   /// Loads in register A the contents of memory specified by the contents of register pair HL
   /// and simultaneously decrements the contents of HL.
-  @discardableResult
-  internal func ld_a_pHLD() -> UInt8 {
+  internal func ld_a_pHLD() -> Int {
     let hl = self.registers.hl
     self.registers.a = self.read(hl)
 
@@ -177,8 +162,7 @@ extension Cpu {
   }
 
   /// Stores the contents of register A in the memory specified by register pair BC.
-  @discardableResult
-  internal func ld_pBC_a() -> UInt8 {
+  internal func ld_pBC_a() -> Int {
     let a = self.registers.a
     let bc = self.registers.bc
     self.write(bc, value: a)
@@ -188,8 +172,7 @@ extension Cpu {
   }
 
   /// Stores the contents of register A in the memory specified by register pair DE.
-  @discardableResult
-  internal func ld_pDE_a() -> UInt8 {
+  internal func ld_pDE_a() -> Int {
     let a = self.registers.a
     let de = self.registers.de
     self.write(de, value: a)
@@ -200,8 +183,7 @@ extension Cpu {
 
   /// Stores the contents of register A in the memory specified by register pair HL
   /// and simultaneously increments the contents of HL.
-  @discardableResult
-  internal func ld_pHLI_a() -> UInt8 {
+  internal func ld_pHLI_a() -> Int {
     let a = self.registers.a
     let hl = self.registers.hl
     self.write(hl, value: a)
@@ -215,8 +197,7 @@ extension Cpu {
 
   /// Stores the contents of register A in the memory specified by register pair HL
   /// and simultaneously decrements the contents of HL.
-  @discardableResult
-  internal func ld_pHLD_a() -> UInt8 {
+  internal func ld_pHLD_a() -> Int {
     let a = self.registers.a
     let hl = self.registers.hl
     self.write(hl, value: a)
@@ -231,8 +212,7 @@ extension Cpu {
   // MARK: - 16-Bit Transfer Instructions
 
   /// Loads 2 bytes of immediate data to register pair dd.
-  @discardableResult
-  internal func ld_rr_d16(_ rr: CombinedRegister, _ nn: UInt16) -> UInt8 {
+  internal func ld_rr_d16(_ rr: CombinedRegister, _ nn: UInt16) -> Int {
     self.registers.set(rr, to: nn)
 
     self.pc += 3
@@ -240,8 +220,7 @@ extension Cpu {
   }
 
   /// Loads 2 bytes of immediate data to register pair dd.
-  @discardableResult
-  internal func ld_sp_d16(_ nn: UInt16) -> UInt8 {
+  internal func ld_sp_d16(_ nn: UInt16) -> Int {
     self.sp = nn
 
     self.pc += 3
@@ -249,8 +228,7 @@ extension Cpu {
   }
 
   /// Loads the contents of register pair HL in stack pointer SP.
-  @discardableResult
-  internal func ld_sp_hl() -> UInt8 {
+  internal func ld_sp_hl() -> Int {
     self.sp = self.registers.hl
 
     self.pc += 1
@@ -261,8 +239,7 @@ extension Cpu {
   /// First 1 is substracted from SP and the contents of the higher portion of qq are placed on the stack.
   /// The contents of the lower portion of qq are then placed on the stack.
   /// The contents of SP are automatically decremented by 2.
-  @discardableResult
-  internal func push(_ rr: CombinedRegister) -> UInt8 {
+  internal func push(_ rr: CombinedRegister) -> Int {
     let nn = self.registers.get(rr)
     self.push16(nn)
 
@@ -274,8 +251,7 @@ extension Cpu {
   /// First the contents of memory specified by the contents of SP are loaded in the lower portion of qq.
   /// Next, the contents of SP are incremented by 1 and the contents of the memory they specify are loaded in the upper portion of qq.
   /// The contents of SP are automatically incremented by 2.
-  @discardableResult
-  internal func pop(_ rr: CombinedRegister) -> UInt8 {
+  internal func pop(_ rr: CombinedRegister) -> Int {
     let nn = self.pop16()
     self.registers.set(rr, to: nn)
 
@@ -284,8 +260,7 @@ extension Cpu {
   }
 
   /// The 8-bit operand e is added to SP and the result is stored in HL.
-  @discardableResult
-  internal func ldhl_sp_plus_e(_ n: UInt8) -> UInt8 {
+  internal func ldhl_sp_plus_e(_ n: UInt8) -> Int {
     let sigN = Int(Int8(bitPattern: n))
     let sp = Int(self.sp)
 
@@ -303,8 +278,7 @@ extension Cpu {
 
   /// Stores the lower byte of SP at address nn specified by the 16-bit
   /// immediate operand nn and the upper byte of SP at address nn + 1.
-  @discardableResult
-  internal func ld_pA16_sp(_ nn: UInt16) -> UInt8 {
+  internal func ld_pA16_sp(_ nn: UInt16) -> Int {
     let low = UInt8(self.sp & 0xff)
     self.write(nn, value: low)
 
@@ -321,8 +295,7 @@ extension Cpu {
 
   /// Adds the contents of register r to those of register A
   /// and stores the results in register A.
-  @discardableResult
-  internal func add_a_r(_ r: SingleRegister) -> UInt8 {
+  internal func add_a_r(_ r: SingleRegister) -> Int {
     self.add_a(self.registers.get(r))
 
     self.pc += 1
@@ -331,8 +304,7 @@ extension Cpu {
 
   /// Adds 8-bit immediate operand n to the contents of register A
   /// and stores the results in register A.
-  @discardableResult
-  internal func add_a_d8(_ n: UInt8) -> UInt8 {
+  internal func add_a_d8(_ n: UInt8) -> Int {
     self.add_a(n)
 
     self.pc += 2
@@ -341,8 +313,7 @@ extension Cpu {
 
   /// Adds the contents of memory specified by the contents of register pair HL
   /// to the contents of register A and stores the results in register A
-  @discardableResult
-  internal func add_a_pHL() -> UInt8 {
+  internal func add_a_pHL() -> Int {
     let value = self.read(self.registers.hl)
     self.add_a(value)
 
@@ -364,8 +335,7 @@ extension Cpu {
 
   /// Adds the contents of register pair ss to the contents of register pair HL
   /// and stores the results in HL.
-  @discardableResult
-  internal func add_hl_r(_ r: CombinedRegister) -> UInt8 {
+  internal func add_hl_r(_ r: CombinedRegister) -> Int {
     self.add_hl(self.registers.get(r))
 
     self.pc += 1
@@ -374,8 +344,7 @@ extension Cpu {
 
   /// Adds the contents of register pair ss to the contents of register pair HL
   /// and stores the results in HL.
-  @discardableResult
-  internal func add_hl_sp() -> UInt8 {
+  internal func add_hl_sp() -> Int {
     self.add_hl(self.sp)
 
     self.pc += 1
@@ -395,8 +364,7 @@ extension Cpu {
   }
 
   /// Adds the contents of the 8-bit immediate operand e and SP and stores the results in SP.
-  @discardableResult
-  internal func add_sp_r8(_ n: UInt8) -> UInt8 {
+  internal func add_sp_r8(_ n: UInt8) -> Int {
     let sp = Int(self.sp)
     let nn = Int(Int8(bitPattern: n))
 
@@ -416,8 +384,7 @@ extension Cpu {
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func adc_a_r(_ r: SingleRegister) -> UInt8 {
+  internal func adc_a_r(_ r: SingleRegister) -> Int {
     self.adc_a(self.registers.get(r))
 
     self.pc += 1
@@ -426,8 +393,7 @@ extension Cpu {
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func adc_a_d8(_ n: UInt8) -> UInt8 {
+  internal func adc_a_d8(_ n: UInt8) -> Int {
     self.adc_a(n)
 
     self.pc += 2
@@ -436,8 +402,7 @@ extension Cpu {
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func adc_a_pHL() -> UInt8 {
+  internal func adc_a_pHL() -> Int {
     self.adc_a(self.read(self.registers.hl))
 
     self.pc += 1
@@ -463,8 +428,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func sub_a_r(_ r: SingleRegister) -> UInt8 {
+  internal func sub_a_r(_ r: SingleRegister) -> Int {
     self.sub_a(self.registers.get(r))
 
     self.pc += 1
@@ -473,8 +437,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func sub_a_d8(_ n: UInt8) -> UInt8 {
+  internal func sub_a_d8(_ n: UInt8) -> Int {
     self.sub_a(n)
 
     self.pc += 2
@@ -483,8 +446,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func sub_a_pHL() -> UInt8 {
+  internal func sub_a_pHL() -> Int {
     self.sub_a(self.read(self.registers.hl))
 
     self.pc += 1
@@ -509,8 +471,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func sbc_a_r(_ r: SingleRegister) -> UInt8 {
+  internal func sbc_a_r(_ r: SingleRegister) -> Int {
     self.sbc_a(self.registers.get(r))
 
     self.pc += 1
@@ -519,8 +480,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func sbc_a_d8(_ n: UInt8) -> UInt8 {
+  internal func sbc_a_d8(_ n: UInt8) -> Int {
     self.sbc_a(n)
 
     self.pc += 2
@@ -529,8 +489,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func sbc_a_pHL() -> UInt8 {
+  internal func sbc_a_pHL() -> Int {
     self.sbc_a(self.read(self.registers.hl))
 
     self.pc += 1
@@ -559,8 +518,7 @@ extension Cpu {
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func cp_a_r(_ r: SingleRegister) -> UInt8 {
+  internal func cp_a_r(_ r: SingleRegister) -> Int {
     self.cp_a(self.registers.get(r))
 
     self.pc += 1
@@ -569,8 +527,7 @@ extension Cpu {
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func cp_a_d8(_ n: UInt8) -> UInt8 {
+  internal func cp_a_d8(_ n: UInt8) -> Int {
     self.cp_a(n)
 
     self.pc += 2
@@ -579,8 +536,7 @@ extension Cpu {
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func cp_a_pHL() -> UInt8 {
+  internal func cp_a_pHL() -> Int {
     self.cp_a(self.read(self.registers.hl))
 
     self.pc += 1
@@ -603,8 +559,7 @@ extension Cpu {
   // MARK: Inc
 
   /// Increments the contents of register r by 1.
-  @discardableResult
-  internal func inc_r(_ r: SingleRegister) -> UInt8 {
+  internal func inc_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     let (newValue, _) = n.addingReportingOverflow(1)
 
@@ -620,8 +575,7 @@ extension Cpu {
   }
 
   /// Increments the contents of register pair ss by 1.
-  @discardableResult
-  internal func inc_rr(_ r: CombinedRegister) -> UInt8 {
+  internal func inc_rr(_ r: CombinedRegister) -> Int {
     let n = self.registers.get(r)
     let (newValue, _) = n.addingReportingOverflow(1)
     // flags affected: none
@@ -632,8 +586,7 @@ extension Cpu {
   }
 
   /// Increments by 1 the contents of memory specified by register pair HL.
-  @discardableResult
-  internal func inc_pHL() -> UInt8 {
+  internal func inc_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
 
@@ -651,8 +604,7 @@ extension Cpu {
   }
 
   /// Increments the contents of register pair ss by 1.
-  @discardableResult
-  internal func inc_sp() -> UInt8 {
+  internal func inc_sp() -> Int {
     let (newValue, _) = self.sp.addingReportingOverflow(1)
     // flags affected: none
     self.sp = newValue
@@ -664,8 +616,7 @@ extension Cpu {
   // MARK: Dec
 
   /// Subtract 1 from the contents of register r by 1.
-  @discardableResult
-  internal func dec_r(_ r: SingleRegister) -> UInt8 {
+  internal func dec_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
 
     let (newValue, _) = n.subtractingReportingOverflow(1)
@@ -683,8 +634,7 @@ extension Cpu {
   }
 
   /// Decrements the contents of register pair ss by 1.
-  @discardableResult
-  internal func dec_rr(_ r: CombinedRegister) -> UInt8 {
+  internal func dec_rr(_ r: CombinedRegister) -> Int {
     let n = self.registers.get(r)
     let (newValue, _) = n.subtractingReportingOverflow(1)
     // flags affected: none
@@ -695,8 +645,7 @@ extension Cpu {
   }
 
   /// Decrements by 1 the contents of memory specified by register pair HL.
-  @discardableResult
-  internal func dec_pHL() -> UInt8 {
+  internal func dec_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
 
@@ -715,8 +664,7 @@ extension Cpu {
   }
 
   /// Decrements the contents of register pair ss by 1.
-  @discardableResult
-  internal func dec_sp() -> UInt8 {
+  internal func dec_sp() -> Int {
     let (newValue, _) = self.sp.subtractingReportingOverflow(1)
     // flags affected: none
     self.sp = newValue
@@ -729,8 +677,7 @@ extension Cpu {
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func and_a_r(_ r: SingleRegister) -> UInt8 {
+  internal func and_a_r(_ r: SingleRegister) -> Int {
     self.and_a(self.registers.get(r))
 
     self.pc += 1
@@ -739,8 +686,7 @@ extension Cpu {
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func and_a_d8(_ n: UInt8) -> UInt8 {
+  internal func and_a_d8(_ n: UInt8) -> Int {
     self.and_a(n)
 
     self.pc += 2
@@ -749,8 +695,7 @@ extension Cpu {
 
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func and_a_pHL() -> UInt8 {
+  internal func and_a_pHL() -> Int {
     self.and_a(self.read(self.registers.hl))
 
     self.pc += 1
@@ -773,8 +718,7 @@ extension Cpu {
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func or_a_r(_ r: SingleRegister) -> UInt8 {
+  internal func or_a_r(_ r: SingleRegister) -> Int {
     self.or_a(self.registers.get(r))
 
     self.pc += 1
@@ -783,8 +727,7 @@ extension Cpu {
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func or_a_d8(_ n: UInt8) -> UInt8 {
+  internal func or_a_d8(_ n: UInt8) -> Int {
     self.or_a(n)
 
     self.pc += 2
@@ -793,8 +736,7 @@ extension Cpu {
 
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func or_a_pHL() -> UInt8 {
+  internal func or_a_pHL() -> Int {
     self.or_a(self.read(self.registers.hl))
 
     self.pc += 1
@@ -817,8 +759,7 @@ extension Cpu {
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func xor_a_r(_ r: SingleRegister) -> UInt8 {
+  internal func xor_a_r(_ r: SingleRegister) -> Int {
     self.xor_a(self.registers.get(r))
 
     self.pc += 1
@@ -827,8 +768,7 @@ extension Cpu {
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func xor_a_d8(_ n: UInt8) -> UInt8 {
+  internal func xor_a_d8(_ n: UInt8) -> Int {
     self.xor_a(n)
 
     self.pc += 2
@@ -837,8 +777,7 @@ extension Cpu {
 
   /// Takes the logical exclusive-OR for each bit of the contents of operand s and register A.
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  @discardableResult
-  internal func xor_a_pHL() -> UInt8 {
+  internal func xor_a_pHL() -> Int {
     self.xor_a(self.read(self.registers.hl))
 
     self.pc += 1
@@ -862,8 +801,7 @@ extension Cpu {
   // MARK: Rotate left
 
   /// Rotates the contents of register A to the left.
-  @discardableResult
-  internal func rlca() -> UInt8 {
+  internal func rlca() -> Int {
     let a = self.registers.a
 
     let carry = a >> 7
@@ -881,8 +819,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of register A to the left.
-  @discardableResult
-  internal func rla() -> UInt8 {
+  internal func rla() -> Int {
     let a = self.registers.a
 
     let carry = a >> 7
@@ -902,8 +839,7 @@ extension Cpu {
   // MARK: Rotate right
 
   /// Rotates the contents of register A to the right.
-  @discardableResult
-  internal func rrca() -> UInt8 {
+  internal func rrca() -> Int {
     let a = self.registers.a
 
     let carry = a & 0x1
@@ -921,8 +857,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of register A to the right.
-  @discardableResult
-  internal func rra() -> UInt8 {
+  internal func rra() -> Int {
     let a = self.registers.a
 
     let carry = a & 0x1
@@ -942,8 +877,7 @@ extension Cpu {
   // MARK: Prefix rotate left
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
-  @discardableResult
-  internal func rlc_r(_ r: SingleRegister) -> UInt8 {
+  internal func rlc_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rlc(n))
 
@@ -952,8 +886,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
-  @discardableResult
-  internal func rlc_pHL() -> UInt8 {
+  internal func rlc_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.rlc(n))
@@ -975,8 +908,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
-  @discardableResult
-  internal func rl_r(_ r: SingleRegister) -> UInt8 {
+  internal func rl_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rl(n))
 
@@ -985,8 +917,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of operand m to the left. r and (HL) are used for operand m.
-  @discardableResult
-  internal func rl_pHL() -> UInt8 {
+  internal func rl_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.rl(n))
@@ -1010,8 +941,7 @@ extension Cpu {
   // MARK: Prefix rotate right
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
-  @discardableResult
-  internal func rrc_r(_ r: SingleRegister) -> UInt8 {
+  internal func rrc_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rrc(n))
 
@@ -1020,8 +950,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
-  @discardableResult
-  internal func rrc_pHL() -> UInt8 {
+  internal func rrc_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.rrc(n))
@@ -1043,8 +972,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
-  @discardableResult
-  internal func rr_r(_ r: SingleRegister) -> UInt8 {
+  internal func rr_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rr(n))
 
@@ -1053,8 +981,7 @@ extension Cpu {
   }
 
   /// Rotates the contents of operand m to the right. r and (HL) are used for operand m.
-  @discardableResult
-  internal func rr_pHL() -> UInt8 {
+  internal func rr_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.rr(n))
@@ -1078,8 +1005,7 @@ extension Cpu {
   // MARK: Shift
 
   /// Shifts the contents of operand m to the left.
-  @discardableResult
-  internal func sla_r(_ r: SingleRegister) -> UInt8 {
+  internal func sla_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.sla(n))
 
@@ -1088,8 +1014,7 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the left.
-  @discardableResult
-  internal func sla_pHL() -> UInt8 {
+  internal func sla_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.sla(n))
@@ -1111,8 +1036,7 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  @discardableResult
-  internal func sra_r(_ r: SingleRegister) -> UInt8 {
+  internal func sra_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.sra(n))
 
@@ -1121,8 +1045,7 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  @discardableResult
-  internal func sra_pHL() -> UInt8 {
+  internal func sra_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.sra(n))
@@ -1144,8 +1067,7 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  @discardableResult
-  internal func srl_r(_ r: SingleRegister) -> UInt8 {
+  internal func srl_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.srl(n))
 
@@ -1154,8 +1076,7 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  @discardableResult
-  internal func srl_pHL() -> UInt8 {
+  internal func srl_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.srl(n))
@@ -1179,8 +1100,7 @@ extension Cpu {
   // MARK: Swap
 
   /// Shifts the contents of operand m to the right.
-  @discardableResult
-  internal func swap_r(_ r: SingleRegister) -> UInt8 {
+  internal func swap_r(_ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.swap(n))
 
@@ -1189,8 +1109,7 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  @discardableResult
-  internal func swap_pHL() -> UInt8 {
+  internal func swap_pHL() -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.swap(n))
@@ -1216,8 +1135,7 @@ extension Cpu {
 
   /// Copies the complement of the contents of the specified bit
   /// in register r to the Z flag of the program status word (PSW).
-  @discardableResult
-  internal func bit_r(_ b: UInt8, _ r: SingleRegister) -> UInt8 {
+  internal func bit_r(_ b: UInt8, _ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.bit(b, n)
 
@@ -1228,8 +1146,7 @@ extension Cpu {
   /// Copies the complement of the contents of the specified bit
   /// in memory specified by the contents of register pair HL
   /// to the Z flag of the program status word (PSW).
-  @discardableResult
-  internal func bit_pHL(_ b: UInt8) -> UInt8 {
+  internal func bit_pHL(_ b: UInt8) -> Int {
     let n = self.read(self.registers.hl)
     self.bit(b, n)
 
@@ -1250,8 +1167,7 @@ extension Cpu {
   // MARK: Set
 
   /// Sets to 1 the specified bit in specified register r.
-  @discardableResult
-  internal func set_r(_ b: UInt8, _ r: SingleRegister) -> UInt8 {
+  internal func set_r(_ b: UInt8, _ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.set(b, n))
 
@@ -1260,8 +1176,7 @@ extension Cpu {
   }
 
   /// Sets to 1 the specified bit in the memory contents specified by registers H and L.
-  @discardableResult
-  internal func set_pHL(_ b: UInt8) -> UInt8 {
+  internal func set_pHL(_ b: UInt8) -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.set(b, n))
@@ -1277,8 +1192,7 @@ extension Cpu {
   // MARK: Reset
 
   /// Resets to 0 the specified bit in the specified register r.
-  @discardableResult
-  internal func res_r(_ b: UInt8, _ r: SingleRegister) -> UInt8 {
+  internal func res_r(_ b: UInt8, _ r: SingleRegister) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.res(b, n))
 
@@ -1287,8 +1201,7 @@ extension Cpu {
   }
 
   /// Resets to 0 the specified bit in the memory contents specified by registers H and L.
-  @discardableResult
-  internal func res_pHL(_ b: UInt8) -> UInt8 {
+  internal func res_pHL(_ b: UInt8) -> Int {
     let hl = self.registers.hl
     let n = self.read(hl)
     self.write(hl, value: self.res(b, n))
@@ -1307,15 +1220,13 @@ extension Cpu {
 
   /// Loads the operand nn to the program counter (PC).
   /// nn specifies the address of the subsequently executed instruction.
-  @discardableResult
-  internal func jp_nn(_ nn: UInt16) -> UInt8 {
+  internal func jp_nn(_ nn: UInt16) -> Int {
     self.pc = nn
     return 16
   }
 
   /// Loads operand nn in the PC if condition cc and the flag status match.
-  @discardableResult
-  internal func jp_cc_nn(_ condition: JumpCondition, _ nn: UInt16) -> UInt8 {
+  internal func jp_cc_nn(_ condition: JumpCondition, _ nn: UInt16) -> Int {
     if self.canJump(condition) {
       self.pc = nn
       return 16
@@ -1326,8 +1237,7 @@ extension Cpu {
   }
 
   /// Loads the contents of register pair HL in program counter PC.
-  @discardableResult
-  internal func jp_pHL() -> UInt8 {
+  internal func jp_pHL() -> Int {
     self.pc = self.registers.hl
     return 4
   }
@@ -1335,15 +1245,13 @@ extension Cpu {
   // MARK: JR
 
   /// Jumps -127 to +129 steps from the current address.
-  @discardableResult
-  internal func jr_e(_ e: UInt8) -> UInt8 {
+  internal func jr_e(_ e: UInt8) -> Int {
     self.jr(e)
     return 12
   }
 
   /// If condition cc and the flag status match, jumps -127 to +129 steps from the current address.
-  @discardableResult
-  internal func jr_cc_e(_ condition: JumpCondition, _ e: UInt8) -> UInt8 {
+  internal func jr_cc_e(_ condition: JumpCondition, _ e: UInt8) -> Int {
     if self.canJump(condition) {
       self.jr(e)
       return 12
@@ -1378,8 +1286,7 @@ extension Cpu {
   /// Pushes the PC value corresponding to the instruction at the address following that of the
   /// CALL instruction to the 2 bytes following the byte specified by the current SP.
   /// Operand nn is then loaded in the PC.
-  @discardableResult
-  internal func call_a16(_ nn: UInt16) -> UInt8 {
+  internal func call_a16(_ nn: UInt16) -> Int {
     self.call(nn)
     return 24
   }
@@ -1387,8 +1294,7 @@ extension Cpu {
   /// If condition cc matches the flag, the PC value corresponding to the instruction following the
   /// CALL instruction in memory is pushed to the 2 bytes following the memory byte specified by the SP.
   /// Operand nn is then loaded in the PC.
-  @discardableResult
-  internal func call_cc_a16(_ condition: JumpCondition, _ nn: UInt16) -> UInt8 {
+  internal func call_cc_a16(_ condition: JumpCondition, _ nn: UInt16) -> Int {
     if self.canJump(condition) {
       self.call(nn)
       return 24
@@ -1410,8 +1316,7 @@ extension Cpu {
 
   /// Pops from the memory stack the PC value pushed when the
   /// subroutine was called, returning control to the source program.
-  @discardableResult
-  internal func ret() -> UInt8 {
+  internal func ret() -> Int {
     self.retShared()
     return 16
   }
@@ -1419,8 +1324,7 @@ extension Cpu {
   /// If condition cc and the flag match, control is returned
   /// to the source program by popping from the memory stack
   /// the PC value pushed to the stack when the subroutine was called.
-  @discardableResult
-  internal func ret_cc(_ condition: JumpCondition) -> UInt8 {
+  internal func ret_cc(_ condition: JumpCondition) -> Int {
     if self.canJump(condition) {
       self.retShared()
       return 20
@@ -1436,8 +1340,7 @@ extension Cpu {
 
   /// The address for the return from the interrupt is loaded in program counter PC.
   /// The master interrupt enable flag is returned to its pre-interrupt status.
-  @discardableResult
-  internal func reti() -> UInt8 {
+  internal func reti() -> Int {
     self.pc = self.pop16()
     self.enableInterrupts()
     return 16
@@ -1448,8 +1351,7 @@ extension Cpu {
   /// Pushes the current value of the PC to the memory stack and loads to the PC
   /// the page 0 memory addresses provided by operand t.
   /// Then next instruction is fetched from the address specified by the new content of PC.
-  @discardableResult
-  internal func rst(_ t: UInt8) -> UInt8 {
+  internal func rst(_ t: UInt8) -> Int {
     let length = UInt16(1)
     let returnAddr = self.pc + length
     self.push16(returnAddr)
@@ -1462,15 +1364,13 @@ extension Cpu {
 
   /// Only advances the program counter by 1;
   /// performs no other operations that have an effect.
-  @discardableResult
-  internal func nop() -> UInt8 {
+  internal func nop() -> Int {
     self.pc += 1
     return 4
   }
 
   /// Stop, blank the screen and wait for button press
-  @discardableResult
-  internal func stop() -> UInt8 {
+  internal func stop() -> Int {
     fatalError("Stop is not implemented!")
 
     //    self.pc += 1 // or maybe 2 as in docs?
@@ -1480,16 +1380,14 @@ extension Cpu {
   /// The program counter is halted at the step after the HALT instruction.
   /// If both the interrupt request flag and the corresponding interrupt enable flag are set,
   /// HALT mode is exited, even if the interrupt master enable flag is not set.
-  @discardableResult
-  internal func halt() -> UInt8 {
+  internal func halt() -> Int {
     self.isHalted = true
 
     self.pc += 1
     return 4
   }
 
-  @discardableResult
-  internal func daa() -> UInt8 {
+  internal func daa() -> Int {
     var a = self.registers.a
 
     var adjust: UInt8 = 0
@@ -1516,8 +1414,7 @@ extension Cpu {
   }
 
   /// Takes the one’s complement of the contents of register A.
-  @discardableResult
-  internal func cpl() -> UInt8 {
+  internal func cpl() -> Int {
     self.registers.a = ~self.registers.a
 
     self.registers.subtractFlag = true
@@ -1528,8 +1425,7 @@ extension Cpu {
   }
 
   /// Sets the carry flag CY.
-  @discardableResult
-  internal func scf() -> UInt8 {
+  internal func scf() -> Int {
     self.registers.subtractFlag = false
     self.registers.halfCarryFlag = false
     self.registers.carryFlag = true
@@ -1539,8 +1435,7 @@ extension Cpu {
   }
 
   /// Flips the carry flag CY.
-  @discardableResult
-  internal func ccf() -> UInt8 {
+  internal func ccf() -> Int {
     self.registers.subtractFlag = false
     self.registers.halfCarryFlag = false
     self.registers.carryFlag.toggle()
@@ -1550,8 +1445,7 @@ extension Cpu {
   }
 
   /// Resets the interrupt master enable flag and prohibits maskable interrupts.
-  @discardableResult
-  internal func di() -> UInt8 {
+  internal func di() -> Int {
     self.disableInterrupts()
     self.pc += 1
     return 4
@@ -1559,8 +1453,7 @@ extension Cpu {
 
   /// Sets the interrupt master enable flag and enables maskable interrupts.
   /// This instruction can be used in an interrupt routine to enable higher-order interrupts.
-  @discardableResult
-  internal func ei() -> UInt8 {
+  internal func ei() -> Int {
     self.enableInterrupts()
     self.pc += 1
     return 4

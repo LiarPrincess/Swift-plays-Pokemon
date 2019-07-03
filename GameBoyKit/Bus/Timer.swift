@@ -14,7 +14,7 @@ public class Timer {
 
   // MARK: - Tick
 
-  internal func tick(cycles: UInt8) {
+  internal func tick(cycles: Int) {
     self.tickDiv(cycles: cycles)
     self.tickTima(cycles: cycles)
   }
@@ -22,7 +22,7 @@ public class Timer {
   // MARK: - Div
 
   /// Frequency at which div register should be incremented.
-  public static let divFrequency: UInt = 16_384
+  public static let divFrequency: Int = 16_384
 
   /// FF04 - DIV - Divider Register.
   /// This register is incremented at rate of 16384Hz.
@@ -36,12 +36,12 @@ public class Timer {
   }
 
   private var divValue: UInt8 = 0
-  private var divProgress: UInt = 0
+  private var divProgress: Int = 0
 
-  private func tickDiv(cycles: UInt8) {
+  private func tickDiv(cycles: Int) {
     let max = Cpu.clockSpeed / Timer.divFrequency // 256
 
-    self.divProgress += UInt(cycles)
+    self.divProgress += cycles
 
     if self.divProgress >= max {
       self.divValue &+= 1
@@ -74,14 +74,14 @@ public class Timer {
     }
   }
 
-  private var timaProgress: UInt = 0
+  private var timaProgress: Int = 0
 
-  private func tickTima(cycles: UInt8) {
+  private func tickTima(cycles: Int) {
     guard self.isCustomEnabled else {
       return
     }
 
-    self.timaProgress += UInt(cycles)
+    self.timaProgress += cycles
 
     let period = self.getPeriod(tac: self.tac)
     if self.timaProgress >= period {
@@ -100,7 +100,7 @@ public class Timer {
     return (self.tac & 0b100) == 0b100
   }
 
-  private func getPeriod(tac: UInt8) -> UInt {
+  private func getPeriod(tac: UInt8) -> Int {
     switch tac & 0b11 {
     case 0b00: return Cpu.clockSpeed /   4_096 // 1024
     case 0b01: return Cpu.clockSpeed / 262_144 //   16

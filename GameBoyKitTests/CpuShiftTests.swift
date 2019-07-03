@@ -18,7 +18,7 @@ class CpuShiftTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
     cpu.registers.carryFlag = false
-    cpu.sla_r(.d)
+    _ = cpu.sla_r(.d)
 
     XCTAssertEqual(cpu.registers.d, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -36,7 +36,7 @@ class CpuShiftTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
     cpu.registers.carryFlag = false
-    cpu.sla_pHL()
+    _ = cpu.sla_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0xfe)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -54,7 +54,7 @@ class CpuShiftTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x01)
     cpu.registers.carryFlag = false
-    cpu.sra_r(.a)
+    _ = cpu.sra_r(.a)
     // documentation does not make sense here, it should be 'SRA A'
 
     XCTAssertEqual(cpu.registers.a, 0xc5)
@@ -73,7 +73,7 @@ class CpuShiftTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x01)
     cpu.registers.carryFlag = false
-    cpu.sra_pHL()
+    _ = cpu.sra_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -91,7 +91,7 @@ class CpuShiftTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
     cpu.registers.carryFlag = false
-    cpu.srl_r(.a)
+    _ = cpu.srl_r(.a)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -109,7 +109,7 @@ class CpuShiftTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xff)
     cpu.registers.carryFlag = false
-    cpu.srl_pHL()
+    _ = cpu.srl_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0x7f)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -128,7 +128,7 @@ class CpuShiftTests: XCTestCase {
     cpu.registers.a = 0x00
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xf0)
-    cpu.swap_r(.a)
+    _ = cpu.swap_r(.a)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -145,7 +145,7 @@ class CpuShiftTests: XCTestCase {
     cpu.registers.a = 0x00
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0xf0)
-    cpu.swap_pHL()
+    _ = cpu.swap_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0x0f)
     XCTAssertEqual(cpu.registers.zeroFlag, false)

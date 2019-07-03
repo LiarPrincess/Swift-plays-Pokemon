@@ -16,7 +16,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.b = 0xfe
-    cpu.ld_r_r(.a, .b)
+    _ = cpu.ld_r_r(.a, .b)
 
     XCTAssertEqual(cpu.registers.a, 0xfe)
     XCTAssertEqual(cpu.registers.b, 0xfe)
@@ -26,7 +26,7 @@ class CpuLdTests: XCTestCase {
   func test_ld_r_d8() {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
-    cpu.ld_r_d8(.b, 0x24)
+    _ = cpu.ld_r_d8(.b, 0x24)
 
     XCTAssertEqual(cpu.registers.b, 0x24)
   }
@@ -38,7 +38,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x5c)
-    cpu.ld_r_pHL(.h)
+    _ = cpu.ld_r_pHL(.h)
 
     XCTAssertEqual(cpu.registers.h, 0x5c)
   }
@@ -50,7 +50,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x3c
     cpu.registers.hl = 0x8ac5
-    cpu.ld_pHL_r(.a)
+    _ = cpu.ld_pHL_r(.a)
 
     XCTAssertEqual(bus.read(0x8ac5), 0x3c)
   }
@@ -61,7 +61,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0x8ac5
-    cpu.ld_pHL_d8(0x3c) // memory starts with value 0
+    _ = cpu.ld_pHL_d8(0x3c) // memory starts with value 0
 
     XCTAssertEqual(bus.read(0x8ac5), 0x3c)
   }
@@ -73,7 +73,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.bc = 0x8ac5
     bus.write(0x8ac5, value: 0x2f)
-    cpu.ld_a_pBC()
+    _ = cpu.ld_a_pBC()
 
     XCTAssertEqual(cpu.registers.a, 0x2f)
   }
@@ -85,7 +85,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.de = 0x8ac5
     bus.write(0x8ac5, value: 0x5f)
-    cpu.ld_a_pDE()
+    _ = cpu.ld_a_pDE()
 
     XCTAssertEqual(cpu.registers.a, 0x5f)
   }
@@ -97,7 +97,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.c = 0x95
     bus.write(0xff95, value: 0x5f)
-    cpu.ld_a_ffC()
+    _ = cpu.ld_a_ffC()
 
     XCTAssertEqual(cpu.registers.a, 0x5f)
   }
@@ -109,7 +109,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x5f
     cpu.registers.c = 0x9f
-    cpu.ld_ffC_a()
+    _ = cpu.ld_ffC_a()
 
     XCTAssertEqual(bus.read(0xff9f), 0x5f)
   }
@@ -120,7 +120,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     bus.write(0xff34, value: 0xfe)
-    cpu.ld_a_pA8(0x34)
+    _ = cpu.ld_a_pA8(0x34)
 
     XCTAssertEqual(cpu.registers.a, 0xfe)
   }
@@ -131,7 +131,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0xfe
-    cpu.ld_pA8_a(0x34)
+    _ = cpu.ld_pA8_a(0x34)
 
     XCTAssertEqual(bus.read(0xff34), 0xfe)
   }
@@ -141,7 +141,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     bus.write(0xff34, value: 0xfe)
-    cpu.ld_a_pA16(0xff34)
+    _ = cpu.ld_a_pA16(0xff34)
 
     XCTAssertEqual(cpu.registers.a, 0xfe)
   }
@@ -151,7 +151,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0xfe
-    cpu.ld_pA16_a(0x8000)
+    _ = cpu.ld_pA16_a(0x8000)
 
     XCTAssertEqual(bus.read(0x8000), 0xfe)
   }
@@ -163,7 +163,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0x1ff
     bus.write(0x1ff, value: 0x56)
-    cpu.ld_a_pHLI()
+    _ = cpu.ld_a_pHLI()
 
     XCTAssertEqual(cpu.registers.a, 0x56)
     XCTAssertEqual(cpu.registers.hl, 0x200)
@@ -176,7 +176,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0x8a5c
     bus.write(0x8a5c, value: 0x3c)
-    cpu.ld_a_pHLD()
+    _ = cpu.ld_a_pHLD()
 
     XCTAssertEqual(cpu.registers.a, 0x3c)
     XCTAssertEqual(cpu.registers.hl, 0x8a5b)
@@ -189,7 +189,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x3c
     cpu.registers.bc = 0x205f
-    cpu.ld_pBC_a()
+    _ = cpu.ld_pBC_a()
 
     XCTAssertEqual(bus.read(0x205f), 0x3c)
   }
@@ -201,7 +201,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x3c // memory starts with value 0
     cpu.registers.de = 0x205f
-    cpu.ld_pDE_a()
+    _ = cpu.ld_pDE_a()
 
     XCTAssertEqual(bus.read(0x205f), 0x3c)
   }
@@ -213,7 +213,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xffff
     cpu.registers.a = 0x56
-    cpu.ld_pHLI_a()
+    _ = cpu.ld_pHLI_a()
 
     XCTAssertEqual(bus.read(0xffff), 0x56)
     XCTAssertEqual(cpu.registers.hl, 0x0000)
@@ -226,7 +226,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0x4000
     cpu.registers.a = 0x5
-    cpu.ld_pHLD_a()
+    _ = cpu.ld_pHLD_a()
 
     XCTAssertEqual(bus.read(0x4000), 0x5)
     XCTAssertEqual(cpu.registers.hl, 0x3fff)
@@ -238,7 +238,7 @@ class CpuLdTests: XCTestCase {
   func test_ld_rr_d16() {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
-    cpu.ld_rr_d16(.hl, 0x3a5b)
+    _ = cpu.ld_rr_d16(.hl, 0x3a5b)
 
     XCTAssertEqual(cpu.registers.hl, 0x3A5B)
   }
@@ -249,7 +249,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xffff
-    cpu.ld_sp_hl()
+    _ = cpu.ld_sp_hl()
 
     XCTAssertEqual(cpu.sp, 0xffff)
   }
@@ -261,7 +261,7 @@ class CpuLdTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.sp = 0xfffe
     cpu.registers.bc = 0xabcd
-    cpu.push(.bc)
+    _ = cpu.push(.bc)
 
     XCTAssertEqual(cpu.sp, 0xfffc)
     XCTAssertEqual(bus.read(0xfffd), 0xab)
@@ -276,7 +276,7 @@ class CpuLdTests: XCTestCase {
     cpu.sp = 0xfffc
     bus.write(0xfffc, value: 0x5f)
     bus.write(0xfffd, value: 0x3c)
-    cpu.pop(.bc)
+    _ = cpu.pop(.bc)
 
     XCTAssertEqual(cpu.registers.b, 0x3c)
     XCTAssertEqual(cpu.registers.c, 0x5f)
@@ -289,7 +289,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.sp = 0xfff8
-    cpu.ldhl_sp_plus_e(2)
+    _ = cpu.ldhl_sp_plus_e(2)
 
     XCTAssertEqual(cpu.registers.hl, 0xfffa)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -304,7 +304,7 @@ class CpuLdTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.sp = 0xfff8
-    cpu.ld_pA16_sp(0xc100)
+    _ = cpu.ld_pA16_sp(0xc100)
 
     XCTAssertEqual(bus.read(0xc100), 0xf8)
     XCTAssertEqual(bus.read(0xc101), 0xff)

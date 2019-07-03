@@ -36,7 +36,7 @@ private func printCpuExtension(_ functionName: String, _ opcodes: [Opcode], _ ge
   print("extension Cpu {")
   print("")
   print("  /// Executes the instruction, returns the number of cycles it took.")
-  print("  internal func \(functionName)(_ opcode: UInt8) -> UInt8 {")
+  print("  internal func \(functionName)(_ opcode: UInt8) -> Int {")
   print("    switch opcode {")
 
   for opcode in opcodes {

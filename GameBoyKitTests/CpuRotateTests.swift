@@ -16,7 +16,7 @@ class CpuRotateTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x85
     cpu.registers.carryFlag = false
-    cpu.rlca()
+    _ = cpu.rlca()
 
     // test is incorrect: lowest bit should be taken from carry, which is 1,
     // so instead of 0b00001010 we have 0b00001011
@@ -35,7 +35,7 @@ class CpuRotateTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x95
     cpu.registers.carryFlag = true
-    cpu.rla()
+    _ = cpu.rla()
 
     XCTAssertEqual(cpu.registers.a, 0x2b)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -53,7 +53,7 @@ class CpuRotateTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x3b
     cpu.registers.carryFlag = false
-    cpu.rrca()
+    _ = cpu.rrca()
 
     XCTAssertEqual(cpu.registers.a, 0x9d)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -69,7 +69,7 @@ class CpuRotateTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x81
     cpu.registers.carryFlag = false
-    cpu.rra()
+    _ = cpu.rra()
 
     XCTAssertEqual(cpu.registers.a, 0x40)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -89,7 +89,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0)
     cpu.registers.carryFlag = false
-    cpu.rlc_r(.b)
+    _ = cpu.rlc_r(.b)
 
     XCTAssertEqual(cpu.registers.b, 0x0b)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -107,7 +107,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0)
     cpu.registers.carryFlag = false
-    cpu.rlc_pHL()
+    _ = cpu.rlc_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -125,7 +125,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x11)
     cpu.registers.carryFlag = false
-    cpu.rl_r(.b)
+    _ = cpu.rl_r(.b)
 
     XCTAssertEqual(cpu.registers.b, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -142,7 +142,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.subtractFlag = false
     cpu.registers.halfCarryFlag = false
     cpu.registers.carryFlag = true
-    cpu.rl_r(.c)
+    _ = cpu.rl_r(.c)
 
     XCTAssertEqual(cpu.registers.c, 0x9d)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -160,7 +160,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x11)
     cpu.registers.carryFlag = false
-    cpu.rl_pHL()
+    _ = cpu.rl_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0x22)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -180,7 +180,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0)
     cpu.registers.carryFlag = false
-    cpu.rrc_r(.c)
+    _ = cpu.rrc_r(.c)
 
     XCTAssertEqual(cpu.registers.c, 0x80)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -198,7 +198,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0)
     cpu.registers.carryFlag = false
-    cpu.rrc_pHL()
+    _ = cpu.rrc_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -216,7 +216,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)
     cpu.registers.carryFlag = false
-    cpu.rr_r(.a)
+    _ = cpu.rr_r(.a)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -234,7 +234,7 @@ class CpuRotateTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)
     cpu.registers.carryFlag = false
-    cpu.rr_pHL()
+    _ = cpu.rr_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0x45)
     XCTAssertEqual(cpu.registers.zeroFlag, false)

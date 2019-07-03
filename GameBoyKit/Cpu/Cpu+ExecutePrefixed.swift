@@ -12,7 +12,7 @@
 extension Cpu {
 
   /// Executes the instruction, returns the number of cycles it took.
-  internal func executePrefixed(_ opcode: UInt8) -> UInt8 {
+  internal func executePrefixed(_ opcode: UInt8) -> Int {
     switch opcode {
     case 0x0: return self.rlc_r(.b)
     case 0x1: return self.rlc_r(.c)

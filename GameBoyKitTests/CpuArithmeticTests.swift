@@ -19,7 +19,7 @@ class CpuArithmeticTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x3a
     cpu.registers.b = 0xc6
-    cpu.add_a_r(.b)
+    _ = cpu.add_a_r(.b)
 
     XCTAssertEqual(cpu.registers.a, 0)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -34,7 +34,7 @@ class CpuArithmeticTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0x3c
-    cpu.add_a_d8(0xff)
+    _ = cpu.add_a_d8(0xff)
 
     XCTAssertEqual(cpu.registers.a, 0x3b)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -51,7 +51,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.a = 0x3c
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x12)
-    cpu.add_a_pHL()
+    _ = cpu.add_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x4e)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -67,7 +67,7 @@ class CpuArithmeticTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0x8a23
     cpu.registers.bc = 0x0605
-    cpu.add_hl_r(.bc)
+    _ = cpu.add_hl_r(.bc)
 
     XCTAssertEqual(cpu.registers.hl, 0x9028)
     XCTAssertEqual(cpu.registers.halfCarryFlag, true)
@@ -82,7 +82,7 @@ class CpuArithmeticTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0x8a23
     cpu.registers.bc = 0x0605
-    cpu.add_hl_r(.hl)
+    _ = cpu.add_hl_r(.hl)
 
     XCTAssertEqual(cpu.registers.hl, 0x1446)
     XCTAssertEqual(cpu.registers.halfCarryFlag, true)
@@ -96,7 +96,7 @@ class CpuArithmeticTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.sp = 0xfff8
-    cpu.add_sp_r8(0x2)
+    _ = cpu.add_sp_r8(0x2)
 
     XCTAssertEqual(cpu.sp, 0xfffa)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -117,7 +117,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x1e)
     cpu.registers.carryFlag = true
-    cpu.adc_a_r(.e)
+    _ = cpu.adc_a_r(.e)
 
     XCTAssertEqual(cpu.registers.a, 0xf1)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -136,7 +136,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x1e)
     cpu.registers.carryFlag = true
-    cpu.adc_a_d8(0x3b)
+    _ = cpu.adc_a_d8(0x3b)
 
     XCTAssertEqual(cpu.registers.a, 0x1d)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -155,7 +155,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x1e)
     cpu.registers.carryFlag = true
-    cpu.adc_a_pHL()
+    _ = cpu.adc_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -175,7 +175,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.e = 0x3e
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x40)
-    cpu.sub_a_r(.e)
+    _ = cpu.sub_a_r(.e)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -193,7 +193,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.e = 0x3e
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x40)
-    cpu.sub_a_d8(0x0f)
+    _ = cpu.sub_a_d8(0x0f)
 
     XCTAssertEqual(cpu.registers.a, 0x2f)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -211,7 +211,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.e = 0x3e
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x40)
-    cpu.sub_a_pHL()
+    _ = cpu.sub_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0xfe)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -232,7 +232,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x4f)
     cpu.registers.carryFlag = true
-    cpu.sbc_a_r(.e)
+    _ = cpu.sbc_a_r(.e)
 
     XCTAssertEqual(cpu.registers.a, 0x10)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -251,7 +251,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x4f)
     cpu.registers.carryFlag = true
-    cpu.sbc_a_d8(0x3a)
+    _ = cpu.sbc_a_d8(0x3a)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -270,7 +270,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x4f)
     cpu.registers.carryFlag = true
-    cpu.sbc_a_pHL()
+    _ = cpu.sbc_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0xeb)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -290,7 +290,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.b = 0x2f
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x40)
-    cpu.cp_a_r(.b)
+    _ = cpu.cp_a_r(.b)
 
     XCTAssertEqual(cpu.registers.a, 0x3c) // not stored
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -308,7 +308,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.b = 0x2f
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x40)
-    cpu.cp_a_d8(0x3c)
+    _ = cpu.cp_a_d8(0x3c)
 
     XCTAssertEqual(cpu.registers.a, 0x3c) // not stored
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -326,7 +326,7 @@ class CpuArithmeticTests: XCTestCase {
     cpu.registers.b = 0x2f
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x40)
-    cpu.cp_a_pHL()
+    _ = cpu.cp_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x3c) // not stored
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -343,7 +343,7 @@ class CpuArithmeticTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.a = 0xff
-    cpu.inc_r(.a)
+    _ = cpu.inc_r(.a)
 
     XCTAssertEqual(cpu.registers.a, 0)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -357,7 +357,7 @@ class CpuArithmeticTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.de = 0x235f
-    cpu.inc_rr(.de)
+    _ = cpu.inc_rr(.de)
 
     XCTAssertEqual(cpu.registers.de, 0x2360)
   }
@@ -369,7 +369,7 @@ class CpuArithmeticTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x50)
-    cpu.inc_pHL()
+    _ = cpu.inc_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0x51)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -385,7 +385,7 @@ class CpuArithmeticTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.l = 0x01
-    cpu.dec_r(.l)
+    _ = cpu.dec_r(.l)
 
     XCTAssertEqual(cpu.registers.l, 0)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -399,7 +399,7 @@ class CpuArithmeticTests: XCTestCase {
     let bus = FakeCpuBus()
     let cpu = self.createCpu(bus: bus)
     cpu.registers.de = 0x235f
-    cpu.dec_rr(.de)
+    _ = cpu.dec_rr(.de)
 
     XCTAssertEqual(cpu.registers.de, 0x235e)
   }
@@ -411,7 +411,7 @@ class CpuArithmeticTests: XCTestCase {
     let cpu = self.createCpu(bus: bus)
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x00)
-    cpu.dec_pHL()
+    _ = cpu.dec_pHL()
 
     XCTAssertEqual(bus.read(0xfefe), 0xff)
     XCTAssertEqual(cpu.registers.zeroFlag, false)

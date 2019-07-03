@@ -18,7 +18,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x00)
-    cpu.and_a_r(.e)
+    _ = cpu.and_a_r(.e)
 
     XCTAssertEqual(cpu.registers.a, 0x1a)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -36,7 +36,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x00)
-    cpu.and_a_d8(0x38)
+    _ = cpu.and_a_d8(0x38)
 
     XCTAssertEqual(cpu.registers.a, 0x18)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -54,7 +54,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.e = 0x3f // we are using .e instead of .l
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x00)
-    cpu.and_a_pHL()
+    _ = cpu.and_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -73,7 +73,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x0f)
-    cpu.or_a_r(.a)
+    _ = cpu.or_a_r(.a)
 
     XCTAssertEqual(cpu.registers.a, 0x5a)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -90,7 +90,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x0f)
-    cpu.or_a_d8(0x03)
+    _ = cpu.or_a_d8(0x03)
 
     XCTAssertEqual(cpu.registers.a, 0x5b)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -107,7 +107,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.a = 0x5a
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x0f)
-    cpu.or_a_pHL()
+    _ = cpu.or_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x5f)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -126,7 +126,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)
-    cpu.xor_a_r(.a)
+    _ = cpu.xor_a_r(.a)
 
     XCTAssertEqual(cpu.registers.a, 0x00)
     XCTAssertEqual(cpu.registers.zeroFlag, true)
@@ -143,7 +143,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)
-    cpu.xor_a_d8(0x0f)
+    _ = cpu.xor_a_d8(0x0f)
 
     XCTAssertEqual(cpu.registers.a, 0xf0)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
@@ -160,7 +160,7 @@ class CpuLogicTests: XCTestCase {
     cpu.registers.a = 0xff
     cpu.registers.hl = 0xfefe
     bus.write(0xfefe, value: 0x8a)
-    cpu.xor_a_pHL()
+    _ = cpu.xor_a_pHL()
 
     XCTAssertEqual(cpu.registers.a, 0x75)
     XCTAssertEqual(cpu.registers.zeroFlag, false)
