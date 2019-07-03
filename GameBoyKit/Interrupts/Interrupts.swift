@@ -8,6 +8,14 @@ private let timerMask:   UInt8 = 1 << 2
 private let serialMask:  UInt8 = 1 << 3
 private let joypadMask:  UInt8 = 1 << 4
 
+internal enum InterruptType {
+  case vBlank
+  case lcdStat
+  case timer
+  case serial
+  case joypad
+}
+
 /// FF0F Interrupt Flag;
 /// FFFF Interrupt Enable
 public class Interrupts {
@@ -62,5 +70,25 @@ public class Interrupts {
       self.isSerialEnabled  = (newValue & serialMask)  == serialMask
       self.isJoypadEnabled  = (newValue & joypadMask)  == joypadMask
     }
+  }
+
+  internal func set(_ type: InterruptType) {
+    let mask = getMask(type)
+    self.flag |= mask
+  }
+
+  internal func clear(_ type: InterruptType) {
+    let mask = getMask(type)
+    self.flag &= ~mask
+  }
+}
+
+private func getMask(_ type: InterruptType) -> UInt8 {
+  switch type {
+  case .vBlank:  return vBlankMask
+  case .lcdStat: return lcdStatMask
+  case .timer:   return timerMask
+  case .serial:  return serialMask
+  case .joypad:  return joypadMask
   }
 }

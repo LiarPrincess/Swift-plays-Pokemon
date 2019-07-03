@@ -44,18 +44,22 @@ public class Cpu {
 
   /// Run 1 instruction. Returns the number of cycles it took.
   internal func tick() -> Int {
+    if let interrupt = self.getAwaitingInterrupt() {
+      if self.isHalted {
+        self.isHalted = false
+        self.pc += 1 // Move to instruction after HALT
+        return 4
+      }
 
-    // interrupts are the only way to escape HALT
-    self.startInterruptRoutineIfNeeded()
-
-    if self.isHalted {
-      return 0
+      self.interrupts.clear(interrupt)
+      self.startInterruptHandlingRoutine(interrupt)
+      return 4
     }
 
     let opcode = self.read(self.pc)
     let cycles = self.executeUnprefixed(opcode)
-    self.cycle &+= UInt64(cycles)
 
+    self.cycle &+= UInt64(cycles)
     return cycles
   }
 
@@ -69,55 +73,51 @@ public class Cpu {
     self.ime = false
   }
 
-  private func startInterruptRoutineIfNeeded() {
-    guard self.ime else {
-      return
+  private func getAwaitingInterrupt() -> InterruptType? {
+    guard self.ime || self.isHalted else {
+      return nil
     }
 
     if self.interrupts.isVBlankEnabled && self.interrupts.vBlank {
-      self.interrupts.vBlank = false
-      self.processInterrupt(0x40)
-      return
+      return .vBlank
     }
 
     if self.interrupts.isLcdStatEnabled && self.interrupts.lcdStat {
-      self.interrupts.lcdStat = false
-      self.processInterrupt(0x48)
-      return
+      return .lcdStat
     }
 
     if self.interrupts.isTimerEnabled && self.interrupts.timer {
-      self.interrupts.timer = false
-      self.processInterrupt(0x50)
-      return
+      return .timer
     }
 
     if self.interrupts.isSerialEnabled && self.interrupts.serial {
-      self.interrupts.serial = false
-      self.processInterrupt(0x58)
-      return
+      return .serial
     }
 
     if self.interrupts.isJoypadEnabled && self.interrupts.joypad {
-      self.interrupts.joypad = false
-      self.processInterrupt(0x60)
-      return
+      return .joypad
     }
+
+    return nil
   }
 
-  private func processInterrupt(_ handlingRoutineAddress: UInt16) {
+  private func startInterruptHandlingRoutine(_ type: InterruptType) {
+    let address: UInt16 = {
+      switch type {
+      case .vBlank:  return 0x40
+      case .lcdStat: return 0x48
+      case .timer:   return 0x50
+      case .serial:  return 0x58
+      case .joypad:  return 0x60
+      }
+    }()
+
     self.ime = false
-
-    // Escape HALT on return
-    if self.isHalted {
-      self.pc += 1
-    }
-
     self.push16(self.pc)
-    self.pc = handlingRoutineAddress
+    self.pc = address
   }
 
-  // MARK: - Next bytes
+  // MARK: - Operands
 
   /// Next 8 bits after pc
   internal var next8: UInt8 {
@@ -131,7 +131,7 @@ public class Cpu {
     return (high << 8) | low
   }
 
-  // MARK: - Stack operations
+  // MARK: - Stack
 
   internal func push8(_ n: UInt8) {
     self.sp -= 1
