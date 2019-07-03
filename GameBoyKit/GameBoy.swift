@@ -123,15 +123,3 @@ public class GameBoy {
     self.bus.write(0xffff, value: 0x00) // IE
   }
 }
-
-// MARK: - Restorable
-
-extension GameBoy: Restorable {
-  internal func save(to state: inout GameBoyState) {
-    self.cpu.save(to: &state)
-  }
-
-  internal func load(from state: GameBoyState) {
-    self.cpu.load(from: state)
-  }
-}

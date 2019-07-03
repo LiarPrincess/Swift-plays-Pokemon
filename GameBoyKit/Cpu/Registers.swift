@@ -192,38 +192,6 @@ public struct Registers {
   }
 }
 
-// MARK: - Restorable
-
-extension Registers: Restorable {
-  internal func save(to state: inout GameBoyState) {
-    state.cpu.a = self.a
-    state.cpu.b = self.b
-    state.cpu.c = self.c
-    state.cpu.d = self.d
-    state.cpu.e = self.e
-    state.cpu.h = self.h
-    state.cpu.l = self.l
-    state.cpu.zeroFlag      = self.zeroFlag
-    state.cpu.subtractFlag  = self.subtractFlag
-    state.cpu.halfCarryFlag = self.halfCarryFlag
-    state.cpu.carryFlag     = self.carryFlag
-  }
-
-  internal mutating func load(from state: GameBoyState) {
-    self.a = state.cpu.a
-    self.b = state.cpu.b
-    self.c = state.cpu.c
-    self.d = state.cpu.d
-    self.e = state.cpu.e
-    self.h = state.cpu.h
-    self.l = state.cpu.l
-    self.zeroFlag      = state.cpu.zeroFlag
-    self.subtractFlag  = state.cpu.subtractFlag
-    self.halfCarryFlag = state.cpu.halfCarryFlag
-    self.carryFlag     = state.cpu.carryFlag
-  }
-}
-
 private func isSet(_ value: UInt8, mask: UInt8) -> Bool {
   return (value & mask) == mask
 }

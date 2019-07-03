@@ -9,6 +9,7 @@ internal enum BootromState {
   case finished
 }
 
+// TODO: Rename to memory + CpuView to MMu
 public class Bus {
 
   internal let lcd: Lcd
@@ -74,30 +75,5 @@ public class Bus {
 
   internal func convertEchoToRamAddress(_ address: UInt16) -> UInt16 {
     return address - 0x2000
-  }
-}
-
-// MARK: - Restorable
-
-extension Bus: Restorable {
-  internal func save(to state: inout GameBoyState) {
-    state.bus.ram = self.ram
-    state.bus.ioMemory = self.ioMemory
-    state.bus.highRam = self.highRam
-    state.bus.audio = self.audio
-    state.bus.unmappedMemory = self.unmappedMemory
-
-    switch self.bootrom {
-    case .finished:               state.bus.hasFinishedBootrom = true
-    case let .executing(bootrom): state.bus.hasFinishedBootrom = false
-    }
-  }
-
-  internal func load(from state: GameBoyState) {
-    self.ram = state.bus.ram
-    self.ioMemory = state.bus.ioMemory
-    self.highRam = state.bus.highRam
-    self.audio = state.bus.audio
-    self.unmappedMemory = state.bus.unmappedMemory
   }
 }

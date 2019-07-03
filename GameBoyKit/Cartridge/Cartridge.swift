@@ -93,15 +93,3 @@ public class Cartridge {
     return CartridgeHeader.getDestination(rom: self.rom)
   }
 }
-
-// MARK: - Restorable
-
-extension Cartridge: Restorable {
-  internal func save(to state: inout GameBoyState) {
-    state.cartridge.ramBanks = self.ramBanks
-  }
-
-  internal func load(from state: GameBoyState) {
-    self.ramBanks = state.cartridge.ramBanks
-  }
-}

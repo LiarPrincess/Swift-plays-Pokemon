@@ -2,6 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// TODO: remove shifts and use 'rawColor * 2'
 private let color0Shift: UInt8 = 0
 private let color1Shift: UInt8 = 2
 private let color2Shift: UInt8 = 4
