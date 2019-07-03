@@ -42,6 +42,7 @@
 		906073A122B8452200F2766D /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A022B8452200F2766D /* Timer.swift */; };
 		906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A222B8453F00F2766D /* DivTimerTests.swift */; };
 		906073A522B8453F00F2766D /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906073A322B8453F00F2766D /* CustomTimerTests.swift */; };
+		906791E422CCCB39003869A9 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791E322CCCB39003869A9 /* DebugState.swift */; };
 		9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* LcdColorPalettes.swift */; };
 		9085FC3322B693F200310090 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */; };
 		9085FC3B22B6BC7400310090 /* FakeCpuBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */; };
@@ -217,6 +218,7 @@
 		906073A022B8452200F2766D /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		906073A222B8453F00F2766D /* DivTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
 		906073A322B8453F00F2766D /* CustomTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimerTests.swift; sourceTree = "<group>"; };
+		906791E322CCCB39003869A9 /* DebugState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
 		9085FC3022B690C600310090 /* LcdColorPalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcdColorPalettes.swift; sourceTree = "<group>"; };
 		9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorPaletteTests.swift; sourceTree = "<group>"; };
 		9085FC3A22B6BC7400310090 /* FakeCpuBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeCpuBus.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				905321B122BE479800A409B2 /* DebugMode.swift */,
+				906791E322CCCB39003869A9 /* DebugState.swift */,
 				905321AF22BE46E800A409B2 /* Debugger.swift */,
 				905321B422BE48EE00A409B2 /* Debugger+Cpu.swift */,
 				905321BD22BE649C00A409B2 /* Debugger+Memory.swift */,
@@ -854,6 +857,7 @@
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
 				90B0DC5B22B78DFE005BBCF5 /* Bus+write.swift in Sources */,
 				90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */,
+				906791E422CCCB39003869A9 /* DebugState.swift in Sources */,
 				90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */,
 				905321B022BE46E800A409B2 /* Debugger.swift in Sources */,
 				90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */,

@@ -81,7 +81,7 @@ extension Debugger {
   // MARK: - Print opcode details
 
   // swiftlint:disable:next function_body_length cyclomatic_complexity
-  internal func printOpcodeDetails(before: GameBoyState, after: GameBoyState) {
+  internal func printOpcodeDetails(before: DebugState, after: DebugState) {
     guard let opcode = self.opcodeAt(pc: before.cpu.pc) else {
       return
     }
@@ -138,7 +138,7 @@ extension Debugger {
   // MARK: - Print register writes
 
   // swiftlint:disable:next cyclomatic_complexity
-  internal func printRegiserWrites(before: GameBoyState, after: GameBoyState) {
+  internal func printRegiserWrites(before: DebugState, after: DebugState) {
 
     let b = before.cpu
     let a = after.cpu
@@ -154,6 +154,9 @@ extension Debugger {
     if b.subtractFlag  != a.subtractFlag  { print("  > cpu.subtractFlag  <- \(a.subtractFlag)") }
     if b.halfCarryFlag != a.halfCarryFlag { print("  > cpu.halfCarryFlag <- \(a.halfCarryFlag)") }
     if b.carryFlag     != a.carryFlag     { print("  > cpu.carryFlag     <- \(a.carryFlag)") }
+
+    if b.pc != a.pc { print("  > cpu.pc <- \(a.pc)") }
+    if b.sp != a.sp { print("  > cpu.sp <- \(a.sp)") }
   }
 
   // MARK: - Print register values
