@@ -2,6 +2,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+/// width = height = 8 pixels
+private let tileSizeInPixels = 8
+private let bytesPerTileLine = 2
+
 extension Lcd {
 
   internal func drawLine() {
@@ -11,32 +15,35 @@ extension Lcd {
 
     if self.control.isBackgroundVisible {
       self.drawBackgroundLine()
+    } else {
+      self.drawWhiteBackgroundLine()
     }
 
-    //    if self.lcdControl.isWindowEnabled {
-    //      self.drawWindow()
-    //    }
-    //
-    //    if self.lcdControl.isSpriteEnabled {
-    //      self.drawSprites()
-    //    }
+    if self.control.isWindowEnabled {
+      self.drawWindow()
+    }
+
+//    if self.control.isSpriteEnabled {
+//      self.drawSprites()
+//    }
   }
 
   private func drawBackgroundLine() {
-    let tileSizeInPixels = 8 // width = height = 8 pixels
-    let bytesPerTileLine = 2
-
     let line    = Int(self.line)
     let globalY = (Int(self.scrollY) + line) % LcdConstants.backgroundMapHeight
     let tileRow = globalY / tileSizeInPixels
     let tileDataOffset = (globalY % tileSizeInPixels) * bytesPerTileLine
 
+    let map = self.control.backgroundTileMap
+
+    let usingWindow = self.control.isWindowEnabled && self.line >= self.windowY
+    let maxX = min(Lcd.width, usingWindow ? Int(self.windowX) - 7 : .max)
+
     var x = 0
-    while x < Int(Lcd.width) {
-      let globalX = (Int(self.scrollX) + x) % LcdConstants.backgroundMapWidth
+    while x < maxX {
+      let globalX = Int(self.scrollX) + x
       let tileColumn = globalX / tileSizeInPixels
 
-      let map = self.control.backgroundTileMap
       let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
       let tileIndex        = self.readVideoRam(tileIndexAddress)
 
@@ -48,10 +55,58 @@ extension Lcd {
       for pixel in startPixel..<tileSizeInPixels {
         let tileColor = self.getColorValue(data1, data2, bit: pixel)
         let color     = self.backgroundColors[tileColor]
-        self.framebuffer[x + pixel, line] = color
+
+        // we may draw a bit of window, but thats ok,
+        // since we will over-draw it later
+        let pixelX = x + pixel
+        if pixelX < Lcd.width {
+          self.framebuffer[pixelX, line] = color
+        }
       }
 
       x += (tileSizeInPixels - startPixel)
+    }
+  }
+
+  private func drawWhiteBackgroundLine() {
+    let line = Int(self.line)
+    for x in 0..<Lcd.width {
+      self.framebuffer[x, line] = 0x00
+    }
+  }
+
+  private func drawWindow() {
+    let line = Int(self.line)
+    let windowStartY = Int(self.windowY)
+    let windowStartX = Int(self.windowX) - 7
+
+    guard line >= windowStartY else {
+      return
+    }
+
+    let windowLine = line - windowStartY
+    let tileRow = windowLine / tileSizeInPixels
+    let tileDataOffset = (windowLine % tileSizeInPixels) * bytesPerTileLine
+
+    let map = self.control.windowTileMap
+
+    // TODO: Performance
+    for x in windowStartX..<Lcd.width {
+      let windowX = x - windowStartX
+      let tileColumn = windowX / tileSizeInPixels
+
+      let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
+      let tileIndex        = self.readVideoRam(tileIndexAddress)
+
+      let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
+      let data1 = self.readVideoRam(tileDataAddress + tileDataOffset)
+      let data2 = self.readVideoRam(tileDataAddress + tileDataOffset + 1)
+
+      let pixel = windowX % tileSizeInPixels
+      let tileColor = self.getColorValue(data1, data2, bit: pixel)
+      let color     = self.backgroundColors[tileColor]
+
+      self.framebuffer[x, line] = color
     }
   }
 

@@ -136,6 +136,8 @@ public class Lcd {
     let previousMode = self.status.mode
     var requestInterrupt = false
 
+    // This is not exactly correct, but for perfomance we will
+    // draw the whole line at once instead on every tick.
     if lineProgress < LcdConstants.oamSearchEnd {
       self.status.mode = .oamSearch
       requestInterrupt = self.status.isOamInterruptEnabled
