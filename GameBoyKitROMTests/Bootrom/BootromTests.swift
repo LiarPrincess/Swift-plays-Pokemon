@@ -5,9 +5,8 @@
 import Foundation
 import GameBoyKit
 
-private let dumpDir = URL(fileURLWithPath: #file)
-                        .deletingLastPathComponent()
-                        .appendingPathComponent("Dump")
+private let dumpDir = URL(fileURLWithPath: #file).deletingLastPathComponent()
+                                                 .appendingPathComponent("Dump")
 
 internal func runBootromTests() {
   let cartridge = createDummyCartridge()

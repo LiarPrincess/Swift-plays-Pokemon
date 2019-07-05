@@ -8,17 +8,19 @@ import GameBoyKit
 //runBootromTests()
 
 // Run Blargg tests
-//runTestCpuInstrs01() // [X]
-//runTestCpuInstrs02() // [ ] hangs at 312
-//runTestCpuInstrs03() // [x]
-//runTestCpuInstrs04() // [X]
-//runTestCpuInstrs05() // [X]
-//runTestCpuInstrs06() // [X]
-//runTestCpuInstrs07() // [ ] hangs at 377
-//runTestCpuInstrs08() // [X]
-//runTestCpuInstrs09() // [ ] unimplemented instr
-//runTestCpuInstrs10() // [x] Long
-//runTestCpuInstrs11() // [x] Long
+//testCpuInstrs01() // [X]
+//testCpuInstrs02() // [x]
+//testCpuInstrs03() // [x]
+//testCpuInstrs04() // [X]
+//testCpuInstrs05() // [X]
+//testCpuInstrs06() // [X]
+//testCpuInstrs07() // [x]
+//testCpuInstrs08() // [X]
+//testCpuInstrs09() // [x]
+//testCpuInstrs10() // [x] Long
+//testCpuInstrs11() // [x] Long
+
+testInstrTiming()
 
 // Show single frame performance
 //performanceTest()

@@ -12,47 +12,25 @@ enum BlarggRomDumps {
     return mainDir.appendingPathComponent("Dumps")
   }()
 
-  static var cpuInstrs01: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_01"))
+  private static func list(_ dir: String) -> [URL] {
+    return listStates(dir: dumpsDir.appendingPathComponent(dir))
   }
 
-  static var cpuInstrs02: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_02"))
-  }
+  // MARK: - Cpu instrs
 
-  static var cpuInstrs03: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_03"))
-  }
+  static var cpuInstrs01 = list("cpu_instr_01")
+  static var cpuInstrs02 = list("cpu_instr_02")
+  static var cpuInstrs03 = list("cpu_instr_03")
+  static var cpuInstrs04 = list("cpu_instr_04")
+  static var cpuInstrs05 = list("cpu_instr_05")
+  static var cpuInstrs06 = list("cpu_instr_06")
+  static var cpuInstrs07 = list("cpu_instr_07")
+  static var cpuInstrs08 = list("cpu_instr_08")
+  static var cpuInstrs09 = list("cpu_instr_09")
+  static var cpuInstrs10 = list("cpu_instr_10")
+  static var cpuInstrs11 = list("cpu_instr_11")
 
-  static var cpuInstrs04: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_04"))
-  }
+  // MARK: - Instr timing
 
-  static var cpuInstrs05: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_05"))
-  }
-
-  static var cpuInstrs06: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_06"))
-  }
-
-  static var cpuInstrs07: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_07"))
-  }
-
-  static var cpuInstrs08: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_08"))
-  }
-
-  static var cpuInstrs09: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_09"))
-  }
-
-  static var cpuInstrs10: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_10"))
-  }
-
-  static var cpuInstrs11: [URL] {
-    return listStates(dir: dumpsDir.appendingPathComponent("cpu_instr_11"))
-  }
+  static var instrTiming = list("instr_timing")
 }

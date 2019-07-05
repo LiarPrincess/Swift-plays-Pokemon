@@ -27,8 +27,8 @@ var checkedAddresses: [UInt16] = {
   result.insert(MemoryMap.IO.unmapBootrom)
 
 //  result.insert(MemoryMap.Timer.div)
-//  result.insert(MemoryMap.Timer.tima)
-//  result.insert(MemoryMap.Timer.tma)
+  result.insert(MemoryMap.Timer.tima)
+  result.insert(MemoryMap.Timer.tma)
 //  result.insert(MemoryMap.Timer.tac)
 
 //  result.insert(MemoryMap.Audio.nr10) // not yet implemented

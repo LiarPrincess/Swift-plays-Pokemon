@@ -8,26 +8,28 @@ import GameBoyKit
 private typealias Roms = BlarggRoms
 private typealias Dumps = BlarggRomDumps
 
-func runTestCpuInstrs01() { runTest(rom: Roms.cpuInstrs01, dump: Dumps.cpuInstrs01) }
-func runTestCpuInstrs02() { runTest(rom: Roms.cpuInstrs02, dump: Dumps.cpuInstrs02) }
-func runTestCpuInstrs03() { runTest(rom: Roms.cpuInstrs03, dump: Dumps.cpuInstrs03) }
-func runTestCpuInstrs04() { runTest(rom: Roms.cpuInstrs04, dump: Dumps.cpuInstrs04) }
-func runTestCpuInstrs05() { runTest(rom: Roms.cpuInstrs05, dump: Dumps.cpuInstrs05) }
-func runTestCpuInstrs06() { runTest(rom: Roms.cpuInstrs06, dump: Dumps.cpuInstrs06) }
-func runTestCpuInstrs07() { runTest(rom: Roms.cpuInstrs07, dump: Dumps.cpuInstrs07) }
-func runTestCpuInstrs08() { runTest(rom: Roms.cpuInstrs08, dump: Dumps.cpuInstrs08) }
-func runTestCpuInstrs09() { runTest(rom: Roms.cpuInstrs09, dump: Dumps.cpuInstrs09) }
-func runTestCpuInstrs10() { runTest(rom: Roms.cpuInstrs10, dump: Dumps.cpuInstrs10) }
-func runTestCpuInstrs11() { runTest(rom: Roms.cpuInstrs11, dump: Dumps.cpuInstrs11) }
+func testCpuInstrs01() { test(Roms.cpuInstrs01, dump: Dumps.cpuInstrs01) }
+func testCpuInstrs02() { test(Roms.cpuInstrs02, dump: Dumps.cpuInstrs02) }
+func testCpuInstrs03() { test(Roms.cpuInstrs03, dump: Dumps.cpuInstrs03) }
+func testCpuInstrs04() { test(Roms.cpuInstrs04, dump: Dumps.cpuInstrs04) }
+func testCpuInstrs05() { test(Roms.cpuInstrs05, dump: Dumps.cpuInstrs05) }
+func testCpuInstrs06() { test(Roms.cpuInstrs06, dump: Dumps.cpuInstrs06) }
+func testCpuInstrs07() { test(Roms.cpuInstrs07, dump: Dumps.cpuInstrs07) }
+func testCpuInstrs08() { test(Roms.cpuInstrs08, dump: Dumps.cpuInstrs08) }
+func testCpuInstrs09() { test(Roms.cpuInstrs09, dump: Dumps.cpuInstrs09) }
+func testCpuInstrs10() { test(Roms.cpuInstrs10, dump: Dumps.cpuInstrs10) }
+func testCpuInstrs11() { test(Roms.cpuInstrs11, dump: Dumps.cpuInstrs11) }
 
-private func runTest(rom: URL, dump urls: [URL]) {
+func testInstrTiming() { test(Roms.instrTiming, dump: Dumps.instrTiming) }
+
+private func test(_ rom: URL, dump urls: [URL]) {
   let cartridge = openRom(url: rom)
   let gameBoy   = GameBoy(bootrom: nil, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
   for (index, url) in urls.enumerated() {
     let fileName = url.lastPathComponent
-    print("\(index)/\(urls.count - 1) - \(fileName)")
+    print("\(index)/\(urls.count - 1) - \(fileName) (cycle: \(gameBoy.cpu.cycle))")
 
     // https://swiftrocks.com/autoreleasepool-in-2019-swift.html
     autoreleasepool {

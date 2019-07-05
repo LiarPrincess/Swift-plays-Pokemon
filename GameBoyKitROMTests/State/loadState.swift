@@ -10,26 +10,28 @@ import Cocoa
 
 private func toData(_ s: String) -> Data { return s.data(using: .ascii)! }
 
-private var cpu_A  = toData("cpu_A")
-private var cpu_B  = toData("cpu_B")
-private var cpu_C  = toData("cpu_C")
-private var cpu_D  = toData("cpu_D")
-private var cpu_E  = toData("cpu_E")
-private var cpu_HL = toData("cpu_HL")
+private let cpu_A  = toData("cpu_A")
+private let cpu_B  = toData("cpu_B")
+private let cpu_C  = toData("cpu_C")
+private let cpu_D  = toData("cpu_D")
+private let cpu_E  = toData("cpu_E")
+private let cpu_HL = toData("cpu_HL")
 
-private var cpu_c_carry     = toData("cpu_c_carry")
-private var cpu_h_halfcarry = toData("cpu_h_halfcarry")
-private var cpu_n_substract = toData("cpu_n_substract")
-private var cpu_z_zero      = toData("cpu_z_zero")
+private let cpu_c_carry     = toData("cpu_c_carry")
+private let cpu_h_halfcarry = toData("cpu_h_halfcarry")
+private let cpu_n_substract = toData("cpu_n_substract")
+private let cpu_z_zero      = toData("cpu_z_zero")
 
-private var cpu_SP = toData("cpu_SP")
-private var cpu_PC = toData("cpu_PC")
+private let cpu_SP = toData("cpu_SP")
+private let cpu_PC = toData("cpu_PC")
+private let total_ticks = toData("total_ticks")
+private let instruction_ticks = toData("instruction_ticks")
 
-private var cpu_interrupt_master_enable = toData("cpu_interrupt_master_enable")
-private var cpu_halted  = toData("cpu_halted")
-private var cpu_stopped = toData("cpu_stopped")
+private let cpu_interrupt_master_enable = toData("cpu_interrupt_master_enable")
+private let cpu_halted  = toData("cpu_halted")
+private let cpu_stopped = toData("cpu_stopped")
 
-private var memory = toData("memory")
+private let memory = toData("memory")
 
 private var colon: UInt8 = 58 // ascii for ':'
 private var comma: UInt8 = 44 // ascii for ','
@@ -76,6 +78,9 @@ private func fill(_ emulator: SavedState, from fileUrl: URL) {
 
     else if property == cpu_SP  { cpu.sp = parseUInt16(value) }
     else if property == cpu_PC  { cpu.pc = parseUInt16(value) }
+
+    else if property == total_ticks {  }
+    else if property == instruction_ticks {  }
 
     else if property == cpu_interrupt_master_enable  { cpu.ime      = parseBool(value) }
     else if property == cpu_halted                   { cpu.isHalted = parseBool(value) }
