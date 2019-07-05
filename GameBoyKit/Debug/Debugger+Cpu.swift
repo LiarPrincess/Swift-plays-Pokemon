@@ -2,6 +2,26 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// From Blargg tests
+private let unprefixedLengths = [
+  1,3,1,1,1,1,2,1,3,1,1,1,1,1,2,1, // 0
+  0,3,1,1,1,1,2,1,2,1,1,1,1,1,2,1, // 1
+  2,3,1,1,1,1,2,1,2,1,1,1,1,1,2,1, // 2
+  2,3,1,1,1,1,2,1,2,1,1,1,1,1,2,1, // 3
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 4
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 5
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 6
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 7
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 8
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 9
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // A
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // B
+  1,1,3,3,3,1,2,1,1,1,3,0,3,3,2,1, // C
+  1,1,3,0,3,1,2,1,1,1,3,0,3,0,2,1, // D
+  2,1,1,0,0,1,2,1,2,1,3,0,0,0,2,1, // E
+  2,1,1,1,0,1,2,1,2,1,3,1,0,0,2,1  // F
+]
+
 extension Debugger {
 
   private func next8(pc: UInt16) -> UInt8 {
@@ -35,7 +55,7 @@ extension Debugger {
 
   private func printUnprefixedOpcode(_ opcode: UnprefixedOpcode) {
     let operands: String = {
-      switch self.getOpcodeLength(opcode) {
+      switch unprefixedLengths[Int(opcode.rawValue)] {
       case 2: return self.next8(pc: self.cpu.pc).hex
       case 3: return self.next16(pc: self.cpu.pc).hex
       default: return ""
@@ -56,26 +76,6 @@ extension Debugger {
     let pc = self.cpu.pc + 1
     let opcodeDesc = String(describing: opcode)
     print("\(pc.hex): \(opcodeDesc.padLeft(toLength: 11))")
-  }
-
-  private func getOpcodeLength(_ opcode: UnprefixedOpcode) -> Int {
-    switch opcode {
-    case .adc_a_d8, .add_a_d8, .add_sp_r8, .and_d8, .cp_d8,
-         .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_r8, .jr_z_r8,
-         .ld_a_d8, .ld_b_d8, .ld_c_d8, .ld_d_d8, .ld_e_d8, .ld_h_d8, .ld_hl_spR8, .ld_l_d8, .ld_pHL_d8,
-         .ldh_a_pA8, .ldh_pA8_a,
-         .sub_d8, .sbc_a_d8,
-         .or_d8, .xor_d8:
-      return 2
-
-    case .call_a16, .call_c_a16, .call_nc_a16, .call_nz_a16, .call_z_a16, .jp_a16,
-         .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16, .ld_a_pA16,
-         .ld_bc_d16, .ld_de_d16, .ld_hl_d16, .ld_pA16_a, .ld_pA16_sp, .ld_sp_d16:
-      return 3
-
-    default:
-      return 1
-    }
   }
 
   // MARK: - Print opcode details
@@ -104,16 +104,19 @@ extension Debugger {
       print("  > conditional jump to \(next16.hex) \(taken)")
 
     case .jr_r8:
-      print("  > relative jump to \(pc)")
-    case .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_z_r8:
-      let length = Int(2)
       let offset = Int8(bitPattern: next8)
-      let predictedPc = Int(before.cpu.pc) + length + Int(offset)
+      let length = Int(2)
+      let predictedPc = UInt16(Int(before.cpu.pc) + length + Int(offset))
+      print("  > relative jump by \(offset) (to: \(predictedPc.hex))")
+    case .jr_c_r8, .jr_nc_r8, .jr_nz_r8, .jr_z_r8:
+      let offset = Int8(bitPattern: next8)
+      let length = Int(2)
+      let predictedPc = UInt16(Int(before.cpu.pc) + length + Int(offset))
       let taken = after.cpu.pc == predictedPc ? "TAKEN" : "NOT TAKEN"
-      print("  > relative conditional jump to \(predictedPc) \(taken)")
+      print("  > relative conditional jump by \(offset) (to: \(predictedPc.hex)) \(taken)")
 
     case .ret:
-      print("  > return to \(after.cpu.pc)")
+      print("  > return to \(after.cpu.pc.hex)")
     case .ret_c, .ret_nc, .ret_nz, .ret_z, .reti:
       let length: UInt16 = 1
       let taken = after.cpu.pc == before.cpu.pc + length ? "NOT TAKEN" : "TAKEN"

@@ -109,6 +109,8 @@
 		90CBB73222AD7AE3004775E2 /* Data+UIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */; };
 		90CBD3CB22BD62B700B58461 /* Framebuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CA22BD62B700B58461 /* Framebuffer.swift */; };
 		90CBD3CD22BD6AA000B58461 /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CBD3CC22BD6AA000B58461 /* Metal.swift */; };
+		90D7C2D622CE85D70011E20C /* CpuOpcodeTimingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D7C2D522CE85D70011E20C /* CpuOpcodeTimingTests.swift */; };
+		90D7C2D822CE8DA00011E20C /* CpuOpcodeLengthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D7C2D722CE8DA00011E20C /* CpuOpcodeLengthTests.swift */; };
 		90EDD2A922C2864100003E9E /* RomOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2A822C2864100003E9E /* RomOnly.swift */; };
 		90EDD2C422C2C71800003E9E /* CartridgeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */; };
 		90EDD2C622C2CCB700003E9E /* MBC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C522C2CCB700003E9E /* MBC1.swift */; };
@@ -282,6 +284,8 @@
 		90CBB73122AD7AE3004775E2 /* Data+UIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UIntTests.swift"; sourceTree = "<group>"; };
 		90CBD3CA22BD62B700B58461 /* Framebuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Framebuffer.swift; sourceTree = "<group>"; };
 		90CBD3CC22BD6AA000B58461 /* Metal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
+		90D7C2D522CE85D70011E20C /* CpuOpcodeTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeTimingTests.swift; sourceTree = "<group>"; };
+		90D7C2D722CE8DA00011E20C /* CpuOpcodeLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeLengthTests.swift; sourceTree = "<group>"; };
 		90EDD2A822C2864100003E9E /* RomOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomOnly.swift; sourceTree = "<group>"; };
 		90EDD2C322C2C71800003E9E /* CartridgeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeFactory.swift; sourceTree = "<group>"; };
 		90EDD2C522C2CCB700003E9E /* MBC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC1.swift; sourceTree = "<group>"; };
@@ -430,6 +434,8 @@
 				90A17BA4229D59EE0027133B /* CpuJumpTests.swift */,
 				90A17BA0229D59EE0027133B /* CpuCallTests.swift */,
 				90A17BA7229D59EE0027133B /* CpuOtherTests.swift */,
+				90D7C2D522CE85D70011E20C /* CpuOpcodeTimingTests.swift */,
+				90D7C2D722CE8DA00011E20C /* CpuOpcodeLengthTests.swift */,
 				9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */,
 				90C19C5722B2AEE200A1B7A9 /* LcdTileDataTests.swift */,
 				903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */,
@@ -873,6 +879,7 @@
 				902BDDA222C15FD600632BA7 /* XCTestCase+createLcd.swift in Sources */,
 				90A17BAD229D59EE0027133B /* CpuJumpTests.swift in Sources */,
 				906791F222CCF201003869A9 /* XCTestCase+createMemory.swift in Sources */,
+				90D7C2D822CE8DA00011E20C /* CpuOpcodeLengthTests.swift in Sources */,
 				90CBB72C22AD7632004775E2 /* InterruptEnableTests.swift in Sources */,
 				906791F822CCF43A003869A9 /* UnmapBootromTests.swift in Sources */,
 				90A17BA9229D59EE0027133B /* CpuCallTests.swift in Sources */,
@@ -884,6 +891,7 @@
 				906073A422B8453F00F2766D /* DivTimerTests.swift in Sources */,
 				902BDDA422C1604200632BA7 /* XCTestCase+createCpu.swift in Sources */,
 				90CBB72922AD75B4004775E2 /* String+padTests.swift in Sources */,
+				90D7C2D622CE85D70011E20C /* CpuOpcodeTimingTests.swift in Sources */,
 				906791FC22CCF4AB003869A9 /* MemoryWriteTests.swift in Sources */,
 				902BDDA622C1643400632BA7 /* XCTestCase+createTimer.swift in Sources */,
 				90A17BAC229D59EE0027133B /* CpuBitTests.swift in Sources */,

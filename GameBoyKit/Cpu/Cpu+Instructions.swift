@@ -1151,7 +1151,7 @@ extension Cpu {
     self.bit(b, n)
 
     self.pc += 2
-    return 16
+    return 12
   }
 
   private func bit(_ b: UInt8, _ n: UInt8) {
@@ -1382,7 +1382,7 @@ extension Cpu {
   /// HALT mode is exited, even if the interrupt master enable flag is not set.
   internal func halt() -> Int {
     self.isHalted = true
-    return 4
+    return 0
   }
 
   internal func daa() -> Int {
