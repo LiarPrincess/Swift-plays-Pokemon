@@ -72,11 +72,6 @@ public class Interrupts {
     }
   }
 
-  internal func set(_ type: InterruptType) {
-    let mask = getMask(type)
-    self.flag |= mask
-  }
-
   internal func clear(_ type: InterruptType) {
     let mask = getMask(type)
     self.flag &= ~mask

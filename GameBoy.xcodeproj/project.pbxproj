@@ -27,6 +27,7 @@
 		903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */; };
 		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
 		903DB4E222BC0C76003132FA /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4E122BC0C76003132FA /* Shader.metal */; };
+		904AE93822CFDB90002AB266 /* Lcd+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904AE93722CFDB90002AB266 /* Lcd+Draw.swift */; };
 		905321AA22BE378300A409B2 /* OrEqualOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321A922BE378300A409B2 /* OrEqualOperator.swift */; };
 		905321B022BE46E800A409B2 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321AF22BE46E800A409B2 /* Debugger.swift */; };
 		905321B222BE479800A409B2 /* DebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321B122BE479800A409B2 /* DebugMode.swift */; };
@@ -196,6 +197,7 @@
 		903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileIndexTests.swift; sourceTree = "<group>"; };
 		903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoyRenderer.swift; sourceTree = "<group>"; };
 		903DB4E122BC0C76003132FA /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
+		904AE93722CFDB90002AB266 /* Lcd+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Draw.swift"; sourceTree = "<group>"; };
 		905321A922BE378300A409B2 /* OrEqualOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrEqualOperator.swift; sourceTree = "<group>"; };
 		905321AF22BE46E800A409B2 /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 		905321B122BE479800A409B2 /* DebugMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMode.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 				9085FC3022B690C600310090 /* LcdColorPalettes.swift */,
 				90CBD3CA22BD62B700B58461 /* Framebuffer.swift */,
 				90B0DC4322B6EC89005BBCF5 /* Lcd.swift */,
+				904AE93722CFDB90002AB266 /* Lcd+Draw.swift */,
 				903DB4DB22BB903A003132FA /* Lcd+Dump.swift */,
 				90BD8BD422C630B3004376BD /* LcdConstants.swift */,
 			);
@@ -858,6 +861,7 @@
 				90059A3D22C24A6300803B48 /* CartridgeType.swift in Sources */,
 				9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */,
 				902CA96B22BF825B00026960 /* Data+initFromRange.swift in Sources */,
+				904AE93822CFDB90002AB266 /* Lcd+Draw.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,
 				90EDD2C422C2C71800003E9E /* CartridgeFactory.swift in Sources */,
 				902CA96D22BF85B600026960 /* Data+UInt.swift in Sources */,

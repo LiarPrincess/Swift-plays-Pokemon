@@ -7,7 +7,13 @@ private let isOamInterruptEnabledMask:    UInt8 = 1 << 5
 private let isVBlankInterruptEnabledMask: UInt8 = 1 << 4
 private let isHBlankInterruptEnabledMask: UInt8 = 1 << 3
 private let isLineCompareInterruptMask:   UInt8 = 1 << 2
+
 private let modeMask: UInt8 = 0b11
+
+private let hBlankRaw:        UInt8 = 0b00
+private let vBlankRaw:        UInt8 = 0b01
+private let oamSearchRaw:     UInt8 = 0b10
+private let pixelTransferRaw: UInt8 = 0b11
 
 public enum LcdMode {
 
@@ -28,7 +34,7 @@ public enum LcdMode {
   case pixelTransfer
 }
 
-public class LcdStatus {
+public struct LcdStatus {
 
   /// Bit 6 - LYC=LY Coincidence Interrupt
   public internal(set) var isLineCompareInterruptEnabled: Bool = false
@@ -48,14 +54,26 @@ public class LcdStatus {
   /// Bit 1-0 - Mode Flag
   public internal(set) var mode: LcdMode = .hBlank
 
-  private var _value: UInt8 = 0
-
   /// Raw byte
   public internal(set) var value: UInt8 {
-    get { return self._value }
-    set {
-      self._value = newValue
+    get {
+      var result: UInt8 = 0
+      result |= self.isLineCompareInterruptEnabled ? isLineCompareInterruptEnabledMask : 0
+      result |= self.isOamInterruptEnabled         ? isOamInterruptEnabledMask : 0
+      result |= self.isVBlankInterruptEnabled      ? isVBlankInterruptEnabledMask : 0
+      result |= self.isHBlankInterruptEnabled      ? isHBlankInterruptEnabledMask : 0
+      result |= self.isLineCompareInterrupt        ? isLineCompareInterruptMask : 0
 
+      switch self.mode {
+      case .hBlank:        result |= hBlankRaw
+      case .vBlank:        result |= vBlankRaw
+      case .oamSearch:     result |= oamSearchRaw
+      case .pixelTransfer: result |= pixelTransferRaw
+      }
+
+      return result
+    }
+    set {
       self.isLineCompareInterruptEnabled = isSet(newValue, mask: isLineCompareInterruptEnabledMask)
       self.isOamInterruptEnabled         = isSet(newValue, mask: isOamInterruptEnabledMask)
       self.isVBlankInterruptEnabled      = isSet(newValue, mask: isVBlankInterruptEnabledMask)
@@ -63,11 +81,11 @@ public class LcdStatus {
       self.isLineCompareInterrupt        = isSet(newValue, mask: isLineCompareInterruptMask)
 
       switch newValue & modeMask {
-      case 0b00: self.mode = .hBlank
-      case 0b01: self.mode = .vBlank
-      case 0b10: self.mode = .oamSearch
-      case 0b11: self.mode = .pixelTransfer
-      default:break
+      case hBlankRaw:        self.mode = .hBlank
+      case vBlankRaw:        self.mode = .vBlank
+      case oamSearchRaw:     self.mode = .oamSearch
+      case pixelTransferRaw: self.mode = .pixelTransfer
+      default: break
       }
     }
   }
