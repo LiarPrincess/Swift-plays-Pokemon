@@ -47,6 +47,7 @@ public class Cpu {
     if let interrupt = self.getAwaitingInterrupt() {
       if self.isHalted {
         self.isHalted = false
+        self.pc += 1 // move past halt
         return 4
       }
 

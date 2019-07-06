@@ -7,6 +7,8 @@
 
 import Foundation
 
+private let defaultValue: UInt8 = 0xff
+
 extension Memory {
 
   /// Read from any address in memory.
@@ -47,13 +49,13 @@ extension Memory {
 
     // other
     case MemoryMap.notUsable:
-      return 0
+      return defaultValue
     case MemoryMap.interruptEnable:
       return self.interrupts.enable
 
     default:
       print("Attempting to read from unsupported memory address: \(address.hex).")
-      return self.unmappedMemory[address] ?? 0
+      return self.unmappedMemory[address] ?? defaultValue
     }
   }
 
@@ -62,7 +64,7 @@ extension Memory {
     case MemoryMap.IO.joypad: return self.joypad.value
     case MemoryMap.IO.sb:     return self.serialPort.sb
     case MemoryMap.IO.sc:     return self.serialPort.sc
-    case MemoryMap.IO.unmapBootrom:  return 0
+    case MemoryMap.IO.unmapBootrom:  return defaultValue
     case MemoryMap.IO.interruptFlag: return self.interrupts.flag
 
     case MemoryMap.Timer.div:  return self.timer.div
@@ -100,7 +102,7 @@ extension Memory {
     case MemoryMap.Lcd.scrollX: return self.lcd.scrollX
     case MemoryMap.Lcd.line:        return self.lcd.line
     case MemoryMap.Lcd.lineCompare: return self.lcd.lineCompare
-    case MemoryMap.Lcd.dma:         return 0
+    case MemoryMap.Lcd.dma:         return defaultValue
     case MemoryMap.Lcd.backgroundColors: return self.lcd.backgroundColors.value
     case MemoryMap.Lcd.objectColors0:    return self.lcd.objectColors0.value
     case MemoryMap.Lcd.objectColors1:    return self.lcd.objectColors1.value
