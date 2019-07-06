@@ -16,7 +16,7 @@ extension XCTestCase {
       bootrom:   bootrom   ?? FakeBootromMemory(),
       cartridge: cartridge ?? FakeCartridgeMemory(),
       joypad:    Joypad(),
-      lcd:       Lcd(interrupts: ints),
+      lcd:       FakeLcdMemory(),
       timer:     Timer(interrupts: ints),
       interrupts: ints
     )

@@ -85,7 +85,7 @@ public class Timer {
 
     let period = self.getPeriod(tac: self.tac)
     if self.timaProgress >= period {
-      // instruction may take even 24 cycles (call_a16), so if we have:
+      // Instruction may take even 24 cycles (call_a16), so if we have:
       // progress: 12
       // cycles:   24 -> new progress 36
       // min period 16 -> 2 tima increments with 4 cycles remaining
@@ -99,9 +99,9 @@ public class Timer {
       if newTima <= timaMax {
         self.tima = UInt8(newTima)
       } else {
-        let diff = newTima - timaMax
-
-        self.tima = self.tma + UInt8(diff)
+        // Maybe we should add: newTima - timaMax?
+        // No documentation mentions it.
+        self.tima = self.tma
         self.interrupts.timer = true
       }
     }

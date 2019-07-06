@@ -154,7 +154,7 @@ class MemoryReadTests: XCTestCase {
     value += 1
 
     memory.lcd.line = value
-    XCTAssertEqual(memory.read(MemoryMap.Lcd.line), 0) // reset on write
+    XCTAssertEqual(memory.read(MemoryMap.Lcd.line), value)
     value += 1
 
     memory.lcd.lineCompare = value

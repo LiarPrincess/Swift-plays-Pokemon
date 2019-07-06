@@ -4,21 +4,6 @@
 
 import Foundation
 
-internal protocol BootromMemory: AnyObject {
-
-  func read(_ address: UInt16) -> UInt8
-  func write(_ address: UInt16, value: UInt8)
-}
-
-internal protocol CartridgeMemory: AnyObject {
-
-  func readRom(_ address: UInt16) -> UInt8
-  func writeRom(_ address: UInt16, value: UInt8)
-
-  func readRam(_ address: UInt16) -> UInt8
-  func writeRam(_ address: UInt16, value: UInt8)
-}
-
 internal enum BootromState {
   case executing(BootromMemory)
   case finished
@@ -26,7 +11,7 @@ internal enum BootromState {
 
 public class Memory: CpuAddressableMemory {
 
-  internal let lcd: Lcd
+  internal let lcd: LcdMemory
   internal let timer: Timer
   internal let joypad: Joypad
   internal let serialPort: SerialPort
@@ -56,7 +41,7 @@ public class Memory: CpuAddressableMemory {
   internal init(bootrom:    BootromMemory?,
                 cartridge:  CartridgeMemory,
                 joypad:     Joypad,
-                lcd:        Lcd,
+                lcd:        LcdMemory,
                 timer:      Timer,
                 interrupts: Interrupts) {
 

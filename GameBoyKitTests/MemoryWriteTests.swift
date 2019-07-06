@@ -158,7 +158,7 @@ class MemoryWriteTests: XCTestCase {
     value += 1
 
     memory.write(MemoryMap.Lcd.line, value: value)
-    XCTAssertEqual(memory.lcd.line, 0) // reset on write
+    XCTAssertEqual(memory.lcd.line, value) // reset on write
     value += 1
 
     memory.write(MemoryMap.Lcd.lineCompare, value: value)

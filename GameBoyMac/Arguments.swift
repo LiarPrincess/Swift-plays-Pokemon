@@ -2,10 +2,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// swiftlint:disable strict_fileprivate
-
-// TODO: https://www.enekoalonso.com/articles/parsing-command-line-arguments-with-swift-package-manager-argument-parser
-
 import Foundation
 import GameBoyKit
 
@@ -31,6 +27,7 @@ internal func parseArguments() -> Arguments {
 }
 
 private func openBootrom(path: String?) -> Bootrom? {
+  return .dmg
   guard let path = path else {
     print("Boot-ROM not provided. Using default one.")
     return nil
@@ -105,9 +102,30 @@ private func parseRawArguments() -> RawArguments {
   }
 
   // if we don't have rom then assume it is in the last argument
-  if result.romPath == nil {
+  if result.romPath == nil && arguments.count > 1 {
     result.romPath = arguments.last
   }
+
+//  let dir = "/Users/michal/Documents/Xcode/SwiftBoy/GameBoyKitROMTests/Blargg/ROMs"
+
+//  let cpuInstrs = "\(dir)/cpu_instrs/individual"
+//  result.romPath = "\(cpuInstrs)/01-special.gb"
+//  result.romPath = "\(cpuInstrs)/02-interrupts.gb"
+//  result.romPath = "\(cpuInstrs)/03-op sp,hl.gb"
+//  result.romPath = "\(cpuInstrs)/04-op r,imm.gb"
+//  result.romPath = "\(cpuInstrs)/05-op rp.gb"
+//  result.romPath = "\(cpuInstrs)/06-ld r,r.gb"
+//  result.romPath = "\(cpuInstrs)/07-jr,jp,call,ret,rst.gb"
+//  result.romPath = "\(cpuInstrs)/08-misc instrs.gb"
+//  result.romPath = "\(cpuInstrs)/09-op r,r.gb" // unimplemented instr
+//  result.romPath = "\(cpuInstrs)/10-bit ops.gb"
+//  result.romPath = "\(cpuInstrs)/11-op a,(hl).gb"
+
+  // Instr timing
+//  result.romPath = "\(dir)/instr_timing/instr_timing.gb"
+
+  // Tetris
+  result.romPath = "/Users/michal/Documents/Xcode/SwiftBoy/ROMs/Tetris.gb"
 
   return result
 }

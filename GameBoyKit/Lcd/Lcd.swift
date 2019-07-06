@@ -4,7 +4,7 @@
 
 import Foundation
 
-public class Lcd {
+public class Lcd: LcdMemory {
 
   /// 160 px = 20 tiles
   public static let width = LcdConstants.width
