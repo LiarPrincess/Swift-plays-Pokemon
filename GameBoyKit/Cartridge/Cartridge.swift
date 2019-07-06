@@ -4,47 +4,64 @@
 
 import Foundation
 
+// Sources:
+// - https://github.com/Gekkio/mooneye-gb
+// - http://bgb.bircd.org/pandocs.htm#thecartridgeheader
 public class Cartridge: CartridgeMemory {
 
-  /// Size of single unit of rom (16 KBytes).
-  public static let romBankSizeInBytes = 16 * 1_024
-
-  /// Size of single unit of ram (8 KBytes).
-  public static let ramBankSizeInBytes = 8 * 1_024
+  /// Game title.
+  public let title: String
 
   /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00);
   /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
   public let rom: Data
 
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
-  public internal(set) var ramBanks: [Data]
+  public internal(set) var ram: Data
 
-  internal var selectedRomBank = 1
-  internal var selectedRamBank = 0
+  /// Offset to selected 0000-3FFF bank.
+  internal var romLowerBankStart = Int(MemoryMap.rom0.start)
 
-  // this will be ignored anyway, but for consistency we have to have it
-  internal var isRamBankEnabled = false
+  /// Offset to selected 4000-7FFF bank.
+  internal var romUpperBankStart = Int(MemoryMap.rom1.start)
+
+  /// Offset to selected ram bank.
+  internal var ramBankStart = 0
 
   internal init(rom: Data) throws {
+    let checksum = isChecksumValid(rom)
+    if case let ChecksumResult.invalid(value) = checksum {
+      throw CartridgeFactoryError.invalidChecksum(value)
+    }
+
+    let isNewCartridge = rom[CartridgeMap.oldLicenseeCode] == 0x33
+    let titleRange = isNewCartridge ? CartridgeMap.newTitle : CartridgeMap.oldTitle
+    self.title = asci(from: rom[titleRange]) ?? ""
+
+    let romSize = try getRomSize(rom[CartridgeMap.romSize])
+    guard rom.count == romSize else {
+      throw CartridgeFactoryError
+        .romSizeNotConsistentWithHeader(size: rom.count, headerSize: romSize)
+    }
     self.rom = rom
 
-    let ramBankCount = try CartridgeHeader.getRamBankCount(rom: rom)
-    self.ramBanks = (0..<ramBankCount).map { _ in
-      Data(count: Cartridge.ramBankSizeInBytes)
-    }
+    let ramSize = try getRamSize(rom[CartridgeMap.ramSize])
+    self.ram = Data(count: ramSize)
   }
 
   // MARK: - Rom
 
-  internal func readRom(_ address: UInt16) -> UInt8 {
+  /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00);
+  /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
+  public func readRom(_ address: UInt16) -> UInt8 {
     switch address {
     case MemoryMap.rom0:
-      return self.rom[address]
+      let index = self.romLowerBankStart | (Int(address) & 0x3fff)
+      return self.rom[index]
 
     case MemoryMap.rom1:
-      let bankStart = self.selectedRomBank * Cartridge.romBankSizeInBytes
-      let bankOffset = address - MemoryMap.rom1.start
-      return self.rom[bankStart + Int(bankOffset)]
+      let index = self.romUpperBankStart | (Int(address) & 0x3fff)
+      return self.rom[index]
 
     default:
       print("Reading from invalid ROM address: \(address.hex).")
@@ -52,44 +69,110 @@ public class Cartridge: CartridgeMemory {
     }
   }
 
+  /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00);
+  /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
   internal func writeRom(_ address: UInt16, value: UInt8) {
     // to override
   }
 
   // MARK: - Ram
 
+  /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
   public func readRam(_ address: UInt16) -> UInt8 {
-    // TODO: RTC?
-    // if self.rtc_enabled and 0x08 <= self.rambank_selected <= 0x0C:
-    //   return self.rtc.getregister(self.rambank_selected)
+    if self.ram.isEmpty { return 0xff }
 
-    let addr = address - MemoryMap.externalRam.start
-    return self.ramBanks[self.selectedRamBank][addr]
+    let index = self.translateRamAddressToRamIndex(address)
+    assert(index < self.ram.count)
+    return self.ram[index]
   }
 
+  /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
   internal func writeRam(_ address: UInt16, value: UInt8) {
-    // to override
+    if self.ram.isEmpty { return }
+
+    let index = self.translateRamAddressToRamIndex(address)
+    assert(index < self.ram.count)
+    self.ram[index] = value
   }
 
-  // MARK: - Header
+  private func translateRamAddressToRamIndex(_ address: UInt16) -> Int {
+    let bankOffset = address - MemoryMap.externalRam.start
+    return self.ramBankStart + Int(bankOffset)
+  }
+}
 
-  /// 0134-0143 - Title (Uppercase ASCII)
-  public var title: String? {
-    return CartridgeHeader.getTitle(rom: self.rom)
+// MARK: - Checksum
+
+private enum ChecksumResult {
+  case valid
+  case invalid(UInt8)
+}
+
+/// Code from bootrom: 0x00f1 to 0x00fa:
+/// If 0x19 + bytes from 0x0134-0x014d don't add to 0 ->  lock up.
+private func isChecksumValid(_ data: Data) -> ChecksumResult {
+  var hl: UInt16 = CartridgeMap.headerChecksumRange.start
+
+  var b: UInt8 = 0x19 // bootrom: 0x00f1
+  var a: UInt8 = b    // bootrom: 0x00f3
+
+  while b > 0 {
+    a &+= data[hl] // bootrom: 0x00f4
+    hl += 1        // bootrom: 0x00f5
+    b -= 1         // bootrom: 0x00f6
+  }
+  a &+= data[hl] // bootrom: 0x00f9
+
+  let isValid = a == CartridgeConstants.checksumCompare // bootrom: 0x00fa
+  return isValid ? .valid : .invalid(a)
+}
+
+// MARK: - Banks
+
+// swiftlint:disable:next cyclomatic_complexity
+private func getRomSize(_ value: UInt8) throws -> Int {
+  let bankSize = CartridgeConstants.romBankSizeInBytes
+  switch value {
+  case 0x00: return   2 * bankSize // 32 KB (no ROM banking)
+  case 0x01: return   4 * bankSize // 64 KB
+  case 0x02: return   8 * bankSize // 128 KB
+  case 0x03: return  16 * bankSize // 256 KB
+  case 0x04: return  32 * bankSize // 512 KB
+  case 0x05: return  64 * bankSize // 1 MB
+  case 0x06: return 128 * bankSize // 2 MB
+  case 0x07: return 256 * bankSize // 4 MB
+  case 0x08: return 512 * bankSize // 8 MB
+  case 0x52: return  72 * bankSize // 1.1 MB
+  case 0x53: return  80 * bankSize // 1.2 MB
+  case 0x54: return  96 * bankSize // 1.5 MB
+  default:
+    throw CartridgeFactoryError.unsupportedRomSize(value)
+  }
+}
+
+private func getRamSize(_ value: UInt8) throws -> Int {
+  switch value {
+  case 0x00: return      0
+  case 0x01: return   2_048 //   2 KB
+  case 0x02: return   8_192 //   8 Kb
+  case 0x03: return  32_768 //  32 KB
+  case 0x04: return 131_072 // 128 KB
+  case 0x05: return  65_536 //  64 KB
+  default:
+    throw CartridgeFactoryError.unsupportedRamSize(value)
+  }
+}
+
+// MARK: - ASCII
+
+private func asci(from data: Data) -> String? {
+  var endIndex = data.endIndex.advanced(by: -1)
+  while endIndex >= data.startIndex && data[endIndex] == 0 {
+    endIndex = endIndex.advanced(by: -1)
   }
 
-  /// 013F-0142 - Manufacturer Code
-  public var manufacturerCode: String? {
-    return CartridgeHeader.getManufacturerCode(rom: self.rom)
-  }
-
-  /// 0147 - Cartridge Type
-  public var type: CartridgeType {
-    return CartridgeHeader.getType(rom: self.rom)
-  }
-
-  /// 014A - Destination Code
-  public var destination: CartridgeDestination {
-    return CartridgeHeader.getDestination(rom: self.rom)
-  }
+  let titleData = data.prefix(upTo: endIndex + 1)
+  return endIndex <= data.startIndex ?
+    nil :
+    String(data: titleData, encoding: .ascii)
 }

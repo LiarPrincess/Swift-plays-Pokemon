@@ -28,7 +28,6 @@ public class Bootrom: BootromMemory {
 
   /// This is the most common version of the boot ROM
   /// found in the original DMG-01 model of Gameboy.
-  /// Source: http://gbdev.gg8.se/files/roms/bootroms/
   public static var dmg: Bootrom {
     let data = Data(dmgData)
     return Bootrom(data: data)
