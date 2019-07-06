@@ -1382,6 +1382,7 @@ extension Cpu {
   /// HALT mode is exited, even if the interrupt master enable flag is not set.
   internal func halt() -> Int {
     self.isHalted = true
+    self.pc += 1
     return 0
   }
 
