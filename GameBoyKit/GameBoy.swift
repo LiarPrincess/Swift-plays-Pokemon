@@ -73,8 +73,6 @@ public class GameBoy {
 
       self.timer.tick(cycles: cycles)
       self.lcd.tick(cycles: cycles)
-
-      // TODO: Handle HALT somehow (return nil -> loop until next interrupt)
     }
   }
 

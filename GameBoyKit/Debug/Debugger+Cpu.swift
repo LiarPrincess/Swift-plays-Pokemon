@@ -86,7 +86,6 @@ extension Debugger {
       return
     }
 
-    let pc = "\(cpu.pc) (\(cpu.pc.hex))"
     let next8  = self.next8(pc: before.cpu.pc)
     let next16 = self.next16(pc: before.cpu.pc)
 

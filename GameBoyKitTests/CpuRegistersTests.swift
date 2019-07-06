@@ -9,38 +9,38 @@ class CpuRegistersTests: XCTestCase {
 
   func test_get_f() {
     var registers = Registers()
-    XCTAssertEqual(registers.f, 0b00000000)
+    XCTAssertEqual(registers.f, 0b000_00000)
 
     registers.zeroFlag = true
-    XCTAssertEqual(registers.f, 0b10000000)
+    XCTAssertEqual(registers.f, 0b1000_0000)
 
     registers.subtractFlag = true
-    XCTAssertEqual(registers.f, 0b11000000)
+    XCTAssertEqual(registers.f, 0b1100_0000)
 
     registers.halfCarryFlag = true
-    XCTAssertEqual(registers.f, 0b11100000)
+    XCTAssertEqual(registers.f, 0b1110_0000)
 
     registers.carryFlag = true
-    XCTAssertEqual(registers.f, 0b11110000)
+    XCTAssertEqual(registers.f, 0b1111_0000)
 
     registers.zeroFlag = false
-    XCTAssertEqual(registers.f, 0b01110000)
+    XCTAssertEqual(registers.f, 0b0111_0000)
 
     registers.subtractFlag = false
-    XCTAssertEqual(registers.f, 0b00110000)
+    XCTAssertEqual(registers.f, 0b0011_0000)
 
     registers.halfCarryFlag = false
-    XCTAssertEqual(registers.f, 0b00010000)
+    XCTAssertEqual(registers.f, 0b0001_0000)
 
     registers.carryFlag = false
-    XCTAssertEqual(registers.f, 0b00000000)
+    XCTAssertEqual(registers.f, 0b0000_0000)
   }
 
   // swiftlint:disable:next function_body_length
   func test_set_f() {
     var registers = Registers()
 
-    registers.f = 0b00000000
+    registers.f = 0b0000_0000
     XCTAssertEqual(registers.zeroFlag, false)
     XCTAssertEqual(registers.subtractFlag, false)
     XCTAssertEqual(registers.halfCarryFlag, false)
@@ -54,25 +54,25 @@ class CpuRegistersTests: XCTestCase {
       XCTAssertEqual(registers.carryFlag, false)
     }
 
-    registers.f |= 0b00010000
+    registers.f |= 0b0001_0000
     XCTAssertEqual(registers.zeroFlag, false)
     XCTAssertEqual(registers.subtractFlag, false)
     XCTAssertEqual(registers.halfCarryFlag, false)
     XCTAssertEqual(registers.carryFlag, true)
 
-    registers.f |= 0b00100000
+    registers.f |= 0b0010_0000
     XCTAssertEqual(registers.zeroFlag, false)
     XCTAssertEqual(registers.subtractFlag, false)
     XCTAssertEqual(registers.halfCarryFlag, true)
     XCTAssertEqual(registers.carryFlag, true)
 
-    registers.f |= 0b01000000
+    registers.f |= 0b0100_0000
     XCTAssertEqual(registers.zeroFlag, false)
     XCTAssertEqual(registers.subtractFlag, true)
     XCTAssertEqual(registers.halfCarryFlag, true)
     XCTAssertEqual(registers.carryFlag, true)
 
-    registers.f |= 0b10000000
+    registers.f |= 0b1000_0000
     XCTAssertEqual(registers.zeroFlag, true)
     XCTAssertEqual(registers.subtractFlag, true)
     XCTAssertEqual(registers.halfCarryFlag, true)

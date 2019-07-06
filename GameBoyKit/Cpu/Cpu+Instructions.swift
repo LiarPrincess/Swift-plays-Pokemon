@@ -861,7 +861,7 @@ extension Cpu {
     let a = self.registers.a
 
     let carry = a & 0x1
-    let newValue = (a >> 1) | (self.registers.carryFlag ? 0b10000000 : 0x0)
+    let newValue = (a >> 1) | (self.registers.carryFlag ? 0b1000_0000 : 0x0)
 
     self.registers.zeroFlag = false
     self.registers.subtractFlag = false
