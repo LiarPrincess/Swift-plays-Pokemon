@@ -4,10 +4,9 @@
 
 import Foundation
 
-private let ramEnabledMask:  UInt8 = 0xf
-private let ramEnabledValue: UInt8 = 0xa
+private typealias Constants = CartridgeConstants
 
-internal class NoMbc: Cartridge { }
+internal class NoMBC: Cartridge { }
 
 internal class MBC1: Cartridge {
 
@@ -31,12 +30,12 @@ internal class MBC1: Cartridge {
 
     // 0000-1FFF - RAM Enable
     case 0x0000...0x1fff:
-      self.isRamEnabled = (value & ramEnabledMask) == ramEnabledValue
+      self.isRamEnabled = (value & 0xf) == 0xa
 
     // 2000-3FFF - ROM Bank Number (5 lower bits)
     case 0x2000...0x3fff:
       let value5 = value & 0b1_1111
-      self.bank1 = value5 == 0 ? 1 : Int(value5)
+      self.bank1 = max(1, Int(value5))
       self.updateRomBankStart()
 
     // 4000-5FFF - RAM Bank Number or ROM Bank Number (2 upper bits)
@@ -63,18 +62,18 @@ internal class MBC1: Cartridge {
     let lowerBank = self.mode ? upperBits : 0
     let upperBank = upperBits | lowerBits
 
-    self.romLowerBankStart = lowerBank * CartridgeConstants.romBankSizeInBytes
-    self.romUpperBankStart = upperBank * CartridgeConstants.romBankSizeInBytes
+    self.romLowerBankStart = lowerBank * Constants.romBankSizeInBytes
+    self.romUpperBankStart = upperBank * Constants.romBankSizeInBytes
   }
 
   private func updateRamBankStart() {
     let bank = self.mode ? self.bank2 : 0
-    self.ramBankStart = bank * CartridgeConstants.ramBankSizeInBytes
+    self.ramBankStart = bank * Constants.ramBankSizeInBytes
   }
 
   /// (mooneye) When RAM access is disabled, all reads return 0xFF.
   internal override func readRam(_ address: UInt16) -> UInt8 {
-    return self.isRamEnabled ? super.readRam(address) : 0xff
+    return self.isRamEnabled ? super.readRam(address) : Constants.defaultRam
   }
 
   /// (mooneye) When RAM access is disabled, all writes
@@ -82,6 +81,44 @@ internal class MBC1: Cartridge {
   internal override func writeRam(_ address: UInt16, value: UInt8) {
     if self.isRamEnabled {
       super.writeRam(address, value: value)
+    }
+  }
+}
+
+internal class MBC3: Cartridge {
+
+  private var romBank: Int = 0b0000_0001
+
+  private var isRamRtcEnabled = false
+
+  /// RAM or RTC? RTC is not supported.
+  private var ramRtcSelect: UInt8 = 0
+
+  internal override func writeRom(_ address: UInt16, value: UInt8) {
+    switch address {
+
+    // 0000-1FFF - RAM Enable
+    case 0x0000...0x1fff:
+      self.isRamRtcEnabled = (value & 0xf) == 0xa
+
+    // 2000-3FFF - ROM Bank Number
+    case 0x2000...0x3fff:
+      self.romBank = max(1, Int(value))
+      self.romLowerBankStart = 0x0000
+      self.romUpperBankStart = self.romBank * Constants.romBankSizeInBytes
+
+    // 4000-5FFF - RAM Bank Number - or - RTC Register Select
+    case 0x4000...0x5fff:
+      self.ramRtcSelect = value & 0b1111
+      let ramBank = Int(self.ramRtcSelect & 0b11)
+      self.ramBankStart = ramBank * Constants.ramBankSizeInBytes
+
+    // 6000-7FFF - Latch Clock Data
+    case 0x6000...0x7fff:
+      break
+
+    default:
+      print("Writing to invalid ROM address: \(address.hex).")
     }
   }
 }

@@ -2,6 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import Foundation
+
 public enum CartridgeFactoryError: Error, CustomStringConvertible {
   case invalidChecksum(UInt8)
   case unsupportedRomSize(UInt8)
@@ -36,39 +38,42 @@ public enum CartridgeFactoryError: Error, CustomStringConvertible {
 
 public enum CartridgeFactory {
 
-  // swiftlint:disable:next function_body_length cyclomatic_complexity
-  public static func fromData(_ data: Data) throws -> Cartridge {
+  /// This function creates new cartridge from given data.
+  ///
+  /// - Parameter data: Cartridge content.
+  /// - Parameter isTest: Tests have relaxed validation rules.
+  public static func fromData(_ data: Data, isTest: Bool = false) throws -> Cartridge {
     let type = data[CartridgeMap.type]
     switch type {
-    case 0x00: return try NoMbc(rom: data)
-    case 0x08: return try NoMbc(rom: data) // ram
-    case 0x09: return try NoMbc(rom: data) // ram, battery
+    case 0x00: return try NoMBC(rom: data, isTest)
+    case 0x08: return try NoMBC(rom: data, isTest) // ram
+    case 0x09: return try NoMBC(rom: data, isTest) // ram, battery
 
-    case 0x01: return try MBC1(rom: data)
-    case 0x02: return try MBC1(rom: data) // ram
-    case 0x03: return try MBC1(rom: data) // ram, battery
+    case 0x01: return try MBC1(rom: data, isTest)
+    case 0x02: return try MBC1(rom: data, isTest) // ram
+    case 0x03: return try MBC1(rom: data, isTest) // ram, battery
 
-//    case 0x05: return try Mbc2(rom: data)
-//    case 0x06: return try Mbc2(rom: data) // battery
+//    case 0x05: return try MBC2(rom: data, isTest)
+//    case 0x06: return try MBC2(rom: data, isTest) // battery
 
-/* case .mbc3RamBattery: return try MBC1(rom: data) // TODO: for bootrom tests */
-//    case 0x11: return Mbc3(ram: false, battery: false, rtc: false)
-//    case 0x12: return Mbc3(ram: true, battery: false, rtc: false)
-//    case 0x13: return Mbc3(ram: true, battery: true, rtc: false)
-//    case 0x0f: return Mbc3(ram: false, battery: true, rtc: true)
-//    case 0x10: return Mbc3(ram: true, battery: true, rtc: true)
+    case 0x11: return try MBC3(rom: data, isTest)
+    case 0x12: return try MBC3(rom: data, isTest) // ram
+    case 0x13: return try MBC3(rom: data, isTest) // ram, battery
+    case 0x0f: return try MBC3(rom: data, isTest) // battery, rtc
+    case 0x10: return try MBC3(rom: data, isTest) // ram, battery, rtc
 
-//    case 0x19: return Mbc5(ram: false, battery: false, rumble: false)
-//    case 0x1a: return Mbc5(ram: true, battery: false, rumble: false)
-//    case 0x1b: return Mbc5(ram: true, battery: true, rumble: false)
-//    case 0x1c: return Mbc5(ram: false, battery: false, rumble: true)
-//    case 0x1d: return Mbc5(ram: true, battery: false, rumble: true)
-//    case 0x1e: return Mbc5(ram: true, battery: true, rumble: true)
+//    case 0x19: return try MBC5(rom: data, isTest)
+//    case 0x1a: return try MBC5(rom: data, isTest) // ram
+//    case 0x1b: return try MBC5(rom: data, isTest) // ram, battery
+//    case 0x1c: return try MBC5(rom: data, isTest) // rumble
+//    case 0x1d: return try MBC5(rom: data, isTest) // ram, rumble
+//    case 0x1e: return try MBC5(rom: data, isTest) // ram, battery, rumble
 
-//    case 0x20: return Mbc6
-//    case 0x22: return Mbc7
-//    case 0xff: return Huc1
-//    case 0xfe: return Huc3
+//    case 0x20: return try MBC6(rom: data, isTest)
+//    case 0x22: return try MBC7(rom: data, isTest)
+//    case 0xff: return try Huc1(rom: data, isTest)
+//    case 0xfe: return try Huc3(rom: data, isTest)
+
     default: break
     }
 

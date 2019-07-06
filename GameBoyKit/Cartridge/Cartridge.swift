@@ -4,6 +4,8 @@
 
 import Foundation
 
+private typealias Constants = CartridgeConstants
+
 // Sources:
 // - https://github.com/Gekkio/mooneye-gb
 // - http://bgb.bircd.org/pandocs.htm#thecartridgeheader
@@ -28,8 +30,8 @@ public class Cartridge: CartridgeMemory {
   /// Offset to selected ram bank.
   internal var ramBankStart = 0
 
-  internal init(rom: Data) throws {
-    let checksum = isChecksumValid(rom)
+  internal init(rom: Data, _ isTest: Bool) throws {
+    let checksum: ChecksumResult = isTest ? .valid : isChecksumValid(rom)
     if case let ChecksumResult.invalid(value) = checksum {
       throw CartridgeFactoryError.invalidChecksum(value)
     }
@@ -39,7 +41,7 @@ public class Cartridge: CartridgeMemory {
     self.title = asci(from: rom[titleRange]) ?? ""
 
     let romSize = try getRomSize(rom[CartridgeMap.romSize])
-    guard rom.count == romSize else {
+    guard isTest || rom.count == romSize else {
       throw CartridgeFactoryError
         .romSizeNotConsistentWithHeader(size: rom.count, headerSize: romSize)
     }
@@ -79,7 +81,7 @@ public class Cartridge: CartridgeMemory {
 
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
   public func readRam(_ address: UInt16) -> UInt8 {
-    if self.ram.isEmpty { return 0xff }
+    if self.ram.isEmpty { return Constants.defaultRam }
 
     let index = self.translateRamAddressToRamIndex(address)
     assert(index < self.ram.count)
@@ -123,7 +125,7 @@ private func isChecksumValid(_ data: Data) -> ChecksumResult {
   }
   a &+= data[hl] // bootrom: 0x00f9
 
-  let isValid = a == CartridgeConstants.checksumCompare // bootrom: 0x00fa
+  let isValid = a == Constants.checksumCompare // bootrom: 0x00fa
   return isValid ? .valid : .invalid(a)
 }
 
@@ -131,7 +133,7 @@ private func isChecksumValid(_ data: Data) -> ChecksumResult {
 
 // swiftlint:disable:next cyclomatic_complexity
 private func getRomSize(_ value: UInt8) throws -> Int {
-  let bankSize = CartridgeConstants.romBankSizeInBytes
+  let bankSize = Constants.romBankSizeInBytes
   switch value {
   case 0x00: return   2 * bankSize // 32 KB (no ROM banking)
   case 0x01: return   4 * bankSize // 64 KB

@@ -59,7 +59,7 @@ var checkedAddresses: [UInt16] = {
 //  result.insert(MemoryMap.Lcd.status)
   result.insert(MemoryMap.Lcd.scrollY)
   result.insert(MemoryMap.Lcd.scrollX)
-  result.insert(MemoryMap.Lcd.line)
+//  result.insert(MemoryMap.Lcd.line)
   result.insert(MemoryMap.Lcd.lineCompare)
 //  result.insert(MemoryMap.Lcd.dma)
   result.insert(MemoryMap.Lcd.backgroundColors)

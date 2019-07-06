@@ -23,13 +23,15 @@ func testCpuInstrs11() { test(Roms.cpuInstrs11, dump: Dumps.cpuInstrs11) }
 func testInstrTiming() { test(Roms.instrTiming, dump: Dumps.instrTiming) }
 
 private func test(_ rom: URL, dump urls: [URL]) {
+  print(rom.lastPathComponent)
+
   let cartridge = openRom(url: rom)
   let gameBoy   = GameBoy(bootrom: nil, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
   for (index, url) in urls.enumerated() {
     let fileName = url.lastPathComponent
-    print("\(index)/\(urls.count - 1) - \(fileName) (cycle: \(gameBoy.cpu.cycle))")
+//    print("\(index)/\(urls.count - 1) - \(fileName) (cycle: \(gameBoy.cpu.cycle))")
 
     // https://swiftrocks.com/autoreleasepool-in-2019-swift.html
     autoreleasepool {
@@ -51,8 +53,8 @@ private func test(_ rom: URL, dump urls: [URL]) {
 private func openRom(url: URL) -> Cartridge {
   do {
     let data = try Data(contentsOf: url)
-    return try CartridgeFactory.fromData(data)
-  } catch let error as CartridgeInitError {
+    return try CartridgeFactory.fromData(data, isTest: true)
+  } catch let error as CartridgeFactoryError {
     print("Error when opening ROM: \(error.description)")
     exit(1)
   } catch {

@@ -9,6 +9,8 @@ private let dumpDir = URL(fileURLWithPath: #file).deletingLastPathComponent()
                                                  .appendingPathComponent("Dump")
 
 internal func runBootromTests() {
+  print("Bootrom test")
+
   let cartridge = createDummyCartridge()
   let gameBoy   = GameBoy(bootrom: .dmg, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
@@ -43,7 +45,7 @@ private func createDummyCartridge() -> Cartridge {
   rom.replaceSubrange(logoStart..<logoEnd, with: nintendoLogo)
 
   // swiftlint:disable:next force_try
-  return try! CartridgeFactory.fromData(rom)
+  return try! CartridgeFactory.fromData(rom, isTest: true)
 }
 
 // swiftlint:disable collection_alignment
