@@ -125,7 +125,7 @@ public class Lcd: LcdMemory {
     if self.line >= Lcd.height {
       if self.status.mode != .vBlank {
         self.status.mode = .vBlank
-        self.interrupts.vBlank  ||= self.status.isVBlankInterruptEnabled
+        self.interrupts.vBlank = true
         self.interrupts.lcdStat ||= self.status.isVBlankInterruptEnabled
       }
       return

@@ -16,17 +16,17 @@ var checkedAddresses: [UInt16] = {
 //  MemoryMap.videoRam.forEach { result.insert($0) }
   MemoryMap.externalRam.forEach { result.insert($0) }
   MemoryMap.internalRam.forEach { result.insert($0) }
-  // MemoryMap.internalRamEcho - we have unit tests for this
-//  MemoryMap.oam.forEach { result.insert($0) }
+//  MemoryMap.internalRamEcho - we have unit tests for this
+//  MemoryMap.oam.forEach { result.insert($0) } // we do dma in 1 single tick
   MemoryMap.notUsable.forEach { result.insert($0) }
 
 //  result.insert(MemoryMap.IO.joypad) // not yet implemented
-//  result.insert(MemoryMap.IO.sb) // not yet implemented
+//  result.insert(MemoryMap.IO.sb) // not interested
 //  result.insert(MemoryMap.IO.sc)
 
   result.insert(MemoryMap.IO.unmapBootrom)
 
-//  result.insert(MemoryMap.Timer.div)
+//  result.insert(MemoryMap.Timer.div) // they start with 0xac
   result.insert(MemoryMap.Timer.tima)
   result.insert(MemoryMap.Timer.tma)
 //  result.insert(MemoryMap.Timer.tac)
@@ -56,12 +56,12 @@ var checkedAddresses: [UInt16] = {
 //  result.insert(MemoryMap.Audio.nr3_ram_end)
 
   result.insert(MemoryMap.Lcd.control)
-//  result.insert(MemoryMap.Lcd.status)
+//  result.insert(MemoryMap.Lcd.status) // no idea here
   result.insert(MemoryMap.Lcd.scrollY)
   result.insert(MemoryMap.Lcd.scrollX)
-//  result.insert(MemoryMap.Lcd.line)
+  result.insert(MemoryMap.Lcd.line)
   result.insert(MemoryMap.Lcd.lineCompare)
-//  result.insert(MemoryMap.Lcd.dma)
+  result.insert(MemoryMap.Lcd.dma)
   result.insert(MemoryMap.Lcd.backgroundColors)
   result.insert(MemoryMap.Lcd.objectColors0)
   result.insert(MemoryMap.Lcd.objectColors1)
@@ -102,7 +102,12 @@ func compare(saved p: SavedState, gameboy g: GameBoy) -> Bool {
 
     if sValue != pValue {
       let desc = MemoryMap.describe(address: address)
-      print("Invalid memory \(address.hex): \(sValue.hex) vs \(pValue.hex) (\(desc))")
+      if address == 0xff40 || address == 0xff41 {
+        print("Invalid memory \(address.hex): \(sValue.bin) vs \(pValue.bin) (\(desc))")
+      }
+      else {
+        print("Invalid memory \(address.hex): \(sValue.hex) vs \(pValue.hex) (\(desc))")
+      }
       e = true
     }
   }

@@ -71,7 +71,7 @@ public struct LcdStatus {
       case .pixelTransfer: result |= pixelTransferRaw
       }
 
-      return result
+      return result | 0b1000_0000
     }
     set {
       self.isLineCompareInterruptEnabled = isSet(newValue, mask: isLineCompareInterruptEnabledMask)

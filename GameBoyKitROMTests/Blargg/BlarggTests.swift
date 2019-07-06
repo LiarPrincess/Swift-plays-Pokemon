@@ -31,7 +31,7 @@ private func test(_ rom: URL, dump urls: [URL]) {
 
   for (index, url) in urls.enumerated() {
     let fileName = url.lastPathComponent
-//    print("\(index)/\(urls.count - 1) - \(fileName) (cycle: \(gameBoy.cpu.cycle))")
+    print("\(index)/\(urls.count - 1) - \(fileName) (cycle: \(gameBoy.cpu.cycle))")
 
     // https://swiftrocks.com/autoreleasepool-in-2019-swift.html
     autoreleasepool {
