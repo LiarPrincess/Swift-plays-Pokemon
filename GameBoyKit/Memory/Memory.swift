@@ -22,13 +22,14 @@ public class Memory: CpuAddressableMemory {
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
-  internal lazy var ram = Data(memoryRange: MemoryMap.internalRam)
-
-  /// FF00-FF7F I/O Ports (just in case game wants to write to unmapped address)
-  internal lazy var ioMemory = Data(memoryRange: MemoryMap.io)
+  internal lazy var ram: UnsafeMutableBufferPointer<UInt8> = {
+    UnsafeMutableBufferPointer<UInt8>.allocate(capacity: MemoryMap.internalRam.count)
+  }()
 
   /// FF80-FFFE High RAM (HRAM)
-  internal lazy var highRam = Data(memoryRange: MemoryMap.highRam)
+  internal lazy var highRam: UnsafeMutableBufferPointer<UInt8> = {
+    UnsafeMutableBufferPointer<UInt8>.allocate(capacity: MemoryMap.highRam.count)
+  }()
 
   /// FF01 - SB - Data send using serial transfer
   internal var linkCable = Data()
@@ -54,6 +55,11 @@ public class Memory: CpuAddressableMemory {
     // swiftlint:disable:next force_unwrapping
     self.bootrom = bootrom != nil ? .executing(bootrom!) : .finished
     self.cartridge = cartridge
+  }
+
+  deinit {
+    self.ram.deallocate()
+    self.highRam.deallocate()
   }
 
   // MARK: - Helpers

@@ -27,12 +27,15 @@ extension Memory {
 
     // internal
     case MemoryMap.highRam:
-      self.highRam[address - MemoryMap.highRam.start] = value
+      let index = Int(address - MemoryMap.highRam.start)
+      self.highRam[index] = value
     case MemoryMap.internalRam:
-      self.ram[address - MemoryMap.internalRam.start] = value
+      let index = Int(address - MemoryMap.internalRam.start)
+      self.ram[index] = value
     case MemoryMap.internalRamEcho:
       let ramAddress = self.convertEchoToRamAddress(address)
-      self.ram[ramAddress - MemoryMap.internalRam.start] = value
+      let index      = Int(ramAddress - MemoryMap.internalRam.start)
+      self.ram[index] = value
 
     // video
     case MemoryMap.videoRam:
@@ -110,8 +113,7 @@ extension Memory {
     case MemoryMap.Lcd.windowX: self.lcd.windowX = value
 
     default:
-      let index = address - MemoryMap.io.start
-      return self.ioMemory[index] = value
+      return self.unmappedMemory[address] = value
     }
   }
 }
