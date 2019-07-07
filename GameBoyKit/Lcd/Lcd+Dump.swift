@@ -93,6 +93,12 @@ extension Lcd {
     }
   }
 
+  /// Read data from video ram.
+  private func readVideoRam(_ address: Int) -> UInt8 {
+    let start = Int(MemoryMap.videoRam.start)
+    return self.videoRam[address - start]
+  }
+
   private func range(region: TileData) -> ClosedRange<Int> {
     switch region {
     case .from8800to97ff: return 0x8800...0x97ff

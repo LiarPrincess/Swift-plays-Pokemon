@@ -4,7 +4,15 @@
 
 /// width = height = 8 pixels
 private let tileSizeInPixels = 8
+
+/// 1 tile line = 2 bytes
 private let bytesPerTileLine = 2
+
+/// Number of tiles in a single row.
+private let tilesPerRow = 32
+
+/// Address of the 1st byte of video ram in memory.
+private let videoRamStart = Int(MemoryMap.videoRam.start)
 
 extension Lcd {
 
@@ -23,9 +31,9 @@ extension Lcd {
       self.drawWindow()
     }
 
-//    if self.control.isSpriteEnabled {
-//      self.drawSprites()
-//    }
+    if self.control.isSpriteEnabled {
+      self.drawSprites()
+    }
   }
 
   private func drawBackgroundLine() {
@@ -34,7 +42,7 @@ extension Lcd {
     let tileRow = globalY / tileSizeInPixels
     let tileDataOffset = (globalY % tileSizeInPixels) * bytesPerTileLine
 
-    let map = self.control.backgroundTileMap
+    let tileMap = self.getTileMap(for: self.control.backgroundTileMap)
 
     let usingWindow = self.control.isWindowEnabled && self.line >= self.windowY
     let maxX = min(Lcd.width, usingWindow ? Int(self.windowX) - 7 : .max)
@@ -43,23 +51,19 @@ extension Lcd {
     while x < maxX {
       let globalX = Int(self.scrollX) + x
       let tileColumn = globalX / tileSizeInPixels
-
-      let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
-      let tileIndex        = self.readVideoRam(tileIndexAddress)
+      let tileIndex  = tileMap[tileRow * tilesPerRow + tileColumn]
 
       let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
-      let data1 = self.readVideoRam(tileDataAddress + tileDataOffset)
-      let data2 = self.readVideoRam(tileDataAddress + tileDataOffset + 1)
+      let data1 = self.videoRam[tileDataAddress + tileDataOffset]
+      let data2 = self.videoRam[tileDataAddress + tileDataOffset + 1]
 
       let startPixel = globalX % tileSizeInPixels
       for pixel in startPixel..<tileSizeInPixels {
         let tileColor = self.getColorValue(data1, data2, bit: pixel)
         let color     = self.backgroundColors[tileColor]
 
-        // we may draw a bit of window, but thats ok,
-        // since we will over-draw it later
         let pixelX = x + pixel
-        if pixelX < Lcd.width {
+        if pixelX < maxX {
           self.framebuffer[pixelX, line] = color
         }
       }
@@ -88,19 +92,17 @@ extension Lcd {
     let tileRow = windowLine / tileSizeInPixels
     let tileDataOffset = (windowLine % tileSizeInPixels) * bytesPerTileLine
 
-    let map = self.control.windowTileMap
+    let tileMap = self.getTileMap(for: self.control.windowTileMap)
 
     // TODO: Performance
     for x in windowStartX..<Lcd.width {
       let windowX = x - windowStartX
       let tileColumn = windowX / tileSizeInPixels
-
-      let tileIndexAddress = self.getTileIndexAddress(from: map, row: tileRow, column: tileColumn)
-      let tileIndex        = self.readVideoRam(tileIndexAddress)
+      let tileIndex  = tileMap[tileRow * tilesPerRow + tileColumn]
 
       let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
-      let data1 = self.readVideoRam(tileDataAddress + tileDataOffset)
-      let data2 = self.readVideoRam(tileDataAddress + tileDataOffset + 1)
+      let data1 = self.videoRam[tileDataAddress + tileDataOffset]
+      let data2 = self.videoRam[tileDataAddress + tileDataOffset + 1]
 
       let pixel = windowX % tileSizeInPixels
       let tileColor = self.getColorValue(data1, data2, bit: pixel)
@@ -110,45 +112,41 @@ extension Lcd {
     }
   }
 
+  private func drawSprites() { }
+
   // MARK: - Helpers
 
-  /// Address (in vram) of a tile index at given row and column.
-  internal func getTileIndexAddress(from map: TileMap,
-                                    row:      Int,
-                                    column:   Int) -> Int {
-    let start: Int = {
+  private func getTileMap(for map: TileMap) -> UnsafeBufferPointer<UInt8> {
+    guard let basePtr = UnsafePointer(self.videoRam.baseAddress) else {
+      fatalError("Unable to obtain video ram address.")
+    }
+
+    let mapStart: UnsafePointer<UInt8> = {
       switch map {
-      case .from9800to9bff: return 0x9800
-      case .from9c00to9fff: return 0x9c00
+      case .from9800to9bff: return basePtr.advanced(by: 0x9800 - videoRamStart)
+      case .from9c00to9fff: return basePtr.advanced(by: 0x9c00 - videoRamStart)
       }
     }()
 
-    let tilesPerRow = 32
-    let offset = row * tilesPerRow + column
-
-    return start + offset
+    let count = LcdConstants.tileMapCount
+    return UnsafeBufferPointer(start: mapStart, count: count)
   }
 
   /// Address (in vram) of a tile data.
+  /// Can be used as index in self.videoRam.
   internal func getTileDataAddress(tileIndex: UInt8) -> Int {
     let tileSize: Int = 16 // bits
 
     switch self.control.tileData {
     case .from8000to8fff:
-      let start = 0x8000
+      let start = 0x8000 - videoRamStart
       return start + Int(tileIndex) * tileSize
 
     case .from8800to97ff:
-      let middle: Int = 0x9000
+      let middle = 0x9000 - videoRamStart
       let signedTileNumber = Int8(bitPattern: tileIndex)
       return middle + Int(signedTileNumber) * tileSize
     }
-  }
-
-  /// Read data from video ram.
-  internal func readVideoRam(_ address: Int) -> UInt8 {
-    let start = Int(MemoryMap.videoRam.start)
-    return self.videoRam[address - start]
   }
 
   /// Color before applying palette.
