@@ -15,6 +15,8 @@ public class Debugger {
     self.gameBoy = gameBoy
   }
 
+  // MARK: - Run
+
   public func run(mode:         DebugMode = .none,
                   instructions: Int64     = .max,
                   untilPC pc:   UInt16    = .max) {
@@ -61,6 +63,20 @@ public class Debugger {
       self.gameBoy.tickCpu(cycles: 1)
       remainingInstructions -= 1
     }
+  }
+
+  // MARK: - Dump lcd
+
+  public func dumpBackgroundTileIndices() {
+    self.gameBoy.lcd.dumpBackgroundTileIndices()
+  }
+
+  public func dumpTileData() {
+    self.gameBoy.lcd.dumpTileData()
+  }
+
+  public func dumpBackground() {
+    self.gameBoy.lcd.dumpBackground()
   }
 }
 

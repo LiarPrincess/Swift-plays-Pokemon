@@ -12,13 +12,16 @@ private let framebufferSize = LcdConstants.width * LcdConstants.height
 // Btw. this class is CRUCIAL for performance.
 public class Framebuffer {
 
+  /// Flag to avoid repeated clear on every tick
+  private var isClear: Bool = true
+
   /// Data that should be put on screen
   public private(set) lazy var data: UnsafeMutableBufferPointer<UInt8> = {
     UnsafeMutableBufferPointer<UInt8>.allocate(capacity: framebufferSize)
   }()
 
-  /// Flag to avoid repeated clear on every tick
-  private var isClear: Bool = true
+  public var width:  Int { return LcdConstants.width }
+  public var height: Int { return LcdConstants.height }
 
   deinit {
     self.data.deallocate()

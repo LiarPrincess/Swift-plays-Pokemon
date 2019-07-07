@@ -37,10 +37,11 @@ extension Memory {
     // video
     case MemoryMap.videoRam:
       // Technically it should nop during 'pixelTransfer'
-      self.lcd.videoRam[address - MemoryMap.videoRam.start] = value
+      self.lcd.writeVideoRam(address, value: value)
     case MemoryMap.oam:
       // Technically it should nop during 'pixelTransfer' or 'oamSearch'
-      self.lcd.oam[address - MemoryMap.oam.start] = value
+      self.lcd.writeOAM(address, value: value)
+
     case MemoryMap.io:
       self.writeInternalIO(address, value: value)
 

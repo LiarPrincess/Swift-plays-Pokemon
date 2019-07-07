@@ -40,10 +40,10 @@ extension Memory {
     // video
     case MemoryMap.videoRam:
       // Technically it should return 0xff during 'pixelTransfer'
-      return self.lcd.videoRam[address - MemoryMap.videoRam.start]
+      return self.lcd.readVideoRam(address)
     case MemoryMap.oam:
       // Technically it should return 0xff during 'pixelTransfer' or 'oamSearch'
-      return self.lcd.oam[address - MemoryMap.oam.start]
+      return self.lcd.readOAM(address)
     case MemoryMap.io:
       return self.readInternalIO(address)
 

@@ -52,10 +52,14 @@ public class Lcd: LcdMemory {
   public internal(set) var objectColors1 = ObjectColorPalette()
 
   /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
-  public internal(set) lazy var videoRam = Data(memoryRange: MemoryMap.videoRam)
+  public internal(set) lazy var videoRam: UnsafeMutableBufferPointer<UInt8> = {
+    UnsafeMutableBufferPointer<UInt8>.allocate(capacity: MemoryMap.videoRam.count)
+  }()
 
   /// FE00-FE9F Sprite Attribute Table (OAM)
-  public internal(set) lazy var oam = Data(memoryRange: MemoryMap.oam)
+  public internal(set) lazy var oam: UnsafeMutableBufferPointer<UInt8> = {
+    UnsafeMutableBufferPointer<UInt8>.allocate(capacity: MemoryMap.oam.count)
+  }()
 
   /// Data that should be put on screen
   public internal(set) var framebuffer = Framebuffer()
@@ -71,6 +75,33 @@ public class Lcd: LcdMemory {
 
   internal init(interrupts: Interrupts) {
     self.interrupts = interrupts
+  }
+
+  deinit {
+    self.videoRam.deallocate()
+    self.oam.deallocate()
+  }
+
+  // MARK: - LcdMemory
+
+  func readVideoRam(_ address: UInt16) -> UInt8 {
+    let index = Int(address - MemoryMap.videoRam.start)
+    return self.videoRam[index]
+  }
+
+  func writeVideoRam(_ address: UInt16, value: UInt8) {
+    let index = Int(address - MemoryMap.videoRam.start)
+     self.videoRam[index] = value
+  }
+
+  func readOAM(_ address: UInt16) -> UInt8 {
+    let index = Int(address - MemoryMap.oam.start)
+    return self.oam[index]
+  }
+
+  func writeOAM(_ address: UInt16, value: UInt8) {
+    let index = Int(address - MemoryMap.oam.start)
+     self.oam[index] = value
   }
 
   // MARK: - Tick

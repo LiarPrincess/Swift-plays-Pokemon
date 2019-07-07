@@ -55,8 +55,14 @@ internal protocol LcdMemory: AnyObject {
   var objectColors1: ObjectColorPalette { get set }
 
   /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
-  var videoRam: Data { get set }
+  func readVideoRam(_ address: UInt16) -> UInt8
+
+  /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
+  func writeVideoRam(_ address: UInt16, value: UInt8)
 
   /// FE00-FE9F Sprite Attribute Table (OAM)
-  var oam: Data { get set }
+  func readOAM(_ address: UInt16) -> UInt8
+
+  /// FE00-FE9F Sprite Attribute Table (OAM)
+  func writeOAM(_ address: UInt16, value: UInt8)
 }

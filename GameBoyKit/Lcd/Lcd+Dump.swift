@@ -8,25 +8,11 @@ private let tileSize        = 8 // pixels
 private let tileRowCount    = Int(Lcd.width)  / tileSize // 18
 private let tileColumnCount = Int(Lcd.height) / tileSize // 20
 
-extension Lcd {
-
-  public func dump() {
-    print("Background tile indices: \(self.control.backgroundTileMap)")
-    self.dumpBackgroundTileIndices()
-
-    print("Tile data: \(self.control.tileData)")
-    self.dumpTileData()
-
-    print("Background:")
-    self.dumpBackground()
-  }
-}
-
 // MARK: - Tile indices
 
 extension Lcd {
 
-  public func dumpBackgroundTileIndices() {
+  internal func dumpBackgroundTileIndices() {
     // horizontal markers
     print("    | " , separator: "", terminator: "")
     for tileColumn in 0..<tileColumnCount {
@@ -60,13 +46,30 @@ extension Lcd {
       print()
     }
   }
+
+  /// Address (in vram) of a tile index at given row and column.
+  private func getTileIndexAddress(from map: TileMap,
+                                   row:      Int,
+                                   column:   Int) -> Int {
+    let start: Int = {
+      switch map {
+      case .from9800to9bff: return 0x9800
+      case .from9c00to9fff: return 0x9c00
+      }
+    }()
+
+    let tilesPerRow = 32
+    let offset = row * tilesPerRow + column
+
+    return start + offset
+  }
 }
 
 // MARK: - Tile data
 
 extension Lcd {
 
-  public func dumpTileData() {
+  internal func dumpTileData() {
     let region = self.control.tileData
     let range = self.range(region: region)
 
@@ -102,7 +105,7 @@ extension Lcd {
 
 extension Lcd {
 
-  public func dumpBackground() {
+  internal func dumpBackground() {
     //    let rowRange:    ClosedRange<Int> = 8...9
     //    let columnRange: ClosedRange<Int> = 4...5 // 16 for R
 

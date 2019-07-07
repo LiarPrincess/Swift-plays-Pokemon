@@ -43,4 +43,9 @@ internal enum LcdConstants {
   /// How many cycles does it take to render a full frame?
   /// (from: http://bgb.bircd.org/pandocs.htm#lcdstatusregister)
   internal static let cyclesPerFrame = 70_224
+
+  // MARK: - Other
+
+  /// Size of a single tile map.
+  internal static let tileMapCount = 0x0400
 }

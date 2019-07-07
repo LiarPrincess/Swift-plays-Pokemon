@@ -65,10 +65,12 @@ public class Memory: CpuAddressableMemory {
 
     let sourceStart = UInt16(writeValue) << 8
 
-    for i in 0..<MemoryMap.oam.count {
-      // [performance] write directly into OAM (instead of self.write)
+    for i in 0..<UInt16(MemoryMap.oam.count) {
       let sourceAddress = sourceStart + UInt16(i)
-      self.lcd.oam[i] = self.read(sourceAddress)
+      let value = self.read(sourceAddress)
+
+      let oamAddress = MemoryMap.oam.start + i
+      self.lcd.writeOAM(oamAddress, value: value)
     }
   }
 
