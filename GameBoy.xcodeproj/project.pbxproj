@@ -49,7 +49,7 @@
 		9085FC3D22B6BF6A00310090 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3C22B6BF6A00310090 /* main.swift */; };
 		9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */; };
 		908D6E0C229DDECE00523C18 /* String+pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D6E0B229DDECD00523C18 /* String+pad.swift */; };
-		90910F8F22D0BB1300B93C2A /* MemoryRegionProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90910F8E22D0BB1300B93C2A /* MemoryRegionProtocols.swift */; };
+		90910F8F22D0BB1300B93C2A /* MemoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90910F8E22D0BB1300B93C2A /* MemoryProtocols.swift */; };
 		90910F9122D0BC7A00B93C2A /* FakeLcdMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90910F9022D0BC7A00B93C2A /* FakeLcdMemory.swift */; };
 		90910F9322D0CE4D00B93C2A /* CartridgeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90910F9222D0CE4D00B93C2A /* CartridgeConstants.swift */; };
 		90910F9522D0E71700B93C2A /* CartridgeImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90910F9422D0E71700B93C2A /* CartridgeImplementations.swift */; };
@@ -115,6 +115,7 @@
 		90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C922C2D50E00003E9E /* BootromFactory.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
+		90FC33F322D2802E008DEC39 /* MemoryRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FC33F222D2802E008DEC39 /* MemoryRegion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,7 +217,7 @@
 		9085FC3C22B6BF6A00310090 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		908D6E0B229DDECD00523C18 /* String+pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+pad.swift"; sourceTree = "<group>"; };
-		90910F8E22D0BB1300B93C2A /* MemoryRegionProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRegionProtocols.swift; sourceTree = "<group>"; };
+		90910F8E22D0BB1300B93C2A /* MemoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryProtocols.swift; sourceTree = "<group>"; };
 		90910F9022D0BC7A00B93C2A /* FakeLcdMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLcdMemory.swift; sourceTree = "<group>"; };
 		90910F9222D0CE4D00B93C2A /* CartridgeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeConstants.swift; sourceTree = "<group>"; };
 		90910F9422D0E71700B93C2A /* CartridgeImplementations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeImplementations.swift; sourceTree = "<group>"; };
@@ -288,6 +289,7 @@
 		90EDD2C922C2D50E00003E9E /* BootromFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromFactory.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
+		90FC33F222D2802E008DEC39 /* MemoryRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRegion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -583,7 +585,8 @@
 				906791E622CCEDB0003869A9 /* Memory+read.swift */,
 				906791E522CCEDB0003869A9 /* Memory+write.swift */,
 				90B0DC5022B76E59005BBCF5 /* MemoryMap.swift */,
-				90910F8E22D0BB1300B93C2A /* MemoryRegionProtocols.swift */,
+				90FC33F222D2802E008DEC39 /* MemoryRegion.swift */,
+				90910F8E22D0BB1300B93C2A /* MemoryProtocols.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -813,13 +816,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90FC33F322D2802E008DEC39 /* MemoryRegion.swift in Sources */,
 				906791FE22CCF829003869A9 /* CartridgeMap.swift in Sources */,
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
 				90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,
 				90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */,
-				90910F8F22D0BB1300B93C2A /* MemoryRegionProtocols.swift in Sources */,
+				90910F8F22D0BB1300B93C2A /* MemoryProtocols.swift in Sources */,
 				906791E422CCCB39003869A9 /* DebugState.swift in Sources */,
 				90B0DC5722B789D0005BBCF5 /* SerialPort.swift in Sources */,
 				905321B022BE46E800A409B2 /* Debugger.swift in Sources */,

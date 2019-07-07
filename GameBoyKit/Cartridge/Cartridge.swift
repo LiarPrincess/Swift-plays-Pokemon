@@ -8,6 +8,7 @@ private typealias Constants = CartridgeConstants
 
 // Sources:
 // - https://github.com/Gekkio/mooneye-gb
+// - https://gekkio.fi/files/gb-docs/gbctr.pdf
 // - http://bgb.bircd.org/pandocs.htm#thecartridgeheader
 public class Cartridge: CartridgeMemory {
 
@@ -19,7 +20,7 @@ public class Cartridge: CartridgeMemory {
   public let rom: Data
 
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
-  public internal(set) var ram: Data
+  public internal(set) var ram: MemoryRegion
 
   /// Offset to selected 0000-3FFF bank.
   internal var romLowerBankStart = Int(MemoryMap.rom0.start)
@@ -48,7 +49,11 @@ public class Cartridge: CartridgeMemory {
     self.rom = rom
 
     let ramSize = try getRamSize(rom[CartridgeMap.ramSize])
-    self.ram = Data(count: ramSize)
+    self.ram = MemoryRegion.allocate(capacity: ramSize)
+  }
+
+  deinit {
+    self.ram.deallocate()
   }
 
   // MARK: - Rom

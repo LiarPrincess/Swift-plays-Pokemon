@@ -14,5 +14,5 @@ internal enum CartridgeConstants {
   internal static let checksumCompare: UInt8 = 0
 
   /// Value to use if RAM is not present/enabled.
-  internal static let defaultRam: UInt8 = 0
+  internal static let defaultRam: UInt8 = 0xff
 }
