@@ -67,16 +67,16 @@ public class Debugger {
 
   // MARK: - Dump lcd
 
-  public func dumpBackgroundTileIndices() {
-    self.gameBoy.lcd.dumpBackgroundTileIndices()
+  public func dumpBackgroundTileIndices(_ map: TileMap) {
+    self.gameBoy.lcd.dumpTileIndices(map)
   }
 
-  public func dumpTileData() {
-    self.gameBoy.lcd.dumpTileData()
+  public func dumpTileData(_ data: TileData) {
+    self.gameBoy.lcd.dumpTileData(data)
   }
 
-  public func dumpBackground() {
-    self.gameBoy.lcd.dumpBackground()
+  public func dumpBackground(_ map: TileMap, _ data: TileData) {
+    self.gameBoy.lcd.dumpBackground(map, data)
   }
 }
 
