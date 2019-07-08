@@ -20,13 +20,17 @@ public class GameBoy {
   }
 
   // swiftlint:disable:next function_default_parameter_at_end
-  public init(bootrom: Bootrom? = nil, cartridge: Cartridge) {
+  public init(input:     GameboyInput,
+              bootrom:   Bootrom,
+              cartridge: Cartridge) {
+
     let interrupts = Interrupts()
     self.lcd = Lcd(interrupts: interrupts)
     self.timer = Timer(interrupts: interrupts)
-    self.joypad = Joypad()
+    self.joypad = Joypad(input: input)
 
-    self.memory = Memory(bootrom:   bootrom,
+    let skipBootrom = bootrom.data.isEmpty
+    self.memory = Memory(bootrom:   skipBootrom ? nil : bootrom,
                          cartridge: cartridge,
                          joypad:    self.joypad,
                          lcd:       self.lcd,
@@ -35,7 +39,7 @@ public class GameBoy {
 
     self.cpu = Cpu(memory: self.memory, interrupts: interrupts)
 
-    if bootrom == nil {
+    if skipBootrom {
       self.skipBootrom()
     }
 

@@ -6,6 +6,5 @@ import Cocoa
 
 public class TestAppDelegate: NSObject, NSApplicationDelegate {
 
-  public func applicationDidFinishLaunching(_ aNotification: Notification) {
-  }
+  public func applicationDidFinishLaunching(_ aNotification: Notification) { }
 }

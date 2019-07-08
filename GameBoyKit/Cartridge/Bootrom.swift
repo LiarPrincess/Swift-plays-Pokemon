@@ -24,7 +24,14 @@ public class Bootrom: BootromMemory {
     print("Attempting to write to read-only bootrom at: \(address.hex).")
   }
 
-  // MARK: - Predefined bootrom
+  // MARK: - Predefined bootroms
+
+  /// This is the most common version of the boot ROM
+  /// found in the original DMG-01 model of Gameboy.
+  public static var skip: Bootrom {
+    let data = Data()
+    return Bootrom(data: data)
+  }
 
   /// This is the most common version of the boot ROM
   /// found in the original DMG-01 model of Gameboy.

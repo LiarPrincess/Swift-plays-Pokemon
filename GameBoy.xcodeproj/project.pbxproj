@@ -20,7 +20,6 @@
 		902CA97922C0159C00026960 /* Bootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902CA97822C0159C00026960 /* Bootrom.swift */; };
 		903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DB22BB903A003132FA /* Lcd+Dump.swift */; };
 		903DB4DE22BB9670003132FA /* LcdTileIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */; };
-		903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */; };
 		903DB4E222BC0C76003132FA /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 903DB4E122BC0C76003132FA /* Shader.metal */; };
 		904AE93822CFDB90002AB266 /* Lcd+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904AE93722CFDB90002AB266 /* Lcd+Draw.swift */; };
 		905321AA22BE378300A409B2 /* OrEqualOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905321A922BE378300A409B2 /* OrEqualOperator.swift */; };
@@ -116,6 +115,9 @@
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
 		90F3474F22D35D0B00B6DCD2 /* TetrisTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F3474E22D35D0B00B6DCD2 /* TetrisTest.swift */; };
+		90F3475122D3BDBF00B6DCD2 /* GameboyInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F3475022D3BDBF00B6DCD2 /* GameboyInput.swift */; };
+		90F3475322D3CD7700B6DCD2 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F3475222D3CD7600B6DCD2 /* Window.swift */; };
+		90F3475722D3E6CE00B6DCD2 /* KeyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F3475622D3E6CE00B6DCD2 /* KeyMap.swift */; };
 		90FC33EF22D27AD5008DEC39 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FC33EE22D27AD5008DEC39 /* Sprite.swift */; };
 		90FC33F322D2802E008DEC39 /* MemoryRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FC33F222D2802E008DEC39 /* MemoryRegion.swift */; };
 /* End PBXBuildFile section */
@@ -190,7 +192,6 @@
 		902CA97822C0159C00026960 /* Bootrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootrom.swift; sourceTree = "<group>"; };
 		903DB4DB22BB903A003132FA /* Lcd+Dump.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lcd+Dump.swift"; sourceTree = "<group>"; };
 		903DB4DD22BB9670003132FA /* LcdTileIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileIndexTests.swift; sourceTree = "<group>"; };
-		903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoyRenderer.swift; sourceTree = "<group>"; };
 		903DB4E122BC0C76003132FA /* Shader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		904AE93722CFDB90002AB266 /* Lcd+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Draw.swift"; sourceTree = "<group>"; };
 		905321A922BE378300A409B2 /* OrEqualOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrEqualOperator.swift; sourceTree = "<group>"; };
@@ -292,6 +293,9 @@
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
 		90F3474E22D35D0B00B6DCD2 /* TetrisTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisTest.swift; sourceTree = "<group>"; };
+		90F3475022D3BDBF00B6DCD2 /* GameboyInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboyInput.swift; sourceTree = "<group>"; };
+		90F3475222D3CD7600B6DCD2 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		90F3475622D3E6CE00B6DCD2 /* KeyMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyMap.swift; sourceTree = "<group>"; };
 		90FC33EE22D27AD5008DEC39 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		90FC33F222D2802E008DEC39 /* MemoryRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRegion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -396,8 +400,9 @@
 				90A17B47229D59840027133B /* Assets.xcassets */,
 				90A17B43229D59830027133B /* AppDelegate.swift */,
 				9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */,
+				90F3475222D3CD7600B6DCD2 /* Window.swift */,
+				90F3475622D3E6CE00B6DCD2 /* KeyMap.swift */,
 				902CA97622C00C7300026960 /* Arguments.swift */,
-				903DB4DF22BBECC4003132FA /* GameBoyRenderer.swift */,
 				90CBD3CC22BD6AA000B58461 /* Metal.swift */,
 				9085FC3C22B6BF6A00310090 /* main.swift */,
 				903DB4E122BC0C76003132FA /* Shader.metal */,
@@ -417,6 +422,7 @@
 				90CBB71722AD74BB004775E2 /* Extensions */,
 				90C19C5A22B3C8B900A1B7A9 /* Debug */,
 				90A56A3422A3DD0D0055A013 /* GameBoy.swift */,
+				90F3475022D3BDBF00B6DCD2 /* GameboyInput.swift */,
 				90A17B5A229D59A20027133B /* GameBoyKit.h */,
 				90A17B5B229D59A20027133B /* Info.plist */,
 			);
@@ -818,11 +824,12 @@
 			files = (
 				9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */,
 				90CBD3CD22BD6AA000B58461 /* Metal.swift in Sources */,
-				903DB4E022BBECC4003132FA /* GameBoyRenderer.swift in Sources */,
 				9085FC3D22B6BF6A00310090 /* main.swift in Sources */,
 				903DB4E222BC0C76003132FA /* Shader.metal in Sources */,
 				902CA97722C00C7300026960 /* Arguments.swift in Sources */,
 				90A17B44229D59830027133B /* AppDelegate.swift in Sources */,
+				90F3475722D3E6CE00B6DCD2 /* KeyMap.swift in Sources */,
+				90F3475322D3CD7700B6DCD2 /* Window.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +868,7 @@
 				903DB4DC22BB903A003132FA /* Lcd+Dump.swift in Sources */,
 				902CA97322BFFDA700026960 /* CBPrefixedOpcode.swift in Sources */,
 				90A17B9D229D59D50027133B /* Cpu.swift in Sources */,
+				90F3475122D3BDBF00B6DCD2 /* GameboyInput.swift in Sources */,
 				906073A122B8452200F2766D /* Timer.swift in Sources */,
 				90910F9322D0CE4D00B93C2A /* CartridgeConstants.swift in Sources */,
 				90B0DC4B22B6F43D005BBCF5 /* Cartridge.swift in Sources */,
@@ -1101,7 +1109,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nopoint.SwiftBoy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nopoint.GameBoyMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1120,7 +1128,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nopoint.SwiftBoy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nopoint.GameBoyMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

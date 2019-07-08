@@ -27,11 +27,16 @@ vertex VertexOut vertex_shader(const device float2* vertexArray [[ buffer(0) ]],
 fragment half4 fragment_shader(VertexOut          interpolated [[ stage_in ]],
                                texture2d<ushort>  tex2D        [[ texture(0) ]])
 {
-  // use this to display texcoords:
-  //  float x = interpolated.texcoord.x;
-  //  float y = interpolated.texcoord.y;
-  //  return half4(x, y, 0.0, 1.0);
+  // GameBoy uses:
+  // 0 - White
+  // 1 - Light gray
+  // 2 - Dark gray
+  // 3 - Black
+  // We need to 'correct' this.
 
-  float value = tex2D.sample(sampler2D, interpolated.texcoord).r;
-  return half4(value, value, value, 1.0);
+  float raw = tex2D.sample(sampler2D, interpolated.texcoord).r;
+  float corrected = 3 - raw;
+  float rgb = corrected * 0.33; // to convert to <0, 1> space
+
+  return half4(rgb, rgb, rgb, 1.0);
 }
