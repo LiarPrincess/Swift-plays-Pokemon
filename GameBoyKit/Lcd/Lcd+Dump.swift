@@ -181,4 +181,23 @@ extension Lcd {
     }
     print("|", separator: "", terminator: "")
   }
+
+  /// Address (in vram) of a tile data.
+  /// Can be used as index in self.videoRam.
+  private func getTileDataAddress(tileIndex: UInt8) -> Int {
+    let tileSize: Int = 16 // bits
+    let videoRamStart = Int(MemoryMap.videoRam.start)
+
+    // TODO: there is an trick in binjgb at line 2941
+    switch self.control.tileData {
+    case .from8000to8fff:
+      let start = 0x8000 - videoRamStart
+      return start + Int(tileIndex) * tileSize
+
+    case .from8800to97ff:
+      let middle = 0x9000 - videoRamStart
+      let signedTileNumber = Int8(bitPattern: tileIndex)
+      return middle + Int(signedTileNumber) * tileSize
+    }
+  }
 }

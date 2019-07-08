@@ -2,13 +2,16 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/// width = height = 8 pixels
-private let tileSizeInPixels = 8
+/// 8 pixels
+private let tileHeightInPixels = 8
+
+/// 8 pixels
+private let tileWidthInPixels = 8
 
 /// 1 tile line = 2 bytes
 private let bytesPerTileLine = 2
 
-/// Number of tiles in a single row.
+/// Number of tiles in a single row (32).
 private let tilesPerRow = 32
 
 /// Address of the 1st byte of video ram in memory.
@@ -19,95 +22,127 @@ extension Lcd {
   internal func drawLine() {
     if self.control.isBackgroundVisible {
       self.drawBackgroundLine()
-    } else {
-      self.drawWhiteBackgroundLine()
     }
 
     if self.control.isWindowEnabled {
       self.drawWindow()
     }
 
-    if self.control.isSpriteEnabled {
-      self.drawSprites()
-    }
+//    if self.control.isSpriteEnabled {
+//      self.drawSprites()
+//    }
   }
 
   private func drawBackgroundLine() {
-    let line    = Int(self.line)
-    let globalY = (Int(self.scrollY) + line) % LcdConstants.backgroundMapHeight
-    let tileRow = globalY / tileSizeInPixels
-    let tileDataOffset = (globalY % tileSizeInPixels) * bytesPerTileLine
+    let line     = Int(self.line)
+    let globalY  = (Int(self.scrollY) + line) % LcdConstants.backgroundMapHeight
+    let tileRow  = globalY / tileHeightInPixels
+    let tileLine = globalY % tileHeightInPixels
 
     let tileMap = self.getTileMap(for: self.control.backgroundTileMap)
-
-    let usingWindow = self.control.isWindowEnabled && self.line >= self.windowY
-    let maxX = min(Lcd.width, usingWindow ? Int(self.windowX) - 7 : .max)
+    let framebufferSlice = self.getBackgroundFramebuffer(line: line)
 
     var x = 0
-    while x < maxX {
+    while x < framebufferSlice.count {
       let globalX = Int(self.scrollX) + x
-      let tileColumn = globalX / tileSizeInPixels
-      let tileIndex  = tileMap[tileRow * tilesPerRow + tileColumn]
+      let tileColumn = globalX / tileWidthInPixels
+      let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
 
-      let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
-      let data1 = self.videoRam[tileDataAddress + tileDataOffset]
-      let data2 = self.videoRam[tileDataAddress + tileDataOffset + 1]
-
-      let startPixel = globalX % tileSizeInPixels
-      for bit in startPixel..<tileSizeInPixels {
-        let tileColor = self.getColorValue(data1, data2, bit: bit)
-        let color     = self.backgroundPalette[tileColor] // backgroundPalette
-
-        let pixelX = x + bit
-        if pixelX < maxX {
-          self.framebuffer[pixelX, line] = color
-        }
+      var tileIndex = Int(tileIndexRaw)
+      if self.control.tileData == .from8800to97ff {
+        tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
       }
 
-      x += (tileSizeInPixels - startPixel)
+      let tileAddress = (tileIndex * tileHeightInPixels + tileLine) * bytesPerTileLine
+      let data1 = self.videoRam[tileAddress]
+      let data2 = self.videoRam[tileAddress + 1]
+
+      let startPixel = globalX % tileWidthInPixels
+      for pixel in startPixel..<tileWidthInPixels {
+        let pixelX = x + pixel
+        guard pixelX < framebufferSlice.count else { break }
+
+        let tileColor = self.getColorValue(data1, data2, bit: pixel)
+        let color     = self.backgroundPalette[tileColor]
+        framebufferSlice[pixelX] = color
+      }
+
+      x += (tileWidthInPixels - startPixel)
     }
   }
 
-  private func drawWhiteBackgroundLine() {
-    let line = Int(self.line)
-    for x in 0..<Lcd.width {
-      self.framebuffer[x, line] = 0x00
+  /// Part of the framebuffer that should be filled in the current draw operation.
+  private func getBackgroundFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
+    guard let basePtr = UnsafeMutablePointer(self.framebuffer.data.baseAddress) else {
+      fatalError("Unable to obtain framebuffer address.")
     }
+
+    let start = basePtr.advanced(by: line * LcdConstants.width)
+
+    let usingWindow = self.control.isWindowEnabled && self.line >= self.windowY
+    let count = min(Lcd.width, usingWindow ? Int(self.windowX) - 7 : .max)
+
+    return UnsafeMutableBufferPointer(start: start, count: count)
   }
 
+  // swiftlint:disable:next function_body_length
   private func drawWindow() {
     let line = Int(self.line)
     let windowStartY = Int(self.windowY)
-    let windowStartX = Int(self.windowX) - 7
 
     guard line >= windowStartY else {
       return
     }
 
-    let windowLine = line - windowStartY
-    let tileRow = windowLine / tileSizeInPixels
-    let tileDataOffset = (windowLine % tileSizeInPixels) * bytesPerTileLine
+    let windowY = line - windowStartY
+    let tileRow = windowY / tileHeightInPixels
+    let tileLine = windowY % tileHeightInPixels
 
     let tileMap = self.getTileMap(for: self.control.windowTileMap)
+    let framebufferSlice = self.getWindowFramebuffer(line: line)
 
-    // TODO: Performance
-    for x in windowStartX..<Lcd.width {
-      let windowX = x - windowStartX
-      let tileColumn = windowX / tileSizeInPixels
-      let tileIndex  = tileMap[tileRow * tilesPerRow + tileColumn]
+    var windowX = 0
+    while windowX < framebufferSlice.count {
+      let tileColumn = windowX / tileWidthInPixels
+      let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
 
-      let tileDataAddress = self.getTileDataAddress(tileIndex: tileIndex)
-      let data1 = self.videoRam[tileDataAddress + tileDataOffset]
-      let data2 = self.videoRam[tileDataAddress + tileDataOffset + 1]
+      var tileIndex = Int(tileIndexRaw)
+      if self.control.tileData == .from8800to97ff {
+        tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
+      }
 
-      let pixel = windowX % tileSizeInPixels
-      let tileColor = self.getColorValue(data1, data2, bit: pixel)
-      let color     = self.backgroundPalette[tileColor]
+      let tileAddress = (tileIndex * tileHeightInPixels + tileLine) * bytesPerTileLine
+      let data1 = self.videoRam[tileAddress]
+      let data2 = self.videoRam[tileAddress + 1]
 
-      self.framebuffer[x, line] = color
+      let startPixel = windowX % tileWidthInPixels
+      for pixel in startPixel..<tileWidthInPixels {
+        let pixelX = windowX + pixel
+        guard pixelX < framebufferSlice.count else { break }
+
+        let tileColor = self.getColorValue(data1, data2, bit: pixel)
+        let color     = self.backgroundPalette[tileColor]
+        framebufferSlice[pixelX] = color
+      }
+
+      windowX += (tileWidthInPixels - startPixel)
     }
   }
 
+  /// Part of the framebuffer that should be filled in the current draw operation.
+  private func getWindowFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
+    guard let basePtr = UnsafeMutablePointer(self.framebuffer.data.baseAddress) else {
+      fatalError("Unable to obtain framebuffer address.")
+    }
+
+    let windowX = Int(self.windowX) - 7
+    let start = basePtr.advanced(by: line * LcdConstants.width + windowX)
+
+    let count = max(Lcd.width - windowX, 0) // we may set window to 250 etc.
+    return UnsafeMutableBufferPointer(start: start, count: count)
+  }
+
+  /*
   private func drawSprites() {
     let sprites = self.getSprites()
     let sortedSprites = self.sortFromRightToLeft(sprites)
@@ -206,7 +241,7 @@ extension Lcd {
       }
       .map { $0.element }
   }
-
+*/
   // MARK: - Helpers
 
   private func getTileMap(for map: TileMap) -> UnsafeBufferPointer<UInt8> {
@@ -223,24 +258,6 @@ extension Lcd {
 
     let count = LcdConstants.tileMapCount
     return UnsafeBufferPointer(start: mapStart, count: count)
-  }
-
-  /// Address (in vram) of a tile data.
-  /// Can be used as index in self.videoRam.
-  internal func getTileDataAddress(tileIndex: UInt8) -> Int {
-    let tileSize: Int = 16 // bits
-
-    // TODO: there is an trick in binjgb at line 2941
-    switch self.control.tileData {
-    case .from8000to8fff:
-      let start = 0x8000 - videoRamStart
-      return start + Int(tileIndex) * tileSize
-
-    case .from8800to97ff:
-      let middle = 0x9000 - videoRamStart
-      let signedTileNumber = Int8(bitPattern: tileIndex)
-      return middle + Int(signedTileNumber) * tileSize
-    }
   }
 
   /// Color before applying palette.
