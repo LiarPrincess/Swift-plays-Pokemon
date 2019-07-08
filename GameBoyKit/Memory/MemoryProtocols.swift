@@ -46,13 +46,13 @@ internal protocol LcdMemory: AnyObject {
   var windowX: UInt8 { get set }
 
   /// FF47 - BGP - BG Palette Data
-  var backgroundColors: BackgroundColorPalette { get set }
+  var backgroundPalette: BackgroundPalette { get set }
 
   /// FF48 - OBP0 - Object Palette 0 Data
-  var objectColors0: ObjectColorPalette { get set }
+  var spritePalette0: SpritePalette { get set }
 
   /// FF49 - OBP1 - Object Palette 1 Data
-  var objectColors1: ObjectColorPalette { get set }
+  var spritePalette1: SpritePalette { get set }
 
   /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
   func readVideoRam(_ address: UInt16) -> UInt8

@@ -7,9 +7,6 @@ private let framebufferSize = LcdConstants.width * LcdConstants.height
 
 // TODO: Check memory leaks (after we implement loading cartridge)
 
-// This is one MASSIVE allocation, but we need it this way,
-// so that we can upload it to gpu.
-// Btw. this class is CRUCIAL for performance.
 public class Framebuffer {
 
   /// Flag to avoid repeated clear on every tick
@@ -29,12 +26,10 @@ public class Framebuffer {
 
   internal subscript(x: Int, y: Int) -> UInt8 {
     get {
-      // for performance we have to disable range checks (even in debug)
       let index = y * lcdWidth + x
       return self.data[index]
     }
     set {
-      // for performance we have to disable range checks (even in debug)
       let index = y * lcdWidth + x
       self.data[index] = newValue
       self.isClear = false // faster than checking if newValue == 0

@@ -43,23 +43,21 @@ public class Lcd: LcdMemory {
   public internal(set) var windowX: UInt8 = 0
 
   /// FF47 - BGP - BG Palette Data
-  public internal(set) var backgroundColors = BackgroundColorPalette()
+  public internal(set) var backgroundPalette = BackgroundPalette()
 
   /// FF48 - OBP0 - Object Palette 0 Data
-  public internal(set) var objectColors0 = ObjectColorPalette()
+  public internal(set) var spritePalette0 = SpritePalette()
 
   /// FF49 - OBP1 - Object Palette 1 Data
-  public internal(set) var objectColors1 = ObjectColorPalette()
+  public internal(set) var spritePalette1 = SpritePalette()
 
   /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
-  public internal(set) lazy var videoRam: UnsafeMutableBufferPointer<UInt8> = {
-    UnsafeMutableBufferPointer<UInt8>.allocate(capacity: MemoryMap.videoRam.count)
-  }()
+  public internal(set) lazy var videoRam =
+    MemoryRegion.allocate(MemoryMap.videoRam)
 
   /// FE00-FE9F Sprite Attribute Table (OAM)
-  public internal(set) lazy var oam: UnsafeMutableBufferPointer<UInt8> = {
-    UnsafeMutableBufferPointer<UInt8>.allocate(capacity: MemoryMap.oam.count)
-  }()
+  public internal(set) lazy var sprites =
+    [Sprite](repeating: Sprite(), count: LcdConstants.spriteCount)
 
   /// Data that should be put on screen
   public internal(set) var framebuffer = Framebuffer()
@@ -79,7 +77,6 @@ public class Lcd: LcdMemory {
 
   deinit {
     self.videoRam.deallocate()
-    self.oam.deallocate()
   }
 
   // MARK: - LcdMemory
@@ -95,13 +92,33 @@ public class Lcd: LcdMemory {
   }
 
   func readOAM(_ address: UInt16) -> UInt8 {
-    let index = Int(address - MemoryMap.oam.start)
-    return self.oam[index]
+    let oamAddress = Int(address - MemoryMap.oam.start)
+
+    let index = oamAddress / LcdConstants.spriteCount
+    let byte  = oamAddress % LcdConstants.spriteByteCount
+
+    switch byte {
+    case 0: return self.sprites[index].positionY
+    case 1: return self.sprites[index].positionX
+    case 2: return self.sprites[index].tile
+    case 3: return self.sprites[index].flags
+    default: return 0
+    }
   }
 
   func writeOAM(_ address: UInt16, value: UInt8) {
-    let index = Int(address - MemoryMap.oam.start)
-     self.oam[index] = value
+    let oamAddress = Int(address - MemoryMap.oam.start)
+
+    let index = oamAddress / LcdConstants.spriteCount
+    let byte  = oamAddress % LcdConstants.spriteByteCount
+
+    switch byte {
+    case 0: self.sprites[index].positionY = value
+    case 1: self.sprites[index].positionX = value
+    case 2: self.sprites[index].tile = value
+    case 3: self.sprites[index].flags = value
+    default: break
+    }
   }
 
   // MARK: - Tick

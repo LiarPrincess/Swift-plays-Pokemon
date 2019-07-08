@@ -17,10 +17,6 @@ private let videoRamStart = Int(MemoryMap.videoRam.start)
 extension Lcd {
 
   internal func drawLine() {
-    guard self.control.spriteSize == .size8x8 else {
-      fatalError("Tile size 8x16 is not yet supported.")
-    }
-
     if self.control.isBackgroundVisible {
       self.drawBackgroundLine()
     } else {
@@ -58,11 +54,11 @@ extension Lcd {
       let data2 = self.videoRam[tileDataAddress + tileDataOffset + 1]
 
       let startPixel = globalX % tileSizeInPixels
-      for pixel in startPixel..<tileSizeInPixels {
-        let tileColor = self.getColorValue(data1, data2, bit: pixel)
-        let color     = self.backgroundColors[tileColor]
+      for bit in startPixel..<tileSizeInPixels {
+        let tileColor = self.getColorValue(data1, data2, bit: bit)
+        let color     = self.backgroundPalette[tileColor] // backgroundPalette
 
-        let pixelX = x + pixel
+        let pixelX = x + bit
         if pixelX < maxX {
           self.framebuffer[pixelX, line] = color
         }
@@ -106,13 +102,110 @@ extension Lcd {
 
       let pixel = windowX % tileSizeInPixels
       let tileColor = self.getColorValue(data1, data2, bit: pixel)
-      let color     = self.backgroundColors[tileColor]
+      let color     = self.backgroundPalette[tileColor]
 
       self.framebuffer[x, line] = color
     }
   }
 
-  private func drawSprites() { }
+  private func drawSprites() {
+    let sprites = self.getSprites()
+    let sortedSprites = self.sortFromRightToLeft(sprites)
+
+    let line = Int(self.line)
+    let spriteHeigth = Int(self.spriteHeigth)
+
+    // code taken from 'binjgb'
+    for sprite in sortedSprites {
+      // skip if out of screen x
+      // if (x >= SCREEN_WIDTH + OBJ_X_OFFSET) {continue;}
+
+      let palette = sprite.palette == 0 ?
+        self.spritePalette0 :
+        self.spritePalette1
+
+      var tileIndex = Int(sprite.tile)
+
+      var tileLine = line - Int(sprite.positionY)
+      if sprite.flipY {
+        tileLine = spriteHeigth - tileLine - 1
+      }
+
+      if spriteHeigth == 16 {
+        if tileLine < 8 { // Top tile of 8x16 sprite
+          tileIndex &= 0xfe
+        } else { // Bottom tile of 8x16 sprite
+          tileIndex |= 0x01
+          tileLine -= tileSizeInPixels
+        }
+      }
+
+      let tileDataAddress = (tileIndex * tileSizeInPixels + tileLine) * bytesPerTileLine
+      let data1 = self.videoRam[tileDataAddress]
+      let data2 = self.videoRam[tileDataAddress + 1]
+
+      for x in 0..<tileSizeInPixels {
+        let bit = sprite.flipX ? 7 - x : x
+
+        let rawColor = self.getColorValue(data1, data2, bit: bit)
+        if rawColor == 0 { continue }
+
+        let color = palette[rawColor]
+
+        let pixelX = Int(sprite.positionX) + x
+        if pixelX < Lcd.width {
+          // TODO: Priority
+          self.framebuffer[pixelX, line] = color
+        }
+      }
+    }
+  }
+
+  private var spriteHeigth: UInt8 {
+    switch self.control.spriteSize {
+    case .size8x8:  return 8
+    case .size8x16: return 16
+    }
+  }
+
+  private func getSprites() -> [Sprite] {
+    let line = self.line
+    let spriteHeigth = self.spriteHeigth
+
+    var result = [Sprite]()
+    result.reserveCapacity(10)
+
+    for sprite in self.sprites {
+      let isAfterStart = line >= sprite.positionY
+      let isBeforeEnd  = line < (sprite.positionY + spriteHeigth)
+
+      guard isAfterStart && isBeforeEnd else {
+        continue
+      }
+
+      result.append(sprite)
+      if result.count == 10 {
+        break
+      }
+    }
+
+    return result
+  }
+
+  /// Sort in REVERSE order (from right to left).
+  private func sortFromRightToLeft(_ sprites: [Sprite]) -> [Sprite] {
+    // Sort in Swift is not stable, so we have to enumerate
+    return sprites
+      .enumerated()
+      .sorted { lhs, rhs in
+        if lhs.element.positionX == rhs.element.positionX {
+          return lhs.offset > rhs.offset
+        }
+
+        return lhs.element.positionX > rhs.element.positionX
+      }
+      .map { $0.element }
+  }
 
   // MARK: - Helpers
 
@@ -137,6 +230,7 @@ extension Lcd {
   internal func getTileDataAddress(tileIndex: UInt8) -> Int {
     let tileSize: Int = 16 // bits
 
+    // TODO: there is an trick in binjgb at line 2941
     switch self.control.tileData {
     case .from8000to8fff:
       let start = 0x8000 - videoRamStart

@@ -115,6 +115,7 @@
 		90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C922C2D50E00003E9E /* BootromFactory.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
+		90FC33EF22D27AD5008DEC39 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FC33EE22D27AD5008DEC39 /* Sprite.swift */; };
 		90FC33F322D2802E008DEC39 /* MemoryRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FC33F222D2802E008DEC39 /* MemoryRegion.swift */; };
 /* End PBXBuildFile section */
 
@@ -289,6 +290,7 @@
 		90EDD2C922C2D50E00003E9E /* BootromFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromFactory.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
+		90FC33EE22D27AD5008DEC39 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		90FC33F222D2802E008DEC39 /* MemoryRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRegion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -559,6 +561,7 @@
 				90EFDB8422AE55640017AEC2 /* LcdStatus.swift */,
 				9085FC3022B690C600310090 /* LcdColorPalettes.swift */,
 				90CBD3CA22BD62B700B58461 /* Framebuffer.swift */,
+				90FC33EE22D27AD5008DEC39 /* Sprite.swift */,
 				90B0DC4322B6EC89005BBCF5 /* Lcd.swift */,
 				904AE93722CFDB90002AB266 /* Lcd+Draw.swift */,
 				903DB4DB22BB903A003132FA /* Lcd+Dump.swift */,
@@ -819,6 +822,7 @@
 				90FC33F322D2802E008DEC39 /* MemoryRegion.swift in Sources */,
 				906791FE22CCF829003869A9 /* CartridgeMap.swift in Sources */,
 				90A17B91229D59D50027133B /* Registers.swift in Sources */,
+				90FC33EF22D27AD5008DEC39 /* Sprite.swift in Sources */,
 				90A90C2922B8130C00DC833F /* Range+start+end.swift in Sources */,
 				90A17B93229D59D50027133B /* UInt+radixFormat.swift in Sources */,
 				90A17B99229D59D50027133B /* Cpu+ExecutePrefixed.swift in Sources */,

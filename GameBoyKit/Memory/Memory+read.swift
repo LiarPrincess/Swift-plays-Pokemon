@@ -106,9 +106,9 @@ extension Memory {
     case MemoryMap.Lcd.line:        return self.lcd.line
     case MemoryMap.Lcd.lineCompare: return self.lcd.lineCompare
     case MemoryMap.Lcd.dma:         return defaultValue
-    case MemoryMap.Lcd.backgroundColors: return self.lcd.backgroundColors.value
-    case MemoryMap.Lcd.objectColors0:    return self.lcd.objectColors0.value
-    case MemoryMap.Lcd.objectColors1:    return self.lcd.objectColors1.value
+    case MemoryMap.Lcd.backgroundColors: return self.lcd.backgroundPalette.value
+    case MemoryMap.Lcd.objectColors0:    return self.lcd.spritePalette0.value
+    case MemoryMap.Lcd.objectColors1:    return self.lcd.spritePalette1.value
     case MemoryMap.Lcd.windowY: return self.lcd.windowY
     case MemoryMap.Lcd.windowX: return self.lcd.windowX
 

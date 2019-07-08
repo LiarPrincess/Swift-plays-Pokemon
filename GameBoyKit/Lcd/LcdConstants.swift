@@ -44,6 +44,14 @@ internal enum LcdConstants {
   /// (from: http://bgb.bircd.org/pandocs.htm#lcdstatusregister)
   internal static let cyclesPerFrame = 70_224
 
+  // MARK: - Sprite
+
+  /// Total number of sprites.
+  internal static let spriteCount = 40
+
+  /// Number of bytes that define single sprite.
+  internal static let spriteByteCount = 4
+
   // MARK: - Other
 
   /// Size of a single tile map.
