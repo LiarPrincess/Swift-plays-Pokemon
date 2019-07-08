@@ -96,7 +96,7 @@ extension Debugger {
   private func printInterruptWrites(before b: DebugInterruptState,
                                     after  a: DebugInterruptState) {
 
-    if b.enable != a.enable { print("  > inter.enable <- \(a.enable)") }
-    if b.flag   != a.flag   { print("  > inter.flag <- \(a.flag)") }
+    if b.enable != a.enable { print("  > inter.enable <- \(a.enable.bin)") }
+    if b.flag   != a.flag   { print("  > inter.flag <- \(a.flag.bin)") }
   }
 }

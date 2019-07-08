@@ -20,6 +20,22 @@ public enum MemoryMap {
   public static let highRam:         ClosedRange<UInt16> = 0xff80...0xfffe
   public static let interruptEnable: UInt16 = 0xffff
 
+  // Source: http://imrannazar.com/GameBoy-Emulation-in-JavaScript:-Graphics
+  public enum VideoRam {
+
+    /// Tile set #0: tiles 0-127
+    public static let tileSet0: ClosedRange<UInt16> = 0x8000...0x87ff
+
+    /// Tile set #0: tiles 128-255, Tile set #1: tiles -1 to -128
+    public static let tileSet01: ClosedRange<UInt16> = 0x8800...0x8fff
+
+    /// Tile set #1: tiles 0-127
+    public static let tileSet1: ClosedRange<UInt16> = 0x9000...0x97ff
+
+    public static let tileMap0: ClosedRange<UInt16> = 0x9800...0x9bff
+    public static let tileMap1: ClosedRange<UInt16> = 0x9c00...0x9fff
+  }
+
   public enum IO {
     public static let joypad: UInt16 = 0xff00
     public static let sb:     UInt16 = 0xff01
@@ -85,7 +101,11 @@ extension MemoryMap {
     switch address {
     case rom0:            return "rom0"
     case rom1:            return "rom1"
-    case videoRam:        return "videoRam"
+    case VideoRam.tileSet0:  return "Tile set #0"
+    case VideoRam.tileSet01: return "Tile set #0 and #1"
+    case VideoRam.tileSet1:  return "Tile set #1"
+    case VideoRam.tileMap0:  return "tileMap0"
+    case VideoRam.tileMap1:  return "tileMap1"
     case externalRam:     return "externalRam"
     case internalRam:     return "internalRam"
     case internalRamEcho: return "internalRamEcho"

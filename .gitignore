@@ -11,6 +11,7 @@
 /GameBoyKitROMTests/Bootrom/Dump
 /GameBoyKitROMTests/Blargg/Dumps
 /GameBoyKitROMTests/Blargg/ROMs
+/GameBoyKitROMTests/Tetris/Dump
 
 # mac
 .DS_Store

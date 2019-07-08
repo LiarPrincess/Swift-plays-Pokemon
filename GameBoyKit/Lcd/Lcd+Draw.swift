@@ -244,7 +244,7 @@ extension Lcd {
 */
   // MARK: - Helpers
 
-  private func getTileMap(for map: TileMap) -> UnsafeBufferPointer<UInt8> {
+  internal func getTileMap(for map: TileMap) -> UnsafeBufferPointer<UInt8> {
     guard let basePtr = UnsafePointer(self.videoRam.baseAddress) else {
       fatalError("Unable to obtain video ram address.")
     }

@@ -157,8 +157,8 @@ extension Debugger {
     if b.halfCarryFlag != a.halfCarryFlag { print("  > cpu.halfCarryFlag <- \(a.halfCarryFlag)") }
     if b.carryFlag     != a.carryFlag     { print("  > cpu.carryFlag     <- \(a.carryFlag)") }
 
-    if b.pc != a.pc { print("  > cpu.pc <- \(a.pc)") }
-    if b.sp != a.sp { print("  > cpu.sp <- \(a.sp)") }
+    if b.pc != a.pc { print("  > cpu.pc <- \(a.pc.hex)") }
+    if b.sp != a.sp { print("  > cpu.sp <- \(a.sp.hex)") }
   }
 
   // MARK: - Print register values

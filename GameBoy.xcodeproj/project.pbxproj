@@ -115,6 +115,7 @@
 		90EDD2CA22C2D50E00003E9E /* BootromFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EDD2C922C2D50E00003E9E /* BootromFactory.swift */; };
 		90EFDB8322AE553A0017AEC2 /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8222AE553A0017AEC2 /* LcdControl.swift */; };
 		90EFDB8522AE55640017AEC2 /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EFDB8422AE55640017AEC2 /* LcdStatus.swift */; };
+		90F3474F22D35D0B00B6DCD2 /* TetrisTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F3474E22D35D0B00B6DCD2 /* TetrisTest.swift */; };
 		90FC33EF22D27AD5008DEC39 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FC33EE22D27AD5008DEC39 /* Sprite.swift */; };
 		90FC33F322D2802E008DEC39 /* MemoryRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FC33F222D2802E008DEC39 /* MemoryRegion.swift */; };
 /* End PBXBuildFile section */
@@ -290,6 +291,7 @@
 		90EDD2C922C2D50E00003E9E /* BootromFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromFactory.swift; sourceTree = "<group>"; };
 		90EFDB8222AE553A0017AEC2 /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90EFDB8422AE55640017AEC2 /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
+		90F3474E22D35D0B00B6DCD2 /* TetrisTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisTest.swift; sourceTree = "<group>"; };
 		90FC33EE22D27AD5008DEC39 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		90FC33F222D2802E008DEC39 /* MemoryRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryRegion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -490,6 +492,7 @@
 			children = (
 				90B2231F22C90A270023F38D /* Bootrom */,
 				90B2230F22C8FA860023F38D /* Blargg */,
+				90F3474D22D35CC700B6DCD2 /* Tetris */,
 				90B2231422C8FB160023F38D /* State */,
 				90B2230922C8FA2E0023F38D /* main.swift */,
 				90B2232222C90AB70023F38D /* performanceTest.swift */,
@@ -592,6 +595,14 @@
 				90910F8E22D0BB1300B93C2A /* MemoryProtocols.swift */,
 			);
 			path = Memory;
+			sourceTree = "<group>";
+		};
+		90F3474D22D35CC700B6DCD2 /* Tetris */ = {
+			isa = PBXGroup;
+			children = (
+				90F3474E22D35D0B00B6DCD2 /* TetrisTest.swift */,
+			);
+			path = Tetris;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -936,6 +947,7 @@
 				90B2231E22C909F10023F38D /* BlarggTests.swift in Sources */,
 				90B2231C22C908E80023F38D /* compare.swift in Sources */,
 				90B2232322C90AB70023F38D /* performanceTest.swift in Sources */,
+				90F3474F22D35D0B00B6DCD2 /* TetrisTest.swift in Sources */,
 				90B2232122C90A960023F38D /* BootromTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

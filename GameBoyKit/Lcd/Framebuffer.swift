@@ -12,7 +12,11 @@ public class Framebuffer {
   /// Flag to avoid repeated clear on every tick
   private var isClear: Bool = true
 
-  /// Data that should be put on screen
+  /// Data that should be put on screen:
+  /// - 0 - White
+  /// - 1 - Light gray
+  /// - 2 - Dark gray
+  /// - 3 - Black
   public private(set) lazy var data: UnsafeMutableBufferPointer<UInt8> = {
     UnsafeMutableBufferPointer<UInt8>.allocate(capacity: framebufferSize)
   }()

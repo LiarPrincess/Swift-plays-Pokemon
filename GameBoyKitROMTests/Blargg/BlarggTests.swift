@@ -81,11 +81,9 @@ private func debug(_ rom: URL, dump urls: [URL]) {
   print("---")
 }
 
-private var resultsDir: URL = {
-  return URL(fileURLWithPath: #file)
-    .deletingLastPathComponent()
-    .appendingPathComponent("Results")
-}()
+private var resultsDir = URL(fileURLWithPath: #file)
+                          .deletingLastPathComponent()
+                          .appendingPathComponent("Results")
 
 private func openRom(url: URL) -> Cartridge {
   do {

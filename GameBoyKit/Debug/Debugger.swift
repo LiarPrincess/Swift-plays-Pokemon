@@ -67,7 +67,7 @@ public class Debugger {
 
   // MARK: - Dump lcd
 
-  public func dumpBackgroundTileIndices(_ map: TileMap) {
+  public func dumpTileIndices(_ map: TileMap) {
     self.gameBoy.lcd.dumpTileIndices(map)
   }
 

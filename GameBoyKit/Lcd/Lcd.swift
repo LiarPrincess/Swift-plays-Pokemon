@@ -88,7 +88,7 @@ public class Lcd: LcdMemory {
 
   func writeVideoRam(_ address: UInt16, value: UInt8) {
     let index = Int(address - MemoryMap.videoRam.start)
-     self.videoRam[index] = value
+    self.videoRam[index] = value
   }
 
   func readOAM(_ address: UInt16) -> UInt8 {

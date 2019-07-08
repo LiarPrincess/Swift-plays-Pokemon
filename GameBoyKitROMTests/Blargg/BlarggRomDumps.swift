@@ -6,11 +6,9 @@ import Foundation
 
 enum BlarggRomDumps {
 
-  private static var dumpsDir: URL = {
-    let currentFile = URL(fileURLWithPath: #file)
-    let mainDir = currentFile.deletingLastPathComponent()
-    return mainDir.appendingPathComponent("Dumps")
-  }()
+  private static var dumpsDir = URL(fileURLWithPath: #file)
+                                  .deletingLastPathComponent()
+                                  .appendingPathComponent("Dumps")
 
   private static func list(_ dir: String) -> [URL] {
     return listStates(dir: dumpsDir.appendingPathComponent(dir))
