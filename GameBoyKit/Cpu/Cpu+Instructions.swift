@@ -1452,7 +1452,7 @@ extension Cpu {
   /// Sets the interrupt master enable flag and enables maskable interrupts.
   /// This instruction can be used in an interrupt routine to enable higher-order interrupts.
   internal func ei() -> Int {
-    self.enableInterrupts()
+    self.enableInterruptsNext()
     self.pc += 1
     return 4
   }

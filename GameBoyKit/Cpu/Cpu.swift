@@ -25,6 +25,10 @@ public class Cpu {
   /// Interrupt Master Enable Flag.
   public internal(set) var ime: Bool = false
 
+  /// True if interrupts should be enabled after next instruction.
+  /// https://www.reddit.com/r/EmuDev/comments/7rm8l2/game_boy_vblank_interrupt_confusion/
+  public internal(set) var imeNext: Bool = false
+
   /// Is halted flag.
   public internal(set) var isHalted: Bool = false
 
@@ -44,17 +48,26 @@ public class Cpu {
 
   /// Run 1 instruction. Returns the number of cycles it took.
   internal func tick() -> Int {
-    if let interrupt = self.getAwaitingInterrupt() {
-      if self.isHalted {
+    let interrupt = self.getAwaitingInterrupt()
+
+    if self.isHalted {
+      if interrupt != nil {
         self.isHalted = false
         self.pc += 1 // move past halt
-        return 4
+      } else {
+        return 4 // just so we 'tick' other components
       }
-
-      self.interrupts.clear(interrupt)
-      self.startInterruptHandlingRoutine(interrupt)
-      return 4
     }
+
+    if let i = interrupt, self.ime {
+      self.disableInterrupts()
+      self.interrupts.clear(i)
+      self.push16(self.pc)
+      self.pc = self.getInterruptHandlingRoutine(i)
+      return 8 // because of push
+    }
+
+    self.ime = self.imeNext
 
     let opcode = self.read(self.pc)
     let cycles = self.executeUnprefixed(opcode)
@@ -67,10 +80,16 @@ public class Cpu {
 
   internal func enableInterrupts() {
     self.ime = true
+    self.imeNext = true
+  }
+
+  internal func enableInterruptsNext() {
+    self.imeNext = true
   }
 
   internal func disableInterrupts() {
     self.ime = false
+    self.imeNext = false
   }
 
   private func getAwaitingInterrupt() -> InterruptType? {
@@ -101,20 +120,14 @@ public class Cpu {
     return nil
   }
 
-  private func startInterruptHandlingRoutine(_ type: InterruptType) {
-    let address: UInt16 = {
-      switch type {
-      case .vBlank:  return 0x40
-      case .lcdStat: return 0x48
-      case .timer:   return 0x50
-      case .serial:  return 0x58
-      case .joypad:  return 0x60
-      }
-    }()
-
-    self.ime = false
-    self.push16(self.pc)
-    self.pc = address
+  private func getInterruptHandlingRoutine(_ type: InterruptType) -> UInt16 {
+    switch type {
+    case .vBlank:  return 0x40
+    case .lcdStat: return 0x48
+    case .timer:   return 0x50
+    case .serial:  return 0x58
+    case .joypad:  return 0x60
+    }
   }
 
   // MARK: - Operands

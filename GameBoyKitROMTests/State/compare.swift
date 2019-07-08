@@ -79,7 +79,7 @@ func compare(saved p: SavedState, gameboy g: GameBoy) -> Bool {
 
   if g.cpu.pc  != p.cpu.pc  { print("Invalid pc: \(g.cpu.pc.hex) vs \(p.cpu.pc.hex)"); e = true }
   if g.cpu.sp  != p.cpu.sp  { print("Invalid sp: \(g.cpu.sp.hex) vs \(p.cpu.sp.hex)"); e = true }
-  if g.cpu.ime != p.cpu.ime { print("Invalid ime: \(g.cpu.ime) vs \(p.cpu.ime)"); e = true }
+  if g.cpu.imeNext != p.cpu.ime { print("Invalid ime: \(g.cpu.ime) vs \(p.cpu.ime)"); e = true }
 
   let pReg = p.cpu.registers
   let gReg = g.cpu.registers
