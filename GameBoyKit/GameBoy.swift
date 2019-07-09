@@ -12,7 +12,7 @@ public class GameBoy {
   public let cpu: Cpu
   public let lcd: Lcd
   public let memory: Memory
-  public let timer: Timer
+  public let timer:  Timer
   public let joypad: Joypad
 
   /// Number of cycles that elapsed since we started current frame.
@@ -22,15 +22,14 @@ public class GameBoy {
     return self.memory.linkCable
   }
 
-  // swiftlint:disable:next function_default_parameter_at_end
   public init(input:     GameboyInput,
               bootrom:   Bootrom,
               cartridge: Cartridge) {
 
     let interrupts = Interrupts()
     self.lcd = LcdImpl(interrupts: interrupts)
-    self.timer = Timer(interrupts: interrupts)
-    self.joypad = Joypad(input: input)
+    self.timer = TimerImpl(interrupts: interrupts)
+    self.joypad = JoypadImpl(input: input)
 
     let skipBootrom = bootrom.data.isEmpty
     self.memory = Memory(bootrom:   skipBootrom ? nil : bootrom,

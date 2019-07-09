@@ -2,9 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-/// FF04 - Divider register;
-/// FF05, FF06, FF07 - App defined timer
-public class Timer {
+internal class TimerImpl: Timer {
 
   private let interrupts: Interrupts
 
@@ -21,13 +19,7 @@ public class Timer {
 
   // MARK: - Div
 
-  /// Frequency at which div register should be incremented.
-  public static let divFrequency: Int = 16_384
-
-  /// FF04 - DIV - Divider Register.
-  /// This register is incremented at rate of 16384Hz.
-  /// Writing any value to this register resets it to 00h.
-  public internal(set) var div: UInt8 {
+  internal var div: UInt8 {
     get { return self.divValue }
     set {
       self.divValue = 0
@@ -39,7 +31,7 @@ public class Timer {
   private var divProgress: Int = 0
 
   private func tickDiv(cycles: Int) {
-    let max = Cpu.clockSpeed / Timer.divFrequency // 256
+    let max = Cpu.clockSpeed / IOConstants.divFrequency // 256
 
     self.divProgress += cycles
 
@@ -51,19 +43,10 @@ public class Timer {
 
   // MARK: - Tima timer
 
-  /// FF05 - TIMA - Timer counter.
-  /// This timer is incremented by a clock frequency specified by the TAC
-  /// register (FF07). When the value overflows then it will be reset to the
-  /// value specified in TMA (FF06), and an interrupt will be requested.
-  public internal(set) var tima: UInt8 = 0x00
+  internal var tima: UInt8 = 0x00
+  internal var tma:  UInt8 = 0x00
 
-  /// FF06 - TMA - Timer Modulo.
-  /// When the TIMA overflows, this data will be loaded.
-  public internal(set) var tma: UInt8 = 0x00
-
-  /// FF07 - TAC - Timer Control.
-  /// Bit 2 - stop timer, bits 1 and 0 - select clock
-  public internal(set) var tac: UInt8 = 0x00 {
+  internal var tac: UInt8 = 0x00 {
     didSet {
       let oldPeriod = self.getPeriod(tac: oldValue)
       let newPeriod = self.getPeriod(tac: self.tac)

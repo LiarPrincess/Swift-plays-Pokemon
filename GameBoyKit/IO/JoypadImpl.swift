@@ -16,11 +16,11 @@ private let leftMask:  UInt8 = 1 << 1
 private let rightMask: UInt8 = 1 << 0
 
 /// FF00 - P1/JOYP
-public class Joypad {
+internal class JoypadImpl: Joypad {
 
   private var _value: UInt8 = 0
 
-  public internal(set) var value: UInt8 {
+  internal var value: UInt8 {
     get { return self._value }
     set {
       let isButtons = isSet(newValue, mask: buttonsMask)

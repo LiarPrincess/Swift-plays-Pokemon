@@ -79,14 +79,14 @@ extension Debugger {
     if b.lineCompare != a.lineCompare { print("  > lcd.lineCompare <- \(a.lineCompare)") }
     if b.dma         != a.dma         { print("  > lcd.dma <- \(a.dma)") }
 
-    if b.backgroundColors != a.backgroundColors {
-      print("  > lcd.backgroundColors <- \(a.backgroundColors)")
+    if b.backgroundPalette != a.backgroundPalette {
+      print("  > lcd.backgroundPalette <- \(a.backgroundPalette)")
     }
-    if b.objectColors0 != a.objectColors0 {
-      print("  > lcd.objectColors0 <- \(a.objectColors0)")
+    if b.spritePalette0 != a.spritePalette0 {
+      print("  > lcd.spritePalette0 <- \(a.spritePalette0)")
     }
-    if b.objectColors1 != a.objectColors1 {
-      print("  > lcd.objectColors1 <- \(a.objectColors1)")
+    if b.spritePalette1 != a.spritePalette1 {
+      print("  > lcd.spritePalette1 <- \(a.spritePalette1)")
     }
 
     if b.windowY != a.windowY { print("  > lcd.windowY <- \(a.windowY)") }
