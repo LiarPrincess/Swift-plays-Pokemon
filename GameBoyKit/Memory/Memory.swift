@@ -11,9 +11,9 @@ internal enum BootromState {
 
 public class Memory: CpuAddressableMemory {
 
-  internal let lcd: LcdMemory
-  internal let timer: Timer
-  internal let joypad: Joypad
+  internal let lcd: Lcd
+  internal let timer: TimerMemory
+  internal let joypad: JoypadMemory
   internal let serialPort: SerialPort
   internal let interrupts: Interrupts
 
@@ -37,9 +37,9 @@ public class Memory: CpuAddressableMemory {
 
   internal init(bootrom:    BootromMemory?,
                 cartridge:  CartridgeMemory,
-                joypad:     Joypad,
-                lcd:        LcdMemory,
-                timer:      Timer,
+                joypad:     JoypadMemory,
+                lcd:        Lcd,
+                timer:      TimerMemory,
                 interrupts: Interrupts) {
 
     self.lcd = lcd

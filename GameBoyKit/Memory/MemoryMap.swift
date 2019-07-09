@@ -78,18 +78,18 @@ public enum MemoryMap {
   }
 
   public enum Lcd {
-    public static let control:          UInt16 = 0xff40
-    public static let status:           UInt16 = 0xff41
-    public static let scrollY:          UInt16 = 0xff42
-    public static let scrollX:          UInt16 = 0xff43
-    public static let line:             UInt16 = 0xff44
-    public static let lineCompare:      UInt16 = 0xff45
-    public static let dma:              UInt16 = 0xff46
-    public static let backgroundColors: UInt16 = 0xff47
-    public static let objectColors0:    UInt16 = 0xff48
-    public static let objectColors1:    UInt16 = 0xff49
-    public static let windowY:          UInt16 = 0xff4a
-    public static let windowX:          UInt16 = 0xff4b
+    public static let control:     UInt16 = 0xff40
+    public static let status:      UInt16 = 0xff41
+    public static let scrollY:     UInt16 = 0xff42
+    public static let scrollX:     UInt16 = 0xff43
+    public static let line:        UInt16 = 0xff44
+    public static let lineCompare: UInt16 = 0xff45
+    public static let dma:         UInt16 = 0xff46
+    public static let backgroundPalette: UInt16 = 0xff47
+    public static let spritePalette0:    UInt16 = 0xff48
+    public static let spritePalette1:    UInt16 = 0xff49
+    public static let windowY: UInt16 = 0xff4a
+    public static let windowX: UInt16 = 0xff4b
   }
 }
 
@@ -159,9 +159,9 @@ extension MemoryMap {
     case Lcd.line:        return "Lcd.line"
     case Lcd.lineCompare: return "Lcd.lineCompare"
     case Lcd.dma:         return "Lcd.dma"
-    case Lcd.backgroundColors: return "Lcd.backgroundColors"
-    case Lcd.objectColors0:    return "Lcd.objectColors0"
-    case Lcd.objectColors1:    return "Lcd.objectColors1"
+    case Lcd.backgroundPalette: return "Lcd.backgroundColors"
+    case Lcd.spritePalette0:    return "Lcd.objectColors0"
+    case Lcd.spritePalette1:    return "Lcd.objectColors1"
     case Lcd.windowY: return "Lcd.windowY"
     case Lcd.windowX: return "Lcd.windowX"
     default: return "unknown IO"

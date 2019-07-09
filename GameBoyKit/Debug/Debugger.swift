@@ -152,18 +152,18 @@ extension Debugger {
   }
 
   private func fillLcd(lcd: inout DebugLcdState) {
-    lcd.control          = self.memory.read(MemoryMap.Lcd.control)
-    lcd.status           = self.memory.read(MemoryMap.Lcd.status)
-    lcd.scrollY          = self.memory.read(MemoryMap.Lcd.scrollY)
-    lcd.scrollX          = self.memory.read(MemoryMap.Lcd.scrollX)
-    lcd.line             = self.memory.read(MemoryMap.Lcd.line)
-    lcd.lineCompare      = self.memory.read(MemoryMap.Lcd.lineCompare)
-    lcd.dma              = self.memory.read(MemoryMap.Lcd.dma)
-    lcd.backgroundColors = self.memory.read(MemoryMap.Lcd.backgroundColors)
-    lcd.objectColors0    = self.memory.read(MemoryMap.Lcd.objectColors0)
-    lcd.objectColors1    = self.memory.read(MemoryMap.Lcd.objectColors1)
-    lcd.windowY          = self.memory.read(MemoryMap.Lcd.windowY)
-    lcd.windowX          = self.memory.read(MemoryMap.Lcd.windowX)
+    lcd.control     = self.memory.read(MemoryMap.Lcd.control)
+    lcd.status      = self.memory.read(MemoryMap.Lcd.status)
+    lcd.scrollY     = self.memory.read(MemoryMap.Lcd.scrollY)
+    lcd.scrollX     = self.memory.read(MemoryMap.Lcd.scrollX)
+    lcd.line        = self.memory.read(MemoryMap.Lcd.line)
+    lcd.lineCompare = self.memory.read(MemoryMap.Lcd.lineCompare)
+    lcd.dma         = self.memory.read(MemoryMap.Lcd.dma)
+    lcd.backgroundPalette = self.memory.read(MemoryMap.Lcd.backgroundPalette)
+    lcd.spritePalette0    = self.memory.read(MemoryMap.Lcd.spritePalette0)
+    lcd.spritePalette1    = self.memory.read(MemoryMap.Lcd.spritePalette1)
+    lcd.windowY = self.memory.read(MemoryMap.Lcd.windowY)
+    lcd.windowX = self.memory.read(MemoryMap.Lcd.windowX)
   }
 
   private func fillInterrupts(interrupts: inout DebugInterruptState) {

@@ -14,23 +14,20 @@ private let bytesPerTileLine = 2
 /// Number of tiles in a single row (32).
 private let tilesPerRow = 32
 
-/// Address of the 1st byte of video ram in memory.
-private let videoRamStart = Int(MemoryMap.videoRam.start)
-
-extension Lcd {
+extension LcdImpl {
 
   internal func drawLine() {
-    if self.control.isBackgroundVisible {
+    if self.isBackgroundVisible {
       self.drawBackgroundLine()
     }
 
-    if self.control.isWindowEnabled {
+    if self.isWindowEnabled {
       self.drawWindow()
     }
 
-//    if self.control.isSpriteEnabled {
-//      self.drawSprites()
-//    }
+    if self.isSpriteEnabled {
+      self.drawSprites()
+    }
   }
 
   private func drawBackgroundLine() {
@@ -39,7 +36,7 @@ extension Lcd {
     let tileRow  = globalY / tileHeightInPixels
     let tileLine = globalY % tileHeightInPixels
 
-    let tileMap = self.getTileMap(for: self.control.backgroundTileMap)
+    let tileMap = self.getTileMap(for: self.backgroundTileMap)
     let framebufferSlice = self.getBackgroundFramebuffer(line: line)
 
     var x = 0
@@ -49,7 +46,7 @@ extension Lcd {
       let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
-      if self.control.tileData == .from8800to97ff {
+      if self.tileData == .from8800to97ff {
         tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
       }
 
@@ -63,7 +60,7 @@ extension Lcd {
         guard pixelX < framebufferSlice.count else { break }
 
         let tileColor = self.getColorValue(data1, data2, bit: pixel)
-        let color     = self.backgroundPalette[tileColor]
+        let color     = self._backgroundPalette[tileColor]
         framebufferSlice[pixelX] = color
       }
 
@@ -79,8 +76,8 @@ extension Lcd {
 
     let start = basePtr.advanced(by: line * LcdConstants.width)
 
-    let usingWindow = self.control.isWindowEnabled && self.line >= self.windowY
-    let count = min(Lcd.width, usingWindow ? Int(self.windowX) - 7 : .max)
+    let usingWindow = self.isWindowEnabled && self.line >= self.windowY
+    let count = min(LcdConstants.width, usingWindow ? Int(self.windowX) - 7 : .max)
 
     return UnsafeMutableBufferPointer(start: start, count: count)
   }
@@ -98,7 +95,7 @@ extension Lcd {
     let tileRow = windowY / tileHeightInPixels
     let tileLine = windowY % tileHeightInPixels
 
-    let tileMap = self.getTileMap(for: self.control.windowTileMap)
+    let tileMap = self.getTileMap(for: self.windowTileMap)
     let framebufferSlice = self.getWindowFramebuffer(line: line)
 
     var windowX = 0
@@ -107,7 +104,7 @@ extension Lcd {
       let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
-      if self.control.tileData == .from8800to97ff {
+      if self.tileData == .from8800to97ff {
         tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
       }
 
@@ -121,7 +118,7 @@ extension Lcd {
         guard pixelX < framebufferSlice.count else { break }
 
         let tileColor = self.getColorValue(data1, data2, bit: pixel)
-        let color     = self.backgroundPalette[tileColor]
+        let color     = self._backgroundPalette[tileColor]
         framebufferSlice[pixelX] = color
       }
 
@@ -138,73 +135,81 @@ extension Lcd {
     let windowX = Int(self.windowX) - 7
     let start = basePtr.advanced(by: line * LcdConstants.width + windowX)
 
-    let count = max(Lcd.width - windowX, 0) // we may set window to 250 etc.
+    let count = max(LcdConstants.width - windowX, 0) // we may set window to 250 etc.
     return UnsafeMutableBufferPointer(start: start, count: count)
   }
 
-  /*
   private func drawSprites() {
-    let sprites = self.getSprites()
-    let sortedSprites = self.sortFromRightToLeft(sprites)
-
     let line = Int(self.line)
     let spriteHeigth = Int(self.spriteHeigth)
 
-    // code taken from 'binjgb'
-    for sprite in sortedSprites {
-      // skip if out of screen x
-      // if (x >= SCREEN_WIDTH + OBJ_X_OFFSET) {continue;}
+    let sprites = self.getSprites(line: line)
+    let sortedSprites = self.sortFromRightToLeft(sprites)
 
-      let palette = sprite.palette == 0 ?
-        self.spritePalette0 :
-        self.spritePalette1
+    let framebufferSlice = self.getSpriteFramebuffer(line: line)
 
-      var tileIndex = Int(sprite.tile)
-
-      var tileLine = line - Int(sprite.positionY)
-      if sprite.flipY {
-        tileLine = spriteHeigth - tileLine - 1
-      }
-
-      if spriteHeigth == 16 {
-        if tileLine < 8 { // Top tile of 8x16 sprite
-          tileIndex &= 0xfe
-        } else { // Bottom tile of 8x16 sprite
-          tileIndex |= 0x01
-          tileLine -= tileSizeInPixels
-        }
-      }
-
-      let tileDataAddress = (tileIndex * tileSizeInPixels + tileLine) * bytesPerTileLine
-      let data1 = self.videoRam[tileDataAddress]
-      let data2 = self.videoRam[tileDataAddress + 1]
-
-      for x in 0..<tileSizeInPixels {
-        let bit = sprite.flipX ? 7 - x : x
-
-        let rawColor = self.getColorValue(data1, data2, bit: bit)
-        if rawColor == 0 { continue }
-
-        let color = palette[rawColor]
-
-        let pixelX = Int(sprite.positionX) + x
-        if pixelX < Lcd.width {
-          // TODO: Priority
-          self.framebuffer[pixelX, line] = color
-        }
-      }
+    for x in 0..<sprites.count {
+      framebufferSlice[x] = 3
     }
+
+    // code taken from 'binjgb'
+//    for sprite in sortedSprites {
+//      var tileIndex = Int(sprite.tile)
+//
+//      var tileLine = line - Int(sprite.positionY)
+//      if sprite.flipY {
+//        tileLine = spriteHeigth - tileLine - 1
+//      }
+//
+//      if spriteHeigth == 16 {
+//        if tileLine < 8 { // Top tile of 8x16 sprite
+//          tileIndex &= 0xfe
+//        } else { // Bottom tile of 8x16 sprite
+//          tileIndex |= 0x01
+//          tileLine -= tileHeightInPixels
+//        }
+//      }
+//
+//      let tileDataAddress = (tileIndex * tileHeightInPixels + tileLine) * bytesPerTileLine
+//      let data1 = self.videoRam[tileDataAddress]
+//      let data2 = self.videoRam[tileDataAddress + 1]
+//
+//      let palette = sprite.palette == 0 ? self.spritePalette0 : self.spritePalette1
+//      for x in 0..<tileWidthInPixels {
+//        let bit = sprite.flipX ? 7 - x : x
+//
+//        let rawColor = self.getColorValue(data1, data2, bit: bit)
+//        if rawColor == 0 { continue }
+//
+//        let color = palette[rawColor]
+//
+//        let pixelX = Int(sprite.positionX) + x
+//        if pixelX < Lcd.width {
+//          // TODO: Priority
+//          self.framebuffer[pixelX, line] = color // performance trick
+//        }
+//      }
+//    }
+  }
+
+  /// Part of the framebuffer that should be filled in the current draw operation.
+  private func getSpriteFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
+    guard let basePtr = UnsafeMutablePointer(self.framebuffer.data.baseAddress) else {
+      fatalError("Unable to obtain framebuffer address.")
+    }
+
+    let start = basePtr.advanced(by: line * LcdConstants.width)
+    return UnsafeMutableBufferPointer(start: start, count: LcdConstants.width)
   }
 
   private var spriteHeigth: UInt8 {
-    switch self.control.spriteSize {
+    switch self.spriteSize {
     case .size8x8:  return 8
     case .size8x16: return 16
     }
   }
 
-  private func getSprites() -> [Sprite] {
-    let line = self.line
+  internal func getSprites(line: Int) -> [Sprite] {
     let spriteHeigth = self.spriteHeigth
 
     var result = [Sprite]()
@@ -241,7 +246,7 @@ extension Lcd {
       }
       .map { $0.element }
   }
-*/
+
   // MARK: - Helpers
 
   internal func getTileMap(for map: TileMap) -> UnsafeBufferPointer<UInt8> {
@@ -250,6 +255,7 @@ extension Lcd {
     }
 
     let mapStart: UnsafePointer<UInt8> = {
+      let videoRamStart = Int(MemoryMap.videoRam.start)
       switch map {
       case .from9800to9bff: return basePtr.advanced(by: 0x9800 - videoRamStart)
       case .from9c00to9fff: return basePtr.advanced(by: 0x9c00 - videoRamStart)

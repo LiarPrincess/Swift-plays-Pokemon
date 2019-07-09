@@ -80,8 +80,8 @@ internal func makeFullscreenVertexBuffer(device: MTLDevice) -> MTLBuffer {
 internal func makeFramebuffer(device: MTLDevice) -> MTLTexture {
   let textureDesc = MTLTextureDescriptor.texture2DDescriptor(
     pixelFormat: .r8Uint,
-    width:       framebufferWidth,
-    height:      framebufferHeight,
+    width:       GameBoy.lcdWidth,
+    height:      GameBoy.lcdHeight,
     mipmapped:   false
   )
 

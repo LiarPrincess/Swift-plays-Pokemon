@@ -6,6 +6,9 @@ import Foundation
 
 public class GameBoy {
 
+  public static var lcdWidth:  Int { return LcdConstants.width }
+  public static var lcdHeight: Int { return LcdConstants.height }
+
   public let cpu: Cpu
   public let lcd: Lcd
   public let memory: Memory
@@ -25,7 +28,7 @@ public class GameBoy {
               cartridge: Cartridge) {
 
     let interrupts = Interrupts()
-    self.lcd = Lcd(interrupts: interrupts)
+    self.lcd = LcdImpl(interrupts: interrupts)
     self.timer = Timer(interrupts: interrupts)
     self.joypad = Joypad(input: input)
 

@@ -2,202 +2,56 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import Foundation
-
-public class Lcd: LcdMemory {
-
-  /// 160 px = 20 tiles
-  public static let width = LcdConstants.width
-
-  /// 144 px = 18 tiles
-  public static let height = LcdConstants.height
+public protocol Lcd: AnyObject {
 
   /// FF40 - LCDC - LCD Control
-  public internal(set) var control = LcdControl()
+  var control: UInt8 { get set }
 
   /// FF41 - STAT - LCDC Status
-  public internal(set) var status = LcdStatus()
+  var status: UInt8 { get set }
 
   /// FF42 - SCY - Scroll Y
-  public internal(set) var scrollY: UInt8 = 0
+  var scrollY: UInt8 { get set }
 
   /// FF43 - SCX - Scroll X
-  public internal(set) var scrollX: UInt8 = 0
+  var scrollX: UInt8 { get set }
 
   /// FF44 - LY - LCDC Y-Coordinate
-  public internal(set) var line: UInt8 {
-    get { return self.isLcdEnabledInCurrentFrame ?
-      UInt8(self.frameProgress / LcdConstants.cyclesPerLine) :
-      0
-    }
-    set { self.frameProgress = 0 }
-  }
+  var line: UInt8 { get set }
 
   /// FF45 - LYC - LY Compare
-  public internal(set) var lineCompare: UInt8 = 0
+  var lineCompare: UInt8 { get set }
 
   /// FF4A - WY - Window Y Position
-  public internal(set) var windowY: UInt8 = 0
+  var windowY: UInt8 { get set }
 
-  /// FF4B - WX - Window X Position minus 7
-  public internal(set) var windowX: UInt8 = 0
+  /// FF4B - WX - Window X Position (minus 7)
+  var windowX: UInt8 { get set }
 
   /// FF47 - BGP - BG Palette Data
-  public internal(set) var backgroundPalette = BackgroundPalette()
+  var backgroundPalette: UInt8 { get set }
 
   /// FF48 - OBP0 - Object Palette 0 Data
-  public internal(set) var spritePalette0 = SpritePalette()
+  var spritePalette0: UInt8 { get set }
 
   /// FF49 - OBP1 - Object Palette 1 Data
-  public internal(set) var spritePalette1 = SpritePalette()
+  var spritePalette1: UInt8 { get set }
 
-  /// 8000-9FFF 8KB Video RAM (VRAM) (switchable bank 0-1 in CGB Mode)
-  public internal(set) lazy var videoRam =
-    MemoryRegion.allocate(MemoryMap.videoRam)
+  /// 8000-9FFF 8KB Video RAM (VRAM)
+  func readVideoRam(_ address: UInt16) -> UInt8
+
+  /// 8000-9FFF 8KB Video RAM (VRAM)
+  func writeVideoRam(_ address: UInt16, value: UInt8)
 
   /// FE00-FE9F Sprite Attribute Table (OAM)
-  public internal(set) lazy var sprites =
-    [Sprite](repeating: Sprite(), count: LcdConstants.spriteCount)
+  func readOAM(_ address: UInt16) -> UInt8
 
-  /// Data that should be put on screen
-  public internal(set) var framebuffer = Framebuffer()
+  /// FE00-FE9F Sprite Attribute Table (OAM)
+  func writeOAM(_ address: UInt16, value: UInt8)
 
-  /// Progress in the current frame (in cycles)
-  private var frameProgress: Int = 0
+  var framebuffer: Framebuffer { get }
 
-  /// We can enable/disable diplay only an the start of the frame.
-  /// See: http://bgb.bircd.org/pandocs.htm#lcdcontrolregister
-  private var isLcdEnabledInCurrentFrame: Bool = false
-
-  private let interrupts: Interrupts
-
-  internal init(interrupts: Interrupts) {
-    self.interrupts = interrupts
-  }
-
-  deinit {
-    self.videoRam.deallocate()
-  }
-
-  // MARK: - LcdMemory
-
-  func readVideoRam(_ address: UInt16) -> UInt8 {
-    let index = Int(address - MemoryMap.videoRam.start)
-    return self.videoRam[index]
-  }
-
-  func writeVideoRam(_ address: UInt16, value: UInt8) {
-    let index = Int(address - MemoryMap.videoRam.start)
-    self.videoRam[index] = value
-  }
-
-  func readOAM(_ address: UInt16) -> UInt8 {
-    let oamAddress = Int(address - MemoryMap.oam.start)
-
-    let index = oamAddress / LcdConstants.spriteCount
-    let byte  = oamAddress % LcdConstants.spriteByteCount
-
-    switch byte {
-    case 0: return self.sprites[index].positionY
-    case 1: return self.sprites[index].positionX
-    case 2: return self.sprites[index].tile
-    case 3: return self.sprites[index].flags
-    default: return 0
-    }
-  }
-
-  func writeOAM(_ address: UInt16, value: UInt8) {
-    let oamAddress = Int(address - MemoryMap.oam.start)
-
-    let index = oamAddress / LcdConstants.spriteCount
-    let byte  = oamAddress % LcdConstants.spriteByteCount
-
-    switch byte {
-    case 0: self.sprites[index].positionY = value
-    case 1: self.sprites[index].positionX = value
-    case 2: self.sprites[index].tile = value
-    case 3: self.sprites[index].flags = value
-    default: break
-    }
-  }
-
-  // MARK: - Tick
-
-  internal func startFrame() {
-    self.frameProgress = 0
-    self.isLcdEnabledInCurrentFrame = self.control.isLcdEnabled
-  }
-
-  internal func tick(cycles: Int) {
-    self.advanceFrameProgress(cycles: cycles)
-
-    guard self.isLcdEnabledInCurrentFrame else {
-      self.framebuffer.clear()
-      self.status.mode = .hBlank
-      return
-    }
-
-    let previousMode = self.status.mode
-    self.updateMode()
-
-    let currentMode = self.status.mode
-    let hasChangedMode = currentMode != previousMode
-
-    let hasFinishedTransfer = hasChangedMode && currentMode == .hBlank
-    if hasFinishedTransfer {
-      self.drawLine()
-    }
-  }
-
-  /// Advance progress (possibly moving to new line).
-  /// Will also request LYC interrupt if needed.
-  private func advanceFrameProgress(cycles: Int) {
-    let previousLine = self.line
-
-    self.frameProgress += cycles
-
-    let currentLine = self.line
-    if currentLine != previousLine {
-      let hasInterrupt = currentLine == self.lineCompare
-
-      self.status.isLineCompareInterrupt = hasInterrupt
-      if hasInterrupt && self.status.isLineCompareInterruptEnabled {
-        self.interrupts.lcdStat = true
-      }
-    }
-  }
-
-  /// Update STAT with new mode (after updating progress).
-  /// Will also request any needed interrupt.
-  private func updateMode() {
-    if self.line >= Lcd.height {
-      if self.status.mode != .vBlank {
-        self.status.mode = .vBlank
-        self.interrupts.vBlank = true
-        self.interrupts.lcdStat ||= self.status.isVBlankInterruptEnabled
-      }
-      return
-    }
-
-    let lineProgress = self.frameProgress % LcdConstants.cyclesPerLine
-
-    let previousMode = self.status.mode
-    var requestInterrupt = false
-
-    // This is not exactly correct, but for perfomance we will
-    // draw the whole line at once instead on every tick.
-    if lineProgress < LcdConstants.oamSearchEnd {
-      self.status.mode = .oamSearch
-      requestInterrupt = self.status.isOamInterruptEnabled
-    } else if lineProgress < LcdConstants.pixelTransferEnd {
-      self.status.mode = .pixelTransfer
-    } else {
-      self.status.mode = .hBlank
-      requestInterrupt = self.status.isHBlankInterruptEnabled
-    }
-
-    if requestInterrupt && self.status.mode != previousMode {
-      self.interrupts.lcdStat = true
-    }
-  }
+  // TODO: Remove this
+  func startFrame()
+  func tick(cycles: Int)
 }

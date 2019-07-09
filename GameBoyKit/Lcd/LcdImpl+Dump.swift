@@ -5,11 +5,11 @@
 // swiftlint:disable function_body_length
 
 private let tileSize        = 8 // pixels
-private let tileRowCount    = Int(Lcd.width)  / tileSize // 18
-private let tileColumnCount = Int(Lcd.height) / tileSize // 20
+private let tileRowCount    = Int(LcdConstants.width)  / tileSize // 18
+private let tileColumnCount = Int(LcdConstants.height) / tileSize // 20
 private let tilesPerRow = 32
 
-extension Lcd {
+extension LcdImpl {
 
   // MARK: - Tile indices
 

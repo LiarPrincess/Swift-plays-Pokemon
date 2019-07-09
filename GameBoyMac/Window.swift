@@ -6,9 +6,6 @@ import AppKit
 import MetalKit
 import GameBoyKit
 
-internal let framebufferWidth  = Int(Lcd.width)
-internal let framebufferHeight = Int(Lcd.height)
-
 public class Window: NSWindow, GameboyInput, MTKViewDelegate {
 
   private var gameBoy: GameBoy! // swiftlint:disable:this implicitly_unwrapped_optional
@@ -25,8 +22,8 @@ public class Window: NSWindow, GameboyInput, MTKViewDelegate {
 
   public init() {
     let scale = 3
-    let width  = Int(Lcd.width)  * scale
-    let height = Int(Lcd.height) * scale
+    let width  = GameBoy.lcdWidth  * scale
+    let height = GameBoy.lcdHeight * scale
 
     self.mtkView = MTKView()
 
@@ -153,7 +150,7 @@ public class Window: NSWindow, GameboyInput, MTKViewDelegate {
 
   private func updateFramebuffer(from framebuffer: Framebuffer) {
     let data   = framebuffer.data
-    let region = MTLRegionMake2D(0, 0, framebufferWidth, framebufferHeight)
+    let region = MTLRegionMake2D(0, 0, framebuffer.width, framebuffer.height)
 
     data.withUnsafeBytes { ptr in
       guard let baseAddress = ptr.baseAddress else { return }
@@ -161,7 +158,7 @@ public class Window: NSWindow, GameboyInput, MTKViewDelegate {
         region:      region,
         mipmapLevel: 0,
         withBytes:   baseAddress,
-        bytesPerRow: framebufferWidth * MemoryLayout<UInt8>.size
+        bytesPerRow: framebuffer.width * MemoryLayout<UInt8>.size
       )
     }
   }

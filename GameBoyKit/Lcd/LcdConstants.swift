@@ -57,3 +57,30 @@ internal enum LcdConstants {
   /// Size of a single tile map.
   internal static let tileMapCount = 0x0400
 }
+
+internal enum LcdControlMasks {
+  internal static let isLcdEnabled:        UInt8 = 1 << 7
+  internal static let isWindowEnabled:     UInt8 = 1 << 5
+  internal static let windowTileMap:       UInt8 = 1 << 6
+  internal static let backgroundTileMap:   UInt8 = 1 << 3
+  internal static let tileData:            UInt8 = 1 << 4
+  internal static let spriteSize:          UInt8 = 1 << 2
+  internal static let isSpriteEnabled:     UInt8 = 1 << 1
+  internal static let isBackgroundVisible: UInt8 = 1 << 0
+}
+
+internal enum LcdStatusMasks {
+  internal static let isLineCompareInterruptEnabled: UInt8 = 1 << 6
+  internal static let isOamInterruptEnabled:    UInt8 = 1 << 5
+  internal static let isVBlankInterruptEnabled: UInt8 = 1 << 4
+  internal static let isHBlankInterruptEnabled: UInt8 = 1 << 3
+  internal static let isLineCompareInterrupt:   UInt8 = 1 << 2
+  internal static let mode: UInt8 = 0b11
+}
+
+internal enum LcdModeValues {
+  internal static let hBlank:        UInt8 = 0b00
+  internal static let vBlank:        UInt8 = 0b01
+  internal static let oamSearch:     UInt8 = 0b10
+  internal static let pixelTransfer: UInt8 = 0b11
+}

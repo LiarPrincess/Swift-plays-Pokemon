@@ -99,16 +99,16 @@ extension Memory {
     case MemoryMap.Audio.nr3_ram_start: return self.audio[address] ?? 0
     case MemoryMap.Audio.nr3_ram_end:   return self.audio[address] ?? 0
 
-    case MemoryMap.Lcd.control: return self.lcd.control.value
-    case MemoryMap.Lcd.status:  return self.lcd.status.value
+    case MemoryMap.Lcd.control: return self.lcd.control
+    case MemoryMap.Lcd.status:  return self.lcd.status
     case MemoryMap.Lcd.scrollY: return self.lcd.scrollY
     case MemoryMap.Lcd.scrollX: return self.lcd.scrollX
     case MemoryMap.Lcd.line:        return self.lcd.line
     case MemoryMap.Lcd.lineCompare: return self.lcd.lineCompare
     case MemoryMap.Lcd.dma:         return defaultValue
-    case MemoryMap.Lcd.backgroundColors: return self.lcd.backgroundPalette.value
-    case MemoryMap.Lcd.objectColors0:    return self.lcd.spritePalette0.value
-    case MemoryMap.Lcd.objectColors1:    return self.lcd.spritePalette1.value
+    case MemoryMap.Lcd.backgroundPalette: return self.lcd.backgroundPalette
+    case MemoryMap.Lcd.spritePalette0:    return self.lcd.spritePalette0
+    case MemoryMap.Lcd.spritePalette1:    return self.lcd.spritePalette1
     case MemoryMap.Lcd.windowY: return self.lcd.windowY
     case MemoryMap.Lcd.windowX: return self.lcd.windowX
 

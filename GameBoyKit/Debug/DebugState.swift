@@ -61,18 +61,18 @@ internal struct DebugAudioState {
 }
 
 internal struct DebugLcdState {
-  internal var control:          UInt8 = 0
-  internal var status:           UInt8 = 0
-  internal var scrollY:          UInt8 = 0
-  internal var scrollX:          UInt8 = 0
-  internal var line:             UInt8 = 0
-  internal var lineCompare:      UInt8 = 0
-  internal var dma:              UInt8 = 0
-  internal var backgroundColors: UInt8 = 0
-  internal var objectColors0:    UInt8 = 0
-  internal var objectColors1:    UInt8 = 0
-  internal var windowY:          UInt8 = 0
-  internal var windowX:          UInt8 = 0
+  internal var control:     UInt8 = 0
+  internal var status:      UInt8 = 0
+  internal var scrollY:     UInt8 = 0
+  internal var scrollX:     UInt8 = 0
+  internal var line:        UInt8 = 0
+  internal var lineCompare: UInt8 = 0
+  internal var dma:         UInt8 = 0
+  internal var backgroundPalette: UInt8 = 0
+  internal var spritePalette0:    UInt8 = 0
+  internal var spritePalette1:    UInt8 = 0
+  internal var windowY: UInt8 = 0
+  internal var windowX: UInt8 = 0
 }
 
 internal struct DebugInterruptState {
