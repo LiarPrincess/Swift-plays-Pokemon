@@ -5,6 +5,5 @@
 internal enum IOConstants {
 
   /// Frequency at which div register should be incremented.
-  public static let divFrequency: Int = 16_384
-
+  internal static let divFrequency: Int = 16_384
 }

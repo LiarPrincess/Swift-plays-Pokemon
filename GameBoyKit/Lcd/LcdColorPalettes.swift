@@ -16,8 +16,7 @@ public struct BackgroundPalette {
 
   private var _value: UInt8 = 0
 
-  public internal(set) var value: UInt8
-  {
+  public internal(set) var value: UInt8 {
     get { return self._value }
     set {
       self._value = newValue

@@ -67,16 +67,19 @@ public class Debugger {
 
   // MARK: - Dump lcd
 
+  // swiftlint:disable:next force_cast
+  private var lcdImpl: LcdImpl { return self.gameBoy.lcd as! LcdImpl }
+
   public func dumpTileIndices(_ map: TileMap) {
-    self.gameBoy.lcd.dumpTileIndices(map)
+    self.lcdImpl.dumpTileIndices(map)
   }
 
   public func dumpTileData(_ data: TileData) {
-    self.gameBoy.lcd.dumpTileData(data)
+    self.lcdImpl.dumpTileData(data)
   }
 
   public func dumpBackground(_ map: TileMap, _ data: TileData) {
-    self.gameBoy.lcd.dumpBackground(map, data)
+    self.lcdImpl.dumpBackground(map, data)
   }
 }
 

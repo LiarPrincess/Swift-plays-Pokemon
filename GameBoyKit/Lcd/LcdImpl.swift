@@ -163,7 +163,7 @@ internal class LcdImpl: Lcd {
       }
       return
     }
-    
+
     let lineProgress = self.frameProgress % LcdConstants.cyclesPerLine
 
     let previousMode = self.mode

@@ -11,38 +11,38 @@ internal struct Sprite {
 
   /// Byte 0 - Y Position;
   /// Specifies the sprites vertical position on the screen (minus 16).
-  public internal(set) var positionY: UInt8 = 0
+  internal var positionY: UInt8 = 0
 
   /// Byte 1 - X Position;
   /// Specifies the sprites horizontal position on the screen (minus 8).
-  public internal(set) var positionX: UInt8 = 0
+  internal var positionX: UInt8 = 0
 
   /// Byte 2 - Tile/Pattern Number
   /// Specifies the sprites Tile Number (00-FF).
-  public internal(set) var tile: UInt8 = 0
+  internal var tile: UInt8 = 0
 
   /// Byte 3 - Attributes/Flags
-  public internal(set) var flags: UInt8 = 0
+  internal var flags: UInt8 = 0
 
   // MARK: - Flags
 
   /// Flags bit 7 - OBJ-to-BG Priority
-  public var isAboveBackground: Bool {
+  internal var isAboveBackground: Bool {
     return !isSet(self.flags, mask: isAboveBackgroundMask)
   }
 
   /// Flags bit 6 - Y flip
-  public var flipY: Bool {
+  internal var flipY: Bool {
     return isSet(self.flags, mask: flipYMask)
   }
 
   /// Flags bit 5 - X flip
-  public var flipX: Bool {
+  internal var flipX: Bool {
     return isSet(self.flags, mask: flipXMask)
   }
 
   /// Flags bit 4 - Palette number (Non CGB Mode Only)
-  public var palette: UInt8 {
+  internal var palette: UInt8 {
     return (self.flags >> paletteNumberShift) & 0b1
   }
 }
