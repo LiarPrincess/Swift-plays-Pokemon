@@ -57,31 +57,38 @@ class MemoryWriteTests: XCTestCase {
   }
 
   func test_videoRam() {
-    let memory = self.createMemory()
-    self.write(memory, MemoryMap.videoRam)
+    let lcd = FakeLcd()
+    let memory = self.createMemory(lcd: lcd)
 
-    let data = memory.lcd.videoRam
-    self.testStartValue(data)
-    self.testEndValue(data)
+    let range = MemoryMap.videoRam
+    memory.write(range.start, value: startValue)
+    memory.write(range.end, value: endValue)
+
+    XCTAssertEqual(lcd.videoRam[range.start], startValue)
+    XCTAssertEqual(lcd.videoRam[range.end], endValue)
   }
 
   func test_externalRam() {
     let cartridge = FakeCartridgeMemory()
     let memory = self.createMemory(cartridge: cartridge)
 
-    self.write(memory, MemoryMap.externalRam)
+    let range = MemoryMap.externalRam
+    memory.write(range.start, value: startValue)
+    memory.write(range.end, value: endValue)
 
-    self.testStartValue(cartridge.ram)
-    self.testEndValue(cartridge.ram)
+    XCTAssertEqual(cartridge.ram[0], startValue)
+    XCTAssertEqual(cartridge.ram[range.count - 1], endValue)
   }
 
   func test_internalRam() {
     let memory = self.createMemory()
-    self.write(memory, MemoryMap.internalRam)
 
-    let data = memory.ram
-    self.testStartValue(data)
-    self.testEndValue(data)
+    let range = MemoryMap.internalRam
+    memory.write(range.start, value: startValue)
+    memory.write(range.end, value: endValue)
+
+    XCTAssertEqual(memory.ram[0], startValue)
+    XCTAssertEqual(memory.ram[range.count - 1], endValue)
   }
 
   func test_echoMemory() {
@@ -96,12 +103,15 @@ class MemoryWriteTests: XCTestCase {
   }
 
   func test_oam() {
-    let memory = self.createMemory()
-    self.write(memory, MemoryMap.oam)
+    let lcd = FakeLcd()
+    let memory = self.createMemory(lcd: lcd)
 
-    let data = memory.lcd.oam
-    self.testStartValue(data)
-    self.testEndValue(data)
+    let range = MemoryMap.oam
+    memory.write(range.start, value: startValue)
+    memory.write(range.end, value: endValue)
+
+    XCTAssertEqual(lcd.oam[range.start], startValue)
+    XCTAssertEqual(lcd.oam[range.end], endValue)
   }
 
   func test_joypadMemory() {
@@ -121,80 +131,85 @@ class MemoryWriteTests: XCTestCase {
   }
 
   func test_timer() {
-    let memory = self.createMemory()
+    let timer  = FakeTimer()
+    let memory = self.createMemory(timer: timer)
 
     memory.write(MemoryMap.Timer.div, value: 4)
-    XCTAssertEqual(memory.timer.div, 0) // should reset on write
+    XCTAssertEqual(timer.div, 4)
 
     memory.write(MemoryMap.Timer.tima, value: 5)
-    XCTAssertEqual(memory.timer.tima, 5)
+    XCTAssertEqual(timer.tima, 5)
 
     memory.write(MemoryMap.Timer.tma, value: 6)
-    XCTAssertEqual(memory.timer.tma, 6)
+    XCTAssertEqual(timer.tma, 6)
 
     memory.write(MemoryMap.Timer.tac, value: 7)
-    XCTAssertEqual(memory.timer.tac, 7)
+    XCTAssertEqual(timer.tac, 7)
   }
 
   // swiftlint:disable:next function_body_length
   func test_lcdMemory() {
-    let memory = self.createMemory()
+    let lcd    = FakeLcd()
+    let memory = self.createMemory(lcd: lcd)
+
     var value: UInt8 = 5
 
     memory.write(MemoryMap.Lcd.control, value: value)
-    XCTAssertEqual(memory.lcd.control.value, value)
+    XCTAssertEqual(lcd.control, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.status, value: value)
-    XCTAssertEqual(memory.lcd.status.value, value)
+    XCTAssertEqual(lcd.status, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.scrollY, value: value)
-    XCTAssertEqual(memory.lcd.scrollY, value)
+    XCTAssertEqual(lcd.scrollY, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.scrollX, value: value)
-    XCTAssertEqual(memory.lcd.scrollX, value)
+    XCTAssertEqual(lcd.scrollX, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.line, value: value)
-    XCTAssertEqual(memory.lcd.line, value) // reset on write
+    XCTAssertEqual(lcd.line, value) // reset on write
     value += 1
 
     memory.write(MemoryMap.Lcd.lineCompare, value: value)
-    XCTAssertEqual(memory.lcd.lineCompare, value)
+    XCTAssertEqual(lcd.lineCompare, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.windowY, value: value)
-    XCTAssertEqual(memory.lcd.windowY, value)
+    XCTAssertEqual(lcd.windowY, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.windowX, value: value)
-    XCTAssertEqual(memory.lcd.windowX, value)
+    XCTAssertEqual(lcd.windowX, value)
     value += 1
 
-    memory.write(MemoryMap.Lcd.backgroundColors, value: value)
-    XCTAssertEqual(memory.lcd.backgroundColors.value, value)
-    value += 1
-
-    // 2 last bits are always 0
-    memory.write(MemoryMap.Lcd.objectColors0, value: value)
-    XCTAssertEqual(memory.lcd.objectColors0.value, value)
+    memory.write(MemoryMap.Lcd.backgroundPalette, value: value)
+    XCTAssertEqual(lcd.backgroundPalette, value)
     value += 1
 
     // 2 last bits are always 0
-    memory.write(MemoryMap.Lcd.objectColors1, value: value)
-    XCTAssertEqual(memory.lcd.objectColors1.value, value)
+    memory.write(MemoryMap.Lcd.spritePalette0, value: value)
+    XCTAssertEqual(lcd.spritePalette0, value)
+    value += 1
+
+    // 2 last bits are always 0
+    memory.write(MemoryMap.Lcd.spritePalette1, value: value)
+    XCTAssertEqual(lcd.spritePalette1, value)
     value += 1
   }
 
   func test_highRam() {
     let memory = self.createMemory()
-    self.write(memory, MemoryMap.highRam)
 
-    let data = memory.highRam
-    self.testStartValue(data)
-    self.testEndValue(data)
+    let range = MemoryMap.highRam
+    memory.write(range.start, value: startValue)
+    memory.write(range.end, value: endValue)
+
+    XCTAssertEqual(memory.highRam[0], startValue)
+    XCTAssertEqual(memory.highRam[range.count - 1], endValue)
   }
 
   func test_interrupts() {
@@ -206,28 +221,5 @@ class MemoryWriteTests: XCTestCase {
 
     XCTAssertEqual(interrupts.enable, 5)
     XCTAssertEqual(interrupts.flag, 6)
-  }
-
-  // MARK: - Helpers
-
-  private func write(_ memory: Memory, _ range: ClosedRange<UInt16>) {
-    memory.write(range.start, value:  startValue)
-    memory.write(range.end,   value:  endValue)
-  }
-
-  private func testStartValue(_ data: Data,
-                              file:   StaticString = #file,
-                              line:   UInt = #line) {
-
-    let value = data[data.startIndex]
-    XCTAssertEqual(value,  startValue, file: file, line: line)
-  }
-
-  private func testEndValue(_ data: Data,
-                            file:   StaticString = #file,
-                            line:   UInt = #line) {
-
-    let value = data[data.endIndex - 1]
-    XCTAssertEqual(value,  endValue, file: file, line: line)
   }
 }

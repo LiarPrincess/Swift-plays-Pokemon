@@ -51,7 +51,7 @@ public protocol Lcd: AnyObject {
 
   var framebuffer: Framebuffer { get }
 
-  // TODO: Remove this
+  // TODO: Remove this (+ in tests)
   func startFrame()
   func tick(cycles: Int)
 }

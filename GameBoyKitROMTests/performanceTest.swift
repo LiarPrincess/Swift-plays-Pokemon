@@ -8,7 +8,7 @@ import GameBoyKit
 private let frameCount: Int64 = 60
 
 internal func performanceTest() {
-  let gameBoy = GameBoy(bootrom: .dmg, cartridge: createCartridge())
+  let gameBoy = GameBoy(input: TestInput(), bootrom: .dmg, cartridge: createCartridge())
 
   let start = DispatchTime.now()
   for _ in 0..<frameCount {

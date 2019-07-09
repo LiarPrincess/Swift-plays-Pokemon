@@ -62,9 +62,9 @@ var checkedAddresses: [UInt16] = {
   result.insert(MemoryMap.Lcd.line)
   result.insert(MemoryMap.Lcd.lineCompare)
   result.insert(MemoryMap.Lcd.dma)
-  result.insert(MemoryMap.Lcd.backgroundColors)
-  result.insert(MemoryMap.Lcd.objectColors0)
-  result.insert(MemoryMap.Lcd.objectColors1)
+  result.insert(MemoryMap.Lcd.backgroundPalette)
+  result.insert(MemoryMap.Lcd.spritePalette0)
+  result.insert(MemoryMap.Lcd.spritePalette1)
   result.insert(MemoryMap.Lcd.windowY)
   result.insert(MemoryMap.Lcd.windowX)
 

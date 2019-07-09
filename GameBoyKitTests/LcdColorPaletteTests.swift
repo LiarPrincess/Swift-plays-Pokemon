@@ -13,7 +13,7 @@ class ColorPaletteTests: XCTestCase {
     for color in colors {
       let shift = color * 2
 
-      var palette = BackgroundColorPalette()
+      var palette = BackgroundPalette()
 
       var value: UInt8 = 0b00 << shift
       palette.value = value
@@ -41,7 +41,7 @@ class ColorPaletteTests: XCTestCase {
   func test_objectColorPalette_color0() {
     let color: UInt8 = 0
 
-    var palette = ObjectColorPalette()
+    var palette = SpritePalette()
 
     var value: UInt8 = 0b00
     palette.value = value
@@ -70,7 +70,7 @@ class ColorPaletteTests: XCTestCase {
     for color in colors {
       let shift = color * 2
 
-      var palette = ObjectColorPalette()
+      var palette = SpritePalette()
 
       var value: UInt8 = 0b00 << shift
       palette.value = value

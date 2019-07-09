@@ -5,19 +5,33 @@
 import XCTest
 @testable import GameBoyKit
 
+class DummyInput: GameboyInput {
+
+  func getButtonsState() -> ButtonsState {
+    return ButtonsState()
+  }
+
+  func getDirectionKeysState() -> DirectionKeysState {
+    return DirectionKeysState()
+  }
+}
+
 extension XCTestCase {
 
   internal func createMemory(bootrom:    BootromMemory?   = nil,
                              cartridge:  CartridgeMemory? = nil,
+                             joypad:     Joypad?          = nil,
+                             lcd:        Lcd?             = nil,
+                             timer:      GameBoyKit.Timer? = nil,
                              interrupts: Interrupts?      = nil) -> Memory {
 
     let ints = interrupts ?? Interrupts()
     return Memory(
-      bootrom:   bootrom   ?? FakeBootromMemory(),
-      cartridge: cartridge ?? FakeCartridgeMemory(),
-      joypad:    Joypad(),
-      lcd:       FakeLcdMemory(),
-      timer:     Timer(interrupts: ints),
+      bootrom:    bootrom   ?? FakeBootromMemory(),
+      cartridge:  cartridge ?? FakeCartridgeMemory(),
+      joypad:     joypad    ?? FakeJoypad(),
+      lcd:        lcd       ?? FakeLcd(),
+      timer:      timer     ?? FakeTimer(),
       interrupts: ints
     )
   }

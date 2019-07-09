@@ -12,7 +12,7 @@ internal func runBootromTests() {
   print("Bootrom test")
 
   let cartridge = createDummyCartridge()
-  let gameBoy   = GameBoy(bootrom: .dmg, cartridge: cartridge)
+  let gameBoy   = GameBoy(input: TestInput(), bootrom: .dmg, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
   let states = listStates(dir: dumpDir)

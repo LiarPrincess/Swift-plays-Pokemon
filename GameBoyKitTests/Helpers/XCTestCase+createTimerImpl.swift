@@ -7,11 +7,7 @@ import XCTest
 
 extension XCTestCase {
 
-  internal func createCpu(memory:     CpuAddressableMemory? = nil,
-                          interrupts: Interrupts? = nil) -> Cpu {
-    return Cpu(
-      memory:     memory ?? FakeCpuAddressableMemory(),
-      interrupts: interrupts ?? Interrupts()
-    )
+  internal func createTimer(interrupts: Interrupts? = nil) -> TimerImpl {
+    return TimerImpl(interrupts: interrupts ?? Interrupts())
   }
 }

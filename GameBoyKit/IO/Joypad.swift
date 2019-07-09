@@ -5,5 +5,5 @@
 public protocol Joypad: AnyObject {
 
   /// FF00 - P1/JOYP
-  var value:  UInt8 { get set }
+  var value: UInt8 { get set }
 }

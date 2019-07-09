@@ -18,7 +18,7 @@ private let urls: [URL] = {
 
 func testTetris() {
   let cartridge = openRom(url: rom)
-  let gameBoy   = GameBoy(bootrom: nil, cartridge: cartridge)
+  let gameBoy   = GameBoy(input: TestInput(), bootrom: .skip, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
   for (index, url) in urls.enumerated() {
@@ -36,15 +36,6 @@ func testTetris() {
 //      }
     }
   }
-
-  let map = gameBoy.lcd.control.backgroundTileMap
-  let data = gameBoy.lcd.control.tileData
-  print("------------------------------------------------")
-  print(map)
-  print(data)
-  debugger.dumpTileIndices(map)
-  debugger.dumpTileData(data)
-  debugger.dumpBackground(map, data)
 }
 
 private func openRom(url: URL) -> Cartridge {

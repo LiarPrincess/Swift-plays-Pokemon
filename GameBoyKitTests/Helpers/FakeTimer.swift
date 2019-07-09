@@ -2,12 +2,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import XCTest
 @testable import GameBoyKit
 
-extension XCTestCase {
+class FakeTimer: Timer {
+  var div:  UInt8 = 0
+  var tima: UInt8 = 0
+  var tma:  UInt8 = 0
+  var tac:  UInt8 = 0
 
-  internal func createTimer(interrupts: Interrupts? = nil) -> GameBoyKit.Timer {
-    return Timer(interrupts: interrupts ?? Interrupts())
-  }
+  func tick(cycles: Int) { }
 }
