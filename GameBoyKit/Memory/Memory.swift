@@ -22,10 +22,10 @@ public class Memory: CpuAddressableMemory {
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
-  internal lazy var ram = MemoryRegion.allocate(MemoryMap.internalRam)
+  internal lazy var ram = MemoryData.allocate(MemoryMap.internalRam)
 
   /// FF80-FFFE High RAM (HRAM)
-  internal lazy var highRam = MemoryRegion.allocate(MemoryMap.highRam)
+  internal lazy var highRam = MemoryData.allocate(MemoryMap.highRam)
 
   /// FF01 - SB - Data send using serial transfer
   internal var linkCable = Data()
