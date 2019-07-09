@@ -83,8 +83,8 @@ internal class LcdImpl: Lcd {
     let byte  = oamAddress % LcdConstants.spriteByteCount
 
     switch byte {
-    case 0: return self.sprites[index].positionY
-    case 1: return self.sprites[index].positionX
+    case 0: return self.sprites[index].y
+    case 1: return self.sprites[index].x
     case 2: return self.sprites[index].tile
     case 3: return self.sprites[index].flags
     default: return 0
@@ -98,8 +98,8 @@ internal class LcdImpl: Lcd {
     let byte  = oamAddress % LcdConstants.spriteByteCount
 
     switch byte {
-    case 0: self.sprites[index].positionY = value
-    case 1: self.sprites[index].positionX = value
+    case 0: self.sprites[index].y = value
+    case 1: self.sprites[index].x = value
     case 2: self.sprites[index].tile = value
     case 3: self.sprites[index].flags = value
     default: break

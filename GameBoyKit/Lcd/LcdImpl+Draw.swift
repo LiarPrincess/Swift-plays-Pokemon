@@ -139,6 +139,7 @@ extension LcdImpl {
     return UnsafeMutableBufferPointer(start: start, count: count)
   }
 
+  // swiftlint:disable:next function_body_length
   private func drawSprites() {
     let line = Int(self.line)
     let spriteHeigth = Int(self.spriteHeigth)
@@ -148,48 +149,44 @@ extension LcdImpl {
 
     let framebufferSlice = self.getSpriteFramebuffer(line: line)
 
-    for x in 0..<sprites.count {
-      framebufferSlice[x] = 3
-    }
-
     // code taken from 'binjgb'
-//    for sprite in sortedSprites {
-//      var tileIndex = Int(sprite.tile)
-//
-//      var tileLine = line - Int(sprite.positionY)
-//      if sprite.flipY {
-//        tileLine = spriteHeigth - tileLine - 1
-//      }
-//
-//      if spriteHeigth == 16 {
-//        if tileLine < 8 { // Top tile of 8x16 sprite
-//          tileIndex &= 0xfe
-//        } else { // Bottom tile of 8x16 sprite
-//          tileIndex |= 0x01
-//          tileLine -= tileHeightInPixels
-//        }
-//      }
-//
-//      let tileDataAddress = (tileIndex * tileHeightInPixels + tileLine) * bytesPerTileLine
-//      let data1 = self.videoRam[tileDataAddress]
-//      let data2 = self.videoRam[tileDataAddress + 1]
-//
-//      let palette = sprite.palette == 0 ? self.spritePalette0 : self.spritePalette1
-//      for x in 0..<tileWidthInPixels {
-//        let bit = sprite.flipX ? 7 - x : x
-//
-//        let rawColor = self.getColorValue(data1, data2, bit: bit)
-//        if rawColor == 0 { continue }
-//
-//        let color = palette[rawColor]
-//
-//        let pixelX = Int(sprite.positionX) + x
-//        if pixelX < Lcd.width {
-//          // TODO: Priority
-//          self.framebuffer[pixelX, line] = color // performance trick
-//        }
-//      }
-//    }
+    for sprite in sortedSprites {
+      var tileIndex = Int(sprite.tile)
+
+      var tileLine = line - sprite.realY
+      if sprite.flipY {
+        tileLine = spriteHeigth - tileLine - 1
+      }
+
+      if spriteHeigth == 16 {
+        if tileLine < 8 { // Top tile of 8x16 sprite
+          tileIndex &= 0xfe
+        } else { // Bottom tile of 8x16 sprite
+          tileIndex |= 0x01
+          tileLine -= tileHeightInPixels
+        }
+      }
+
+      let tileDataAddress = (tileIndex * tileHeightInPixels + tileLine) * bytesPerTileLine
+      let data1 = self.videoRam[tileDataAddress]
+      let data2 = self.videoRam[tileDataAddress + 1]
+
+      let palette = sprite.palette == 0 ? self._spritePalette0 : self._spritePalette1
+      for x in 0..<tileWidthInPixels {
+        let bit = sprite.flipX ? 7 - x : x
+
+        let rawColor = self.getColorValue(data1, data2, bit: bit)
+        if rawColor == 0 { continue }
+
+        let color = palette[rawColor]
+
+        let pixelX = sprite.realX + x
+        if 0 < pixelX && pixelX < framebufferSlice.count {
+          // TODO: Priority
+          framebufferSlice[pixelX] = color
+        }
+      }
+    }
   }
 
   /// Part of the framebuffer that should be filled in the current draw operation.
@@ -202,7 +199,7 @@ extension LcdImpl {
     return UnsafeMutableBufferPointer(start: start, count: LcdConstants.width)
   }
 
-  private var spriteHeigth: UInt8 {
+  private var spriteHeigth: Int {
     switch self.spriteSize {
     case .size8x8:  return 8
     case .size8x16: return 16
@@ -210,14 +207,14 @@ extension LcdImpl {
   }
 
   internal func getSprites(line: Int) -> [Sprite] {
-    let spriteHeigth = self.spriteHeigth
-
     var result = [Sprite]()
     result.reserveCapacity(10)
 
+    let spriteHeigth = self.spriteHeigth
+
     for sprite in self.sprites {
-      let isAfterStart = line >= sprite.positionY
-      let isBeforeEnd  = line < (sprite.positionY + spriteHeigth)
+      let isAfterStart = line >= sprite.realY
+      let isBeforeEnd  = line < (sprite.realY + spriteHeigth)
 
       guard isAfterStart && isBeforeEnd else {
         continue
@@ -238,11 +235,9 @@ extension LcdImpl {
     return sprites
       .enumerated()
       .sorted { lhs, rhs in
-        if lhs.element.positionX == rhs.element.positionX {
-          return lhs.offset > rhs.offset
-        }
-
-        return lhs.element.positionX > rhs.element.positionX
+        return lhs.element.x != rhs.element.x ?
+               lhs.element.x > rhs.element.x :
+               lhs.offset    > rhs.offset
       }
       .map { $0.element }
   }

@@ -33,34 +33,34 @@ internal class JoypadImpl: Joypad {
     }
   }
 
-  private weak var input: GameboyInput?
+  private weak var provider: GameboyInputProvider?
 
-  internal init (input: GameboyInput) {
-    self.input = input
+  internal init (provider: GameboyInputProvider) {
+    self.provider = provider
   }
 
   private func setButtons() {
-    guard let state = self.input?.getButtonsState() else {
+    guard let input = self.provider?.getGameboyInput() else {
       return
     }
 
     self._value = 0
-    if !state.a { self._value |= aMask }
-    if !state.b { self._value |= bMask }
-    if !state.start  { self._value |= startMask }
-    if !state.select { self._value |= selectMask }
+    if !input.a { self._value |= aMask }
+    if !input.b { self._value |= bMask }
+    if !input.start  { self._value |= startMask }
+    if !input.select { self._value |= selectMask }
   }
 
   private func setDirections() {
-    guard let state = self.input?.getDirectionKeysState() else {
+    guard let input = self.provider?.getGameboyInput() else {
       return
     }
 
     self._value = 0
-    if !state.up    { self._value |= upMask }
-    if !state.down  { self._value |= downMask }
-    if !state.left  { self._value |= leftMask }
-    if !state.right { self._value |= rightMask }
+    if !input.up    { self._value |= upMask }
+    if !input.down  { self._value |= downMask }
+    if !input.left  { self._value |= leftMask }
+    if !input.right { self._value |= rightMask }
   }
 }
 

@@ -11,11 +11,11 @@ internal struct Sprite {
 
   /// Byte 0 - Y Position;
   /// Specifies the sprites vertical position on the screen (minus 16).
-  internal var positionY: UInt8 = 0
+  internal var y: UInt8 = 0
 
   /// Byte 1 - X Position;
   /// Specifies the sprites horizontal position on the screen (minus 8).
-  internal var positionX: UInt8 = 0
+  internal var x: UInt8 = 0
 
   /// Byte 2 - Tile/Pattern Number
   /// Specifies the sprites Tile Number (00-FF).
@@ -23,6 +23,9 @@ internal struct Sprite {
 
   /// Byte 3 - Attributes/Flags
   internal var flags: UInt8 = 0
+
+  internal var realY: Int { return Int(self.y) - 16 }
+  internal var realX: Int { return Int(self.x) - 8 }
 
   // MARK: - Flags
 

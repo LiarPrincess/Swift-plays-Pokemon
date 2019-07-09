@@ -22,14 +22,14 @@ public class GameBoy {
     return self.memory.linkCable
   }
 
-  public init(input:     GameboyInput,
+  public init(input:     GameboyInputProvider,
               bootrom:   Bootrom,
               cartridge: Cartridge) {
 
     let interrupts = Interrupts()
     self.lcd = LcdImpl(interrupts: interrupts)
     self.timer = TimerImpl(interrupts: interrupts)
-    self.joypad = JoypadImpl(input: input)
+    self.joypad = JoypadImpl(provider: input)
 
     let skipBootrom = bootrom.data.isEmpty
     self.memory = Memory(bootrom:   skipBootrom ? nil : bootrom,
