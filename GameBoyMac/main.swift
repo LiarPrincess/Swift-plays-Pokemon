@@ -4,9 +4,6 @@
 
 import AppKit
 
-print("Press enter...")
-_ = readLine()
-
 let isRunningTest = NSClassFromString("XCTestCase") != nil
 
 let app = NSApplication.shared
