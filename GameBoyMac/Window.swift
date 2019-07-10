@@ -6,7 +6,7 @@ import AppKit
 import MetalKit
 import GameBoyKit
 
-public class Window: NSWindow, GameboyInput, MTKViewDelegate {
+public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
 
   private var gameBoy: GameBoy! // swiftlint:disable:this implicitly_unwrapped_optional
   private let mtkView: MTKView
@@ -42,12 +42,12 @@ public class Window: NSWindow, GameboyInput, MTKViewDelegate {
     let args = parseArguments()
     self.gameBoy = GameBoy(input: self, bootrom: args.bootrom, cartridge: args.cartridge)
 
-    self.customizeWindow()
+    self.customizeWindow(title: args.cartridge.title)
     self.embedView()
   }
 
-  private func customizeWindow() {
-    self.title = "Gameboy"
+  private func customizeWindow(title: String) {
+    self.title = title
     self.backgroundColor = .black
     self.isMovableByWindowBackground = true
 
@@ -80,15 +80,10 @@ public class Window: NSWindow, GameboyInput, MTKViewDelegate {
 
   // MARK: - Input
 
-  private var buttonsState = ButtonsState()
-  private var directionKeysState = DirectionKeysState()
+  private var input = GameboyInput()
 
-  public func getButtonsState() -> ButtonsState {
-    return self.buttonsState
-  }
-
-  public func getDirectionKeysState() -> DirectionKeysState {
-    return self.directionKeysState
+  public func getGameboyInput() -> GameboyInput {
+    return input
   }
 
   public override func keyDown(with event: NSEvent) {
@@ -103,15 +98,14 @@ public class Window: NSWindow, GameboyInput, MTKViewDelegate {
     if event.isARepeat { return }
 
     switch event.keyCode {
-    case KeyMap.a:      self.buttonsState.a = isDown
-    case KeyMap.b:      self.buttonsState.b = isDown
-    case KeyMap.start:  self.buttonsState.start = isDown
-    case KeyMap.select: self.buttonsState.select = isDown
-
-    case KeyMap.up:     self.directionKeysState.up = isDown
-    case KeyMap.down:   self.directionKeysState.down = isDown
-    case KeyMap.left:   self.directionKeysState.left = isDown
-    case KeyMap.right:  self.directionKeysState.right = isDown
+    case KeyMap.a:      self.input.a = isDown
+    case KeyMap.b:      self.input.b = isDown
+    case KeyMap.start:  self.input.start = isDown
+    case KeyMap.select: self.input.select = isDown
+    case KeyMap.up:     self.input.up = isDown
+    case KeyMap.down:   self.input.down = isDown
+    case KeyMap.left:   self.input.left = isDown
+    case KeyMap.right:  self.input.right = isDown
 
     default:
       // use this if you want to proagate event down the responder chain:

@@ -39,7 +39,12 @@ public class Cartridge: CartridgeMemory {
 
     let isNewCartridge = rom[CartridgeMap.oldLicenseeCode] == 0x33
     let titleRange = isNewCartridge ? CartridgeMap.newTitle : CartridgeMap.oldTitle
-    self.title = asci(from: rom[titleRange]) ?? ""
+
+    // For some reason if we don't cast to Int we get:
+    // 'Not enough bits to represent the passed value'
+    let start = Int(titleRange.start)
+    let end   = Int(titleRange.end)
+    self.title = asci(from: rom[start...end]) ?? ""
 
     let romSize = try getRomSize(rom[CartridgeMap.romSize])
     guard isTest || rom.count == romSize else {
