@@ -142,7 +142,7 @@ extension LcdImpl {
   // swiftlint:disable:next function_body_length
   private func drawSprites() {
     let line = Int(self.line)
-    let spriteHeigth = Int(self.spriteHeigth)
+    let spriteHeigth = self.spriteHeigth
 
     let sprites = self.getSprites(line: line)
     let sortedSprites = self.sortFromRightToLeft(sprites)
@@ -172,19 +172,20 @@ extension LcdImpl {
       let data2 = self.videoRam[tileDataAddress + 1]
 
       let palette = sprite.palette == 0 ? self._spritePalette0 : self._spritePalette1
-      for x in 0..<tileWidthInPixels {
-        let bit = sprite.flipX ? 7 - x : x
 
-        let rawColor = self.getColorValue(data1, data2, bit: bit)
-        if rawColor == 0 { continue }
+      // realX < 0 when sprite is partially visible on the left edge of the screen
+      let startBit = sprite.realX < 0 ? -sprite.realX : 0
 
-        let color = palette[rawColor]
-
-        let pixelX = sprite.realX + x
-        if 0 < pixelX && pixelX < framebufferSlice.count {
-          // TODO: Priority
-          framebufferSlice[pixelX] = color
+      // TODO: Priority
+      var bit = 0
+      while startBit + bit < tileWidthInPixels && sprite.realX + bit < framebufferSlice.count {
+        let colorBit = sprite.flipX ? 7 - bit : bit
+        let rawColor = self.getColorValue(data1, data2, bit: colorBit)
+        if rawColor != 0 {
+          let color = palette[rawColor]
+          framebufferSlice[sprite.realX + bit] = color
         }
+        bit += 1
       }
     }
   }
