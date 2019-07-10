@@ -85,7 +85,7 @@ internal class TimerImpl: Timer {
         // Maybe we should add: newTima - timaMax?
         // No documentation mentions it.
         self.tima = self.tma
-        self.interrupts.timer = true
+        self.interrupts.set(.timer)
       }
     }
   }

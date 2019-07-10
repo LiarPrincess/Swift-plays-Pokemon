@@ -97,25 +97,15 @@ public class Cpu {
       return nil
     }
 
-    if self.interrupts.isVBlankEnabled && self.interrupts.vBlank {
-      return .vBlank
+    guard self.interrupts.isAnySet else {
+      return nil
     }
 
-    if self.interrupts.isLcdStatEnabled && self.interrupts.lcdStat {
-      return .lcdStat
-    }
-
-    if self.interrupts.isTimerEnabled && self.interrupts.timer {
-      return .timer
-    }
-
-    if self.interrupts.isSerialEnabled && self.interrupts.serial {
-      return .serial
-    }
-
-    if self.interrupts.isJoypadEnabled && self.interrupts.joypad {
-      return .joypad
-    }
+    if self.interrupts.isSet(.vBlank)  { return .vBlank }
+    if self.interrupts.isSet(.lcdStat) { return .lcdStat }
+    if self.interrupts.isSet(.timer)   { return .timer }
+    if self.interrupts.isSet(.serial)  { return .serial }
+    if self.interrupts.isSet(.joypad)  { return .joypad }
 
     return nil
   }

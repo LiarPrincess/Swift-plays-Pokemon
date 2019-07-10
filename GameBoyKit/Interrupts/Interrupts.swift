@@ -20,56 +20,24 @@ internal enum InterruptType {
 /// FFFF Interrupt Enable
 public class Interrupts {
 
-  internal var vBlank  = false
-  internal var lcdStat = false
-  internal var timer   = false
-  internal var serial  = false
-  internal var joypad  = false
-
-  internal var isVBlankEnabled  = false
-  internal var isLcdStatEnabled = false
-  internal var isTimerEnabled   = false
-  internal var isSerialEnabled  = false
-  internal var isJoypadEnabled  = false
-
   /// FF0F - IF - Interrupt Flag
-  public internal(set) var flag: UInt8 {
-    get {
-      var result: UInt8 = 0
-      result |= self.vBlank  ? vBlankMask  : 0
-      result |= self.lcdStat ? lcdStatMask : 0
-      result |= self.timer   ? timerMask   : 0
-      result |= self.serial  ? serialMask  : 0
-      result |= self.joypad  ? joypadMask  : 0
-      return result
-    }
-    set {
-      self.vBlank  = (newValue & vBlankMask)  == vBlankMask
-      self.lcdStat = (newValue & lcdStatMask) == lcdStatMask
-      self.timer   = (newValue & timerMask)   == timerMask
-      self.serial  = (newValue & serialMask)  == serialMask
-      self.joypad  = (newValue & joypadMask)  == joypadMask
-    }
-  }
+  public internal(set) var flag: UInt8 = 0
 
   /// FFFF - IE - Interrupt Enable
-  public internal(set) var enable: UInt8 {
-    get {
-      var result: UInt8 = 0
-      result |= self.isVBlankEnabled  ? vBlankMask  : 0
-      result |= self.isLcdStatEnabled ? lcdStatMask : 0
-      result |= self.isTimerEnabled   ? timerMask   : 0
-      result |= self.isSerialEnabled  ? serialMask  : 0
-      result |= self.isJoypadEnabled  ? joypadMask  : 0
-      return result
-    }
-    set {
-      self.isVBlankEnabled  = (newValue & vBlankMask)  == vBlankMask
-      self.isLcdStatEnabled = (newValue & lcdStatMask) == lcdStatMask
-      self.isTimerEnabled   = (newValue & timerMask)   == timerMask
-      self.isSerialEnabled  = (newValue & serialMask)  == serialMask
-      self.isJoypadEnabled  = (newValue & joypadMask)  == joypadMask
-    }
+  public internal(set) var enable: UInt8 = 0
+
+  internal var isAnySet: Bool {
+    return self.enable & self.flag > 0
+  }
+
+  internal func set(_ type: InterruptType) {
+    let mask = getMask(type)
+    self.flag |= mask
+  }
+
+  internal func isSet(_ type: InterruptType) -> Bool {
+    let mask = getMask(type)
+    return self.enable & self.flag & mask > 0
   }
 
   internal func clear(_ type: InterruptType) {

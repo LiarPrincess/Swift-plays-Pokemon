@@ -4,7 +4,7 @@
 
 import Foundation
 
-internal class LcdImpl: Lcd {
+internal class LcdImpl: WritableLcd {
 
   internal var control: UInt8 = 0
   internal var status:  UInt8 = 0
@@ -147,7 +147,7 @@ internal class LcdImpl: Lcd {
 
       self.setIsLineCompareInterrupt(hasInterrupt)
       if hasInterrupt && self.isLineCompareInterruptEnabled {
-        self.interrupts.lcdStat = true
+        self.interrupts.set(.lcdStat)
       }
     }
   }
@@ -158,8 +158,10 @@ internal class LcdImpl: Lcd {
     if self.line >= LcdConstants.height {
       if self.mode != .vBlank {
         self.setMode(.vBlank)
-        self.interrupts.vBlank = true
-        self.interrupts.lcdStat ||= self.isVBlankInterruptEnabled
+        self.interrupts.set(.vBlank)
+        if self.isVBlankInterruptEnabled {
+          self.interrupts.set(.lcdStat)
+        }
       }
       return
     }
@@ -182,7 +184,7 @@ internal class LcdImpl: Lcd {
     }
 
     if requestInterrupt && self.mode != previousMode {
-      self.interrupts.lcdStat = true
+      self.interrupts.set(.lcdStat)
     }
   }
 

@@ -13,4 +13,6 @@ internal enum KeyMap {
   internal static let down:  UInt16 = 125 // arrow down
   internal static let left:  UInt16 = 123 // arrow left
   internal static let right: UInt16 = 124 // arrow right
+
+  internal static let debug: UInt16 = 2 // d
 }
