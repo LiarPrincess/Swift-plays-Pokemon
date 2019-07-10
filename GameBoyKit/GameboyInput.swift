@@ -14,6 +14,8 @@ public struct GameboyInput {
   public var start  = false
   public var select = false
 
+  public var debug = false
+
   public init() { }
 }
 

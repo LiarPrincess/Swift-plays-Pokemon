@@ -11,6 +11,36 @@ private let tilesPerRow = 32
 
 extension LcdImpl {
 
+  // MARK: - Properties
+
+  internal func dumpProperties() {
+    print("isLcdEnabled: \(self.isLcdEnabled)")
+    print("isBackgroundVisible: \(self.isBackgroundVisible)")
+    print("isWindowEnabled: \(self.isWindowEnabled)")
+    print("isSpriteEnabled: \(self.isSpriteEnabled)")
+    print("windowTileMap: \(self.windowTileMap)")
+    print("backgroundTileMap: \(self.backgroundTileMap)")
+    print("tileData: \(self.tileData)")
+    print("spriteSize: \(self.spriteSize)")
+
+    print("isLineCompareInterruptEnabled: \(self.isLineCompareInterruptEnabled)")
+    print("isOamInterruptEnabled: \(self.isOamInterruptEnabled)")
+    print("isVBlankInterruptEnabled: \(self.isVBlankInterruptEnabled)")
+    print("isHBlankInterruptEnabled: \(self.isHBlankInterruptEnabled)")
+    print("isLineCompareInterrupt: \(self.isLineCompareInterrupt)")
+    print("mode: \(self.mode)")
+
+    print("scrollY: \(self.scrollY.hex)")
+    print("scrollX: \(self.scrollX.hex)")
+    print("line: \(self.line.hex)")
+    print("lineCompare: \(self.lineCompare.hex)")
+    print("windowY: \(self.windowY.hex)")
+    print("windowX: \(self.windowX.hex)")
+    print("backgroundPalette: \(self.backgroundPalette.hex)")
+    print("spritePalette0: \(self.spritePalette0.hex)")
+    print("spritePalette1: \(self.spritePalette1.hex)")
+  }
+
   // MARK: - Tile indices
 
   internal func dumpTileIndices(_ map: TileMap) {

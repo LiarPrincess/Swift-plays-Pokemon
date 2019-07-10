@@ -39,9 +39,9 @@ extension LcdImpl {
     let tileMap = self.getTileMap(for: self.backgroundTileMap)
     let framebufferSlice = self.getBackgroundFramebuffer(line: line)
 
-    var x = 0
-    while x < framebufferSlice.count {
-      let globalX = Int(self.scrollX) + x
+    var progress = 0
+    while progress < framebufferSlice.count {
+      let globalX = (Int(self.scrollX) + progress) % LcdConstants.backgroundMapWidth
       let tileColumn = globalX / tileWidthInPixels
       let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
 
@@ -54,17 +54,17 @@ extension LcdImpl {
       let data1 = self.videoRam[tileAddress]
       let data2 = self.videoRam[tileAddress + 1]
 
-      let startPixel = globalX % tileWidthInPixels
-      for pixel in startPixel..<tileWidthInPixels {
-        let pixelX = x + pixel
-        guard pixelX < framebufferSlice.count else { break }
+      let startBit = globalX % tileWidthInPixels
 
-        let tileColor = self.getColorValue(data1, data2, bit: pixel)
+      var bit = startBit
+      while bit < tileWidthInPixels && progress + bit < framebufferSlice.count {
+        let tileColor = self.getColorValue(data1, data2, bit: bit)
         let color     = self._backgroundPalette[tileColor]
-        framebufferSlice[pixelX] = color
+        framebufferSlice[progress + bit] = color
+        bit += 1
       }
 
-      x += (tileWidthInPixels - startPixel)
+      progress += (tileWidthInPixels - startBit)
     }
   }
 
@@ -235,9 +235,9 @@ extension LcdImpl {
     return sprites
       .enumerated()
       .sorted { lhs, rhs in
-        return lhs.element.x != rhs.element.x ?
-               lhs.element.x > rhs.element.x :
-               lhs.offset    > rhs.offset
+        lhs.element.x != rhs.element.x ?
+        lhs.element.x > rhs.element.x :
+        lhs.offset    > rhs.offset
       }
       .map { $0.element }
   }

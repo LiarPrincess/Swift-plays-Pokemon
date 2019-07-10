@@ -30,7 +30,11 @@ internal class JoypadImpl: Joypad {
       // both true or both false? -> ignore
       if isButtons == isDirections { return }
 
-      isButtons ? self.setButtons() : self.setDirections()
+      guard let input = self.provider?.getGameboyInput() else {
+        return
+      }
+
+      isButtons ? self.setButtons(from: input) : self.setDirections(from: input)
     }
   }
 
@@ -40,11 +44,7 @@ internal class JoypadImpl: Joypad {
     self.provider = provider
   }
 
-  private func setButtons() {
-    guard let input = self.provider?.getGameboyInput() else {
-      return
-    }
-
+  private func setButtons(from input: GameboyInput) {
     self._value = 0
     if !input.a { self._value |= aMask }
     if !input.b { self._value |= bMask }
@@ -52,11 +52,7 @@ internal class JoypadImpl: Joypad {
     if !input.select { self._value |= selectMask }
   }
 
-  private func setDirections() {
-    guard let input = self.provider?.getGameboyInput() else {
-      return
-    }
-
+  private func setDirections(from input: GameboyInput) {
     self._value = 0
     if !input.up    { self._value |= upMask }
     if !input.down  { self._value |= downMask }

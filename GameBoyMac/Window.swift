@@ -106,6 +106,7 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
     case KeyMap.down:   self.input.down = isDown
     case KeyMap.left:   self.input.left = isDown
     case KeyMap.right:  self.input.right = isDown
+    case KeyMap.debug:  self.input.debug = isDown
 
     default:
       // use this if you want to proagate event down the responder chain:

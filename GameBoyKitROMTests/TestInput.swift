@@ -4,13 +4,9 @@
 
 import GameBoyKit
 
-internal class TestInput: GameboyInput {
+internal class TestInput: GameboyInputProvider {
 
-  func getButtonsState() -> ButtonsState {
-    return ButtonsState()
-  }
-
-  func getDirectionKeysState() -> DirectionKeysState {
-    return DirectionKeysState()
+  func getGameboyInput() -> GameboyInput {
+    return GameboyInput()
   }
 }
