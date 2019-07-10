@@ -7,7 +7,7 @@ private let flipXMask: UInt8 = 1 << 5
 private let paletteNumberShift: UInt8 = 4
 private let isAboveBackgroundMask: UInt8 = 1 << 7
 
-internal struct Sprite {
+internal class Sprite {
 
   /// Byte 0 - Y Position;
   /// Specifies the sprites vertical position on the screen (minus 16).

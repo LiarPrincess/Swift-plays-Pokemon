@@ -12,13 +12,7 @@ internal class LcdImpl: WritableLcd {
   internal var scrollY: UInt8 = 0
   internal var scrollX: UInt8 = 0
 
-  internal var line: UInt8 {
-    get { return self.isLcdEnabledInCurrentFrame ?
-      UInt8(self.frameProgress / LcdConstants.cyclesPerLine) : 0
-    }
-    set { self.frameProgress = 0 }
-  }
-
+  internal var line:        UInt8 = 0
   internal var lineCompare: UInt8 = 0
 
   internal var windowY: UInt8 = 0
@@ -42,12 +36,12 @@ internal class LcdImpl: WritableLcd {
   }
 
   internal lazy var videoRam = MemoryData.allocate(MemoryMap.videoRam)
-  internal lazy var sprites  = [Sprite](repeating: Sprite(), count: LcdConstants.spriteCount)
+  internal lazy var sprites  = (0..<LcdConstants.spriteCount).map { _ in Sprite() }
 
   /// Data that should be put on screen
   internal var framebuffer = Framebuffer()
 
-  /// Progress in the current frame (in cycles)
+  /// Number of cycles that elapsed since we started current frame.
   private var frameProgress: Int = 0
 
   /// We can enable/disable diplay only an the start of the frame.
@@ -108,42 +102,47 @@ internal class LcdImpl: WritableLcd {
 
   // MARK: - Tick
 
-  internal func startFrame() {
-    self.frameProgress = 0
-    self.isLcdEnabledInCurrentFrame = self.isLcdEnabled
-  }
-
   internal func tick(cycles: Int) {
     self.advanceFrameProgress(cycles: cycles)
 
     guard self.isLcdEnabledInCurrentFrame else {
-      self.framebuffer.clear()
-      self.setMode(.hBlank)
       return
     }
+
+    self.updateLine()
 
     let previousMode = self.mode
     self.updateMode()
 
-    let currentMode = self.mode
-    let hasChangedMode = currentMode != previousMode
-
-    let hasFinishedTransfer = hasChangedMode && currentMode == .hBlank
+    // This is not exactly correct, but for perfomance we will
+    // draw the whole line at once instead on every tick.
+    let hasFinishedTransfer = self.mode != previousMode && previousMode == .pixelTransfer
     if hasFinishedTransfer {
       self.drawLine()
     }
   }
 
-  /// Advance progress (possibly moving to new line).
-  /// Will also request LYC interrupt if needed.
   private func advanceFrameProgress(cycles: Int) {
-    let previousLine = self.line
-
     self.frameProgress += cycles
 
-    let currentLine = self.line
-    if currentLine != previousLine {
-      let hasInterrupt = currentLine == self.lineCompare
+    if self.frameProgress > LcdConstants.cyclesPerFrame {
+      self.frameProgress -= LcdConstants.cyclesPerFrame
+
+      self.isLcdEnabledInCurrentFrame = self.isLcdEnabled
+      if !self.isLcdEnabledInCurrentFrame {
+        self.line = 0
+        self.framebuffer.clear()
+        self.setMode(.hBlank) // 0
+      }
+    }
+  }
+
+  private func updateLine() {
+    let previousLine = self.line
+    self.line = UInt8(self.frameProgress / LcdConstants.cyclesPerLine)
+
+    if self.line != previousLine {
+      let hasInterrupt = self.line == self.lineCompare
 
       self.setIsLineCompareInterrupt(hasInterrupt)
       if hasInterrupt && self.isLineCompareInterruptEnabled {
@@ -171,8 +170,6 @@ internal class LcdImpl: WritableLcd {
     let previousMode = self.mode
     var requestInterrupt = false
 
-    // This is not exactly correct, but for perfomance we will
-    // draw the whole line at once instead on every tick.
     if lineProgress < LcdConstants.oamSearchEnd {
       self.setMode(.oamSearch)
       requestInterrupt = self.isOamInterruptEnabled

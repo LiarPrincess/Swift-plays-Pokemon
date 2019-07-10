@@ -48,9 +48,6 @@ public class GameBoy {
     if skipBootrom {
       self.skipBootrom()
     }
-
-    // prepare for 1st frame
-    self._lcd.startFrame()
   }
 
   @discardableResult
@@ -78,7 +75,6 @@ public class GameBoy {
       self.frameProgress += cycles
       if self.frameProgress > LcdConstants.cyclesPerFrame {
         self.frameProgress -= LcdConstants.cyclesPerFrame
-        self._lcd.startFrame()
       }
 
       self._timer.tick(cycles: cycles)

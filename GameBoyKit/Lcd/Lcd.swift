@@ -88,7 +88,5 @@ internal protocol WritableLcd: Lcd {
   /// FE00-FE9F Sprite Attribute Table (OAM)
   func writeOAM(_ address: UInt16, value: UInt8)
 
-  // TODO: Remove this (+ in tests)
-  func startFrame()
   func tick(cycles: Int)
 }
