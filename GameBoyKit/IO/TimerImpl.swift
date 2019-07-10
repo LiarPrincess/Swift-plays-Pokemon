@@ -31,13 +31,11 @@ internal class TimerImpl: Timer {
   private var divProgress: Int = 0
 
   private func tickDiv(cycles: Int) {
-    let max = Cpu.clockSpeed / IOConstants.divFrequency // 256
-
     self.divProgress += cycles
 
-    if self.divProgress >= max {
+    if self.divProgress >= IOConstants.divMax {
       self.divValue &+= 1
-      self.divProgress %= max
+      self.divProgress %= IOConstants.divMax
     }
   }
 

@@ -6,4 +6,7 @@ internal enum IOConstants {
 
   /// Frequency at which div register should be incremented.
   internal static let divFrequency: Int = 16_384
+
+  /// Number of div tick to increment
+  internal static let divMax = Cpu.clockSpeed / IOConstants.divFrequency // 256
 }
