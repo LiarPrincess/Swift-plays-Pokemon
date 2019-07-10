@@ -23,8 +23,9 @@ internal class JoypadImpl: Joypad {
   internal var value: UInt8 {
     get { return self._value }
     set {
-      let isButtons = isSet(newValue, mask: buttonsMask)
-      let isDirections = isSet(newValue, mask: directionKeysMask)
+      // 0 = Select
+      let isButtons    = !isSet(newValue, mask: buttonsMask)
+      let isDirections = !isSet(newValue, mask: directionKeysMask)
 
       // both true or both false? -> ignore
       if isButtons == isDirections { return }
