@@ -17,7 +17,7 @@ public enum SpriteSize {
   case size8x16
 }
 
-public enum LcdMode {
+internal enum LcdMode {
 
   /// Mode 0: The LCD controller is in the H-Blank period.
   /// CPU can access both the display RAM (8000h-9FFFh) and OAM (FE00h-FE9Fh)
@@ -36,7 +36,7 @@ public enum LcdMode {
   case pixelTransfer
 }
 
-extension Lcd {
+extension WritableLcd {
 
   // MARK: - Control properties
 

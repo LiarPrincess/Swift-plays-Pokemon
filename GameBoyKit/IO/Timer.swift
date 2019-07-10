@@ -9,6 +9,30 @@ public protocol Timer: AnyObject {
   /// FF04 - DIV - Divider Register.
   /// This register is incremented at rate of 16384Hz.
   /// Writing any value to this register resets it to 00h.
+  var div: UInt8 { get }
+
+  /// FF05 - TIMA - Timer counter.
+  /// This timer is incremented by a clock frequency specified by the TAC
+  /// register (FF07). When the value overflows then it will be reset to the
+  /// value specified in TMA (FF06), and an interrupt will be requested.
+  var tima: UInt8 { get }
+
+  /// FF06 - TMA - Timer Modulo.
+  /// When the TIMA overflows, this data will be loaded.
+  var tma: UInt8 { get }
+
+  /// FF07 - TAC - Timer Control.
+  /// Bit 2 - stop timer, bits 1 and 0 - select clock
+  var tac: UInt8 { get }
+}
+
+/// FF04 - Divider register;
+/// FF05, FF06, FF07 - App defined timer
+internal protocol WritableTimer: Timer {
+
+  /// FF04 - DIV - Divider Register.
+  /// This register is incremented at rate of 16384Hz.
+  /// Writing any value to this register resets it to 00h.
   var div: UInt8 { get set }
 
   /// FF05 - TIMA - Timer counter.

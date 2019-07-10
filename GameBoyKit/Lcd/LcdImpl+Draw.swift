@@ -209,7 +209,7 @@ extension LcdImpl {
 
   internal func getSprites(line: Int) -> [Sprite] {
     var result = [Sprite]()
-    result.reserveCapacity(10)
+    result.reserveCapacity(LcdConstants.spriteCountPerLine)
 
     let spriteHeigth = self.spriteHeigth
 
@@ -222,7 +222,7 @@ extension LcdImpl {
       }
 
       result.append(sprite)
-      if result.count == 10 {
+      if result.count == LcdConstants.spriteCountPerLine {
         break
       }
     }

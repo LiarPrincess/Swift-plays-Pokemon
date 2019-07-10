@@ -46,6 +46,9 @@ internal enum LcdConstants {
 
   // MARK: - Sprite
 
+  /// Max number of sprites in a single line.
+  internal static let spriteCountPerLine = 10
+
   /// Total number of sprites.
   internal static let spriteCount = 40
 

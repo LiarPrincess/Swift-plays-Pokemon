@@ -7,6 +7,7 @@ public class Debugger {
   internal var gameBoy:   GameBoy
   internal var cpu:       Cpu    { return gameBoy.cpu }
   internal var memory:    Memory { return gameBoy.memory }
+  internal var lcd:       LcdImpl { return gameBoy._lcd }
 
   private var stateBefore = DebugState()
   private var stateAfter  = DebugState()
@@ -67,19 +68,20 @@ public class Debugger {
 
   // MARK: - Dump lcd
 
-  // swiftlint:disable:next force_cast
-  private var lcdImpl: LcdImpl { return self.gameBoy.lcd as! LcdImpl }
+  public func dumpLcdProperties() {
+    self.lcd.dumpProperties()
+  }
 
   public func dumpTileIndices(_ map: TileMap) {
-    self.lcdImpl.dumpTileIndices(map)
+    self.lcd.dumpTileIndices(map)
   }
 
   public func dumpTileData(_ data: TileData) {
-    self.lcdImpl.dumpTileData(data)
+    self.lcd.dumpTileData(data)
   }
 
   public func dumpBackground(_ map: TileMap, _ data: TileData) {
-    self.lcdImpl.dumpBackground(map, data)
+    self.lcd.dumpBackground(map, data)
   }
 }
 

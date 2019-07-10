@@ -16,7 +16,7 @@ private let leftMask:  UInt8 = 1 << 1
 private let rightMask: UInt8 = 1 << 0
 
 /// FF00 - P1/JOYP
-internal class JoypadImpl: Joypad {
+internal class JoypadImpl: WritableJoypad {
 
   private var _value: UInt8 = 0
 

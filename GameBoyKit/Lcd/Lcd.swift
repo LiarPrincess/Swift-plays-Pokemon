@@ -5,6 +5,51 @@
 public protocol Lcd: AnyObject {
 
   /// FF40 - LCDC - LCD Control
+  var control: UInt8 { get }
+
+  /// FF41 - STAT - LCDC Status
+  var status: UInt8 { get }
+
+  /// FF42 - SCY - Scroll Y
+  var scrollY: UInt8 { get }
+
+  /// FF43 - SCX - Scroll X
+  var scrollX: UInt8 { get }
+
+  /// FF44 - LY - LCDC Y-Coordinate
+  var line: UInt8 { get }
+
+  /// FF45 - LYC - LY Compare
+  var lineCompare: UInt8 { get }
+
+  /// FF4A - WY - Window Y Position
+  var windowY: UInt8 { get }
+
+  /// FF4B - WX - Window X Position (minus 7)
+  var windowX: UInt8 { get }
+
+  /// FF47 - BGP - BG Palette Data
+  var backgroundPalette: UInt8 { get }
+
+  /// FF48 - OBP0 - Object Palette 0 Data
+  var spritePalette0: UInt8 { get }
+
+  /// FF49 - OBP1 - Object Palette 1 Data
+  var spritePalette1: UInt8 { get }
+
+  /// 8000-9FFF 8KB Video RAM (VRAM)
+  func readVideoRam(_ address: UInt16) -> UInt8
+
+  /// FE00-FE9F Sprite Attribute Table (OAM)
+  func readOAM(_ address: UInt16) -> UInt8
+
+  /// Data that should be displayed on the screen
+  var framebuffer: Framebuffer { get }
+}
+
+internal protocol WritableLcd: Lcd {
+
+  /// FF40 - LCDC - LCD Control
   var control: UInt8 { get set }
 
   /// FF41 - STAT - LCDC Status
@@ -38,18 +83,10 @@ public protocol Lcd: AnyObject {
   var spritePalette1: UInt8 { get set }
 
   /// 8000-9FFF 8KB Video RAM (VRAM)
-  func readVideoRam(_ address: UInt16) -> UInt8
-
-  /// 8000-9FFF 8KB Video RAM (VRAM)
   func writeVideoRam(_ address: UInt16, value: UInt8)
 
   /// FE00-FE9F Sprite Attribute Table (OAM)
-  func readOAM(_ address: UInt16) -> UInt8
-
-  /// FE00-FE9F Sprite Attribute Table (OAM)
   func writeOAM(_ address: UInt16, value: UInt8)
-
-  var framebuffer: Framebuffer { get }
 
   // TODO: Remove this (+ in tests)
   func startFrame()

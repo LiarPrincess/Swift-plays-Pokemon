@@ -10,10 +10,14 @@ public class GameBoy {
   public static var lcdHeight: Int { return LcdConstants.height }
 
   public let cpu: Cpu
-  public let lcd: Lcd
+  public var lcd: Lcd { return self._lcd }
   public let memory: Memory
-  public let timer:  Timer
-  public let joypad: Joypad
+  public var timer:  Timer  { return self._timer }
+  public var joypad: Joypad { return self._joypad }
+
+  internal let _lcd: LcdImpl
+  internal let _timer: TimerImpl
+  internal let _joypad: JoypadImpl
 
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress: Int = 0
@@ -27,16 +31,16 @@ public class GameBoy {
               cartridge: Cartridge) {
 
     let interrupts = Interrupts()
-    self.lcd = LcdImpl(interrupts: interrupts)
-    self.timer = TimerImpl(interrupts: interrupts)
-    self.joypad = JoypadImpl(provider: input)
+    self._lcd = LcdImpl(interrupts: interrupts)
+    self._timer = TimerImpl(interrupts: interrupts)
+    self._joypad = JoypadImpl(provider: input)
 
     let skipBootrom = bootrom.data.isEmpty
     self.memory = Memory(bootrom:   skipBootrom ? nil : bootrom,
                          cartridge: cartridge,
-                         joypad:    self.joypad,
-                         lcd:       self.lcd,
-                         timer:     self.timer,
+                         joypad:    self._joypad,
+                         lcd:       self._lcd,
+                         timer:     self._timer,
                          interrupts: interrupts)
 
     self.cpu = Cpu(memory: self.memory, interrupts: interrupts)
@@ -46,7 +50,7 @@ public class GameBoy {
     }
 
     // prepare for 1st frame
-    self.lcd.startFrame()
+    self._lcd.startFrame()
   }
 
   @discardableResult
@@ -74,11 +78,11 @@ public class GameBoy {
       self.frameProgress += cycles
       if self.frameProgress > LcdConstants.cyclesPerFrame {
         self.frameProgress -= LcdConstants.cyclesPerFrame
-        self.lcd.startFrame()
+        self._lcd.startFrame()
       }
 
-      self.timer.tick(cycles: cycles)
-      self.lcd.tick(cycles: cycles)
+      self._timer.tick(cycles: cycles)
+      self._lcd.tick(cycles: cycles)
     }
   }
 
