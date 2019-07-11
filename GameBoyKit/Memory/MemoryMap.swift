@@ -32,8 +32,8 @@ public enum MemoryMap {
     /// Tile set #1: tiles 0-127
     public static let tileSet1: ClosedRange<UInt16> = 0x9000...0x97ff
 
-    public static let tileMap0: ClosedRange<UInt16> = 0x9800...0x9bff
-    public static let tileMap1: ClosedRange<UInt16> = 0x9c00...0x9fff
+    public static let tileMap9800to9bff: ClosedRange<UInt16> = 0x9800...0x9bff
+    public static let tileMap9c00to9fff: ClosedRange<UInt16> = 0x9c00...0x9fff
   }
 
   public enum IO {
@@ -104,8 +104,8 @@ extension MemoryMap {
     case VideoRam.tileSet0:  return "Tile set #0"
     case VideoRam.tileSet01: return "Tile set #0 and #1"
     case VideoRam.tileSet1:  return "Tile set #1"
-    case VideoRam.tileMap0:  return "tileMap0"
-    case VideoRam.tileMap1:  return "tileMap1"
+    case VideoRam.tileMap9800to9bff: return "tileMap9800to9bff"
+    case VideoRam.tileMap9c00to9fff: return "tileMap9c00to9fff"
     case externalRam:     return "externalRam"
     case internalRam:     return "internalRam"
     case internalRamEcho: return "internalRamEcho"

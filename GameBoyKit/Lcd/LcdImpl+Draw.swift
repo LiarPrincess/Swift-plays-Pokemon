@@ -2,6 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable file_length
+
 /// 8 pixels
 private let tileHeightInPixels = 8
 
@@ -242,21 +244,11 @@ extension LcdImpl {
 
   // MARK: - Helpers
 
-  internal func getTileMap(for map: TileMap) -> UnsafeBufferPointer<UInt8> {
-    guard let basePtr = UnsafePointer(self.videoRam.baseAddress) else {
-      fatalError("Unable to obtain video ram address.")
+  internal func getTileMap(for map: TileMap) -> MemoryData {
+    switch map {
+    case .from9800to9bff: return self.tileMap9800to9bff
+    case .from9c00to9fff: return self.tileMap9c00to9fff
     }
-
-    let mapStart: UnsafePointer<UInt8> = {
-      let videoRamStart = Int(MemoryMap.videoRam.start)
-      switch map {
-      case .from9800to9bff: return basePtr.advanced(by: 0x9800 - videoRamStart)
-      case .from9c00to9fff: return basePtr.advanced(by: 0x9c00 - videoRamStart)
-      }
-    }()
-
-    let count = LcdConstants.tileMapCount
-    return UnsafeBufferPointer(start: mapStart, count: count)
   }
 
   /// Color before applying palette.

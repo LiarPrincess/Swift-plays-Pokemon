@@ -2,7 +2,11 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable file_length
+
 import Foundation
+
+private typealias VideoRamMap = MemoryMap.VideoRam
 
 internal class LcdImpl: WritableLcd {
 
@@ -18,7 +22,7 @@ internal class LcdImpl: WritableLcd {
     }
   }
 
-  internal var status:  UInt8 = 0
+  internal var status: UInt8 = 0
 
   internal var scrollY: UInt8 = 0
   internal var scrollX: UInt8 = 0
@@ -47,6 +51,10 @@ internal class LcdImpl: WritableLcd {
   }
 
   internal lazy var videoRam = MemoryData.allocate(MemoryMap.videoRam)
+
+  internal lazy var tileMap9800to9bff = MemoryData.allocate(VideoRamMap.tileMap9800to9bff)
+  internal lazy var tileMap9c00to9fff = MemoryData.allocate(VideoRamMap.tileMap9c00to9fff)
+
   internal lazy var sprites  = (0..<LcdConstants.spriteCount).map { _ in Sprite() }
 
   /// Cache, so we don't recalculate sprites every frame.
@@ -74,18 +82,45 @@ internal class LcdImpl: WritableLcd {
 
   deinit {
     self.videoRam.deallocate()
+    self.framebuffer.deallocate()
+    self.tileMap9800to9bff.deallocate()
+    self.tileMap9c00to9fff.deallocate()
   }
 
   // MARK: - Read/write
 
   internal func readVideoRam(_ address: UInt16) -> UInt8 {
-    let index = Int(address - MemoryMap.videoRam.start)
-    return self.videoRam[index]
+    switch address {
+
+    case VideoRamMap.tileMap9800to9bff:
+      let index = Int(address - VideoRamMap.tileMap9800to9bff.start)
+      return self.tileMap9800to9bff[index]
+
+    case VideoRamMap.tileMap9c00to9fff:
+      let index = Int(address - VideoRamMap.tileMap9c00to9fff.start)
+      return self.tileMap9c00to9fff[index]
+
+    default:
+      let index = Int(address - MemoryMap.videoRam.start)
+      return self.videoRam[index]
+    }
   }
 
   internal func writeVideoRam(_ address: UInt16, value: UInt8) {
-    let index = Int(address - MemoryMap.videoRam.start)
-    self.videoRam[index] = value
+    switch address {
+
+    case VideoRamMap.tileMap9800to9bff:
+      let index = Int(address - VideoRamMap.tileMap9800to9bff.start)
+      self.tileMap9800to9bff[index] = value
+
+    case VideoRamMap.tileMap9c00to9fff:
+      let index = Int(address - VideoRamMap.tileMap9c00to9fff.start)
+      self.tileMap9c00to9fff[index] = value
+
+    default:
+      let index = Int(address - MemoryMap.videoRam.start)
+      self.videoRam[index] = value
+    }
   }
 
   internal func readOAM(_ address: UInt16) -> UInt8 {
@@ -143,7 +178,7 @@ internal class LcdImpl: WritableLcd {
   // MARK: - Tick
 
   internal func tick(cycles: Int) {
-    self.advanceFrameProgress(cycles: cycles)
+    self.updateFrameProgress(cycles: cycles)
 
     guard self.isLcdEnabledInCurrentFrame else {
       return
@@ -162,7 +197,7 @@ internal class LcdImpl: WritableLcd {
     }
   }
 
-  private func advanceFrameProgress(cycles: Int) {
+  private func updateFrameProgress(cycles: Int) {
     self.frameProgress += cycles
 
     if self.frameProgress > LcdConstants.cyclesPerFrame {
