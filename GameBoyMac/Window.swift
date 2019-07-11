@@ -120,8 +120,8 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
   public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) { }
 
   public func draw(in view: MTKView) {
-    let frame = self.gameBoy.tickFrame()
-    self.updateFramebuffer(from: frame)
+    self.gameBoy.tickFrame()
+    self.updateFramebuffer()
 
     guard let drawable = view.currentDrawable,
           let renderPassDesc = view.currentRenderPassDescriptor else {
@@ -143,9 +143,9 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
     commandBuffer.commit()
   }
 
-  private func updateFramebuffer(from framebuffer: Framebuffer) {
-    let data   = framebuffer.data
-    let region = MTLRegionMake2D(0, 0, framebuffer.width, framebuffer.height)
+  private func updateFramebuffer() {
+    let data   = self.gameBoy.lcd.framebuffer
+    let region = MTLRegionMake2D(0, 0, GameBoy.lcdWidth, GameBoy.lcdHeight)
 
     data.withUnsafeBytes { ptr in
       guard let baseAddress = ptr.baseAddress else { return }
@@ -153,7 +153,7 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
         region:      region,
         mipmapLevel: 0,
         withBytes:   baseAddress,
-        bytesPerRow: framebuffer.width * MemoryLayout<UInt8>.size
+        bytesPerRow: GameBoy.lcdWidth * MemoryLayout<UInt8>.size
       )
     }
   }

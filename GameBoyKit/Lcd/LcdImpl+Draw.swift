@@ -70,7 +70,7 @@ extension LcdImpl {
 
   /// Part of the framebuffer that should be filled in the current draw operation.
   private func getBackgroundFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
-    guard let basePtr = UnsafeMutablePointer(self.framebuffer.data.baseAddress) else {
+    guard let basePtr = UnsafeMutablePointer(self.framebuffer.baseAddress) else {
       fatalError("Unable to obtain framebuffer address.")
     }
 
@@ -128,7 +128,7 @@ extension LcdImpl {
 
   /// Part of the framebuffer that should be filled in the current draw operation.
   private func getWindowFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
-    guard let basePtr = UnsafeMutablePointer(self.framebuffer.data.baseAddress) else {
+    guard let basePtr = UnsafeMutablePointer(self.framebuffer.baseAddress) else {
       fatalError("Unable to obtain framebuffer address.")
     }
 
@@ -190,7 +190,7 @@ extension LcdImpl {
 
   /// Part of the framebuffer that should be filled in the current draw operation.
   private func getSpriteFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
-    guard let basePtr = UnsafeMutablePointer(self.framebuffer.data.baseAddress) else {
+    guard let basePtr = UnsafeMutablePointer(self.framebuffer.baseAddress) else {
       fatalError("Unable to obtain framebuffer address.")
     }
 
@@ -199,6 +199,7 @@ extension LcdImpl {
   }
 
   internal func getSprites(line: Int) -> [Sprite] {
+    // TODO: This is wrong! We should cache sprites from whole line and then select only 1st 10
     if let cached = self.spritesByLineCache[line] {
       return cached
     }

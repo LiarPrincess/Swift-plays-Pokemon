@@ -37,14 +37,18 @@ public protocol Lcd: AnyObject {
   /// FF49 - OBP1 - Object Palette 1 Data
   var spritePalette1: UInt8 { get }
 
+  /// Data that should be put on screen:
+  /// - 0 - White
+  /// - 1 - Light gray
+  /// - 2 - Dark gray
+  /// - 3 - Black
+  var framebuffer: UnsafeMutableBufferPointer<UInt8> { get }
+
   /// 8000-9FFF 8KB Video RAM (VRAM)
   func readVideoRam(_ address: UInt16) -> UInt8
 
   /// FE00-FE9F Sprite Attribute Table (OAM)
   func readOAM(_ address: UInt16) -> UInt8
-
-  /// Data that should be displayed on the screen
-  var framebuffer: Framebuffer { get }
 }
 
 internal protocol WritableLcd: Lcd {

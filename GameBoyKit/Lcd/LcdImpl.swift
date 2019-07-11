@@ -52,8 +52,12 @@ internal class LcdImpl: WritableLcd {
   /// Cache, so we don't recalculate sprites every frame.
   internal lazy var spritesByLineCache = [Int:[Sprite]]()
 
-  /// Data that should be put on screen
-  internal var framebuffer = Framebuffer()
+  internal lazy var framebuffer: UnsafeMutableBufferPointer<UInt8> = {
+    let size = LcdConstants.width * LcdConstants.height
+    let result = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: size)
+    result.assign(repeating: 0)
+    return result
+  }()
 
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress: Int = 0
@@ -167,7 +171,7 @@ internal class LcdImpl: WritableLcd {
       self.isLcdEnabledInCurrentFrame = self.isLcdEnabled
       if !self.isLcdEnabledInCurrentFrame {
         self.line = 0
-        self.framebuffer.clear()
+        self.framebuffer.assign(repeating: 0) // clear
         self.setMode(.hBlank) // 0
       }
     }

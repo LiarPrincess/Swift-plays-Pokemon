@@ -50,8 +50,7 @@ public class GameBoy {
     }
   }
 
-  @discardableResult
-  public func tickFrame() -> Framebuffer {
+  public func tickFrame() {
     let cycles = LcdConstants.cyclesPerFrame - self.frameProgress
 
     self.tickCpu(cycles: cycles)
@@ -61,8 +60,6 @@ public class GameBoy {
     if self.frameProgress == LcdConstants.cyclesPerFrame {
       self.tickCpu(cycles: 1)
     }
-
-    return self.lcd.framebuffer
   }
 
   internal func tickCpu(cycles totalCycles: Int = 1) {
