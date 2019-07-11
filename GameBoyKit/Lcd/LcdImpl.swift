@@ -50,14 +50,13 @@ internal class LcdImpl: WritableLcd {
     set { self._spritePalette1.value = newValue }
   }
 
-  internal lazy var videoRam = MemoryData.allocate(MemoryMap.videoRam)
-
   internal lazy var tileMap9800to9bff = MemoryData.allocate(VideoRamMap.tileMap9800to9bff)
   internal lazy var tileMap9c00to9fff = MemoryData.allocate(VideoRamMap.tileMap9c00to9fff)
 
-  internal lazy var sprites  = (0..<LcdConstants.spriteCount).map { _ in Sprite() }
+  internal lazy var tiles   = (0..<TileConstants.count).map { _ in Tile() }
+  internal lazy var sprites = (0..<SpriteConstants.count).map { _ in Sprite() }
 
-  /// Cache, so we don't recalculate sprites every frame.
+  /// Cache, so we don't recalculate sprites on every line.
   internal lazy var spritesByLineCache = [Int:[Sprite]]()
 
   internal lazy var framebuffer: UnsafeMutableBufferPointer<UInt8> = {
@@ -81,16 +80,23 @@ internal class LcdImpl: WritableLcd {
   }
 
   deinit {
-    self.videoRam.deallocate()
-    self.framebuffer.deallocate()
     self.tileMap9800to9bff.deallocate()
     self.tileMap9c00to9fff.deallocate()
+    self.framebuffer.deallocate()
   }
 
   // MARK: - Read/write
 
   internal func readVideoRam(_ address: UInt16) -> UInt8 {
     switch address {
+
+    case VideoRamMap.tileData:
+      let relativeAddress = Int(address - VideoRamMap.tileData.start)
+      let index = relativeAddress / TileConstants.byteCount
+      let byte  = relativeAddress % TileConstants.byteCount
+
+      let tile = self.tiles[index]
+      return tile.data[byte]
 
     case VideoRamMap.tileMap9800to9bff:
       let index = Int(address - VideoRamMap.tileMap9800to9bff.start)
@@ -101,13 +107,20 @@ internal class LcdImpl: WritableLcd {
       return self.tileMap9c00to9fff[index]
 
     default:
-      let index = Int(address - MemoryMap.videoRam.start)
-      return self.videoRam[index]
+      return 0
     }
   }
 
   internal func writeVideoRam(_ address: UInt16, value: UInt8) {
     switch address {
+
+    case VideoRamMap.tileData:
+      let relativeAddress = Int(address - VideoRamMap.tileData.start)
+      let index = relativeAddress / TileConstants.byteCount
+      let byte  = relativeAddress % TileConstants.byteCount
+
+      let tile = self.tiles[index]
+      tile.setByte(byte, value: value)
 
     case VideoRamMap.tileMap9800to9bff:
       let index = Int(address - VideoRamMap.tileMap9800to9bff.start)
@@ -118,16 +131,15 @@ internal class LcdImpl: WritableLcd {
       self.tileMap9c00to9fff[index] = value
 
     default:
-      let index = Int(address - MemoryMap.videoRam.start)
-      self.videoRam[index] = value
+      break
     }
   }
 
   internal func readOAM(_ address: UInt16) -> UInt8 {
     let oamAddress = Int(address - MemoryMap.oam.start)
 
-    let index = oamAddress / LcdConstants.spriteByteCount
-    let byte  = oamAddress % LcdConstants.spriteByteCount
+    let index = oamAddress / SpriteConstants.byteCount
+    let byte  = oamAddress % SpriteConstants.byteCount
 
     let sprite = self.sprites[index]
     switch byte {
@@ -142,8 +154,8 @@ internal class LcdImpl: WritableLcd {
   internal func writeOAM(_ address: UInt16, value: UInt8) {
     let oamAddress = Int(address - MemoryMap.oam.start)
 
-    let index = oamAddress / LcdConstants.spriteByteCount
-    let byte  = oamAddress % LcdConstants.spriteByteCount
+    let index = oamAddress / SpriteConstants.byteCount
+    let byte  = oamAddress % SpriteConstants.byteCount
 
     let sprite = self.sprites[index]
     switch byte {

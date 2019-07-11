@@ -68,7 +68,7 @@ extension WritableLcd {
   }
 
   /// Control bit 4 - BG & Window Tile Data Select
-  internal var tileData: TileData {
+  internal var tileDataSelect: TileData {
     return isSet(self.control, mask: LcdControlMasks.tileData) ?
       .from8000to8fff : .from8800to97ff
   }

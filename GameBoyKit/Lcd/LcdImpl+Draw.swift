@@ -2,20 +2,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// swiftlint:disable file_length
-
-/// 8 pixels
-private let tileHeightInPixels = 8
-
-/// 8 pixels
-private let tileWidthInPixels = 8
-
-/// 1 tile line = 2 bytes
-private let bytesPerTileLine = 2
-
-/// Number of tiles in a single row (32).
-private let tilesPerRow = 32
-
 extension LcdImpl {
 
   internal func drawLine() {
@@ -35,8 +21,8 @@ extension LcdImpl {
   private func drawBackgroundLine() {
     let line     = Int(self.line)
     let globalY  = (Int(self.scrollY) + line) % LcdConstants.backgroundMapHeight
-    let tileRow  = globalY / tileHeightInPixels
-    let tileLine = globalY % tileHeightInPixels
+    let tileRow  = globalY / TileConstants.height
+    let tileLine = globalY % TileConstants.height
 
     let tileMap = self.getTileMap(for: self.backgroundTileMap)
     let framebufferSlice = self.getBackgroundFramebuffer(line: line)
@@ -44,29 +30,28 @@ extension LcdImpl {
     var progress = 0
     while progress < framebufferSlice.count {
       let globalX = (Int(self.scrollX) + progress) % LcdConstants.backgroundMapWidth
-      let tileColumn = globalX / tileWidthInPixels
-      let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
+      let tileColumn = globalX / TileConstants.width
+      let tileIndexRaw = tileMap[tileRow * TileConstants.tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
-      if self.tileData == .from8800to97ff {
+      if self.tileDataSelect == .from8800to97ff {
         tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
       }
 
-      let tileAddress = (tileIndex * tileHeightInPixels + tileLine) * bytesPerTileLine
-      let data1 = self.videoRam[tileAddress]
-      let data2 = self.videoRam[tileAddress + 1]
+      let tile = self.tiles[tileIndex]
+      let tilePixels = tile.getPixels(in: tileLine)
 
-      let startBit = globalX % tileWidthInPixels
+      let startBit = globalX % TileConstants.width
 
       var bit = startBit
-      while bit < tileWidthInPixels && progress + bit < framebufferSlice.count {
-        let tileColor = self.getColorValue(data1, data2, bit: bit)
+      while bit < TileConstants.width && progress + bit < framebufferSlice.count {
+        let tileColor = tilePixels[bit]
         let color     = self._backgroundPalette[tileColor]
         framebufferSlice[progress + bit] = color
         bit += 1
       }
 
-      progress += (tileWidthInPixels - startBit)
+      progress += (TileConstants.width - startBit)
     }
   }
 
@@ -94,37 +79,36 @@ extension LcdImpl {
     }
 
     let windowY = line - windowStartY
-    let tileRow = windowY / tileHeightInPixels
-    let tileLine = windowY % tileHeightInPixels
+    let tileRow = windowY / TileConstants.height
+    let tileLine = windowY % TileConstants.height
 
     let tileMap = self.getTileMap(for: self.windowTileMap)
     let framebufferSlice = self.getWindowFramebuffer(line: line)
 
     var windowX = 0
     while windowX < framebufferSlice.count {
-      let tileColumn = windowX / tileWidthInPixels
-      let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
+      let tileColumn = windowX / TileConstants.width
+      let tileIndexRaw = tileMap[tileRow * TileConstants.tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
-      if self.tileData == .from8800to97ff {
+      if self.tileDataSelect == .from8800to97ff {
         tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
       }
 
-      let tileAddress = (tileIndex * tileHeightInPixels + tileLine) * bytesPerTileLine
-      let data1 = self.videoRam[tileAddress]
-      let data2 = self.videoRam[tileAddress + 1]
+      let tile = self.tiles[tileIndex]
+      let tilePixels = tile.getPixels(in: tileLine)
 
-      let startPixel = windowX % tileWidthInPixels
-      for pixel in startPixel..<tileWidthInPixels {
+      let startPixel = windowX % TileConstants.width
+      for pixel in startPixel..<TileConstants.width {
         let pixelX = windowX + pixel
         guard pixelX < framebufferSlice.count else { break }
 
-        let tileColor = self.getColorValue(data1, data2, bit: pixel)
+        let tileColor = tilePixels[pixel]
         let color     = self._backgroundPalette[tileColor]
         framebufferSlice[pixelX] = color
       }
 
-      windowX += (tileWidthInPixels - startPixel)
+      windowX += (TileConstants.width - startPixel)
     }
   }
 
@@ -163,13 +147,12 @@ extension LcdImpl {
           tileIndex &= 0xfe
         } else { // Bottom tile of 8x16 sprite
           tileIndex |= 0x01
-          tileLine -= tileHeightInPixels
+          tileLine -= TileConstants.height
         }
       }
 
-      let tileDataAddress = (tileIndex * tileHeightInPixels + tileLine) * bytesPerTileLine
-      let data1 = self.videoRam[tileDataAddress]
-      let data2 = self.videoRam[tileDataAddress + 1]
+      let tile = self.tiles[tileIndex]
+      let tilePixels = tile.getPixels(in: tileLine)
 
       let palette = sprite.palette == 0 ? self._spritePalette0 : self._spritePalette1
 
@@ -178,9 +161,9 @@ extension LcdImpl {
 
       // TODO: Priority
       var bit = 0
-      while startBit + bit < tileWidthInPixels && sprite.realX + bit < framebufferSlice.count {
+      while startBit + bit < TileConstants.width && sprite.realX + bit < framebufferSlice.count {
         let colorBit = sprite.flipX ? 7 - bit : bit
-        let rawColor = self.getColorValue(data1, data2, bit: colorBit)
+        let rawColor = tilePixels[colorBit]
         if rawColor != 0 {
           let color = palette[rawColor]
           framebufferSlice[sprite.realX + bit] = color
@@ -201,13 +184,14 @@ extension LcdImpl {
   }
 
   internal func getSprites(line: Int) -> [Sprite] {
-    // TODO: This is wrong! We should cache sprites from whole line and then select only 1st 10
+    // TODO: This is wrong! We should cache sprites from whole line
+    // and then select only 1st 10 (check rs - cache_sprite/render_sprite)
     if let cached = self.spritesByLineCache[line] {
       return cached
     }
 
     var sprites = [Sprite]()
-    sprites.reserveCapacity(LcdConstants.spriteCountPerLine)
+    sprites.reserveCapacity(SpriteConstants.countPerLine)
 
     let spriteHeight = self.spriteHeight
 
@@ -220,7 +204,7 @@ extension LcdImpl {
       }
 
       sprites.append(sprite)
-      if sprites.count == LcdConstants.spriteCountPerLine {
+      if sprites.count == SpriteConstants.countPerLine {
         break
       }
     }
@@ -249,16 +233,5 @@ extension LcdImpl {
     case .from9800to9bff: return self.tileMap9800to9bff
     case .from9c00to9fff: return self.tileMap9c00to9fff
     }
-  }
-
-  /// Color before applying palette.
-  /// Bit offset is counted from left starting from 0.
-  internal func getColorValue(_ data1:  UInt8,
-                              _ data2:  UInt8,
-                              bit:      Int) -> UInt8 {
-    let shift = 7 - bit
-    let data1Bit = (data1 >> shift) & 0x1
-    let data2Bit = (data2 >> shift) & 0x1
-    return (data2Bit << 1) | data1Bit
   }
 }

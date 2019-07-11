@@ -101,6 +101,7 @@
 		90B2232722C90C8E0023F38D /* listStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B2232622C90C8E0023F38D /* listStates.swift */; };
 		90BD8BD522C630B3004376BD /* LcdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BD8BD422C630B3004376BD /* LcdConstants.swift */; };
 		90BE338622B5123B00DF3953 /* LcdColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */; };
+		90BFB4BB22D7C2FE00A3BD91 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BFB4BA22D7C2FE00A3BD91 /* Tile.swift */; };
 		90C2AD3F22A1DFD500F5A7AF /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD3E22A1DFD500F5A7AF /* Common.swift */; };
 		90C2AD4122A1E47000F5A7AF /* PrintExecute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD4022A1E47000F5A7AF /* PrintExecute.swift */; };
 		90C2AD4322A2699100F5A7AF /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C2AD4222A2699100F5A7AF /* ModifyInstructions.swift */; };
@@ -278,6 +279,7 @@
 		90B2232622C90C8E0023F38D /* listStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listStates.swift; sourceTree = "<group>"; };
 		90BD8BD422C630B3004376BD /* LcdConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdConstants.swift; sourceTree = "<group>"; };
 		90BE338522B5123B00DF3953 /* LcdColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorValueTests.swift; sourceTree = "<group>"; };
+		90BFB4BA22D7C2FE00A3BD91 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		90C2AD3E22A1DFD500F5A7AF /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		90C2AD4022A1E47000F5A7AF /* PrintExecute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintExecute.swift; sourceTree = "<group>"; };
 		90C2AD4222A2699100F5A7AF /* ModifyInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyInstructions.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 				90B0DC4322B6EC89005BBCF5 /* LcdImpl.swift */,
 				904AE93722CFDB90002AB266 /* LcdImpl+Draw.swift */,
 				903DB4DB22BB903A003132FA /* LcdImpl+Dump.swift */,
+				90BFB4BA22D7C2FE00A3BD91 /* Tile.swift */,
 				90FC33EE22D27AD5008DEC39 /* Sprite.swift */,
 				9085FC3022B690C600310090 /* LcdColorPalettes.swift */,
 				90BD8BD422C630B3004376BD /* LcdConstants.swift */,
@@ -908,6 +911,7 @@
 				903CF63D22D5352700542AA3 /* Extensions.swift in Sources */,
 				903CF63F22D5355400542AA3 /* Operators.swift in Sources */,
 				90EDD2C422C2C71800003E9E /* CartridgeFactory.swift in Sources */,
+				90BFB4BB22D7C2FE00A3BD91 /* Tile.swift in Sources */,
 				90B0DC4422B6EC89005BBCF5 /* LcdImpl.swift in Sources */,
 				90BD8BD522C630B3004376BD /* LcdConstants.swift in Sources */,
 			);

@@ -4,7 +4,7 @@
 
 internal enum LcdConstants {
 
-  // MARK: - Resolution
+  // MARK: - Size
 
   /// 160 px = 20 tiles
   internal static let width = 160
@@ -43,22 +43,39 @@ internal enum LcdConstants {
   /// How many cycles does it take to render a full frame?
   /// (from: http://bgb.bircd.org/pandocs.htm#lcdstatusregister)
   internal static let cyclesPerFrame = 70_224
+}
 
-  // MARK: - Sprite
+internal enum TileConstants {
 
-  /// Max number of sprites in a single line.
-  internal static let spriteCountPerLine = 10
+  /// Total number of tiles (3 * 128)
+  internal static let count = 3 * 128
 
-  /// Total number of sprites.
-  internal static let spriteCount = 40
+  /// 8 pixels
+  internal static let height = 8
 
-  /// Number of bytes that define single sprite.
-  internal static let spriteByteCount = 4
+  /// 8 pixels
+  internal static let width = 8
 
-  // MARK: - Other
+  /// 1 tile line = 2 bytes
+  internal static let bytesPerLine = 2
 
-  /// Size of a single tile map.
-  internal static let tileMapCount = 0x0400
+  /// 1 tile = 16 bytes
+  internal static let byteCount = height * bytesPerLine
+
+  /// 1 row (in background map) = 32 tiles
+  internal static let tilesPerRow = 32
+}
+
+internal enum SpriteConstants {
+
+  /// Total number of sprites (40)
+  internal static let count = 40
+
+  /// 1 line = max 10 sprites
+  internal static let countPerLine = 10
+
+  /// 1 sprite = 4 bytes
+  internal static let byteCount = 4
 }
 
 internal enum LcdControlMasks {
