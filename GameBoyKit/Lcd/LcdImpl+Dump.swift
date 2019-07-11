@@ -14,6 +14,7 @@ extension LcdImpl {
   // MARK: - Properties
 
   internal func dumpProperties() {
+    print("LCDC: \(self.control.bin)")
     print("isLcdEnabled: \(self.isLcdEnabled)")
     print("isBackgroundVisible: \(self.isBackgroundVisible)")
     print("isWindowEnabled: \(self.isWindowEnabled)")
@@ -21,8 +22,9 @@ extension LcdImpl {
     print("windowTileMap: \(self.windowTileMap)")
     print("backgroundTileMap: \(self.backgroundTileMap)")
     print("tileData: \(self.tileData)")
-    print("spriteSize: \(self.spriteSize)")
+    print("spriteHeight: \(self.spriteHeight)")
 
+    print("STAT: \(self.status.bin)")
     print("isLineCompareInterruptEnabled: \(self.isLineCompareInterruptEnabled)")
     print("isOamInterruptEnabled: \(self.isOamInterruptEnabled)")
     print("isVBlankInterruptEnabled: \(self.isVBlankInterruptEnabled)")

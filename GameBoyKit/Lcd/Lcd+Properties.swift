@@ -12,11 +12,6 @@ public enum TileData {
   case from8000to8fff
 }
 
-public enum SpriteSize {
-  case size8x8
-  case size8x16
-}
-
 internal enum LcdMode {
 
   /// Mode 0: The LCD controller is in the H-Blank period.
@@ -79,9 +74,8 @@ extension WritableLcd {
   }
 
   /// Control bit 2 - OBJ (Sprite) Size
-  internal var spriteSize: SpriteSize {
-    return isSet(self.control, mask: LcdControlMasks.spriteSize) ?
-      .size8x16 : .size8x8
+  internal var spriteHeight: Int {
+    return isSet(self.control, mask: LcdControlMasks.spriteSize) ? 16 : 8
   }
 
   // MARK: - Status properties

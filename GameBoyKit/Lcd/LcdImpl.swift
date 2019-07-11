@@ -6,7 +6,18 @@ import Foundation
 
 internal class LcdImpl: WritableLcd {
 
-  internal var control: UInt8 = 0
+  internal var control: UInt8 = 0 {
+    didSet {
+      let oldSpriteSize = oldValue & LcdControlMasks.spriteSize
+      let newSpriteSize = self.control & LcdControlMasks.spriteSize
+
+      let hasChangedSpriteSize = oldSpriteSize != newSpriteSize
+      if hasChangedSpriteSize {
+        self.spritesByLineCache.removeAll(keepingCapacity: true)
+      }
+    }
+  }
+
   internal var status:  UInt8 = 0
 
   internal var scrollY: UInt8 = 0
@@ -37,6 +48,9 @@ internal class LcdImpl: WritableLcd {
 
   internal lazy var videoRam = MemoryData.allocate(MemoryMap.videoRam)
   internal lazy var sprites  = (0..<LcdConstants.spriteCount).map { _ in Sprite() }
+
+  /// Cache, so we don't recalculate sprites every frame.
+  internal lazy var spritesByLineCache = [Int:[Sprite]]()
 
   /// Data that should be put on screen
   internal var framebuffer = Framebuffer()
@@ -76,11 +90,12 @@ internal class LcdImpl: WritableLcd {
     let index = oamAddress / LcdConstants.spriteByteCount
     let byte  = oamAddress % LcdConstants.spriteByteCount
 
+    let sprite = self.sprites[index]
     switch byte {
-    case 0: return self.sprites[index].y
-    case 1: return self.sprites[index].x
-    case 2: return self.sprites[index].tile
-    case 3: return self.sprites[index].flags
+    case 0: return sprite.y
+    case 1: return sprite.x
+    case 2: return sprite.tile
+    case 3: return sprite.flags
     default: return 0
     }
   }
@@ -91,12 +106,33 @@ internal class LcdImpl: WritableLcd {
     let index = oamAddress / LcdConstants.spriteByteCount
     let byte  = oamAddress % LcdConstants.spriteByteCount
 
+    let sprite = self.sprites[index]
     switch byte {
-    case 0: self.sprites[index].y = value
-    case 1: self.sprites[index].x = value
-    case 2: self.sprites[index].tile = value
-    case 3: self.sprites[index].flags = value
+    case 0:
+      if sprite.y != value {
+        self.clearSpriteCache(fromLine: sprite.realY)
+        sprite.y = value
+        self.clearSpriteCache(fromLine: sprite.realY)
+      }
+    case 1:
+      if sprite.x != value {
+        sprite.x = value
+        self.clearSpriteCache(fromLine: sprite.realY)
+      }
+    case 2: sprite.tile = value
+    case 3: sprite.flags = value
     default: break
+    }
+  }
+
+  private func clearSpriteCache(fromLine startLine: Int) {
+    let height = self.spriteHeight
+
+    let startLine = max(startLine, 0)
+    let endLine   = min(LcdConstants.backgroundMapHeight, startLine + height)
+
+    for line in startLine..<endLine {
+      self.spritesByLineCache[line] = nil
     }
   }
 

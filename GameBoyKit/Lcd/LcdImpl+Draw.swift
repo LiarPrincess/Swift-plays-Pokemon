@@ -142,23 +142,21 @@ extension LcdImpl {
   // swiftlint:disable:next function_body_length
   private func drawSprites() {
     let line = Int(self.line)
-    let spriteHeigth = self.spriteHeigth
+    let spriteHeight = self.spriteHeight
 
     let sprites = self.getSprites(line: line)
-    let sortedSprites = self.sortFromRightToLeft(sprites)
-
     let framebufferSlice = self.getSpriteFramebuffer(line: line)
 
     // code taken from 'binjgb'
-    for sprite in sortedSprites {
+    for sprite in sprites {
       var tileIndex = Int(sprite.tile)
 
       var tileLine = line - sprite.realY
       if sprite.flipY {
-        tileLine = spriteHeigth - tileLine - 1
+        tileLine = spriteHeight - tileLine - 1
       }
 
-      if spriteHeigth == 16 {
+      if spriteHeight == 16 {
         if tileLine < 8 { // Top tile of 8x16 sprite
           tileIndex &= 0xfe
         } else { // Bottom tile of 8x16 sprite
@@ -200,47 +198,45 @@ extension LcdImpl {
     return UnsafeMutableBufferPointer(start: start, count: LcdConstants.width)
   }
 
-  private var spriteHeigth: Int {
-    switch self.spriteSize {
-    case .size8x8:  return 8
-    case .size8x16: return 16
-    }
-  }
-
   internal func getSprites(line: Int) -> [Sprite] {
-    var result = [Sprite]()
-    result.reserveCapacity(LcdConstants.spriteCountPerLine)
+    if let cached = self.spritesByLineCache[line] {
+      return cached
+    }
 
-    let spriteHeigth = self.spriteHeigth
+    var sprites = [Sprite]()
+    sprites.reserveCapacity(LcdConstants.spriteCountPerLine)
+
+    let spriteHeight = self.spriteHeight
 
     for sprite in self.sprites {
       let isAfterStart = line >= sprite.realY
-      let isBeforeEnd  = line < (sprite.realY + spriteHeigth)
+      let isBeforeEnd  = line < (sprite.realY + spriteHeight)
 
       guard isAfterStart && isBeforeEnd else {
         continue
       }
 
-      result.append(sprite)
-      if result.count == LcdConstants.spriteCountPerLine {
+      sprites.append(sprite)
+      if sprites.count == LcdConstants.spriteCountPerLine {
         break
       }
     }
 
-    return result
-  }
+    // TODO: that if we already have sprite there? Pokemon intro bug.
 
-  /// Sort in REVERSE order (from right to left).
-  private func sortFromRightToLeft(_ sprites: [Sprite]) -> [Sprite] {
+    // Sort in REVERSE order (from right to left).
     // Sort in Swift is not stable, so we have to enumerate
-    return sprites
+    let sortedSprites = sprites
       .enumerated()
       .sorted { lhs, rhs in
         lhs.element.x != rhs.element.x ?
-        lhs.element.x > rhs.element.x :
-        lhs.offset    > rhs.offset
+          lhs.element.x > rhs.element.x :
+          lhs.offset    > rhs.offset
       }
       .map { $0.element }
+
+    self.spritesByLineCache[line] = sortedSprites
+    return sortedSprites
   }
 
   // MARK: - Helpers
