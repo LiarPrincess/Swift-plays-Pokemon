@@ -94,6 +94,7 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
     self.updateKeyState(event: event, isDown: false)
   }
 
+  // swiftlint:disable:next cyclomatic_complexity
   private func updateKeyState(event: NSEvent, isDown: Bool) {
     if event.isARepeat { return }
 
@@ -106,7 +107,10 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
     case KeyMap.down:   self.input.down = isDown
     case KeyMap.left:   self.input.left = isDown
     case KeyMap.right:  self.input.right = isDown
-    case KeyMap.debug:  self.input.debug = isDown
+
+    #if DEBUG
+    case KeyMap.debug: self.input.debug = isDown
+    #endif
 
     default:
       // use this if you want to proagate event down the responder chain:

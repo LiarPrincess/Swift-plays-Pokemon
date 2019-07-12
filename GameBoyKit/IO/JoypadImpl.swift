@@ -15,6 +15,8 @@ private let downMask:  UInt8 = 1 << 3
 private let leftMask:  UInt8 = 1 << 1
 private let rightMask: UInt8 = 1 << 0
 
+internal var inputBreak = false
+
 /// FF00 - P1/JOYP
 internal class JoypadImpl: WritableJoypad {
 
@@ -35,6 +37,10 @@ internal class JoypadImpl: WritableJoypad {
       }
 
       isButtons ? self.setButtons(from: input) : self.setDirections(from: input)
+
+      #if DEBUG
+      inputBreak = input.debug
+      #endif
     }
   }
 

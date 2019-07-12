@@ -114,7 +114,7 @@ extension WritableLcd {
     case LcdModeValues.oamSearch:     return .oamSearch
     case LcdModeValues.pixelTransfer: return .pixelTransfer
     default:
-      fatalError()
+      fatalError("Invalid mode bits: '\(rawMode.bin)'.") // ?
     }
   }
 }

@@ -49,6 +49,5 @@ internal protocol WritableTimer: Timer {
   /// Bit 2 - stop timer, bits 1 and 0 - select clock
   var tac: UInt8 { get set }
 
-  // TODO: To remove
   func tick(cycles: Int)
 }

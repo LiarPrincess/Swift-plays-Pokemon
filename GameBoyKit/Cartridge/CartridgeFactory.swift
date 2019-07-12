@@ -4,6 +4,8 @@
 
 import Foundation
 
+// swiftlint:disable cyclomatic_complexity
+
 public enum CartridgeFactoryError: Error, CustomStringConvertible {
   case invalidChecksum(UInt8)
   case unsupportedRomSize(UInt8)

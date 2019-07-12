@@ -82,9 +82,9 @@ private func fill(_ emulator: SavedState, from fileUrl: URL) {
     else if property == total_ticks {  }
     else if property == instruction_ticks {  }
 
-    else if property == cpu_interrupt_master_enable  { cpu.ime      = parseBool(value) }
-    else if property == cpu_halted                   { cpu.isHalted = parseBool(value) }
-    else if property == cpu_stopped { } // TODO: Import 'cpu_stopped' from file
+    else if property == cpu_interrupt_master_enable  { cpu.ime = parseBool(value) }
+    else if property == cpu_halted  { cpu.isHalted  = parseBool(value) }
+    else if property == cpu_stopped { cpu.isStopped = parseBool(value) }
 
     else if property == memory {
       replace(emulator.memory, from: 0x0000, to: 0xffff, with: value)

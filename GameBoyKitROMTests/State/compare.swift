@@ -3,6 +3,8 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // swiftlint:disable cyclomatic_complexity
+// swiftlint:disable closure_body_length
+// swiftlint:disable function_body_length
 
 import GameBoyKit
 

@@ -20,8 +20,9 @@ class SavedCpu {
   var pc:    UInt16 = 0
   var sp:    UInt16 = 0
   var cycle: UInt16 = 0
-  var ime:      Bool = false
-  var isHalted: Bool = false
+  var ime:       Bool = false
+  var isHalted:  Bool = false
+  var isStopped: Bool = false
   var registers = SavedRegisters()
 }
 
