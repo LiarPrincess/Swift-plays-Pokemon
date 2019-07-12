@@ -78,10 +78,10 @@ extension LcdImpl {
       // ---------------------+---+-------------+------
       // 1st tile (last pixel)|  0|  0 - 7 =  -7|     0
       // 1st tile (full)      |  7|  7 - 7 =   0|     0
-      // no window            |166|166 - 7 = 159|   160
+      // last tile (1 pixel)  |166|166 - 7 = 159|   159
 
       let windowX = max(self.shiftedWindowX, 0)
-      count = min(count, windowX + 1)
+      count = min(count, windowX)
     }
 
     return UnsafeMutableBufferPointer(start: start, count: count)
