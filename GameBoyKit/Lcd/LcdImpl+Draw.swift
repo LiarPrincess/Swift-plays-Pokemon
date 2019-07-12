@@ -41,17 +41,17 @@ extension LcdImpl {
       let tile = self.tiles[tileIndex]
       let tilePixels = tile.getPixels(in: tileLine)
 
+      let pixelsToEnd = framebufferSlice.count - progress
       let startBit = globalX % TileConstants.width
+      let lastBit  = min(TileConstants.width, pixelsToEnd)
 
-      var bit = startBit
-      while bit < TileConstants.width && progress + bit < framebufferSlice.count {
+      for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
         let color     = self._backgroundPalette[tileColor]
         framebufferSlice[progress + bit] = color
-        bit += 1
       }
 
-      progress += (TileConstants.width - startBit)
+      progress += lastBit
     }
   }
 
@@ -62,9 +62,21 @@ extension LcdImpl {
     }
 
     let start = basePtr.advanced(by: line * LcdConstants.width)
+    var count = LcdConstants.width
 
-    let usingWindow = self.isWindowEnabled && self.line >= self.windowY
-    let count = min(LcdConstants.width, usingWindow ? Int(self.windowX) - 7 : .max)
+    let isUsingWindow = self.isWindowEnabled && self.line >= self.windowY
+    if isUsingWindow {
+      // TODO: Convert to tests
+      // http://bgb.bircd.org/pandocs.htm#lcdpositionandscrolling
+      // desc                 |wx |with shift   | count
+      // ---------------------+---+-------------+------
+      // 1st tile (last pixel)|  0|  0 - 7 =  -7|     0
+      // 1st tile (full)      |  7|  7 - 7 =   0|     0
+      // no window            |166|166 - 7 = 159|   160
+
+      let windowX = max(Int(self.windowX) - LcdConstants.windowXShift, 0)
+      count = min(count, windowX + 1)
+    }
 
     return UnsafeMutableBufferPointer(start: start, count: count)
   }
@@ -85,9 +97,9 @@ extension LcdImpl {
     let tileMap = self.getTileMap(for: self.windowTileMap)
     let framebufferSlice = self.getWindowFramebuffer(line: line)
 
-    var windowX = 0
-    while windowX < framebufferSlice.count {
-      let tileColumn = windowX / TileConstants.width
+    var progress = 0 // windowX
+    while progress < framebufferSlice.count {
+      let tileColumn = progress / TileConstants.width
       let tileIndexRaw = tileMap[tileRow * TileConstants.tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
@@ -98,17 +110,17 @@ extension LcdImpl {
       let tile = self.tiles[tileIndex]
       let tilePixels = tile.getPixels(in: tileLine)
 
-      let startPixel = windowX % TileConstants.width
-      for pixel in startPixel..<TileConstants.width {
-        let pixelX = windowX + pixel
-        guard pixelX < framebufferSlice.count else { break }
+      let pixelsToEnd = framebufferSlice.count - progress
+      let startBit = progress % TileConstants.width
+      let lastBit  = min(TileConstants.width, pixelsToEnd)
 
-        let tileColor = tilePixels[pixel]
+      for bit in startBit..<lastBit {
+        let tileColor = tilePixels[bit]
         let color     = self._backgroundPalette[tileColor]
-        framebufferSlice[pixelX] = color
+        framebufferSlice[progress + bit] = color
       }
 
-      windowX += (TileConstants.width - startPixel)
+      progress += lastBit
     }
   }
 
@@ -118,10 +130,21 @@ extension LcdImpl {
       fatalError("Unable to obtain framebuffer address.")
     }
 
-    let windowX = Int(self.windowX) - 7
-    let start = basePtr.advanced(by: line * LcdConstants.width + windowX)
+    // TODO: Convert to tests
+    // http://bgb.bircd.org/pandocs.htm#lcdpositionandscrolling
+    // desc                 |wx |with shift   |start*|count
+    // ---------------------+---+-------------+------+-----
+    // 1st tile (last pixel)|  0|  0 - 7 =  -7|     0|  160
+    // 1st tile (full)      |  7|  7 - 7 =   0|     0|  160
+    // no window            |166|166 - 7 = 159|   160|    0
+    // * - relative to line start
 
-    let count = max(LcdConstants.width - windowX, 0) // we may set window to 250 etc.
+    let windowX = Int(self.windowX) - LcdConstants.windowXShift
+
+    let relativeStart = max(windowX, 0)
+    let start = basePtr.advanced(by: line * LcdConstants.width + relativeStart)
+    let count = max(LcdConstants.width - relativeStart, 0)
+
     return UnsafeMutableBufferPointer(start: start, count: count)
   }
 

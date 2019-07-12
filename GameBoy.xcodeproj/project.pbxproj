@@ -49,7 +49,7 @@
 		906791FB22CCF4AB003869A9 /* MemoryReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791F922CCF4AB003869A9 /* MemoryReadTests.swift */; };
 		906791FC22CCF4AB003869A9 /* MemoryWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791FA22CCF4AB003869A9 /* MemoryWriteTests.swift */; };
 		906791FE22CCF829003869A9 /* CartridgeMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906791FD22CCF829003869A9 /* CartridgeMap.swift */; };
-		9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* LcdColorPalettes.swift */; };
+		9085FC3122B690C600310090 /* ColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3022B690C600310090 /* ColorPalettes.swift */; };
 		9085FC3322B693F200310090 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */; };
 		9085FC3D22B6BF6A00310090 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3C22B6BF6A00310090 /* main.swift */; };
 		9085FC3F22B6BFC100310090 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */; };
@@ -221,7 +221,7 @@
 		906791F922CCF4AB003869A9 /* MemoryReadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryReadTests.swift; sourceTree = "<group>"; };
 		906791FA22CCF4AB003869A9 /* MemoryWriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryWriteTests.swift; sourceTree = "<group>"; };
 		906791FD22CCF829003869A9 /* CartridgeMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeMap.swift; sourceTree = "<group>"; };
-		9085FC3022B690C600310090 /* LcdColorPalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcdColorPalettes.swift; sourceTree = "<group>"; };
+		9085FC3022B690C600310090 /* ColorPalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalettes.swift; sourceTree = "<group>"; };
 		9085FC3222B693F200310090 /* LcdColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorPaletteTests.swift; sourceTree = "<group>"; };
 		9085FC3C22B6BF6A00310090 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9085FC3E22B6BFC100310090 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
@@ -608,7 +608,7 @@
 				903DB4DB22BB903A003132FA /* LcdImpl+Dump.swift */,
 				90BFB4BA22D7C2FE00A3BD91 /* Tile.swift */,
 				90FC33EE22D27AD5008DEC39 /* Sprite.swift */,
-				9085FC3022B690C600310090 /* LcdColorPalettes.swift */,
+				9085FC3022B690C600310090 /* ColorPalettes.swift */,
 				90BD8BD422C630B3004376BD /* LcdConstants.swift */,
 			);
 			path = Lcd;
@@ -904,7 +904,7 @@
 				903CF63722D5309000542AA3 /* JoypadImpl.swift in Sources */,
 				90B0DC4B22B6F43D005BBCF5 /* Cartridge.swift in Sources */,
 				905321BE22BE649C00A409B2 /* Debugger+Memory.swift in Sources */,
-				9085FC3122B690C600310090 /* LcdColorPalettes.swift in Sources */,
+				9085FC3122B690C600310090 /* ColorPalettes.swift in Sources */,
 				904AE93822CFDB90002AB266 /* LcdImpl+Draw.swift in Sources */,
 				90910F9522D0E71700B93C2A /* CartridgeImplementations.swift in Sources */,
 				90B0DC5522B78927005BBCF5 /* Joypad.swift in Sources */,

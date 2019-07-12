@@ -43,6 +43,12 @@ internal enum LcdConstants {
   /// How many cycles does it take to render a full frame?
   /// (from: http://bgb.bircd.org/pandocs.htm#lcdstatusregister)
   internal static let cyclesPerFrame = 70_224
+
+  // MARK: - Other
+
+  /// FF4B - WX - Window X Position minus 7.
+  /// A postion of WX=7, WY=0 locates the window at upper left.
+  internal static let windowXShift = 7
 }
 
 internal enum TileConstants {

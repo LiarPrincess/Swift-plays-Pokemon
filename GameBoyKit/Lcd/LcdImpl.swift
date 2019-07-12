@@ -12,13 +12,7 @@ internal class LcdImpl: WritableLcd {
 
   internal var control: UInt8 = 0 {
     didSet {
-      let oldSpriteSize = oldValue & LcdControlMasks.spriteSize
-      let newSpriteSize = self.control & LcdControlMasks.spriteSize
-
-      let hasChangedSpriteSize = oldSpriteSize != newSpriteSize
-      if hasChangedSpriteSize {
-        self.spritesByLineCache.removeAll(keepingCapacity: true)
-      }
+      self.clearSpriteCacheIfSpriteSizeChanged(oldControl: oldValue, newControl: self.control)
     }
   }
 
@@ -56,7 +50,8 @@ internal class LcdImpl: WritableLcd {
   internal lazy var tiles   = (0..<TileConstants.count).map { _ in Tile() }
   internal lazy var sprites = (0..<SpriteConstants.count).map { _ in Sprite() }
 
-  /// Cache, so we don't recalculate sprites on every line.
+  /// Cache, so we don't recalculate sprites on every line draw.
+  /// Writes to OAM will clear appropriate entries.
   internal lazy var spritesByLineCache = [Int:[Sprite]]()
 
   internal lazy var framebuffer: UnsafeMutableBufferPointer<UInt8> = {
@@ -67,7 +62,7 @@ internal class LcdImpl: WritableLcd {
   }()
 
   /// Number of cycles that elapsed since we started current frame.
-  private var frameProgress: Int = 0
+  private var frameProgress = 0
 
   /// We can enable/disable diplay only an the start of the frame.
   /// See: http://bgb.bircd.org/pandocs.htm#lcdcontrolregister
@@ -180,7 +175,7 @@ internal class LcdImpl: WritableLcd {
     let height = self.spriteHeight
 
     let startLine = max(startLine, 0)
-    let endLine   = min(LcdConstants.backgroundMapHeight, startLine + height)
+    let endLine   = min(startLine + height, LcdConstants.backgroundMapHeight)
 
     for line in startLine..<endLine {
       self.spritesByLineCache[line] = nil
@@ -273,6 +268,16 @@ internal class LcdImpl: WritableLcd {
   }
 
   // MARK: - Setters
+
+  private func clearSpriteCacheIfSpriteSizeChanged(oldControl: UInt8, newControl: UInt8) {
+    let oldSize = oldControl & LcdControlMasks.spriteSize
+    let newSize = newControl & LcdControlMasks.spriteSize
+
+    let hasSizeChanged = oldSize != newSize
+    if hasSizeChanged {
+      self.spritesByLineCache.removeAll(keepingCapacity: true)
+    }
+  }
 
   private func setIsLineCompareInterrupt(_ value: Bool) {
     let clear = ~LcdStatusMasks.isLineCompareInterrupt

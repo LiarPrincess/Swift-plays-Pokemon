@@ -26,6 +26,7 @@ internal class Tile {
 
   deinit {
     self.data.deallocate()
+    self.pixels.deallocate()
   }
 
   internal func setByte(_ byte: Int, value: UInt8) {
