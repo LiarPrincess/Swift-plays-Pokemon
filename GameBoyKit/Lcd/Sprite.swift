@@ -9,6 +9,9 @@ private let isAboveBackgroundMask: UInt8 = 1 << 7
 
 internal class Sprite {
 
+  /// Sprite number (0..<40)
+  internal var id: UInt8
+
   /// Byte 0 - Y Position;
   /// Specifies the sprites vertical position on the screen (minus 16).
   internal var y: UInt8 = 0
@@ -26,6 +29,10 @@ internal class Sprite {
 
   internal var realY: Int { return Int(self.y) - 16 }
   internal var realX: Int { return Int(self.x) - 8 }
+
+  internal init(id: UInt8) {
+    self.id = id
+  }
 
   // MARK: - Flags
 

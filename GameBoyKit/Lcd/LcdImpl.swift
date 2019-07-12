@@ -48,7 +48,7 @@ internal class LcdImpl: WritableLcd {
   internal lazy var tileMap9c00to9fff = MemoryData.allocate(VideoRamMap.tileMap9c00to9fff)
 
   internal lazy var tiles   = (0..<TileConstants.count).map { _ in Tile() }
-  internal lazy var sprites = (0..<SpriteConstants.count).map { _ in Sprite() }
+  internal lazy var sprites = (0..<SpriteConstants.count).map { Sprite(id: $0) }
 
   /// Cache, so we don't recalculate sprites on every line draw.
   /// Writes to OAM will clear appropriate entries.

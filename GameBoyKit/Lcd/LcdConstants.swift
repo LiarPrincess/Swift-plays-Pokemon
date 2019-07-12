@@ -75,7 +75,7 @@ internal enum TileConstants {
 internal enum SpriteConstants {
 
   /// Total number of sprites (40)
-  internal static let count = 40
+  internal static let count: UInt8 = 40
 
   /// 1 line = max 10 sprites
   internal static let countPerLine = 10
