@@ -2,6 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable file_length
+
 extension LcdImpl {
 
   internal func drawLine() {
@@ -18,6 +20,7 @@ extension LcdImpl {
     }
   }
 
+  // swiftlint:disable:next function_body_length
   private func drawBackgroundLine() {
     let line     = Int(self.line)
     let globalY  = (Int(self.scrollY) + line) % LcdConstants.backgroundMapHeight
@@ -48,8 +51,10 @@ extension LcdImpl {
       for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
         let color     = self._backgroundPalette[tileColor]
-        let relativeBit = bit - startBit
-        framebufferSlice[progress + relativeBit] = color
+
+        let targetX = progress + (bit - startBit)
+        framebufferSlice[targetX] = color
+        self.isBackgroundZero[targetX] = tileColor == 0
       }
 
       progress += (TileConstants.width - startBit)
@@ -75,7 +80,7 @@ extension LcdImpl {
       // 1st tile (full)      |  7|  7 - 7 =   0|     0
       // no window            |166|166 - 7 = 159|   160
 
-      let windowX = max(Int(self.windowX) - LcdConstants.windowXShift, 0)
+      let windowX = max(self.shiftedWindowX, 0)
       count = min(count, windowX + 1)
     }
 
@@ -86,6 +91,7 @@ extension LcdImpl {
   private func drawWindow() {
     let line = Int(self.line)
     let windowStartY = Int(self.windowY)
+    let windowStartX = self.shiftedWindowX
 
     guard line >= windowStartY else {
       return
@@ -118,8 +124,10 @@ extension LcdImpl {
       for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
         let color     = self._backgroundPalette[tileColor]
-        let relativeBit = bit - startBit
-        framebufferSlice[progress + relativeBit] = color
+
+        let targetX = progress + (bit - startBit)
+        framebufferSlice[targetX] = color
+        self.isBackgroundZero[targetX] = tileColor == 0
       }
 
       progress += (TileConstants.width - startBit)
@@ -141,9 +149,7 @@ extension LcdImpl {
     // no window            |166|166 - 7 = 159|   160|    0
     // * - relative to line start
 
-    let windowX = Int(self.windowX) - LcdConstants.windowXShift
-
-    let relativeStart = max(windowX, 0)
+    let relativeStart = max(self.shiftedWindowX, 0)
     let start = basePtr.advanced(by: line * LcdConstants.width + relativeStart)
     let count = max(LcdConstants.width - relativeStart, 0)
 
@@ -197,14 +203,16 @@ extension LcdImpl {
         let colorBit = sprite.flipX ? 7 - bit : bit
         let rawColor = tilePixels[colorBit]
 
+        let targetX = sprite.realX + bit
+
         let isTransparent = rawColor == 0
-        if !isTransparent {
+        let isAboveBackground = sprite.isAboveBackground || self.isBackgroundZero[targetX]
+
+        if !isTransparent && isAboveBackground {
           let color = palette[rawColor]
-          framebufferSlice[sprite.realX + bit] = color
+          framebufferSlice[targetX] = color
         }
       }
-
-      // TODO: Priority
     }
   }
 
@@ -253,6 +261,11 @@ extension LcdImpl {
   }
 
   // MARK: - Helpers
+
+  /// windowX - 7
+  private var shiftedWindowX: Int {
+    return Int(self.windowX) - LcdConstants.windowXShift
+  }
 
   internal func getTileMap(for map: TileMap) -> MemoryData {
     switch map {

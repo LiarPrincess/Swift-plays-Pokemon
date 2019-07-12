@@ -64,6 +64,9 @@ internal class LcdImpl: WritableLcd {
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress = 0
 
+  /// Used when drawing sprites (isBehindBackground property).
+  internal var isBackgroundZero = [Bool](repeating: true, count: LcdConstants.width)
+
   /// We can enable/disable diplay only an the start of the frame.
   /// See: http://bgb.bircd.org/pandocs.htm#lcdcontrolregister
   private var isLcdEnabledInCurrentFrame: Bool = false
