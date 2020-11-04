@@ -7,24 +7,35 @@
 
 import Foundation
 
+// Add some lines at the end of every instruction
 func modifyInstructions(_ opcodes: Opcodes, _ instructionsFileContent: String) {
   let groupedFunctions = groupByFunction(opcodes)
   validate(groupedFunctions)
 
-  let swiftLines = instructionsFileContent.split(separator: "\n", maxSplits: .max, omittingEmptySubsequences: false)
+  let swiftLines = instructionsFileContent.split(
+    separator: "\n",
+    maxSplits: .max,
+    omittingEmptySubsequences: false
+  )
 
   var functionName: String? = nil
   for line in swiftLines {
-    if line.starts(with: "  internal func") {
+    let isFunctionStart = line.starts(with: "  internal func")
+    if isFunctionStart {
       let nameStart = line.index(line.startIndex, offsetBy: 16)
       let nameEnd = line.firstIndex(of: "(")!
       functionName = String(line[nameStart..<nameEnd])
     }
 
-    if line.starts(with: "  }") && functionName != nil {
-      guard let opcode = groupedFunctions[functionName!]?.first else {
-        fatalError("Function '\(String(describing: functionName))' is not an CPU instruction. Maybe it has invalid ACL?")
+    let isFunctionEnd = line.starts(with: "  }")
+    if isFunctionEnd {
+      guard let fnName = functionName else {
+        // This is probably a private function
         continue
+      }
+
+      guard let opcode = groupedFunctions[fnName]?.first else {
+        fatalError("Function '\(fnName)' is not an CPU instruction. Maybe it has invalid ACL?")
       }
 
       print("")

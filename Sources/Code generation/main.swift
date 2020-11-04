@@ -9,28 +9,28 @@ let sourcesDir = currentFile.deletingLastPathComponent().deletingLastPathCompone
 let cpuDir   = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathComponent("Cpu")
 let debugDir = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathComponent("Debug")
 
-let opcodes = try openOpcodesFile()
+let opcodes = try readOpcodes()
 defer { fclose(stdout) }
 
 // MARK: - Execute
 
 var file = cpuDir.appendingPathComponent("Cpu+ExecuteUnprefixed.swift")
 freopen(file.path, "w", stdout)
-printExecuteExtension(opcodes)
+printExecuteSwitch(opcodes)
 
 file = cpuDir.appendingPathComponent("Cpu+ExecutePrefixed.swift")
 freopen(file.path, "w", stdout)
-printExecutePrefixExtension(opcodes)
+printExecutePrefixSwitch(opcodes)
 
 // MARK: - Symbols
 
 file = debugDir.appendingPathComponent("UnprefixedOpcode.swift")
 freopen(file.path, "w", stdout)
-printOpcodes(opcodes)
+printOpcodeEnum(opcodes)
 
 file = debugDir.appendingPathComponent("CBPrefixedOpcode.swift")
 freopen(file.path, "w", stdout)
-printPrefixOpcodes(opcodes)
+printPrefixOpcodeEnum(opcodes)
 
 // MARK: - Modify cpu instructions
 

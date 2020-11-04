@@ -2,7 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-struct Opcode {
+struct Opcode: Codable {
 
   /// Instruction mnemonic
   let mnemonic: String
@@ -28,4 +28,9 @@ struct Opcode {
 
   /// Operand 2
   let operand2: String?
+}
+
+struct Opcodes: Codable {
+  let unprefixed: [Opcode]
+  let cbprefixed: [Opcode]
 }

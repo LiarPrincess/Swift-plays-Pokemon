@@ -2,7 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-func printOpcodes(_ opcodes: Opcodes) {
+func printOpcodeEnum(_ opcodes: Opcodes) {
   printHeader()
 
   print("/// One of the standard 256 opcodes.")
@@ -11,7 +11,7 @@ func printOpcodes(_ opcodes: Opcodes) {
   printOpcodeEnum("UnprefixedOpcode", opcodes.unprefixed)
 }
 
-func printPrefixOpcodes(_ opcodes: Opcodes) {
+func printPrefixOpcodeEnum(_ opcodes: Opcodes) {
   printHeader()
 
   print("/// One of the 256 opcodes that should be executed if opcode is 0xCB.")

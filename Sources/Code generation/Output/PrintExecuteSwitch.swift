@@ -2,12 +2,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-func printExecuteExtension(_ opcodes: Opcodes) {
+func printExecuteSwitch(_ opcodes: Opcodes) {
   printHeader()
   printCpuExtension("executeUnprefixed", opcodes.unprefixed, getUnprefixedOpcodeCall(_:))
 }
 
-func printExecutePrefixExtension(_ opcodes: Opcodes) {
+func printExecutePrefixSwitch(_ opcodes: Opcodes) {
   printHeader()
   printCpuExtension("executePrefixed", opcodes.cbprefixed, getCBPrefixedOpcodeCall(_:))
 }

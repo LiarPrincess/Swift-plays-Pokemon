@@ -34,9 +34,9 @@
 		OBJ_146 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Common.swift */; };
 		OBJ_147 /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ModifyInstructions.swift */; };
 		OBJ_148 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Opcode.swift */; };
-		OBJ_149 /* OpenOpcodesFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* OpenOpcodesFile.swift */; };
-		OBJ_150 /* PrintExecute.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* PrintExecute.swift */; };
-		OBJ_151 /* PrintOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* PrintOpcodes.swift */; };
+		OBJ_149 /* readOpcodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* readOpcodes.swift */; };
+		OBJ_150 /* PrintExecuteSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* PrintExecuteSwitch.swift */; };
+		OBJ_151 /* PrintOpcodeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* PrintOpcodeEnum.swift */; };
 		OBJ_152 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* main.swift */; };
 		OBJ_159 /* Bootrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Bootrom.swift */; };
 		OBJ_160 /* BootromFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* BootromFactory.swift */; };
@@ -223,15 +223,15 @@
 		OBJ_127 /* MemoryReadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryReadTests.swift; sourceTree = "<group>"; };
 		OBJ_128 /* MemoryWriteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryWriteTests.swift; sourceTree = "<group>"; };
 		OBJ_129 /* UnmapBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmapBootromTests.swift; sourceTree = "<group>"; };
-		OBJ_13 /* OpenOpcodesFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenOpcodesFile.swift; sourceTree = "<group>"; };
+		OBJ_13 /* readOpcodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = readOpcodes.swift; sourceTree = "<group>"; };
 		OBJ_130 /* String+padTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+padTests.swift"; sourceTree = "<group>"; };
 		OBJ_131 /* UInt+radixFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+radixFormatTests.swift"; sourceTree = "<group>"; };
 		OBJ_137 /* ROMs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ROMs; sourceTree = SOURCE_ROOT; };
 		OBJ_138 /* Build */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Build; sourceTree = SOURCE_ROOT; };
 		OBJ_139 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		OBJ_14 /* PrintExecute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintExecute.swift; sourceTree = "<group>"; };
+		OBJ_14 /* PrintExecuteSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintExecuteSwitch.swift; sourceTree = "<group>"; };
 		OBJ_140 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		OBJ_15 /* PrintOpcodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintOpcodes.swift; sourceTree = "<group>"; };
+		OBJ_15 /* PrintOpcodeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintOpcodeEnum.swift; sourceTree = "<group>"; };
 		OBJ_16 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_18 /* GameBoyKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameBoyKit.h; sourceTree = "<group>"; };
 		OBJ_19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -375,6 +375,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		90374A4D2553494B008A908D /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* opcodes.json */,
+				OBJ_12 /* Opcode.swift */,
+				OBJ_13 /* readOpcodes.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		90374A5425534A02008A908D /* Output */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_10 /* Common.swift */,
+				OBJ_14 /* PrintExecuteSwitch.swift */,
+				OBJ_15 /* PrintOpcodeEnum.swift */,
+				OBJ_11 /* ModifyInstructions.swift */,
+			);
+			path = Output;
+			sourceTree = "<group>";
+		};
 		OBJ_107 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,7 +529,7 @@
 			path = IO;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -521,7 +542,6 @@
 				OBJ_140 /* README.md */,
 				90374A3A25534757008A908D /* Frameworks */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_52 /* Interrupts */ = {
@@ -619,13 +639,8 @@
 		OBJ_8 /* Code generation */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* opcodes.json */,
-				OBJ_10 /* Common.swift */,
-				OBJ_11 /* ModifyInstructions.swift */,
-				OBJ_12 /* Opcode.swift */,
-				OBJ_13 /* OpenOpcodesFile.swift */,
-				OBJ_14 /* PrintExecute.swift */,
-				OBJ_15 /* PrintOpcodes.swift */,
+				90374A4D2553494B008A908D /* Input */,
+				90374A5425534A02008A908D /* Output */,
 				OBJ_16 /* main.swift */,
 			);
 			name = "Code generation";
@@ -810,7 +825,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_132 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -870,9 +885,9 @@
 				OBJ_146 /* Common.swift in Sources */,
 				OBJ_147 /* ModifyInstructions.swift in Sources */,
 				OBJ_148 /* Opcode.swift in Sources */,
-				OBJ_149 /* OpenOpcodesFile.swift in Sources */,
-				OBJ_150 /* PrintExecute.swift in Sources */,
-				OBJ_151 /* PrintOpcodes.swift in Sources */,
+				OBJ_149 /* readOpcodes.swift in Sources */,
+				OBJ_150 /* PrintExecuteSwitch.swift in Sources */,
+				OBJ_151 /* PrintOpcodeEnum.swift in Sources */,
 				OBJ_152 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
