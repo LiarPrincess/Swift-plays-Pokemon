@@ -4,7 +4,7 @@
 
 // swiftlint:disable file_length
 
-extension LcdImpl {
+extension Lcd {
 
   internal func drawLine() {
     if self.control.isBackgroundVisible {
@@ -50,7 +50,7 @@ extension LcdImpl {
 
       for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
-        let color     = self._backgroundPalette[tileColor]
+        let color = self.backgroundColorPalette[tileColor]
 
         let targetX = progress + (bit - startBit)
         framebufferSlice[targetX] = color
@@ -123,7 +123,7 @@ extension LcdImpl {
 
       for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
-        let color     = self._backgroundPalette[tileColor]
+        let color = self.backgroundColorPalette[tileColor]
 
         let targetX = progress + (bit - startBit)
         framebufferSlice[targetX] = color
@@ -191,7 +191,7 @@ extension LcdImpl {
       let tile = self.tiles[tileIndex]
       let tilePixels = tile.getPixels(in: tileLine)
 
-      let palette = sprite.palette == 0 ? self._spritePalette0 : self._spritePalette1
+      let palette = sprite.palette == 0 ? self.spriteColorPalette0 : self.spriteColorPalette1
 
       // realX < 0 when sprite is partially visible on the left edge of the screen
       let startBit = sprite.realX < 0 ? -sprite.realX : 0

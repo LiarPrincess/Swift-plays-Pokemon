@@ -7,7 +7,7 @@ import XCTest
 
 extension XCTestCase {
 
-  func createLcd(interrupts: Interrupts? = nil) -> LcdImpl {
-    return LcdImpl(interrupts: interrupts ?? Interrupts())
+  func createLcd(interrupts: Interrupts? = nil) -> Lcd {
+    return Lcd(interrupts: interrupts ?? Interrupts())
   }
 }

@@ -7,7 +7,7 @@ public final class Debugger {
   internal var gameBoy:   GameBoy
   internal var cpu:       Cpu    { return gameBoy.cpu }
   internal var memory:    Memory { return gameBoy.memory }
-  internal var lcd:       LcdImpl { return gameBoy._lcd }
+  internal var lcd:       Lcd { return gameBoy.lcd }
 
   private var stateBefore = DebugState()
   private var stateAfter  = DebugState()

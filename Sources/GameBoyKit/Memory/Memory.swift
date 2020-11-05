@@ -11,7 +11,7 @@ public final class Memory: CpuMemory {
     case finished
   }
 
-  internal let lcd: WritableLcd
+  internal let lcd: LcdMemory
   internal var audio: AudioMemory
   internal let timer: TimerMemory
   internal let joypad: JoypadMemory
@@ -37,7 +37,7 @@ public final class Memory: CpuMemory {
   internal init(bootrom:    BootromState,
                 cartridge:  CartridgeMemory,
                 joypad:     JoypadMemory,
-                lcd:        WritableLcd,
+                lcd:        LcdMemory,
                 audio:      AudioMemory,
                 timer:      TimerMemory,
                 interrupts: Interrupts) {

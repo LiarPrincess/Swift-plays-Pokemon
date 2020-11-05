@@ -99,18 +99,30 @@ extension Memory {
     case MemoryMap.Audio.nr3_ram_start: self.audio.nr3_ram_start = value
     case MemoryMap.Audio.nr3_ram_end:   self.audio.nr3_ram_end = value
 
-    case MemoryMap.Lcd.control: self.lcd.controlRaw = value
-    case MemoryMap.Lcd.status:  self.lcd.statusRaw = value
-    case MemoryMap.Lcd.scrollY: self.lcd.scrollY = value
-    case MemoryMap.Lcd.scrollX: self.lcd.scrollX = value
-    case MemoryMap.Lcd.line:        self.lcd.line = value
-    case MemoryMap.Lcd.lineCompare: self.lcd.lineCompare = value
-    case MemoryMap.Lcd.dma:         self.dma(writeValue: value)
-    case MemoryMap.Lcd.backgroundPalette: self.lcd.backgroundPalette = value
-    case MemoryMap.Lcd.spritePalette0:    self.lcd.spritePalette0 = value
-    case MemoryMap.Lcd.spritePalette1:    self.lcd.spritePalette1 = value
-    case MemoryMap.Lcd.windowY: self.lcd.windowY = value
-    case MemoryMap.Lcd.windowX: self.lcd.windowX = value
+    case MemoryMap.Lcd.control:
+      self.lcd.control = LcdControl(value: value)
+    case MemoryMap.Lcd.status:
+      self.lcd.status = LcdStatus(value: value)
+    case MemoryMap.Lcd.scrollY:
+      self.lcd.scrollY = value
+    case MemoryMap.Lcd.scrollX:
+      self.lcd.scrollX = value
+    case MemoryMap.Lcd.line:
+      self.lcd.line = value
+    case MemoryMap.Lcd.lineCompare:
+      self.lcd.lineCompare = value
+    case MemoryMap.Lcd.dma:
+      self.dma(writeValue: value)
+    case MemoryMap.Lcd.backgroundPalette:
+      self.lcd.backgroundColorPalette = BackgroundColorPalette(value: value)
+    case MemoryMap.Lcd.spritePalette0:
+      self.lcd.spriteColorPalette0 = SpriteColorPalette(value: value)
+    case MemoryMap.Lcd.spritePalette1:
+      self.lcd.spriteColorPalette1 = SpriteColorPalette(value: value)
+    case MemoryMap.Lcd.windowY:
+      self.lcd.windowY = value
+    case MemoryMap.Lcd.windowX:
+      self.lcd.windowX = value
 
     default:
       return self.unmappedMemory[address] = value

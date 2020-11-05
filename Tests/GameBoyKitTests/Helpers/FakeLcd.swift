@@ -4,28 +4,26 @@
 
 @testable import GameBoyKit
 
-class FakeLcd: WritableLcd {
+class FakeLcd: LcdMemory {
 
-  var controlRaw: UInt8 = 0
-  var statusRaw:  UInt8 = 0
+  var control = LcdControl(value: 0)
+  var status = LcdStatus(value: 0)
 
-  var scrollY: UInt8 = 0
-  var scrollX: UInt8 = 0
+  var scrollY = UInt8()
+  var scrollX = UInt8()
 
-  var line:        UInt8 = 0
-  var lineCompare: UInt8 = 0
+  var line = UInt8()
+  var lineCompare = UInt8()
 
-  var windowY: UInt8 = 0
-  var windowX: UInt8 = 0
+  var windowY = UInt8()
+  var windowX = UInt8()
 
-  var backgroundPalette: UInt8 = 0
-  var spritePalette0:    UInt8 = 0
-  var spritePalette1:    UInt8 = 0
+  var backgroundColorPalette = BackgroundColorPalette(value: 0)
+  var spriteColorPalette0 = SpriteColorPalette(value: 0)
+  var spriteColorPalette1 = SpriteColorPalette(value: 0)
 
   var videoRam = [UInt16:UInt8]()
   var oam      = [UInt16:UInt8]()
-
-  var framebuffer = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: 0)
 
   func readVideoRam(_ address: UInt16) -> UInt8 {
     return self.videoRam[address] ?? 0
@@ -42,7 +40,4 @@ class FakeLcd: WritableLcd {
   func writeOAM(_ address: UInt16, value: UInt8) {
     self.oam[address] = value
   }
-
-  func startFrame() { }
-  func tick(cycles: Int) { }
 }

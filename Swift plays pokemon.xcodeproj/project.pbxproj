@@ -41,7 +41,7 @@
 		90427DED25548D93007A9E9D /* BackgroundColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427DE525548D8E007A9E9D /* BackgroundColorPaletteTests.swift */; };
 		90427E0825548FEB007A9E9D /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E0725548FEB007A9E9D /* LcdControl.swift */; };
 		90427E10255491C8007A9E9D /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E0F255491C8007A9E9D /* LcdStatus.swift */; };
-		90427E26255497CA007A9E9D /* Lcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E24255497CA007A9E9D /* Lcd.swift */; };
+		90427E26255497CA007A9E9D /* LcdMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E24255497CA007A9E9D /* LcdMemory.swift */; };
 		90427E3A25549F27007A9E9D /* LcdTileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E3925549F27007A9E9D /* LcdTileMap.swift */; };
 		90427E4825549F43007A9E9D /* LcdTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E4725549F43007A9E9D /* LcdTileData.swift */; };
 		90427E5025549F5E007A9E9D /* LcdMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E4F25549F5E007A9E9D /* LcdMode.swift */; };
@@ -82,9 +82,9 @@
 		OBJ_187 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Interrupts.swift */; };
 		OBJ_188 /* SpriteColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* SpriteColorPalette.swift */; };
 		OBJ_191 /* LcdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* LcdConstants.swift */; };
-		OBJ_192 /* LcdImpl+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* LcdImpl+Draw.swift */; };
-		OBJ_193 /* LcdImpl+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* LcdImpl+Dump.swift */; };
-		OBJ_194 /* LcdImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* LcdImpl.swift */; };
+		OBJ_192 /* Lcd+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Lcd+Draw.swift */; };
+		OBJ_193 /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Lcd+Dump.swift */; };
+		OBJ_194 /* Lcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Lcd.swift */; };
 		OBJ_195 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* Sprite.swift */; };
 		OBJ_196 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* Tile.swift */; };
 		OBJ_197 /* Memory+read.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* Memory+read.swift */; };
@@ -127,7 +127,7 @@
 		OBJ_246 /* FakeLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* FakeLcd.swift */; };
 		OBJ_247 /* FakeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FakeTimer.swift */; };
 		OBJ_248 /* CpuTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* CpuTestCase.swift */; };
-		OBJ_249 /* XCTestCase+createLcdImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* XCTestCase+createLcdImpl.swift */; };
+		OBJ_249 /* XCTestCase+createLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* XCTestCase+createLcd.swift */; };
 		OBJ_250 /* XCTestCase+createMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* XCTestCase+createMemory.swift */; };
 		OBJ_251 /* TimerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* TimerTestCase.swift */; };
 		OBJ_252 /* TimerTimaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* TimerTimaTests.swift */; };
@@ -215,7 +215,7 @@
 		90427DE525548D8E007A9E9D /* BackgroundColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorPaletteTests.swift; sourceTree = "<group>"; };
 		90427E0725548FEB007A9E9D /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90427E0F255491C8007A9E9D /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
-		90427E24255497CA007A9E9D /* Lcd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lcd.swift; sourceTree = "<group>"; };
+		90427E24255497CA007A9E9D /* LcdMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcdMemory.swift; sourceTree = "<group>"; };
 		90427E3925549F27007A9E9D /* LcdTileMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileMap.swift; sourceTree = "<group>"; };
 		90427E4725549F43007A9E9D /* LcdTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileData.swift; sourceTree = "<group>"; };
 		90427E4F25549F5E007A9E9D /* LcdMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdMode.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 		OBJ_112 /* FakeLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLcd.swift; sourceTree = "<group>"; };
 		OBJ_113 /* FakeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTimer.swift; sourceTree = "<group>"; };
 		OBJ_114 /* CpuTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuTestCase.swift; sourceTree = "<group>"; };
-		OBJ_115 /* XCTestCase+createLcdImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcdImpl.swift"; sourceTree = "<group>"; };
+		OBJ_115 /* XCTestCase+createLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcd.swift"; sourceTree = "<group>"; };
 		OBJ_116 /* XCTestCase+createMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createMemory.swift"; sourceTree = "<group>"; };
 		OBJ_117 /* TimerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTestCase.swift; sourceTree = "<group>"; };
 		OBJ_119 /* TimerTimaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTimaTests.swift; sourceTree = "<group>"; };
@@ -290,10 +290,10 @@
 		OBJ_53 /* Interrupts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interrupts.swift; sourceTree = "<group>"; };
 		OBJ_55 /* SpriteColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteColorPalette.swift; sourceTree = "<group>"; };
 		OBJ_58 /* LcdConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdConstants.swift; sourceTree = "<group>"; };
-		OBJ_59 /* LcdImpl+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LcdImpl+Draw.swift"; sourceTree = "<group>"; };
+		OBJ_59 /* Lcd+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Draw.swift"; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_60 /* LcdImpl+Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LcdImpl+Dump.swift"; sourceTree = "<group>"; };
-		OBJ_61 /* LcdImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdImpl.swift; sourceTree = "<group>"; };
+		OBJ_60 /* Lcd+Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Dump.swift"; sourceTree = "<group>"; };
+		OBJ_61 /* Lcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lcd.swift; sourceTree = "<group>"; };
 		OBJ_62 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		OBJ_63 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		OBJ_65 /* Memory+read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memory+read.swift"; sourceTree = "<group>"; };
@@ -455,15 +455,6 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
-		90427DCA25548C53007A9E9D /* Color palettes */ = {
-			isa = PBXGroup;
-			children = (
-				90427DCB25548C7F007A9E9D /* BackgroundColorPalette.swift */,
-				OBJ_55 /* SpriteColorPalette.swift */,
-			);
-			path = "Color palettes";
-			sourceTree = "<group>";
-		};
 		90427E0625548FC5007A9E9D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,6 +463,8 @@
 				90427E4F25549F5E007A9E9D /* LcdMode.swift */,
 				90427E3925549F27007A9E9D /* LcdTileMap.swift */,
 				90427E4725549F43007A9E9D /* LcdTileData.swift */,
+				90427DCB25548C7F007A9E9D /* BackgroundColorPalette.swift */,
+				OBJ_55 /* SpriteColorPalette.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -485,7 +478,7 @@
 				OBJ_111 /* FakeJoypad.swift */,
 				OBJ_112 /* FakeLcd.swift */,
 				OBJ_113 /* FakeTimer.swift */,
-				OBJ_115 /* XCTestCase+createLcdImpl.swift */,
+				OBJ_115 /* XCTestCase+createLcd.swift */,
 				OBJ_116 /* XCTestCase+createMemory.swift */,
 			);
 			path = Helpers;
@@ -627,12 +620,11 @@
 		OBJ_54 /* Lcd */ = {
 			isa = PBXGroup;
 			children = (
-				90427DCA25548C53007A9E9D /* Color palettes */,
 				90427E0625548FC5007A9E9D /* Entities */,
-				90427E24255497CA007A9E9D /* Lcd.swift */,
-				OBJ_61 /* LcdImpl.swift */,
-				OBJ_59 /* LcdImpl+Draw.swift */,
-				OBJ_60 /* LcdImpl+Dump.swift */,
+				90427E24255497CA007A9E9D /* LcdMemory.swift */,
+				OBJ_61 /* Lcd.swift */,
+				OBJ_59 /* Lcd+Draw.swift */,
+				OBJ_60 /* Lcd+Dump.swift */,
 				OBJ_58 /* LcdConstants.swift */,
 				OBJ_62 /* Sprite.swift */,
 				OBJ_63 /* Tile.swift */,
@@ -1006,9 +998,9 @@
 				OBJ_187 /* Interrupts.swift in Sources */,
 				OBJ_188 /* SpriteColorPalette.swift in Sources */,
 				OBJ_191 /* LcdConstants.swift in Sources */,
-				OBJ_192 /* LcdImpl+Draw.swift in Sources */,
-				OBJ_193 /* LcdImpl+Dump.swift in Sources */,
-				OBJ_194 /* LcdImpl.swift in Sources */,
+				OBJ_192 /* Lcd+Draw.swift in Sources */,
+				OBJ_193 /* Lcd+Dump.swift in Sources */,
+				OBJ_194 /* Lcd.swift in Sources */,
 				OBJ_195 /* Sprite.swift in Sources */,
 				OBJ_196 /* Tile.swift in Sources */,
 				OBJ_197 /* Memory+read.swift in Sources */,
@@ -1016,7 +1008,7 @@
 				OBJ_198 /* Memory+write.swift in Sources */,
 				OBJ_199 /* Memory.swift in Sources */,
 				90427E10255491C8007A9E9D /* LcdStatus.swift in Sources */,
-				90427E26255497CA007A9E9D /* Lcd.swift in Sources */,
+				90427E26255497CA007A9E9D /* LcdMemory.swift in Sources */,
 				90427E0825548FEB007A9E9D /* LcdControl.swift in Sources */,
 				OBJ_200 /* MemoryBuffer.swift in Sources */,
 				OBJ_201 /* MemoryMap.swift in Sources */,
@@ -1071,7 +1063,7 @@
 				90427DB125548A42007A9E9D /* FakeAudioMemory.swift in Sources */,
 				OBJ_247 /* FakeTimer.swift in Sources */,
 				OBJ_248 /* CpuTestCase.swift in Sources */,
-				OBJ_249 /* XCTestCase+createLcdImpl.swift in Sources */,
+				OBJ_249 /* XCTestCase+createLcd.swift in Sources */,
 				OBJ_250 /* XCTestCase+createMemory.swift in Sources */,
 				OBJ_251 /* TimerTestCase.swift in Sources */,
 				90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */,

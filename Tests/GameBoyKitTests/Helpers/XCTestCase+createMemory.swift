@@ -17,7 +17,7 @@ extension XCTestCase {
   func createMemory(bootrom:    BootromMemory?   = nil,
                     cartridge:  CartridgeMemory? = nil,
                     joypad:     JoypadMemory?    = nil,
-                    lcd:        WritableLcd?     = nil,
+                    lcd:        LcdMemory?     = nil,
                     audio:      AudioMemory?     = nil,
                     timer:      TimerMemory?     = nil,
                     interrupts: Interrupts?      = nil) -> Memory {

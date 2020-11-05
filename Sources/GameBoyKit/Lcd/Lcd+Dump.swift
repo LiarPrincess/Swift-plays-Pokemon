@@ -9,12 +9,12 @@ private let tileRowCount    = 32
 private let tileColumnCount = 32
 private let tilesPerRow = 32
 
-extension LcdImpl {
+extension Lcd {
 
   // MARK: - Properties
 
   internal func dumpProperties() {
-    print("LCDC: \(self.controlRaw.bin)")
+    print("LCDC: \(self.control.value.bin)")
     print("  isLcdEnabled: \(self.control.isLcdEnabled)")
     print("  isBackgroundVisible: \(self.control.isBackgroundVisible)")
     print("  isWindowEnabled: \(self.control.isWindowEnabled)")
@@ -24,7 +24,7 @@ extension LcdImpl {
     print("  tileDataSelect: \(self.control.tileDataSelect)")
     print("  spriteHeight: \(self.control.spriteHeight)")
 
-    print("STAT: \(self.statusRaw.bin)")
+    print("STAT: \(self.status.value.bin)")
     print("  isLineCompareInterruptEnabled: \(self.status.isLineCompareInterruptEnabled)")
     print("  isOamInterruptEnabled: \(self.status.isOamInterruptEnabled)")
     print("  isVBlankInterruptEnabled: \(self.status.isVBlankInterruptEnabled)")
@@ -38,9 +38,9 @@ extension LcdImpl {
     print("LineCompare: \(self.lineCompare.hex)")
     print("WindowY: \(self.windowY.hex)")
     print("WindowX: \(self.windowX.hex)")
-    print("BackgroundPalette: \(self.backgroundPalette.hex)")
-    print("SpritePalette0: \(self.spritePalette0.hex)")
-    print("SpritePalette1: \(self.spritePalette1.hex)")
+    print("BackgroundPalette: \(self.backgroundColorPalette.value.hex)")
+    print("SpritePalette0: \(self.spriteColorPalette0.value.hex)")
+    print("SpritePalette1: \(self.spriteColorPalette1.value.hex)")
   }
 
   // MARK: - Tile indices

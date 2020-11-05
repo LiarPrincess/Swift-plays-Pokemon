@@ -10,13 +10,11 @@ public final class GameBoy {
   public static var lcdHeight: Int { return LcdConstants.height }
 
   public let cpu: Cpu
-  public var lcd: Lcd { return self._lcd }
+  public let lcd: Lcd
   public let audio: Audio
   public let memory: Memory
   public let timer: GameBoyKit.Timer
   public let joypad: Joypad
-
-  internal let _lcd: LcdImpl
 
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress: Int = 0
@@ -31,7 +29,7 @@ public final class GameBoy {
               bootrom: Bootrom?,
               cartridge: Cartridge) {
     let interrupts = Interrupts()
-    self._lcd = LcdImpl(interrupts: interrupts)
+    self.lcd = Lcd(interrupts: interrupts)
     self.audio = Audio()
     self.timer = GameBoyKit.Timer(interrupts: interrupts)
     self.joypad = Joypad(provider: input)
@@ -41,7 +39,7 @@ public final class GameBoy {
     self.memory = Memory(bootrom:   bootromState,
                          cartridge: cartridge,
                          joypad:    self.joypad,
-                         lcd:       self._lcd,
+                         lcd:       self.lcd,
                          audio:     self.audio,
                          timer:     self.timer,
                          interrupts: interrupts)
@@ -125,7 +123,7 @@ public final class GameBoy {
       }
 
       self.timer.tick(cycles: cycles)
-      self._lcd.tick(cycles: cycles)
+      self.lcd.tick(cycles: cycles)
     }
   }
 }
