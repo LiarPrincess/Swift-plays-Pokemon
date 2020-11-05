@@ -34,6 +34,9 @@
 		90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427CF725545FC8007A9E9D /* CpuMemory.swift */; };
 		90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D5625546F00007A9E9D /* BootromMemory.swift */; };
 		90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D7C25548092007A9E9D /* Interrupts+properties.swift */; };
+		90427D9A2554866E007A9E9D /* AudioMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D992554866E007A9E9D /* AudioMemory.swift */; };
+		90427DA2255487C5007A9E9D /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427DA1255487C5007A9E9D /* Audio.swift */; };
+		90427DB125548A42007A9E9D /* FakeAudioMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427DA925548A21007A9E9D /* FakeAudioMemory.swift */; };
 		OBJ_146 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Common.swift */; };
 		OBJ_147 /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ModifyInstructions.swift */; };
 		OBJ_148 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Opcode.swift */; };
@@ -199,6 +202,9 @@
 		90427CF725545FC8007A9E9D /* CpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuMemory.swift; sourceTree = "<group>"; };
 		90427D5625546F00007A9E9D /* BootromMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromMemory.swift; sourceTree = "<group>"; };
 		90427D7C25548092007A9E9D /* Interrupts+properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Interrupts+properties.swift"; sourceTree = "<group>"; };
+		90427D992554866E007A9E9D /* AudioMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMemory.swift; sourceTree = "<group>"; };
+		90427DA1255487C5007A9E9D /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		90427DA925548A21007A9E9D /* FakeAudioMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAudioMemory.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		OBJ_100 /* CpuOpcodeLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeLengthTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* CpuOpcodeTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeTimingTests.swift; sourceTree = "<group>"; };
@@ -428,11 +434,21 @@
 			path = Bootrom;
 			sourceTree = "<group>";
 		};
+		90427D982554865E007A9E9D /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				90427D992554866E007A9E9D /* AudioMemory.swift */,
+				90427DA1255487C5007A9E9D /* Audio.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		OBJ_107 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_108 /* FakeBootromMemory.swift */,
 				OBJ_109 /* FakeCartridgeMemory.swift */,
+				90427DA925548A21007A9E9D /* FakeAudioMemory.swift */,
 				OBJ_111 /* FakeJoypad.swift */,
 				OBJ_112 /* FakeLcd.swift */,
 				OBJ_113 /* FakeTimer.swift */,
@@ -493,6 +509,7 @@
 				OBJ_45 /* IO */,
 				OBJ_54 /* Lcd */,
 				OBJ_64 /* Memory */,
+				90427D982554865E007A9E9D /* Audio */,
 				OBJ_34 /* Debug */,
 				OBJ_43 /* GameBoy.swift */,
 				OBJ_44 /* GameboyInput.swift */,
@@ -928,6 +945,7 @@
 				OBJ_166 /* Cpu+ExecutePrefixed.swift in Sources */,
 				OBJ_167 /* Cpu+ExecuteUnprefixed.swift in Sources */,
 				OBJ_168 /* Cpu+Instructions.swift in Sources */,
+				90427D9A2554866E007A9E9D /* AudioMemory.swift in Sources */,
 				OBJ_169 /* Cpu.swift in Sources */,
 				OBJ_170 /* CpuRegisters.swift in Sources */,
 				OBJ_171 /* CBPrefixedOpcode.swift in Sources */,
@@ -941,6 +959,7 @@
 				OBJ_178 /* Extensions.swift in Sources */,
 				OBJ_179 /* GameBoy.swift in Sources */,
 				OBJ_180 /* GameboyInput.swift in Sources */,
+				90427DA2255487C5007A9E9D /* Audio.swift in Sources */,
 				OBJ_182 /* JoypadMemory.swift in Sources */,
 				OBJ_183 /* Joypad.swift in Sources */,
 				OBJ_184 /* SerialPort.swift in Sources */,
@@ -1009,6 +1028,7 @@
 				OBJ_244 /* FakeCpuMemory.swift in Sources */,
 				OBJ_245 /* FakeJoypad.swift in Sources */,
 				OBJ_246 /* FakeLcd.swift in Sources */,
+				90427DB125548A42007A9E9D /* FakeAudioMemory.swift in Sources */,
 				OBJ_247 /* FakeTimer.swift in Sources */,
 				OBJ_248 /* CpuTestCase.swift in Sources */,
 				OBJ_249 /* XCTestCase+createLcdImpl.swift in Sources */,

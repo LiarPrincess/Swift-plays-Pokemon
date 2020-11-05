@@ -18,8 +18,8 @@ extension Memory {
     // bootrom
     case MemoryMap.bootrom:
       switch self.bootrom {
-      case let .executing(bootrom): return bootrom.read(address)
-      case .finished:               return self.cartridge.readRom(address)
+      case .executing(let bootrom): return bootrom.read(address)
+      case .finished: return self.cartridge.readRom(address)
       }
 
     // cartridge
@@ -75,29 +75,29 @@ extension Memory {
     case MemoryMap.Timer.tma:  return self.timer.tma
     case MemoryMap.Timer.tac:  return self.timer.tac
 
-    case MemoryMap.Audio.nr10:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr11:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr12:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr13:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr14:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr21:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr22:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr23:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr24:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr30:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr31:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr32:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr33:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr34:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr41:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr42:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr43:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr44:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr50:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr51:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr52:          return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr3_ram_start: return self.audio[address] ?? 0
-    case MemoryMap.Audio.nr3_ram_end:   return self.audio[address] ?? 0
+    case MemoryMap.Audio.nr10: return self.audio.nr10
+    case MemoryMap.Audio.nr11: return self.audio.nr11
+    case MemoryMap.Audio.nr12: return self.audio.nr12
+    case MemoryMap.Audio.nr13: return self.audio.nr13
+    case MemoryMap.Audio.nr14: return self.audio.nr14
+    case MemoryMap.Audio.nr21: return self.audio.nr21
+    case MemoryMap.Audio.nr22: return self.audio.nr22
+    case MemoryMap.Audio.nr23: return self.audio.nr23
+    case MemoryMap.Audio.nr24: return self.audio.nr24
+    case MemoryMap.Audio.nr30: return self.audio.nr30
+    case MemoryMap.Audio.nr31: return self.audio.nr31
+    case MemoryMap.Audio.nr32: return self.audio.nr32
+    case MemoryMap.Audio.nr33: return self.audio.nr33
+    case MemoryMap.Audio.nr34: return self.audio.nr34
+    case MemoryMap.Audio.nr41: return self.audio.nr41
+    case MemoryMap.Audio.nr42: return self.audio.nr42
+    case MemoryMap.Audio.nr43: return self.audio.nr43
+    case MemoryMap.Audio.nr44: return self.audio.nr44
+    case MemoryMap.Audio.nr50: return self.audio.nr50
+    case MemoryMap.Audio.nr51: return self.audio.nr51
+    case MemoryMap.Audio.nr52: return self.audio.nr52
+    case MemoryMap.Audio.nr3_ram_start: return self.audio.nr3_ram_start
+    case MemoryMap.Audio.nr3_ram_end:   return self.audio.nr3_ram_end
 
     case MemoryMap.Lcd.control: return self.lcd.control
     case MemoryMap.Lcd.status:  return self.lcd.status

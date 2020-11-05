@@ -18,13 +18,15 @@ extension XCTestCase {
                     cartridge:  CartridgeMemory? = nil,
                     joypad:     JoypadMemory?    = nil,
                     lcd:        WritableLcd?     = nil,
+                    audio:      AudioMemory?     = nil,
                     timer:      TimerMemory?     = nil,
                     interrupts: Interrupts?      = nil) -> Memory {
     return Memory(
-      bootrom:    bootrom    ?? FakeBootromMemory(),
+      bootrom:    .executing(bootrom ?? FakeBootromMemory()),
       cartridge:  cartridge  ?? FakeCartridgeMemory(),
       joypad:     joypad     ?? FakeJoypadMemory(),
       lcd:        lcd        ?? FakeLcd(),
+      audio:      audio      ?? FakeAudioMemory(),
       timer:      timer      ?? FakeTimerMemory(),
       interrupts: interrupts ?? Interrupts()
     )

@@ -11,9 +11,10 @@ public final class GameBoy {
 
   public let cpu: Cpu
   public var lcd: Lcd { return self._lcd }
+  public let audio: Audio
   public let memory: Memory
   public let timer: GameBoyKit.Timer
-  public var joypad: Joypad
+  public let joypad: Joypad
 
   internal let _lcd: LcdImpl
 
@@ -24,54 +25,31 @@ public final class GameBoy {
     return self.memory.linkCable
   }
 
+  // MARK: - Init
+
   public init(input: GameboyInputProvider,
               bootrom: Bootrom?,
               cartridge: Cartridge) {
     let interrupts = Interrupts()
     self._lcd = LcdImpl(interrupts: interrupts)
+    self.audio = Audio()
     self.timer = GameBoyKit.Timer(interrupts: interrupts)
     self.joypad = Joypad(provider: input)
 
-    self.memory = Memory(bootrom:   bootrom,
+    let bootromState = bootrom.map(Memory.BootromState.executing) ?? .finished
+
+    self.memory = Memory(bootrom:   bootromState,
                          cartridge: cartridge,
                          joypad:    self.joypad,
                          lcd:       self._lcd,
+                         audio:     self.audio,
                          timer:     self.timer,
                          interrupts: interrupts)
 
     self.cpu = Cpu(memory: self.memory, interrupts: interrupts)
 
-    if bootrom == nil {
+    if case .finished = bootromState {
       self.skipBootrom()
-    }
-  }
-
-  public func tickFrame() {
-    let cycles = LcdConstants.cyclesPerFrame - self.frameProgress
-
-    self.tickCpu(cycles: cycles)
-
-    // if we stopped at the last cycle of the frame, then
-    // run 1 bonus instruction to actually 'tick' it
-    if self.frameProgress == LcdConstants.cyclesPerFrame {
-      self.tickCpu(cycles: 1)
-    }
-  }
-
-  internal func tickCpu(cycles totalCycles: Int = 1) {
-    var remainingCycles = totalCycles
-
-    while remainingCycles > 0 {
-      let cycles = self.cpu.tick()
-      remainingCycles -= cycles
-
-      self.frameProgress += cycles
-      if self.frameProgress > LcdConstants.cyclesPerFrame {
-        self.frameProgress -= LcdConstants.cyclesPerFrame
-      }
-
-      self.timer.tick(cycles: cycles)
-      self._lcd.tick(cycles: cycles)
     }
   }
 
@@ -118,5 +96,36 @@ public final class GameBoy {
     self.memory.write(0xff4a, value: 0x00) // WY
     self.memory.write(0xff4b, value: 0x00) // WX
     self.memory.write(0xffff, value: 0x00) // IE
+  }
+
+  // MARK: - Tick
+
+  public func tickFrame() {
+    let cycles = LcdConstants.cyclesPerFrame - self.frameProgress
+
+    self.tickCpu(cycles: cycles)
+
+    // if we stopped at the last cycle of the frame, then
+    // run 1 bonus instruction to actually 'tick' it
+    if self.frameProgress == LcdConstants.cyclesPerFrame {
+      self.tickCpu(cycles: 1)
+    }
+  }
+
+  internal func tickCpu(cycles totalCycles: Int = 1) {
+    var remainingCycles = totalCycles
+
+    while remainingCycles > 0 {
+      let cycles = self.cpu.tick()
+      remainingCycles -= cycles
+
+      self.frameProgress += cycles
+      if self.frameProgress > LcdConstants.cyclesPerFrame {
+        self.frameProgress -= LcdConstants.cyclesPerFrame
+      }
+
+      self.timer.tick(cycles: cycles)
+      self._lcd.tick(cycles: cycles)
+    }
   }
 }

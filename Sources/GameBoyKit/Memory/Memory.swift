@@ -12,6 +12,7 @@ public final class Memory: CpuMemory {
   }
 
   internal let lcd: WritableLcd
+  internal var audio: AudioMemory
   internal let timer: TimerMemory
   internal let joypad: JoypadMemory
   internal let serialPort: SerialPort
@@ -33,28 +34,21 @@ public final class Memory: CpuMemory {
   /// Catch'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()
 
-  internal var audio = [UInt16:UInt8]()
-
-  internal init(bootrom:    BootromMemory?,
+  internal init(bootrom:    BootromState,
                 cartridge:  CartridgeMemory,
                 joypad:     JoypadMemory,
                 lcd:        WritableLcd,
+                audio:      AudioMemory,
                 timer:      TimerMemory,
                 interrupts: Interrupts) {
-    self.lcd = lcd
-    self.timer = timer
-    self.joypad = joypad
-    self.serialPort = SerialPort()
-    self.interrupts = interrupts
-
-    self.bootrom = {
-      switch (bootrom) {
-      case .none: return .finished
-      case .some(let b): return .executing(b)
-      }
-    }()
-
+    self.bootrom = bootrom
     self.cartridge = cartridge
+    self.joypad = joypad
+    self.lcd = lcd
+    self.audio = audio
+    self.timer = timer
+    self.interrupts = interrupts
+    self.serialPort = SerialPort()
   }
 
   deinit {
