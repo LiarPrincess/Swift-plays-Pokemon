@@ -5,6 +5,20 @@
 import XCTest
 @testable import GameBoyKit
 
+extension Interrupts {
+  public var vBlank: Bool { return self.isSet(.vBlank) }
+  public var lcdStat: Bool { return self.isSet(.lcdStat) }
+  public var timer: Bool { return self.isSet(.timer) }
+  public var serial: Bool { return self.isSet(.serial) }
+  public var joypad: Bool { return self.isSet(.joypad) }
+
+  public var isVBlankEnabled: Bool { return self.isEnabled(.vBlank) }
+  public var isLcdStatEnabled: Bool { return self.isEnabled(.lcdStat) }
+  public var isTimerEnabled: Bool { return self.isEnabled(.timer) }
+  public var isSerialEnabled: Bool { return self.isEnabled(.serial) }
+  public var isJoypadEnabled: Bool { return self.isEnabled(.joypad) }
+}
+
 class InterruptsTests: XCTestCase {
 
   func test_flag() {

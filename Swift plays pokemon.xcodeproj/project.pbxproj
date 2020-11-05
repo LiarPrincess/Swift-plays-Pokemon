@@ -125,7 +125,7 @@
 		OBJ_254 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* LcdColorPaletteTests.swift */; };
 		OBJ_255 /* TileColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* TileColorValueTests.swift */; };
 		OBJ_256 /* DmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* DmaTests.swift */; };
-		OBJ_257 /* InterruptEnableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* InterruptEnableTests.swift */; };
+		OBJ_257 /* InterruptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* InterruptsTests.swift */; };
 		OBJ_258 /* MemoryReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* MemoryReadTests.swift */; };
 		OBJ_259 /* MemoryWriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_128 /* MemoryWriteTests.swift */; };
 		OBJ_260 /* UnmapBootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* UnmapBootromTests.swift */; };
@@ -221,7 +221,7 @@
 		OBJ_122 /* LcdColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorPaletteTests.swift; sourceTree = "<group>"; };
 		OBJ_123 /* TileColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileColorValueTests.swift; sourceTree = "<group>"; };
 		OBJ_125 /* DmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DmaTests.swift; sourceTree = "<group>"; };
-		OBJ_126 /* InterruptEnableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptEnableTests.swift; sourceTree = "<group>"; };
+		OBJ_126 /* InterruptsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptsTests.swift; sourceTree = "<group>"; };
 		OBJ_127 /* MemoryReadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryReadTests.swift; sourceTree = "<group>"; };
 		OBJ_128 /* MemoryWriteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryWriteTests.swift; sourceTree = "<group>"; };
 		OBJ_129 /* UnmapBootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmapBootromTests.swift; sourceTree = "<group>"; };
@@ -444,7 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_125 /* DmaTests.swift */,
-				OBJ_126 /* InterruptEnableTests.swift */,
 				OBJ_127 /* MemoryReadTests.swift */,
 				OBJ_128 /* MemoryWriteTests.swift */,
 				OBJ_129 /* UnmapBootromTests.swift */,
@@ -470,7 +469,6 @@
 				OBJ_28 /* Cpu */,
 				OBJ_20 /* Cartridge */,
 				OBJ_45 /* IO */,
-				OBJ_52 /* Interrupts */,
 				OBJ_54 /* Lcd */,
 				OBJ_64 /* Memory */,
 				OBJ_34 /* Debug */,
@@ -508,6 +506,7 @@
 				OBJ_31 /* Cpu+Instructions.swift */,
 				90427CF725545FC8007A9E9D /* CpuMemory.swift */,
 				OBJ_33 /* CpuRegisters.swift */,
+				OBJ_53 /* Interrupts.swift */,
 			);
 			path = Cpu;
 			sourceTree = "<group>";
@@ -552,14 +551,6 @@
 				OBJ_140 /* README.md */,
 				90374A3A25534757008A908D /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		OBJ_52 /* Interrupts */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_53 /* Interrupts.swift */,
-			);
-			path = Interrupts;
 			sourceTree = "<group>";
 		};
 		OBJ_54 /* Lcd */ = {
@@ -707,6 +698,7 @@
 				OBJ_100 /* CpuOpcodeLengthTests.swift */,
 				OBJ_101 /* CpuOpcodeTimingTests.swift */,
 				OBJ_103 /* CpuRegistersTests.swift */,
+				OBJ_126 /* InterruptsTests.swift */,
 			);
 			path = Cpu;
 			sourceTree = "<group>";
@@ -1008,7 +1000,7 @@
 				OBJ_254 /* LcdColorPaletteTests.swift in Sources */,
 				OBJ_255 /* TileColorValueTests.swift in Sources */,
 				OBJ_256 /* DmaTests.swift in Sources */,
-				OBJ_257 /* InterruptEnableTests.swift in Sources */,
+				OBJ_257 /* InterruptsTests.swift in Sources */,
 				OBJ_258 /* MemoryReadTests.swift in Sources */,
 				OBJ_259 /* MemoryWriteTests.swift in Sources */,
 				OBJ_260 /* UnmapBootromTests.swift in Sources */,
