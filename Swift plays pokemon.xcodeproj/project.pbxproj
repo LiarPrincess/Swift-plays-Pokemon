@@ -81,7 +81,7 @@
 		OBJ_197 /* Memory+read.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* Memory+read.swift */; };
 		OBJ_198 /* Memory+write.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Memory+write.swift */; };
 		OBJ_199 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Memory.swift */; };
-		OBJ_200 /* MemoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* MemoryData.swift */; };
+		OBJ_200 /* MemoryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* MemoryBuffer.swift */; };
 		OBJ_201 /* MemoryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* MemoryMap.swift */; };
 		OBJ_202 /* CartridgeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* CartridgeMemory.swift */; };
 		OBJ_203 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Operators.swift */; };
@@ -198,6 +198,7 @@
 		90374A24255346AD008A908D /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		90427CF725545FC8007A9E9D /* CpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuMemory.swift; sourceTree = "<group>"; };
 		90427D5625546F00007A9E9D /* BootromMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromMemory.swift; sourceTree = "<group>"; };
+		90427D7C25548092007A9E9D /* Interrupts+properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Interrupts+properties.swift"; sourceTree = "<group>"; };
 		OBJ_10 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		OBJ_100 /* CpuOpcodeLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeLengthTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* CpuOpcodeTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeTimingTests.swift; sourceTree = "<group>"; };
@@ -280,7 +281,7 @@
 		OBJ_65 /* Memory+read.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memory+read.swift"; sourceTree = "<group>"; };
 		OBJ_66 /* Memory+write.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Memory+write.swift"; sourceTree = "<group>"; };
 		OBJ_67 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
-		OBJ_68 /* MemoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryData.swift; sourceTree = "<group>"; };
+		OBJ_68 /* MemoryBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBuffer.swift; sourceTree = "<group>"; };
 		OBJ_69 /* MemoryMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMap.swift; sourceTree = "<group>"; };
 		OBJ_70 /* CartridgeMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeMemory.swift; sourceTree = "<group>"; };
 		OBJ_71 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -404,6 +405,7 @@
 			children = (
 				OBJ_110 /* FakeCpuMemory.swift */,
 				OBJ_114 /* CpuTestCase.swift */,
+				90427D7C25548092007A9E9D /* Interrupts+properties.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -585,8 +587,8 @@
 				OBJ_67 /* Memory.swift */,
 				OBJ_65 /* Memory+read.swift */,
 				OBJ_66 /* Memory+write.swift */,
-				OBJ_68 /* MemoryData.swift */,
 				OBJ_69 /* MemoryMap.swift */,
+				OBJ_68 /* MemoryBuffer.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -950,7 +952,7 @@
 				90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */,
 				OBJ_198 /* Memory+write.swift in Sources */,
 				OBJ_199 /* Memory.swift in Sources */,
-				OBJ_200 /* MemoryData.swift in Sources */,
+				OBJ_200 /* MemoryBuffer.swift in Sources */,
 				OBJ_201 /* MemoryMap.swift in Sources */,
 				OBJ_202 /* CartridgeMemory.swift in Sources */,
 				OBJ_203 /* Operators.swift in Sources */,

@@ -5,10 +5,12 @@
 import XCTest
 @testable import GameBoyKit
 
-class MemoryReadTests: XCTestCase {
+/// Value that will be written at the 1st address in given range
+private let startValue: UInt8 = 5
+/// Value that will be written at the last address in given range
+private let endValue: UInt8 = 6
 
-  private let startValue: UInt8 = 5
-  private let endValue:   UInt8 = 6
+class MemoryReadTests: XCTestCase {
 
   func test_bootrom() {
     let range = MemoryMap.bootrom
@@ -92,8 +94,8 @@ class MemoryReadTests: XCTestCase {
     let memory = self.createMemory()
     let range = MemoryMap.internalRamEcho
 
-    memory.ram[memory.ram.startIndex] = startValue
-    memory.ram[memory.ram.startIndex + range.count - 1] = endValue
+    memory.ram[0] = startValue
+    memory.ram[range.count - 1] = endValue
 
     XCTAssertEqual(memory.read(range.start), startValue)
     XCTAssertEqual(memory.read(range.end), endValue)

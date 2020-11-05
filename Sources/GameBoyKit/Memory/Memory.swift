@@ -4,15 +4,15 @@
 
 import Foundation
 
-internal enum BootromState {
-  case executing(BootromMemory)
-  case finished
-}
-
 public final class Memory: CpuMemory {
 
-  internal let lcd:    WritableLcd
-  internal let timer:  TimerMemory
+  internal enum BootromState {
+    case executing(BootromMemory)
+    case finished
+  }
+
+  internal let lcd: WritableLcd
+  internal let timer: TimerMemory
   internal let joypad: JoypadMemory
   internal let serialPort: SerialPort
   internal let interrupts: Interrupts
@@ -22,10 +22,10 @@ public final class Memory: CpuMemory {
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
-  internal lazy var ram = MemoryData.allocate(MemoryMap.internalRam)
+  internal lazy var ram = MemoryBuffer(region: MemoryMap.internalRam)
 
   /// FF80-FFFE High RAM (HRAM)
-  internal lazy var highRam = MemoryData.allocate(MemoryMap.highRam)
+  internal lazy var highRam = MemoryBuffer(region: MemoryMap.highRam)
 
   /// FF01 - SB - Data send using serial transfer
   internal var linkCable = Data()
@@ -41,7 +41,6 @@ public final class Memory: CpuMemory {
                 lcd:        WritableLcd,
                 timer:      TimerMemory,
                 interrupts: Interrupts) {
-
     self.lcd = lcd
     self.timer = timer
     self.joypad = joypad

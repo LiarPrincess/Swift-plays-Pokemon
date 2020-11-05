@@ -30,14 +30,14 @@ extension Memory {
 
     // internal
     case MemoryMap.highRam:
-      let index = Int(address - MemoryMap.highRam.start)
+      let index = address - MemoryMap.highRam.start
       return self.highRam[index]
     case MemoryMap.internalRam:
-      let index = Int(address - MemoryMap.internalRam.start)
+      let index = address - MemoryMap.internalRam.start
       return self.ram[index]
     case MemoryMap.internalRamEcho:
       let ramAddress = self.convertEchoToRamAddress(address)
-      let index      = Int(ramAddress - MemoryMap.internalRam.start)
+      let index = ramAddress - MemoryMap.internalRam.start
       return self.ram[index]
 
     // video

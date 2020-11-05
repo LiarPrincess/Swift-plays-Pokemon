@@ -20,7 +20,7 @@ public class Cartridge: CartridgeMemory {
   public let rom: Data
 
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
-  public internal(set) var ram: MemoryData
+  public internal(set) var ram: MemoryBuffer
 
   /// Offset to selected 0000-3FFF bank.
   internal var romLowerBankStart = Int(MemoryMap.rom0.start)
@@ -54,7 +54,7 @@ public class Cartridge: CartridgeMemory {
     self.rom = rom
 
     let ramSize = try getRamSize(rom[CartridgeMap.ramSize])
-    self.ram = MemoryData.allocate(capacity: ramSize)
+    self.ram = MemoryBuffer(count: ramSize)
   }
 
   deinit {

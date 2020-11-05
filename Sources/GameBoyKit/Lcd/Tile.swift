@@ -15,7 +15,7 @@
 
 internal final class Tile {
 
-  internal lazy var data = MemoryData.allocate(capacity: TileConstants.byteCount)
+  internal lazy var data = MemoryBuffer(count: TileConstants.byteCount)
 
   private lazy var pixels: UnsafeMutableBufferPointer<UInt8> = {
     let count = TileConstants.width * TileConstants.height

@@ -267,7 +267,7 @@ extension LcdImpl {
     return Int(self.windowX) - LcdConstants.windowXShift
   }
 
-  internal func getTileMap(for map: TileMap) -> MemoryData {
+  internal func getTileMap(for map: TileMap) -> MemoryBuffer {
     switch map {
     case .from9800to9bff: return self.tileMap9800to9bff
     case .from9c00to9fff: return self.tileMap9c00to9fff

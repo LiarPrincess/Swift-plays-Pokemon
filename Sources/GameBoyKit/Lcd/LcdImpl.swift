@@ -44,8 +44,8 @@ internal final class LcdImpl: WritableLcd {
     set { self._spritePalette1.value = newValue }
   }
 
-  internal lazy var tileMap9800to9bff = MemoryData.allocate(VideoRamMap.tileMap9800to9bff)
-  internal lazy var tileMap9c00to9fff = MemoryData.allocate(VideoRamMap.tileMap9c00to9fff)
+  internal lazy var tileMap9800to9bff = MemoryBuffer(region: VideoRamMap.tileMap9800to9bff)
+  internal lazy var tileMap9c00to9fff = MemoryBuffer(region: VideoRamMap.tileMap9c00to9fff)
 
   internal lazy var tiles   = (0..<TileConstants.count).map { _ in Tile() }
   internal lazy var sprites = (0..<SpriteConstants.count).map { Sprite(id: $0) }
@@ -97,11 +97,11 @@ internal final class LcdImpl: WritableLcd {
       return tile.data[byte]
 
     case VideoRamMap.tileMap9800to9bff:
-      let index = Int(address - VideoRamMap.tileMap9800to9bff.start)
+      let index = address - VideoRamMap.tileMap9800to9bff.start
       return self.tileMap9800to9bff[index]
 
     case VideoRamMap.tileMap9c00to9fff:
-      let index = Int(address - VideoRamMap.tileMap9c00to9fff.start)
+      let index = address - VideoRamMap.tileMap9c00to9fff.start
       return self.tileMap9c00to9fff[index]
 
     default:
@@ -121,11 +121,11 @@ internal final class LcdImpl: WritableLcd {
       tile.setByte(byte, value: value)
 
     case VideoRamMap.tileMap9800to9bff:
-      let index = Int(address - VideoRamMap.tileMap9800to9bff.start)
+      let index = address - VideoRamMap.tileMap9800to9bff.start
       self.tileMap9800to9bff[index] = value
 
     case VideoRamMap.tileMap9c00to9fff:
-      let index = Int(address - VideoRamMap.tileMap9c00to9fff.start)
+      let index = address - VideoRamMap.tileMap9c00to9fff.start
       self.tileMap9c00to9fff[index] = value
 
     default:
