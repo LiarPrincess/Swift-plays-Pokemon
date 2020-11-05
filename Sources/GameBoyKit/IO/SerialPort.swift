@@ -3,7 +3,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 /// FF01 and FF02 Serial Data Transfer (Link Cable)
-public class SerialPort {
+public final class SerialPort {
 
   /// Serial transfer data
   public internal(set) var sb: UInt8 = 0x00
