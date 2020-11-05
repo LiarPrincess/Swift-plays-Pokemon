@@ -5,43 +5,13 @@
 import XCTest
 @testable import GameBoyKit
 
-class ColorPaletteTests: XCTestCase {
-
-  func test_backgroundColorPalette() {
-    let colors: [UInt8] = [0, 1, 2, 3]
-
-    for color in colors {
-      let shift = color * 2
-
-      var palette = BackgroundPalette()
-
-      var value: UInt8 = 0b00 << shift
-      palette.value = value
-      XCTAssertEqual(palette[color], 0b00)
-      XCTAssertEqual(palette.value, value) // check if we can restore it
-
-      value = 0b01 << shift
-      palette.value = value
-      XCTAssertEqual(palette[color], 0b01)
-      XCTAssertEqual(palette.value, value) // check if we can restore it
-
-      value = 0b10 << shift
-      palette.value = value
-      XCTAssertEqual(palette[color], 0b10)
-      XCTAssertEqual(palette.value, value) // check if we can restore it
-
-      value = 0b11 << shift
-      palette.value = value
-      XCTAssertEqual(palette[color], 0b11)
-      XCTAssertEqual(palette.value, value) // check if we can restore it
-    }
-  }
+class SpriteColorPaletteTests: XCTestCase {
 
   /// Transparent bits (0 and 1) should always be 0
-  func test_objectColorPalette_color0() {
+  func test_color0() {
     let color: UInt8 = 0
 
-    var palette = SpritePalette()
+    var palette = SpriteColorPalette()
 
     var value: UInt8 = 0b00
     palette.value = value
@@ -64,13 +34,13 @@ class ColorPaletteTests: XCTestCase {
     XCTAssertEqual(palette.value, value) // not even saved
   }
 
-  func test_objectColorPalette_colors123() {
+  func test_colors123() {
     let colors: [UInt8] = [1, 2, 3]
 
     for color in colors {
       let shift = color * 2
 
-      var palette = SpritePalette()
+      var palette = SpriteColorPalette()
 
       var value: UInt8 = 0b00 << shift
       palette.value = value

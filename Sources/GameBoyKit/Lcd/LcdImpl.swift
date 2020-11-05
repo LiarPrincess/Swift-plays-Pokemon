@@ -27,9 +27,9 @@ internal final class LcdImpl: WritableLcd {
   internal var windowY: UInt8 = 0
   internal var windowX: UInt8 = 0
 
-  internal var _backgroundPalette = BackgroundPalette()
-  internal var _spritePalette0 = SpritePalette()
-  internal var _spritePalette1 = SpritePalette()
+  internal var _backgroundPalette = BackgroundColorPalette()
+  internal var _spritePalette0 = SpriteColorPalette()
+  internal var _spritePalette1 = SpriteColorPalette()
 
   internal var backgroundPalette: UInt8 {
     get { return self._backgroundPalette.value }

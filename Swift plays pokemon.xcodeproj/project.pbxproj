@@ -37,6 +37,7 @@
 		90427D9A2554866E007A9E9D /* AudioMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D992554866E007A9E9D /* AudioMemory.swift */; };
 		90427DA2255487C5007A9E9D /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427DA1255487C5007A9E9D /* Audio.swift */; };
 		90427DB125548A42007A9E9D /* FakeAudioMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427DA925548A21007A9E9D /* FakeAudioMemory.swift */; };
+		90427DCC25548C80007A9E9D /* BackgroundColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427DCB25548C7F007A9E9D /* BackgroundColorPalette.swift */; };
 		OBJ_146 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Common.swift */; };
 		OBJ_147 /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ModifyInstructions.swift */; };
 		OBJ_148 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Opcode.swift */; };
@@ -126,7 +127,7 @@
 		OBJ_251 /* TimerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* TimerTestCase.swift */; };
 		OBJ_252 /* TimerTimaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* TimerTimaTests.swift */; };
 		OBJ_253 /* TimerDivTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* TimerDivTests.swift */; };
-		OBJ_254 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* LcdColorPaletteTests.swift */; };
+		OBJ_254 /* SpriteColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* SpriteColorPaletteTests.swift */; };
 		OBJ_255 /* TileColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* TileColorValueTests.swift */; };
 		OBJ_256 /* DmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* DmaTests.swift */; };
 		OBJ_257 /* InterruptsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* InterruptsTests.swift */; };
@@ -205,6 +206,8 @@
 		90427D992554866E007A9E9D /* AudioMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMemory.swift; sourceTree = "<group>"; };
 		90427DA1255487C5007A9E9D /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		90427DA925548A21007A9E9D /* FakeAudioMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAudioMemory.swift; sourceTree = "<group>"; };
+		90427DCB25548C7F007A9E9D /* BackgroundColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorPalette.swift; sourceTree = "<group>"; };
+		90427DE525548D8E007A9E9D /* BackgroundColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColorPaletteTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		OBJ_100 /* CpuOpcodeLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeLengthTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* CpuOpcodeTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeTimingTests.swift; sourceTree = "<group>"; };
@@ -441,6 +444,15 @@
 				90427DA1255487C5007A9E9D /* Audio.swift */,
 			);
 			path = Audio;
+			sourceTree = "<group>";
+		};
+		90427DCA25548C53007A9E9D /* Color palettes */ = {
+			isa = PBXGroup;
+			children = (
+				90427DCB25548C7F007A9E9D /* BackgroundColorPalette.swift */,
+				OBJ_55 /* SpriteColorPalette.swift */,
+			);
+			path = "Color palettes";
 			sourceTree = "<group>";
 		};
 		OBJ_107 /* Helpers */ = {
@@ -951,6 +963,7 @@
 				OBJ_171 /* CBPrefixedOpcode.swift in Sources */,
 				OBJ_172 /* DebugMode.swift in Sources */,
 				OBJ_173 /* DebugState.swift in Sources */,
+				90427DCC25548C80007A9E9D /* BackgroundColorPalette.swift in Sources */,
 				OBJ_174 /* Debugger+Cpu.swift in Sources */,
 				OBJ_175 /* Debugger+Memory.swift in Sources */,
 				90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */,
@@ -1014,6 +1027,7 @@
 				OBJ_230 /* CpuBitTests.swift in Sources */,
 				OBJ_231 /* CpuCallTests.swift in Sources */,
 				OBJ_232 /* CpuJumpTests.swift in Sources */,
+				90427DED25548D93007A9E9D /* BackgroundColorPaletteTests.swift in Sources */,
 				OBJ_233 /* CpuLdTests.swift in Sources */,
 				OBJ_234 /* CpuLogicTests.swift in Sources */,
 				OBJ_235 /* CpuOpcodeLengthTests.swift in Sources */,
@@ -1037,7 +1051,7 @@
 				90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */,
 				OBJ_252 /* TimerTimaTests.swift in Sources */,
 				OBJ_253 /* TimerDivTests.swift in Sources */,
-				OBJ_254 /* LcdColorPaletteTests.swift in Sources */,
+				OBJ_254 /* SpriteColorPaletteTests.swift in Sources */,
 				OBJ_255 /* TileColorValueTests.swift in Sources */,
 				OBJ_256 /* DmaTests.swift in Sources */,
 				OBJ_257 /* InterruptsTests.swift in Sources */,
