@@ -37,7 +37,7 @@ func debugInstrTiming() { debug(Roms.instrTiming, dump: Dumps.instrTiming) }
 private func test(_ rom: URL, frames: Int) {
   print(rom.lastPathComponent, terminator: "")
   let cartridge = openRom(url: rom)
-  let gameBoy   = GameBoy(input: TestInput(), bootrom: .skip, cartridge: cartridge)
+  let gameBoy   = GameBoy(input: TestInput(), bootrom: nil, cartridge: cartridge)
 
   for _ in 0..<frames {
     gameBoy.tickFrame()
@@ -57,7 +57,7 @@ private func debug(_ rom: URL, dump urls: [URL]) {
   print(rom.lastPathComponent)
 
   let cartridge = openRom(url: rom)
-  let gameBoy   = GameBoy(input: TestInput(), bootrom: .skip, cartridge: cartridge)
+  let gameBoy   = GameBoy(input: TestInput(), bootrom: nil, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
   for (index, url) in urls.enumerated() {

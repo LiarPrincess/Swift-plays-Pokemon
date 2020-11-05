@@ -18,7 +18,7 @@ private let urls: [URL] = {
 
 func testTetris() {
   let cartridge = openRom(url: rom)
-  let gameBoy   = GameBoy(input: TestInput(), bootrom: .skip, cartridge: cartridge)
+  let gameBoy   = GameBoy(input: TestInput(), bootrom: nil, cartridge: cartridge)
   let debugger  = Debugger(gameBoy: gameBoy)
 
   for (index, url) in urls.enumerated() {
