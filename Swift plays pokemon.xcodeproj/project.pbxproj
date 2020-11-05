@@ -418,6 +418,16 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		90427D9125548341007A9E9D /* Bootrom */ = {
+			isa = PBXGroup;
+			children = (
+				90427D5625546F00007A9E9D /* BootromMemory.swift */,
+				OBJ_21 /* Bootrom.swift */,
+				OBJ_22 /* BootromFactory.swift */,
+			);
+			path = Bootrom;
+			sourceTree = "<group>";
+		};
 		OBJ_107 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_28 /* Cpu */,
+				90427D9125548341007A9E9D /* Bootrom */,
 				OBJ_20 /* Cartridge */,
 				OBJ_45 /* IO */,
 				OBJ_54 /* Lcd */,
@@ -497,9 +508,6 @@
 		OBJ_20 /* Cartridge */ = {
 			isa = PBXGroup;
 			children = (
-				90427D5625546F00007A9E9D /* BootromMemory.swift */,
-				OBJ_21 /* Bootrom.swift */,
-				OBJ_22 /* BootromFactory.swift */,
 				OBJ_70 /* CartridgeMemory.swift */,
 				OBJ_23 /* Cartridge.swift */,
 				OBJ_24 /* CartridgeConstants.swift */,

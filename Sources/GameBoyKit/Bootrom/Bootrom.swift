@@ -4,9 +4,9 @@
 
 import Foundation
 
-/// Code that will be ran when gameboy is started. You can find
-/// different bootroms [here](http://gbdev.gg8.se/files/roms/bootroms/).
-public class Bootrom: BootromMemory {
+/// Code that will be ran when gameboy is started.
+/// You can find different bootroms [here](http://gbdev.gg8.se/files/roms/bootroms).
+public struct Bootrom: BootromMemory {
 
   internal static let size = MemoryMap.bootrom.count
 
@@ -25,13 +25,6 @@ public class Bootrom: BootromMemory {
   }
 
   // MARK: - Predefined bootroms
-
-  /// This is the most common version of the boot ROM
-  /// found in the original DMG-01 model of Gameboy.
-  public static var skip: Bootrom {
-    let data = Data()
-    return Bootrom(data: data)
-  }
 
   /// This is the most common version of the boot ROM
   /// found in the original DMG-01 model of Gameboy.

@@ -47,8 +47,13 @@ public final class Memory: CpuMemory {
     self.serialPort = SerialPort()
     self.interrupts = interrupts
 
-    // swiftlint:disable:next force_unwrapping
-    self.bootrom = bootrom != nil ? .executing(bootrom!) : .finished
+    self.bootrom = {
+      switch (bootrom) {
+      case .none: return .finished
+      case .some(let b): return .executing(b)
+      }
+    }()
+
     self.cartridge = cartridge
   }
 

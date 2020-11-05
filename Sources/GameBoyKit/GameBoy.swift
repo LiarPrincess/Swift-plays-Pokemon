@@ -25,16 +25,14 @@ public final class GameBoy {
   }
 
   public init(input: GameboyInputProvider,
-              bootrom: Bootrom,
+              bootrom: Bootrom?,
               cartridge: Cartridge) {
-
     let interrupts = Interrupts()
     self._lcd = LcdImpl(interrupts: interrupts)
     self.timer = GameBoyKit.Timer(interrupts: interrupts)
     self.joypad = Joypad(provider: input)
 
-    let skipBootrom = bootrom.data.isEmpty
-    self.memory = Memory(bootrom:   skipBootrom ? nil : bootrom,
+    self.memory = Memory(bootrom:   bootrom,
                          cartridge: cartridge,
                          joypad:    self.joypad,
                          lcd:       self._lcd,
@@ -43,7 +41,7 @@ public final class GameBoy {
 
     self.cpu = Cpu(memory: self.memory, interrupts: interrupts)
 
-    if skipBootrom {
+    if bootrom == nil {
       self.skipBootrom()
     }
   }
