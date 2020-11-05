@@ -7,12 +7,12 @@ import XCTest
 
 class CpuTestCase: XCTestCase {
 
-  internal func createFakeMemory() -> FakeCpuMemory {
+  func createFakeMemory() -> FakeCpuMemory {
     return FakeCpuMemory()
   }
 
-  internal func createCpu(memory: CpuMemory? = nil,
-                          interrupts: Interrupts? = nil) -> Cpu {
+  func createCpu(memory: CpuMemory? = nil,
+                 interrupts: Interrupts? = nil) -> Cpu {
     return Cpu(
       memory: memory ?? FakeCpuMemory(),
       interrupts: interrupts ?? Interrupts()

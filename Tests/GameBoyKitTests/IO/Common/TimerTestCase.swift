@@ -5,9 +5,9 @@
 import XCTest
 @testable import GameBoyKit
 
-extension XCTestCase {
+class TimerTestCase: XCTestCase {
 
-  internal func createTimer(interrupts: Interrupts? = nil) -> TimerImpl {
-    return TimerImpl(interrupts: interrupts ?? Interrupts())
+  func createTimer(interrupts: Interrupts? = nil) -> GameBoyKit.Timer {
+    return GameBoyKit.Timer(interrupts: interrupts ?? Interrupts())
   }
 }

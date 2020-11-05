@@ -130,7 +130,7 @@ class MemoryReadTests: XCTestCase {
   }
 
   func test_timer() {
-    let timer  = FakeTimer()
+    let timer  = FakeTimerMemory()
     let memory = self.createMemory(timer: timer)
 
     timer.div = 4

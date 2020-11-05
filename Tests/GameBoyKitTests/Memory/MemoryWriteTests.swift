@@ -131,7 +131,7 @@ class MemoryWriteTests: XCTestCase {
   }
 
   func test_timer() {
-    let timer  = FakeTimer()
+    let timer  = FakeTimerMemory()
     let memory = self.createMemory(timer: timer)
 
     memory.write(MemoryMap.Timer.div, value: 4)

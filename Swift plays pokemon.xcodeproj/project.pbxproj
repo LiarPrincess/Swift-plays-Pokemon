@@ -65,8 +65,8 @@
 		OBJ_182 /* Joypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* Joypad.swift */; };
 		OBJ_183 /* JoypadImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* JoypadImpl.swift */; };
 		OBJ_184 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* SerialPort.swift */; };
-		OBJ_185 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* Timer.swift */; };
-		OBJ_186 /* TimerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* TimerImpl.swift */; };
+		OBJ_185 /* TimerMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* TimerMemory.swift */; };
+		OBJ_186 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Timer.swift */; };
 		OBJ_187 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Interrupts.swift */; };
 		OBJ_188 /* ColorPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* ColorPalettes.swift */; };
 		OBJ_189 /* Lcd+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* Lcd+Properties.swift */; };
@@ -119,9 +119,9 @@
 		OBJ_248 /* CpuTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* CpuTestCase.swift */; };
 		OBJ_249 /* XCTestCase+createLcdImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* XCTestCase+createLcdImpl.swift */; };
 		OBJ_250 /* XCTestCase+createMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* XCTestCase+createMemory.swift */; };
-		OBJ_251 /* XCTestCase+createTimerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* XCTestCase+createTimerImpl.swift */; };
-		OBJ_252 /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* CustomTimerTests.swift */; };
-		OBJ_253 /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* DivTimerTests.swift */; };
+		OBJ_251 /* TimerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* TimerTestCase.swift */; };
+		OBJ_252 /* TimerTimaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* TimerTimaTests.swift */; };
+		OBJ_253 /* TimerDivTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* TimerDivTests.swift */; };
 		OBJ_254 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* LcdColorPaletteTests.swift */; };
 		OBJ_255 /* TileColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* TileColorValueTests.swift */; };
 		OBJ_256 /* DmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* DmaTests.swift */; };
@@ -214,10 +214,10 @@
 		OBJ_114 /* CpuTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuTestCase.swift; sourceTree = "<group>"; };
 		OBJ_115 /* XCTestCase+createLcdImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcdImpl.swift"; sourceTree = "<group>"; };
 		OBJ_116 /* XCTestCase+createMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createMemory.swift"; sourceTree = "<group>"; };
-		OBJ_117 /* XCTestCase+createTimerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createTimerImpl.swift"; sourceTree = "<group>"; };
-		OBJ_119 /* CustomTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimerTests.swift; sourceTree = "<group>"; };
+		OBJ_117 /* TimerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTestCase.swift; sourceTree = "<group>"; };
+		OBJ_119 /* TimerTimaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTimaTests.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Opcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
-		OBJ_120 /* DivTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
+		OBJ_120 /* TimerDivTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDivTests.swift; sourceTree = "<group>"; };
 		OBJ_122 /* LcdColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorPaletteTests.swift; sourceTree = "<group>"; };
 		OBJ_123 /* TileColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileColorValueTests.swift; sourceTree = "<group>"; };
 		OBJ_125 /* DmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DmaTests.swift; sourceTree = "<group>"; };
@@ -263,8 +263,8 @@
 		OBJ_47 /* Joypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joypad.swift; sourceTree = "<group>"; };
 		OBJ_48 /* JoypadImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoypadImpl.swift; sourceTree = "<group>"; };
 		OBJ_49 /* SerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
-		OBJ_50 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
-		OBJ_51 /* TimerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerImpl.swift; sourceTree = "<group>"; };
+		OBJ_50 /* TimerMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMemory.swift; sourceTree = "<group>"; };
+		OBJ_51 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		OBJ_53 /* Interrupts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interrupts.swift; sourceTree = "<group>"; };
 		OBJ_55 /* ColorPalettes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalettes.swift; sourceTree = "<group>"; };
 		OBJ_56 /* Lcd+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Properties.swift"; sourceTree = "<group>"; };
@@ -407,6 +407,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		90427D3125546906007A9E9D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_117 /* TimerTestCase.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		OBJ_107 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,7 +425,6 @@
 				OBJ_113 /* FakeTimer.swift */,
 				OBJ_115 /* XCTestCase+createLcdImpl.swift */,
 				OBJ_116 /* XCTestCase+createMemory.swift */,
-				OBJ_117 /* XCTestCase+createTimerImpl.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -425,8 +432,9 @@
 		OBJ_118 /* IO */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_119 /* CustomTimerTests.swift */,
-				OBJ_120 /* DivTimerTests.swift */,
+				90427D3125546906007A9E9D /* Common */,
+				OBJ_120 /* TimerDivTests.swift */,
+				OBJ_119 /* TimerTimaTests.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -532,8 +540,8 @@
 				OBJ_47 /* Joypad.swift */,
 				OBJ_48 /* JoypadImpl.swift */,
 				OBJ_49 /* SerialPort.swift */,
-				OBJ_50 /* Timer.swift */,
-				OBJ_51 /* TimerImpl.swift */,
+				OBJ_50 /* TimerMemory.swift */,
+				OBJ_51 /* Timer.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -926,8 +934,8 @@
 				OBJ_182 /* Joypad.swift in Sources */,
 				OBJ_183 /* JoypadImpl.swift in Sources */,
 				OBJ_184 /* SerialPort.swift in Sources */,
-				OBJ_185 /* Timer.swift in Sources */,
-				OBJ_186 /* TimerImpl.swift in Sources */,
+				OBJ_185 /* TimerMemory.swift in Sources */,
+				OBJ_186 /* Timer.swift in Sources */,
 				OBJ_187 /* Interrupts.swift in Sources */,
 				OBJ_188 /* ColorPalettes.swift in Sources */,
 				OBJ_189 /* Lcd+Properties.swift in Sources */,
@@ -994,9 +1002,9 @@
 				OBJ_248 /* CpuTestCase.swift in Sources */,
 				OBJ_249 /* XCTestCase+createLcdImpl.swift in Sources */,
 				OBJ_250 /* XCTestCase+createMemory.swift in Sources */,
-				OBJ_251 /* XCTestCase+createTimerImpl.swift in Sources */,
-				OBJ_252 /* CustomTimerTests.swift in Sources */,
-				OBJ_253 /* DivTimerTests.swift in Sources */,
+				OBJ_251 /* TimerTestCase.swift in Sources */,
+				OBJ_252 /* TimerTimaTests.swift in Sources */,
+				OBJ_253 /* TimerDivTests.swift in Sources */,
 				OBJ_254 /* LcdColorPaletteTests.swift in Sources */,
 				OBJ_255 /* TileColorValueTests.swift in Sources */,
 				OBJ_256 /* DmaTests.swift in Sources */,

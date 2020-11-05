@@ -5,7 +5,7 @@
 import XCTest
 @testable import GameBoyKit
 
-class DivTimerTests: XCTestCase {
+class TimerDivTests: TimerTestCase {
 
   func test_increment() {
     let timer = self.createTimer()
