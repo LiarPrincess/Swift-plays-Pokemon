@@ -4,6 +4,12 @@
 
 public class Timer: TimerMemory {
 
+  /// Frequency at which div register should be incremented.
+  internal static let divFrequency: Int = 16_384
+
+  /// Number of div tick to increment
+  internal static let divMax = Cpu.clockSpeed / Timer.divFrequency // 256
+
   private let interrupts: Interrupts
 
   internal init(interrupts: Interrupts) {
@@ -34,9 +40,9 @@ public class Timer: TimerMemory {
   private func tickDiv(cycles: Int) {
     self.divProgress += cycles
 
-    if self.divProgress >= IOConstants.divMax {
+    if self.divProgress >= Self.divMax {
       self.divValue &+= 1
-      self.divProgress %= IOConstants.divMax
+      self.divProgress %= Self.divMax
     }
   }
 
