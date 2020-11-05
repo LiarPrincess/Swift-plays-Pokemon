@@ -112,7 +112,7 @@ class MemoryReadTests: XCTestCase {
   }
 
   func test_joypadMemory() {
-    let joypad = FakeJoypad()
+    let joypad = FakeJoypadMemory()
     let memory = self.createMemory(joypad: joypad)
 
     joypad.value = 5

@@ -16,14 +16,14 @@ extension XCTestCase {
 
   internal func createMemory(bootrom:    BootromMemory?   = nil,
                              cartridge:  CartridgeMemory? = nil,
-                             joypad:     WritableJoypad?  = nil,
+                             joypad:     JoypadMemory?    = nil,
                              lcd:        WritableLcd?     = nil,
                              timer:      TimerMemory?     = nil,
                              interrupts: Interrupts?      = nil) -> Memory {
     return Memory(
       bootrom:    bootrom    ?? FakeBootromMemory(),
       cartridge:  cartridge  ?? FakeCartridgeMemory(),
-      joypad:     joypad     ?? FakeJoypad(),
+      joypad:     joypad     ?? FakeJoypadMemory(),
       lcd:        lcd        ?? FakeLcd(),
       timer:      timer      ?? FakeTimerMemory(),
       interrupts: interrupts ?? Interrupts()
