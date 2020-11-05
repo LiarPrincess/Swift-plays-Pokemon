@@ -6,9 +6,9 @@ import Foundation
 
 private typealias Constants = CartridgeConstants
 
-internal class NoMBC: Cartridge { }
+internal final class NoMBC: Cartridge { }
 
-internal class MBC1: Cartridge {
+internal final class MBC1: Cartridge {
 
   /// The 5-bit BANK1 register is used as the lower 5 bits of the ROM
   /// bank number when the CPU accesses the 4000-7FFF memory area.

@@ -2,7 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-public class Timer: TimerMemory {
+public final class Timer: TimerMemory {
 
   /// Frequency at which div register should be incremented.
   internal static let divFrequency: Int = 16_384

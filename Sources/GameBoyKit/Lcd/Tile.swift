@@ -13,7 +13,7 @@
 //     12|     6|00000000|00000000
 //     14|     7|00000000|00000000
 
-internal class Tile {
+internal final class Tile {
 
   internal lazy var data = MemoryData.allocate(capacity: TileConstants.byteCount)
 
@@ -69,4 +69,3 @@ internal class Tile {
     return (data2Bit << 1) | data1Bit
   }
 }
-

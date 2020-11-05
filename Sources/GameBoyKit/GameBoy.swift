@@ -24,8 +24,8 @@ public final class GameBoy {
     return self.memory.linkCable
   }
 
-  public init(input:     GameboyInputProvider,
-              bootrom:   Bootrom,
+  public init(input: GameboyInputProvider,
+              bootrom: Bootrom,
               cartridge: Cartridge) {
 
     let interrupts = Interrupts()

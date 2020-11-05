@@ -8,7 +8,7 @@ import Foundation
 
 private typealias VideoRamMap = MemoryMap.VideoRam
 
-internal class LcdImpl: WritableLcd {
+internal final class LcdImpl: WritableLcd {
 
   internal var control: UInt8 = 0 {
     didSet {

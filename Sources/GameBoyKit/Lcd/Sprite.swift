@@ -7,7 +7,7 @@ private let flipXMask: UInt8 = 1 << 5
 private let paletteNumberShift: UInt8 = 4
 private let isAboveBackgroundMask: UInt8 = 1 << 7
 
-internal class Sprite {
+internal final class Sprite {
 
   /// Sprite number (0..<40)
   internal var id: UInt8
