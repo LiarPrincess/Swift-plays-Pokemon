@@ -8,7 +8,7 @@ import XCTest
 class CpuRegistersTests: XCTestCase {
 
   func test_get_f() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     XCTAssertEqual(registers.f, 0b000_00000)
 
     registers.zeroFlag = true
@@ -38,7 +38,7 @@ class CpuRegistersTests: XCTestCase {
 
   // swiftlint:disable:next function_body_length
   func test_set_f() {
-    var registers = Registers()
+    var registers = CpuRegisters()
 
     registers.f = 0b0000_0000
     XCTAssertEqual(registers.zeroFlag, false)
@@ -80,56 +80,56 @@ class CpuRegistersTests: XCTestCase {
   }
 
   func test_get_af() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     registers.a = 0x16
     registers.f = 0xc0
     XCTAssertEqual(registers.af, 0x16c0)
   }
 
   func test_set_af() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     registers.af = 0x16c0
     XCTAssertEqual(registers.a, 0x16)
     XCTAssertEqual(registers.f, 0xc0)
   }
 
   func test_get_bc() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     registers.b = 0x16
     registers.c = 0xc0
     XCTAssertEqual(registers.bc, 0x16c0)
   }
 
   func test_set_bc() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     registers.bc = 0x16c0
     XCTAssertEqual(registers.b, 0x16)
     XCTAssertEqual(registers.c, 0xc0)
   }
 
   func test_get_de() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     registers.d = 0x16
     registers.e = 0xc0
     XCTAssertEqual(registers.de, 0x16c0)
   }
 
   func test_set_de() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     registers.de = 0x16c0
     XCTAssertEqual(registers.d, 0x16)
     XCTAssertEqual(registers.e, 0xc0)
   }
 
   func test_get_hl() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     registers.h = 0x16
     registers.l = 0xc0
     XCTAssertEqual(registers.hl, 0x16c0)
   }
 
   func test_set_hl() {
-    var registers = Registers()
+    var registers = CpuRegisters()
     registers.hl = 0x16c0
     XCTAssertEqual(registers.h, 0x16)
     XCTAssertEqual(registers.l, 0xc0)

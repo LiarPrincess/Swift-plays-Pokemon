@@ -4,7 +4,7 @@
 
 @testable import GameBoyKit
 
-class FakeLcd: Lcd {
+class FakeLcd: WritableLcd {
 
   var control: UInt8 = 0
   var status:  UInt8 = 0
@@ -25,7 +25,7 @@ class FakeLcd: Lcd {
   var videoRam = [UInt16:UInt8]()
   var oam      = [UInt16:UInt8]()
 
-  var framebuffer = Framebuffer()
+  var framebuffer = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: 0)
 
   func readVideoRam(_ address: UInt16) -> UInt8 {
     return self.videoRam[address] ?? 0

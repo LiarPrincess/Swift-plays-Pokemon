@@ -42,7 +42,7 @@ internal class Tile {
     let data2 = self.data[line * TileConstants.bytesPerLine + 1]
 
     for bit in 0..<TileConstants.width {
-      let color = getColorValue(data1, data2, bit: bit)
+      let color = Self.getColorValue(data1, data2, bit: bit)
       let pixelIndex = (line * TileConstants.width) + bit
       self.pixels[pixelIndex] = color
     }
@@ -57,15 +57,16 @@ internal class Tile {
     let count = TileConstants.width
     return UnsafeBufferPointer(start: start, count: count)
   }
+
+  /// Single color encoded in tile.
+  /// Bit offset is counted from left starting from 0.
+  internal static func getColorValue(_ data1:  UInt8,
+                                     _ data2:  UInt8,
+                                     bit:      Int) -> UInt8 {
+    let shift = 7 - bit
+    let data1Bit = (data1 >> shift) & 0x1
+    let data2Bit = (data2 >> shift) & 0x1
+    return (data2Bit << 1) | data1Bit
+  }
 }
 
-/// Single color encoded in tile.
-/// Bit offset is counted from left starting from 0.
-private func getColorValue(_ data1:  UInt8,
-                           _ data2:  UInt8,
-                           bit:      Int) -> UInt8 {
-  let shift = 7 - bit
-  let data1Bit = (data1 >> shift) & 0x1
-  let data2Bit = (data2 >> shift) & 0x1
-  return (data2Bit << 1) | data1Bit
-}

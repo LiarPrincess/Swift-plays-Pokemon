@@ -122,7 +122,7 @@
 		OBJ_252 /* CustomTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* CustomTimerTests.swift */; };
 		OBJ_253 /* DivTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* DivTimerTests.swift */; };
 		OBJ_254 /* LcdColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* LcdColorPaletteTests.swift */; };
-		OBJ_255 /* LcdColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* LcdColorValueTests.swift */; };
+		OBJ_255 /* TileColorValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* TileColorValueTests.swift */; };
 		OBJ_256 /* DmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* DmaTests.swift */; };
 		OBJ_257 /* InterruptEnableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* InterruptEnableTests.swift */; };
 		OBJ_258 /* MemoryReadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* MemoryReadTests.swift */; };
@@ -217,7 +217,7 @@
 		OBJ_12 /* Opcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
 		OBJ_120 /* DivTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivTimerTests.swift; sourceTree = "<group>"; };
 		OBJ_122 /* LcdColorPaletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorPaletteTests.swift; sourceTree = "<group>"; };
-		OBJ_123 /* LcdColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdColorValueTests.swift; sourceTree = "<group>"; };
+		OBJ_123 /* TileColorValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileColorValueTests.swift; sourceTree = "<group>"; };
 		OBJ_125 /* DmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DmaTests.swift; sourceTree = "<group>"; };
 		OBJ_126 /* InterruptEnableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptEnableTests.swift; sourceTree = "<group>"; };
 		OBJ_127 /* MemoryReadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryReadTests.swift; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_122 /* LcdColorPaletteTests.swift */,
-				OBJ_123 /* LcdColorValueTests.swift */,
+				OBJ_123 /* TileColorValueTests.swift */,
 			);
 			path = Lcd;
 			sourceTree = "<group>";
@@ -994,7 +994,7 @@
 				OBJ_252 /* CustomTimerTests.swift in Sources */,
 				OBJ_253 /* DivTimerTests.swift in Sources */,
 				OBJ_254 /* LcdColorPaletteTests.swift in Sources */,
-				OBJ_255 /* LcdColorValueTests.swift in Sources */,
+				OBJ_255 /* TileColorValueTests.swift in Sources */,
 				OBJ_256 /* DmaTests.swift in Sources */,
 				OBJ_257 /* InterruptEnableTests.swift in Sources */,
 				OBJ_258 /* MemoryReadTests.swift in Sources */,

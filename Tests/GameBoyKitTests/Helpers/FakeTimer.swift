@@ -4,7 +4,7 @@
 
 @testable import GameBoyKit
 
-class FakeTimer: Timer {
+class FakeTimer: WritableTimer {
   var div:  UInt8 = 0
   var tima: UInt8 = 0
   var tma:  UInt8 = 0

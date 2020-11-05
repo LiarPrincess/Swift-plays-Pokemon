@@ -4,6 +4,6 @@
 
 @testable import GameBoyKit
 
-class FakeJoypad: Joypad {
+class FakeJoypad: WritableJoypad {
   var value: UInt8 = 0
 }
