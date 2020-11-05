@@ -10,13 +10,15 @@ private typealias VideoRamMap = MemoryMap.VideoRam
 
 internal final class LcdImpl: WritableLcd {
 
-  internal var control: UInt8 = 0 {
+  internal var controlRaw: UInt8 = 0 {
     didSet {
-      self.clearSpriteCacheIfSpriteSizeChanged(oldControl: oldValue, newControl: self.control)
+      let old = LcdControl(value: oldValue)
+      let new = LcdControl(value: self.controlRaw)
+      self.clearSpriteCacheIfSpriteSizeChanged(oldValue: old, newValue: new)
     }
   }
 
-  internal var status: UInt8 = 0
+  internal var statusRaw: UInt8 = 0
 
   internal var scrollY: UInt8 = 0
   internal var scrollX: UInt8 = 0
@@ -54,6 +56,11 @@ internal final class LcdImpl: WritableLcd {
   /// Writes to OAM will clear appropriate entries.
   internal lazy var spritesByLineCache = [Int:[Sprite]]()
 
+  /// Data that should be put on screen:
+  /// - 0 - White
+  /// - 1 - Light gray
+  /// - 2 - Dark gray
+  /// - 3 - Black
   internal lazy var framebuffer: UnsafeMutableBufferPointer<UInt8> = {
     let size = LcdConstants.width * LcdConstants.height
     let result = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: size)
@@ -175,7 +182,7 @@ internal final class LcdImpl: WritableLcd {
   }
 
   private func clearSpriteCache(fromLine startLine: Int) {
-    let height = self.spriteHeight
+    let height = self.control.spriteHeight
 
     let startLine = max(startLine, 0)
     let endLine   = min(startLine + height, LcdConstants.backgroundMapHeight)
@@ -196,12 +203,12 @@ internal final class LcdImpl: WritableLcd {
 
     self.updateLine()
 
-    let previousMode = self.mode
+    let previousMode = self.status.mode
     self.updateMode()
 
     // This is not exactly correct, but for perfomance we will
     // draw the whole line at once instead on every tick.
-    let hasFinishedTransfer = self.mode != previousMode && previousMode == .pixelTransfer
+    let hasFinishedTransfer = self.status.mode != previousMode && previousMode == .pixelTransfer
     if hasFinishedTransfer {
       self.drawLine()
     }
@@ -213,7 +220,7 @@ internal final class LcdImpl: WritableLcd {
     if self.frameProgress > LcdConstants.cyclesPerFrame {
       self.frameProgress -= LcdConstants.cyclesPerFrame
 
-      self.isLcdEnabledInCurrentFrame = self.isLcdEnabled
+      self.isLcdEnabledInCurrentFrame = self.control.isLcdEnabled
       if !self.isLcdEnabledInCurrentFrame {
         self.line = 0
         self.framebuffer.assign(repeating: 0) // clear
@@ -230,7 +237,7 @@ internal final class LcdImpl: WritableLcd {
       let hasInterrupt = self.line == self.lineCompare
 
       self.setIsLineCompareInterrupt(hasInterrupt)
-      if hasInterrupt && self.isLineCompareInterruptEnabled {
+      if hasInterrupt && self.status.isLineCompareInterruptEnabled {
         self.interrupts.set(.lcdStat)
       }
     }
@@ -240,10 +247,11 @@ internal final class LcdImpl: WritableLcd {
   /// Will also request any needed interrupt.
   private func updateMode() {
     if self.line >= LcdConstants.height {
-      if self.mode != .vBlank {
+      if self.status.mode != .vBlank {
         self.setMode(.vBlank)
         self.interrupts.set(.vBlank)
-        if self.isVBlankInterruptEnabled {
+
+        if self.status.isVBlankInterruptEnabled {
           self.interrupts.set(.lcdStat)
         }
       }
@@ -252,58 +260,56 @@ internal final class LcdImpl: WritableLcd {
 
     let lineProgress = self.frameProgress % LcdConstants.cyclesPerLine
 
-    let previousMode = self.mode
+    let previousMode = self.status.mode
     var requestInterrupt = false
 
     if lineProgress < LcdConstants.oamSearchEnd {
       self.setMode(.oamSearch)
-      requestInterrupt = self.isOamInterruptEnabled
+      requestInterrupt = self.status.isOamInterruptEnabled
     } else if lineProgress < LcdConstants.pixelTransferEnd {
       self.setMode(.pixelTransfer)
     } else {
       self.setMode(.hBlank)
-      requestInterrupt = self.isHBlankInterruptEnabled
+      requestInterrupt = self.status.isHBlankInterruptEnabled
     }
 
-    if requestInterrupt && self.mode != previousMode {
+    if requestInterrupt && self.status.mode != previousMode {
       self.interrupts.set(.lcdStat)
     }
   }
 
   // MARK: - Setters
 
-  private func clearSpriteCacheIfSpriteSizeChanged(oldControl: UInt8, newControl: UInt8) {
-    let oldSize = oldControl & LcdControlMasks.spriteSize
-    let newSize = newControl & LcdControlMasks.spriteSize
-
-    let hasSizeChanged = oldSize != newSize
+  private func clearSpriteCacheIfSpriteSizeChanged(oldValue: LcdControl,
+                                                   newValue: LcdControl) {
+    let hasSizeChanged = oldValue.spriteSize != newValue.spriteSize
     if hasSizeChanged {
       self.spritesByLineCache.removeAll(keepingCapacity: true)
     }
   }
 
   private func setIsLineCompareInterrupt(_ value: Bool) {
-    let clear = ~LcdStatusMasks.isLineCompareInterrupt
-    var newStatus = self.status & clear
+    let clear = ~LcdStatus.Masks.isLineCompareInterrupt
+    var newStatus = self.status.value & clear
 
     if value {
-      newStatus |= LcdStatusMasks.isLineCompareInterrupt
+      newStatus |= LcdStatus.Masks.isLineCompareInterrupt
     }
 
-    self.status = newStatus
+    self.status.value = newStatus
   }
 
   private func setMode(_ mode: LcdMode) {
-    let clear = ~LcdStatusMasks.mode
-    var newStatus = self.status & clear
+    let clear = ~LcdStatus.Masks.mode
+    var newStatus = self.status.value & clear
 
     switch mode {
-    case .hBlank:        newStatus |= LcdModeValues.hBlank
-    case .vBlank:        newStatus |= LcdModeValues.vBlank
-    case .oamSearch:     newStatus |= LcdModeValues.oamSearch
-    case .pixelTransfer: newStatus |= LcdModeValues.pixelTransfer
+    case .hBlank:        newStatus |= LcdMode.hBlankValue
+    case .vBlank:        newStatus |= LcdMode.vBlankValue
+    case .oamSearch:     newStatus |= LcdMode.oamSearchValue
+    case .pixelTransfer: newStatus |= LcdMode.pixelTransferValue
     }
 
-    self.status = newStatus
+    self.status.value = newStatus
   }
 }

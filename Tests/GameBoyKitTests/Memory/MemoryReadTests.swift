@@ -155,11 +155,11 @@ class MemoryReadTests: XCTestCase {
 
     var value: UInt8 = 0
 
-    lcd.control = value
+    lcd.controlRaw = value
     XCTAssertEqual(memory.read(MemoryMap.Lcd.control), value)
     value += 1
 
-    lcd.status = value
+    lcd.statusRaw = value
     XCTAssertEqual(memory.read(MemoryMap.Lcd.status), value)
     value += 1
 

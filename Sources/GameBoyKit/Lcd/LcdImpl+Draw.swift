@@ -7,15 +7,15 @@
 extension LcdImpl {
 
   internal func drawLine() {
-    if self.isBackgroundVisible {
+    if self.control.isBackgroundVisible {
       self.drawBackgroundLine()
     }
 
-    if self.isWindowEnabled {
+    if self.control.isWindowEnabled {
       self.drawWindow()
     }
 
-    if self.isSpriteEnabled {
+    if self.control.isSpriteEnabled {
       self.drawSprites()
     }
   }
@@ -27,7 +27,7 @@ extension LcdImpl {
     let tileRow  = globalY / TileConstants.height
     let tileLine = globalY % TileConstants.height
 
-    let tileMap = self.getTileMap(for: self.backgroundTileMap)
+    let tileMap = self.getTileMap(for: self.control.backgroundTileMap)
     let framebufferSlice = self.getBackgroundFramebuffer(line: line)
 
     var progress = 0
@@ -37,7 +37,7 @@ extension LcdImpl {
       let tileIndexRaw = tileMap[tileRow * TileConstants.tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
-      if self.tileDataSelect == .from8800to97ff {
+      if self.control.tileDataSelect == .from8800to97ff {
         tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
       }
 
@@ -70,7 +70,7 @@ extension LcdImpl {
     let start = basePtr.advanced(by: line * LcdConstants.width)
     var count = LcdConstants.width
 
-    let isUsingWindow = self.isWindowEnabled && self.line >= self.windowY
+    let isUsingWindow = self.control.isWindowEnabled && self.line >= self.windowY
     if isUsingWindow {
       // TODO: Convert to tests
       // http://bgb.bircd.org/pandocs.htm#lcdpositionandscrolling
@@ -101,7 +101,7 @@ extension LcdImpl {
     let tileRow = windowY / TileConstants.height
     let tileLine = windowY % TileConstants.height
 
-    let tileMap = self.getTileMap(for: self.windowTileMap)
+    let tileMap = self.getTileMap(for: self.control.windowTileMap)
     let framebufferSlice = self.getWindowFramebuffer(line: line)
 
     var progress = 0 // windowX
@@ -110,7 +110,7 @@ extension LcdImpl {
       let tileIndexRaw = tileMap[tileRow * TileConstants.tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
-      if self.tileDataSelect == .from8800to97ff {
+      if self.control.tileDataSelect == .from8800to97ff {
         tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
       }
 
@@ -159,7 +159,7 @@ extension LcdImpl {
   // swiftlint:disable:next function_body_length
   private func drawSprites() {
     let line = Int(self.line)
-    let spriteHeight = self.spriteHeight
+    let spriteHeight = self.control.spriteHeight
 
     let sprites = self.getSpritesFromRightToLeft(line: line)
     let framebufferSlice = self.getSpriteFramebuffer(line: line)
@@ -235,7 +235,7 @@ extension LcdImpl {
     var result = [Sprite]()
     result.reserveCapacity(SpriteConstants.countPerLine)
 
-    let spriteHeight = self.spriteHeight
+    let spriteHeight = self.control.spriteHeight
 
     for sprite in self.sprites {
       let isAfterStart = line >= sprite.realY
@@ -267,7 +267,7 @@ extension LcdImpl {
     return Int(self.windowX) - LcdConstants.windowXShift
   }
 
-  internal func getTileMap(for map: TileMap) -> MemoryBuffer {
+  internal func getTileMap(for map: LcdTileMap) -> MemoryBuffer {
     switch map {
     case .from9800to9bff: return self.tileMap9800to9bff
     case .from9c00to9fff: return self.tileMap9c00to9fff

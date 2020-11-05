@@ -72,15 +72,15 @@ public final class Debugger {
     self.lcd.dumpProperties()
   }
 
-  public func dumpTileIndices(_ map: TileMap) {
+  public func dumpTileIndices(_ map: LcdTileMap) {
     self.lcd.dumpTileIndices(map)
   }
 
-  public func dumpTileData(_ data: TileData) {
+  public func dumpTileData(_ data: LcdTileData) {
     self.lcd.dumpTileData(data)
   }
 
-  public func dumpBackground(_ map: TileMap, _ data: TileData) {
+  public func dumpBackground(_ map: LcdTileMap, _ data: LcdTileData) {
     self.lcd.dumpBackground(map, data)
   }
 }

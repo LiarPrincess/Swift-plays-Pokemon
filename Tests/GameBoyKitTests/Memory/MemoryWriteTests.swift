@@ -155,11 +155,11 @@ class MemoryWriteTests: XCTestCase {
     var value: UInt8 = 5
 
     memory.write(MemoryMap.Lcd.control, value: value)
-    XCTAssertEqual(lcd.control, value)
+    XCTAssertEqual(lcd.controlRaw, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.status, value: value)
-    XCTAssertEqual(lcd.status, value)
+    XCTAssertEqual(lcd.statusRaw, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.scrollY, value: value)

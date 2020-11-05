@@ -5,10 +5,10 @@
 public protocol Lcd: AnyObject {
 
   /// FF40 - LCDC - LCD Control
-  var control: UInt8 { get }
+  var controlRaw: UInt8 { get }
 
   /// FF41 - STAT - LCDC Status
-  var status: UInt8 { get }
+  var statusRaw: UInt8 { get }
 
   /// FF42 - SCY - Scroll Y
   var scrollY: UInt8 { get }
@@ -54,10 +54,10 @@ public protocol Lcd: AnyObject {
 internal protocol WritableLcd: Lcd {
 
   /// FF40 - LCDC - LCD Control
-  var control: UInt8 { get set }
+  var controlRaw: UInt8 { get set }
 
   /// FF41 - STAT - LCDC Status
-  var status: UInt8 { get set }
+  var statusRaw: UInt8 { get set }
 
   /// FF42 - SCY - Scroll Y
   var scrollY: UInt8 { get set }
@@ -93,4 +93,19 @@ internal protocol WritableLcd: Lcd {
   func writeOAM(_ address: UInt16, value: UInt8)
 
   func tick(cycles: Int)
+}
+
+extension WritableLcd {
+
+  // MARK: - Control properties
+
+  internal var control: LcdControl {
+    get { return LcdControl(value: self.controlRaw) }
+    set { self.controlRaw = newValue.value }
+  }
+
+  internal var status: LcdStatus {
+    get { return LcdStatus(value: self.statusRaw) }
+    set { self.statusRaw = newValue.value }
+  }
 }

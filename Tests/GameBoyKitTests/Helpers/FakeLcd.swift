@@ -6,8 +6,8 @@
 
 class FakeLcd: WritableLcd {
 
-  var control: UInt8 = 0
-  var status:  UInt8 = 0
+  var controlRaw: UInt8 = 0
+  var statusRaw:  UInt8 = 0
 
   var scrollY: UInt8 = 0
   var scrollX: UInt8 = 0

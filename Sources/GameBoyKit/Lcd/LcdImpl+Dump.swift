@@ -14,23 +14,23 @@ extension LcdImpl {
   // MARK: - Properties
 
   internal func dumpProperties() {
-    print("LCDC: \(self.control.bin)")
-    print("  isLcdEnabled: \(self.isLcdEnabled)")
-    print("  isBackgroundVisible: \(self.isBackgroundVisible)")
-    print("  isWindowEnabled: \(self.isWindowEnabled)")
-    print("  isSpriteEnabled: \(self.isSpriteEnabled)")
-    print("  windowTileMap: \(self.windowTileMap)")
-    print("  backgroundTileMap: \(self.backgroundTileMap)")
-    print("  tileDataSelect: \(self.tileDataSelect)")
-    print("  spriteHeight: \(self.spriteHeight)")
+    print("LCDC: \(self.controlRaw.bin)")
+    print("  isLcdEnabled: \(self.control.isLcdEnabled)")
+    print("  isBackgroundVisible: \(self.control.isBackgroundVisible)")
+    print("  isWindowEnabled: \(self.control.isWindowEnabled)")
+    print("  isSpriteEnabled: \(self.control.isSpriteEnabled)")
+    print("  windowTileMap: \(self.control.windowTileMap)")
+    print("  backgroundTileMap: \(self.control.backgroundTileMap)")
+    print("  tileDataSelect: \(self.control.tileDataSelect)")
+    print("  spriteHeight: \(self.control.spriteHeight)")
 
-    print("STAT: \(self.status.bin)")
-    print("  isLineCompareInterruptEnabled: \(self.isLineCompareInterruptEnabled)")
-    print("  isOamInterruptEnabled: \(self.isOamInterruptEnabled)")
-    print("  isVBlankInterruptEnabled: \(self.isVBlankInterruptEnabled)")
-    print("  isHBlankInterruptEnabled: \(self.isHBlankInterruptEnabled)")
-    print("  isLineCompareInterrupt: \(self.isLineCompareInterrupt)")
-    print("  mode: \(self.mode)")
+    print("STAT: \(self.statusRaw.bin)")
+    print("  isLineCompareInterruptEnabled: \(self.status.isLineCompareInterruptEnabled)")
+    print("  isOamInterruptEnabled: \(self.status.isOamInterruptEnabled)")
+    print("  isVBlankInterruptEnabled: \(self.status.isVBlankInterruptEnabled)")
+    print("  isHBlankInterruptEnabled: \(self.status.isHBlankInterruptEnabled)")
+    print("  isLineCompareInterrupt: \(self.status.isLineCompareInterrupt)")
+    print("  mode: \(self.status.mode)")
 
     print("ScrollY: \(self.scrollY.hex)")
     print("ScrollX: \(self.scrollX.hex)")
@@ -45,7 +45,7 @@ extension LcdImpl {
 
   // MARK: - Tile indices
 
-  internal func dumpTileIndices(_ map: TileMap) {
+  internal func dumpTileIndices(_ map: LcdTileMap) {
     print("Tile indices \(map):")
 
     // horizontal markers
@@ -83,7 +83,7 @@ extension LcdImpl {
 
   // MARK: - Tile data
 
-  internal func dumpTileData(_ data: TileData) {
+  internal func dumpTileData(_ data: LcdTileData) {
     let columnCount = 16
     print("Tile data \(data):")
 
@@ -137,7 +137,7 @@ extension LcdImpl {
 
   // MARK: - Background
 
-  internal func dumpBackground(_ map: TileMap, _ data: TileData) {
+  internal func dumpBackground(_ map: LcdTileMap, _ data: LcdTileData) {
     print("Background for map: \(map), data: \(data)")
 
     let rowRange    = 0..<tileRowCount
@@ -187,8 +187,8 @@ extension LcdImpl {
     }
   }
 
-  private func drawTile(_ map:  TileMap,
-                        _ data: TileData,
+  private func drawTile(_ map:  LcdTileMap,
+                        _ data: LcdTileData,
                         _ tileRow:    Int,
                         _ tileColumn: Int,
                         _ tileLine:   Int) {

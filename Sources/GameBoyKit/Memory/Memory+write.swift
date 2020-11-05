@@ -99,8 +99,8 @@ extension Memory {
     case MemoryMap.Audio.nr3_ram_start: self.audio.nr3_ram_start = value
     case MemoryMap.Audio.nr3_ram_end:   self.audio.nr3_ram_end = value
 
-    case MemoryMap.Lcd.control: self.lcd.control = value
-    case MemoryMap.Lcd.status:  self.lcd.status = value
+    case MemoryMap.Lcd.control: self.lcd.controlRaw = value
+    case MemoryMap.Lcd.status:  self.lcd.statusRaw = value
     case MemoryMap.Lcd.scrollY: self.lcd.scrollY = value
     case MemoryMap.Lcd.scrollX: self.lcd.scrollX = value
     case MemoryMap.Lcd.line:        self.lcd.line = value
