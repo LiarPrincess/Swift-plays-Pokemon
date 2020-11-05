@@ -5,45 +5,31 @@
 import XCTest
 @testable import GameBoyKit
 
-extension Interrupts {
-  public var vBlank: Bool { return self.isSet(.vBlank) }
-  public var lcdStat: Bool { return self.isSet(.lcdStat) }
-  public var timer: Bool { return self.isSet(.timer) }
-  public var serial: Bool { return self.isSet(.serial) }
-  public var joypad: Bool { return self.isSet(.joypad) }
-
-  public var isVBlankEnabled: Bool { return self.isEnabled(.vBlank) }
-  public var isLcdStatEnabled: Bool { return self.isEnabled(.lcdStat) }
-  public var isTimerEnabled: Bool { return self.isEnabled(.timer) }
-  public var isSerialEnabled: Bool { return self.isEnabled(.serial) }
-  public var isJoypadEnabled: Bool { return self.isEnabled(.joypad) }
-}
-
 class InterruptsTests: XCTestCase {
 
   func test_flag() {
     let interrupts = Interrupts()
 
-    XCTAssertEqual(interrupts.vBlank,  false)
-    XCTAssertEqual(interrupts.lcdStat, false)
-    XCTAssertEqual(interrupts.timer,   false)
-    XCTAssertEqual(interrupts.serial,  false)
-    XCTAssertEqual(interrupts.joypad,  false)
+    XCTAssertEqual(interrupts.isVBlankSet,  false)
+    XCTAssertEqual(interrupts.isLcdStatSet, false)
+    XCTAssertEqual(interrupts.isTimerSet,   false)
+    XCTAssertEqual(interrupts.isSerialSet,  false)
+    XCTAssertEqual(interrupts.isJoypadSet,  false)
 
     interrupts.flag = 1 << 0
-    XCTAssertEqual(interrupts.vBlank, true)
+    XCTAssertEqual(interrupts.isVBlankSet, true)
 
     interrupts.flag = 1 << 1
-    XCTAssertEqual(interrupts.lcdStat, true)
+    XCTAssertEqual(interrupts.isLcdStatSet, true)
 
     interrupts.flag = 1 << 2
-    XCTAssertEqual(interrupts.timer, true)
+    XCTAssertEqual(interrupts.isTimerSet, true)
 
     interrupts.flag = 1 << 3
-    XCTAssertEqual(interrupts.serial, true)
+    XCTAssertEqual(interrupts.isSerialSet, true)
 
     interrupts.flag = 1 << 4
-    XCTAssertEqual(interrupts.joypad, true)
+    XCTAssertEqual(interrupts.isJoypadSet, true)
   }
 
   func test_enabled() {

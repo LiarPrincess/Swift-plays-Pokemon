@@ -4,7 +4,7 @@
 
 import GameBoyKit
 
-internal class TestInput: GameboyInputProvider {
+class TestInput: GameboyInputProvider {
 
   func getGameboyInput() -> GameboyInput {
     return GameboyInput()

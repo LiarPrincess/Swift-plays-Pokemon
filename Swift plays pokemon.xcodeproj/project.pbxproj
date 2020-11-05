@@ -33,6 +33,7 @@
 		90374A3C25534757008A908D /* GameBoyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427CF725545FC8007A9E9D /* CpuMemory.swift */; };
 		90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D5625546F00007A9E9D /* BootromMemory.swift */; };
+		90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D7C25548092007A9E9D /* Interrupts+properties.swift */; };
 		OBJ_146 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Common.swift */; };
 		OBJ_147 /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ModifyInstructions.swift */; };
 		OBJ_148 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Opcode.swift */; };
@@ -1003,6 +1004,7 @@
 				OBJ_249 /* XCTestCase+createLcdImpl.swift in Sources */,
 				OBJ_250 /* XCTestCase+createMemory.swift in Sources */,
 				OBJ_251 /* TimerTestCase.swift in Sources */,
+				90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */,
 				OBJ_252 /* TimerTimaTests.swift in Sources */,
 				OBJ_253 /* TimerDivTests.swift in Sources */,
 				OBJ_254 /* LcdColorPaletteTests.swift in Sources */,

@@ -23,7 +23,7 @@ class TimerTimaTests: TimerTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x01)
 
-    XCTAssertEqual(interrupts.timer, false)
+    XCTAssertFalse(interrupts.isTimerSet)
   }
 
   func test_period1024_incrementsAt_1024cycles() {
@@ -39,7 +39,7 @@ class TimerTimaTests: TimerTestCase {
     timer.tick(cycles: 24)
     XCTAssertEqual(timer.tima, 0x01)
 
-    XCTAssertEqual(interrupts.timer, false)
+    XCTAssertFalse(interrupts.isTimerSet)
   }
 
   func test_disabled_doesNothing() {
@@ -57,7 +57,7 @@ class TimerTimaTests: TimerTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, 0x00)
 
-    XCTAssertEqual(interrupts.timer, false)
+    XCTAssertFalse(interrupts.isTimerSet)
   }
 
   func test_overflow() {
@@ -79,6 +79,6 @@ class TimerTimaTests: TimerTestCase {
     timer.tick(cycles: 8)
     XCTAssertEqual(timer.tima, timer.tma) // now!
 
-    XCTAssertEqual(interrupts.timer, true)
+    XCTAssertTrue(interrupts.isTimerSet)
   }
 }

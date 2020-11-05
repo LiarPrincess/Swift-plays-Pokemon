@@ -14,12 +14,12 @@ class DummyInput: GameboyInputProvider {
 
 extension XCTestCase {
 
-  internal func createMemory(bootrom:    BootromMemory?   = nil,
-                             cartridge:  CartridgeMemory? = nil,
-                             joypad:     JoypadMemory?    = nil,
-                             lcd:        WritableLcd?     = nil,
-                             timer:      TimerMemory?     = nil,
-                             interrupts: Interrupts?      = nil) -> Memory {
+  func createMemory(bootrom:    BootromMemory?   = nil,
+                    cartridge:  CartridgeMemory? = nil,
+                    joypad:     JoypadMemory?    = nil,
+                    lcd:        WritableLcd?     = nil,
+                    timer:      TimerMemory?     = nil,
+                    interrupts: Interrupts?      = nil) -> Memory {
     return Memory(
       bootrom:    bootrom    ?? FakeBootromMemory(),
       cartridge:  cartridge  ?? FakeCartridgeMemory(),
