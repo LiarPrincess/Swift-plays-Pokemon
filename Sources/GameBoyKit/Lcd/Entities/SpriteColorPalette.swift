@@ -8,20 +8,17 @@ private let color3Shift: UInt8 = 6
 
 public struct SpriteColorPalette {
 
-  private var color1: UInt8 = 0
-  private var color2: UInt8 = 0
-  private var color3: UInt8 = 0
+  public let color1: UInt8
+  public let color2: UInt8
+  public let color3: UInt8
 
-  private var _value: UInt8 = 0
+  public let value: UInt8
 
-  public internal(set) var value: UInt8 {
-    get { return self._value }
-    set {
-      self._value = newValue
-      self.color1 = (newValue >> color1Shift) & 0b11
-      self.color2 = (newValue >> color2Shift) & 0b11
-      self.color3 = (newValue >> color3Shift) & 0b11
-    }
+  internal init(value: UInt8) {
+    self.value = value
+    self.color1 = (value >> color1Shift) & 0b11
+    self.color2 = (value >> color2Shift) & 0b11
+    self.color3 = (value >> color3Shift) & 0b11
   }
 
   public subscript(rawColor: UInt8) -> UInt8 {

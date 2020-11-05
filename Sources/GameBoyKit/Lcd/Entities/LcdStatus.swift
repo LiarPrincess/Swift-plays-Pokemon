@@ -13,7 +13,11 @@ public struct LcdStatus {
     internal static let mode: UInt8 = 0b11
   }
 
-  public internal(set) var value = UInt8()
+  public let value: UInt8
+
+  internal init(value: UInt8) {
+    self.value = value
+  }
 
   // MARK: - Interrupts
 

@@ -13,25 +13,23 @@ class BackgroundColorPaletteTests: XCTestCase {
     for color in colors {
       let shift = color * 2
 
-      var palette = BackgroundColorPalette()
-
       var value: UInt8 = 0b00 << shift
-      palette.value = value
+      var palette = BackgroundColorPalette(value: value)
       XCTAssertEqual(palette[color], 0b00)
       XCTAssertEqual(palette.value, value) // check if we can restore it
 
       value = 0b01 << shift
-      palette.value = value
+      palette = BackgroundColorPalette(value: value)
       XCTAssertEqual(palette[color], 0b01)
       XCTAssertEqual(palette.value, value) // check if we can restore it
 
       value = 0b10 << shift
-      palette.value = value
+      palette = BackgroundColorPalette(value: value)
       XCTAssertEqual(palette[color], 0b10)
       XCTAssertEqual(palette.value, value) // check if we can restore it
 
       value = 0b11 << shift
-      palette.value = value
+      palette = BackgroundColorPalette(value: value)
       XCTAssertEqual(palette[color], 0b11)
       XCTAssertEqual(palette.value, value) // check if we can restore it
     }

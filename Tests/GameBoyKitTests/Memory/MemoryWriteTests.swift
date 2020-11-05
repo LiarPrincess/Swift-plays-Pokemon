@@ -155,11 +155,11 @@ class MemoryWriteTests: XCTestCase {
     var value: UInt8 = 5
 
     memory.write(MemoryMap.Lcd.control, value: value)
-    XCTAssertEqual(lcd.controlRaw, value)
+    XCTAssertEqual(lcd.control.value, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.status, value: value)
-    XCTAssertEqual(lcd.statusRaw, value)
+    XCTAssertEqual(lcd.status.value, value)
     value += 1
 
     memory.write(MemoryMap.Lcd.scrollY, value: value)
@@ -187,17 +187,17 @@ class MemoryWriteTests: XCTestCase {
     value += 1
 
     memory.write(MemoryMap.Lcd.backgroundPalette, value: value)
-    XCTAssertEqual(lcd.backgroundPalette, value)
+    XCTAssertEqual(lcd.backgroundColorPalette.value, value)
     value += 1
 
     // 2 last bits are always 0
     memory.write(MemoryMap.Lcd.spritePalette0, value: value)
-    XCTAssertEqual(lcd.spritePalette0, value)
+    XCTAssertEqual(lcd.spriteColorPalette0.value, value)
     value += 1
 
     // 2 last bits are always 0
     memory.write(MemoryMap.Lcd.spritePalette1, value: value)
-    XCTAssertEqual(lcd.spritePalette1, value)
+    XCTAssertEqual(lcd.spriteColorPalette1.value, value)
     value += 1
   }
 

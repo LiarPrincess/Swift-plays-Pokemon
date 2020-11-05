@@ -15,7 +15,11 @@ public struct LcdControl {
     internal static let isBackgroundVisible: UInt8 = 1 << 0
   }
 
-  public internal(set) var value = UInt8()
+  public let value: UInt8
+
+  internal init(value: UInt8) {
+    self.value = value
+  }
 
   // MARK: - Is enabled
 

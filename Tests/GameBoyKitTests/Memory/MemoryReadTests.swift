@@ -155,11 +155,11 @@ class MemoryReadTests: XCTestCase {
 
     var value: UInt8 = 0
 
-    lcd.controlRaw = value
+    lcd.control = LcdControl(value: value)
     XCTAssertEqual(memory.read(MemoryMap.Lcd.control), value)
     value += 1
 
-    lcd.statusRaw = value
+    lcd.status = LcdStatus(value: value)
     XCTAssertEqual(memory.read(MemoryMap.Lcd.status), value)
     value += 1
 
@@ -187,17 +187,17 @@ class MemoryReadTests: XCTestCase {
     XCTAssertEqual(memory.read(MemoryMap.Lcd.windowX), value)
     value += 1
 
-    lcd.backgroundPalette = value
+    lcd.backgroundColorPalette = BackgroundColorPalette(value: value)
     XCTAssertEqual(memory.read(MemoryMap.Lcd.backgroundPalette), value)
     value += 1
 
     // 2 last bits are always 0
-    lcd.spritePalette0 = value
+    lcd.spriteColorPalette0 = SpriteColorPalette(value: value)
     XCTAssertEqual(memory.read(MemoryMap.Lcd.spritePalette0), value)
     value += 1
 
     // 2 last bits are always 0
-    lcd.spritePalette1 = value
+    lcd.spriteColorPalette1 = SpriteColorPalette(value: value)
     XCTAssertEqual(memory.read(MemoryMap.Lcd.spritePalette1), value)
     value += 1
   }
