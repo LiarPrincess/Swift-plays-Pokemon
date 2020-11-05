@@ -19,7 +19,7 @@ extension Cpu {
   // MARK: - 8-Bit Transfer and Input/Output Instructions
 
   /// Loads the contents of register r' into register r.
-  internal func ld_r_r(_ r0: SingleRegister, _ r1: SingleRegister) -> Int {
+  internal func ld_r_r(_ r0: CpuRegisters.Single, _ r1: CpuRegisters.Single) -> Int {
     let value = self.registers.get(r1)
     self.registers.set(r0, to: value)
 
@@ -28,7 +28,7 @@ extension Cpu {
   }
 
   /// Loads 8-bit immediate data n into register r.
-  internal func ld_r_d8(_ r: SingleRegister, _ n: UInt8) -> Int {
+  internal func ld_r_d8(_ r: CpuRegisters.Single, _ n: UInt8) -> Int {
     self.registers.set(r, to: n)
 
     self.pc += 2
@@ -37,7 +37,7 @@ extension Cpu {
 
   /// Loads the contents of memory (8 bits) specified by register pair HL
   /// into register r.
-  internal func ld_r_pHL(_ r: SingleRegister) -> Int {
+  internal func ld_r_pHL(_ r: CpuRegisters.Single) -> Int {
     let n = self.read(self.registers.hl)
     self.registers.set(r, to: n)
 
@@ -46,7 +46,7 @@ extension Cpu {
   }
 
   /// Stores the contents of register r in memory specified by register pair HL.
-  internal func ld_pHL_r(_ r: SingleRegister) -> Int {
+  internal func ld_pHL_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     let hl = self.registers.hl
     self.write(hl, value: n)
@@ -216,7 +216,7 @@ extension Cpu {
   // MARK: - 16-Bit Transfer Instructions
 
   /// Loads 2 bytes of immediate data to register pair dd.
-  internal func ld_rr_d16(_ rr: CombinedRegister, _ nn: UInt16) -> Int {
+  internal func ld_rr_d16(_ rr: CpuRegisters.Combined, _ nn: UInt16) -> Int {
     self.registers.set(rr, to: nn)
 
     self.pc += 3
@@ -244,7 +244,7 @@ extension Cpu {
   /// are placed on the stack.
   /// The contents of the lower portion of qq are then placed on the stack.
   /// The contents of SP are automatically decremented by 2.
-  internal func push(_ rr: CombinedRegister) -> Int {
+  internal func push(_ rr: CpuRegisters.Combined) -> Int {
     let nn = self.registers.get(rr)
     self.push16(nn)
 
@@ -258,7 +258,7 @@ extension Cpu {
   /// Next, the contents of SP are incremented by 1 and the contents of the memory
   /// they specify are loaded in the upper portion of qq.
   /// The contents of SP are automatically incremented by 2.
-  internal func pop(_ rr: CombinedRegister) -> Int {
+  internal func pop(_ rr: CpuRegisters.Combined) -> Int {
     let nn = self.pop16()
     self.registers.set(rr, to: nn)
 
@@ -302,7 +302,7 @@ extension Cpu {
 
   /// Adds the contents of register r to those of register A
   /// and stores the results in register A.
-  internal func add_a_r(_ r: SingleRegister) -> Int {
+  internal func add_a_r(_ r: CpuRegisters.Single) -> Int {
     self.add_a(self.registers.get(r))
 
     self.pc += 1
@@ -342,7 +342,7 @@ extension Cpu {
 
   /// Adds the contents of register pair ss to the contents of register pair HL
   /// and stores the results in HL.
-  internal func add_hl_r(_ r: CombinedRegister) -> Int {
+  internal func add_hl_r(_ r: CpuRegisters.Combined) -> Int {
     self.add_hl(self.registers.get(r))
 
     self.pc += 1
@@ -392,7 +392,7 @@ extension Cpu {
 
   /// Adds the contents of operand s and CY to the contents of register A
   /// and stores the results in register A.. r, n, and (HL) are used for operand s.
-  internal func adc_a_r(_ r: SingleRegister) -> Int {
+  internal func adc_a_r(_ r: CpuRegisters.Single) -> Int {
     self.adc_a(self.registers.get(r))
 
     self.pc += 1
@@ -436,7 +436,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  internal func sub_a_r(_ r: SingleRegister) -> Int {
+  internal func sub_a_r(_ r: CpuRegisters.Single) -> Int {
     self.sub_a(self.registers.get(r))
 
     self.pc += 1
@@ -479,7 +479,7 @@ extension Cpu {
 
   /// Subtracts the contents of operand s and CY from the contents of register A
   /// and stores the results in register A. r, n, and (HL) are used for operand s.
-  internal func sbc_a_r(_ r: SingleRegister) -> Int {
+  internal func sbc_a_r(_ r: CpuRegisters.Single) -> Int {
     self.sbc_a(self.registers.get(r))
 
     self.pc += 1
@@ -526,7 +526,7 @@ extension Cpu {
 
   /// Compares the contents of operand s and register A
   /// and sets the flag if they are equal. r, n, and (HL) are used for operand s.
-  internal func cp_a_r(_ r: SingleRegister) -> Int {
+  internal func cp_a_r(_ r: CpuRegisters.Single) -> Int {
     self.cp_a(self.registers.get(r))
 
     self.pc += 1
@@ -567,7 +567,7 @@ extension Cpu {
   // MARK: Inc
 
   /// Increments the contents of register r by 1.
-  internal func inc_r(_ r: SingleRegister) -> Int {
+  internal func inc_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     let (newValue, _) = n.addingReportingOverflow(1)
 
@@ -583,7 +583,7 @@ extension Cpu {
   }
 
   /// Increments the contents of register pair ss by 1.
-  internal func inc_rr(_ r: CombinedRegister) -> Int {
+  internal func inc_rr(_ r: CpuRegisters.Combined) -> Int {
     let n = self.registers.get(r)
     let (newValue, _) = n.addingReportingOverflow(1)
     // flags affected: none
@@ -624,7 +624,7 @@ extension Cpu {
   // MARK: Dec
 
   /// Subtract 1 from the contents of register r by 1.
-  internal func dec_r(_ r: SingleRegister) -> Int {
+  internal func dec_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
 
     let (newValue, _) = n.subtractingReportingOverflow(1)
@@ -642,7 +642,7 @@ extension Cpu {
   }
 
   /// Decrements the contents of register pair ss by 1.
-  internal func dec_rr(_ r: CombinedRegister) -> Int {
+  internal func dec_rr(_ r: CpuRegisters.Combined) -> Int {
     let n = self.registers.get(r)
     let (newValue, _) = n.subtractingReportingOverflow(1)
     // flags affected: none
@@ -686,7 +686,7 @@ extension Cpu {
   /// Takes the logical-AND for each bit of the contents of operand s and register A,
   /// and stores the results in register A.
   /// r, n, and (HL) are used for operand s.
-  internal func and_a_r(_ r: SingleRegister) -> Int {
+  internal func and_a_r(_ r: CpuRegisters.Single) -> Int {
     self.and_a(self.registers.get(r))
 
     self.pc += 1
@@ -730,7 +730,7 @@ extension Cpu {
   /// Takes the logical-OR for each bit of the contents of operand s and register A
   /// and stores the results in register A.
   /// r, n, and (HL) are used for operand s.
-  internal func or_a_r(_ r: SingleRegister) -> Int {
+  internal func or_a_r(_ r: CpuRegisters.Single) -> Int {
     self.or_a(self.registers.get(r))
 
     self.pc += 1
@@ -774,7 +774,7 @@ extension Cpu {
   /// Takes the logical exclusive-OR for each bit of the contents of operand s
   /// and register A and stores the results in register A.
   /// r, n, and (HL) are used for operand s.
-  internal func xor_a_r(_ r: SingleRegister) -> Int {
+  internal func xor_a_r(_ r: CpuRegisters.Single) -> Int {
     self.xor_a(self.registers.get(r))
 
     self.pc += 1
@@ -895,7 +895,7 @@ extension Cpu {
 
   /// Rotates the contents of operand m to the left.
   /// r and (HL) are used for operand m.
-  internal func rlc_r(_ r: SingleRegister) -> Int {
+  internal func rlc_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rlc(n))
 
@@ -928,7 +928,7 @@ extension Cpu {
 
   /// Rotates the contents of operand m to the left.
   /// r and (HL) are used for operand m.
-  internal func rl_r(_ r: SingleRegister) -> Int {
+  internal func rl_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rl(n))
 
@@ -963,7 +963,7 @@ extension Cpu {
 
   /// Rotates the contents of operand m to the right.
   /// r and (HL) are used for operand m.
-  internal func rrc_r(_ r: SingleRegister) -> Int {
+  internal func rrc_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rrc(n))
 
@@ -996,7 +996,7 @@ extension Cpu {
 
   /// Rotates the contents of operand m to the right.
   /// r and (HL) are used for operand m.
-  internal func rr_r(_ r: SingleRegister) -> Int {
+  internal func rr_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.rr(n))
 
@@ -1030,7 +1030,7 @@ extension Cpu {
   // MARK: Shift
 
   /// Shifts the contents of operand m to the left.
-  internal func sla_r(_ r: SingleRegister) -> Int {
+  internal func sla_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.sla(n))
 
@@ -1061,7 +1061,7 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  internal func sra_r(_ r: SingleRegister) -> Int {
+  internal func sra_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.sra(n))
 
@@ -1092,7 +1092,7 @@ extension Cpu {
   }
 
   /// Shifts the contents of operand m to the right.
-  internal func srl_r(_ r: SingleRegister) -> Int {
+  internal func srl_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.srl(n))
 
@@ -1125,7 +1125,7 @@ extension Cpu {
   // MARK: Swap
 
   /// Shifts the contents of operand m to the right.
-  internal func swap_r(_ r: SingleRegister) -> Int {
+  internal func swap_r(_ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.swap(n))
 
@@ -1160,7 +1160,7 @@ extension Cpu {
 
   /// Copies the complement of the contents of the specified bit in register r
   /// to the Z flag of the program status word (PSW).
-  internal func bit_r(_ b: UInt8, _ r: SingleRegister) -> Int {
+  internal func bit_r(_ b: UInt8, _ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.bit(b, n)
 
@@ -1192,7 +1192,7 @@ extension Cpu {
   // MARK: Set
 
   /// Sets to 1 the specified bit in specified register r.
-  internal func set_r(_ b: UInt8, _ r: SingleRegister) -> Int {
+  internal func set_r(_ b: UInt8, _ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.set(b, n))
 
@@ -1218,7 +1218,7 @@ extension Cpu {
   // MARK: Reset
 
   /// Resets to 0 the specified bit in the specified register r.
-  internal func res_r(_ b: UInt8, _ r: SingleRegister) -> Int {
+  internal func res_r(_ b: UInt8, _ r: CpuRegisters.Single) -> Int {
     let n = self.registers.get(r)
     self.registers.set(r, to: self.res(b, n))
 

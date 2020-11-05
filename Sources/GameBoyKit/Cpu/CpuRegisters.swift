@@ -7,32 +7,9 @@ private let subtractFlagMask:  UInt8 = 1 << 6
 private let halfCarryFlagMask: UInt8 = 1 << 5
 private let carryFlagMask:     UInt8 = 1 << 4
 
-internal enum FlagRegister {
-  case zeroFlag
-  case subtractFlag
-  case halfCarryFlag
-  case carryFlag
-}
+public struct CpuRegisters {
 
-internal enum SingleRegister {
-  case a
-  case b
-  case c
-  case d
-  case e
-  case f
-  case h
-  case l
-}
-
-internal enum CombinedRegister {
-  case af
-  case bc
-  case de
-  case hl
-}
-
-public struct Registers {
+  // MARK: - Single registers
 
   /// Accumulator. An 8-bit register for storing data
   /// and the results of arithmetic and logical operations.
@@ -55,6 +32,8 @@ public struct Registers {
 
   /// Auxiliary register: L
   public internal(set) var l: UInt8 = 0
+
+  // MARK: - Flag register
 
   /// Flag register: F (lower 4 bits are always zero)
   public internal(set) var f: UInt8 {
@@ -93,43 +72,59 @@ public struct Registers {
 
   /// Merge of A and F registers.
   public internal(set) var af: UInt16 {
-    get { return (UInt16(self.a) << 8) | UInt16(self.f) }
-    set {
-      self.a = UInt8((newValue & 0xff00) >> 8)
-      self.f = UInt8(newValue & 0xff)
-    }
+    get { return combine(high: self.a, low: self.f) }
+    set { (self.a, self.f) = split(combined: newValue) }
   }
 
   /// Merge of B and C registers.
   public internal(set) var bc: UInt16 {
-    get { return (UInt16(self.b) << 8) | UInt16(self.c) }
-    set {
-      self.b = UInt8((newValue & 0xff00) >> 8)
-      self.c = UInt8(newValue & 0xff)
-    }
+    get { return combine(high: self.b, low: self.c) }
+    set { (self.b, self.c) = split(combined: newValue) }
   }
 
   /// Merge of D and E registers.
   public internal(set) var de: UInt16 {
-    get { return (UInt16(self.d) << 8) | UInt16(self.e) }
-    set {
-      self.d = UInt8((newValue & 0xff00) >> 8)
-      self.e = UInt8(newValue & 0xff)
-    }
+    get { return combine(high: self.d, low: self.e) }
+    set { (self.d, self.e) = split(combined: newValue) }
   }
 
   /// Merge of H and L registers.
   public internal(set) var hl: UInt16 {
-    get { return (UInt16(self.h) << 8) | UInt16(self.l) }
-    set {
-      self.h = UInt8((newValue & 0xff00) >> 8)
-      self.l = UInt8(newValue & 0xff)
-    }
+    get { return combine(high: self.h, low: self.l) }
+    set { (self.h, self.l) = split(combined: newValue) }
   }
 
   // MARK: - Addressing
 
-  internal func get(_ f: FlagRegister) -> Bool {
+  /// Names of all of the flag registers
+  internal enum Flag {
+    case zeroFlag
+    case subtractFlag
+    case halfCarryFlag
+    case carryFlag
+  }
+
+  /// Names of all of the single registers
+  internal enum Single {
+    case a
+    case b
+    case c
+    case d
+    case e
+    case f
+    case h
+    case l
+  }
+
+  /// Names of all of the combined registers
+  internal enum Combined {
+    case af
+    case bc
+    case de
+    case hl
+  }
+
+  internal func get(_ f: Flag) -> Bool {
     switch f {
     case .zeroFlag:      return self.zeroFlag
     case .subtractFlag:  return self.subtractFlag
@@ -138,7 +133,7 @@ public struct Registers {
     }
   }
 
-  internal func get(_ r: SingleRegister) -> UInt8 {
+  internal func get(_ r: Single) -> UInt8 {
     switch r {
     case .a: return self.a
     case .b: return self.b
@@ -151,7 +146,7 @@ public struct Registers {
     }
   }
 
-  internal func get(_ rr: CombinedRegister) -> UInt16 {
+  internal func get(_ rr: Combined) -> UInt16 {
     switch rr {
     case .af: return self.af
     case .bc: return self.bc
@@ -160,7 +155,7 @@ public struct Registers {
     }
   }
 
-  internal mutating func set(_ f: FlagRegister, to value: Bool) {
+  internal mutating func set(_ f: Flag, to value: Bool) {
     switch f {
     case .zeroFlag:      self.zeroFlag      = value
     case .subtractFlag:  self.subtractFlag  = value
@@ -169,7 +164,7 @@ public struct Registers {
     }
   }
 
-  internal mutating func set(_ r: SingleRegister, to value: UInt8) {
+  internal mutating func set(_ r: Single, to value: UInt8) {
     switch r {
     case .a: self.a = value
     case .b: self.b = value
@@ -182,7 +177,7 @@ public struct Registers {
     }
   }
 
-  internal mutating func set(_ rr: CombinedRegister, to value: UInt16) {
+  internal mutating func set(_ rr: Combined, to value: UInt16) {
     switch rr {
     case .af: self.af = value
     case .bc: self.bc = value
@@ -190,6 +185,16 @@ public struct Registers {
     case .hl: self.hl = value
     }
   }
+}
+
+private func combine(high: UInt8, low: UInt8) -> UInt16 {
+  return (UInt16(high) << 8) | UInt16(low)
+}
+
+private func split(combined: UInt16) -> (high: UInt8, low: UInt8) {
+  let high = UInt8((combined & 0xff00) >> 8)
+  let low  = UInt8(combined & 0xff)
+  return (high, low)
 }
 
 private func isSet(_ value: UInt8, mask: UInt8) -> Bool {

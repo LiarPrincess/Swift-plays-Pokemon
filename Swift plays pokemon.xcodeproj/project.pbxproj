@@ -49,7 +49,7 @@
 		OBJ_167 /* Cpu+ExecuteUnprefixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* Cpu+ExecuteUnprefixed.swift */; };
 		OBJ_168 /* Cpu+Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Cpu+Instructions.swift */; };
 		OBJ_169 /* Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Cpu.swift */; };
-		OBJ_170 /* Registers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Registers.swift */; };
+		OBJ_170 /* CpuRegisters.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* CpuRegisters.swift */; };
 		OBJ_171 /* CBPrefixedOpcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* CBPrefixedOpcode.swift */; };
 		OBJ_172 /* DebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* DebugMode.swift */; };
 		OBJ_173 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* DebugState.swift */; };
@@ -246,7 +246,7 @@
 		OBJ_30 /* Cpu+ExecuteUnprefixed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+ExecuteUnprefixed.swift"; sourceTree = "<group>"; };
 		OBJ_31 /* Cpu+Instructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cpu+Instructions.swift"; sourceTree = "<group>"; };
 		OBJ_32 /* Cpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cpu.swift; sourceTree = "<group>"; };
-		OBJ_33 /* Registers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registers.swift; sourceTree = "<group>"; };
+		OBJ_33 /* CpuRegisters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuRegisters.swift; sourceTree = "<group>"; };
 		OBJ_35 /* CBPrefixedOpcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBPrefixedOpcode.swift; sourceTree = "<group>"; };
 		OBJ_36 /* DebugMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMode.swift; sourceTree = "<group>"; };
 		OBJ_37 /* DebugState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
@@ -497,7 +497,7 @@
 				OBJ_30 /* Cpu+ExecuteUnprefixed.swift */,
 				OBJ_31 /* Cpu+Instructions.swift */,
 				OBJ_32 /* Cpu.swift */,
-				OBJ_33 /* Registers.swift */,
+				OBJ_33 /* CpuRegisters.swift */,
 			);
 			path = Cpu;
 			sourceTree = "<group>";
@@ -907,7 +907,7 @@
 				OBJ_167 /* Cpu+ExecuteUnprefixed.swift in Sources */,
 				OBJ_168 /* Cpu+Instructions.swift in Sources */,
 				OBJ_169 /* Cpu.swift in Sources */,
-				OBJ_170 /* Registers.swift in Sources */,
+				OBJ_170 /* CpuRegisters.swift in Sources */,
 				OBJ_171 /* CBPrefixedOpcode.swift in Sources */,
 				OBJ_172 /* DebugMode.swift in Sources */,
 				OBJ_173 /* DebugState.swift in Sources */,
