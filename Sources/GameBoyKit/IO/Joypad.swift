@@ -22,6 +22,7 @@ public final class Joypad: JoypadMemory {
 
   private var _value: UInt8 = 0
 
+  /// FF00 - P1/JOYP
   public internal(set) var value: UInt8 {
     get { return self._value }
     set {

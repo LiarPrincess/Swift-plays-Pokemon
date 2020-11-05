@@ -2,6 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+/// FF04 - Divider register;
+/// FF05, FF06, FF07 - App defined timer
 public final class Timer: TimerMemory {
 
   /// Frequency at which div register should be incremented.
@@ -25,6 +27,9 @@ public final class Timer: TimerMemory {
 
   // MARK: - Div
 
+  /// FF04 - DIV - Divider Register.
+  /// This register is incremented at rate of 16384Hz.
+  /// Writing any value to this register resets it to 00h.
   public internal(set) var div: UInt8 {
     get { return self.divValue }
     set { // swiftlint:disable:this unused_setter_value
@@ -48,9 +53,18 @@ public final class Timer: TimerMemory {
 
   // MARK: - Tima
 
+  /// FF05 - TIMA - Timer counter.
+  /// This timer is incremented by a clock frequency specified by the TAC
+  /// register (FF07). When the value overflows then it will be reset to the
+  /// value specified in TMA (FF06), and an interrupt will be requested.
   public internal(set) var tima: UInt8 = 0x00
+
+  /// FF06 - TMA - Timer Modulo.
+  /// When the TIMA overflows, this data will be loaded.
   public internal(set) var tma:  UInt8 = 0x00
 
+  /// FF07 - TAC - Timer Control.
+  /// Bit 2 - stop timer, bits 1 and 0 - select clock
   public internal(set) var tac: UInt8 = 0x00 {
     didSet {
       let oldPeriod = self.getPeriod(tac: oldValue)
