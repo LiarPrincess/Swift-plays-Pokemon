@@ -32,6 +32,7 @@
 		90374A3B25534757008A908D /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; };
 		90374A3C25534757008A908D /* GameBoyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427CF725545FC8007A9E9D /* CpuMemory.swift */; };
+		90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D5625546F00007A9E9D /* BootromMemory.swift */; };
 		OBJ_146 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Common.swift */; };
 		OBJ_147 /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ModifyInstructions.swift */; };
 		OBJ_148 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Opcode.swift */; };
@@ -61,9 +62,8 @@
 		OBJ_178 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Extensions.swift */; };
 		OBJ_179 /* GameBoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* GameBoy.swift */; };
 		OBJ_180 /* GameboyInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* GameboyInput.swift */; };
-		OBJ_181 /* IOConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* IOConstants.swift */; };
-		OBJ_182 /* Joypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* Joypad.swift */; };
-		OBJ_183 /* JoypadImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* JoypadImpl.swift */; };
+		OBJ_182 /* JoypadMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* JoypadMemory.swift */; };
+		OBJ_183 /* Joypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* Joypad.swift */; };
 		OBJ_184 /* SerialPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* SerialPort.swift */; };
 		OBJ_185 /* TimerMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* TimerMemory.swift */; };
 		OBJ_186 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Timer.swift */; };
@@ -82,7 +82,7 @@
 		OBJ_199 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Memory.swift */; };
 		OBJ_200 /* MemoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* MemoryData.swift */; };
 		OBJ_201 /* MemoryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* MemoryMap.swift */; };
-		OBJ_202 /* MemoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* MemoryProtocols.swift */; };
+		OBJ_202 /* CartridgeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* CartridgeMemory.swift */; };
 		OBJ_203 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Operators.swift */; };
 		OBJ_210 /* BlarggRomDumps.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* BlarggRomDumps.swift */; };
 		OBJ_211 /* BlarggRoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* BlarggRoms.swift */; };
@@ -196,6 +196,7 @@
 		90374A22255346AC008A908D /* Shader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		90374A24255346AD008A908D /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		90427CF725545FC8007A9E9D /* CpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuMemory.swift; sourceTree = "<group>"; };
+		90427D5625546F00007A9E9D /* BootromMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromMemory.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		OBJ_100 /* CpuOpcodeLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeLengthTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* CpuOpcodeTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeTimingTests.swift; sourceTree = "<group>"; };
@@ -259,9 +260,8 @@
 		OBJ_42 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		OBJ_43 /* GameBoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoy.swift; sourceTree = "<group>"; };
 		OBJ_44 /* GameboyInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameboyInput.swift; sourceTree = "<group>"; };
-		OBJ_46 /* IOConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOConstants.swift; sourceTree = "<group>"; };
-		OBJ_47 /* Joypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joypad.swift; sourceTree = "<group>"; };
-		OBJ_48 /* JoypadImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoypadImpl.swift; sourceTree = "<group>"; };
+		OBJ_47 /* JoypadMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoypadMemory.swift; sourceTree = "<group>"; };
+		OBJ_48 /* Joypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joypad.swift; sourceTree = "<group>"; };
 		OBJ_49 /* SerialPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPort.swift; sourceTree = "<group>"; };
 		OBJ_50 /* TimerMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMemory.swift; sourceTree = "<group>"; };
 		OBJ_51 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 		OBJ_67 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		OBJ_68 /* MemoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryData.swift; sourceTree = "<group>"; };
 		OBJ_69 /* MemoryMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMap.swift; sourceTree = "<group>"; };
-		OBJ_70 /* MemoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryProtocols.swift; sourceTree = "<group>"; };
+		OBJ_70 /* CartridgeMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeMemory.swift; sourceTree = "<group>"; };
 		OBJ_71 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		OBJ_74 /* BlarggRomDumps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggRomDumps.swift; sourceTree = "<group>"; };
 		OBJ_75 /* BlarggRoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggRoms.swift; sourceTree = "<group>"; };
@@ -494,8 +494,10 @@
 		OBJ_20 /* Cartridge */ = {
 			isa = PBXGroup;
 			children = (
+				90427D5625546F00007A9E9D /* BootromMemory.swift */,
 				OBJ_21 /* Bootrom.swift */,
 				OBJ_22 /* BootromFactory.swift */,
+				OBJ_70 /* CartridgeMemory.swift */,
 				OBJ_23 /* Cartridge.swift */,
 				OBJ_24 /* CartridgeConstants.swift */,
 				OBJ_25 /* CartridgeFactory.swift */,
@@ -536,12 +538,11 @@
 		OBJ_45 /* IO */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_46 /* IOConstants.swift */,
-				OBJ_47 /* Joypad.swift */,
-				OBJ_48 /* JoypadImpl.swift */,
 				OBJ_49 /* SerialPort.swift */,
-				OBJ_50 /* TimerMemory.swift */,
+				OBJ_48 /* Joypad.swift */,
+				OBJ_47 /* JoypadMemory.swift */,
 				OBJ_51 /* Timer.swift */,
+				OBJ_50 /* TimerMemory.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -580,12 +581,11 @@
 		OBJ_64 /* Memory */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_67 /* Memory.swift */,
 				OBJ_65 /* Memory+read.swift */,
 				OBJ_66 /* Memory+write.swift */,
-				OBJ_67 /* Memory.swift */,
 				OBJ_68 /* MemoryData.swift */,
 				OBJ_69 /* MemoryMap.swift */,
-				OBJ_70 /* MemoryProtocols.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -930,9 +930,8 @@
 				OBJ_178 /* Extensions.swift in Sources */,
 				OBJ_179 /* GameBoy.swift in Sources */,
 				OBJ_180 /* GameboyInput.swift in Sources */,
-				OBJ_181 /* IOConstants.swift in Sources */,
-				OBJ_182 /* Joypad.swift in Sources */,
-				OBJ_183 /* JoypadImpl.swift in Sources */,
+				OBJ_182 /* JoypadMemory.swift in Sources */,
+				OBJ_183 /* Joypad.swift in Sources */,
 				OBJ_184 /* SerialPort.swift in Sources */,
 				OBJ_185 /* TimerMemory.swift in Sources */,
 				OBJ_186 /* Timer.swift in Sources */,
@@ -947,11 +946,12 @@
 				OBJ_195 /* Sprite.swift in Sources */,
 				OBJ_196 /* Tile.swift in Sources */,
 				OBJ_197 /* Memory+read.swift in Sources */,
+				90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */,
 				OBJ_198 /* Memory+write.swift in Sources */,
 				OBJ_199 /* Memory.swift in Sources */,
 				OBJ_200 /* MemoryData.swift in Sources */,
 				OBJ_201 /* MemoryMap.swift in Sources */,
-				OBJ_202 /* MemoryProtocols.swift in Sources */,
+				OBJ_202 /* CartridgeMemory.swift in Sources */,
 				OBJ_203 /* Operators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
