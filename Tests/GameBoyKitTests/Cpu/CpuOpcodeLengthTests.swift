@@ -5,7 +5,7 @@
 import XCTest
 @testable import GameBoyKit
 
-// From Blargg tests
+// This table comes from Blargg tests
 
 private let unprefixedLengths: [UInt16] = [
   1,3,1,1,1,1,2,1,3,1,1,1,1,1,2,1,
@@ -26,7 +26,9 @@ private let unprefixedLengths: [UInt16] = [
   2,1,1,1,0,1,2,1,2,1,3,1,0,0,2,1
 ]
 
-class CpuOpcodeLengthTests: XCTestCase {
+class CpuOpcodeLengthTests: CpuTestCase {
+
+  // MARK: - Unprefixed
 
   func test_unprefixed() {
     let skippedOpcodes = Set<UInt8>([
@@ -40,7 +42,7 @@ class CpuOpcodeLengthTests: XCTestCase {
       0xc9, 0xd9, // ret, reti
       0xc7, 0xcf, 0xd7, 0xdf, 0xe7, 0xef, 0xf7, 0xff, // rst 00, 08, 10, 18, 20, 28, 30, 38
 
-      // we have separate tests for those:
+      // We have separate tests for those:
       0x20, 0x28, 0x30, 0x38, // jr_cc: nz, z, nc, c
       0xc0, 0xc8, 0xd0, 0xd8, // ret_cc: .nz, .z, .nc, .c
       0xc2, 0xca, 0xd2, 0xda, // jp_cc_nn: .nz, .z, .nc, .c
@@ -53,7 +55,7 @@ class CpuOpcodeLengthTests: XCTestCase {
         continue
       }
 
-      let memory = FakeCpuAddressableMemory()
+      let memory = self.createFakeMemory()
       let cpu = self.createCpu(memory: memory)
 
       cpu.pc = 0
@@ -73,7 +75,7 @@ class CpuOpcodeLengthTests: XCTestCase {
     ]
 
     for opcode in opcodes {
-      let memory = FakeCpuAddressableMemory()
+      let memory = self.createFakeMemory()
       let cpu = self.createCpu(memory: memory)
 
       cpu.pc = 0
@@ -95,7 +97,7 @@ class CpuOpcodeLengthTests: XCTestCase {
     ]
 
     for opcode in opcodes {
-      let memory = FakeCpuAddressableMemory()
+      let memory = self.createFakeMemory()
       let cpu = self.createCpu(memory: memory)
 
       cpu.pc = 0
@@ -109,9 +111,11 @@ class CpuOpcodeLengthTests: XCTestCase {
     }
   }
 
+  // MARK: - Prefixed
+
   func test_prefixed() {
     for opcode in 0...UInt8.max {
-      let memory = FakeCpuAddressableMemory()
+      let memory = self.createFakeMemory()
       let cpu = self.createCpu(memory: memory)
 
       cpu.pc = 0

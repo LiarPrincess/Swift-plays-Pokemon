@@ -31,6 +31,7 @@
 		90374A2B255346AD008A908D /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90374A24255346AD008A908D /* Window.swift */; };
 		90374A3B25534757008A908D /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; };
 		90374A3C25534757008A908D /* GameBoyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427CF725545FC8007A9E9D /* CpuMemory.swift */; };
 		OBJ_146 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Common.swift */; };
 		OBJ_147 /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ModifyInstructions.swift */; };
 		OBJ_148 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Opcode.swift */; };
@@ -104,18 +105,18 @@
 		OBJ_234 /* CpuLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* CpuLogicTests.swift */; };
 		OBJ_235 /* CpuOpcodeLengthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* CpuOpcodeLengthTests.swift */; };
 		OBJ_236 /* CpuOpcodeTimingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* CpuOpcodeTimingTests.swift */; };
-		OBJ_237 /* CpuOtherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* CpuOtherTests.swift */; };
+		OBJ_237 /* CpuOtherInstructionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* CpuOtherInstructionsTests.swift */; };
 		OBJ_238 /* CpuRegistersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* CpuRegistersTests.swift */; };
 		OBJ_239 /* CpuRotateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* CpuRotateTests.swift */; };
 		OBJ_240 /* CpuShiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* CpuShiftTests.swift */; };
 		OBJ_241 /* Data+UIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* Data+UIntTests.swift */; };
 		OBJ_242 /* FakeBootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* FakeBootromMemory.swift */; };
 		OBJ_243 /* FakeCartridgeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* FakeCartridgeMemory.swift */; };
-		OBJ_244 /* FakeCpuAddressableMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* FakeCpuAddressableMemory.swift */; };
+		OBJ_244 /* FakeCpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* FakeCpuMemory.swift */; };
 		OBJ_245 /* FakeJoypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* FakeJoypad.swift */; };
 		OBJ_246 /* FakeLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* FakeLcd.swift */; };
 		OBJ_247 /* FakeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FakeTimer.swift */; };
-		OBJ_248 /* XCTestCase+createCpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* XCTestCase+createCpu.swift */; };
+		OBJ_248 /* CpuTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* CpuTestCase.swift */; };
 		OBJ_249 /* XCTestCase+createLcdImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* XCTestCase+createLcdImpl.swift */; };
 		OBJ_250 /* XCTestCase+createMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* XCTestCase+createMemory.swift */; };
 		OBJ_251 /* XCTestCase+createTimerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* XCTestCase+createTimerImpl.swift */; };
@@ -194,10 +195,11 @@
 		90374A21255346AC008A908D /* Metal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
 		90374A22255346AC008A908D /* Shader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
 		90374A24255346AD008A908D /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		90427CF725545FC8007A9E9D /* CpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuMemory.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		OBJ_100 /* CpuOpcodeLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeLengthTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* CpuOpcodeTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeTimingTests.swift; sourceTree = "<group>"; };
-		OBJ_102 /* CpuOtherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOtherTests.swift; sourceTree = "<group>"; };
+		OBJ_102 /* CpuOtherInstructionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOtherInstructionsTests.swift; sourceTree = "<group>"; };
 		OBJ_103 /* CpuRegistersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuRegistersTests.swift; sourceTree = "<group>"; };
 		OBJ_104 /* CpuRotateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuRotateTests.swift; sourceTree = "<group>"; };
 		OBJ_105 /* CpuShiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuShiftTests.swift; sourceTree = "<group>"; };
@@ -205,11 +207,11 @@
 		OBJ_108 /* FakeBootromMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBootromMemory.swift; sourceTree = "<group>"; };
 		OBJ_109 /* FakeCartridgeMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCartridgeMemory.swift; sourceTree = "<group>"; };
 		OBJ_11 /* ModifyInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyInstructions.swift; sourceTree = "<group>"; };
-		OBJ_110 /* FakeCpuAddressableMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCpuAddressableMemory.swift; sourceTree = "<group>"; };
+		OBJ_110 /* FakeCpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCpuMemory.swift; sourceTree = "<group>"; };
 		OBJ_111 /* FakeJoypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeJoypad.swift; sourceTree = "<group>"; };
 		OBJ_112 /* FakeLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLcd.swift; sourceTree = "<group>"; };
 		OBJ_113 /* FakeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTimer.swift; sourceTree = "<group>"; };
-		OBJ_114 /* XCTestCase+createCpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createCpu.swift"; sourceTree = "<group>"; };
+		OBJ_114 /* CpuTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuTestCase.swift; sourceTree = "<group>"; };
 		OBJ_115 /* XCTestCase+createLcdImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcdImpl.swift"; sourceTree = "<group>"; };
 		OBJ_116 /* XCTestCase+createMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createMemory.swift"; sourceTree = "<group>"; };
 		OBJ_117 /* XCTestCase+createTimerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createTimerImpl.swift"; sourceTree = "<group>"; };
@@ -396,16 +398,23 @@
 			path = Output;
 			sourceTree = "<group>";
 		};
+		90427CFF25546050007A9E9D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_110 /* FakeCpuMemory.swift */,
+				OBJ_114 /* CpuTestCase.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		OBJ_107 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_108 /* FakeBootromMemory.swift */,
 				OBJ_109 /* FakeCartridgeMemory.swift */,
-				OBJ_110 /* FakeCpuAddressableMemory.swift */,
 				OBJ_111 /* FakeJoypad.swift */,
 				OBJ_112 /* FakeLcd.swift */,
 				OBJ_113 /* FakeTimer.swift */,
-				OBJ_114 /* XCTestCase+createCpu.swift */,
 				OBJ_115 /* XCTestCase+createLcdImpl.swift */,
 				OBJ_116 /* XCTestCase+createMemory.swift */,
 				OBJ_117 /* XCTestCase+createTimerImpl.swift */,
@@ -493,10 +502,11 @@
 		OBJ_28 /* Cpu */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_29 /* Cpu+ExecutePrefixed.swift */,
-				OBJ_30 /* Cpu+ExecuteUnprefixed.swift */,
-				OBJ_31 /* Cpu+Instructions.swift */,
 				OBJ_32 /* Cpu.swift */,
+				OBJ_30 /* Cpu+ExecuteUnprefixed.swift */,
+				OBJ_29 /* Cpu+ExecutePrefixed.swift */,
+				OBJ_31 /* Cpu+Instructions.swift */,
+				90427CF725545FC8007A9E9D /* CpuMemory.swift */,
 				OBJ_33 /* CpuRegisters.swift */,
 			);
 			path = Cpu;
@@ -667,13 +677,13 @@
 		OBJ_91 /* GameBoyKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_92 /* Info.plist */,
-				OBJ_93 /* Cpu */,
-				OBJ_106 /* Data+UIntTests.swift */,
 				OBJ_107 /* Helpers */,
+				OBJ_93 /* Cpu */,
 				OBJ_118 /* IO */,
 				OBJ_121 /* Lcd */,
 				OBJ_124 /* Memory */,
+				OBJ_92 /* Info.plist */,
+				OBJ_106 /* Data+UIntTests.swift */,
 				OBJ_130 /* String+padTests.swift */,
 				OBJ_131 /* UInt+radixFormatTests.swift */,
 			);
@@ -684,18 +694,19 @@
 		OBJ_93 /* Cpu */ = {
 			isa = PBXGroup;
 			children = (
+				90427CFF25546050007A9E9D /* Common */,
 				OBJ_94 /* CpuArithmeticTests.swift */,
 				OBJ_95 /* CpuBitTests.swift */,
 				OBJ_96 /* CpuCallTests.swift */,
 				OBJ_97 /* CpuJumpTests.swift */,
 				OBJ_98 /* CpuLdTests.swift */,
 				OBJ_99 /* CpuLogicTests.swift */,
-				OBJ_100 /* CpuOpcodeLengthTests.swift */,
-				OBJ_101 /* CpuOpcodeTimingTests.swift */,
-				OBJ_102 /* CpuOtherTests.swift */,
-				OBJ_103 /* CpuRegistersTests.swift */,
 				OBJ_104 /* CpuRotateTests.swift */,
 				OBJ_105 /* CpuShiftTests.swift */,
+				OBJ_102 /* CpuOtherInstructionsTests.swift */,
+				OBJ_100 /* CpuOpcodeLengthTests.swift */,
+				OBJ_101 /* CpuOpcodeTimingTests.swift */,
+				OBJ_103 /* CpuRegistersTests.swift */,
 			);
 			path = Cpu;
 			sourceTree = "<group>";
@@ -913,6 +924,7 @@
 				OBJ_173 /* DebugState.swift in Sources */,
 				OBJ_174 /* Debugger+Cpu.swift in Sources */,
 				OBJ_175 /* Debugger+Memory.swift in Sources */,
+				90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */,
 				OBJ_176 /* Debugger.swift in Sources */,
 				OBJ_177 /* UnprefixedOpcode.swift in Sources */,
 				OBJ_178 /* Extensions.swift in Sources */,
@@ -976,18 +988,18 @@
 				OBJ_234 /* CpuLogicTests.swift in Sources */,
 				OBJ_235 /* CpuOpcodeLengthTests.swift in Sources */,
 				OBJ_236 /* CpuOpcodeTimingTests.swift in Sources */,
-				OBJ_237 /* CpuOtherTests.swift in Sources */,
+				OBJ_237 /* CpuOtherInstructionsTests.swift in Sources */,
 				OBJ_238 /* CpuRegistersTests.swift in Sources */,
 				OBJ_239 /* CpuRotateTests.swift in Sources */,
 				OBJ_240 /* CpuShiftTests.swift in Sources */,
 				OBJ_241 /* Data+UIntTests.swift in Sources */,
 				OBJ_242 /* FakeBootromMemory.swift in Sources */,
 				OBJ_243 /* FakeCartridgeMemory.swift in Sources */,
-				OBJ_244 /* FakeCpuAddressableMemory.swift in Sources */,
+				OBJ_244 /* FakeCpuMemory.swift in Sources */,
 				OBJ_245 /* FakeJoypad.swift in Sources */,
 				OBJ_246 /* FakeLcd.swift in Sources */,
 				OBJ_247 /* FakeTimer.swift in Sources */,
-				OBJ_248 /* XCTestCase+createCpu.swift in Sources */,
+				OBJ_248 /* CpuTestCase.swift in Sources */,
 				OBJ_249 /* XCTestCase+createLcdImpl.swift in Sources */,
 				OBJ_250 /* XCTestCase+createMemory.swift in Sources */,
 				OBJ_251 /* XCTestCase+createTimerImpl.swift in Sources */,

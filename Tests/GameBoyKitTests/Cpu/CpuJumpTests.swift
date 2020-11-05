@@ -5,13 +5,13 @@
 import XCTest
 @testable import GameBoyKit
 
-class CpuJumpTests: XCTestCase {
+class CpuJumpTests: CpuTestCase {
 
   // MARK: - JP
 
   /// JP 8000h ; Jump to 8000h.
   func test_jp_nn() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     _ = cpu.jp_nn(0x8000)
 
@@ -21,7 +21,7 @@ class CpuJumpTests: XCTestCase {
   /// When Z=1andC=0,
   /// JP NZ, 8000h ; Moves to next instruction after 3 cycles.
   func test_jp_cc_nn_nz() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
@@ -34,7 +34,7 @@ class CpuJumpTests: XCTestCase {
   /// When Z=1andC=0,
   /// JP Z, 8000h ; Jumps to address 8000h.
   func test_jp_cc_nn_z() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
@@ -47,7 +47,7 @@ class CpuJumpTests: XCTestCase {
   /// When Z=1andC=0,
   /// JP C, 8000h ; Moves to next instruction after 3 cycles.
   func test_jp_cc_nn_c() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
@@ -60,7 +60,7 @@ class CpuJumpTests: XCTestCase {
   /// When Z=1andC=0,
   /// JP NC, 8000h ; Jumps to address 8000h.
   func test_jp_cc_nn_nc() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.zeroFlag = true
     cpu.registers.carryFlag = false
@@ -73,7 +73,7 @@ class CpuJumpTests: XCTestCase {
   /// When HL = 8000h,
   /// JP (HL) ; Jumps to 8000h.
   func test_jp_pHL() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.hl = 0x8000
     _ = cpu.jp_pHL()
@@ -85,7 +85,7 @@ class CpuJumpTests: XCTestCase {
 
   /// Test taken from bootstrap (0x000a)
   func test_jr_cc_1() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.pc = 0x000a
     cpu.registers.zeroFlag = false
@@ -96,7 +96,7 @@ class CpuJumpTests: XCTestCase {
 
   /// Test taken from bootstrap (0x004b)
   func test_jr_cc_2() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.pc = 0x004b
     cpu.registers.zeroFlag = true

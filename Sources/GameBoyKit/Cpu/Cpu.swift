@@ -2,44 +2,38 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-internal protocol CpuAddressableMemory: AnyObject {
-  func read(_ address: UInt16) -> UInt8
-  func write(_ address: UInt16, value: UInt8)
-}
-
 /// Central processing unit 
-public class Cpu {
+public final class Cpu {
 
   /// 4 194 304 Hz
   public static let clockSpeed = 4_194_304
 
   /// A 16-bit register that holds the address of the next executed instruction.
-  public internal(set) var pc: UInt16 = 0
+  public internal(set) var pc = UInt16(0)
 
   /// A 16-bit register that holds the starting address of the stack.
-  public internal(set) var sp: UInt16 = 0
+  public internal(set) var sp = UInt16(0)
 
   /// Current cycle incremented after each operation (starting from 0).
-  public internal(set) var cycle: UInt64 = 0
+  public internal(set) var cycle = UInt64(0)
 
   /// Interrupt Master Enable Flag.
-  public internal(set) var ime: Bool = false
+  public internal(set) var ime = false
 
   /// True if interrupts should be enabled after next instruction.
   /// https://www.reddit.com/r/EmuDev/comments/7rm8l2/game_boy_vblank_interrupt_confusion/
-  public internal(set) var imeNext: Bool = false
+  public internal(set) var imeNext = false
 
   /// Is halted flag.
-  public internal(set) var isHalted: Bool = false
+  public internal(set) var isHalted = false
 
   /// Register values (except for pc and sp).
-  public internal(set) var registers: Registers
+  public internal(set) var registers = CpuRegisters()
 
-  private let memory: CpuAddressableMemory
-  private let interrupts: Interrupts
+  private unowned let memory: CpuMemory
+  private unowned let interrupts: Interrupts
 
-  internal init(memory: CpuAddressableMemory, interrupts: Interrupts) {
-    self.registers = Registers()
+  internal init(memory: CpuMemory, interrupts: Interrupts) {
     self.memory = memory
     self.interrupts = interrupts
   }
@@ -92,25 +86,21 @@ public class Cpu {
     self.imeNext = false
   }
 
-  private func getAwaitingInterrupt() -> InterruptType? {
+  private func getAwaitingInterrupt() -> Interrupts.Kind? {
     guard self.ime || self.isHalted else {
       return nil
     }
 
-    guard self.interrupts.isAnySet else {
-      return nil
-    }
-
-    if self.interrupts.isSet(.vBlank) { return .vBlank }
-    if self.interrupts.isSet(.lcdStat) { return .lcdStat }
-    if self.interrupts.isSet(.timer) { return .timer }
-    if self.interrupts.isSet(.serial) { return .serial }
-    if self.interrupts.isSet(.joypad) { return .joypad }
+    if self.interrupts.isEnabledAndSet(.vBlank) { return .vBlank }
+    if self.interrupts.isEnabledAndSet(.lcdStat) { return .lcdStat }
+    if self.interrupts.isEnabledAndSet(.timer) { return .timer }
+    if self.interrupts.isEnabledAndSet(.serial) { return .serial }
+    if self.interrupts.isEnabledAndSet(.joypad) { return .joypad }
 
     return nil
   }
 
-  private func getInterruptHandlingRoutine(_ type: InterruptType) -> UInt16 {
+  private func getInterruptHandlingRoutine(_ type: Interrupts.Kind) -> UInt16 {
     switch type {
     case .vBlank:  return 0x40
     case .lcdStat: return 0x48

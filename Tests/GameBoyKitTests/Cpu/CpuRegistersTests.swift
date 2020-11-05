@@ -7,6 +7,8 @@ import XCTest
 
 class CpuRegistersTests: XCTestCase {
 
+  // MARK: - f
+
   func test_get_f() {
     var registers = CpuRegisters()
     XCTAssertEqual(registers.f, 0b000_00000)
@@ -79,6 +81,8 @@ class CpuRegistersTests: XCTestCase {
     XCTAssertEqual(registers.carryFlag, true)
   }
 
+  // MARK: - af
+
   func test_get_af() {
     var registers = CpuRegisters()
     registers.a = 0x16
@@ -92,6 +96,8 @@ class CpuRegistersTests: XCTestCase {
     XCTAssertEqual(registers.a, 0x16)
     XCTAssertEqual(registers.f, 0xc0)
   }
+
+  // MARK: - bc
 
   func test_get_bc() {
     var registers = CpuRegisters()
@@ -107,6 +113,8 @@ class CpuRegistersTests: XCTestCase {
     XCTAssertEqual(registers.c, 0xc0)
   }
 
+  // MARK: - de
+
   func test_get_de() {
     var registers = CpuRegisters()
     registers.d = 0x16
@@ -120,6 +128,8 @@ class CpuRegistersTests: XCTestCase {
     XCTAssertEqual(registers.d, 0x16)
     XCTAssertEqual(registers.e, 0xc0)
   }
+
+  // MARK: - hl
 
   func test_get_hl() {
     var registers = CpuRegisters()

@@ -5,7 +5,7 @@
 import XCTest
 @testable import GameBoyKit
 
-// From Blargg tests
+// Those tables come from Blargg tests
 
 private let unprefixedTimings = [
   1,3,2,2,1,1,2,1,5,2,2,2,1,1,2,1,
@@ -45,7 +45,9 @@ private let prefixedTimings = [
   2,2,2,2,2,2,4,2,2,2,2,2,2,2,4,2
 ]
 
-class CpuOpcodeTimingTests: XCTestCase {
+class CpuOpcodeTimingTests: CpuTestCase {
+
+  // MARK: - Unprefixed
 
   func test_unprefixed() {
     let skippedOpcodes = Set<UInt8>([
@@ -66,7 +68,7 @@ class CpuOpcodeTimingTests: XCTestCase {
         continue
       }
 
-      let memory = FakeCpuAddressableMemory()
+      let memory = self.createFakeMemory()
       let cpu = self.createCpu(memory: memory)
 
       cpu.pc = 0
@@ -86,7 +88,7 @@ class CpuOpcodeTimingTests: XCTestCase {
     ]
 
     for opcode in opcodes {
-      let memory = FakeCpuAddressableMemory()
+      let memory = self.createFakeMemory()
       let cpu = self.createCpu(memory: memory)
 
       cpu.pc = 0
@@ -108,7 +110,7 @@ class CpuOpcodeTimingTests: XCTestCase {
     ]
 
     for opcode in opcodes {
-      let memory = FakeCpuAddressableMemory()
+      let memory = self.createFakeMemory()
       let cpu = self.createCpu(memory: memory)
 
       cpu.pc = 0
@@ -122,8 +124,10 @@ class CpuOpcodeTimingTests: XCTestCase {
     }
   }
 
+  // MARK: - Prefixed
+
   func test_prefixed() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
 
     for (i, timing) in prefixedTimings.enumerated() {

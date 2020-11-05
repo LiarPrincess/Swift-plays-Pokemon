@@ -5,12 +5,16 @@
 import XCTest
 @testable import GameBoyKit
 
-extension XCTestCase {
+class CpuTestCase: XCTestCase {
 
-  internal func createCpu(memory:     CpuAddressableMemory? = nil,
+  internal func createFakeMemory() -> FakeCpuMemory {
+    return FakeCpuMemory()
+  }
+
+  internal func createCpu(memory: CpuMemory? = nil,
                           interrupts: Interrupts? = nil) -> Cpu {
     return Cpu(
-      memory:     memory ?? FakeCpuAddressableMemory(),
+      memory: memory ?? FakeCpuMemory(),
       interrupts: interrupts ?? Interrupts()
     )
   }

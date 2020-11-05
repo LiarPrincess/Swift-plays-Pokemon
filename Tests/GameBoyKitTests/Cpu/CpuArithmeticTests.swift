@@ -8,14 +8,14 @@
 import XCTest
 @testable import GameBoyKit
 
-class CpuArithmeticTests: XCTestCase {
+class CpuArithmeticTests: CpuTestCase {
 
   // MARK: - Add
 
   /// When A = 0x3A and B = 0xC6,
   /// ADD A, B ; A←0,Z←1,H←1,N←0,CY←1
   func test_add_a_r() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3a
     cpu.registers.b = 0xc6
@@ -31,7 +31,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = 3Ch,
   /// ADDA.FFh ; A←3Bh,Z←0,H←1,N←0,CY←1
   func test_add_a_d8() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3c
     _ = cpu.add_a_d8(0xff)
@@ -46,7 +46,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = 3Ch and (HL) = 12h,
   /// ADD A, (HL) ; A←4Eh,Z←0,H←0,N←0,CY←0
   func test_add_a_pHL() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3c
     cpu.registers.hl = 0xfefe
@@ -63,7 +63,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When HL = 8A23h, BC = 0605h,
   /// ADD HL,BC ; HL←9028h,H←1,N←0,CY←0
   func test_add_hl_r1() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.hl = 0x8a23
     cpu.registers.bc = 0x0605
@@ -78,7 +78,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When HL = 8A23h, BC = 0605h,
   /// ADD HL,HL ; HL←1446h,H←1,N←0,CY←1
   func test_add_hl_r2() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.hl = 0x8a23
     cpu.registers.bc = 0x0605
@@ -93,7 +93,7 @@ class CpuArithmeticTests: XCTestCase {
   /// SP = FFF8h
   /// ADDSP,2 ; SP←0xFFFA,CY←0,H←0,N←0,Z←0
   func test_add_sp_r8() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.sp = 0xfff8
     _ = cpu.add_sp_r8(0x2)
@@ -110,7 +110,7 @@ class CpuArithmeticTests: XCTestCase {
   /// WhenA=E1h,E=0Fh,(HL)=1Eh,andCY=1,
   /// ADC A, E ; A←F1h,Z←0,H←1,CY←0
   func test_adc_a_r() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0xe1
     cpu.registers.e = 0x0f
@@ -129,7 +129,7 @@ class CpuArithmeticTests: XCTestCase {
   /// WhenA=E1h,E=0Fh,(HL)=1Eh,andCY=1,
   /// ADC A, 3Bh ; A←1Dh,Z←0,H←0,CY←-1
   func test_adc_a_d8() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0xe1
     cpu.registers.e = 0x0f
@@ -148,7 +148,7 @@ class CpuArithmeticTests: XCTestCase {
   /// WhenA=E1h,E=0Fh,(HL)=1Eh,andCY=1,
   /// ADC A, (HL) ; A←00h,Z←1,H←1,CY←1
   func test_adc_a_pHL() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0xe1
     cpu.registers.e = 0x0f
@@ -169,7 +169,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = 3Eh, E = 3Eh, and (HL) = 40h,
   /// SUB E ; A←00h,Z←1,H←0,N←1 CY←0
   func test_sub_a_r() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3e
     cpu.registers.e = 0x3e
@@ -187,7 +187,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = 3Eh, E = 3Eh, and (HL) = 40h,
   /// SUB 0Fh; A←2Fh,Z←0,H←1,N←1 CY←0
   func test_sub_a_d8() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3e
     cpu.registers.e = 0x3e
@@ -205,7 +205,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = 3Eh, E = 3Eh, and (HL) = 40h,
   /// SUB (HL) ; A←FEh,Z←0,H←0,N←1 CY←1
   func test_sub_a_pHL() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3e
     cpu.registers.e = 0x3e
@@ -225,7 +225,7 @@ class CpuArithmeticTests: XCTestCase {
   /// WhenA=3Bh, (HL)=4Fh,H=2Ah,andCY=1,
   /// SBC A, H ; A←10h,Z←0,H←0,N←1 CY←0
   func test_sbc_a_r() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3b
     cpu.registers.e = 0x2a // we are using .e instead of .h
@@ -244,7 +244,7 @@ class CpuArithmeticTests: XCTestCase {
   /// WhenA=3Bh, (HL)=4Fh,H=2Ah,andCY=1,
   /// SBC A, 3Ah; A←00h,Z←1,H←0,N←1 CY←0
   func test_sbc_a_d8() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3b
     cpu.registers.e = 0x2a // we are using .e instead of .h
@@ -263,7 +263,7 @@ class CpuArithmeticTests: XCTestCase {
   /// WhenA=3Bh, (HL)=4Fh,H=2Ah,andCY=1,
   /// SBC A, (HL) ; A←EBh,Z←0,H←1,N←1 CY←1
   func test_sbc_a_pHL() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3b
     cpu.registers.e = 0x2a // we are using .e instead of .h
@@ -284,7 +284,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = 3Ch, B = 2Fh, and (HL) = 40h,
   /// CP B ; Z←0,H←1,N←1,CY←0
   func test_cp_a_r() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3c
     cpu.registers.b = 0x2f
@@ -302,7 +302,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = 3Ch, B = 2Fh, and (HL) = 40h,
   /// CP 3Ch ; Z←1,H←0,N←1,CY←0
   func test_cp_a_d8() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3c
     cpu.registers.b = 0x2f
@@ -320,7 +320,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = 3Ch, B = 2Fh, and (HL) = 40h,
   /// CP(HL) ; Z←0,H←0,N←1,CY←1
   func test_cp_a_pHL() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0x3c
     cpu.registers.b = 0x2f
@@ -340,7 +340,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When A = FFh,
   /// INC A ; A←0,Z←1,H←1,N←0
   func test_inc_r() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.a = 0xff
     _ = cpu.inc_r(.a)
@@ -354,7 +354,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When DE = 235Fh,
   /// INC DE ; DE ← 2360h
   func test_inc_rr() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.de = 0x235f
     _ = cpu.inc_rr(.de)
@@ -365,7 +365,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When (HL) = 0x50,
   /// INC (HL) ; (HL)←0x51,Z←0,H←0,N←0
   func test_inc_pHL() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.hl = 0xfefe
     memory.write(0xfefe, value: 0x50)
@@ -382,7 +382,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When L = 01h,
   /// DEC L ; L←0,Z←1,H←0,N←1
   func test_dec_r() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.l = 0x01
     _ = cpu.dec_r(.l)
@@ -396,7 +396,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When DE = 235Fh,
   /// DEC DE ; DE ← 235Eh
   func test_dec_rr() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.de = 0x235f
     _ = cpu.dec_rr(.de)
@@ -407,7 +407,7 @@ class CpuArithmeticTests: XCTestCase {
   /// When (HL) = 00h,
   /// DEC(HL) ; (HL)←FFh,Z←0,H←1,N←1
   func test_dec_pHL() {
-    let memory = FakeCpuAddressableMemory()
+    let memory = self.createFakeMemory()
     let cpu = self.createCpu(memory: memory)
     cpu.registers.hl = 0xfefe
     memory.write(0xfefe, value: 0x00)

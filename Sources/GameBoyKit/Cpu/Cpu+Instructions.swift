@@ -4,17 +4,19 @@
 
 // swiftlint:disable file_length
 
-internal enum JumpCondition {
-  case nz
-  case z
-  case nc
-  case c
-}
-
 // This file is massive, but we need it this way so we can easier Cmd+F.
 // Source:
 // https://ia801906.us.archive.org/19/items/GameBoyProgManVer1.1/GameBoyProgManVer1.1.pdf
 extension Cpu {
+
+  // MARK: - Jump condition
+
+  internal enum JumpCondition {
+    case nz
+    case z
+    case nc
+    case c
+  }
 
   // MARK: - 8-Bit Transfer and Input/Output Instructions
 
