@@ -1,19 +1,18 @@
-# build
+.DS_Store
+Swift plays pokemon.xcodeproj/xcuserdata
+
 /Build
 /.build
 
-# roms
-/ROMs/*
-/GameBoyKitBlarggTests/ROMs/*
-!/GameBoyKitBlarggTests/ROMs/.gitkeep
+# Roms are excluded because of legal stuff…
+ROMs/*
 
 # ROM test files
-/GameBoyKitROMTests/Bootrom/Dump
-/GameBoyKitROMTests/Blargg/Dumps
-/GameBoyKitROMTests/Blargg/ROMs
-/GameBoyKitROMTests/Tetris/Dump
-/GameBoyKitROMTests/Tetris/Tetris.gb
+/Tests/GameBoyKitROMTests/Bootrom/Dump
 
-# mac
-.DS_Store
-/*.xcodeproj
+/Tests/GameBoyKitROMTests/Blargg/ROMs
+/Tests/GameBoyKitROMTests/Blargg/Dumps
+/Tests/GameBoyKitROMTests/Blargg/Dumps.zip
+
+/Tests/GameBoyKitROMTests/Tetris/Dump
+/Tests/GameBoyKitROMTests/Tetris/Tetris.gb
