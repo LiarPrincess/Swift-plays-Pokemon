@@ -185,7 +185,10 @@ extension Debugger {
           d: \(registerValue(r.d)) | e: \(registerValue(r.e)) | de: \(registerValue(r.de))
           h: \(registerValue(r.h)) | l: \(registerValue(r.l)) | hl: \(registerValue(r.hl))
         flags:
-          z:\(flagValue(r.zeroFlag)) n:\(flagValue(r.subtractFlag)) h:\(flagValue(r.halfCarryFlag)) c:\(flagValue(r.carryFlag))
+          z: \(flagValue(r.zeroFlag))
+          n: \(flagValue(r.subtractFlag))
+          h: \(flagValue(r.halfCarryFlag))
+          c: \(flagValue(r.carryFlag))
       """)
   }
 

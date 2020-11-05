@@ -17,8 +17,8 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
   private let vertexBuffer: MTLBuffer
   private let texture:      MTLTexture
 
-  public override var canBecomeKey:  Bool { return true }
-  public override var canBecomeMain: Bool { return true }
+  override public var canBecomeKey:  Bool { return true }
+  override public var canBecomeMain: Bool { return true }
 
   public init() {
     let scale = 3
@@ -86,11 +86,11 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
     return input
   }
 
-  public override func keyDown(with event: NSEvent) {
+  override public func keyDown(with event: NSEvent) {
     self.updateKeyState(event: event, isDown: true)
   }
 
-  public override func keyUp(with event: NSEvent) {
+  override public func keyUp(with event: NSEvent) {
     self.updateKeyState(event: event, isDown: false)
   }
 
@@ -134,7 +134,7 @@ public class Window: NSWindow, GameboyInputProvider, MTKViewDelegate {
 
     guard let commandBuffer = self.commandQueue.makeCommandBuffer(),
           let commandEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDesc) else {
-        fatalError("Error when rendering Metal frame: unable to create command buffer.")
+      fatalError("Error when rendering Metal frame: unable to create command buffer.")
     }
 
     commandEncoder.setRenderPipelineState(self.pipeline)

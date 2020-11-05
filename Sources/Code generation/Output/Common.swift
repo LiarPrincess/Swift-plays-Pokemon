@@ -119,11 +119,21 @@ func getUnprefixedOpcodeCall(_ opcode: Opcode) -> String {
       let operand1 = opcode.operand1!.lowercased()
       let operand2 = opcode.operand2!.lowercased()
 
-      if isRegister(operand1) && isRegister(operand2)    { return "ld_r_r(.\(operand1), .\(operand2))" }
-      if isRegister(operand1) && isd8(operand2)          { return "ld_r_d8(.\(operand1), \(next8))" }
-      if isRegister(operand1) && ispHL(operand2)         { return "ld_r_pHL(.\(operand1))" }
-      if isCombinedRegister(operand1) && isd16(operand2) { return "ld_rr_d16(.\(operand1), \(next16))" }
-      if ispHL(operand1) && isRegister(operand2)         { return "ld_pHL_r(.\(operand2))" }
+      if isRegister(operand1) && isRegister(operand2) {
+        return "ld_r_r(.\(operand1), .\(operand2))"
+      }
+      if isRegister(operand1) && isd8(operand2) {
+        return "ld_r_d8(.\(operand1), \(next8))"
+      }
+      if isRegister(operand1) && ispHL(operand2) {
+        return "ld_r_pHL(.\(operand1))"
+      }
+      if isCombinedRegister(operand1) && isd16(operand2) {
+        return "ld_rr_d16(.\(operand1), \(next16))"
+      }
+      if ispHL(operand1) && isRegister(operand2) {
+        return "ld_pHL_r(.\(operand2))"
+      }
     }
 
   // no idea why those are 'ldh' instead of 'ld' (as in official documentation)

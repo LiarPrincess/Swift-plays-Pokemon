@@ -101,11 +101,11 @@ public class Cpu {
       return nil
     }
 
-    if self.interrupts.isSet(.vBlank)  { return .vBlank }
+    if self.interrupts.isSet(.vBlank) { return .vBlank }
     if self.interrupts.isSet(.lcdStat) { return .lcdStat }
-    if self.interrupts.isSet(.timer)   { return .timer }
-    if self.interrupts.isSet(.serial)  { return .serial }
-    if self.interrupts.isSet(.joypad)  { return .joypad }
+    if self.interrupts.isSet(.timer) { return .timer }
+    if self.interrupts.isSet(.serial) { return .serial }
+    if self.interrupts.isSet(.joypad) { return .joypad }
 
     return nil
   }

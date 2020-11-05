@@ -12,7 +12,7 @@ public class GameBoy {
   public let cpu: Cpu
   public var lcd: Lcd { return self._lcd }
   public let memory: Memory
-  public var timer:  Timer  { return self._timer }
+  public var timer: Timer { return self._timer }
   public var joypad: Joypad { return self._joypad }
 
   internal let _lcd: LcdImpl

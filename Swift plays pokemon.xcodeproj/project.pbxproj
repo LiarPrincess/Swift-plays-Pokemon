@@ -458,19 +458,19 @@
 		OBJ_17 /* GameBoyKit */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_18 /* GameBoyKit.h */,
-				OBJ_19 /* Info.plist */,
-				OBJ_20 /* Cartridge */,
 				OBJ_28 /* Cpu */,
-				OBJ_34 /* Debug */,
-				OBJ_42 /* Extensions.swift */,
-				OBJ_43 /* GameBoy.swift */,
-				OBJ_44 /* GameboyInput.swift */,
+				OBJ_20 /* Cartridge */,
 				OBJ_45 /* IO */,
 				OBJ_52 /* Interrupts */,
 				OBJ_54 /* Lcd */,
 				OBJ_64 /* Memory */,
+				OBJ_34 /* Debug */,
+				OBJ_43 /* GameBoy.swift */,
+				OBJ_44 /* GameboyInput.swift */,
+				OBJ_42 /* Extensions.swift */,
+				OBJ_18 /* GameBoyKit.h */,
 				OBJ_71 /* Operators.swift */,
+				OBJ_19 /* Info.plist */,
 			);
 			name = GameBoyKit;
 			path = Sources/GameBoyKit;

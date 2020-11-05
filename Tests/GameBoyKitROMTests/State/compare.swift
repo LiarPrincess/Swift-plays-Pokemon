@@ -93,10 +93,22 @@ func compare(saved p: SavedState, gameboy g: GameBoy) -> Bool {
   if gReg.h != pReg.h { print("Invalid h: \(gReg.h.hex) vs \(pReg.h.hex)"); e = true }
   if gReg.l != pReg.l { print("Invalid l: \(gReg.l.hex) vs \(pReg.l.hex)"); e = true }
 
-  if gReg.zeroFlag      != pReg.zeroFlag      { print("Invalid zeroFlag: \(gReg.zeroFlag) vs \(pReg.zeroFlag)"); e = true }
-  if gReg.subtractFlag  != pReg.subtractFlag  { print("Invalid subtractFlag: \(gReg.subtractFlag) vs \(pReg.subtractFlag)"); e = true }
-  if gReg.halfCarryFlag != pReg.halfCarryFlag { print("Invalid halfCarryFlag: \(gReg.halfCarryFlag) vs \(pReg.halfCarryFlag)"); e = true }
-  if gReg.carryFlag     != pReg.carryFlag     { print("Invalid carryFlag: \(gReg.carryFlag) vs \(pReg.carryFlag)"); e = true }
+  if gReg.zeroFlag != pReg.zeroFlag {
+    print("Invalid zeroFlag: \(gReg.zeroFlag) vs \(pReg.zeroFlag)")
+    e = true
+  }
+  if gReg.subtractFlag != pReg.subtractFlag {
+    print("Invalid subtractFlag: \(gReg.subtractFlag) vs \(pReg.subtractFlag)")
+    e = true
+  }
+  if gReg.halfCarryFlag != pReg.halfCarryFlag {
+    print("Invalid halfCarryFlag: \(gReg.halfCarryFlag) vs \(pReg.halfCarryFlag)")
+    e = true
+  }
+  if gReg.carryFlag != pReg.carryFlag {
+    print("Invalid carryFlag: \(gReg.carryFlag) vs \(pReg.carryFlag)")
+    e = true
+  }
 
   for address in checkedAddresses {
     let pValue = p.memory.data[Int(address)]

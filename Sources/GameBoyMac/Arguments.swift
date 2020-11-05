@@ -14,8 +14,8 @@ internal struct Arguments {
 }
 
 private struct RawArguments {
-  fileprivate var bootromPath: String? = nil
-  fileprivate var romPath:     String? = nil
+  fileprivate var bootromPath: String?
+  fileprivate var romPath:     String?
 }
 
 internal func parseArguments() -> Arguments {

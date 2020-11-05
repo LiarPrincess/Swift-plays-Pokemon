@@ -21,7 +21,8 @@ internal class TimerImpl: WritableTimer {
 
   internal var div: UInt8 {
     get { return self.divValue }
-    set {
+    set { // swiftlint:disable:this unused_setter_value
+      // Any write to 'div' resets is. The actual stored value does not matter.
       self.divValue = 0
       self.divProgress = 0
     }

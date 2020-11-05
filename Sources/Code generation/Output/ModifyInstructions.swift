@@ -18,7 +18,7 @@ func modifyInstructions(_ opcodes: Opcodes, _ instructionsFileContent: String) {
     omittingEmptySubsequences: false
   )
 
-  var functionName: String? = nil
+  var functionName: String?
   for line in swiftLines {
     let isFunctionStart = line.starts(with: "  internal func")
     if isFunctionStart {

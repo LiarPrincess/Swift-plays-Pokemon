@@ -25,7 +25,7 @@ internal class MBC1: Cartridge {
   ///  ram_en: bool
   private var isRamEnabled = false
 
-  internal override func writeRom(_ address: UInt16, value: UInt8) {
+  override internal func writeRom(_ address: UInt16, value: UInt8) {
     switch address {
 
     // 0000-1FFF - RAM Enable
@@ -72,13 +72,13 @@ internal class MBC1: Cartridge {
   }
 
   /// (mooneye) When RAM access is disabled, all reads return 0xFF.
-  internal override func readRam(_ address: UInt16) -> UInt8 {
+  override internal func readRam(_ address: UInt16) -> UInt8 {
     return self.isRamEnabled ? super.readRam(address) : Constants.defaultRam
   }
 
   /// (mooneye) When RAM access is disabled, all writes
   /// to the external RAM area 0xA000-0xBFFF are ignored.
-  internal override func writeRam(_ address: UInt16, value: UInt8) {
+  override internal func writeRam(_ address: UInt16, value: UInt8) {
     if self.isRamEnabled {
       super.writeRam(address, value: value)
     }
@@ -94,7 +94,7 @@ internal class MBC3: Cartridge {
   /// RAM or RTC? RTC is not supported.
   private var ramRtcSelect: UInt8 = 0
 
-  internal override func writeRom(_ address: UInt16, value: UInt8) {
+  override internal func writeRom(_ address: UInt16, value: UInt8) {
     switch address {
 
     // 0000-1FFF - RAM Enable
