@@ -20,21 +20,23 @@ extension Lcd {
     }
   }
 
+  // MARK: - Background line
+
   // swiftlint:disable:next function_body_length
   private func drawBackgroundLine() {
     let line     = Int(self.line)
-    let globalY  = (Int(self.scrollY) + line) % LcdConstants.backgroundMapHeight
-    let tileRow  = globalY / TileConstants.height
-    let tileLine = globalY % TileConstants.height
+    let globalY  = (Int(self.scrollY) + line) % Constants.backgroundMapHeight
+    let tileRow  = globalY / Tile.Constants.height
+    let tileLine = globalY % Tile.Constants.height
 
     let tileMap = self.getTileMap(for: self.control.backgroundTileMap)
     let framebufferSlice = self.getBackgroundFramebuffer(line: line)
 
     var progress = 0
     while progress < framebufferSlice.count {
-      let globalX = (Int(self.scrollX) + progress) % LcdConstants.backgroundMapWidth
-      let tileColumn = globalX / TileConstants.width
-      let tileIndexRaw = tileMap[tileRow * TileConstants.tilesPerRow + tileColumn]
+      let globalX = (Int(self.scrollX) + progress) % Constants.backgroundMapWidth
+      let tileColumn = globalX / Tile.Constants.width
+      let tileIndexRaw = tileMap[tileRow * Tile.Constants.tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
       if self.control.tileDataSelect == .from8800to97ff {
@@ -45,8 +47,8 @@ extension Lcd {
       let tilePixels = tile.getPixels(in: tileLine)
 
       let pixelsToEnd = framebufferSlice.count - progress
-      let startBit = globalX % TileConstants.width
-      let lastBit  = min(TileConstants.width, pixelsToEnd)
+      let startBit = globalX % Tile.Constants.width
+      let lastBit  = min(Tile.Constants.width, pixelsToEnd)
 
       for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
@@ -57,7 +59,7 @@ extension Lcd {
         self.isBackgroundZero[targetX] = tileColor == 0
       }
 
-      progress += (TileConstants.width - startBit)
+      progress += (Tile.Constants.width - startBit)
     }
   }
 
@@ -67,8 +69,8 @@ extension Lcd {
       fatalError("Unable to obtain framebuffer address.")
     }
 
-    let start = basePtr.advanced(by: line * LcdConstants.width)
-    var count = LcdConstants.width
+    let start = basePtr.advanced(by: line * Constants.width)
+    var count = Constants.width
 
     let isUsingWindow = self.control.isWindowEnabled && self.line >= self.windowY
     if isUsingWindow {
@@ -87,6 +89,8 @@ extension Lcd {
     return UnsafeMutableBufferPointer(start: start, count: count)
   }
 
+  // MARK: - Draw window
+
   // swiftlint:disable:next function_body_length
   private func drawWindow() {
     let line = Int(self.line)
@@ -98,16 +102,16 @@ extension Lcd {
     }
 
     let windowY = line - windowStartY
-    let tileRow = windowY / TileConstants.height
-    let tileLine = windowY % TileConstants.height
+    let tileRow = windowY / Tile.Constants.height
+    let tileLine = windowY % Tile.Constants.height
 
     let tileMap = self.getTileMap(for: self.control.windowTileMap)
     let framebufferSlice = self.getWindowFramebuffer(line: line)
 
     var progress = 0 // windowX
     while progress < framebufferSlice.count {
-      let tileColumn = progress / TileConstants.width
-      let tileIndexRaw = tileMap[tileRow * TileConstants.tilesPerRow + tileColumn]
+      let tileColumn = progress / Tile.Constants.width
+      let tileIndexRaw = tileMap[tileRow * Tile.Constants.tilesPerRow + tileColumn]
 
       var tileIndex = Int(tileIndexRaw)
       if self.control.tileDataSelect == .from8800to97ff {
@@ -118,8 +122,8 @@ extension Lcd {
       let tilePixels = tile.getPixels(in: tileLine)
 
       let pixelsToEnd = framebufferSlice.count - progress
-      let startBit = progress % TileConstants.width
-      let lastBit  = min(TileConstants.width, pixelsToEnd)
+      let startBit = progress % Tile.Constants.width
+      let lastBit  = min(Tile.Constants.width, pixelsToEnd)
 
       for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
@@ -130,7 +134,7 @@ extension Lcd {
         self.isBackgroundZero[targetX] = tileColor == 0
       }
 
-      progress += (TileConstants.width - startBit)
+      progress += (Tile.Constants.width - startBit)
     }
   }
 
@@ -150,11 +154,13 @@ extension Lcd {
     // * - relative to line start
 
     let relativeStart = max(self.shiftedWindowX, 0)
-    let start = basePtr.advanced(by: line * LcdConstants.width + relativeStart)
-    let count = max(LcdConstants.width - relativeStart, 0)
+    let start = basePtr.advanced(by: line * Constants.width + relativeStart)
+    let count = max(Constants.width - relativeStart, 0)
 
     return UnsafeMutableBufferPointer(start: start, count: count)
   }
+
+  // MARK: - Draw sprites
 
   // swiftlint:disable:next function_body_length
   private func drawSprites() {
@@ -166,8 +172,8 @@ extension Lcd {
 
     // code taken from 'binjgb'
     for sprite in sprites {
-      let inScreenLeft  = sprite.realX + TileConstants.width >= 0
-      let inScreenRight = sprite.realX < LcdConstants.width
+      let inScreenLeft  = sprite.realX + Tile.Constants.width >= 0
+      let inScreenRight = sprite.realX < Constants.width
       guard inScreenLeft && inScreenRight else {
           continue
       }
@@ -184,19 +190,21 @@ extension Lcd {
           tileIndex &= 0xfe
         } else { // Bottom tile of 8x16 sprite
           tileIndex |= 0x01
-          tileLine -= TileConstants.height
+          tileLine -= Tile.Constants.height
         }
       }
 
       let tile = self.tiles[tileIndex]
       let tilePixels = tile.getPixels(in: tileLine)
 
-      let palette = sprite.palette == 0 ? self.spriteColorPalette0 : self.spriteColorPalette1
+      let palette = sprite.palette == 0 ?
+        self.spriteColorPalette0 :
+        self.spriteColorPalette1
 
       // realX < 0 when sprite is partially visible on the left edge of the screen
       let startBit = sprite.realX < 0 ? -sprite.realX : 0
 
-      let lcdEnd = min(framebufferSlice.count, sprite.realX + TileConstants.width)
+      let lcdEnd = min(framebufferSlice.count, sprite.realX + Tile.Constants.width)
       let lastBit = lcdEnd - sprite.realX
 
       for bit in startBit..<lastBit {
@@ -222,8 +230,8 @@ extension Lcd {
       fatalError("Unable to obtain framebuffer address.")
     }
 
-    let start = basePtr.advanced(by: line * LcdConstants.width)
-    return UnsafeMutableBufferPointer(start: start, count: LcdConstants.width)
+    let start = basePtr.advanced(by: line * Constants.width)
+    return UnsafeMutableBufferPointer(start: start, count: Constants.width)
   }
 
   /// Sort in REVERSE order (from right to left).
@@ -233,7 +241,7 @@ extension Lcd {
     }
 
     var result = [Sprite]()
-    result.reserveCapacity(SpriteConstants.countPerLine)
+    result.reserveCapacity(Sprite.Constants.countPerLine)
 
     let spriteHeight = self.control.spriteHeight
 
@@ -246,7 +254,7 @@ extension Lcd {
       }
 
       result.append(sprite)
-      if result.count == SpriteConstants.countPerLine {
+      if result.count == Sprite.Constants.countPerLine {
         break
       }
     }
@@ -264,7 +272,7 @@ extension Lcd {
 
   /// windowX - 7
   private var shiftedWindowX: Int {
-    return Int(self.windowX) - LcdConstants.windowXShift
+    return Int(self.windowX) - Constants.windowXShift
   }
 
   internal func getTileMap(for map: LcdTileMap) -> MemoryBuffer {

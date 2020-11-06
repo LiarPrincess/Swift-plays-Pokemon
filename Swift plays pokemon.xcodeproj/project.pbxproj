@@ -81,7 +81,7 @@
 		OBJ_186 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Timer.swift */; };
 		OBJ_187 /* Interrupts.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Interrupts.swift */; };
 		OBJ_188 /* SpriteColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* SpriteColorPalette.swift */; };
-		OBJ_191 /* LcdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* LcdConstants.swift */; };
+		OBJ_191 /* Lcd+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Lcd+Constants.swift */; };
 		OBJ_192 /* Lcd+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Lcd+Draw.swift */; };
 		OBJ_193 /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Lcd+Dump.swift */; };
 		OBJ_194 /* Lcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Lcd.swift */; };
@@ -289,7 +289,7 @@
 		OBJ_51 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		OBJ_53 /* Interrupts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interrupts.swift; sourceTree = "<group>"; };
 		OBJ_55 /* SpriteColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteColorPalette.swift; sourceTree = "<group>"; };
-		OBJ_58 /* LcdConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdConstants.swift; sourceTree = "<group>"; };
+		OBJ_58 /* Lcd+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Constants.swift"; sourceTree = "<group>"; };
 		OBJ_59 /* Lcd+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Draw.swift"; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_60 /* Lcd+Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Dump.swift"; sourceTree = "<group>"; };
@@ -625,7 +625,7 @@
 				OBJ_61 /* Lcd.swift */,
 				OBJ_59 /* Lcd+Draw.swift */,
 				OBJ_60 /* Lcd+Dump.swift */,
-				OBJ_58 /* LcdConstants.swift */,
+				OBJ_58 /* Lcd+Constants.swift */,
 				OBJ_62 /* Sprite.swift */,
 				OBJ_63 /* Tile.swift */,
 			);
@@ -997,7 +997,7 @@
 				OBJ_186 /* Timer.swift in Sources */,
 				OBJ_187 /* Interrupts.swift in Sources */,
 				OBJ_188 /* SpriteColorPalette.swift in Sources */,
-				OBJ_191 /* LcdConstants.swift in Sources */,
+				OBJ_191 /* Lcd+Constants.swift in Sources */,
 				OBJ_192 /* Lcd+Draw.swift in Sources */,
 				OBJ_193 /* Lcd+Dump.swift in Sources */,
 				OBJ_194 /* Lcd.swift in Sources */,

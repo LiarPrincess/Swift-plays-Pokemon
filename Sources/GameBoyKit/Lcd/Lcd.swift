@@ -16,7 +16,11 @@ public final class Lcd: LcdMemory {
     set {
       let oldValue = self._control
       self._control = newValue
-      self.clearSpriteCacheIfSpriteSizeChanged(oldValue: oldValue, newValue: newValue)
+
+      let hasSizeChanged = oldValue.spriteSize != newValue.spriteSize
+      if hasSizeChanged {
+        self.spritesByLineCache.removeAll(keepingCapacity: true)
+      }
     }
   }
 
@@ -35,11 +39,11 @@ public final class Lcd: LcdMemory {
   public internal(set) var spriteColorPalette0 = SpriteColorPalette(value: 0)
   public internal(set) var spriteColorPalette1 = SpriteColorPalette(value: 0)
 
-  public private(set) lazy var tileMap9800to9bff = MemoryBuffer(region: VideoRamMap.tileMap9800to9bff)
-  public private(set) lazy var tileMap9c00to9fff = MemoryBuffer(region: VideoRamMap.tileMap9c00to9fff)
+  public internal(set) var tileMap9800to9bff = MemoryBuffer(region: VideoRamMap.tileMap9800to9bff)
+  public internal(set) var tileMap9c00to9fff = MemoryBuffer(region: VideoRamMap.tileMap9c00to9fff)
 
-  internal lazy var tiles   = (0..<TileConstants.count).map { _ in Tile() }
-  internal lazy var sprites = (0..<SpriteConstants.count).map { Sprite(id: $0) }
+  internal lazy var tiles   = (0..<Tile.Constants.count).map { _ in Tile() }
+  internal lazy var sprites = (0..<Sprite.Constants.count).map { Sprite(id: $0) }
 
   /// Cache, so we don't recalculate sprites on every line draw.
   /// Writes to OAM will clear appropriate entries.
@@ -51,7 +55,7 @@ public final class Lcd: LcdMemory {
   /// - 2 - Dark gray
   /// - 3 - Black
   internal lazy var framebuffer: UnsafeMutableBufferPointer<UInt8> = {
-    let size = LcdConstants.width * LcdConstants.height
+    let size = Constants.width * Constants.height
     let result = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: size)
     result.assign(repeating: 0)
     return result
@@ -61,13 +65,13 @@ public final class Lcd: LcdMemory {
   private var frameProgress = 0
 
   /// Used when drawing sprites (isBehindBackground property).
-  internal var isBackgroundZero = [Bool](repeating: true, count: LcdConstants.width)
+  internal var isBackgroundZero = [Bool](repeating: true, count: Constants.width)
 
   /// We can enable/disable diplay only an the start of the frame.
   /// See: http://bgb.bircd.org/pandocs.htm#lcdcontrolregister
   private var isLcdEnabledInCurrentFrame: Bool = false
 
-  private let interrupts: Interrupts
+  private unowned let interrupts: Interrupts
 
   internal init(interrupts: Interrupts) {
     self.interrupts = interrupts
@@ -86,8 +90,8 @@ public final class Lcd: LcdMemory {
 
     case VideoRamMap.tileData:
       let relativeAddress = Int(address - VideoRamMap.tileData.start)
-      let index = relativeAddress / TileConstants.byteCount
-      let byte  = relativeAddress % TileConstants.byteCount
+      let index = relativeAddress / Tile.Constants.byteCount
+      let byte  = relativeAddress % Tile.Constants.byteCount
 
       let tile = self.tiles[index]
       return tile.data[byte]
@@ -110,8 +114,8 @@ public final class Lcd: LcdMemory {
 
     case VideoRamMap.tileData:
       let relativeAddress = Int(address - VideoRamMap.tileData.start)
-      let index = relativeAddress / TileConstants.byteCount
-      let byte  = relativeAddress % TileConstants.byteCount
+      let index = relativeAddress / Tile.Constants.byteCount
+      let byte  = relativeAddress % Tile.Constants.byteCount
 
       let tile = self.tiles[index]
       tile.setByte(byte, value: value)
@@ -132,8 +136,8 @@ public final class Lcd: LcdMemory {
   internal func readOAM(_ address: UInt16) -> UInt8 {
     let oamAddress = Int(address - MemoryMap.oam.start)
 
-    let index = oamAddress / SpriteConstants.byteCount
-    let byte  = oamAddress % SpriteConstants.byteCount
+    let index = oamAddress / Sprite.Constants.byteCount
+    let byte  = oamAddress % Sprite.Constants.byteCount
 
     let sprite = self.sprites[index]
     switch byte {
@@ -148,8 +152,8 @@ public final class Lcd: LcdMemory {
   internal func writeOAM(_ address: UInt16, value: UInt8) {
     let oamAddress = Int(address - MemoryMap.oam.start)
 
-    let index = oamAddress / SpriteConstants.byteCount
-    let byte  = oamAddress % SpriteConstants.byteCount
+    let index = oamAddress / Sprite.Constants.byteCount
+    let byte  = oamAddress % Sprite.Constants.byteCount
 
     let sprite = self.sprites[index]
     switch byte {
@@ -174,7 +178,7 @@ public final class Lcd: LcdMemory {
     let height = self.control.spriteHeight
 
     let startLine = max(startLine, 0)
-    let endLine   = min(startLine + height, LcdConstants.backgroundMapHeight)
+    let endLine = min(startLine + height, Constants.backgroundMapHeight)
 
     for line in startLine..<endLine {
       self.spritesByLineCache[line] = nil
@@ -206,8 +210,8 @@ public final class Lcd: LcdMemory {
   private func updateFrameProgress(cycles: Int) {
     self.frameProgress += cycles
 
-    if self.frameProgress > LcdConstants.cyclesPerFrame {
-      self.frameProgress -= LcdConstants.cyclesPerFrame
+    if self.frameProgress > Constants.cyclesPerFrame {
+      self.frameProgress -= Constants.cyclesPerFrame
 
       self.isLcdEnabledInCurrentFrame = self.control.isLcdEnabled
       if !self.isLcdEnabledInCurrentFrame {
@@ -220,7 +224,7 @@ public final class Lcd: LcdMemory {
 
   private func updateLine() {
     let previousLine = self.line
-    self.line = UInt8(self.frameProgress / LcdConstants.cyclesPerLine)
+    self.line = UInt8(self.frameProgress / Constants.cyclesPerLine)
 
     if self.line != previousLine {
       let hasInterrupt = self.line == self.lineCompare
@@ -235,7 +239,7 @@ public final class Lcd: LcdMemory {
   /// Update STAT with new mode (after updating progress).
   /// Will also request any needed interrupt.
   private func updateMode() {
-    if self.line >= LcdConstants.height {
+    if self.line >= Constants.height {
       if self.status.mode != .vBlank {
         self.setMode(.vBlank)
         self.interrupts.set(.vBlank)
@@ -247,15 +251,15 @@ public final class Lcd: LcdMemory {
       return
     }
 
-    let lineProgress = self.frameProgress % LcdConstants.cyclesPerLine
+    let lineProgress = self.frameProgress % Constants.cyclesPerLine
 
     let previousMode = self.status.mode
     var requestInterrupt = false
 
-    if lineProgress < LcdConstants.oamSearchEnd {
+    if lineProgress < Constants.oamSearchEnd {
       self.setMode(.oamSearch)
       requestInterrupt = self.status.isOamInterruptEnabled
-    } else if lineProgress < LcdConstants.pixelTransferEnd {
+    } else if lineProgress < Constants.pixelTransferEnd {
       self.setMode(.pixelTransfer)
     } else {
       self.setMode(.hBlank)
@@ -268,14 +272,6 @@ public final class Lcd: LcdMemory {
   }
 
   // MARK: - Setters
-
-  private func clearSpriteCacheIfSpriteSizeChanged(oldValue: LcdControl,
-                                                   newValue: LcdControl) {
-    let hasSizeChanged = oldValue.spriteSize != newValue.spriteSize
-    if hasSizeChanged {
-      self.spritesByLineCache.removeAll(keepingCapacity: true)
-    }
-  }
 
   private func setIsLineCompareInterrupt(_ value: Bool) {
     let clear = ~LcdStatus.Masks.isLineCompareInterrupt

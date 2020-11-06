@@ -15,10 +15,25 @@
 
 internal final class Tile {
 
-  internal lazy var data = MemoryBuffer(count: TileConstants.byteCount)
+  internal enum Constants {
+    /// Total number of tiles (3 * 128)
+    internal static let count = 3 * 128
+    /// 8 pixels
+    internal static let height = 8
+    /// 8 pixels
+    internal static let width = 8
+    /// 1 tile line = 2 bytes
+    internal static let bytesPerLine = 2
+    /// 1 tile = 16 bytes
+    internal static let byteCount = height * bytesPerLine
+    /// 1 row (in background map) = 32 tiles
+    internal static let tilesPerRow = 32
+  }
+
+  internal lazy var data = MemoryBuffer(count: Constants.byteCount)
 
   private lazy var pixels: UnsafeMutableBufferPointer<UInt8> = {
-    let count = TileConstants.width * TileConstants.height
+    let count = Constants.width * Constants.height
     let result = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: count)
     result.assign(repeating: 0)
     return result
@@ -36,14 +51,14 @@ internal final class Tile {
 
     self.data[byte] = value
 
-    // recalculate pixels
-    let line = byte / TileConstants.bytesPerLine
-    let data1 = self.data[line * TileConstants.bytesPerLine]
-    let data2 = self.data[line * TileConstants.bytesPerLine + 1]
+    // Recalculate pixels
+    let line = byte / Constants.bytesPerLine
+    let data1 = self.data[line * Constants.bytesPerLine]
+    let data2 = self.data[line * Constants.bytesPerLine + 1]
 
-    for bit in 0..<TileConstants.width {
+    for bit in 0..<Constants.width {
       let color = Self.getColorValue(data1, data2, bit: bit)
-      let pixelIndex = (line * TileConstants.width) + bit
+      let pixelIndex = (line * Constants.width) + bit
       self.pixels[pixelIndex] = color
     }
   }
@@ -53,8 +68,8 @@ internal final class Tile {
       fatalError("Unable to obtain tile pixels address.")
     }
 
-    let start = basePtr.advanced(by: line * TileConstants.width)
-    let count = TileConstants.width
+    let start = basePtr.advanced(by: line * Constants.width)
+    let count = Constants.width
     return UnsafeBufferPointer(start: start, count: count)
   }
 

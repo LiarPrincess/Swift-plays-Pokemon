@@ -6,8 +6,8 @@ import Foundation
 
 public final class GameBoy {
 
-  public static var lcdWidth:  Int { return LcdConstants.width }
-  public static var lcdHeight: Int { return LcdConstants.height }
+  public static var lcdWidth:  Int { return Lcd.Constants.width }
+  public static var lcdHeight: Int { return Lcd.Constants.height }
 
   public let cpu: Cpu
   public let lcd: Lcd
@@ -99,13 +99,13 @@ public final class GameBoy {
   // MARK: - Tick
 
   public func tickFrame() {
-    let cycles = LcdConstants.cyclesPerFrame - self.frameProgress
+    let cycles = Lcd.Constants.cyclesPerFrame - self.frameProgress
 
     self.tickCpu(cycles: cycles)
 
     // if we stopped at the last cycle of the frame, then
     // run 1 bonus instruction to actually 'tick' it
-    if self.frameProgress == LcdConstants.cyclesPerFrame {
+    if self.frameProgress == Lcd.Constants.cyclesPerFrame {
       self.tickCpu(cycles: 1)
     }
   }
@@ -118,8 +118,8 @@ public final class GameBoy {
       remainingCycles -= cycles
 
       self.frameProgress += cycles
-      if self.frameProgress > LcdConstants.cyclesPerFrame {
-        self.frameProgress -= LcdConstants.cyclesPerFrame
+      if self.frameProgress > Lcd.Constants.cyclesPerFrame {
+        self.frameProgress -= Lcd.Constants.cyclesPerFrame
       }
 
       self.timer.tick(cycles: cycles)

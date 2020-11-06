@@ -9,21 +9,26 @@ private let isAboveBackgroundMask: UInt8 = 1 << 7
 
 internal final class Sprite {
 
+  internal enum Constants {
+    /// Total number of sprites (40)
+    internal static let count: UInt8 = 40
+    /// 1 line = max 10 sprites
+    internal static let countPerLine = 10
+    /// 1 sprite = 4 bytes
+    internal static let byteCount = 4
+  }
+
   /// Sprite number (0..<40)
   internal var id: UInt8
-
   /// Byte 0 - Y Position;
   /// Specifies the sprites vertical position on the screen (minus 16).
   internal var y: UInt8 = 0
-
   /// Byte 1 - X Position;
   /// Specifies the sprites horizontal position on the screen (minus 8).
   internal var x: UInt8 = 0
-
   /// Byte 2 - Tile/Pattern Number
   /// Specifies the sprites Tile Number (00-FF).
   internal var tile: UInt8 = 0
-
   /// Byte 3 - Attributes/Flags
   internal var flags: UInt8 = 0
 
