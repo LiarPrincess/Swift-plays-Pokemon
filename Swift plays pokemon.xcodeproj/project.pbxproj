@@ -45,6 +45,9 @@
 		90427E3A25549F27007A9E9D /* LcdTileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E3925549F27007A9E9D /* LcdTileMap.swift */; };
 		90427E4825549F43007A9E9D /* LcdTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E4725549F43007A9E9D /* LcdTileData.swift */; };
 		90427E5025549F5E007A9E9D /* LcdMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E4F25549F5E007A9E9D /* LcdMode.swift */; };
+		90427EA02555592C007A9E9D /* Framebuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E9F2555592C007A9E9D /* Framebuffer.swift */; };
+		90427EA825555E2D007A9E9D /* LinkCable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427EA725555E2D007A9E9D /* LinkCable.swift */; };
+		90427EBC25556202007A9E9D /* CartridgeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427EBB25556202007A9E9D /* CartridgeHeader.swift */; };
 		OBJ_146 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Common.swift */; };
 		OBJ_147 /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ModifyInstructions.swift */; };
 		OBJ_148 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Opcode.swift */; };
@@ -218,6 +221,9 @@
 		90427E3925549F27007A9E9D /* LcdTileMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileMap.swift; sourceTree = "<group>"; };
 		90427E4725549F43007A9E9D /* LcdTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileData.swift; sourceTree = "<group>"; };
 		90427E4F25549F5E007A9E9D /* LcdMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdMode.swift; sourceTree = "<group>"; };
+		90427E9F2555592C007A9E9D /* Framebuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Framebuffer.swift; sourceTree = "<group>"; };
+		90427EA725555E2D007A9E9D /* LinkCable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCable.swift; sourceTree = "<group>"; };
+		90427EBB25556202007A9E9D /* CartridgeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeHeader.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		OBJ_100 /* CpuOpcodeLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeLengthTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* CpuOpcodeTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeTimingTests.swift; sourceTree = "<group>"; };
@@ -552,9 +558,10 @@
 			children = (
 				OBJ_70 /* CartridgeMemory.swift */,
 				OBJ_23 /* Cartridge.swift */,
-				OBJ_24 /* CartridgeConstants.swift */,
+				90427EBB25556202007A9E9D /* CartridgeHeader.swift */,
 				OBJ_25 /* CartridgeFactory.swift */,
 				OBJ_26 /* CartridgeImplementations.swift */,
+				OBJ_24 /* CartridgeConstants.swift */,
 				OBJ_27 /* CartridgeMap.swift */,
 			);
 			path = Cartridge;
@@ -592,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_49 /* SerialPort.swift */,
+				90427EA725555E2D007A9E9D /* LinkCable.swift */,
 				OBJ_47 /* JoypadMemory.swift */,
 				OBJ_48 /* Joypad.swift */,
 				OBJ_50 /* TimerMemory.swift */,
@@ -626,6 +634,7 @@
 				OBJ_58 /* Lcd+Constants.swift */,
 				OBJ_62 /* Sprite.swift */,
 				OBJ_63 /* Tile.swift */,
+				90427E9F2555592C007A9E9D /* Framebuffer.swift */,
 			);
 			path = Lcd;
 			sourceTree = "<group>";
@@ -959,6 +968,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_159 /* Bootrom.swift in Sources */,
+				90427EA825555E2D007A9E9D /* LinkCable.swift in Sources */,
 				OBJ_160 /* BootromFactory.swift in Sources */,
 				OBJ_161 /* Cartridge.swift in Sources */,
 				OBJ_162 /* CartridgeConstants.swift in Sources */,
@@ -987,8 +997,10 @@
 				OBJ_179 /* GameBoy.swift in Sources */,
 				OBJ_180 /* GameboyInput.swift in Sources */,
 				90427DA2255487C5007A9E9D /* Audio.swift in Sources */,
+				90427EBC25556202007A9E9D /* CartridgeHeader.swift in Sources */,
 				OBJ_182 /* JoypadMemory.swift in Sources */,
 				OBJ_183 /* Joypad.swift in Sources */,
+				90427EA02555592C007A9E9D /* Framebuffer.swift in Sources */,
 				OBJ_184 /* SerialPort.swift in Sources */,
 				OBJ_185 /* TimerMemory.swift in Sources */,
 				OBJ_186 /* Timer.swift in Sources */,

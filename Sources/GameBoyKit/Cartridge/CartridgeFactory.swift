@@ -41,44 +41,38 @@ public enum CartridgeFactoryError: Error, CustomStringConvertible {
 public enum CartridgeFactory {
 
   /// This function creates new cartridge from given data.
+  public static func create(data: Data) throws -> Cartridge {
+    let header = try CartridgeHeader(rom: data, skipChecks: false)
+    return try Self.create(header: header, data: data)
+  }
+
+  /// This function creates new cartridge from given data.
   ///
-  /// - Parameter data: Cartridge content.
-  /// - Parameter isTest: Tests have relaxed validation rules.
-  public static func fromData(_ data: Data, isTest: Bool = false) throws -> Cartridge {
-    let type = data[CartridgeMap.type]
-    switch type {
-    case 0x00: return try NoMBC(rom: data, isTest)
-    case 0x08: return try NoMBC(rom: data, isTest) // ram
-    case 0x09: return try NoMBC(rom: data, isTest) // ram, battery
+  /// It will skip any check (for example: checksum, rom size etc.).
+  public static func unchecked(data: Data) throws -> Cartridge {
+    let header = try CartridgeHeader(rom: data, skipChecks: true)
+    return try Self.create(header: header, data: data)
+  }
 
-    case 0x01: return try MBC1(rom: data, isTest)
-    case 0x02: return try MBC1(rom: data, isTest) // ram
-    case 0x03: return try MBC1(rom: data, isTest) // ram, battery
-
-//    case 0x05: return try MBC2(rom: data, isTest)
-//    case 0x06: return try MBC2(rom: data, isTest) // battery
-
-    case 0x11: return try MBC3(rom: data, isTest)
-    case 0x12: return try MBC3(rom: data, isTest) // ram
-    case 0x13: return try MBC3(rom: data, isTest) // ram, battery
-    case 0x0f: return try MBC3(rom: data, isTest) // battery, rtc
-    case 0x10: return try MBC3(rom: data, isTest) // ram, battery, rtc
-
-//    case 0x19: return try MBC5(rom: data, isTest)
-//    case 0x1a: return try MBC5(rom: data, isTest) // ram
-//    case 0x1b: return try MBC5(rom: data, isTest) // ram, battery
-//    case 0x1c: return try MBC5(rom: data, isTest) // rumble
-//    case 0x1d: return try MBC5(rom: data, isTest) // ram, rumble
-//    case 0x1e: return try MBC5(rom: data, isTest) // ram, battery, rumble
-
-//    case 0x20: return try MBC6(rom: data, isTest)
-//    case 0x22: return try MBC7(rom: data, isTest)
-//    case 0xff: return try Huc1(rom: data, isTest)
-//    case 0xfe: return try Huc3(rom: data, isTest)
-
-    default: break
+  private static func create(header: CartridgeHeader, data: Data) throws -> Cartridge {
+    switch header.type.value {
+    case .noMBC:
+      return NoMBC(header: header, rom: data)
+    case .mbc1:
+      return MBC1(header: header, rom: data)
+    case .mbc3:
+      return MBC3(header: header, rom: data)
+    // Not implemented:
+    // case .mbc2
+    // case .mbc4
+    // case .mbc5
+    // case .mbc6
+    // case .mbc7
+    // case .huc1
+    // case .huc3
+    default:
+      let raw = data[CartridgeMap.type]
+      throw CartridgeError.unsupportedType(raw)
     }
-
-    throw CartridgeFactoryError.unsupportedType(type)
   }
 }
