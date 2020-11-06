@@ -6,9 +6,6 @@ import Foundation
 
 public final class GameBoy {
 
-  public static var lcdWidth:  Int { return Lcd.Constants.width }
-  public static var lcdHeight: Int { return Lcd.Constants.height }
-
   public let cpu: Cpu
   public let lcd: Lcd
   public let audio: Audio
@@ -118,9 +115,7 @@ public final class GameBoy {
       remainingCycles -= cycles
 
       self.frameProgress += cycles
-      if self.frameProgress > Lcd.Constants.cyclesPerFrame {
-        self.frameProgress -= Lcd.Constants.cyclesPerFrame
-      }
+      self.frameProgress %= Lcd.Constants.cyclesPerFrame
 
       self.timer.tick(cycles: cycles)
       self.lcd.tick(cycles: cycles)

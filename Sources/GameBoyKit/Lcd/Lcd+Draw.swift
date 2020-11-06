@@ -65,11 +65,9 @@ extension Lcd {
 
   /// Part of the framebuffer that should be filled in the current draw operation.
   private func getBackgroundFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
-    guard let basePtr = UnsafeMutablePointer(self.framebuffer.baseAddress) else {
-      fatalError("Unable to obtain framebuffer address.")
-    }
+    let framebufferStart = self.framebuffer.baseAddress
 
-    let start = basePtr.advanced(by: line * Constants.width)
+    let start = framebufferStart.advanced(by: line * Constants.width)
     var count = Constants.width
 
     let isUsingWindow = self.control.isWindowEnabled && self.line >= self.windowY
@@ -140,9 +138,7 @@ extension Lcd {
 
   /// Part of the framebuffer that should be filled in the current draw operation.
   private func getWindowFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
-    guard let basePtr = UnsafeMutablePointer(self.framebuffer.baseAddress) else {
-      fatalError("Unable to obtain framebuffer address.")
-    }
+    let framebufferStart = self.framebuffer.baseAddress
 
     // TODO: Convert to tests
     // http://bgb.bircd.org/pandocs.htm#lcdpositionandscrolling
@@ -154,7 +150,7 @@ extension Lcd {
     // * - relative to line start
 
     let relativeStart = max(self.shiftedWindowX, 0)
-    let start = basePtr.advanced(by: line * Constants.width + relativeStart)
+    let start = framebufferStart.advanced(by: line * Constants.width + relativeStart)
     let count = max(Constants.width - relativeStart, 0)
 
     return UnsafeMutableBufferPointer(start: start, count: count)
@@ -226,11 +222,8 @@ extension Lcd {
 
   /// Part of the framebuffer that should be filled in the current draw operation.
   private func getSpriteFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
-    guard let basePtr = UnsafeMutablePointer(self.framebuffer.baseAddress) else {
-      fatalError("Unable to obtain framebuffer address.")
-    }
-
-    let start = basePtr.advanced(by: line * Constants.width)
+    let framebufferStart = self.framebuffer.baseAddress
+    let start = framebufferStart.advanced(by: line * Constants.width)
     return UnsafeMutableBufferPointer(start: start, count: Constants.width)
   }
 

@@ -49,17 +49,8 @@ public final class Lcd: LcdMemory {
   /// Writes to OAM will clear appropriate entries.
   internal lazy var spritesByLineCache = [Int:[Sprite]]()
 
-  /// Data that should be put on screen:
-  /// - 0 - White
-  /// - 1 - Light gray
-  /// - 2 - Dark gray
-  /// - 3 - Black
-  internal lazy var framebuffer: UnsafeMutableBufferPointer<UInt8> = {
-    let size = Constants.width * Constants.height
-    let result = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: size)
-    result.assign(repeating: 0)
-    return result
-  }()
+  /// Data that should be put on screen
+  internal lazy var framebuffer = Framebuffer()
 
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress = 0
@@ -216,7 +207,7 @@ public final class Lcd: LcdMemory {
       self.isLcdEnabledInCurrentFrame = self.control.isLcdEnabled
       if !self.isLcdEnabledInCurrentFrame {
         self.line = 0
-        self.framebuffer.assign(repeating: 0) // clear
+        self.framebuffer.clear()
         self.setMode(.hBlank) // 0
       }
     }
