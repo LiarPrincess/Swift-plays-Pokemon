@@ -12,13 +12,11 @@ public final class GameBoy {
   public let memory: Memory
   public let timer: GameBoyKit.Timer
   public let joypad: Joypad
+  public let serialPort: SerialPort
+  public let linkCable: LinkCable
 
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress: Int = 0
-
-  public var linkCable: Data {
-    return self.memory.linkCable
-  }
 
   // MARK: - Init
 
@@ -30,16 +28,20 @@ public final class GameBoy {
     self.audio = Audio()
     self.timer = GameBoyKit.Timer(interrupts: interrupts)
     self.joypad = Joypad(provider: input)
+    self.serialPort = SerialPort()
+    self.linkCable = LinkCable()
 
     let bootromState = bootrom.map(Memory.BootromState.executing) ?? .finished
 
-    self.memory = Memory(bootrom:   bootromState,
-                         cartridge: cartridge,
-                         joypad:    self.joypad,
-                         lcd:       self.lcd,
-                         audio:     self.audio,
-                         timer:     self.timer,
-                         interrupts: interrupts)
+    self.memory = Memory(bootrom:    bootromState,
+                         cartridge:  cartridge,
+                         joypad:     self.joypad,
+                         lcd:        self.lcd,
+                         audio:      self.audio,
+                         timer:      self.timer,
+                         interrupts: interrupts,
+                         serialPort: self.serialPort,
+                         linkCable:  self.linkCable)
 
     self.cpu = Cpu(memory: self.memory, interrupts: interrupts)
 

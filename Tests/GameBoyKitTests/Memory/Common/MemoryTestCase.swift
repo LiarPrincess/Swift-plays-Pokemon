@@ -10,7 +10,7 @@ class MemoryTestCase: XCTestCase {
   func createMemory(bootrom:    BootromMemory?   = nil,
                     cartridge:  CartridgeMemory? = nil,
                     joypad:     JoypadMemory?    = nil,
-                    lcd:        LcdMemory?     = nil,
+                    lcd:        LcdMemory?       = nil,
                     audio:      AudioMemory?     = nil,
                     timer:      TimerMemory?     = nil,
                     interrupts: Interrupts?      = nil) -> Memory {
@@ -21,7 +21,9 @@ class MemoryTestCase: XCTestCase {
       lcd:        lcd        ?? FakeLcdMemory(),
       audio:      audio      ?? FakeAudioMemory(),
       timer:      timer      ?? FakeTimerMemory(),
-      interrupts: interrupts ?? Interrupts()
+      interrupts: interrupts ?? Interrupts(),
+      serialPort: SerialPort(),
+      linkCable:  LinkCable()
     )
   }
 }

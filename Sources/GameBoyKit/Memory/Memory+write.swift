@@ -64,7 +64,7 @@ extension Memory {
     switch address {
     case MemoryMap.IO.joypad: self.joypad.value = value
     case MemoryMap.IO.sb:
-      self.linkCable.append(value)
+      self.linkCable.write(value)
       self.serialPort.sb = value
     case MemoryMap.IO.sc:     self.serialPort.sc = value
     case MemoryMap.IO.unmapBootrom:  self.bootrom = .finished

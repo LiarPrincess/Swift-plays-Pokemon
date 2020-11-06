@@ -43,7 +43,7 @@ private func test(_ rom: URL, frames: Int) {
     gameBoy.tickFrame()
   }
 
-  let link = String(bytes: gameBoy.linkCable, encoding: .ascii) ?? ""
+  let link = String(bytes: gameBoy.linkCable.data, encoding: .ascii) ?? ""
   let passed = link.contains("Passed")
 
   if passed {
@@ -77,7 +77,7 @@ private func debug(_ rom: URL, dump urls: [URL]) {
   }
 
   print("---")
-  print(String(bytes: gameBoy.linkCable, encoding: .ascii) ?? "")
+  print(String(bytes: gameBoy.linkCable.data, encoding: .ascii) ?? "")
   print("---")
 }
 

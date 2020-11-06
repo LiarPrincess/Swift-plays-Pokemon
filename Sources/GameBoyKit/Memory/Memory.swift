@@ -12,11 +12,12 @@ public final class Memory: CpuMemory {
   }
 
   internal let lcd: LcdMemory
-  internal var audio: AudioMemory
+  internal let audio: AudioMemory
   internal let timer: TimerMemory
   internal let joypad: JoypadMemory
-  internal let serialPort: SerialPort
   internal let interrupts: Interrupts
+  internal let serialPort: SerialPort
+  internal let linkCable: LinkCable
 
   internal var bootrom: BootromState
   internal let cartridge: CartridgeMemory
@@ -28,9 +29,6 @@ public final class Memory: CpuMemory {
   /// FF80-FFFE High RAM (HRAM)
   internal lazy var highRam = MemoryBuffer(region: MemoryMap.highRam)
 
-  /// FF01 - SB - Data send using serial transfer
-  internal var linkCable = Data()
-
   /// Catch'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()
 
@@ -40,7 +38,9 @@ public final class Memory: CpuMemory {
                 lcd:        LcdMemory,
                 audio:      AudioMemory,
                 timer:      TimerMemory,
-                interrupts: Interrupts) {
+                interrupts: Interrupts,
+                serialPort: SerialPort,
+                linkCable:  LinkCable) {
     self.bootrom = bootrom
     self.cartridge = cartridge
     self.joypad = joypad
@@ -48,7 +48,8 @@ public final class Memory: CpuMemory {
     self.audio = audio
     self.timer = timer
     self.interrupts = interrupts
-    self.serialPort = SerialPort()
+    self.serialPort = serialPort
+    self.linkCable = linkCable
   }
 
   deinit {
