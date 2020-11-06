@@ -5,5 +5,5 @@
 @testable import GameBoyKit
 
 class FakeJoypadMemory: JoypadMemory {
-  var value: UInt8 = 0
+  var value = UInt8()
 }

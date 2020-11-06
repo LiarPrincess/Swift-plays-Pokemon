@@ -5,14 +5,7 @@
 import XCTest
 @testable import GameBoyKit
 
-class DummyInput: GameboyInputProvider {
-
-  func getGameboyInput() -> GameboyInput {
-    return GameboyInput()
-  }
-}
-
-extension XCTestCase {
+class MemoryTestCase: XCTestCase {
 
   func createMemory(bootrom:    BootromMemory?   = nil,
                     cartridge:  CartridgeMemory? = nil,
@@ -25,7 +18,7 @@ extension XCTestCase {
       bootrom:    .executing(bootrom ?? FakeBootromMemory()),
       cartridge:  cartridge  ?? FakeCartridgeMemory(),
       joypad:     joypad     ?? FakeJoypadMemory(),
-      lcd:        lcd        ?? FakeLcd(),
+      lcd:        lcd        ?? FakeLcdMemory(),
       audio:      audio      ?? FakeAudioMemory(),
       timer:      timer      ?? FakeTimerMemory(),
       interrupts: interrupts ?? Interrupts()

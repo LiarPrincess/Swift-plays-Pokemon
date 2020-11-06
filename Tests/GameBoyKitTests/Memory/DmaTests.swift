@@ -5,12 +5,12 @@
 import XCTest
 @testable import GameBoyKit
 
-class DmaTests: XCTestCase {
+class DmaTests: MemoryTestCase {
 
   func test_dma() {
     let memory = self.createMemory()
 
-    // fill source (somewhere in external ram)
+    // Fill source (somewhere in external ram)
     let sourceStart: UInt16 = 0xab00
     let sourceEnd:   UInt16 = 0xab9f
 
@@ -19,11 +19,11 @@ class DmaTests: XCTestCase {
       memory.write(address, value: value)
     }
 
-    // dma
+    // DMA
     let writeValue = UInt8(sourceStart >> 8)
     memory.write(MemoryMap.Lcd.dma, value: writeValue)
 
-    // check values at 0xfeXX
+    // Check values at 0xfeXX
     for address in sourceStart...sourceEnd {
       let dmaAddress = MemoryMap.oam.start + address & 0x00ff
 

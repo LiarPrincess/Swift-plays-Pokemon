@@ -4,7 +4,7 @@
 
 @testable import GameBoyKit
 
-class FakeLcd: LcdMemory {
+class FakeLcdMemory: LcdMemory {
 
   var control = LcdControl(value: 0)
   var status = LcdStatus(value: 0)

@@ -124,11 +124,10 @@
 		OBJ_243 /* FakeCartridgeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* FakeCartridgeMemory.swift */; };
 		OBJ_244 /* FakeCpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* FakeCpuMemory.swift */; };
 		OBJ_245 /* FakeJoypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* FakeJoypad.swift */; };
-		OBJ_246 /* FakeLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* FakeLcd.swift */; };
-		OBJ_247 /* FakeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FakeTimer.swift */; };
+		OBJ_246 /* FakeLcdMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* FakeLcdMemory.swift */; };
+		OBJ_247 /* FakeTimerMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FakeTimerMemory.swift */; };
 		OBJ_248 /* CpuTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* CpuTestCase.swift */; };
-		OBJ_249 /* XCTestCase+createLcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* XCTestCase+createLcd.swift */; };
-		OBJ_250 /* XCTestCase+createMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* XCTestCase+createMemory.swift */; };
+		OBJ_250 /* MemoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* MemoryTestCase.swift */; };
 		OBJ_251 /* TimerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* TimerTestCase.swift */; };
 		OBJ_252 /* TimerTimaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* TimerTimaTests.swift */; };
 		OBJ_253 /* TimerDivTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* TimerDivTests.swift */; };
@@ -232,11 +231,10 @@
 		OBJ_11 /* ModifyInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyInstructions.swift; sourceTree = "<group>"; };
 		OBJ_110 /* FakeCpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCpuMemory.swift; sourceTree = "<group>"; };
 		OBJ_111 /* FakeJoypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeJoypad.swift; sourceTree = "<group>"; };
-		OBJ_112 /* FakeLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLcd.swift; sourceTree = "<group>"; };
-		OBJ_113 /* FakeTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTimer.swift; sourceTree = "<group>"; };
+		OBJ_112 /* FakeLcdMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLcdMemory.swift; sourceTree = "<group>"; };
+		OBJ_113 /* FakeTimerMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTimerMemory.swift; sourceTree = "<group>"; };
 		OBJ_114 /* CpuTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuTestCase.swift; sourceTree = "<group>"; };
-		OBJ_115 /* XCTestCase+createLcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createLcd.swift"; sourceTree = "<group>"; };
-		OBJ_116 /* XCTestCase+createMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+createMemory.swift"; sourceTree = "<group>"; };
+		OBJ_116 /* MemoryTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryTestCase.swift; sourceTree = "<group>"; };
 		OBJ_117 /* TimerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTestCase.swift; sourceTree = "<group>"; };
 		OBJ_119 /* TimerTimaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTimaTests.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Opcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
@@ -469,19 +467,18 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		OBJ_107 /* Helpers */ = {
+		OBJ_107 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_108 /* FakeBootromMemory.swift */,
 				OBJ_109 /* FakeCartridgeMemory.swift */,
-				90427DA925548A21007A9E9D /* FakeAudioMemory.swift */,
 				OBJ_111 /* FakeJoypad.swift */,
-				OBJ_112 /* FakeLcd.swift */,
-				OBJ_113 /* FakeTimer.swift */,
-				OBJ_115 /* XCTestCase+createLcd.swift */,
-				OBJ_116 /* XCTestCase+createMemory.swift */,
+				OBJ_112 /* FakeLcdMemory.swift */,
+				90427DA925548A21007A9E9D /* FakeAudioMemory.swift */,
+				OBJ_113 /* FakeTimerMemory.swift */,
+				OBJ_116 /* MemoryTestCase.swift */,
 			);
-			path = Helpers;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		OBJ_118 /* IO */ = {
@@ -507,6 +504,7 @@
 		OBJ_124 /* Memory */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_107 /* Common */,
 				OBJ_125 /* DmaTests.swift */,
 				OBJ_127 /* MemoryReadTests.swift */,
 				OBJ_128 /* MemoryWriteTests.swift */,
@@ -730,7 +728,6 @@
 		OBJ_91 /* GameBoyKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_107 /* Helpers */,
 				OBJ_93 /* Cpu */,
 				OBJ_118 /* IO */,
 				OBJ_121 /* Lcd */,
@@ -1059,12 +1056,11 @@
 				OBJ_243 /* FakeCartridgeMemory.swift in Sources */,
 				OBJ_244 /* FakeCpuMemory.swift in Sources */,
 				OBJ_245 /* FakeJoypad.swift in Sources */,
-				OBJ_246 /* FakeLcd.swift in Sources */,
+				OBJ_246 /* FakeLcdMemory.swift in Sources */,
 				90427DB125548A42007A9E9D /* FakeAudioMemory.swift in Sources */,
-				OBJ_247 /* FakeTimer.swift in Sources */,
+				OBJ_247 /* FakeTimerMemory.swift in Sources */,
 				OBJ_248 /* CpuTestCase.swift in Sources */,
-				OBJ_249 /* XCTestCase+createLcd.swift in Sources */,
-				OBJ_250 /* XCTestCase+createMemory.swift in Sources */,
+				OBJ_250 /* MemoryTestCase.swift in Sources */,
 				OBJ_251 /* TimerTestCase.swift in Sources */,
 				90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */,
 				OBJ_252 /* TimerTimaTests.swift in Sources */,

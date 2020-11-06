@@ -5,10 +5,12 @@
 import XCTest
 @testable import GameBoyKit
 
-class MemoryWriteTests: XCTestCase {
+/// Value that will be written at the 1st address in given range
+private let startValue: UInt8 = 5
+/// Value that will be written at the last address in given range
+private let endValue: UInt8 = 6
 
-  private let startValue: UInt8 = 5
-  private let endValue:   UInt8 = 6
+class MemoryWriteTests: MemoryTestCase {
 
   func test_bootrom() {
     let range = MemoryMap.bootrom
@@ -33,7 +35,6 @@ class MemoryWriteTests: XCTestCase {
 
     let cartridge = FakeCartridgeMemory()
     let memory = self.createMemory(cartridge: cartridge)
-
     memory.bootrom = .finished
 
     memory.write(range.start, value: startValue)
@@ -57,7 +58,7 @@ class MemoryWriteTests: XCTestCase {
   }
 
   func test_videoRam() {
-    let lcd = FakeLcd()
+    let lcd = FakeLcdMemory()
     let memory = self.createMemory(lcd: lcd)
 
     let range = MemoryMap.videoRam
@@ -103,7 +104,7 @@ class MemoryWriteTests: XCTestCase {
   }
 
   func test_oam() {
-    let lcd = FakeLcd()
+    let lcd = FakeLcdMemory()
     let memory = self.createMemory(lcd: lcd)
 
     let range = MemoryMap.oam
@@ -131,7 +132,7 @@ class MemoryWriteTests: XCTestCase {
   }
 
   func test_timer() {
-    let timer  = FakeTimerMemory()
+    let timer = FakeTimerMemory()
     let memory = self.createMemory(timer: timer)
 
     memory.write(MemoryMap.Timer.div, value: 4)
@@ -149,7 +150,7 @@ class MemoryWriteTests: XCTestCase {
 
   // swiftlint:disable:next function_body_length
   func test_lcdMemory() {
-    let lcd    = FakeLcd()
+    let lcd = FakeLcdMemory()
     let memory = self.createMemory(lcd: lcd)
 
     var value: UInt8 = 5

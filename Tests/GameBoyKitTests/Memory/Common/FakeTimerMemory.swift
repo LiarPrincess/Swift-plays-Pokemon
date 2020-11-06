@@ -2,12 +2,11 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import XCTest
 @testable import GameBoyKit
 
-extension XCTestCase {
-
-  func createLcd(interrupts: Interrupts? = nil) -> Lcd {
-    return Lcd(interrupts: interrupts ?? Interrupts())
-  }
+class FakeTimerMemory: TimerMemory {
+  var div  = UInt8()
+  var tima = UInt8()
+  var tma  = UInt8()
+  var tac  = UInt8()
 }

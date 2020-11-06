@@ -10,7 +10,7 @@ private let startValue: UInt8 = 5
 /// Value that will be written at the last address in given range
 private let endValue: UInt8 = 6
 
-class MemoryReadTests: XCTestCase {
+class MemoryReadTests: MemoryTestCase {
 
   func test_bootrom() {
     let range = MemoryMap.bootrom
@@ -56,7 +56,7 @@ class MemoryReadTests: XCTestCase {
   }
 
   func test_videoRam() {
-    let lcd = FakeLcd()
+    let lcd = FakeLcdMemory()
     let memory = self.createMemory(lcd: lcd)
 
     let range = MemoryMap.videoRam
@@ -102,7 +102,7 @@ class MemoryReadTests: XCTestCase {
   }
 
   func test_oam() {
-    let lcd = FakeLcd()
+    let lcd = FakeLcdMemory()
     let memory = self.createMemory(lcd: lcd)
 
     let range = MemoryMap.oam
@@ -132,7 +132,7 @@ class MemoryReadTests: XCTestCase {
   }
 
   func test_timer() {
-    let timer  = FakeTimerMemory()
+    let timer = FakeTimerMemory()
     let memory = self.createMemory(timer: timer)
 
     timer.div = 4
@@ -150,7 +150,7 @@ class MemoryReadTests: XCTestCase {
 
   // swiftlint:disable:next function_body_length
   func test_lcdMemory() {
-    let lcd    = FakeLcd()
+    let lcd = FakeLcdMemory()
     let memory = self.createMemory(lcd: lcd)
 
     var value: UInt8 = 0
