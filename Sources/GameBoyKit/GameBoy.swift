@@ -102,8 +102,8 @@ public final class GameBoy {
 
     self.tickCpu(cycles: cycles)
 
-    // if we stopped at the last cycle of the frame, then
-    // run 1 bonus instruction to actually 'tick' it
+    // If we stopped at the last cycle of the current frame,
+    // we need to run 1 bonus instruction to actually 'tick' it
     if self.frameProgress == Lcd.Constants.cyclesPerFrame {
       self.tickCpu(cycles: 1)
     }

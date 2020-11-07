@@ -108,7 +108,6 @@
 		OBJ_199 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Memory.swift */; };
 		OBJ_200 /* MemoryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* MemoryBuffer.swift */; };
 		OBJ_201 /* MemoryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* MemoryMap.swift */; };
-		OBJ_203 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Operators.swift */; };
 		OBJ_210 /* BlarggRomDumps.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* BlarggRomDumps.swift */; };
 		OBJ_211 /* BlarggRoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* BlarggRoms.swift */; };
 		OBJ_212 /* BlarggTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* BlarggTests.swift */; };
@@ -330,7 +329,6 @@
 		OBJ_67 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		OBJ_68 /* MemoryBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBuffer.swift; sourceTree = "<group>"; };
 		OBJ_69 /* MemoryMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMap.swift; sourceTree = "<group>"; };
-		OBJ_71 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		OBJ_74 /* BlarggRomDumps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggRomDumps.swift; sourceTree = "<group>"; };
 		OBJ_75 /* BlarggRoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggRoms.swift; sourceTree = "<group>"; };
 		OBJ_76 /* BlarggTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggTests.swift; sourceTree = "<group>"; };
@@ -529,6 +527,16 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		9067C75A25574328007991FC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_130 /* String+padTests.swift */,
+				OBJ_106 /* Data+UIntTests.swift */,
+				OBJ_131 /* UInt+radixFormatTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		90F681F82556AA1900EBD803 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,7 +621,6 @@
 				OBJ_44 /* GameboyInput.swift */,
 				OBJ_42 /* Extensions.swift */,
 				OBJ_18 /* GameBoyKit.h */,
-				OBJ_71 /* Operators.swift */,
 				OBJ_19 /* Info.plist */,
 			);
 			name = GameBoyKit;
@@ -809,10 +816,8 @@
 				OBJ_118 /* IO */,
 				OBJ_121 /* Lcd */,
 				OBJ_124 /* Memory */,
+				9067C75A25574328007991FC /* Extensions */,
 				OBJ_92 /* Info.plist */,
-				OBJ_106 /* Data+UIntTests.swift */,
-				OBJ_130 /* String+padTests.swift */,
-				OBJ_131 /* UInt+radixFormatTests.swift */,
 			);
 			name = GameBoyKitTests;
 			path = Tests/GameBoyKitTests;
@@ -957,7 +962,7 @@
 					};
 				};
 			};
-			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Swift plays pokemon" */;
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Swift plays Pokemon" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1097,7 +1102,6 @@
 				90427E0825548FEB007A9E9D /* LcdControl.swift in Sources */,
 				OBJ_200 /* MemoryBuffer.swift in Sources */,
 				OBJ_201 /* MemoryMap.swift in Sources */,
-				OBJ_203 /* Operators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1624,7 +1628,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_2 /* Build configuration list for PBXProject "Swift plays pokemon" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "Swift plays Pokemon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_3 /* Debug */,

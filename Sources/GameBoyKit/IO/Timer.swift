@@ -12,7 +12,7 @@ public final class Timer: TimerMemory {
   /// Number of div tick to increment
   internal static let divMax = Cpu.clockSpeed / Timer.divFrequency // 256
 
-  private let interrupts: Interrupts
+  private unowned let interrupts: Interrupts
 
   internal init(interrupts: Interrupts) {
     self.interrupts = interrupts

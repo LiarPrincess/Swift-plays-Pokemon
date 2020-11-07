@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "Swift plays pokemon",
+  name: "Swift plays Pokemon",
   platforms: [
     .macOS(.v10_11)
   ],

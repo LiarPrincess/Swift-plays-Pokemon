@@ -8,11 +8,11 @@ import Foundation
 
 extension String {
 
-  public func padLeft(toLength newLength: Int) -> String {
+  internal func padLeft(toLength newLength: Int) -> String {
     return self.createPadding(newLength) + self
   }
 
-  public func padRight(toLength newLength: Int) -> String {
+  internal func padRight(toLength newLength: Int) -> String {
     return self + self.createPadding(newLength)
   }
 
@@ -33,19 +33,19 @@ extension String {
 
 extension UInt8 {
 
-  public var dec: String {
+  internal var dec: String {
     let s = String(self, radix: 10, uppercase: false)
     let padding = String(repeating: " ", count: 3 - s.count)
     return "\(padding)\(s)"
   }
 
-  public var hex: String  {
+  internal var hex: String  {
     let s = String(self, radix: 16, uppercase: false)
     let padding = String(repeating: "0", count: 2 - s.count)
     return "0x\(padding)\(s)"
   }
 
-  public var bin: String  {
+  internal var bin: String  {
     let s = String(self, radix: 2, uppercase: false)
     let padding = String(repeating: "0", count: 8 - s.count)
     return "0b\(padding)\(s)"
@@ -54,19 +54,19 @@ extension UInt8 {
 
 extension UInt16 {
 
-  public var dec: String {
+  internal var dec: String {
     let s = String(self, radix: 10, uppercase: false)
     let padding = String(repeating: " ", count: 5 - s.count)
     return "\(padding)\(s)"
   }
 
-  public var hex: String  {
+  internal var hex: String  {
     let s = String(self, radix: 16, uppercase: false)
     let padding = String(repeating: "0", count: 4 - s.count)
     return "0x\(padding)\(s)"
   }
 
-  public var bin: String  {
+  internal var bin: String  {
     let s = String(self, radix: 2, uppercase: false)
     let padding = String(repeating: "0", count: 16 - s.count)
     return "0b\(padding)\(s)"
@@ -77,16 +77,7 @@ extension UInt16 {
 
 extension Data {
 
-  internal init(memoryRange range: ClosedRange<UInt16>) {
-    self.init(count: range.count)
-  }
-
-  public subscript(index: UInt8) -> UInt8 {
-    get { return self[Int(index)] }
-    set { self[Int(index)] = newValue }
-  }
-
-  public subscript(index: UInt16) -> UInt8 {
+  internal subscript(index: UInt16) -> UInt8 {
     get { return self[Int(index)] }
     set { self[Int(index)] = newValue }
   }
@@ -97,17 +88,17 @@ extension Data {
 extension Range {
 
   /// First element included in range
-  public var start: Bound { return self.lowerBound }
+  internal var start: Bound { return self.lowerBound }
 
   /// Last element included in range
-  public var end: Bound { return self.upperBound }
+  internal var end: Bound { return self.upperBound }
 }
 
 extension ClosedRange {
 
   /// First element included in range
-  public var start: Bound { return self.lowerBound }
+  internal var start: Bound { return self.lowerBound }
 
   /// Last element included in range
-  public var end: Bound { return self.upperBound }
+  internal var end: Bound { return self.upperBound }
 }

@@ -27,7 +27,7 @@ public final class Joypad: JoypadMemory {
     get { return self._value }
     set {
       // 0 = Select
-      let isButtons    = !isSet(newValue, mask: buttonsMask)
+      let isButtons = !isSet(newValue, mask: buttonsMask)
       let isDirections = !isSet(newValue, mask: directionKeysMask)
 
       // both true or both false? -> ignore
