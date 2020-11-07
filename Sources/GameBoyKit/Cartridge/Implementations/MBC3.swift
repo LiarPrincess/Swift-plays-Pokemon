@@ -14,13 +14,13 @@ internal struct MBC3: Cartridge, CartridgeMixin {
   internal var ram: Data
 
   /// Offset to selected 0000-3FFF bank.
-  internal private(set) var romLowerBankStart = Int(MemoryMap.rom0.start)
+  internal let romLowerBankStart = Int(MemoryMap.rom0.start)
   /// Offset to selected 4000-7FFF bank.
   internal private(set) var romUpperBankStart = Int(MemoryMap.rom1.start)
   /// Offset to selected ram bank.
   internal private(set) var ramBankStart = 0
 
-  // We have MBC, so we do support switching upper rom bank.
+  /// We have MBC, so we do support switching upper rom bank.
   private var romBank = firstRomBank
   /// RAM or RTC? RTC is not supported.
   private var ramRtcSelect = UInt8()
@@ -52,7 +52,6 @@ internal struct MBC3: Cartridge, CartridgeMixin {
     // 2000-3FFF - ROM Bank Number
     case 0x2000...0x3fff:
       self.romBank = max(firstRomBank, Int(value))
-      self.romLowerBankStart = 0x0000
       self.romUpperBankStart = self.romBank * CartridgeConstants.romBankSizeInBytes
 
     // 4000-5FFF - RAM Bank Number - or - RTC Register Select

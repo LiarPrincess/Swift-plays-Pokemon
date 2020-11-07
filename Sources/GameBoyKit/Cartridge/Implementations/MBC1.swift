@@ -4,6 +4,8 @@
 
 import Foundation
 
+private let firstRomBank = 1
+
 /// http://bgb.bircd.org/pandocs.htm#mbc1max2mbyteromandor32kbyteram
 internal struct MBC1: Cartridge, CartridgeMixin {
 
@@ -55,19 +57,19 @@ internal struct MBC1: Cartridge, CartridgeMixin {
 
     // 2000-3FFF - ROM Bank Number (5 lower bits)
     case 0x2000...0x3fff:
-      let value5 = value & 0b1_1111
-      self.bank1 = max(1, Int(value5))
+      let value5LowestBits = value & 0b1_1111
+      self.bank1 = max(firstRomBank, Int(value5LowestBits))
       self.updateRomBankStart()
 
     // 4000-5FFF - RAM Bank Number or ROM Bank Number (2 upper bits)
     case 0x4000...0x5fff:
-      self.bank2 = Int(value & 0x11)
+      self.bank2 = Int(value & 0b11)
       self.updateRomBankStart()
       self.updateRamBankStart()
 
     // 6000-7FFF - ROM/RAM Mode Select
     case 0x6000...0x7fff:
-      self.mode = (value & 0b1) == 0b0
+      self.mode = (value & 0b1) == 0b1
       self.updateRomBankStart()
       self.updateRamBankStart()
 

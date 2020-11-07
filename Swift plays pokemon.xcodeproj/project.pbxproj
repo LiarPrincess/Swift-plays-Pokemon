@@ -56,6 +56,7 @@
 		90427EBC25556202007A9E9D /* CartridgeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427EBB25556202007A9E9D /* CartridgeHeader.swift */; };
 		9063A2542556B0D800C36D84 /* CartridgeRamSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F6823D2556AC7800EBD803 /* CartridgeRamSize.swift */; };
 		9063A25C2556EE0E00C36D84 /* CartridgeMixin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063A25B2556EE0E00C36D84 /* CartridgeMixin.swift */; };
+		9063A2772557239900C36D84 /* MBC1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063A2692557231800C36D84 /* MBC1Tests.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
 		90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681DD2556A69700EBD803 /* CartridgeType.swift */; };
 		90F682072556AA7A00EBD803 /* BootromError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681F92556AA6400EBD803 /* BootromError.swift */; };
@@ -242,6 +243,7 @@
 		90427EA725555E2D007A9E9D /* LinkCable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCable.swift; sourceTree = "<group>"; };
 		90427EBB25556202007A9E9D /* CartridgeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeHeader.swift; sourceTree = "<group>"; };
 		9063A25B2556EE0E00C36D84 /* CartridgeMixin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeMixin.swift; sourceTree = "<group>"; };
+		9063A2692557231800C36D84 /* MBC1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC1Tests.swift; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
 		90F681DD2556A69700EBD803 /* CartridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeType.swift; sourceTree = "<group>"; };
 		90F681F92556AA6400EBD803 /* BootromError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromError.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 				9024C37A2555F6590094AA47 /* Common */,
 				9024C34A2555E6320094AA47 /* CartridgeHeaderTests.swift */,
 				9024C3652555F6090094AA47 /* NoMBCTests.swift */,
+				9063A2692557231800C36D84 /* MBC1Tests.swift */,
 				90F681D52556A08C00EBD803 /* MBC3Tests.swift */,
 			);
 			path = Cartridge;
@@ -1122,6 +1125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				9063A2772557239900C36D84 /* MBC1Tests.swift in Sources */,
 				OBJ_229 /* CpuArithmeticTests.swift in Sources */,
 				OBJ_230 /* CpuBitTests.swift in Sources */,
 				OBJ_231 /* CpuCallTests.swift in Sources */,

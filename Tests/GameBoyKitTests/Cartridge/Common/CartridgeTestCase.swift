@@ -7,6 +7,12 @@ import XCTest
 
 class CartridgeTestCase: XCTestCase {
 
+  // MARK: - Has type
+
+  func hasType(header: CartridgeHeader, allowedTypes: [CartridgeType]) -> Bool {
+    return allowedTypes.contains { $0.headerValue == header.type.headerValue }
+  }
+
   // MARK: - Create rom
 
   enum DestinationCode: UInt8 {
