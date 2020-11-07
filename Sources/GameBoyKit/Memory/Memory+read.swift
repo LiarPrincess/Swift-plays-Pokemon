@@ -19,12 +19,14 @@ extension Memory {
     case MemoryMap.bootrom:
       switch self.bootrom {
       case .executing(let bootrom): return bootrom.read(address)
-      case .finished: return self.cartridge.readRom(address)
+      case .finished: return self.cartridge.readRomLowerBank(address)
       }
 
     // cartridge
-    case MemoryMap.rom0, MemoryMap.rom1:
-      return self.cartridge.readRom(address)
+    case MemoryMap.rom0:
+      return self.cartridge.readRomLowerBank(address)
+    case MemoryMap.rom1:
+      return self.cartridge.readRomUpperBank(address)
     case MemoryMap.externalRam:
       return self.cartridge.readRam(address)
 

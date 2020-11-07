@@ -17,17 +17,15 @@ public class Cartridge: CartridgeMemory {
 
   /// Offset to selected 0000-3FFF bank.
   internal var romLowerBankStart = Int(MemoryMap.rom0.start)
-
   /// Offset to selected 4000-7FFF bank.
   internal var romUpperBankStart = Int(MemoryMap.rom1.start)
-
   /// Offset to selected ram bank.
   internal var ramBankStart = 0
 
-  internal init(header: CartridgeHeader, rom: Data) throws {
+  internal init(header: CartridgeHeader, rom: Data) {
     self.header = header
     self.rom = rom
-    self.ram = MemoryBuffer(count: header.ramSize)
+    self.ram = MemoryBuffer(count: header.ramSize.byteCount)
   }
 
   deinit {
@@ -36,26 +34,16 @@ public class Cartridge: CartridgeMemory {
 
   // MARK: - Rom
 
-  /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00);
-  /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
-  public func readRom(_ address: UInt16) -> UInt8 {
-    switch address {
-    case MemoryMap.rom0:
-      let index = self.romLowerBankStart | (Int(address) & 0x3fff)
-      return self.rom[index]
-
-    case MemoryMap.rom1:
-      let index = self.romUpperBankStart | (Int(address) & 0x3fff)
-      return self.rom[index]
-
-    default:
-      print("Reading from invalid ROM address: \(address.hex).")
-      return 0
-    }
+  public func readRomLowerBank(_ address: UInt16) -> UInt8 {
+    let index = self.romLowerBankStart | (Int(address) & 0x3fff)
+    return self.rom[index]
   }
 
-  /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00);
-  /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
+  public func readRomUpperBank(_ address: UInt16) -> UInt8 {
+    let index = self.romUpperBankStart | (Int(address) & 0x3fff)
+    return self.rom[index]
+  }
+
   internal func writeRom(_ address: UInt16, value: UInt8) {
     // to override
   }
@@ -64,24 +52,29 @@ public class Cartridge: CartridgeMemory {
 
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
   public func readRam(_ address: UInt16) -> UInt8 {
-    if self.ram.isEmpty { return CartridgeConstants.defaultRam }
+    if self.ram.isEmpty {
+      return CartridgeConstants.defaultRam
+    }
 
     let index = self.translateRamAddressToRamIndex(address)
-    assert(index < self.ram.count)
     return self.ram[index]
   }
 
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
   internal func writeRam(_ address: UInt16, value: UInt8) {
-    if self.ram.isEmpty { return }
+    if self.ram.isEmpty {
+      return
+    }
 
     let index = self.translateRamAddressToRamIndex(address)
-    assert(index < self.ram.count)
     self.ram[index] = value
   }
 
   private func translateRamAddressToRamIndex(_ address: UInt16) -> Int {
     let bankOffset = address - MemoryMap.externalRam.start
-    return self.ramBankStart + Int(bankOffset)
+    let index = self.ramBankStart + Int(bankOffset)
+
+    assert(index < self.ram.count)
+    return index
   }
 }

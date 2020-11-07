@@ -17,7 +17,12 @@ class FakeCartridgeMemory: CartridgeMemory {
     return Data(count: count)
   }()
 
-  func readRom(_ address: UInt16) -> UInt8 {
+  func readRomLowerBank(_ address: UInt16) -> UInt8 {
+    return self.rom[address - MemoryMap.rom0.start]
+  }
+
+  func readRomUpperBank(_ address: UInt16) -> UInt8 {
+    // 'rom0' not 'rom1'!
     return self.rom[address - MemoryMap.rom0.start]
   }
 
