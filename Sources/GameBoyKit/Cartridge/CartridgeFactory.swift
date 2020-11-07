@@ -4,40 +4,6 @@
 
 import Foundation
 
-// swiftlint:disable cyclomatic_complexity
-
-public enum CartridgeFactoryError: Error, CustomStringConvertible {
-  case invalidChecksum(UInt8)
-  case unsupportedRomSize(UInt8)
-  case unsupportedRamSize(UInt8)
-  case unsupportedType(UInt8)
-  case romSizeNotConsistentWithHeader(size: Int, headerSize: Int)
-
-  public var description: String {
-    switch self {
-    case let .invalidChecksum(value):
-      let range = CartridgeMap.headerChecksumRange
-      let compare = CartridgeConstants.checksumCompare
-      return "Checksum (bytes: \(range.start.hex)-\(range.end.hex)) is not " +
-             "valid (it is \(value.hex), but it should be \(compare.hex))."
-
-    case let .unsupportedRomSize(value):
-      let address = CartridgeMap.romSize
-      return "Unsupported ROM size \(value.hex) (at: \(address.hex))."
-
-    case let .unsupportedRamSize(value):
-      let address = CartridgeMap.ramSize
-      return "Unsupported RAM size \(value.hex) (at: \(address.hex))."
-
-    case let .unsupportedType(type):
-      return "ROM type: '\(type.hex)' is not currently supported."
-
-    case let .romSizeNotConsistentWithHeader(size, headerSize):
-      return "Expected \(headerSize) bytes of cartridge ROM, got \(size)."
-    }
-  }
-}
-
 public enum CartridgeFactory {
 
   /// This function creates new cartridge from given data.
