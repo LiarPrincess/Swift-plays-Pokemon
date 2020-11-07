@@ -20,7 +20,7 @@ public final class Memory: CpuMemory {
   internal let linkCable: LinkCable
 
   internal var bootrom: BootromState
-  internal let cartridge: CartridgeMemory
+  internal var cartridge: CartridgeMemory
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)

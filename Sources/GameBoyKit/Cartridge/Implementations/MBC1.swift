@@ -4,12 +4,23 @@
 
 import Foundation
 
-internal final class MBC1: Cartridge {
+/// http://bgb.bircd.org/pandocs.htm#mbc1max2mbyteromandor32kbyteram
+internal struct MBC1: Cartridge, CartridgeMixin {
+
+  internal let header: CartridgeHeader
+  internal let rom: Data
+  internal var ram: Data
+
+  /// Offset to selected 0000-3FFF bank.
+  internal private(set) var romLowerBankStart = Int(MemoryMap.rom0.start)
+  /// Offset to selected 4000-7FFF bank.
+  internal private(set) var romUpperBankStart = Int(MemoryMap.rom1.start)
+  /// Offset to selected ram bank.
+  internal private(set) var ramBankStart = 0
 
   /// The 5-bit BANK1 register is used as the lower 5 bits of the ROM
   /// bank number when the CPU accesses the 4000-7FFF memory area.
   private var bank1: Int = 1
-
   /// The 2-bit BANK2 register can be used as the upper bits
   /// of the ROM bank number, or as the 2-bit RAM bank number.
   private var bank2: Int = 0
@@ -17,11 +28,25 @@ internal final class MBC1: Cartridge {
   /// true  - BANK2 affects 0000-3FFF, 4000-7FFF, A000-BFFF
   /// false - BANK2 affects 4000-7FFF + RAM
   private var mode = false
-
-  ///  ram_en: bool
   private var isRamEnabled = false
 
-  override internal func writeRom(_ address: UInt16, value: UInt8) {
+  internal init(header: CartridgeHeader, rom: Data) {
+    self.header = header
+    self.rom = rom
+    self.ram = Data(count: header.ramSize.byteCount)
+  }
+
+  // MARK: - Rom
+
+  internal func readRomLowerBank(_ address: UInt16) -> UInt8 {
+    return self.readRomLowerBankMixin(address)
+  }
+
+  internal func readRomUpperBank(_ address: UInt16) -> UInt8 {
+    return self.readRomUpperBankMixin(address)
+  }
+
+  internal mutating func writeRom(_ address: UInt16, value: UInt8) {
     switch address {
 
     // 0000-1FFF - RAM Enable
@@ -51,7 +76,7 @@ internal final class MBC1: Cartridge {
     }
   }
 
-  private func updateRomBankStart() {
+  private mutating func updateRomBankStart() {
     let upperBits = self.bank2 << 5
     let lowerBits = self.bank1
 
@@ -62,21 +87,27 @@ internal final class MBC1: Cartridge {
     self.romUpperBankStart = upperBank * CartridgeConstants.romBankSizeInBytes
   }
 
-  private func updateRamBankStart() {
+  private mutating func updateRamBankStart() {
     let bank = self.mode ? self.bank2 : 0
     self.ramBankStart = bank * CartridgeConstants.ramBankSizeInBytes
   }
 
+  // MARK: - Ram
+
   /// (mooneye) When RAM access is disabled, all reads return 0xFF.
-  override internal func readRam(_ address: UInt16) -> UInt8 {
-    return self.isRamEnabled ? super.readRam(address) : CartridgeConstants.defaultRam
+  internal func readRam(_ address: UInt16) -> UInt8 {
+    if self.isRamEnabled {
+      return self.readRamMixin(address)
+    }
+
+    return CartridgeConstants.defaultRam
   }
 
   /// (mooneye) When RAM access is disabled, all writes
   /// to the external RAM area 0xA000-0xBFFF are ignored.
-  override internal func writeRam(_ address: UInt16, value: UInt8) {
+  internal mutating func writeRam(_ address: UInt16, value: UInt8) {
     if self.isRamEnabled {
-      super.writeRam(address, value: value)
+      self.writeRamMixin(address, value: value)
     }
   }
 }
