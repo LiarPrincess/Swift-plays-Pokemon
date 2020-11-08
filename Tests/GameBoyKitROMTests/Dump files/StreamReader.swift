@@ -18,11 +18,10 @@ class StreamReader  {
 
   private var isEof = false
 
-  init?(url:        URL,
-        delimiter:  String = "\n",
-        encoding:   String.Encoding = .utf8,
+  init?(url: URL,
+        delimiter: String = "\n",
+        encoding: String.Encoding = .utf8,
         bufferSize: Int = 4_096) {
-
     guard let fileHandle = FileHandle(forReadingAtPath: url.path),
           let delimiterData = delimiter.data(using: encoding) else {
         return nil

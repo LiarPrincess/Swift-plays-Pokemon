@@ -8,11 +8,11 @@ import Foundation
 
 extension String {
 
-  internal func padLeft(toLength newLength: Int) -> String {
+  public func padLeft(toLength newLength: Int) -> String {
     return self.createPadding(newLength) + self
   }
 
-  internal func padRight(toLength newLength: Int) -> String {
+  public func padRight(toLength newLength: Int) -> String {
     return self + self.createPadding(newLength)
   }
 
@@ -33,19 +33,19 @@ extension String {
 
 extension UInt8 {
 
-  internal var dec: String {
+  public var dec: String {
     let s = String(self, radix: 10, uppercase: false)
     let padding = String(repeating: " ", count: 3 - s.count)
     return "\(padding)\(s)"
   }
 
-  internal var hex: String  {
+  public var hex: String  {
     let s = String(self, radix: 16, uppercase: false)
     let padding = String(repeating: "0", count: 2 - s.count)
     return "0x\(padding)\(s)"
   }
 
-  internal var bin: String  {
+  public var bin: String  {
     let s = String(self, radix: 2, uppercase: false)
     let padding = String(repeating: "0", count: 8 - s.count)
     return "0b\(padding)\(s)"
@@ -54,19 +54,19 @@ extension UInt8 {
 
 extension UInt16 {
 
-  internal var dec: String {
+  public var dec: String {
     let s = String(self, radix: 10, uppercase: false)
     let padding = String(repeating: " ", count: 5 - s.count)
     return "\(padding)\(s)"
   }
 
-  internal var hex: String  {
+  public var hex: String  {
     let s = String(self, radix: 16, uppercase: false)
     let padding = String(repeating: "0", count: 4 - s.count)
     return "0x\(padding)\(s)"
   }
 
-  internal var bin: String  {
+  public var bin: String  {
     let s = String(self, radix: 2, uppercase: false)
     let padding = String(repeating: "0", count: 16 - s.count)
     return "0b\(padding)\(s)"
@@ -77,7 +77,7 @@ extension UInt16 {
 
 extension Data {
 
-  internal subscript(index: UInt16) -> UInt8 {
+  public subscript(index: UInt16) -> UInt8 {
     get { return self[Int(index)] }
     set { self[Int(index)] = newValue }
   }
@@ -88,17 +88,17 @@ extension Data {
 extension Range {
 
   /// First element included in range
-  internal var start: Bound { return self.lowerBound }
+  public var start: Bound { return self.lowerBound }
 
   /// Last element included in range
-  internal var end: Bound { return self.upperBound }
+  public var end: Bound { return self.upperBound }
 }
 
 extension ClosedRange {
 
   /// First element included in range
-  internal var start: Bound { return self.lowerBound }
+  public var start: Bound { return self.lowerBound }
 
   /// Last element included in range
-  internal var end: Bound { return self.upperBound }
+  public var end: Bound { return self.upperBound }
 }

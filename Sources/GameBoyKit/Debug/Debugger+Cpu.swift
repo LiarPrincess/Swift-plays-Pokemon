@@ -54,7 +54,7 @@ extension Debugger {
   }
 
   private func printUnprefixedOpcode(_ opcode: UnprefixedOpcode) {
-    let operands: String = {
+    let operandsRaw: String = {
       switch unprefixedLengths[Int(opcode.rawValue)] {
       case 2: return self.next8(pc: self.cpu.pc).hex
       case 3: return self.next16(pc: self.cpu.pc).hex
@@ -64,7 +64,8 @@ extension Debugger {
 
     let cycle = gameBoy.cpu.cycle
     let opcodeDesc = String(describing: opcode).padRight(toLength: 11)
-    print("\(cpu.pc.hex): \(opcodeDesc) \(operands) (cycle: \(cycle))")
+    let operands = operandsRaw.padRight(toLength: 6)
+    print("\(cpu.pc.hex): \(opcodeDesc)\(operands) (cycle: \(cycle))")
   }
 
   private func printPrefixedOpcode() {
@@ -74,8 +75,9 @@ extension Debugger {
     }
 
     let pc = self.cpu.pc + 1
-    let opcodeDesc = String(describing: opcode)
-    print("\(pc.hex): \(opcodeDesc.padLeft(toLength: 11))")
+    let cycle = gameBoy.cpu.cycle
+    let opcodeDesc = String(describing: opcode).padRight(toLength: 11)
+    print("\(pc.hex): \(opcodeDesc)       (cycle: \(cycle), prefixed opcode)")
   }
 
   // MARK: - Print opcode details

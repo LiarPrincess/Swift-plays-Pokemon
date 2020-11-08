@@ -4,7 +4,7 @@
 
 public final class Debugger {
 
-  public enum DebugMode {
+  public enum Mode {
     /// Print nothing
     case none
     /// Print only executed opcodes
@@ -15,10 +15,10 @@ public final class Debugger {
     case full
   }
 
-  internal var gameBoy:   GameBoy
-  internal var cpu:       Cpu    { return gameBoy.cpu }
-  internal var memory:    Memory { return gameBoy.memory }
-  internal var lcd:       Lcd { return gameBoy.lcd }
+  internal var gameBoy: GameBoy
+  internal var cpu: Cpu { return gameBoy.cpu }
+  internal var memory: Memory { return gameBoy.memory }
+  internal var lcd: Lcd { return gameBoy.lcd }
 
   public init(gameBoy: GameBoy) {
     self.gameBoy = gameBoy
@@ -26,7 +26,7 @@ public final class Debugger {
 
   // MARK: - Run
 
-  public func run(mode: DebugMode,
+  public func run(mode: Mode,
                   instructions: Int64 = .max,
                   untilPC pc: UInt16 = .max) {
     if mode == .none {

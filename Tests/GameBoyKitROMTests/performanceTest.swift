@@ -6,9 +6,13 @@ import Foundation
 import GameBoyKit
 
 private let frameCount: Int64 = 60
+private let romUrl = romsDir.appendingPathComponent("Tetris.gb")
 
-internal func performanceTest() {
-  let gameBoy = GameBoy(input: TestInput(), bootrom: .dmg, cartridge: createCartridge())
+func performanceTest() {
+  let bootrom = Bootrom.dmg
+  let cartridge = openRom()
+  let input = DummyInputProvider()
+  let gameBoy = GameBoy(bootrom: bootrom, cartridge: cartridge, input: input)
 
   let start = DispatchTime.now()
   for _ in 0..<frameCount {
@@ -33,11 +37,11 @@ Finished
 """)
 }
 
-private func createCartridge() -> Cartridge {
-  let count = MemoryMap.rom0.count + MemoryMap.rom1.count
-  var rom = Data(count: count)
-  rom[0x014d] = 231 // just to make checksum happy
-
-  // swiftlint:disable:next force_try
-  return try! CartridgeFactory.fromData(rom)
+private func openRom() -> Cartridge {
+  do {
+    let data = try Data(contentsOf: romUrl)
+    return try CartridgeFactory.create(data: data)
+  } catch  {
+    fatalError("Unable to open: '\(romUrl)'")
+  }
 }

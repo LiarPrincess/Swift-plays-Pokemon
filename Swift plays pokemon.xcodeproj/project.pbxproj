@@ -21,6 +21,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		902341B825583CB200B72EFB /* DumpFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902341B725583CB200B72EFB /* DumpFile.swift */; };
+		902341DD255844F500B72EFB /* romsDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902341DC255844F500B72EFB /* romsDir.swift */; };
+		902341F3255845AB00B72EFB /* openDumpFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902341F2255845AB00B72EFB /* openDumpFile.swift */; };
+		902341FF255845EE00B72EFB /* openDumpDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902341FE255845EE00B72EFB /* openDumpDir.swift */; };
+		9023420B2558464500B72EFB /* runDump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023420A2558464500B72EFB /* runDump.swift */; };
 		9024C32C25559FAA0094AA47 /* NoMBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024C32B25559FAA0094AA47 /* NoMBC.swift */; };
 		9024C33425559FB60094AA47 /* MBC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024C33325559FB60094AA47 /* MBC1.swift */; };
 		9024C33C2555A0810094AA47 /* MBC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024C33B2555A0810094AA47 /* MBC3.swift */; };
@@ -57,6 +62,9 @@
 		9063A2542556B0D800C36D84 /* CartridgeRamSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F6823D2556AC7800EBD803 /* CartridgeRamSize.swift */; };
 		9063A25C2556EE0E00C36D84 /* CartridgeMixin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063A25B2556EE0E00C36D84 /* CartridgeMixin.swift */; };
 		9063A2772557239900C36D84 /* MBC1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063A2692557231800C36D84 /* MBC1Tests.swift */; };
+		9067C7792558017B007991FC /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; };
+		9067C77A2558017B007991FC /* GameBoyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9067C7942558093C007991FC /* memoryAddressesToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9067C78D2558088B007991FC /* memoryAddressesToTest.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
 		90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681DD2556A69700EBD803 /* CartridgeType.swift */; };
 		90F682072556AA7A00EBD803 /* BootromError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681F92556AA6400EBD803 /* BootromError.swift */; };
@@ -107,16 +115,11 @@
 		OBJ_199 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Memory.swift */; };
 		OBJ_200 /* MemoryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* MemoryBuffer.swift */; };
 		OBJ_201 /* MemoryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* MemoryMap.swift */; };
-		OBJ_210 /* BlarggRomDumps.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* BlarggRomDumps.swift */; };
-		OBJ_211 /* BlarggRoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* BlarggRoms.swift */; };
 		OBJ_212 /* BlarggTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* BlarggTests.swift */; };
 		OBJ_213 /* BootromTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* BootromTests.swift */; };
-		OBJ_214 /* SavedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* SavedState.swift */; };
+		OBJ_214 /* DumpFileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* DumpFileContent.swift */; };
 		OBJ_215 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* StreamReader.swift */; };
-		OBJ_216 /* compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* compare.swift */; };
-		OBJ_217 /* listStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* listStates.swift */; };
-		OBJ_218 /* loadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* loadState.swift */; };
-		OBJ_219 /* TestInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* TestInput.swift */; };
+		OBJ_219 /* DummyInputProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* DummyInputProvider.swift */; };
 		OBJ_220 /* TetrisTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* TetrisTest.swift */; };
 		OBJ_221 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* main.swift */; };
 		OBJ_222 /* performanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* performanceTest.swift */; };
@@ -179,6 +182,13 @@
 			remoteGlobalIDString = "Swift plays pokemon::GameBoyKit";
 			remoteInfo = GameBoyKit;
 		};
+		9067C77B2558017B007991FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Swift plays pokemon::GameBoyKit";
+			remoteInfo = GameBoyKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -202,9 +212,25 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9067C77D2558017B007991FC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9067C77A2558017B007991FC /* GameBoyKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		902341B725583CB200B72EFB /* DumpFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpFile.swift; sourceTree = "<group>"; };
+		902341DC255844F500B72EFB /* romsDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = romsDir.swift; sourceTree = "<group>"; };
+		902341F2255845AB00B72EFB /* openDumpFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = openDumpFile.swift; sourceTree = "<group>"; };
+		902341FE255845EE00B72EFB /* openDumpDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = openDumpDir.swift; sourceTree = "<group>"; };
+		9023420A2558464500B72EFB /* runDump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = runDump.swift; sourceTree = "<group>"; };
 		9024C32B25559FAA0094AA47 /* NoMBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMBC.swift; sourceTree = "<group>"; };
 		9024C33325559FB60094AA47 /* MBC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC1.swift; sourceTree = "<group>"; };
 		9024C33B2555A0810094AA47 /* MBC3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3.swift; sourceTree = "<group>"; };
@@ -242,6 +268,7 @@
 		90427EBB25556202007A9E9D /* CartridgeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeHeader.swift; sourceTree = "<group>"; };
 		9063A25B2556EE0E00C36D84 /* CartridgeMixin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeMixin.swift; sourceTree = "<group>"; };
 		9063A2692557231800C36D84 /* MBC1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC1Tests.swift; sourceTree = "<group>"; };
+		9067C78D2558088B007991FC /* memoryAddressesToTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoryAddressesToTest.swift; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
 		90F681DD2556A69700EBD803 /* CartridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeType.swift; sourceTree = "<group>"; };
 		90F681F92556AA6400EBD803 /* BootromError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromError.swift; sourceTree = "<group>"; };
@@ -327,16 +354,11 @@
 		OBJ_67 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		OBJ_68 /* MemoryBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBuffer.swift; sourceTree = "<group>"; };
 		OBJ_69 /* MemoryMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMap.swift; sourceTree = "<group>"; };
-		OBJ_74 /* BlarggRomDumps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggRomDumps.swift; sourceTree = "<group>"; };
-		OBJ_75 /* BlarggRoms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggRoms.swift; sourceTree = "<group>"; };
 		OBJ_76 /* BlarggTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlarggTests.swift; sourceTree = "<group>"; };
 		OBJ_78 /* BootromTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromTests.swift; sourceTree = "<group>"; };
-		OBJ_80 /* SavedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedState.swift; sourceTree = "<group>"; };
+		OBJ_80 /* DumpFileContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpFileContent.swift; sourceTree = "<group>"; };
 		OBJ_81 /* StreamReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamReader.swift; sourceTree = "<group>"; };
-		OBJ_82 /* compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = compare.swift; sourceTree = "<group>"; };
-		OBJ_83 /* listStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listStates.swift; sourceTree = "<group>"; };
-		OBJ_84 /* loadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadState.swift; sourceTree = "<group>"; };
-		OBJ_85 /* TestInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInput.swift; sourceTree = "<group>"; };
+		OBJ_85 /* DummyInputProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyInputProvider.swift; sourceTree = "<group>"; };
 		OBJ_87 /* TetrisTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisTest.swift; sourceTree = "<group>"; };
 		OBJ_88 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_89 /* performanceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = performanceTest.swift; sourceTree = "<group>"; };
@@ -350,7 +372,7 @@
 		OBJ_99 /* CpuLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuLogicTests.swift; sourceTree = "<group>"; };
 		"Swift plays pokemon::Code generation::Product" /* Code generation */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Code generation"; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GameBoyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Swift plays pokemon::GameBoyKitROMTests::Product" /* GameBoyKitROMTests */ = {isa = PBXFileReference; lastKnownFileType = text; path = GameBoyKitROMTests; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Swift plays pokemon::GameBoyKitROMTests::Product" /* GameBoyKitROMTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = GameBoyKitROMTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Swift plays pokemon::GameBoyKitTests::Product" /* GameBoyKitTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = GameBoyKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -381,6 +403,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
+				9067C7792558017B007991FC /* GameBoyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +418,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		902341DB255844C900B72EFB /* Dump files */ = {
+			isa = PBXGroup;
+			children = (
+				902341B725583CB200B72EFB /* DumpFile.swift */,
+				OBJ_80 /* DumpFileContent.swift */,
+				OBJ_81 /* StreamReader.swift */,
+				902341FE255845EE00B72EFB /* openDumpDir.swift */,
+				902341F2255845AB00B72EFB /* openDumpFile.swift */,
+				9023420A2558464500B72EFB /* runDump.swift */,
+			);
+			path = "Dump files";
+			sourceTree = "<group>";
+		};
 		9024C32425559F7F0094AA47 /* Implementations */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +569,16 @@
 				OBJ_131 /* UInt+radixFormatTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9067C7F125582452007991FC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				902341DC255844F500B72EFB /* romsDir.swift */,
+				9067C78D2558088B007991FC /* memoryAddressesToTest.swift */,
+				OBJ_85 /* DummyInputProvider.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		90F681F82556AA1900EBD803 /* Header */ = {
@@ -735,47 +781,17 @@
 		OBJ_72 /* GameBoyKitROMTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_73 /* Blargg */,
-				OBJ_77 /* Bootrom */,
-				OBJ_79 /* State */,
-				OBJ_85 /* TestInput.swift */,
-				OBJ_86 /* Tetris */,
+				9067C7F125582452007991FC /* Helpers */,
+				902341DB255844C900B72EFB /* Dump files */,
+				OBJ_78 /* BootromTests.swift */,
+				OBJ_76 /* BlarggTests.swift */,
+				OBJ_87 /* TetrisTest.swift */,
 				OBJ_88 /* main.swift */,
 				OBJ_89 /* performanceTest.swift */,
 			);
 			name = GameBoyKitROMTests;
 			path = Tests/GameBoyKitROMTests;
 			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_73 /* Blargg */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_74 /* BlarggRomDumps.swift */,
-				OBJ_75 /* BlarggRoms.swift */,
-				OBJ_76 /* BlarggTests.swift */,
-			);
-			path = Blargg;
-			sourceTree = "<group>";
-		};
-		OBJ_77 /* Bootrom */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_78 /* BootromTests.swift */,
-			);
-			path = Bootrom;
-			sourceTree = "<group>";
-		};
-		OBJ_79 /* State */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_80 /* SavedState.swift */,
-				OBJ_81 /* StreamReader.swift */,
-				OBJ_82 /* compare.swift */,
-				OBJ_83 /* listStates.swift */,
-				OBJ_84 /* loadState.swift */,
-			);
-			path = State;
-			sourceTree = "<group>";
 		};
 		OBJ_8 /* Code generation */ = {
 			isa = PBXGroup;
@@ -787,14 +803,6 @@
 			name = "Code generation";
 			path = "Sources/Code generation";
 			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_86 /* Tetris */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_87 /* TetrisTest.swift */,
-			);
-			path = Tetris;
-			sourceTree = "<group>";
 		};
 		OBJ_90 /* Tests */ = {
 			isa = PBXGroup;
@@ -902,10 +910,12 @@
 			buildPhases = (
 				OBJ_209 /* Sources */,
 				OBJ_223 /* Frameworks */,
+				9067C77D2558017B007991FC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9067C77C2558017B007991FC /* PBXTargetDependency */,
 			);
 			name = GameBoyKitROMTests;
 			productName = GameBoyKitROMTests;
@@ -1105,19 +1115,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_210 /* BlarggRomDumps.swift in Sources */,
-				OBJ_211 /* BlarggRoms.swift in Sources */,
+				9023420B2558464500B72EFB /* runDump.swift in Sources */,
 				OBJ_212 /* BlarggTests.swift in Sources */,
 				OBJ_213 /* BootromTests.swift in Sources */,
-				OBJ_214 /* SavedState.swift in Sources */,
+				OBJ_214 /* DumpFileContent.swift in Sources */,
 				OBJ_215 /* StreamReader.swift in Sources */,
-				OBJ_216 /* compare.swift in Sources */,
-				OBJ_217 /* listStates.swift in Sources */,
-				OBJ_218 /* loadState.swift in Sources */,
-				OBJ_219 /* TestInput.swift in Sources */,
+				902341DD255844F500B72EFB /* romsDir.swift in Sources */,
+				OBJ_219 /* DummyInputProvider.swift in Sources */,
+				9067C7942558093C007991FC /* memoryAddressesToTest.swift in Sources */,
 				OBJ_220 /* TetrisTest.swift in Sources */,
 				OBJ_221 /* main.swift in Sources */,
+				902341F3255845AB00B72EFB /* openDumpFile.swift in Sources */,
 				OBJ_222 /* performanceTest.swift in Sources */,
+				902341B825583CB200B72EFB /* DumpFile.swift in Sources */,
+				902341FF255845EE00B72EFB /* openDumpDir.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,6 +1195,11 @@
 			isa = PBXTargetDependency;
 			target = "Swift plays pokemon::GameBoyKit" /* GameBoyKit */;
 			targetProxy = 90374A3D25534757008A908D /* PBXContainerItemProxy */;
+		};
+		9067C77C2558017B007991FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Swift plays pokemon::GameBoyKit" /* GameBoyKit */;
+			targetProxy = 9067C77B2558017B007991FC /* PBXContainerItemProxy */;
 		};
 		OBJ_265 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

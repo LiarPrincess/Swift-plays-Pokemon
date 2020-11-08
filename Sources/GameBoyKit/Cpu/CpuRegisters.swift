@@ -97,7 +97,7 @@ public struct CpuRegisters {
   // MARK: - Addressing
 
   /// Names of all of the flag registers
-  internal enum Flag {
+  public enum Flag {
     case zeroFlag
     case subtractFlag
     case halfCarryFlag
@@ -105,7 +105,7 @@ public struct CpuRegisters {
   }
 
   /// Names of all of the single registers
-  internal enum Single {
+  public enum Single {
     case a
     case b
     case c
@@ -117,14 +117,14 @@ public struct CpuRegisters {
   }
 
   /// Names of all of the combined registers
-  internal enum Combined {
+  public enum Combined {
     case af
     case bc
     case de
     case hl
   }
 
-  internal func get(_ f: Flag) -> Bool {
+  public func get(_ f: Flag) -> Bool {
     switch f {
     case .zeroFlag:      return self.zeroFlag
     case .subtractFlag:  return self.subtractFlag
@@ -133,7 +133,7 @@ public struct CpuRegisters {
     }
   }
 
-  internal func get(_ r: Single) -> UInt8 {
+  public func get(_ r: Single) -> UInt8 {
     switch r {
     case .a: return self.a
     case .b: return self.b
@@ -146,7 +146,7 @@ public struct CpuRegisters {
     }
   }
 
-  internal func get(_ rr: Combined) -> UInt16 {
+  public func get(_ rr: Combined) -> UInt16 {
     switch rr {
     case .af: return self.af
     case .bc: return self.bc

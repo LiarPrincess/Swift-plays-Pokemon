@@ -20,9 +20,9 @@ public final class GameBoy {
 
   // MARK: - Init
 
-  public init(input: GameboyInputProvider,
-              bootrom: Bootrom?,
-              cartridge: Cartridge) {
+  public init(bootrom: Bootrom?,
+              cartridge: Cartridge,
+              input: GameboyInputProvider) {
     let interrupts = Interrupts()
     self.lcd = Lcd(interrupts: interrupts)
     self.audio = Audio()

@@ -73,15 +73,13 @@ class CartridgeTestCase: XCTestCase {
   }
 
   private func createRom(header: [UInt8], byteCount: Int) -> Data {
-    var result = Data(count: byteCount)
+    var data = Data(count: byteCount)
 
-    for headerIndex in 0..<header.count {
-      // Rememeber that header starts at '0x0100'
-      let romIndex = 0x0100 + headerIndex
-      result[romIndex] = header[headerIndex]
-    }
+    let headerStart = 0x0100
+    let headerEnd = headerStart + header.count
+    data.replaceSubrange(headerStart..<headerEnd, with: header)
 
-    return result
+    return data
   }
 }
 
