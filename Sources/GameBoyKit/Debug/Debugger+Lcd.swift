@@ -9,44 +9,51 @@ private let tileRowCount    = 32
 private let tileColumnCount = 32
 private let tilesPerRow = 32
 
-extension Lcd {
+extension Debugger {
 
   // MARK: - Properties
 
-  internal func dumpProperties() {
-    print("LCDC: \(self.control.value.bin)")
-    print("  isLcdEnabled: \(self.control.isLcdEnabled)")
-    print("  isBackgroundVisible: \(self.control.isBackgroundVisible)")
-    print("  isWindowEnabled: \(self.control.isWindowEnabled)")
-    print("  isSpriteEnabled: \(self.control.isSpriteEnabled)")
-    print("  windowTileMap: \(self.control.windowTileMap)")
-    print("  backgroundTileMap: \(self.control.backgroundTileMap)")
-    print("  tileDataSelect: \(self.control.tileDataSelect)")
-    print("  spriteHeight: \(self.control.spriteHeight)")
+  public func dumpLcdState() {
+    let lcd = self.lcd
+    let control = self.lcd.control
+    let status = self.lcd.status
 
-    print("STAT: \(self.status.value.bin)")
-    print("  isLineCompareInterruptEnabled: \(self.status.isLineCompareInterruptEnabled)")
-    print("  isOamInterruptEnabled: \(self.status.isOamInterruptEnabled)")
-    print("  isVBlankInterruptEnabled: \(self.status.isVBlankInterruptEnabled)")
-    print("  isHBlankInterruptEnabled: \(self.status.isHBlankInterruptEnabled)")
-    print("  isLineCompareInterrupt: \(self.status.isLineCompareInterrupt)")
-    print("  mode: \(self.status.mode)")
+    print("""
+Lcd
+  LCDC: \(control.value.bin)
+    isLcdEnabled: \(control.isLcdEnabled)
+    isBackgroundVisible: \(control.isBackgroundVisible)
+    isWindowEnabled: \(control.isWindowEnabled)
+    isSpriteEnabled: \(control.isSpriteEnabled)
+    windowTileMap: \(control.windowTileMap)
+    backgroundTileMap: \(control.backgroundTileMap)
+    tileDataSelect: \(control.tileDataSelect)
+    spriteHeight: \(control.spriteHeight)
 
-    print("ScrollY: \(self.scrollY.hex)")
-    print("ScrollX: \(self.scrollX.hex)")
-    print("Line: \(self.line.hex)")
-    print("LineCompare: \(self.lineCompare.hex)")
-    print("WindowY: \(self.windowY.hex)")
-    print("WindowX: \(self.windowX.hex)")
-    print("BackgroundPalette: \(self.backgroundColorPalette.value.hex)")
-    print("SpritePalette0: \(self.spriteColorPalette0.value.hex)")
-    print("SpritePalette1: \(self.spriteColorPalette1.value.hex)")
+  STAT: \(status.value.bin)
+    isLineCompareInterruptEnabled: \(status.isLineCompareInterruptEnabled)
+    isOamInterruptEnabled: \(status.isOamInterruptEnabled)
+    isVBlankInterruptEnabled: \(status.isVBlankInterruptEnabled)
+    isHBlankInterruptEnabled: \(status.isHBlankInterruptEnabled)
+    isLineCompareInterrupt: \(status.isLineCompareInterrupt)
+    mode: \(status.mode)
+
+  ScrollY: \(lcd.scrollY.hex)
+  ScrollX: \(lcd.scrollX.hex)
+  Line: \(lcd.line.hex)
+  LineCompare: \(lcd.lineCompare.hex)
+  WindowY: \(lcd.windowY.hex)
+  WindowX: \(lcd.windowX.hex)
+  BackgroundPalette: \(lcd.backgroundColorPalette.value.hex)
+  SpritePalette0: \(lcd.spriteColorPalette0.value.hex)
+  SpritePalette1: \(lcd.spriteColorPalette1.value.hex)
+""")
   }
 
   // MARK: - Tile indices
 
-  internal func dumpTileIndices(_ map: LcdTileMap) {
-    print("Tile indices \(map):")
+  public func dumpTileIndices(tileMap: LcdTileMap) {
+    print("Tile indices \(tileMap):")
 
     // horizontal markers
     print("    | " , separator: "", terminator: "")
@@ -64,14 +71,14 @@ extension Lcd {
     print()
 
     // data
-    let tileMap = self.getTileMap(for: map)
+    let tileMapBuffer = self.lcd.getTileMap(for: tileMap)
     for tileRow in 0..<tileRowCount {
       let rowText = String(describing: tileRow)
       let rowPadding = String(repeating: " ", count: 2 - rowText.count)
       print("\(rowPadding) \(rowText) |", separator: "", terminator: " ")
 
       for tileColumn in 0..<tileColumnCount {
-        let tileIndex = tileMap[tileRow * tilesPerRow + tileColumn]
+        let tileIndex = tileMapBuffer[tileRow * tilesPerRow + tileColumn]
 
         let text = String(tileIndex, radix: 16, uppercase: false)
         let textPadding = String(repeating: "0", count: 2 - text.count)
@@ -83,9 +90,9 @@ extension Lcd {
 
   // MARK: - Tile data
 
-  internal func dumpTileData(_ data: LcdTileData) {
+  public func dumpTileData(tileData: LcdTileData) {
     let columnCount = 16
-    print("Tile data \(data):")
+    print("Tile data \(tileData):")
 
     // horizontal markers
     print("    |" , separator: "", terminator: "")
@@ -101,9 +108,9 @@ extension Lcd {
     }
     print()
 
-    let start = data == .from8000to8fff ?   0 : 128
-    let end   = data == .from8000to8fff ? 256 : 384
-    let tiles = self.tiles[start..<end]
+    let start = tileData == .from8000to8fff ?   0 : 128
+    let end   = tileData == .from8000to8fff ? 256 : 384
+    let tiles = self.lcd.tiles[start..<end]
 
     let rowCount = tiles.count / columnCount
     for row in 0..<rowCount {
@@ -137,8 +144,8 @@ extension Lcd {
 
   // MARK: - Background
 
-  internal func dumpBackground(_ map: LcdTileMap, _ data: LcdTileData) {
-    print("Background for map: \(map), data: \(data)")
+  public func dumpBackground(tileMap: LcdTileMap, tileData: LcdTileData) {
+    print("Background for map: \(tileMap), data: \(tileData)")
 
     let rowRange    = 0..<tileRowCount
     let columnRange = 0..<tileColumnCount
@@ -174,7 +181,7 @@ extension Lcd {
         print("|", separator: "", terminator: " ")
 
         for tileColumn in columnRange {
-          self.drawTile(map, data, tileRow, tileColumn, tileLine)
+          self.drawTile(tileMap, tileData, tileRow, tileColumn, tileLine)
         }
         print()
       }
@@ -192,8 +199,7 @@ extension Lcd {
                         _ tileRow:    Int,
                         _ tileColumn: Int,
                         _ tileLine:   Int) {
-
-    let tileMap = self.getTileMap(for: map)
+    let tileMap = self.lcd.getTileMap(for: map)
     let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
 
     var tileIndex = Int(tileIndexRaw)
@@ -201,7 +207,7 @@ extension Lcd {
       tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
     }
 
-    let tile = self.tiles[tileIndex]
+    let tile = self.lcd.tiles[tileIndex]
     let tilePixels = tile.getPixels(in: tileLine)
 
     for pixel in tilePixels {

@@ -4,99 +4,66 @@
 
 extension Debugger {
 
+  // swiftlint:disable:next function_body_length
   internal func printMemoryWrites(before: DebugState, after: DebugState) {
-    self.printIOWrites(before:    before.io,    after: after.io)
-    self.printTimerWrites(before: before.timer, after: after.timer)
-    self.printAudioWrites(before: before.audio, after: after.audio)
-    self.printLcdWrites(before:   before.lcd,   after: after.lcd)
-    self.printInterruptWrites(before: before.interrupts, after: after.interrupts)
-  }
+    func printIfChanged<T: Equatable>(name: String, path: KeyPath<DebugState, T>) {
+      let valueBefore = before[keyPath: path]
+      let valueAfter = after[keyPath: path]
 
-  private func printIOWrites(before b: DebugIOState,
-                             after  a: DebugIOState) {
-
-    if b.joypad != a.joypad { print("  > io.joypad <- \(a.joypad)") }
-    if b.sb     != a.sb     { print("  > io.sb <- \(a.sb)") }
-    if b.sc     != a.sc     { print("  > io.sc <- \(a.sc)") }
-
-    if b.unmapBootrom != a.unmapBootrom {
-      print("  > io.unmapBootrom <- \(a.unmapBootrom)")
-    }
-  }
-
-  private func printTimerWrites(before b: DebugTimerState,
-                                after  a: DebugTimerState) {
-
-    if b.div  != a.div  { print("  > timer.div <- \(a.div)") }
-    if b.tima != a.tima { print("  > timer.tima <- \(a.tima)") }
-    if b.tma  != a.tma  { print("  > timer.tma <- \(a.tma)") }
-    if b.tac  != a.tac  { print("  > timer.tac <- \(a.tac)") }
-  }
-
-  // swiftlint:disable:next cyclomatic_complexity
-  private func printAudioWrites(before b: DebugAudioState,
-                                after  a: DebugAudioState) {
-
-    if b.nr10 != a.nr10 { print("  > audio.nr10 <- \(a.nr10)") }
-    if b.nr11 != a.nr11 { print("  > audio.nr11 <- \(a.nr11)") }
-    if b.nr12 != a.nr12 { print("  > audio.nr12 <- \(a.nr12)") }
-    if b.nr13 != a.nr13 { print("  > audio.nr13 <- \(a.nr13)") }
-    if b.nr14 != a.nr14 { print("  > audio.nr14 <- \(a.nr14)") }
-    if b.nr21 != a.nr21 { print("  > audio.nr21 <- \(a.nr21)") }
-    if b.nr22 != a.nr22 { print("  > audio.nr22 <- \(a.nr22)") }
-    if b.nr23 != a.nr23 { print("  > audio.nr23 <- \(a.nr23)") }
-    if b.nr24 != a.nr24 { print("  > audio.nr24 <- \(a.nr24)") }
-    if b.nr30 != a.nr30 { print("  > audio.nr30 <- \(a.nr30)") }
-    if b.nr31 != a.nr31 { print("  > audio.nr31 <- \(a.nr31)") }
-    if b.nr32 != a.nr32 { print("  > audio.nr32 <- \(a.nr32)") }
-    if b.nr33 != a.nr33 { print("  > audio.nr33 <- \(a.nr33)") }
-    if b.nr34 != a.nr34 { print("  > audio.nr34 <- \(a.nr34)") }
-    if b.nr41 != a.nr41 { print("  > audio.nr41 <- \(a.nr41)") }
-    if b.nr42 != a.nr42 { print("  > audio.nr42 <- \(a.nr42)") }
-    if b.nr43 != a.nr43 { print("  > audio.nr43 <- \(a.nr43)") }
-    if b.nr44 != a.nr44 { print("  > audio.nr44 <- \(a.nr44)") }
-    if b.nr50 != a.nr50 { print("  > audio.nr50 <- \(a.nr50)") }
-    if b.nr51 != a.nr51 { print("  > audio.nr51 <- \(a.nr51)") }
-    if b.nr52 != a.nr52 { print("  > audio.nr52 <- \(a.nr52)") }
-
-    if b.nr3_ram_start != a.nr3_ram_start {
-      print("  > audio.nr3_ram_start <- \(a.nr3_ram_start)")
-    }
-    if b.nr3_ram_end != a.nr3_ram_end {
-      print("  > audio.nr3_ram_end <- \(a.nr3_ram_end)")
-    }
-  }
-
-  // swiftlint:disable:next cyclomatic_complexity
-  private func printLcdWrites(before b: DebugLcdState,
-                              after  a: DebugLcdState) {
-
-    if b.control     != a.control     { print("  > lcd.control <- \(a.control)") }
-    if b.status      != a.status      { print("  > lcd.status <- \(a.status)") }
-    if b.scrollY     != a.scrollY     { print("  > lcd.scrollY <- \(a.scrollY)") }
-    if b.scrollX     != a.scrollX     { print("  > lcd.scrollX <- \(a.scrollX)") }
-    if b.line        != a.line        { print("  > lcd.line <- \(a.line)") }
-    if b.lineCompare != a.lineCompare { print("  > lcd.lineCompare <- \(a.lineCompare)") }
-    if b.dma         != a.dma         { print("  > lcd.dma <- \(a.dma)") }
-
-    if b.backgroundPalette != a.backgroundPalette {
-      print("  > lcd.backgroundPalette <- \(a.backgroundPalette)")
-    }
-    if b.spritePalette0 != a.spritePalette0 {
-      print("  > lcd.spritePalette0 <- \(a.spritePalette0)")
-    }
-    if b.spritePalette1 != a.spritePalette1 {
-      print("  > lcd.spritePalette1 <- \(a.spritePalette1)")
+      if valueBefore != valueAfter {
+        print("  > \(name) <- \(valueAfter)")
+      }
     }
 
-    if b.windowY != a.windowY { print("  > lcd.windowY <- \(a.windowY)") }
-    if b.windowX != a.windowX { print("  > lcd.windowX <- \(a.windowX)") }
-  }
+    printIfChanged(name: "io.joypad", path: \DebugState.io.joypad)
+    printIfChanged(name: "io.sb", path: \DebugState.io.sb)
+    printIfChanged(name: "io.sc", path: \DebugState.io.sc)
+    printIfChanged(name: "io.unmapBootrom", path: \DebugState.io.unmapBootrom)
 
-  private func printInterruptWrites(before b: DebugInterruptState,
-                                    after  a: DebugInterruptState) {
+    printIfChanged(name: "timer.div", path: \DebugState.timer.div)
+    printIfChanged(name: "timer.tima", path: \DebugState.timer.tima)
+    printIfChanged(name: "timer.tma", path: \DebugState.timer.tma)
+    printIfChanged(name: "timer.tac", path: \DebugState.timer.tac)
 
-    if b.enable != a.enable { print("  > inter.enable <- \(a.enable.bin)") }
-    if b.flag   != a.flag   { print("  > inter.flag <- \(a.flag.bin)") }
+    printIfChanged(name: "audio.nr10", path: \DebugState.audio.nr10)
+    printIfChanged(name: "audio.nr11", path: \DebugState.audio.nr11)
+    printIfChanged(name: "audio.nr12", path: \DebugState.audio.nr12)
+    printIfChanged(name: "audio.nr13", path: \DebugState.audio.nr13)
+    printIfChanged(name: "audio.nr14", path: \DebugState.audio.nr14)
+    printIfChanged(name: "audio.nr21", path: \DebugState.audio.nr21)
+    printIfChanged(name: "audio.nr22", path: \DebugState.audio.nr22)
+    printIfChanged(name: "audio.nr23", path: \DebugState.audio.nr23)
+    printIfChanged(name: "audio.nr24", path: \DebugState.audio.nr24)
+    printIfChanged(name: "audio.nr30", path: \DebugState.audio.nr30)
+    printIfChanged(name: "audio.nr31", path: \DebugState.audio.nr31)
+    printIfChanged(name: "audio.nr32", path: \DebugState.audio.nr32)
+    printIfChanged(name: "audio.nr33", path: \DebugState.audio.nr33)
+    printIfChanged(name: "audio.nr34", path: \DebugState.audio.nr34)
+    printIfChanged(name: "audio.nr41", path: \DebugState.audio.nr41)
+    printIfChanged(name: "audio.nr42", path: \DebugState.audio.nr42)
+    printIfChanged(name: "audio.nr43", path: \DebugState.audio.nr43)
+    printIfChanged(name: "audio.nr44", path: \DebugState.audio.nr44)
+    printIfChanged(name: "audio.nr50", path: \DebugState.audio.nr50)
+    printIfChanged(name: "audio.nr51", path: \DebugState.audio.nr51)
+    printIfChanged(name: "audio.nr52", path: \DebugState.audio.nr52)
+    printIfChanged(name: "audio.nr3_ram_start", path: \DebugState.audio.nr3_ram_start)
+    printIfChanged(name: "audio.nr3_ram_end", path: \DebugState.audio.nr3_ram_end)
+
+    printIfChanged(name: "lcd.control", path: \DebugState.lcd.control)
+    printIfChanged(name: "lcd.status", path: \DebugState.lcd.status)
+    printIfChanged(name: "lcd.scrollY", path: \DebugState.lcd.scrollY)
+    printIfChanged(name: "lcd.scrollX", path: \DebugState.lcd.scrollX)
+    printIfChanged(name: "lcd.line", path: \DebugState.lcd.line)
+    printIfChanged(name: "lcd.lineCompare", path: \DebugState.lcd.lineCompare)
+    printIfChanged(name: "lcd.dma", path: \DebugState.lcd.dma)
+
+    printIfChanged(name: "lcd.backgroundPalette", path: \DebugState.lcd.backgroundPalette)
+    printIfChanged(name: "lcd.spritePalette0", path: \DebugState.lcd.spritePalette0)
+    printIfChanged(name: "lcd.spritePalette1", path: \DebugState.lcd.spritePalette1)
+    printIfChanged(name: "lcd.windowY", path: \DebugState.lcd.windowY)
+    printIfChanged(name: "lcd.windowX", path: \DebugState.lcd.windowX)
+
+    printIfChanged(name: "interrupts.enable", path: \DebugState.interrupts.enable)
+    printIfChanged(name: "interrupts.flag", path: \DebugState.interrupts.flag)
   }
 }

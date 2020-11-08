@@ -2,92 +2,109 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-internal struct DebugCpuState {
-  internal var a: UInt8 = 0
-  internal var b: UInt8 = 0
-  internal var c: UInt8 = 0
-  internal var d: UInt8 = 0
-  internal var e: UInt8 = 0
-  internal var h: UInt8 = 0
-  internal var l: UInt8 = 0
-
-  internal var zeroFlag:      Bool = false
-  internal var subtractFlag:  Bool = false
-  internal var halfCarryFlag: Bool = false
-  internal var carryFlag:     Bool = false
-
-  internal var pc: UInt16 = 0
-  internal var sp: UInt16 = 0
-}
-
-internal struct DebugIOState {
-  internal var joypad: UInt8 = 0
-  internal var sb:     UInt8 = 0
-  internal var sc:     UInt8 = 0
-  internal var unmapBootrom:  UInt8 = 0
-}
-
-internal struct DebugTimerState {
-  internal var div:  UInt8 = 0
-  internal var tima: UInt8 = 0
-  internal var tma:  UInt8 = 0
-  internal var tac:  UInt8 = 0
-}
-
-internal struct DebugAudioState {
-  internal var nr10:          UInt8 = 0
-  internal var nr11:          UInt8 = 0
-  internal var nr12:          UInt8 = 0
-  internal var nr13:          UInt8 = 0
-  internal var nr14:          UInt8 = 0
-  internal var nr21:          UInt8 = 0
-  internal var nr22:          UInt8 = 0
-  internal var nr23:          UInt8 = 0
-  internal var nr24:          UInt8 = 0
-  internal var nr30:          UInt8 = 0
-  internal var nr31:          UInt8 = 0
-  internal var nr32:          UInt8 = 0
-  internal var nr33:          UInt8 = 0
-  internal var nr34:          UInt8 = 0
-  internal var nr41:          UInt8 = 0
-  internal var nr42:          UInt8 = 0
-  internal var nr43:          UInt8 = 0
-  internal var nr44:          UInt8 = 0
-  internal var nr50:          UInt8 = 0
-  internal var nr51:          UInt8 = 0
-  internal var nr52:          UInt8 = 0
-  internal var nr3_ram_start: UInt8 = 0
-  internal var nr3_ram_end:   UInt8 = 0
-}
-
-internal struct DebugLcdState {
-  internal var control:     UInt8 = 0
-  internal var status:      UInt8 = 0
-  internal var scrollY:     UInt8 = 0
-  internal var scrollX:     UInt8 = 0
-  internal var line:        UInt8 = 0
-  internal var lineCompare: UInt8 = 0
-  internal var dma:         UInt8 = 0
-  internal var backgroundPalette: UInt8 = 0
-  internal var spritePalette0:    UInt8 = 0
-  internal var spritePalette1:    UInt8 = 0
-  internal var windowY: UInt8 = 0
-  internal var windowX: UInt8 = 0
-}
-
-internal struct DebugInterruptState {
-  internal var enable: UInt8 = 0
-  internal var flag:   UInt8 = 0
-}
-
 /// Everything that we care during debugging (basically cpu + io).
 internal struct DebugState {
-  internal var cpu = DebugCpuState()
 
-  internal var io    = DebugIOState()
-  internal var timer = DebugTimerState()
-  internal var audio = DebugAudioState()
-  internal var lcd   = DebugLcdState()
+  // MARK: - Cpu
 
-  internal var interrupts = DebugInterruptState()
+  internal struct Cpu {
+    internal let a: UInt8
+    internal let b: UInt8
+    internal let c: UInt8
+    internal let d: UInt8
+    internal let e: UInt8
+    internal let h: UInt8
+    internal let l: UInt8
+
+    internal let zeroFlag:      Bool
+    internal let subtractFlag:  Bool
+    internal let halfCarryFlag: Bool
+    internal let carryFlag:     Bool
+
+    internal let pc: UInt16
+    internal let sp: UInt16
+  }
+
+  internal let cpu: Cpu
+
+  // MARK: - IO
+
+  // swiftlint:disable:next type_name
+  internal struct IO {
+    internal let joypad: UInt8
+    internal let sb:     UInt8
+    internal let sc:     UInt8
+    internal let unmapBootrom:  UInt8
+  }
+
+  internal let io: IO
+
+  // MARK: - Timer
+
+  internal struct Timer {
+    internal let div:  UInt8
+    internal let tima: UInt8
+    internal let tma:  UInt8
+    internal let tac:  UInt8
+  }
+
+  internal let timer: Timer
+
+  // MARK: - Audio
+
+  internal struct Audio {
+    internal let nr10:          UInt8
+    internal let nr11:          UInt8
+    internal let nr12:          UInt8
+    internal let nr13:          UInt8
+    internal let nr14:          UInt8
+    internal let nr21:          UInt8
+    internal let nr22:          UInt8
+    internal let nr23:          UInt8
+    internal let nr24:          UInt8
+    internal let nr30:          UInt8
+    internal let nr31:          UInt8
+    internal let nr32:          UInt8
+    internal let nr33:          UInt8
+    internal let nr34:          UInt8
+    internal let nr41:          UInt8
+    internal let nr42:          UInt8
+    internal let nr43:          UInt8
+    internal let nr44:          UInt8
+    internal let nr50:          UInt8
+    internal let nr51:          UInt8
+    internal let nr52:          UInt8
+    internal let nr3_ram_start: UInt8
+    internal let nr3_ram_end:   UInt8
+  }
+
+  internal let audio: Audio
+
+  // MARK: - Lcd
+
+  internal struct Lcd {
+    internal let control:     UInt8
+    internal let status:      UInt8
+    internal let scrollY:     UInt8
+    internal let scrollX:     UInt8
+    internal let line:        UInt8
+    internal let lineCompare: UInt8
+    internal let dma:         UInt8
+    internal let backgroundPalette: UInt8
+    internal let spritePalette0:    UInt8
+    internal let spritePalette1:    UInt8
+    internal let windowY: UInt8
+    internal let windowX: UInt8
+  }
+
+  internal let lcd: Lcd
+
+  // MARK: - Interrupts
+
+  internal struct Interrupts {
+    internal let enable: UInt8
+    internal let flag:   UInt8
+  }
+
+  internal let interrupts: Interrupts
 }

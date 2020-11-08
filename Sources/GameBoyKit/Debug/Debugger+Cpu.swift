@@ -38,7 +38,7 @@ extension Debugger {
     return self.memory.read(address)
   }
 
-  private func opcodeAt(pc: UInt16) -> UnprefixedOpcode? {
+  private func unprefixedOpcodeAt(pc: UInt16) -> UnprefixedOpcode? {
     let rawOpcode = self.read(pc)
     return UnprefixedOpcode(rawValue: rawOpcode)
   }
@@ -46,9 +46,9 @@ extension Debugger {
   // MARK: - Print opcode
 
   internal func printNextOpcode() {
-    switch self.opcodeAt(pc: self.cpu.pc) {
+    switch self.unprefixedOpcodeAt(pc: self.cpu.pc) {
     case .none: return
-    case let .some(opcode) where opcode == .prefix: self.printPrefixOpcode()
+    case let .some(opcode) where opcode == .prefix: self.printPrefixedOpcode()
     case let .some(opcode): printUnprefixedOpcode(opcode)
     }
   }
@@ -67,7 +67,7 @@ extension Debugger {
     print("\(cpu.pc.hex): \(opcodeDesc) \(operands) (cycle: \(cycle))")
   }
 
-  private func printPrefixOpcode() {
+  private func printPrefixedOpcode() {
     let rawOpcode = self.next8(pc: self.cpu.pc)
     guard let opcode = CBPrefixedOpcode(rawValue: rawOpcode) else {
       return
@@ -81,8 +81,8 @@ extension Debugger {
   // MARK: - Print opcode details
 
   // swiftlint:disable:next function_body_length cyclomatic_complexity
-  internal func printOpcodeDetails(before: DebugState, after: DebugState) {
-    guard let opcode = self.opcodeAt(pc: before.cpu.pc) else {
+  internal func printExecutedOpcodeDetails(before: DebugState, after: DebugState) {
+    guard let opcode = self.unprefixedOpcodeAt(pc: before.cpu.pc) else {
       return
     }
 
@@ -139,31 +139,36 @@ extension Debugger {
 
   // MARK: - Print register writes
 
-  // swiftlint:disable:next cyclomatic_complexity
   internal func printRegiserWrites(before: DebugState, after: DebugState) {
+    func printIfChanged<T: Equatable>(name: String, path: KeyPath<DebugState, T>) {
+      let valueBefore = before[keyPath: path]
+      let valueAfter = after[keyPath: path]
 
-    let b = before.cpu
-    let a = after.cpu
+      if valueBefore != valueAfter {
+        print("  > \(name) <- \(valueAfter)")
+      }
+    }
 
-    if b.a != a.a { print("  > cpu.a <- \(a.a.hex)") }
-    if b.b != a.b { print("  > cpu.b <- \(a.b.hex)") }
-    if b.c != a.c { print("  > cpu.c <- \(a.c.hex)") }
-    if b.d != a.d { print("  > cpu.d <- \(a.d.hex)") }
-    if b.e != a.e { print("  > cpu.e <- \(a.e.hex)") }
-    if b.h != a.h { print("  > cpu.h <- \(a.h.hex)") }
-    if b.l != a.l { print("  > cpu.l <- \(a.l.hex)") }
-    if b.zeroFlag      != a.zeroFlag      { print("  > cpu.zeroFlag      <- \(a.zeroFlag)") }
-    if b.subtractFlag  != a.subtractFlag  { print("  > cpu.subtractFlag  <- \(a.subtractFlag)") }
-    if b.halfCarryFlag != a.halfCarryFlag { print("  > cpu.halfCarryFlag <- \(a.halfCarryFlag)") }
-    if b.carryFlag     != a.carryFlag     { print("  > cpu.carryFlag     <- \(a.carryFlag)") }
+    printIfChanged(name: "cpu.a", path: \DebugState.cpu.a)
+    printIfChanged(name: "cpu.b", path: \DebugState.cpu.b)
+    printIfChanged(name: "cpu.c", path: \DebugState.cpu.c)
+    printIfChanged(name: "cpu.d", path: \DebugState.cpu.d)
+    printIfChanged(name: "cpu.e", path: \DebugState.cpu.e)
+    printIfChanged(name: "cpu.h", path: \DebugState.cpu.h)
+    printIfChanged(name: "cpu.l", path: \DebugState.cpu.l)
 
-    if b.pc != a.pc { print("  > cpu.pc <- \(a.pc.hex)") }
-    if b.sp != a.sp { print("  > cpu.sp <- \(a.sp.hex)") }
+    printIfChanged(name: "cpu.zeroFlag", path: \DebugState.cpu.zeroFlag)
+    printIfChanged(name: "cpu.subtractFlag", path: \DebugState.cpu.subtractFlag)
+    printIfChanged(name: "cpu.halfCarryFlag", path: \DebugState.cpu.halfCarryFlag)
+    printIfChanged(name: "cpu.carryFlag", path: \DebugState.cpu.carryFlag)
+
+    printIfChanged(name: "cpu.pc", path: \DebugState.cpu.pc)
+    printIfChanged(name: "cpu.sp", path: \DebugState.cpu.sp)
   }
 
   // MARK: - Print register values
 
-  internal func printRegisterValues() {
+  public func dumpCpuState() {
     let stackStart: UInt16 = self.cpu.sp
     var stackEnd:   UInt16 = 0xfffe
 
@@ -176,31 +181,32 @@ extension Debugger {
 
     let r = self.cpu.registers
     print("""
-        pc: \(cpu.pc) (\(cpu.pc.hex))
-        sp: \(cpu.sp) (\(cpu.sp.hex)) \(stackValues.map { $0.hex })
-        cycle: \(cpu.cycle)
-        auxiliary registers:
-          a: \(registerValue(r.a))
-          b: \(registerValue(r.b)) | c: \(registerValue(r.c)) | bc: \(registerValue(r.bc))
-          d: \(registerValue(r.d)) | e: \(registerValue(r.e)) | de: \(registerValue(r.de))
-          h: \(registerValue(r.h)) | l: \(registerValue(r.l)) | hl: \(registerValue(r.hl))
-        flags:
-          z: \(flagValue(r.zeroFlag))
-          n: \(flagValue(r.subtractFlag))
-          h: \(flagValue(r.halfCarryFlag))
-          c: \(flagValue(r.carryFlag))
-      """)
+Cpu
+  pc: \(cpu.pc) (\(cpu.pc.hex))
+  sp: \(cpu.sp) (\(cpu.sp.hex)) \(stackValues.map { $0.hex })
+  cycle: \(cpu.cycle)
+  auxiliary registers:
+    a: \(formatRegister(r.a))
+    b: \(formatRegister(r.b)) | c: \(formatRegister(r.c)) | bc: \(formatRegister(r.bc))
+    d: \(formatRegister(r.d)) | e: \(formatRegister(r.e)) | de: \(formatRegister(r.de))
+    h: \(formatRegister(r.h)) | l: \(formatRegister(r.l)) | hl: \(formatRegister(r.hl))
+  flags:
+    z: \(formatFlag(r.zeroFlag))
+    n: \(formatFlag(r.subtractFlag))
+    h: \(formatFlag(r.halfCarryFlag))
+    c: \(formatFlag(r.carryFlag))
+""")
   }
 
-  private func registerValue(_ value: UInt8) -> String {
+  private func formatRegister(_ value: UInt8) -> String {
     return "\(value.dec) (\(value.hex))"
   }
 
-  private func registerValue(_ value: UInt16) -> String {
+  private func formatRegister(_ value: UInt16) -> String {
     return "\(value.dec) (\(value.hex))"
   }
 
-  private func flagValue(_ value: Bool) -> String {
+  private func formatFlag(_ value: Bool) -> String {
     return value ? "1" : "0"
   }
 }

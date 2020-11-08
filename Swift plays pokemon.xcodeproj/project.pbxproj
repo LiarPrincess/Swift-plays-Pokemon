@@ -81,7 +81,6 @@
 		OBJ_169 /* Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Cpu.swift */; };
 		OBJ_170 /* CpuRegisters.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* CpuRegisters.swift */; };
 		OBJ_171 /* CBPrefixedOpcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* CBPrefixedOpcode.swift */; };
-		OBJ_172 /* DebugMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* DebugMode.swift */; };
 		OBJ_173 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* DebugState.swift */; };
 		OBJ_174 /* Debugger+Cpu.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* Debugger+Cpu.swift */; };
 		OBJ_175 /* Debugger+Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* Debugger+Memory.swift */; };
@@ -99,7 +98,7 @@
 		OBJ_188 /* SpriteColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* SpriteColorPalette.swift */; };
 		OBJ_191 /* Lcd+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Lcd+Constants.swift */; };
 		OBJ_192 /* Lcd+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Lcd+Draw.swift */; };
-		OBJ_193 /* Lcd+Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Lcd+Dump.swift */; };
+		OBJ_193 /* Debugger+Lcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Debugger+Lcd.swift */; };
 		OBJ_194 /* Lcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Lcd.swift */; };
 		OBJ_195 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* Sprite.swift */; };
 		OBJ_196 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* Tile.swift */; };
@@ -301,7 +300,6 @@
 		OBJ_32 /* Cpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cpu.swift; sourceTree = "<group>"; };
 		OBJ_33 /* CpuRegisters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuRegisters.swift; sourceTree = "<group>"; };
 		OBJ_35 /* CBPrefixedOpcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBPrefixedOpcode.swift; sourceTree = "<group>"; };
-		OBJ_36 /* DebugMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMode.swift; sourceTree = "<group>"; };
 		OBJ_37 /* DebugState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
 		OBJ_38 /* Debugger+Cpu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debugger+Cpu.swift"; sourceTree = "<group>"; };
 		OBJ_39 /* Debugger+Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debugger+Memory.swift"; sourceTree = "<group>"; };
@@ -320,7 +318,7 @@
 		OBJ_58 /* Lcd+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Constants.swift"; sourceTree = "<group>"; };
 		OBJ_59 /* Lcd+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Draw.swift"; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_60 /* Lcd+Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lcd+Dump.swift"; sourceTree = "<group>"; };
+		OBJ_60 /* Debugger+Lcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Debugger+Lcd.swift"; sourceTree = "<group>"; };
 		OBJ_61 /* Lcd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lcd.swift; sourceTree = "<group>"; };
 		OBJ_62 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		OBJ_63 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
@@ -658,13 +656,13 @@
 		OBJ_34 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_35 /* CBPrefixedOpcode.swift */,
-				OBJ_36 /* DebugMode.swift */,
-				OBJ_37 /* DebugState.swift */,
-				OBJ_38 /* Debugger+Cpu.swift */,
-				OBJ_39 /* Debugger+Memory.swift */,
 				OBJ_40 /* Debugger.swift */,
+				OBJ_38 /* Debugger+Cpu.swift */,
+				OBJ_60 /* Debugger+Lcd.swift */,
+				OBJ_39 /* Debugger+Memory.swift */,
+				OBJ_37 /* DebugState.swift */,
 				OBJ_41 /* UnprefixedOpcode.swift */,
+				OBJ_35 /* CBPrefixedOpcode.swift */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -704,7 +702,6 @@
 				90427E24255497CA007A9E9D /* LcdMemory.swift */,
 				OBJ_61 /* Lcd.swift */,
 				OBJ_59 /* Lcd+Draw.swift */,
-				OBJ_60 /* Lcd+Dump.swift */,
 				OBJ_58 /* Lcd+Constants.swift */,
 				OBJ_62 /* Sprite.swift */,
 				OBJ_63 /* Tile.swift */,
@@ -1057,7 +1054,6 @@
 				OBJ_170 /* CpuRegisters.swift in Sources */,
 				90F682072556AA7A00EBD803 /* BootromError.swift in Sources */,
 				OBJ_171 /* CBPrefixedOpcode.swift in Sources */,
-				OBJ_172 /* DebugMode.swift in Sources */,
 				90427E4825549F43007A9E9D /* LcdTileData.swift in Sources */,
 				90F682282556AB0A00EBD803 /* CartridgeError.swift in Sources */,
 				OBJ_173 /* DebugState.swift in Sources */,
@@ -1086,7 +1082,7 @@
 				OBJ_188 /* SpriteColorPalette.swift in Sources */,
 				OBJ_191 /* Lcd+Constants.swift in Sources */,
 				OBJ_192 /* Lcd+Draw.swift in Sources */,
-				OBJ_193 /* Lcd+Dump.swift in Sources */,
+				OBJ_193 /* Debugger+Lcd.swift in Sources */,
 				90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */,
 				OBJ_194 /* Lcd.swift in Sources */,
 				OBJ_195 /* Sprite.swift in Sources */,
