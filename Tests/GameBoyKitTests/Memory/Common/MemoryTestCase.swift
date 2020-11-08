@@ -15,7 +15,7 @@ class MemoryTestCase: XCTestCase {
                     timer:      TimerMemory?     = nil,
                     interrupts: Interrupts?      = nil) -> Memory {
     return Memory(
-      bootrom:    .executing(bootrom ?? FakeBootromMemory()),
+      bootrom:    bootrom    ?? FakeBootromMemory(),
       cartridge:  cartridge  ?? FakeCartridgeMemory(),
       joypad:     joypad     ?? FakeJoypadMemory(),
       lcd:        lcd        ?? FakeLcdMemory(),

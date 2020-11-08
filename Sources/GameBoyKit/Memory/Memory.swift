@@ -6,11 +6,6 @@ import Foundation
 
 public final class Memory: CpuMemory {
 
-  internal enum BootromState {
-    case executing(BootromMemory)
-    case finished
-  }
-
   internal let lcd: LcdMemory
   internal let audio: AudioMemory
   internal let timer: TimerMemory
@@ -19,8 +14,11 @@ public final class Memory: CpuMemory {
   internal let serialPort: SerialPort
   internal let linkCable: LinkCable
 
-  internal var bootrom: BootromState
+  internal let bootrom: BootromMemory
   internal var cartridge: CartridgeMemory
+  /// GameBoy starts with 'Bootrom' and then after writing to '0xff50'
+  /// it switches to cartridge.
+  internal var isRunningBootrom: Bool
 
   /// C000-CFFF 4KB Work RAM Bank 0 (WRAM)
   /// D000-DFFF 4KB Work RAM Bank 1 (WRAM) (switchable bank 1-7 in CGB Mode)
@@ -32,7 +30,7 @@ public final class Memory: CpuMemory {
   /// Catch'em all for any invalid read/write
   internal var unmappedMemory = [UInt16:UInt8]()
 
-  internal init(bootrom:    BootromState,
+  internal init(bootrom:    BootromMemory?,
                 cartridge:  CartridgeMemory,
                 joypad:     JoypadMemory,
                 lcd:        LcdMemory,
@@ -41,8 +39,6 @@ public final class Memory: CpuMemory {
                 interrupts: Interrupts,
                 serialPort: SerialPort,
                 linkCable:  LinkCable) {
-    self.bootrom = bootrom
-    self.cartridge = cartridge
     self.joypad = joypad
     self.lcd = lcd
     self.audio = audio
@@ -50,6 +46,10 @@ public final class Memory: CpuMemory {
     self.interrupts = interrupts
     self.serialPort = serialPort
     self.linkCable = linkCable
+
+    self.bootrom = bootrom ?? Bootrom.dmg
+    self.cartridge = cartridge
+    self.isRunningBootrom = bootrom != nil
   }
 
   deinit {

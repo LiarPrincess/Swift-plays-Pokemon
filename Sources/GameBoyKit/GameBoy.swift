@@ -31,9 +31,7 @@ public final class GameBoy {
     self.serialPort = SerialPort()
     self.linkCable = LinkCable()
 
-    let bootromState = bootrom.map(Memory.BootromState.executing) ?? .finished
-
-    self.memory = Memory(bootrom:    bootromState,
+    self.memory = Memory(bootrom:    bootrom,
                          cartridge:  cartridge,
                          joypad:     self.joypad,
                          lcd:        self.lcd,
@@ -45,13 +43,13 @@ public final class GameBoy {
 
     self.cpu = Cpu(memory: self.memory, interrupts: interrupts)
 
-    if case .finished = bootromState {
-      self.skipBootrom()
+    if bootrom == nil {
+      self.skipToStateAfterBootrom()
     }
   }
 
   // swiftlint:disable:next function_body_length
-  private func skipBootrom() {
+  private func skipToStateAfterBootrom() {
     // Source: http://bgb.bircd.org/pandocs.htm#powerupsequence
 
     self.cpu.registers.af = 0x01b0

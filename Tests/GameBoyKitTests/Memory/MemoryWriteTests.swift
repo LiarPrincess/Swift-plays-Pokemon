@@ -35,7 +35,7 @@ class MemoryWriteTests: MemoryTestCase {
 
     let cartridge = FakeCartridgeMemory()
     let memory = self.createMemory(cartridge: cartridge)
-    memory.bootrom = .finished
+    memory.isRunningBootrom = false
 
     memory.write(range.start, value: startValue)
     XCTAssertEqual(cartridge.rom[MemoryMap.rom0.start], startValue)

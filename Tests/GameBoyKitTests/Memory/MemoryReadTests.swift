@@ -34,7 +34,7 @@ class MemoryReadTests: MemoryTestCase {
     cartridge.rom[range.count - 1]   = endValue
 
     let memory = self.createMemory(cartridge: cartridge)
-    memory.bootrom = .finished
+    memory.isRunningBootrom = false
 
     XCTAssertEqual(memory.read(range.start), startValue)
     XCTAssertEqual(memory.read(range.end), endValue)
@@ -49,7 +49,7 @@ class MemoryReadTests: MemoryTestCase {
     cartridge.rom[rangeStart + range.count - 1] = endValue
 
     let memory = self.createMemory(cartridge: cartridge)
-    memory.bootrom = .finished
+    memory.isRunningBootrom = false
 
     XCTAssertEqual(memory.read(range.start), startValue)
     XCTAssertEqual(memory.read(range.end), endValue)

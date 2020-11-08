@@ -13,11 +13,8 @@ extension Memory {
     switch address {
 
     // bootrom,
-    case MemoryMap.bootrom:
-      switch self.bootrom {
-      case let .executing(bootrom): bootrom.write(address, value: value)
-      case .finished:               self.cartridge.writeRom(address, value: value)
-      }
+    case MemoryMap.bootrom where self.isRunningBootrom:
+      bootrom.write(address, value: value)
 
     // cartridge
     case MemoryMap.rom0, MemoryMap.rom1:
@@ -67,7 +64,7 @@ extension Memory {
       self.linkCable.write(value)
       self.serialPort.sb = value
     case MemoryMap.IO.sc:     self.serialPort.sc = value
-    case MemoryMap.IO.unmapBootrom:  self.bootrom = .finished
+    case MemoryMap.IO.unmapBootrom:  self.isRunningBootrom = false
     case MemoryMap.IO.interruptFlag: self.interrupts.flag = value
 
     case MemoryMap.Timer.div:  self.timer.div = value
