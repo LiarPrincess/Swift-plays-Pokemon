@@ -10,7 +10,6 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
 
   // swiftlint:disable:next implicitly_unwrapped_optional
   private(set) var gameBoy: GameBoy!
-  let mtkView: MTKView
   let keyMap: KeyMap
 
   let device:       MTLDevice
@@ -22,8 +21,8 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
   override var canBecomeKey:  Bool { return true }
   override var canBecomeMain: Bool { return true }
 
+  // swiftlint:disable:next function_body_length
   init(scale: Int, bootrom: Bootrom?, cartridge: Cartridge, keyMap: KeyMap) {
-    self.mtkView = MTKView()
     self.keyMap = keyMap
 
     self.device = Metal.createDevice()
@@ -51,11 +50,16 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
       input: self
     )
 
-    self.customizeWindow(title: cartridge.header.title)
-    self.addMtkSubview()
-  }
+    self.contentView = {
+      let view = MTKView()
+      view.device = self.device
+      view.delegate = self
+      view.colorPixelFormat = .bgra8Unorm
+      view.framebufferOnly = true
+      view.translatesAutoresizingMaskIntoConstraints = false
+      return view
+    }()
 
-  private func customizeWindow(title: String) {
     self.title = title
     self.backgroundColor = .black
     self.isMovableByWindowBackground = true
@@ -65,27 +69,6 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
 
     // Use this if you resized window, and you don't like new size
     // self.setContentSize(NSSize(width: width, height: height))
-  }
-
-  private func addMtkSubview() {
-    guard let contentView = self.contentView else {
-      print("Unable to find window content view.")
-      exit(1)
-    }
-
-    self.mtkView.device = self.device
-    self.mtkView.delegate = self
-    self.mtkView.colorPixelFormat = .bgra8Unorm
-    self.mtkView.framebufferOnly = true
-    self.mtkView.translatesAutoresizingMaskIntoConstraints = false
-
-    contentView.addSubview(self.mtkView)
-    NSLayoutConstraint.activate([
-      self.mtkView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-      self.mtkView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-      self.mtkView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-      self.mtkView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
-    ])
   }
 
   // MARK: - Input

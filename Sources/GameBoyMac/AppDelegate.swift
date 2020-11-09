@@ -19,8 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       right: .right,
       a: .a,
       b: .s,
-      start: .space,
-      select: .q
+      start: .q,
+      select: .w
     )
 
     let window = GameBoyWindow(
