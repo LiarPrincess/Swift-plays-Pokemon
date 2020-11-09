@@ -17,7 +17,7 @@
                BlueprintIdentifier = "Swift plays pokemon::Code generation"
                BuildableName = "Code generation"
                BlueprintName = "Code generation"
-               ReferencedContainer = "container:Swift plays pokemon.xcodeproj">
+               ReferencedContainer = "container:Swift plays Pokemon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "Swift plays pokemon::Code generation"
             BuildableName = "Code generation"
             BlueprintName = "Code generation"
-            ReferencedContainer = "container:Swift plays pokemon.xcodeproj">
+            ReferencedContainer = "container:Swift plays Pokemon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>

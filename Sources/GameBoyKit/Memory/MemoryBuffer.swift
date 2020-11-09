@@ -5,9 +5,9 @@
 /// Data stored in memory
 public struct MemoryBuffer {
 
-  private typealias BufferPointer = UnsafeMutableBufferPointer<UInt8>
+  internal typealias BufferPointer = UnsafeMutableBufferPointer<UInt8>
 
-  private let ptr: BufferPointer
+  internal let ptr: BufferPointer
 
   public var isEmpty: Bool {
     return self.ptr.isEmpty

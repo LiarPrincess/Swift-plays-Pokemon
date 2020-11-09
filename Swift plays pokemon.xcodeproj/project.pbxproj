@@ -32,16 +32,16 @@
 		9024C3582555E63A0094AA47 /* CartridgeHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024C34A2555E6320094AA47 /* CartridgeHeaderTests.swift */; };
 		9024C36D2555F60D0094AA47 /* NoMBCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024C3652555F6090094AA47 /* NoMBCTests.swift */; };
 		9024C3832555F67C0094AA47 /* CartridgeTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024C37B2555F66B0094AA47 /* CartridgeTestCase.swift */; };
-		90374A082553466E008A908D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90374A072553466E008A908D /* main.swift */; };
-		90374A25255346AD008A908D /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90374A1A255346AC008A908D /* TestAppDelegate.swift */; };
-		90374A26255346AD008A908D /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90374A1B255346AC008A908D /* Arguments.swift */; };
-		90374A27255346AD008A908D /* KeyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90374A1C255346AC008A908D /* KeyMap.swift */; };
-		90374A28255346AD008A908D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90374A1F255346AC008A908D /* AppDelegate.swift */; };
-		90374A29255346AD008A908D /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90374A21255346AC008A908D /* Metal.swift */; };
-		90374A2A255346AD008A908D /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 90374A22255346AC008A908D /* Shader.metal */; };
-		90374A2B255346AD008A908D /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90374A24255346AD008A908D /* Window.swift */; };
-		90374A3B25534757008A908D /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; };
-		90374A3C25534757008A908D /* GameBoyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		903C2B102559758100EB1C6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B0F2559758100EB1C6D /* AppDelegate.swift */; };
+		903C2B142559758300EB1C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 903C2B132559758300EB1C6D /* Assets.xcassets */; };
+		903C2B1A2559758300EB1C6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 903C2B182559758300EB1C6D /* Main.storyboard */; };
+		903C2B502559766400EB1C6D /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; };
+		903C2B512559766400EB1C6D /* GameBoyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		903C2B612559774B00EB1C6D /* KeyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5A2559774B00EB1C6D /* KeyMap.swift */; };
+		903C2B622559774B00EB1C6D /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5B2559774B00EB1C6D /* Shader.metal */; };
+		903C2B642559774B00EB1C6D /* GameBoyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5D2559774B00EB1C6D /* GameBoyWindow.swift */; };
+		903C2B652559774B00EB1C6D /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5E2559774B00EB1C6D /* Arguments.swift */; };
+		903C2B662559774B00EB1C6D /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5F2559774B00EB1C6D /* Metal.swift */; };
 		90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427CF725545FC8007A9E9D /* CpuMemory.swift */; };
 		90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D5625546F00007A9E9D /* BootromMemory.swift */; };
 		90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D7C25548092007A9E9D /* Interrupts+properties.swift */; };
@@ -175,7 +175,7 @@
 			remoteGlobalIDString = "Swift plays pokemon::GameBoyKitTests";
 			remoteInfo = GameBoyKitTests;
 		};
-		90374A3D25534757008A908D /* PBXContainerItemProxy */ = {
+		903C2B522559766400EB1C6D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -192,22 +192,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		90374A032553466E008A908D /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		90374A3F25534757008A908D /* Embed Frameworks */ = {
+		903C2B542559766400EB1C6D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				90374A3C25534757008A908D /* GameBoyKit.framework in Embed Frameworks */,
+				903C2B512559766400EB1C6D /* GameBoyKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,18 +228,17 @@
 		9024C34A2555E6320094AA47 /* CartridgeHeaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeHeaderTests.swift; sourceTree = "<group>"; };
 		9024C3652555F6090094AA47 /* NoMBCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMBCTests.swift; sourceTree = "<group>"; };
 		9024C37B2555F66B0094AA47 /* CartridgeTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeTestCase.swift; sourceTree = "<group>"; };
-		90374A052553466E008A908D /* GameBoyMac */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameBoyMac; sourceTree = BUILT_PRODUCTS_DIR; };
-		90374A072553466E008A908D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		90374A1A255346AC008A908D /* TestAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
-		90374A1B255346AC008A908D /* Arguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
-		90374A1C255346AC008A908D /* KeyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMap.swift; sourceTree = "<group>"; };
-		90374A1D255346AC008A908D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		90374A1E255346AC008A908D /* GameBoyMac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = GameBoyMac.entitlements; sourceTree = "<group>"; };
-		90374A1F255346AC008A908D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		90374A20255346AC008A908D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		90374A21255346AC008A908D /* Metal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
-		90374A22255346AC008A908D /* Shader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
-		90374A24255346AD008A908D /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		903C2B0D2559758100EB1C6D /* GameBoyMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameBoyMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		903C2B0F2559758100EB1C6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		903C2B132559758300EB1C6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		903C2B192559758300EB1C6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		903C2B1B2559758300EB1C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		903C2B1C2559758300EB1C6D /* GameBoyMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameBoyMac.entitlements; sourceTree = "<group>"; };
+		903C2B5A2559774B00EB1C6D /* KeyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyMap.swift; sourceTree = "<group>"; };
+		903C2B5B2559774B00EB1C6D /* Shader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
+		903C2B5D2559774B00EB1C6D /* GameBoyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoyWindow.swift; sourceTree = "<group>"; };
+		903C2B5E2559774B00EB1C6D /* Arguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
+		903C2B5F2559774B00EB1C6D /* Metal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
 		90427CF725545FC8007A9E9D /* CpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuMemory.swift; sourceTree = "<group>"; };
 		90427D5625546F00007A9E9D /* BootromMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromMemory.swift; sourceTree = "<group>"; };
 		90427D7C25548092007A9E9D /* Interrupts+properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Interrupts+properties.swift"; sourceTree = "<group>"; };
@@ -377,11 +367,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		90374A022553466E008A908D /* Frameworks */ = {
+		903C2B0A2559758100EB1C6D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90374A3B25534757008A908D /* GameBoyKit.framework in Frameworks */,
+				903C2B502559766400EB1C6D /* GameBoyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,25 +452,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		90374A062553466E008A908D /* GameBoyMac */ = {
-			isa = PBXGroup;
-			children = (
-				90374A20255346AC008A908D /* Assets.xcassets */,
-				90374A1F255346AC008A908D /* AppDelegate.swift */,
-				90374A1B255346AC008A908D /* Arguments.swift */,
-				90374A1E255346AC008A908D /* GameBoyMac.entitlements */,
-				90374A1D255346AC008A908D /* Info.plist */,
-				90374A1C255346AC008A908D /* KeyMap.swift */,
-				90374A21255346AC008A908D /* Metal.swift */,
-				90374A22255346AC008A908D /* Shader.metal */,
-				90374A1A255346AC008A908D /* TestAppDelegate.swift */,
-				90374A24255346AD008A908D /* Window.swift */,
-				90374A072553466E008A908D /* main.swift */,
-			);
-			name = GameBoyMac;
-			path = Sources/GameBoyMac;
-			sourceTree = "<group>";
-		};
 		90374A3A25534757008A908D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,6 +478,24 @@
 				OBJ_11 /* ModifyInstructions.swift */,
 			);
 			path = Output;
+			sourceTree = "<group>";
+		};
+		903C2B0E2559758100EB1C6D /* GameBoyMac */ = {
+			isa = PBXGroup;
+			children = (
+				903C2B132559758300EB1C6D /* Assets.xcassets */,
+				903C2B182559758300EB1C6D /* Main.storyboard */,
+				903C2B1C2559758300EB1C6D /* GameBoyMac.entitlements */,
+				903C2B0F2559758100EB1C6D /* AppDelegate.swift */,
+				903C2B5E2559774B00EB1C6D /* Arguments.swift */,
+				903C2B5D2559774B00EB1C6D /* GameBoyWindow.swift */,
+				903C2B5A2559774B00EB1C6D /* KeyMap.swift */,
+				903C2B5F2559774B00EB1C6D /* Metal.swift */,
+				903C2B5B2559774B00EB1C6D /* Shader.metal */,
+				903C2B1B2559758300EB1C6D /* Info.plist */,
+			);
+			name = GameBoyMac;
+			path = Sources/GameBoyMac;
 			sourceTree = "<group>";
 		};
 		90427CFF25546050007A9E9D /* Common */ = {
@@ -645,7 +634,7 @@
 				"Swift plays pokemon::GameBoyKitROMTests::Product" /* GameBoyKitROMTests */,
 				"Swift plays pokemon::Code generation::Product" /* Code generation */,
 				"Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */,
-				90374A052553466E008A908D /* GameBoyMac */,
+				903C2B0D2559758100EB1C6D /* GameBoyMac.app */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -771,7 +760,7 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				90374A062553466E008A908D /* GameBoyMac */,
+				903C2B0E2559758100EB1C6D /* GameBoyMac */,
 				OBJ_17 /* GameBoyKit */,
 				OBJ_8 /* Code generation */,
 			);
@@ -852,24 +841,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		90374A042553466E008A908D /* GameBoyMac */ = {
+		903C2B0C2559758100EB1C6D /* GameBoyMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90374A092553466E008A908D /* Build configuration list for PBXNativeTarget "GameBoyMac" */;
+			buildConfigurationList = 903C2B1D2559758300EB1C6D /* Build configuration list for PBXNativeTarget "GameBoyMac" */;
 			buildPhases = (
-				90374A012553466E008A908D /* Sources */,
-				90374A022553466E008A908D /* Frameworks */,
-				90374A032553466E008A908D /* CopyFiles */,
-				90374A3F25534757008A908D /* Embed Frameworks */,
+				903C2B092559758100EB1C6D /* Sources */,
+				903C2B0A2559758100EB1C6D /* Frameworks */,
+				903C2B0B2559758100EB1C6D /* Resources */,
+				903C2B542559766400EB1C6D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				90374A3E25534757008A908D /* PBXTargetDependency */,
+				903C2B532559766400EB1C6D /* PBXTargetDependency */,
 			);
 			name = GameBoyMac;
 			productName = GameBoyMac;
-			productReference = 90374A052553466E008A908D /* GameBoyMac */;
-			productType = "com.apple.product-type.tool";
+			productReference = 903C2B0D2559758100EB1C6D /* GameBoyMac.app */;
+			productType = "com.apple.product-type.application";
 		};
 		"Swift plays pokemon::Code generation" /* Code generation */ = {
 			isa = PBXNativeTarget;
@@ -963,7 +952,7 @@
 				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 9999;
 				TargetAttributes = {
-					90374A042553466E008A908D = {
+					903C2B0C2559758100EB1C6D = {
 						CreatedOnToolsVersion = 12.0;
 						ProvisioningStyle = Automatic;
 					};
@@ -975,22 +964,35 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = OBJ_5;
 			productRefGroup = OBJ_132 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				"Swift plays pokemon::Code generation" /* Code generation */,
+				903C2B0C2559758100EB1C6D /* GameBoyMac */,
 				"Swift plays pokemon::GameBoyKit" /* GameBoyKit */,
-				"Swift plays pokemon::GameBoyKitROMTests" /* GameBoyKitROMTests */,
 				"Swift plays pokemon::GameBoyKitTests" /* GameBoyKitTests */,
+				"Swift plays pokemon::GameBoyKitROMTests" /* GameBoyKitROMTests */,
+				"Swift plays pokemon::Code generation" /* Code generation */,
 				"Swift plays pokemon::SwiftPMPackageDescription" /* Swift plays pokemonPackageDescription */,
 				"Swift plays pokemon::Swift plays pokemonPackageTests::ProductTarget" /* Swift plays pokemonPackageTests */,
-				90374A042553466E008A908D /* GameBoyMac */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		903C2B0B2559758100EB1C6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				903C2B1A2559758300EB1C6D /* Main.storyboard in Resources */,
+				903C2B142559758300EB1C6D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		90374A46255347A8008A908D /* SwiftLint */ = {
@@ -1014,18 +1016,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		90374A012553466E008A908D /* Sources */ = {
+		903C2B092559758100EB1C6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90374A26255346AD008A908D /* Arguments.swift in Sources */,
-				90374A29255346AD008A908D /* Metal.swift in Sources */,
-				90374A25255346AD008A908D /* TestAppDelegate.swift in Sources */,
-				90374A27255346AD008A908D /* KeyMap.swift in Sources */,
-				90374A28255346AD008A908D /* AppDelegate.swift in Sources */,
-				90374A2A255346AD008A908D /* Shader.metal in Sources */,
-				90374A082553466E008A908D /* main.swift in Sources */,
-				90374A2B255346AD008A908D /* Window.swift in Sources */,
+				903C2B652559774B00EB1C6D /* Arguments.swift in Sources */,
+				903C2B642559774B00EB1C6D /* GameBoyWindow.swift in Sources */,
+				903C2B622559774B00EB1C6D /* Shader.metal in Sources */,
+				903C2B662559774B00EB1C6D /* Metal.swift in Sources */,
+				903C2B612559774B00EB1C6D /* KeyMap.swift in Sources */,
+				903C2B102559758100EB1C6D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1191,10 +1191,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		90374A3E25534757008A908D /* PBXTargetDependency */ = {
+		903C2B532559766400EB1C6D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Swift plays pokemon::GameBoyKit" /* GameBoyKit */;
-			targetProxy = 90374A3D25534757008A908D /* PBXContainerItemProxy */;
+			targetProxy = 903C2B522559766400EB1C6D /* PBXContainerItemProxy */;
 		};
 		9067C77C2558017B007991FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1213,11 +1213,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		903C2B182559758300EB1C6D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				903C2B192559758300EB1C6D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		90374A0A2553466E008A908D /* Debug */ = {
+		903C2B1E2559758300EB1C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1246,7 +1259,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = GameBoyMac/GameBoyMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1262,19 +1278,24 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/GameBoyMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LiarPrincess.GameBoyMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		90374A0B2553466E008A908D /* Release */ = {
+		903C2B1F2559758300EB1C6D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1303,9 +1324,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = GameBoyMac/GameBoyMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1315,9 +1339,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/GameBoyMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LiarPrincess.GameBoyMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1613,11 +1640,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		90374A092553466E008A908D /* Build configuration list for PBXNativeTarget "GameBoyMac" */ = {
+		903C2B1D2559758300EB1C6D /* Build configuration list for PBXNativeTarget "GameBoyMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				90374A0A2553466E008A908D /* Debug */,
-				90374A0B2553466E008A908D /* Release */,
+				903C2B1E2559758300EB1C6D /* Debug */,
+				903C2B1F2559758300EB1C6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

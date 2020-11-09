@@ -34,7 +34,7 @@ public final class Joypad: JoypadMemory {
       if isButtons == isDirections { return }
 
       guard let input = self.provider?.getGameboyInput() else {
-        return
+        fatalError("GameBoy input provider was deallocated before finishing running")
       }
 
       isButtons ? self.setButtons(from: input) : self.setDirections(from: input)

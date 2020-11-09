@@ -5,79 +5,35 @@
 import Foundation
 import GameBoyKit
 
-private let bootromArgument = "--bootrom"
-private let romArgument = "--rom" // or just last one
+struct Arguments {
 
-internal struct Arguments {
-  internal let bootrom:   Bootrom
-  internal let cartridge: Cartridge
+  static let bootromArgument = "--bootrom"
+  static let romArgument = "--rom" // or just last one
+
+  let bootrom: Bootrom?
+  let rom: Cartridge
+
+  init(arguments: [String]) {
+    let stringArguments = parse(arguments: arguments)
+    self.bootrom = openBootrom(path: stringArguments.bootromPath)
+    self.rom = openRom(path: stringArguments.romPath)
+  }
 }
 
-private struct RawArguments {
+private struct StringArguments {
   fileprivate var bootromPath: String?
-  fileprivate var romPath:     String?
+  fileprivate var romPath: String?
 }
 
-internal func parseArguments() -> Arguments {
-  let rawArguments = parseRawArguments()
-  return Arguments(
-    bootrom: openBootrom(path: rawArguments.bootromPath),
-    cartridge: openRom(path: rawArguments.romPath)
-  )
-}
-
-private func openBootrom(path: String?) -> Bootrom {
-  guard let path = path else {
-    print("Boot-ROM not provided. Using default one.")
-    return .skip
-  }
-
-  do {
-    print("Boot-ROM: \(path)")
-
-    let url = URL(fileURLWithPath: path, isDirectory: false)
-    let data = try Data(contentsOf: url)
-    return try BootromFactory.fromData(data)
-  } catch let error as BootromFactoryError {
-    print("Error when opening Boot-ROM: \(error.description)")
-    exit(1)
-  } catch {
-    print("Error when opening Boot-ROM: \(error.localizedDescription)")
-    exit(1)
-  }
-}
-
-private func openRom(path: String?) -> Cartridge {
-  guard let path = path else {
-    print("ROM not provided. Use '\(romArgument)' to specify ROM file.")
-    exit(1)
-  }
-
-  do {
-    print("ROM: \(path)")
-
-    let url = URL(fileURLWithPath: path, isDirectory: false)
-    let data = try Data(contentsOf: url)
-    return try CartridgeFactory.fromData(data)
-  } catch let error as CartridgeFactoryError {
-    print("Error when opening ROM: \(error.description)")
-    exit(1)
-  } catch {
-    print("Error when opening ROM: \(error.localizedDescription)")
-    exit(1)
-  }
-}
-
-private func parseRawArguments() -> RawArguments {
-  let arguments = CommandLine.arguments
-
-  var result = RawArguments()
-
+private func parse(arguments: [String]) -> StringArguments {
+  var result = StringArguments()
   var index = 0
-  while index < arguments.count {
-    switch arguments[index] {
 
-    case bootromArgument:
+  while index < arguments.count {
+    let value = arguments[index].trimmingCharacters(in: .whitespaces)
+    switch value {
+
+    case Arguments.bootromArgument:
       guard index + 1 < arguments.count else {
         index += 1
         break
@@ -86,7 +42,7 @@ private func parseRawArguments() -> RawArguments {
       result.bootromPath = arguments[index + 1]
       index += 2
 
-    case romArgument:
+    case Arguments.romArgument:
       guard index + 1 < arguments.count else {
         index += 1
         break
@@ -100,10 +56,58 @@ private func parseRawArguments() -> RawArguments {
     }
   }
 
-  // if we don't have rom then assume it is in the last argument
+  // If we don't have rom then assume it is in the last argument.
+  // '> 1' because 1st argument is the program name.
   if result.romPath == nil && arguments.count > 1 {
     result.romPath = arguments.last
   }
 
   return result
+}
+
+private func openBootrom(path: String?) -> Bootrom? {
+  guard let path = path else {
+    print("Boot-ROM not provided. Using default one.")
+    return nil
+  }
+
+  do {
+    print("Boot-ROM:", path)
+
+    let url = URL(fileURLWithPath: path, isDirectory: false)
+    let data = try Data(contentsOf: url)
+    return try BootromFactory.create(data: data)
+  } catch let error as BootromError {
+    print("Error when opening Boot-ROM: \(error.description)")
+    exit(1)
+  } catch {
+    print("Error when opening Boot-ROM: \(error.localizedDescription)")
+    exit(1)
+  }
+}
+
+private func openRom(path: String?) -> Cartridge {
+  guard let path = path else {
+    let arg = Arguments.romArgument
+    print("ROM not provided. Use '\(arg)' argument to specify ROM file.")
+    exit(1)
+  }
+
+  do {
+    print("ROM:", path)
+
+    let url = URL(fileURLWithPath: path, isDirectory: false)
+    let data = try Data(contentsOf: url)
+    let result = try CartridgeFactory.create(data: data)
+
+    print("Found:", result.header.title)
+    print("ROM type:", result.header.type)
+    return result
+  } catch let error as CartridgeError {
+    print("Error when opening ROM: \(error.description)")
+    exit(1)
+  } catch {
+    print("Error when opening ROM: \(error.localizedDescription)")
+    exit(1)
+  }
 }

@@ -18,6 +18,10 @@ public final class GameBoy {
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress: Int = 0
 
+  public var framebuffer: Framebuffer {
+    return self.lcd.framebuffer
+  }
+
   // MARK: - Init
 
   public init(bootrom: Bootrom?,

@@ -1,14 +1,35 @@
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
 import AppKit
+import GameBoyKit
 
-public class AppDelegate: NSObject, NSApplicationDelegate {
+@NSApplicationMain
+class AppDelegate: NSObject, NSApplicationDelegate {
 
-  private lazy var window = Window()
+  // swiftlint:disable:next implicitly_unwrapped_optional
+  private var window: NSWindow!
 
-  public func applicationDidFinishLaunching(_ aNotification: Notification) {
+  func applicationDidFinishLaunching(_ aNotification: Notification) {
+    let argumentsRaw = CommandLine.arguments
+    let arguments = Arguments(arguments: argumentsRaw)
+
+    let keyMap = KeyMap(
+      up: .up,
+      down: .down,
+      left: .left,
+      right: .right,
+      a: .a,
+      b: .s,
+      start: .space,
+      select: .q
+    )
+
+    let window = GameBoyWindow(
+      scale: 3,
+      bootrom: arguments.bootrom,
+      cartridge: arguments.rom,
+      keyMap: keyMap
+    )
+
+    self.window = window
     self.window.makeKeyAndOrderFront(nil)
     self.window.makeMain()
   }

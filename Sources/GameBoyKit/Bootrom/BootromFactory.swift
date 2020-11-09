@@ -7,7 +7,7 @@ import Foundation
 // We wil use 'BootromFactory' for symetry with 'CartridgeFactory'
 public enum BootromFactory {
 
-  public static func fromData(_ data: Data) throws -> Bootrom {
+  public static func create(data: Data) throws -> Bootrom {
     guard data.count == Bootrom.size else {
       throw BootromError.invalidSize
     }
