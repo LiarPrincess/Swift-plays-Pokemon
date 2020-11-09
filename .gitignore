@@ -1,18 +1,18 @@
 .DS_Store
-Swift plays pokemon.xcodeproj/xcuserdata
 
+# User settings
+Swift plays Pokemon.xcodeproj/**/xcuserdata
+
+# Build thingies
 /Build
 /.build
 
 # Roms are excluded because of legal stuff…
-ROMs/*
+ROMs/*.gb
 
-# ROM test files
-/Tests/GameBoyKitROMTests/Bootrom/Dump
+# You can download 'Blargg' test ROMs at:
+# https://gbdev.gg8.se/wiki/articles/Test_ROMs
+ROMs/Tests - Blargg
 
-/Tests/GameBoyKitROMTests/Blargg/ROMs
-/Tests/GameBoyKitROMTests/Blargg/Dumps
-/Tests/GameBoyKitROMTests/Blargg/Dumps.zip
-
-/Tests/GameBoyKitROMTests/Tetris/Dump
-/Tests/GameBoyKitROMTests/Tetris/Tetris.gb
+# We store dumps in zip files, we do not need them unzipped
+ROMs/**/Dump

@@ -157,6 +157,6 @@ private func openRom(romPath: String) -> Cartridge {
 private func getDumpsDirUrl(dumpDirName: String) -> URL {
   return romsDir
     .appendingPathComponent("Tests - Blargg")
-    .appendingPathComponent("Dumps")
+    .appendingPathComponent("Dump")
     .appendingPathComponent(dumpDirName)
 }
