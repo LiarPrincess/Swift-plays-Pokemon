@@ -78,12 +78,12 @@ private func isChecksumValid(_ data: Data) -> ChecksumResult {
   var hl: UInt16 = CartridgeMap.headerChecksumRange.start
 
   var b: UInt8 = 0x19 // bootrom: 0x00f1
-  var a: UInt8 = b    // bootrom: 0x00f3
+  var a: UInt8 = b // bootrom: 0x00f3
 
   while b > 0 {
     a &+= data[hl] // bootrom: 0x00f4
-    hl += 1        // bootrom: 0x00f5
-    b -= 1         // bootrom: 0x00f6
+    hl += 1 // bootrom: 0x00f5
+    b -= 1 // bootrom: 0x00f6
   }
   a &+= data[hl] // bootrom: 0x00f9
 

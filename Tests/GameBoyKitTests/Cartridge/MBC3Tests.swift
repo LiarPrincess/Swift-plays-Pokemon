@@ -193,7 +193,8 @@ class MBC3Tests: CartridgeTestCase {
 
   private func createCartridge(romSize: CartridgeRomSize,
                                ramSize: CartridgeRamSize,
-                               romData: [UInt16:UInt8] = [:]) throws -> MBC3 {
+                               romData: [UInt16: UInt8] = [:]) throws -> MBC3
+  {
     let type: CartridgeType = ramSize.byteCount == 0 ? .mbc3 : .mbc3Ram
 
     var data = self.createRom(title: "ROM",

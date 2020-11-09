@@ -240,7 +240,7 @@ class CpuLdTests: CpuTestCase {
     let cpu = self.createCpu(memory: memory)
     _ = cpu.ld_rr_d16(.hl, 0x3a5b)
 
-    XCTAssertEqual(cpu.registers.hl, 0x3A5B)
+    XCTAssertEqual(cpu.registers.hl, 0x3a5b)
   }
 
   /// When HL = FFFFh

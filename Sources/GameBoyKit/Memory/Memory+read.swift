@@ -64,15 +64,15 @@ extension Memory {
   private func readInternalIO(_ address: UInt16) -> UInt8 {
     switch address {
     case MemoryMap.IO.joypad: return self.joypad.value
-    case MemoryMap.IO.sb:     return self.serialPort.sb
-    case MemoryMap.IO.sc:     return self.serialPort.sc
-    case MemoryMap.IO.unmapBootrom:  return defaultValue
+    case MemoryMap.IO.sb: return self.serialPort.sb
+    case MemoryMap.IO.sc: return self.serialPort.sc
+    case MemoryMap.IO.unmapBootrom: return defaultValue
     case MemoryMap.IO.interruptFlag: return self.interrupts.flag
 
-    case MemoryMap.Timer.div:  return self.timer.div
+    case MemoryMap.Timer.div: return self.timer.div
     case MemoryMap.Timer.tima: return self.timer.tima
-    case MemoryMap.Timer.tma:  return self.timer.tma
-    case MemoryMap.Timer.tac:  return self.timer.tac
+    case MemoryMap.Timer.tma: return self.timer.tma
+    case MemoryMap.Timer.tac: return self.timer.tac
 
     case MemoryMap.Audio.nr10: return self.audio.nr10
     case MemoryMap.Audio.nr11: return self.audio.nr11
@@ -96,18 +96,18 @@ extension Memory {
     case MemoryMap.Audio.nr51: return self.audio.nr51
     case MemoryMap.Audio.nr52: return self.audio.nr52
     case MemoryMap.Audio.nr3_ram_start: return self.audio.nr3_ram_start
-    case MemoryMap.Audio.nr3_ram_end:   return self.audio.nr3_ram_end
+    case MemoryMap.Audio.nr3_ram_end: return self.audio.nr3_ram_end
 
     case MemoryMap.Lcd.control: return self.lcd.control.value
-    case MemoryMap.Lcd.status:  return self.lcd.status.value
+    case MemoryMap.Lcd.status: return self.lcd.status.value
     case MemoryMap.Lcd.scrollY: return self.lcd.scrollY
     case MemoryMap.Lcd.scrollX: return self.lcd.scrollX
-    case MemoryMap.Lcd.line:        return self.lcd.line
+    case MemoryMap.Lcd.line: return self.lcd.line
     case MemoryMap.Lcd.lineCompare: return self.lcd.lineCompare
-    case MemoryMap.Lcd.dma:         return defaultValue
+    case MemoryMap.Lcd.dma: return defaultValue
     case MemoryMap.Lcd.backgroundPalette: return self.lcd.backgroundColorPalette.value
-    case MemoryMap.Lcd.spritePalette0:    return self.lcd.spriteColorPalette0.value
-    case MemoryMap.Lcd.spritePalette1:    return self.lcd.spriteColorPalette1.value
+    case MemoryMap.Lcd.spritePalette0: return self.lcd.spriteColorPalette0.value
+    case MemoryMap.Lcd.spritePalette1: return self.lcd.spriteColorPalette1.value
     case MemoryMap.Lcd.windowY: return self.lcd.windowY
     case MemoryMap.Lcd.windowX: return self.lcd.windowX
 

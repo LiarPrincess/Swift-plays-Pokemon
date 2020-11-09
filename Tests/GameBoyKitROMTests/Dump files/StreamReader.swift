@@ -7,13 +7,13 @@ import Foundation
 // Source:
 // https://stackoverflow.com/questions/24581517/read-a-file-url-line-by-line-in-swift
 
-class StreamReader  {
+class StreamReader {
 
   private var fileHandle: FileHandle?
-  private let encoding:   String.Encoding
-  private let delimiter:  Data
+  private let encoding: String.Encoding
+  private let delimiter: Data
 
-  private var buffer:     Data
+  private var buffer: Data
   private let bufferSize: Int
 
   private var isEof = false
@@ -21,17 +21,19 @@ class StreamReader  {
   init?(url: URL,
         delimiter: String = "\n",
         encoding: String.Encoding = .utf8,
-        bufferSize: Int = 4_096) {
+        bufferSize: Int = 4_096)
+  {
     guard let fileHandle = FileHandle(forReadingAtPath: url.path),
-          let delimiterData = delimiter.data(using: encoding) else {
+          let delimiterData = delimiter.data(using: encoding)
+    else {
         return nil
     }
 
-    self.encoding   = encoding
+    self.encoding = encoding
     self.bufferSize = bufferSize
     self.fileHandle = fileHandle
-    self.delimiter  = delimiterData
-    self.buffer     = Data(capacity: bufferSize)
+    self.delimiter = delimiterData
+    self.buffer = Data(capacity: bufferSize)
   }
 
   deinit {
@@ -50,8 +52,9 @@ class StreamReader  {
 
     while !self.isEof {
       if let range = self.buffer.range(of: self.delimiter) {
-        let line = String(data: buffer.subdata(in: 0..<range.lowerBound), encoding: encoding)
-        buffer.removeSubrange(0..<range.upperBound)
+        let lineData = self.buffer.subdata(in: 0..<range.lowerBound)
+        let line = String(data: lineData, encoding: self.encoding)
+        self.buffer.removeSubrange(0..<range.upperBound)
         return line
       }
 
@@ -84,8 +87,8 @@ class StreamReader  {
 
     while !self.isEof {
       if let range = self.buffer.range(of: self.delimiter) {
-        let data = buffer.subdata(in: 0..<range.lowerBound)
-        buffer.removeSubrange(0..<range.upperBound)
+        let data = self.buffer.subdata(in: 0..<range.lowerBound)
+        self.buffer.removeSubrange(0..<range.upperBound)
         return data
       }
 
@@ -94,8 +97,8 @@ class StreamReader  {
         self.isEof = true
         // Buffer contains last line in file (not terminated by delimiter)
         if !self.buffer.isEmpty {
-          let data = buffer as Data
-          buffer.count = 0
+          let data = self.buffer as Data
+          self.buffer.count = 0
           return data
         }
       } else {
@@ -120,7 +123,7 @@ class StreamReader  {
   }
 }
 
-extension StreamReader : Sequence {
+extension StreamReader: Sequence {
   func makeIterator() -> AnyIterator<String> {
     return AnyIterator { self.nextLine() }
   }

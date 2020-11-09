@@ -28,5 +28,5 @@ struct DumpFileContent {
   }
 
   var cpu = Cpu()
-  var memory = [UInt8](repeating: 0, count: 0x10000)
+  var memory = [UInt8](repeating: 0, count: 0x1_0000)
 }

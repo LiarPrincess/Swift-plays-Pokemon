@@ -271,4 +271,3 @@ internal enum UnprefixedOpcode: UInt8, RawRepresentable {
   case cp_d8 = 0xfe
   case rst_38 = 0xff
 }
-

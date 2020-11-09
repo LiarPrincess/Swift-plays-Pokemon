@@ -12,7 +12,7 @@ class DmaTests: MemoryTestCase {
 
     // Fill source (somewhere in external ram)
     let sourceStart: UInt16 = 0xab00
-    let sourceEnd:   UInt16 = 0xab9f
+    let sourceEnd: UInt16 = 0xab9f
 
     for address in sourceStart...sourceEnd {
       let value = UInt8(address & 0x00ff)

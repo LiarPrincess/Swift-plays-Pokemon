@@ -96,10 +96,10 @@ class MemoryWriteTests: MemoryTestCase {
     let memory = self.createMemory()
     let range = MemoryMap.internalRamEcho
 
-    memory.write(range.start, value:  startValue)
-    memory.write(range.end,   value:  endValue)
+    memory.write(range.start, value: startValue)
+    memory.write(range.end, value: endValue)
 
-    XCTAssertEqual(memory.ram[0],  startValue)
+    XCTAssertEqual(memory.ram[0], startValue)
     XCTAssertEqual(memory.ram[range.count - 1], endValue)
   }
 

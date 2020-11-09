@@ -10,11 +10,11 @@ class InterruptsTests: XCTestCase {
   func test_flag() {
     let interrupts = Interrupts()
 
-    XCTAssertEqual(interrupts.isVBlankSet,  false)
+    XCTAssertEqual(interrupts.isVBlankSet, false)
     XCTAssertEqual(interrupts.isLcdStatSet, false)
-    XCTAssertEqual(interrupts.isTimerSet,   false)
-    XCTAssertEqual(interrupts.isSerialSet,  false)
-    XCTAssertEqual(interrupts.isJoypadSet,  false)
+    XCTAssertEqual(interrupts.isTimerSet, false)
+    XCTAssertEqual(interrupts.isSerialSet, false)
+    XCTAssertEqual(interrupts.isJoypadSet, false)
 
     interrupts.flag = 1 << 0
     XCTAssertEqual(interrupts.isVBlankSet, true)
@@ -35,11 +35,11 @@ class InterruptsTests: XCTestCase {
   func test_enabled() {
     let interrupts = Interrupts()
 
-    XCTAssertEqual(interrupts.isVBlankEnabled,  false)
+    XCTAssertEqual(interrupts.isVBlankEnabled, false)
     XCTAssertEqual(interrupts.isLcdStatEnabled, false)
-    XCTAssertEqual(interrupts.isTimerEnabled,   false)
-    XCTAssertEqual(interrupts.isSerialEnabled,  false)
-    XCTAssertEqual(interrupts.isJoypadEnabled,  false)
+    XCTAssertEqual(interrupts.isTimerEnabled, false)
+    XCTAssertEqual(interrupts.isSerialEnabled, false)
+    XCTAssertEqual(interrupts.isJoypadEnabled, false)
 
     interrupts.enable = 1 << 0
     XCTAssertEqual(interrupts.isVBlankEnabled, true)

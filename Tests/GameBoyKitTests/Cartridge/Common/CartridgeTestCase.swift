@@ -28,7 +28,8 @@ class CartridgeTestCase: XCTestCase {
                  destinationCode: DestinationCode,
                  romSize: CartridgeRomSize,
                  ramSize: CartridgeRamSize,
-                 checksum: UInt8) -> Data {
+                 checksum: UInt8) -> Data
+  {
     var data = Data(count: romSize.byteCount)
 
     // Taken from Tetris (means that title will be at 'CartridgeMap.newTitle')

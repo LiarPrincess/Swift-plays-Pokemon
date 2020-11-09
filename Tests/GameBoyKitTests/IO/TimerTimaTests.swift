@@ -5,9 +5,9 @@
 import XCTest
 @testable import GameBoyKit
 
-private let disabled:   UInt8 = 0b000
-private let enabled:    UInt8 = 0b100
-private let period16:   UInt8 = 0b01
+private let disabled: UInt8 = 0b000
+private let enabled: UInt8 = 0b100
+private let period16: UInt8 = 0b01
 private let period1024: UInt8 = 0b00
 
 class TimerTimaTests: TimerTestCase {

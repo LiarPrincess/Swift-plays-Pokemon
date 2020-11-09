@@ -16,17 +16,17 @@ private func toData(_ s: String) -> Data {
   return s.data(using: .ascii)!
 }
 
-private let cpu_A  = toData("cpu_A")
-private let cpu_B  = toData("cpu_B")
-private let cpu_C  = toData("cpu_C")
-private let cpu_D  = toData("cpu_D")
-private let cpu_E  = toData("cpu_E")
+private let cpu_A = toData("cpu_A")
+private let cpu_B = toData("cpu_B")
+private let cpu_C = toData("cpu_C")
+private let cpu_D = toData("cpu_D")
+private let cpu_E = toData("cpu_E")
 private let cpu_HL = toData("cpu_HL")
 
-private let cpu_c_carry     = toData("cpu_c_carry")
+private let cpu_c_carry = toData("cpu_c_carry")
 private let cpu_h_halfcarry = toData("cpu_h_halfcarry")
 private let cpu_n_substract = toData("cpu_n_substract")
-private let cpu_z_zero      = toData("cpu_z_zero")
+private let cpu_z_zero = toData("cpu_z_zero")
 
 private let cpu_SP = toData("cpu_SP")
 private let cpu_PC = toData("cpu_PC")
@@ -34,7 +34,7 @@ private let total_ticks = toData("total_ticks")
 private let instruction_ticks = toData("instruction_ticks")
 
 private let cpu_interrupt_master_enable = toData("cpu_interrupt_master_enable")
-private let cpu_halted  = toData("cpu_halted")
+private let cpu_halted = toData("cpu_halted")
 private let cpu_stopped = toData("cpu_stopped")
 
 private let memory = toData("memory")
@@ -61,38 +61,52 @@ private func fill(state: inout DumpFileContent, from fileUrl: URL) {
     let property = line[..<splitIndex]
     let value = line[line.index(after: splitIndex)...]
 
-    if property == cpu_A  { state.cpu.a = parseUInt8(value) }
-    else if property == cpu_B  { state.cpu.b = parseUInt8(value) }
-    else if property == cpu_C  { state.cpu.c = parseUInt8(value) }
-    else if property == cpu_D  { state.cpu.d = parseUInt8(value) }
-    else if property == cpu_E  { state.cpu.e = parseUInt8(value) }
-    else if property == cpu_HL {
-      let v = parseUInt16(value)
-      state.cpu.h = UInt8((v & 0xff00) >> 8)
-      state.cpu.l = UInt8(v & 0xff)
-    }
+    switch property {
+    case cpu_A:
+      state.cpu.a = parseUInt8(value)
+    case cpu_B:
+      state.cpu.b = parseUInt8(value)
+    case cpu_C:
+      state.cpu.c = parseUInt8(value)
+    case cpu_D:
+      state.cpu.d = parseUInt8(value)
+    case cpu_E:
+      state.cpu.e = parseUInt8(value)
+    case cpu_HL:
+      let u16 = parseUInt16(value)
+      state.cpu.h = UInt8((u16 & 0xff00) >> 8)
+      state.cpu.l = UInt8(u16 & 0xff)
 
-    else if property == cpu_c_carry      { state.cpu.carryFlag     = parseBool(value) }
-    else if property == cpu_h_halfcarry  { state.cpu.halfCarryFlag = parseBool(value) }
-    else if property == cpu_n_substract  { state.cpu.subtractFlag  = parseBool(value) }
-    else if property == cpu_z_zero       { state.cpu.zeroFlag      = parseBool(value) }
+    case cpu_c_carry:
+      state.cpu.carryFlag = parseBool(value)
+    case cpu_h_halfcarry:
+      state.cpu.halfCarryFlag = parseBool(value)
+    case cpu_n_substract:
+      state.cpu.subtractFlag = parseBool(value)
+    case cpu_z_zero:
+      state.cpu.zeroFlag = parseBool(value)
 
-    else if property == cpu_SP  { state.cpu.sp = parseUInt16(value) }
-    else if property == cpu_PC  { state.cpu.pc = parseUInt16(value) }
+    case cpu_SP:
+      state.cpu.sp = parseUInt16(value)
+    case cpu_PC:
+      state.cpu.pc = parseUInt16(value)
 
-    else if property == total_ticks {  }
-    else if property == instruction_ticks {  }
+    case total_ticks,
+         instruction_ticks:
+      break
 
-    else if property == cpu_interrupt_master_enable  { state.cpu.ime = parseBool(value) }
-    else if property == cpu_halted  { state.cpu.isHalted  = parseBool(value) }
-    else if property == cpu_stopped { state.cpu.isStopped = parseBool(value) }
+    case cpu_interrupt_master_enable:
+      state.cpu.ime = parseBool(value)
+    case cpu_halted:
+      state.cpu.isHalted = parseBool(value)
+    case cpu_stopped:
+      state.cpu.isStopped = parseBool(value)
 
-    else if property == memory {
+    case memory:
       fillMemory(state: &state, from: 0x0000, to: 0xffff, with: value)
-      assert(state.memory.count == 0x10000)
-    }
+      assert(state.memory.count == 0x1_0000)
 
-    else {
+    default:
       // swiftlint:disable:next force_unwrapping
       let propertyString = String(bytes: property, encoding: .ascii)!
       print("Invalid line: \(propertyString)...")

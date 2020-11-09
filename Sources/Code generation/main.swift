@@ -6,7 +6,7 @@ import Foundation
 
 let currentFile = URL(fileURLWithPath: #file)
 let sourcesDir = currentFile.deletingLastPathComponent().deletingLastPathComponent()
-let cpuDir   = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathComponent("Cpu")
+let cpuDir = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathComponent("Cpu")
 let debugDir = sourcesDir.appendingPathComponent("GameBoyKit").appendingPathComponent("Debug")
 
 let opcodes = try readOpcodes()
@@ -34,7 +34,7 @@ printPrefixOpcodeEnum(opcodes)
 
 // MARK: - Modify cpu instructions
 
-//file = frameworkDir.appendingPathComponent("Cpu+Instructions.swift")
-//let instructionsFileContent = try! String(contentsOf: file, encoding: .utf8)
-//freopen(file.path, "w", stdout)
-//modifyInstructions(opcodes, instructionsFileContent)
+// file = frameworkDir.appendingPathComponent("Cpu+Instructions.swift")
+// let instructionsFileContent = try! String(contentsOf: file, encoding: .utf8)
+// freopen(file.path, "w", stdout)
+// modifyInstructions(opcodes, instructionsFileContent)

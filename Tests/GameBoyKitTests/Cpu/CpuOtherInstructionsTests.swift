@@ -24,9 +24,9 @@ class CpuOtherInstructionsTests: CpuTestCase {
 
     _ = cpu.daa() // CY: 0, H: 0
     XCTAssertEqual(cpu.registers.a, 0x83)
-    XCTAssertEqual(cpu.registers.carryFlag,     false)
+    XCTAssertEqual(cpu.registers.carryFlag, false)
     XCTAssertEqual(cpu.registers.halfCarryFlag, false) // added by me
-    XCTAssertEqual(cpu.registers.zeroFlag,      false) // added by me
+    XCTAssertEqual(cpu.registers.zeroFlag, false) // added by me
 
     _ = cpu.sub_a_r(.b)
     XCTAssertEqual(cpu.registers.a, 0x4b)
@@ -34,9 +34,9 @@ class CpuOtherInstructionsTests: CpuTestCase {
 
     _ = cpu.daa() // CY: 0, H: 1
     XCTAssertEqual(cpu.registers.a, 0x45)
-    XCTAssertEqual(cpu.registers.carryFlag,     false) // added by me
+    XCTAssertEqual(cpu.registers.carryFlag, false) // added by me
     XCTAssertEqual(cpu.registers.halfCarryFlag, false) // added by me
-    XCTAssertEqual(cpu.registers.zeroFlag,      false) // added by me
+    XCTAssertEqual(cpu.registers.zeroFlag, false) // added by me
   }
 
   func test_nop() {

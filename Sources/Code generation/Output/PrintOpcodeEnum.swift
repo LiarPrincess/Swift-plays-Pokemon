@@ -58,8 +58,8 @@ private func printOpcodeEnum(_ enumName: String, _ opcodes: [Opcode]) {
   print("")
 }
 
-private func byAddress(_ opcodes: [Opcode]) -> [String:Opcode] {
-  var result = [String:Opcode]()
+private func byAddress(_ opcodes: [Opcode]) -> [String: Opcode] {
+  var result = [String: Opcode]()
   for op in opcodes {
     result[op.addr] = op
   }

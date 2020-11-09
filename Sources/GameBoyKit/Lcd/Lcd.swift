@@ -29,7 +29,7 @@ public final class Lcd: LcdMemory {
   public internal(set) var scrollY: UInt8 = 0
   public internal(set) var scrollX: UInt8 = 0
 
-  public internal(set) var line:        UInt8 = 0
+  public internal(set) var line: UInt8 = 0
   public internal(set) var lineCompare: UInt8 = 0
 
   public internal(set) var windowY: UInt8 = 0
@@ -42,12 +42,12 @@ public final class Lcd: LcdMemory {
   public internal(set) var tileMap9800to9bff = MemoryBuffer(region: VideoRamMap.tileMap9800to9bff)
   public internal(set) var tileMap9c00to9fff = MemoryBuffer(region: VideoRamMap.tileMap9c00to9fff)
 
-  internal lazy var tiles   = (0..<Tile.Constants.count).map { _ in Tile() }
+  internal lazy var tiles = (0..<Tile.Constants.count).map { _ in Tile() }
   internal lazy var sprites = (0..<Sprite.Constants.count).map { Sprite(id: $0) }
 
   /// Cache, so we don't recalculate sprites on every line draw.
   /// Writes to OAM will clear appropriate entries.
-  internal lazy var spritesByLineCache = [Int:[Sprite]]()
+  internal lazy var spritesByLineCache = [Int: [Sprite]]()
 
   /// Data that should be put on screen
   internal lazy var framebuffer = Framebuffer()
@@ -82,7 +82,7 @@ public final class Lcd: LcdMemory {
     case VideoRamMap.tileData:
       let relativeAddress = Int(address - VideoRamMap.tileData.start)
       let index = relativeAddress / Tile.Constants.byteCount
-      let byte  = relativeAddress % Tile.Constants.byteCount
+      let byte = relativeAddress % Tile.Constants.byteCount
 
       let tile = self.tiles[index]
       return tile.data[byte]
@@ -106,7 +106,7 @@ public final class Lcd: LcdMemory {
     case VideoRamMap.tileData:
       let relativeAddress = Int(address - VideoRamMap.tileData.start)
       let index = relativeAddress / Tile.Constants.byteCount
-      let byte  = relativeAddress % Tile.Constants.byteCount
+      let byte = relativeAddress % Tile.Constants.byteCount
 
       let tile = self.tiles[index]
       tile.setByte(byte, value: value)
@@ -128,7 +128,7 @@ public final class Lcd: LcdMemory {
     let oamAddress = Int(address - MemoryMap.oam.start)
 
     let index = oamAddress / Sprite.Constants.byteCount
-    let byte  = oamAddress % Sprite.Constants.byteCount
+    let byte = oamAddress % Sprite.Constants.byteCount
 
     let sprite = self.sprites[index]
     switch byte {
@@ -144,7 +144,7 @@ public final class Lcd: LcdMemory {
     let oamAddress = Int(address - MemoryMap.oam.start)
 
     let index = oamAddress / Sprite.Constants.byteCount
-    let byte  = oamAddress % Sprite.Constants.byteCount
+    let byte = oamAddress % Sprite.Constants.byteCount
 
     let sprite = self.sprites[index]
     switch byte {
@@ -280,9 +280,9 @@ public final class Lcd: LcdMemory {
     var newStatus = self.status.value & clear
 
     switch mode {
-    case .hBlank:        newStatus |= LcdMode.hBlankValue
-    case .vBlank:        newStatus |= LcdMode.vBlankValue
-    case .oamSearch:     newStatus |= LcdMode.oamSearchValue
+    case .hBlank: newStatus |= LcdMode.hBlankValue
+    case .vBlank: newStatus |= LcdMode.vBlankValue
+    case .oamSearch: newStatus |= LcdMode.oamSearchValue
     case .pixelTransfer: newStatus |= LcdMode.pixelTransferValue
     }
 

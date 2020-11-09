@@ -29,14 +29,14 @@ enum BootromTests {
       debugger.run(mode: .none, untilPC: 0x0100)
     }
 
-    checkFinalStateBeforeUnmappingBootrom(gameBoy: gameBoy)
+    self.checkFinalStateBeforeUnmappingBootrom(gameBoy: gameBoy)
   }
 
   private static func openRom() -> Cartridge {
     do {
       let data = try Data(contentsOf: romUrl)
       return try CartridgeFactory.create(data: data)
-    } catch  {
+    } catch {
       fatalError("Unable to open: '\(romUrl)'")
     }
   }
@@ -112,7 +112,7 @@ enum BootromTests {
       0xff49: 0xff, // obp1
       0xff4a: 0x00, // wy
       0xff4b: 0x00, // wx
-      0xffff: 0x00  // ie
+      0xffff: 0x00 // ie
     ]
 
     for address in memoryAddressesToTest {

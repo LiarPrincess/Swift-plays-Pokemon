@@ -24,9 +24,9 @@ extension Lcd {
 
   // swiftlint:disable:next function_body_length
   private func drawBackgroundLine() {
-    let line     = Int(self.line)
-    let globalY  = (Int(self.scrollY) + line) % Constants.backgroundMapHeight
-    let tileRow  = globalY / Tile.Constants.height
+    let line = Int(self.line)
+    let globalY = (Int(self.scrollY) + line) % Constants.backgroundMapHeight
+    let tileRow = globalY / Tile.Constants.height
     let tileLine = globalY % Tile.Constants.height
 
     let tileMap = self.getTileMap(for: self.control.backgroundTileMap)
@@ -48,7 +48,7 @@ extension Lcd {
 
       let pixelsToEnd = framebufferSlice.count - progress
       let startBit = globalX % Tile.Constants.width
-      let lastBit  = min(Tile.Constants.width, pixelsToEnd)
+      let lastBit = min(Tile.Constants.width, pixelsToEnd)
 
       for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
@@ -121,7 +121,7 @@ extension Lcd {
 
       let pixelsToEnd = framebufferSlice.count - progress
       let startBit = progress % Tile.Constants.width
-      let lastBit  = min(Tile.Constants.width, pixelsToEnd)
+      let lastBit = min(Tile.Constants.width, pixelsToEnd)
 
       for bit in startBit..<lastBit {
         let tileColor = tilePixels[bit]
@@ -168,7 +168,7 @@ extension Lcd {
 
     // code taken from 'binjgb'
     for sprite in sprites {
-      let inScreenLeft  = sprite.realX + Tile.Constants.width >= 0
+      let inScreenLeft = sprite.realX + Tile.Constants.width >= 0
       let inScreenRight = sprite.realX < Constants.width
       guard inScreenLeft && inScreenRight else {
           continue
@@ -240,7 +240,7 @@ extension Lcd {
 
     for sprite in self.sprites {
       let isAfterStart = line >= sprite.realY
-      let isBeforeEnd  = line < (sprite.realY + spriteHeight)
+      let isBeforeEnd = line < (sprite.realY + spriteHeight)
 
       guard isAfterStart && isBeforeEnd else {
         continue

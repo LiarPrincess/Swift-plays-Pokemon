@@ -12,13 +12,13 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
   private(set) var gameBoy: GameBoy!
   let keyMap: KeyMap
 
-  let device:       MTLDevice
-  let pipeline:     MTLRenderPipelineState
+  let device: MTLDevice
+  let pipeline: MTLRenderPipelineState
   let commandQueue: MTLCommandQueue
   let vertexBuffer: MTLBuffer
-  let texture:      MTLTexture
+  let texture: MTLTexture
 
-  override var canBecomeKey:  Bool { return true }
+  override var canBecomeKey: Bool { return true }
   override var canBecomeMain: Bool { return true }
 
   // swiftlint:disable:next function_body_length
@@ -26,11 +26,11 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
     self.keyMap = keyMap
 
     self.device = Metal.createDevice()
-    let library       = Metal.makeLibrary(device: self.device)
-    self.pipeline     = Metal.makePipeline(device: self.device, library: library)
+    let library = Metal.makeLibrary(device: self.device)
+    self.pipeline = Metal.makePipeline(device: self.device, library: library)
     self.commandQueue = Metal.makeCommandQueue(device: self.device)
     self.vertexBuffer = Metal.makeFullscreenVertexBuffer(device: self.device)
-    self.texture      = Metal.makeFramebuffer(device: self.device)
+    self.texture = Metal.makeFramebuffer(device: self.device)
 
     super.init(
       contentRect: NSRect(
@@ -76,7 +76,7 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
   private var input = GameboyInput()
 
   func getGameboyInput() -> GameboyInput {
-    return input
+    return self.input
   }
 
   override func keyDown(with event: NSEvent) {
@@ -91,6 +91,7 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
     if event.isARepeat { return }
 
     switch event.keyCode {
+    // swiftformat:disable consecutiveSpaces
     case self.keyMap.a.value:      self.input.a = isDown
     case self.keyMap.b.value:      self.input.b = isDown
     case self.keyMap.start.value:  self.input.start = isDown
@@ -99,6 +100,7 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
     case self.keyMap.down.value:   self.input.down = isDown
     case self.keyMap.left.value:   self.input.left = isDown
     case self.keyMap.right.value:  self.input.right = isDown
+    // swiftformat:enable consecutiveSpaces
 
     default:
       // Use this if you want to propagate event down the responder chain:
@@ -109,19 +111,21 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
 
   // MARK: - MTKViewDelegate
 
-  func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) { }
+  func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
 
   func draw(in view: MTKView) {
     self.gameBoy.tickFrame()
     self.updateFramebuffer()
 
     guard let drawable = view.currentDrawable,
-          let renderPassDesc = view.currentRenderPassDescriptor else {
+          let renderPassDesc = view.currentRenderPassDescriptor
+    else {
         fatalError("Error when rendering Metal frame: unable to obtain drawable.")
     }
 
     guard let cmdBuffer = self.commandQueue.makeCommandBuffer(),
-          let cmdEncoder = cmdBuffer.makeRenderCommandEncoder(descriptor: renderPassDesc) else {
+          let cmdEncoder = cmdBuffer.makeRenderCommandEncoder(descriptor: renderPassDesc)
+    else {
       fatalError("Error when rendering Metal frame: unable to create command buffer.")
     }
 
@@ -142,9 +146,9 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
     framebuffer.pixels.withUnsafeBytes { ptr in
       guard let baseAddress = ptr.baseAddress else { return }
       texture.replace(
-        region:      region,
+        region: region,
         mipmapLevel: 0,
-        withBytes:   baseAddress,
+        withBytes: baseAddress,
         bytesPerRow: Framebuffer.width * MemoryLayout<UInt8>.size
       )
     }

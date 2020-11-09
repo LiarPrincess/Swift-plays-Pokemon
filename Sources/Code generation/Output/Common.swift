@@ -12,7 +12,7 @@
 func getEnumCase(_ opcode: Opcode) -> String {
   var result = opcode.mnemonic.lowercased()
   if result == "prefix" { return result }
-  if result == "stop"   { return result }
+  if result == "stop" { return result }
 
   if let operand1 = opcode.operand1 {
     result += "_"
@@ -61,24 +61,24 @@ private func getOperandValue(_ value: String) -> String {
   case "30H": return "30"
   case "38H": return "38"
 
-  case "SP":    return "sp"
+  case "SP": return "sp"
   case "SP+r8": return "spR8"
 
-  case "d8":  return "d8"
+  case "d8": return "d8"
   case "d16": return "d16"
-  case "r8":  return "r8"
+  case "r8": return "r8"
   case "a16": return "a16"
-  case "NC":  return "nc"
-  case "NZ":  return "nz"
-  case "Z":   return "z"
+  case "NC": return "nc"
+  case "NZ": return "nz"
+  case "Z": return "z"
 
-  case "(BC)":  return "pBC"
-  case "(C)":   return "pC"
-  case "(DE)":  return "pDE"
-  case "(HL)":  return "pHL"
+  case "(BC)": return "pBC"
+  case "(C)": return "pC"
+  case "(DE)": return "pDE"
+  case "(HL)": return "pHL"
   case "(HL+)": return "pHLI"
   case "(HL-)": return "pHLD"
-  case "(a8)":  return "pA8"
+  case "(a8)": return "pA8"
   case "(a16)": return "pA16"
 
   default: return "Unknown value: " + value.lowercased()
@@ -154,7 +154,7 @@ func getUnprefixedOpcodeCall(_ opcode: Opcode) -> String {
       let operand1 = opcode.operand1!.lowercased()
       let operand2 = opcode.operand2!.lowercased()
 
-      if  isA(operand1) && isRegister(operand2)         { return "add_a_r(.\(operand2))" }
+      if isA(operand1) && isRegister(operand2) { return "add_a_r(.\(operand2))" }
       if isHL(operand1) && isCombinedRegister(operand2) { return "add_hl_r(.\(operand2))" }
     }
 
@@ -252,9 +252,9 @@ func getUnprefixedOpcodeCall(_ opcode: Opcode) -> String {
     }
 
   case "rlca": return "rlca()"
-  case "rla":  return "rla()"
+  case "rla": return "rla()"
   case "rrca": return "rrca()"
-  case "rra":  return "rra()"
+  case "rra": return "rra()"
 
   case "jp":
     switch opcode.addr {
@@ -309,15 +309,15 @@ func getUnprefixedOpcodeCall(_ opcode: Opcode) -> String {
     let argument = "0x" + operand.dropLast()
     return "rst(\(argument))"
 
-  case "stop":   return "stop()"
-  case "daa":    return "daa()"
-  case "cpl":    return "cpl()"
-  case "scf":    return "scf()"
-  case "ccf":    return "ccf()"
-  case "halt":   return "halt()"
+  case "stop": return "stop()"
+  case "daa": return "daa()"
+  case "cpl": return "cpl()"
+  case "scf": return "scf()"
+  case "ccf": return "ccf()"
+  case "halt": return "halt()"
   case "prefix": return "executePrefixed(\(next8))"
-  case "di":     return "di()"
-  case "ei":     return "ei()"
+  case "di": return "di()"
+  case "ei": return "ei()"
 
   default: break
   }
@@ -345,7 +345,7 @@ func getCBPrefixedOpcodeCall(_ opcode: Opcode) -> String {
   return ""
 }
 
-private let singleRegisters  = ["a", "b", "c", "d", "e", "h", "l"]
+private let singleRegisters = ["a", "b", "c", "d", "e", "h", "l"]
 private let combinedRegisters = ["af", "bc", "de", "hl"]
 private let jumpConditions = ["nz", "z", "nc", "c"]
 

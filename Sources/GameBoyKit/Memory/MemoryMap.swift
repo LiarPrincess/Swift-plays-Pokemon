@@ -3,6 +3,8 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // swiftlint:disable type_name
+// swiftformat:disable consecutiveSpaces
+// swiftformat:disable redundantSelf
 
 public enum MemoryMap {
 

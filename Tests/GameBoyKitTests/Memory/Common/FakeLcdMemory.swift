@@ -22,8 +22,8 @@ class FakeLcdMemory: LcdMemory {
   var spriteColorPalette0 = SpriteColorPalette(value: 0)
   var spriteColorPalette1 = SpriteColorPalette(value: 0)
 
-  var videoRam = [UInt16:UInt8]()
-  var oam      = [UInt16:UInt8]()
+  var videoRam = [UInt16: UInt8]()
+  var oam = [UInt16: UInt8]()
 
   func readVideoRam(_ address: UInt16) -> UInt8 {
     return self.videoRam[address] ?? 0

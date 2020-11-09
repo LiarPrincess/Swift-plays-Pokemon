@@ -2,10 +2,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftformat:disable consecutiveSpaces
 private let zeroFlagMask:      UInt8 = 1 << 7
 private let subtractFlagMask:  UInt8 = 1 << 6
 private let halfCarryFlagMask: UInt8 = 1 << 5
 private let carryFlagMask:     UInt8 = 1 << 4
+// swiftformat:enable consecutiveSpaces
 
 public struct CpuRegisters {
 
@@ -39,17 +41,17 @@ public struct CpuRegisters {
   public internal(set) var f: UInt8 {
     get {
       var result: UInt8 = 0
-      result |= self.zeroFlag      ? zeroFlagMask      : 0
-      result |= self.subtractFlag  ? subtractFlagMask  : 0
+      result |= self.zeroFlag ? zeroFlagMask : 0
+      result |= self.subtractFlag ? subtractFlagMask : 0
       result |= self.halfCarryFlag ? halfCarryFlagMask : 0
-      result |= self.carryFlag     ? carryFlagMask     : 0
+      result |= self.carryFlag ? carryFlagMask : 0
       return result
     }
     set {
-      self.zeroFlag      = isSet(newValue, mask: zeroFlagMask)
-      self.subtractFlag  = isSet(newValue, mask: subtractFlagMask)
+      self.zeroFlag = isSet(newValue, mask: zeroFlagMask)
+      self.subtractFlag = isSet(newValue, mask: subtractFlagMask)
       self.halfCarryFlag = isSet(newValue, mask: halfCarryFlagMask)
-      self.carryFlag     = isSet(newValue, mask: carryFlagMask)
+      self.carryFlag = isSet(newValue, mask: carryFlagMask)
     }
   }
 
@@ -126,10 +128,12 @@ public struct CpuRegisters {
 
   public func get(_ f: Flag) -> Bool {
     switch f {
+    // swiftformat:disable consecutiveSpaces
     case .zeroFlag:      return self.zeroFlag
     case .subtractFlag:  return self.subtractFlag
     case .halfCarryFlag: return self.halfCarryFlag
     case .carryFlag:     return self.carryFlag
+    // swiftformat:enable consecutiveSpaces
     }
   }
 
@@ -157,10 +161,12 @@ public struct CpuRegisters {
 
   internal mutating func set(_ f: Flag, to value: Bool) {
     switch f {
-    case .zeroFlag:      self.zeroFlag      = value
-    case .subtractFlag:  self.subtractFlag  = value
+    // swiftformat:disable consecutiveSpaces
+    case .zeroFlag:      self.zeroFlag = value
+    case .subtractFlag:  self.subtractFlag = value
     case .halfCarryFlag: self.halfCarryFlag = value
-    case .carryFlag:     self.carryFlag     = value
+    case .carryFlag:     self.carryFlag = value
+    // swiftformat:enable consecutiveSpaces
     }
   }
 
@@ -193,7 +199,7 @@ private func combine(high: UInt8, low: UInt8) -> UInt16 {
 
 private func split(combined: UInt16) -> (high: UInt8, low: UInt8) {
   let high = UInt8((combined & 0xff00) >> 8)
-  let low  = UInt8(combined & 0xff)
+  let low = UInt8(combined & 0xff)
   return (high, low)
 }
 

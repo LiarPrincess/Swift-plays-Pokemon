@@ -5,8 +5,8 @@
 @testable import GameBoyKit
 
 class FakeTimerMemory: TimerMemory {
-  var div  = UInt8()
+  var div = UInt8()
   var tima = UInt8()
-  var tma  = UInt8()
-  var tac  = UInt8()
+  var tma = UInt8()
+  var tac = UInt8()
 }

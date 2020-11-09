@@ -271,4 +271,3 @@ internal enum CBPrefixedOpcode: UInt8, RawRepresentable {
   case set_7_pHL = 0xfe
   case set_7_a = 0xff
 }
-

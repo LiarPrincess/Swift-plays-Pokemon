@@ -31,7 +31,7 @@ enum TetrisTest {
     do {
       let data = try Data(contentsOf: romUrl)
       return try CartridgeFactory.create(data: data)
-    } catch  {
+    } catch {
       fatalError("Unable to open: '\(romUrl)'")
     }
   }

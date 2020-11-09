@@ -16,9 +16,9 @@ public final class Debugger {
   }
 
   internal var gameBoy: GameBoy
-  internal var cpu: Cpu { return gameBoy.cpu }
-  internal var memory: Memory { return gameBoy.memory }
-  internal var lcd: Lcd { return gameBoy.lcd }
+  internal var cpu: Cpu { return self.gameBoy.cpu }
+  internal var memory: Memory { return self.gameBoy.memory }
+  internal var lcd: Lcd { return self.gameBoy.lcd }
 
   public init(gameBoy: GameBoy) {
     self.gameBoy = gameBoy
@@ -28,7 +28,8 @@ public final class Debugger {
 
   public func run(mode: Mode,
                   instructions: Int64 = .max,
-                  untilPC pc: UInt16 = .max) {
+                  untilPC pc: UInt16 = .max)
+  {
     if mode == .none {
       self.runDebugNone(instructions: instructions, untilPC: pc)
       return
@@ -47,7 +48,7 @@ public final class Debugger {
 
       if mode == .opcodesAndWrites || mode == .full {
         self.printRegiserWrites(before: stateBefore, after: stateAfter)
-        self.printMemoryWrites(before:  stateBefore, after: stateAfter)
+        self.printMemoryWrites(before: stateBefore, after: stateAfter)
         self.printExecutedOpcodeDetails(before: stateBefore, after: stateAfter)
       }
 
@@ -62,8 +63,9 @@ public final class Debugger {
   }
 
   // Waaaaay faster than normal debug
-  private func runDebugNone(instructions: Int64  = .max,
-                            untilPC pc:   UInt16 = .max) {
+  private func runDebugNone(instructions: Int64 = .max,
+                            untilPC pc: UInt16 = .max)
+  {
     var remainingInstructions = instructions
 
     while remainingInstructions > 0 && self.cpu.pc != pc {
@@ -75,15 +77,17 @@ public final class Debugger {
 
 // MARK: - Fill state
 
+// swiftformat:disable consecutiveSpaces
+
 extension Debugger {
 
   private func captureState() -> DebugState {
     return DebugState(
       cpu: self.captureCpuState(),
-      io: self.captureIOState(),
+      io:  self.captureIOState(),
       timer: self.captureTimerState(),
       audio: self.captureAudioState(),
-      lcd: self.captureLcdState(),
+      lcd:   self.captureLcdState(),
       interrupts: self.captureInterruptsState()
     )
   }
@@ -97,10 +101,10 @@ extension Debugger {
       e: self.cpu.registers.e,
       h: self.cpu.registers.h,
       l: self.cpu.registers.l,
-      zeroFlag: self.cpu.registers.zeroFlag,
-      subtractFlag: self.cpu.registers.subtractFlag,
+      zeroFlag:      self.cpu.registers.zeroFlag,
+      subtractFlag:  self.cpu.registers.subtractFlag,
       halfCarryFlag: self.cpu.registers.halfCarryFlag,
-      carryFlag: self.cpu.registers.carryFlag,
+      carryFlag:     self.cpu.registers.carryFlag,
       pc: self.cpu.pc,
       sp: self.cpu.sp
     )
@@ -154,11 +158,11 @@ extension Debugger {
 
   private func captureLcdState() -> DebugState.Lcd {
     return DebugState.Lcd(
-      control:     self.memory.read(MemoryMap.Lcd.control),
-      status:      self.memory.read(MemoryMap.Lcd.status),
-      scrollY:     self.memory.read(MemoryMap.Lcd.scrollY),
-      scrollX:     self.memory.read(MemoryMap.Lcd.scrollX),
-      line:        self.memory.read(MemoryMap.Lcd.line),
+      control: self.memory.read(MemoryMap.Lcd.control),
+      status:  self.memory.read(MemoryMap.Lcd.status),
+      scrollY: self.memory.read(MemoryMap.Lcd.scrollY),
+      scrollX: self.memory.read(MemoryMap.Lcd.scrollX),
+      line:    self.memory.read(MemoryMap.Lcd.line),
       lineCompare: self.memory.read(MemoryMap.Lcd.lineCompare),
       dma:         self.memory.read(MemoryMap.Lcd.dma),
       backgroundPalette: self.memory.read(MemoryMap.Lcd.backgroundPalette),

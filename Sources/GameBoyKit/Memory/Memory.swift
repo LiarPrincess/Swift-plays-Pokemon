@@ -28,17 +28,18 @@ public final class Memory: CpuMemory {
   internal lazy var highRam = MemoryBuffer(region: MemoryMap.highRam)
 
   /// Catch'em all for any invalid read/write
-  internal var unmappedMemory = [UInt16:UInt8]()
+  internal var unmappedMemory = [UInt16: UInt8]()
 
-  internal init(bootrom:    BootromMemory?,
-                cartridge:  CartridgeMemory,
-                joypad:     JoypadMemory,
-                lcd:        LcdMemory,
-                audio:      AudioMemory,
-                timer:      TimerMemory,
+  internal init(bootrom: BootromMemory?,
+                cartridge: CartridgeMemory,
+                joypad: JoypadMemory,
+                lcd: LcdMemory,
+                audio: AudioMemory,
+                timer: TimerMemory,
                 interrupts: Interrupts,
                 serialPort: SerialPort,
-                linkCable:  LinkCable) {
+                linkCable: LinkCable)
+  {
     self.joypad = joypad
     self.lcd = lcd
     self.audio = audio

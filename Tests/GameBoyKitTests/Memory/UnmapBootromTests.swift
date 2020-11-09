@@ -18,7 +18,7 @@ class UnmapBootromTests: MemoryTestCase {
 
     let cartridge = FakeCartridgeMemory()
     cartridge.rom[range.start] = startValue
-    cartridge.rom[range.end]   = endValue
+    cartridge.rom[range.end] = endValue
 
     let memory = self.createMemory(cartridge: cartridge)
     memory.write(MemoryMap.IO.unmapBootrom, value: 1) // <-- this

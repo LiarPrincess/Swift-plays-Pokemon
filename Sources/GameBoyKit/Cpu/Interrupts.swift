@@ -2,11 +2,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftformat:disable consecutiveSpaces
 private let vBlankMask:  UInt8 = 1 << 0
 private let lcdStatMask: UInt8 = 1 << 1
 private let timerMask:   UInt8 = 1 << 2
 private let serialMask:  UInt8 = 1 << 3
 private let joypadMask:  UInt8 = 1 << 4
+// swiftformat:enable consecutiveSpaces
 
 /// FF0F Interrupt Flag;
 /// FFFF Interrupt Enable
@@ -21,11 +23,11 @@ public final class Interrupts {
 
     fileprivate var mask: UInt8 {
       switch self {
-      case .vBlank:  return vBlankMask
+      case .vBlank: return vBlankMask
       case .lcdStat: return lcdStatMask
-      case .timer:   return timerMask
-      case .serial:  return serialMask
-      case .joypad:  return joypadMask
+      case .timer: return timerMask
+      case .serial: return serialMask
+      case .joypad: return joypadMask
       }
     }
   }

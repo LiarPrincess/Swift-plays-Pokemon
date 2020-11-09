@@ -4,22 +4,22 @@
 
 // From Blargg tests
 private let unprefixedLengths = [
-  1,3,1,1,1,1,2,1,3,1,1,1,1,1,2,1, // 0
-  0,3,1,1,1,1,2,1,2,1,1,1,1,1,2,1, // 1
-  2,3,1,1,1,1,2,1,2,1,1,1,1,1,2,1, // 2
-  2,3,1,1,1,1,2,1,2,1,1,1,1,1,2,1, // 3
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 4
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 5
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 6
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 7
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 8
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 9
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // A
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // B
-  1,1,3,3,3,1,2,1,1,1,3,0,3,3,2,1, // C
-  1,1,3,0,3,1,2,1,1,1,3,0,3,0,2,1, // D
-  2,1,1,0,0,1,2,1,2,1,3,0,0,0,2,1, // E
-  2,1,1,1,0,1,2,1,2,1,3,1,0,0,2,1  // F
+  1, 3, 1, 1, 1, 1, 2, 1, 3, 1, 1, 1, 1, 1, 2, 1, // 0
+  0, 3, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, // 1
+  2, 3, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, // 2
+  2, 3, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, // 3
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 4
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 5
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 6
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 7
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 8
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 9
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // A
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // B
+  1, 1, 3, 3, 3, 1, 2, 1, 1, 1, 3, 0, 3, 3, 2, 1, // C
+  1, 1, 3, 0, 3, 1, 2, 1, 1, 1, 3, 0, 3, 0, 2, 1, // D
+  2, 1, 1, 0, 0, 1, 2, 1, 2, 1, 3, 0, 0, 0, 2, 1, // E
+  2, 1, 1, 1, 0, 1, 2, 1, 2, 1, 3, 1, 0, 0, 2, 1 // F
 ]
 
 extension Debugger {
@@ -29,7 +29,7 @@ extension Debugger {
   }
 
   private func next16(pc: UInt16) -> UInt16 {
-    let low  = UInt16(self.memory.read(pc + 1))
+    let low = UInt16(self.memory.read(pc + 1))
     let high = UInt16(self.memory.read(pc + 2))
     return (high << 8) | low
   }
@@ -49,7 +49,7 @@ extension Debugger {
     switch self.unprefixedOpcodeAt(pc: self.cpu.pc) {
     case .none: return
     case let .some(opcode) where opcode == .prefix: self.printPrefixedOpcode()
-    case let .some(opcode): printUnprefixedOpcode(opcode)
+    case let .some(opcode): self.printUnprefixedOpcode(opcode)
     }
   }
 
@@ -88,7 +88,7 @@ extension Debugger {
       return
     }
 
-    let next8  = self.next8(pc: before.cpu.pc)
+    let next8 = self.next8(pc: before.cpu.pc)
     let next16 = self.next16(pc: before.cpu.pc)
 
     switch opcode {
@@ -100,7 +100,7 @@ extension Debugger {
 
     case .jp_a16, .jp_pHL:
       print("  > jump to \(next16.hex)")
-    case  .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16:
+    case .jp_c_a16, .jp_nc_a16, .jp_nz_a16, .jp_z_a16:
       let taken = after.cpu.pc == next16 ? "TAKEN" : "NOT TAKEN"
       print("  > conditional jump to \(next16.hex) \(taken)")
 
@@ -172,7 +172,7 @@ extension Debugger {
 
   public func dumpCpuState() {
     let stackStart: UInt16 = self.cpu.sp
-    var stackEnd:   UInt16 = 0xfffe
+    var stackEnd: UInt16 = 0xfffe
 
     let stackCount = stackEnd - stackStart
     if stackCount > 20 {
@@ -188,27 +188,27 @@ Cpu
   sp: \(cpu.sp) (\(cpu.sp.hex)) \(stackValues.map { $0.hex })
   cycle: \(cpu.cycle)
   auxiliary registers:
-    a: \(formatRegister(r.a))
-    b: \(formatRegister(r.b)) | c: \(formatRegister(r.c)) | bc: \(formatRegister(r.bc))
-    d: \(formatRegister(r.d)) | e: \(formatRegister(r.e)) | de: \(formatRegister(r.de))
-    h: \(formatRegister(r.h)) | l: \(formatRegister(r.l)) | hl: \(formatRegister(r.hl))
+    a: \(self.format(r.a))
+    b: \(self.format(r.b)) | c: \(self.format(r.c)) | bc: \(self.format(r.bc))
+    d: \(self.format(r.d)) | e: \(self.format(r.e)) | de: \(self.format(r.de))
+    h: \(self.format(r.h)) | l: \(self.format(r.l)) | hl: \(self.format(r.hl))
   flags:
-    z: \(formatFlag(r.zeroFlag))
-    n: \(formatFlag(r.subtractFlag))
-    h: \(formatFlag(r.halfCarryFlag))
-    c: \(formatFlag(r.carryFlag))
+    z: \(self.format(r.zeroFlag))
+    n: \(self.format(r.subtractFlag))
+    h: \(self.format(r.halfCarryFlag))
+    c: \(self.format(r.carryFlag))
 """)
   }
 
-  private func formatRegister(_ value: UInt8) -> String {
+  private func format(_ value: UInt8) -> String {
     return "\(value.dec) (\(value.hex))"
   }
 
-  private func formatRegister(_ value: UInt16) -> String {
+  private func format(_ value: UInt16) -> String {
     return "\(value.dec) (\(value.hex))"
   }
 
-  private func formatFlag(_ value: Bool) -> String {
+  private func format(_ value: Bool) -> String {
     return value ? "1" : "0"
   }
 }

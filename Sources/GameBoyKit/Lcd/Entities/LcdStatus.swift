@@ -5,12 +5,14 @@
 public struct LcdStatus {
 
   internal enum Masks {
+    // swiftformat:disable consecutiveSpaces
     internal static let isLineCompareInterruptEnabled: UInt8 = 1 << 6
     internal static let isOamInterruptEnabled:    UInt8 = 1 << 5
     internal static let isVBlankInterruptEnabled: UInt8 = 1 << 4
     internal static let isHBlankInterruptEnabled: UInt8 = 1 << 3
     internal static let isLineCompareInterrupt:   UInt8 = 1 << 2
     internal static let mode: UInt8 = 0b11
+    // swiftformat:enable consecutiveSpaces
   }
 
   public let value: UInt8

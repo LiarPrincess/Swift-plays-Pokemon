@@ -5,6 +5,7 @@
 public struct LcdControl {
 
   internal enum Masks {
+    // swiftformat:disable consecutiveSpaces
     internal static let isLcdEnabled:        UInt8 = 1 << 7
     internal static let isWindowEnabled:     UInt8 = 1 << 5
     internal static let windowTileMap:       UInt8 = 1 << 6
@@ -13,6 +14,7 @@ public struct LcdControl {
     internal static let spriteSize:          UInt8 = 1 << 2
     internal static let isSpriteEnabled:     UInt8 = 1 << 1
     internal static let isBackgroundVisible: UInt8 = 1 << 0
+    // swiftformat:enable consecutiveSpaces
   }
 
   public let value: UInt8

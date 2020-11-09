@@ -17,7 +17,7 @@ class MemoryReadTests: MemoryTestCase {
 
     let bootrom = FakeBootromMemory()
     bootrom.data[0] = startValue
-    bootrom.data[range.count - 1]   = endValue
+    bootrom.data[range.count - 1] = endValue
 
     let memory = self.createMemory(bootrom: bootrom)
     // 'memory.hasFinishedBootrom' should be false by default
@@ -31,7 +31,7 @@ class MemoryReadTests: MemoryTestCase {
 
     let cartridge = FakeCartridgeMemory()
     cartridge.rom[0] = startValue
-    cartridge.rom[range.count - 1]   = endValue
+    cartridge.rom[range.count - 1] = endValue
 
     let memory = self.createMemory(cartridge: cartridge)
     memory.isRunningBootrom = false
@@ -61,7 +61,7 @@ class MemoryReadTests: MemoryTestCase {
 
     let range = MemoryMap.videoRam
     lcd.videoRam[range.start] = startValue
-    lcd.videoRam[range.end]   = endValue
+    lcd.videoRam[range.end] = endValue
 
     XCTAssertEqual(memory.read(range.start), startValue)
     XCTAssertEqual(memory.read(range.end), endValue)
@@ -73,7 +73,7 @@ class MemoryReadTests: MemoryTestCase {
 
     let range = MemoryMap.externalRam
     cartridge.ram[0] = startValue
-    cartridge.ram[range.count - 1]   = endValue
+    cartridge.ram[range.count - 1] = endValue
 
     XCTAssertEqual(memory.read(range.start), startValue)
     XCTAssertEqual(memory.read(range.end), endValue)
@@ -84,7 +84,7 @@ class MemoryReadTests: MemoryTestCase {
 
     let range = MemoryMap.internalRam
     memory.ram[0] = startValue
-    memory.ram[range.count - 1]   = endValue
+    memory.ram[range.count - 1] = endValue
 
     XCTAssertEqual(memory.read(range.start), startValue)
     XCTAssertEqual(memory.read(range.end), endValue)
@@ -107,7 +107,7 @@ class MemoryReadTests: MemoryTestCase {
 
     let range = MemoryMap.oam
     lcd.oam[range.start] = startValue
-    lcd.oam[range.end]   = endValue
+    lcd.oam[range.end] = endValue
 
     XCTAssertEqual(memory.read(range.start), startValue)
     XCTAssertEqual(memory.read(range.end), endValue)
@@ -207,7 +207,7 @@ class MemoryReadTests: MemoryTestCase {
 
     let range = MemoryMap.highRam
     memory.highRam[0] = startValue
-    memory.highRam[range.count - 1]   = endValue
+    memory.highRam[range.count - 1] = endValue
 
     XCTAssertEqual(memory.read(range.start), startValue)
     XCTAssertEqual(memory.read(range.end), endValue)

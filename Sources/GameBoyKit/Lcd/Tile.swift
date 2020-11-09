@@ -75,9 +75,10 @@ internal final class Tile {
 
   /// Single color encoded in tile.
   /// Bit offset is counted from left starting from 0.
-  internal static func getColorValue(_ data1:  UInt8,
-                                     _ data2:  UInt8,
-                                     bit:      Int) -> UInt8 {
+  internal static func getColorValue(_ data1: UInt8,
+                                     _ data2: UInt8,
+                                     bit: Int) -> UInt8
+  {
     let shift = 7 - bit
     let data1Bit = (data1 >> shift) & 0x1
     let data2Bit = (data2 >> shift) & 0x1

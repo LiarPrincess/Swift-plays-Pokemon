@@ -61,7 +61,7 @@ public final class Timer: TimerMemory {
 
   /// FF06 - TMA - Timer Modulo.
   /// When the TIMA overflows, this data will be loaded.
-  public internal(set) var tma:  UInt8 = 0x00
+  public internal(set) var tma: UInt8 = 0x00
 
   /// FF07 - TAC - Timer Control.
   /// Bit 2 - stop timer, bits 1 and 0 - select clock
@@ -114,6 +114,7 @@ public final class Timer: TimerMemory {
   }
 
   private func getPeriod(tac: UInt8) -> Int {
+    // swiftformat:disable consecutiveSpaces
     switch tac & 0b11 {
     case 0b00: return Cpu.clockSpeed /   4_096 // 1024
     case 0b01: return Cpu.clockSpeed / 262_144 //   16
@@ -121,5 +122,6 @@ public final class Timer: TimerMemory {
     case 0b11: return Cpu.clockSpeed /  16_384 //  256
     default: fatalError("Invalid timer frequency.") // ?
     }
+    // swiftformat:enable consecutiveSpaces
   }
 }

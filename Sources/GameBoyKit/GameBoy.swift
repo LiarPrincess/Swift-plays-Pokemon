@@ -26,7 +26,8 @@ public final class GameBoy {
 
   public init(bootrom: Bootrom?,
               cartridge: Cartridge,
-              input: GameboyInputProvider) {
+              input: GameboyInputProvider)
+  {
     let interrupts = Interrupts()
     self.lcd = Lcd(interrupts: interrupts)
     self.audio = Audio()
@@ -35,15 +36,15 @@ public final class GameBoy {
     self.serialPort = SerialPort()
     self.linkCable = LinkCable()
 
-    self.memory = Memory(bootrom:    bootrom,
-                         cartridge:  cartridge,
-                         joypad:     self.joypad,
-                         lcd:        self.lcd,
-                         audio:      self.audio,
-                         timer:      self.timer,
+    self.memory = Memory(bootrom: bootrom,
+                         cartridge: cartridge,
+                         joypad: self.joypad,
+                         lcd: self.lcd,
+                         audio: self.audio,
+                         timer: self.timer,
                          interrupts: interrupts,
                          serialPort: self.serialPort,
-                         linkCable:  self.linkCable)
+                         linkCable: self.linkCable)
 
     self.cpu = Cpu(memory: self.memory, interrupts: interrupts)
 

@@ -13,7 +13,7 @@ import GameBoyKit
 // check each case.
 let useDumps = false
 
-//BootromTests.run(compareWithDumps: useDumps)
+// BootromTests.run(compareWithDumps: useDumps)
 
 BlarggTests.cpuInstrs01(compareWithDumps: useDumps)
 BlarggTests.cpuInstrs02(compareWithDumps: useDumps)
@@ -28,7 +28,7 @@ BlarggTests.cpuInstrs10(compareWithDumps: useDumps)
 BlarggTests.cpuInstrs11(compareWithDumps: useDumps)
 BlarggTests.instrTiming(compareWithDumps: useDumps)
 
-//TetrisTest.run(compareWithDumps: ())
+// TetrisTest.run(compareWithDumps: ())
 
 // Show single frame performance
-//performanceTest()
+// performanceTest()

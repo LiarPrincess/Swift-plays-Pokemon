@@ -102,11 +102,11 @@ public final class Cpu {
 
   private func getInterruptHandlingRoutine(_ type: Interrupts.Kind) -> UInt16 {
     switch type {
-    case .vBlank:  return 0x40
+    case .vBlank: return 0x40
     case .lcdStat: return 0x48
-    case .timer:   return 0x50
-    case .serial:  return 0x58
-    case .joypad:  return 0x60
+    case .timer: return 0x50
+    case .serial: return 0x58
+    case .joypad: return 0x60
     }
   }
 
@@ -119,7 +119,7 @@ public final class Cpu {
 
   /// Next 16 bits after pc
   internal var next16: UInt16 {
-    let low  = UInt16(self.read(self.pc + 1))
+    let low = UInt16(self.read(self.pc + 1))
     let high = UInt16(self.read(self.pc + 2))
     return (high << 8) | low
   }
@@ -143,7 +143,7 @@ public final class Cpu {
   }
 
   internal func pop16() -> UInt16 {
-    let low  = UInt16(self.pop8())
+    let low = UInt16(self.pop8())
     let high = UInt16(self.pop8())
     return (high << 8) | low
   }

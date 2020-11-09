@@ -4,21 +4,17 @@
 
 public struct GameboyInput {
 
-  public var up    = false
-  public var down  = false
-  public var left  = false
+  public var up = false
+  public var down = false
+  public var left = false
   public var right = false
 
   public var a = false
   public var b = false
-  public var start  = false
+  public var start = false
   public var select = false
 
-  #if DEBUG
-  public var debug = false
-  #endif
-
-  public init() { }
+  public init() {}
 }
 
 public protocol GameboyInputProvider: AnyObject {

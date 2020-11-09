@@ -2,6 +2,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftformat:disable consecutiveSpaces
+// swiftformat:disable redundantSelf
+
 internal enum CartridgeMap {
   internal static let interruptVectors: ClosedRange<UInt16> = 0x0000...0x00ff
   internal static let entryPoint:       ClosedRange<UInt16> = 0x0100...0x0103

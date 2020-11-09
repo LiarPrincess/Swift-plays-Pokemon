@@ -8,7 +8,7 @@ import GameBoyKit
 enum Metal {
 
   static func createDevice() -> MTLDevice {
-    if let lowPowerDevice = MTLCopyAllDevices().first(where:  { $0.isLowPower }) {
+    if let lowPowerDevice = MTLCopyAllDevices().first(where: { $0.isLowPower }) {
       return lowPowerDevice
     }
 
@@ -40,7 +40,7 @@ enum Metal {
 
   static func makePipeline(device: MTLDevice, library: MTLLibrary) -> MTLRenderPipelineState {
     let pipelineDesc = MTLRenderPipelineDescriptor()
-    pipelineDesc.vertexFunction   = library.makeFunction(name: "vertex_shader")
+    pipelineDesc.vertexFunction = library.makeFunction(name: "vertex_shader")
     pipelineDesc.fragmentFunction = library.makeFunction(name: "fragment_shader")
     pipelineDesc.colorAttachments[0].pixelFormat = .bgra8Unorm
 
@@ -63,15 +63,12 @@ enum Metal {
     let data: [Float] = [
       -1.0, -1.0,
        1.0, -1.0, // swiftlint:disable:this collection_alignment
-      -1.0,  1.0,
-       1.0,  1.0  // swiftlint:disable:this collection_alignment
+      -1.0, 1.0,
+       1.0, 1.0 // swiftlint:disable:this collection_alignment
     ]
 
-    if let buffer = device.makeBuffer(
-      bytes:   data,
-      length:  data.count * MemoryLayout<Float>.size,
-      options: []) {
-
+    let bufferCount = data.count * MemoryLayout<Float>.size
+    if let buffer = device.makeBuffer(bytes: data, length: bufferCount, options: []) {
       return buffer
     }
 
@@ -81,9 +78,9 @@ enum Metal {
   static func makeFramebuffer(device: MTLDevice) -> MTLTexture {
     let textureDesc = MTLTextureDescriptor.texture2DDescriptor(
       pixelFormat: .r8Uint,
-      width:       GameBoyKit.Framebuffer.width,
-      height:      GameBoyKit.Framebuffer.height,
-      mipmapped:   false
+      width: GameBoyKit.Framebuffer.width,
+      height: GameBoyKit.Framebuffer.height,
+      mipmapped: false
     )
 
     if let texture = device.makeTexture(descriptor: textureDesc) {

@@ -11,7 +11,7 @@ class CpuRegistersTests: XCTestCase {
 
   func test_get_f() {
     var registers = CpuRegisters()
-    XCTAssertEqual(registers.f, 0b000_00000)
+    XCTAssertEqual(registers.f, 0b0000_0000)
 
     registers.zeroFlag = true
     XCTAssertEqual(registers.f, 0b1000_0000)

@@ -3,6 +3,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // swiftlint:disable file_length
+// swiftformat:disable consecutiveSpaces
 
 // This file is massive, but we need it this way so we can easier Cmd+F.
 // Source:

@@ -2,6 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftformat:disable consecutiveSpaces
+
 private let buttonsMask:       UInt8 = 1 << 5
 private let directionKeysMask: UInt8 = 1 << 4
 
@@ -14,8 +16,6 @@ private let upMask:    UInt8 = 1 << 2
 private let downMask:  UInt8 = 1 << 3
 private let leftMask:  UInt8 = 1 << 1
 private let rightMask: UInt8 = 1 << 0
-
-internal var inputBreak = false
 
 /// FF00 - P1/JOYP
 public final class Joypad: JoypadMemory {
@@ -38,16 +38,12 @@ public final class Joypad: JoypadMemory {
       }
 
       isButtons ? self.setButtons(from: input) : self.setDirections(from: input)
-
-      #if DEBUG
-      inputBreak = input.debug
-      #endif
     }
   }
 
   private weak var provider: GameboyInputProvider?
 
-  internal init (provider: GameboyInputProvider) {
+  internal init(provider: GameboyInputProvider) {
     self.provider = provider
   }
 
@@ -55,15 +51,15 @@ public final class Joypad: JoypadMemory {
     self._value = 0
     if !input.a { self._value |= aMask }
     if !input.b { self._value |= bMask }
-    if !input.start  { self._value |= startMask }
+    if !input.start { self._value |= startMask }
     if !input.select { self._value |= selectMask }
   }
 
   private func setDirections(from input: GameboyInput) {
     self._value = 0
-    if !input.up    { self._value |= upMask }
-    if !input.down  { self._value |= downMask }
-    if !input.left  { self._value |= leftMask }
+    if !input.up { self._value |= upMask }
+    if !input.down { self._value |= downMask }
+    if !input.left { self._value |= leftMask }
     if !input.right { self._value |= rightMask }
   }
 }

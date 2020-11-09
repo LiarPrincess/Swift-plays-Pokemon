@@ -14,7 +14,7 @@ class CartridgeHeaderTests: CartridgeTestCase {
 
       _ = try CartridgeHeader(rom: rom, skipChecks: false)
       XCTFail("It should throw")
-    } catch { }
+    } catch {}
   }
 
   func test_tetris() throws {

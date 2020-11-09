@@ -4,8 +4,8 @@
 
 // swiftlint:disable function_body_length
 
-private let tileSize        = 8 // pixels
-private let tileRowCount    = 32
+private let tileSize = 8 // pixels
+private let tileRowCount = 32
 private let tileColumnCount = 32
 private let tilesPerRow = 32
 
@@ -56,7 +56,7 @@ Lcd
     print("Tile indices \(tileMap):")
 
     // horizontal markers
-    print("    | " , separator: "", terminator: "")
+    print("    | ", separator: "", terminator: "")
     for tileColumn in 0..<tileColumnCount {
       let text = String(describing: tileColumn)
       let padding = String(repeating: " ", count: 2 - text.count)
@@ -64,7 +64,7 @@ Lcd
     }
     print()
 
-    print("----+" , separator: "", terminator: "")
+    print("----+", separator: "", terminator: "")
     for _ in 0..<tileColumnCount {
       print("---", separator: "", terminator: "")
     }
@@ -95,21 +95,21 @@ Lcd
     print("Tile data \(tileData):")
 
     // horizontal markers
-    print("    |" , separator: "", terminator: "")
+    print("    |", separator: "", terminator: "")
     for tileColumn in 0..<columnCount {
       let text = UInt8(tileColumn).hex
       print("    \(text)|", separator: "", terminator: "")
     }
     print()
 
-    print("----+" , separator: "", terminator: "")
+    print("----+", separator: "", terminator: "")
     for _ in 0..<columnCount {
       print("--------+", separator: "", terminator: "")
     }
     print()
 
-    let start = tileData == .from8000to8fff ?   0 : 128
-    let end   = tileData == .from8000to8fff ? 256 : 384
+    let start = tileData == .from8000to8fff ? 0 : 128
+    let end = tileData == .from8000to8fff ? 256 : 384
     let tiles = self.lcd.tiles[start..<end]
 
     let rowCount = tiles.count / columnCount
@@ -134,7 +134,7 @@ Lcd
         }
         print()
       }
-      print("----+" , separator: "", terminator: "")
+      print("----+", separator: "", terminator: "")
       for _ in 0..<columnCount {
         print("--------+", separator: "", terminator: "")
       }
@@ -147,13 +147,13 @@ Lcd
   public func dumpBackground(tileMap: LcdTileMap, tileData: LcdTileData) {
     print("Background for map: \(tileMap), data: \(tileData)")
 
-    let rowRange    = 0..<tileRowCount
+    let rowRange = 0..<tileRowCount
     let columnRange = 0..<tileColumnCount
 
     let linesPerTile = 8
 
     // horizontal markers
-    print(" t  l | " , separator: "", terminator: "")
+    print(" t  l | ", separator: "", terminator: "")
     for tileColumn in columnRange {
       let text = String(describing: tileColumn)
       let padding = String(repeating: " ", count: 8 - text.count)
@@ -161,7 +161,7 @@ Lcd
     }
     print()
 
-    print("------+" , separator: "", terminator: "")
+    print("------+", separator: "", terminator: "")
     for _ in columnRange {
       print("---------", separator: "", terminator: "")
     }
@@ -181,12 +181,16 @@ Lcd
         print("|", separator: "", terminator: " ")
 
         for tileColumn in columnRange {
-          self.drawTile(tileMap, tileData, tileRow, tileColumn, tileLine)
+          self.drawTile(map: tileMap,
+                        data: tileData,
+                        row: tileRow,
+                        column: tileColumn,
+                        line: tileLine)
         }
         print()
       }
 
-      print("-------" , separator: "", terminator: "")
+      print("-------", separator: "", terminator: "")
       for _ in columnRange {
         print("---------", separator: "", terminator: "")
       }
@@ -194,11 +198,12 @@ Lcd
     }
   }
 
-  private func drawTile(_ map:  LcdTileMap,
-                        _ data: LcdTileData,
-                        _ tileRow:    Int,
-                        _ tileColumn: Int,
-                        _ tileLine:   Int) {
+  private func drawTile(map: LcdTileMap,
+                        data: LcdTileData,
+                        row tileRow: Int,
+                        column tileColumn: Int,
+                        line tileLine: Int)
+  {
     let tileMap = self.lcd.getTileMap(for: map)
     let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
 

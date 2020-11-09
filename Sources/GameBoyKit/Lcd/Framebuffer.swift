@@ -6,7 +6,7 @@ public struct Framebuffer {
 
   public typealias PixelBufferPointer = UnsafeMutableBufferPointer<UInt8>
 
-  public static let width  = Lcd.Constants.width
+  public static let width = Lcd.Constants.width
   public static let height = Lcd.Constants.height
 
   /// Data that should be put on screen:

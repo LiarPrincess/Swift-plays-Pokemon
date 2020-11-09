@@ -63,14 +63,14 @@ extension Memory {
     case MemoryMap.IO.sb:
       self.linkCable.write(value)
       self.serialPort.sb = value
-    case MemoryMap.IO.sc:     self.serialPort.sc = value
-    case MemoryMap.IO.unmapBootrom:  self.isRunningBootrom = false
+    case MemoryMap.IO.sc: self.serialPort.sc = value
+    case MemoryMap.IO.unmapBootrom: self.isRunningBootrom = false
     case MemoryMap.IO.interruptFlag: self.interrupts.flag = value
 
-    case MemoryMap.Timer.div:  self.timer.div = value
+    case MemoryMap.Timer.div: self.timer.div = value
     case MemoryMap.Timer.tima: self.timer.tima = value
-    case MemoryMap.Timer.tma:  self.timer.tma = value
-    case MemoryMap.Timer.tac:  self.timer.tac = value
+    case MemoryMap.Timer.tma: self.timer.tma = value
+    case MemoryMap.Timer.tac: self.timer.tac = value
 
     case MemoryMap.Audio.nr10: self.audio.nr10 = value
     case MemoryMap.Audio.nr11: self.audio.nr11 = value
@@ -94,7 +94,7 @@ extension Memory {
     case MemoryMap.Audio.nr51: self.audio.nr51 = value
     case MemoryMap.Audio.nr52: self.audio.nr52 = value
     case MemoryMap.Audio.nr3_ram_start: self.audio.nr3_ram_start = value
-    case MemoryMap.Audio.nr3_ram_end:   self.audio.nr3_ram_end = value
+    case MemoryMap.Audio.nr3_ram_end: self.audio.nr3_ram_end = value
 
     case MemoryMap.Lcd.control:
       self.lcd.control = LcdControl(value: value)

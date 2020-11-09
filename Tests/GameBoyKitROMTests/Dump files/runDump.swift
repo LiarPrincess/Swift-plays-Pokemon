@@ -13,7 +13,8 @@ enum RunDumpErrorHandling {
 func runDump(gameBoy: GameBoy,
              dumpDirUrl: URL,
              mode: Debugger.Mode = .opcodes,
-             errorHandling: RunDumpErrorHandling = .fatal) {
+             errorHandling: RunDumpErrorHandling = .fatal)
+{
   let debugger = Debugger(gameBoy: gameBoy)
   let dumpFiles = openDumpDir(directory: dumpDirUrl)
 

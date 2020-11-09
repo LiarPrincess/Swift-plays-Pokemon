@@ -109,7 +109,8 @@ enum BlarggTests {
 private func test(romPath: String,
                   dumpDirName: String,
                   frames: Int,
-                  compareWithDumps: Bool) {
+                  compareWithDumps: Bool)
+{
   print(romPath, terminator: "")
 
   let input = DummyInputProvider()

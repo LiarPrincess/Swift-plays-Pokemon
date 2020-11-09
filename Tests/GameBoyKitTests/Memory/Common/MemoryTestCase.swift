@@ -5,6 +5,8 @@
 import XCTest
 @testable import GameBoyKit
 
+// swiftformat:disable consecutiveSpaces
+
 class MemoryTestCase: XCTestCase {
 
   func createMemory(bootrom:    BootromMemory?   = nil,
@@ -13,7 +15,8 @@ class MemoryTestCase: XCTestCase {
                     lcd:        LcdMemory?       = nil,
                     audio:      AudioMemory?     = nil,
                     timer:      TimerMemory?     = nil,
-                    interrupts: Interrupts?      = nil) -> Memory {
+                    interrupts: Interrupts?      = nil) -> Memory
+  {
     return Memory(
       bootrom:    bootrom    ?? FakeBootromMemory(),
       cartridge:  cartridge  ?? FakeCartridgeMemory(),

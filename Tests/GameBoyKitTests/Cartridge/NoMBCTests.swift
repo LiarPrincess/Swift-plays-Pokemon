@@ -92,7 +92,8 @@ class NoMBCTests: CartridgeTestCase {
 
   private func createCartridge(romSize: CartridgeRomSize,
                                ramSize: CartridgeRamSize,
-                               romData: [UInt16:UInt8] = [:]) throws -> NoMBC {
+                               romData: [UInt16: UInt8] = [:]) throws -> NoMBC
+  {
     let type: CartridgeType = ramSize.byteCount == 0 ? .noMBC : .noMBCRam
 
     var data = self.createRom(title: "ROM",
