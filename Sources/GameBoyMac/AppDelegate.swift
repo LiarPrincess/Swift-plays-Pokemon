@@ -9,6 +9,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     let argumentsRaw = CommandLine.arguments
+//    let argumentsRaw = ["GameBoyMac", ROMs.tetris]
     let arguments = Arguments(arguments: argumentsRaw)
 
     let keyMap = KeyMap(

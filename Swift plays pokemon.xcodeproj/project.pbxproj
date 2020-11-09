@@ -42,6 +42,7 @@
 		903C2B642559774B00EB1C6D /* GameBoyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5D2559774B00EB1C6D /* GameBoyWindow.swift */; };
 		903C2B652559774B00EB1C6D /* Arguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5E2559774B00EB1C6D /* Arguments.swift */; };
 		903C2B662559774B00EB1C6D /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5F2559774B00EB1C6D /* Metal.swift */; };
+		903C2B962559A5B000EB1C6D /* ROMs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B952559A5AF00EB1C6D /* ROMs.swift */; };
 		90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427CF725545FC8007A9E9D /* CpuMemory.swift */; };
 		90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D5625546F00007A9E9D /* BootromMemory.swift */; };
 		90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D7C25548092007A9E9D /* Interrupts+properties.swift */; };
@@ -239,6 +240,7 @@
 		903C2B5D2559774B00EB1C6D /* GameBoyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoyWindow.swift; sourceTree = "<group>"; };
 		903C2B5E2559774B00EB1C6D /* Arguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arguments.swift; sourceTree = "<group>"; };
 		903C2B5F2559774B00EB1C6D /* Metal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
+		903C2B952559A5AF00EB1C6D /* ROMs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROMs.swift; sourceTree = "<group>"; };
 		90427CF725545FC8007A9E9D /* CpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuMemory.swift; sourceTree = "<group>"; };
 		90427D5625546F00007A9E9D /* BootromMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromMemory.swift; sourceTree = "<group>"; };
 		90427D7C25548092007A9E9D /* Interrupts+properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Interrupts+properties.swift"; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				903C2B5D2559774B00EB1C6D /* GameBoyWindow.swift */,
 				903C2B5A2559774B00EB1C6D /* KeyMap.swift */,
 				903C2B5F2559774B00EB1C6D /* Metal.swift */,
+				903C2B952559A5AF00EB1C6D /* ROMs.swift */,
 				903C2B5B2559774B00EB1C6D /* Shader.metal */,
 				903C2B1B2559758300EB1C6D /* Info.plist */,
 			);
@@ -1025,6 +1028,7 @@
 				903C2B622559774B00EB1C6D /* Shader.metal in Sources */,
 				903C2B662559774B00EB1C6D /* Metal.swift in Sources */,
 				903C2B612559774B00EB1C6D /* KeyMap.swift in Sources */,
+				903C2B962559A5B000EB1C6D /* ROMs.swift in Sources */,
 				903C2B102559758100EB1C6D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
