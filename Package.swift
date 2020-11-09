@@ -28,7 +28,7 @@ let package = Package(
     // http://gbdev.gg8.se/files/roms/blargg-gb-tests/
     .target(
       name: "GameBoyKitROMTests",
-      dependencies: [],
+      dependencies: ["GameBoyKit"],
       path: "Tests/GameBoyKitROMTests"
     ),
 

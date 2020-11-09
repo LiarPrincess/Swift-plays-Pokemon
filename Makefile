@@ -15,6 +15,9 @@ build:
 test:
 	swift test
 
+testRom:
+	swift run "GameBoyKitROMTests"
+
 clean:
 	swift package clean
 
