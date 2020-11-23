@@ -28,12 +28,12 @@ public struct MemoryBuffer {
 
   public internal(set) subscript(address: Int) -> UInt8 {
     get { return self.ptr[address] }
-    set { self.ptr[address] = newValue }
+    nonmutating set { self.ptr[address] = newValue }
   }
 
   public internal(set) subscript(address: UInt16) -> UInt8 {
     get { return self.ptr[Int(address)] }
-    set { self.ptr[Int(address)] = newValue }
+    nonmutating set { self.ptr[Int(address)] = newValue }
   }
 
   internal func deallocate() {

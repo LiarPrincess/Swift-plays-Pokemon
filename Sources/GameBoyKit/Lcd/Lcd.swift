@@ -69,6 +69,10 @@ public final class Lcd: LcdMemory {
   }
 
   deinit {
+    for tile in self.tiles {
+      tile.deallocate()
+    }
+
     self.tileMap9800to9bff.deallocate()
     self.tileMap9c00to9fff.deallocate()
     self.framebuffer.deallocate()
@@ -76,7 +80,7 @@ public final class Lcd: LcdMemory {
 
   // MARK: - Read/write
 
-  internal func readVideoRam(_ address: UInt16) -> UInt8 {
+  public func readVideoRam(_ address: UInt16) -> UInt8 {
     switch address {
 
     case VideoRamMap.tileData:
@@ -124,7 +128,7 @@ public final class Lcd: LcdMemory {
     }
   }
 
-  internal func readOAM(_ address: UInt16) -> UInt8 {
+  public func readOAM(_ address: UInt16) -> UInt8 {
     let oamAddress = Int(address - MemoryMap.oam.start)
 
     let index = oamAddress / Sprite.Constants.byteCount

@@ -13,7 +13,7 @@
 //     12|     6|00000000|00000000
 //     14|     7|00000000|00000000
 
-internal final class Tile {
+internal struct Tile {
 
   internal enum Constants {
     /// Total number of tiles (3 * 128)
@@ -30,16 +30,11 @@ internal final class Tile {
     internal static let tilesPerRow = 32
   }
 
-  internal lazy var data = MemoryBuffer(count: Constants.byteCount)
+  internal let data = MemoryBuffer(count: Constants.byteCount)
+  // Processed `self.data`
+  private let pixels = MemoryBuffer(count: Constants.width * Constants.height)
 
-  private lazy var pixels: UnsafeMutableBufferPointer<UInt8> = {
-    let count = Constants.width * Constants.height
-    let result = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: count)
-    result.assign(repeating: 0)
-    return result
-  }()
-
-  deinit {
+  internal func deallocate() {
     self.data.deallocate()
     self.pixels.deallocate()
   }
@@ -64,13 +59,12 @@ internal final class Tile {
   }
 
   internal func getPixels(in line: Int) -> UnsafeBufferPointer<UInt8> {
-    guard let basePtr = UnsafePointer(self.pixels.baseAddress) else {
+    guard let basePtr = UnsafePointer(self.pixels.ptr.baseAddress) else {
       fatalError("Unable to obtain tile pixels address.")
     }
 
     let start = basePtr.advanced(by: line * Constants.width)
-    let count = Constants.width
-    return UnsafeBufferPointer(start: start, count: count)
+    return UnsafeBufferPointer(start: start, count: Constants.width)
   }
 
   /// Single color encoded in tile.
