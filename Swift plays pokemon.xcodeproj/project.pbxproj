@@ -66,6 +66,10 @@
 		9067C7792558017B007991FC /* GameBoyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; };
 		9067C77A2558017B007991FC /* GameBoyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "Swift plays pokemon::GameBoyKit::Product" /* GameBoyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9067C7942558093C007991FC /* memoryAddressesToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9067C78D2558088B007991FC /* memoryAddressesToTest.swift */; };
+		908B1FEC256BF921004FBD53 /* LcdTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B1FE0256BF903004FBD53 /* LcdTestCase.swift */; };
+		908B1FF9256BF970004FBD53 /* DrawBackgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B1FF2256BF947004FBD53 /* DrawBackgroundTests.swift */; };
+		908B201A256C21C1004FBD53 /* DrawSpritesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */; };
+		90AC59BA256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
 		90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681DD2556A69700EBD803 /* CartridgeType.swift */; };
 		90F682072556AA7A00EBD803 /* BootromError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681F92556AA6400EBD803 /* BootromError.swift */; };
@@ -261,6 +265,10 @@
 		9063A25B2556EE0E00C36D84 /* CartridgeMixin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeMixin.swift; sourceTree = "<group>"; };
 		9063A2692557231800C36D84 /* MBC1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC1Tests.swift; sourceTree = "<group>"; };
 		9067C78D2558088B007991FC /* memoryAddressesToTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoryAddressesToTest.swift; sourceTree = "<group>"; };
+		908B1FE0256BF903004FBD53 /* LcdTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTestCase.swift; sourceTree = "<group>"; };
+		908B1FF2256BF947004FBD53 /* DrawBackgroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawBackgroundTests.swift; sourceTree = "<group>"; };
+		908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawSpritesTests.swift; sourceTree = "<group>"; };
+		90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesPerLineInPreviousFrame.swift; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
 		90F681DD2556A69700EBD803 /* CartridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeType.swift; sourceTree = "<group>"; };
 		90F681F92556AA6400EBD803 /* BootromError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromError.swift; sourceTree = "<group>"; };
@@ -573,6 +581,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		908B1FDF256BF8E7004FBD53 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				908B1FE0256BF903004FBD53 /* LcdTestCase.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		90F681F82556AA1900EBD803 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -611,9 +627,12 @@
 		OBJ_121 /* Lcd */ = {
 			isa = PBXGroup;
 			children = (
+				908B1FDF256BF8E7004FBD53 /* Common */,
 				90427DE525548D8E007A9E9D /* BackgroundColorPaletteTests.swift */,
 				OBJ_122 /* SpriteColorPaletteTests.swift */,
 				OBJ_123 /* TileColorValueTests.swift */,
+				908B1FF2256BF947004FBD53 /* DrawBackgroundTests.swift */,
+				908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */,
 			);
 			path = Lcd;
 			sourceTree = "<group>";
@@ -1143,6 +1162,7 @@
 				9063A2772557239900C36D84 /* MBC1Tests.swift in Sources */,
 				OBJ_229 /* CpuArithmeticTests.swift in Sources */,
 				OBJ_230 /* CpuBitTests.swift in Sources */,
+				908B1FF9256BF970004FBD53 /* DrawBackgroundTests.swift in Sources */,
 				OBJ_231 /* CpuCallTests.swift in Sources */,
 				OBJ_232 /* CpuJumpTests.swift in Sources */,
 				90427DED25548D93007A9E9D /* BackgroundColorPaletteTests.swift in Sources */,
@@ -1167,8 +1187,10 @@
 				OBJ_248 /* CpuTestCase.swift in Sources */,
 				OBJ_250 /* MemoryTestCase.swift in Sources */,
 				OBJ_251 /* TimerTestCase.swift in Sources */,
+				908B201A256C21C1004FBD53 /* DrawSpritesTests.swift in Sources */,
 				9024C3832555F67C0094AA47 /* CartridgeTestCase.swift in Sources */,
 				90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */,
+				908B1FEC256BF921004FBD53 /* LcdTestCase.swift in Sources */,
 				OBJ_252 /* TimerTimaTests.swift in Sources */,
 				OBJ_253 /* TimerDivTests.swift in Sources */,
 				OBJ_254 /* SpriteColorPaletteTests.swift in Sources */,

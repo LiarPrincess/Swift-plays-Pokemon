@@ -9,7 +9,7 @@ public struct Framebuffer {
   public static let width = Lcd.Constants.width
   public static let height = Lcd.Constants.height
 
-  /// Data that should be put on screen:
+  /// Data that should be put on the screen:
   /// - 0 - White
   /// - 1 - Light gray
   /// - 2 - Dark gray

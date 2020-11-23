@@ -11,9 +11,7 @@ class CpuTestCase: XCTestCase {
     return FakeCpuMemory()
   }
 
-  func createCpu(memory: CpuMemory? = nil,
-                 interrupts: Interrupts? = nil) -> Cpu
-  {
+  func createCpu(memory: CpuMemory? = nil, interrupts: Interrupts? = nil) -> Cpu {
     return Cpu(
       memory: memory ?? FakeCpuMemory(),
       interrupts: interrupts ?? Interrupts()

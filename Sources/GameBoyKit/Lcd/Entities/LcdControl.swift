@@ -4,16 +4,16 @@
 
 public struct LcdControl {
 
-  internal enum Masks {
+  public enum Masks {
     // swiftformat:disable consecutiveSpaces
-    internal static let isLcdEnabled:        UInt8 = 1 << 7
-    internal static let isWindowEnabled:     UInt8 = 1 << 5
-    internal static let windowTileMap:       UInt8 = 1 << 6
-    internal static let backgroundTileMap:   UInt8 = 1 << 3
-    internal static let tileData:            UInt8 = 1 << 4
-    internal static let spriteSize:          UInt8 = 1 << 2
-    internal static let isSpriteEnabled:     UInt8 = 1 << 1
-    internal static let isBackgroundVisible: UInt8 = 1 << 0
+    public static let isLcdEnabled:        UInt8 = 1 << 7
+    public static let isWindowEnabled:     UInt8 = 1 << 5
+    public static let windowTileMap:       UInt8 = 1 << 6
+    public static let backgroundTileMap:   UInt8 = 1 << 3
+    public static let tileData:            UInt8 = 1 << 4
+    public static let spriteSize:          UInt8 = 1 << 2
+    public static let isSpriteEnabled:     UInt8 = 1 << 1
+    public static let isBackgroundVisible: UInt8 = 1 << 0
     // swiftformat:enable consecutiveSpaces
   }
 
@@ -23,11 +23,43 @@ public struct LcdControl {
     self.value = value
   }
 
+  internal init(isLcdEnabled: Bool,
+                isBackgroundVisible: Bool,
+                isWindowEnabled: Bool,
+                isSpriteEnabled: Bool,
+                windowTileMap: LcdTileMap,
+                backgroundTileMap: LcdTileMap,
+                tileDataSelect: LcdTileData,
+                isSpriteHeight16: Bool) {
+    var value = UInt8()
+    func set(_ mask: UInt8, if condition: Bool) {
+      value |= condition ? mask : 0
+    }
+
+    set(Masks.isLcdEnabled, if: isLcdEnabled)
+    set(Masks.isBackgroundVisible, if: isBackgroundVisible)
+    set(Masks.isWindowEnabled, if: isWindowEnabled)
+    set(Masks.isSpriteEnabled, if: isSpriteEnabled)
+
+    set(Masks.backgroundTileMap, if: backgroundTileMap == .from9c00to9fff)
+    set(Masks.windowTileMap, if: windowTileMap == .from9c00to9fff)
+    set(Masks.tileData, if: tileDataSelect == .from8000to8fff)
+
+    set(Masks.spriteSize, if: isSpriteHeight16)
+
+    self.value = value
+  }
+
   // MARK: - Is enabled
 
   /// Control bit 7 - LCD Display Enable
   public var isLcdEnabled: Bool {
     return isSet(self.value, mask: Masks.isLcdEnabled)
+  }
+
+  /// Control bit 0 - BG Display
+  public var isBackgroundVisible: Bool {
+    return isSet(self.value, mask: Masks.isBackgroundVisible)
   }
 
   /// Control bit 5 - Window Display Enable
@@ -42,14 +74,14 @@ public struct LcdControl {
 
   // MARK: - Tile map
 
-  /// Control bit 6 - Window Tile Map Display Select
-  public var windowTileMap: LcdTileMap {
-    return isSet(self.value, mask: Masks.windowTileMap) ? .from9c00to9fff : .from9800to9bff
-  }
-
   /// Control bit 3 - BG Tile Map Display Select
   public var backgroundTileMap: LcdTileMap {
     return isSet(self.value, mask: Masks.backgroundTileMap) ? .from9c00to9fff : .from9800to9bff
+  }
+
+  /// Control bit 6 - Window Tile Map Display Select
+  public var windowTileMap: LcdTileMap {
+    return isSet(self.value, mask: Masks.windowTileMap) ? .from9c00to9fff : .from9800to9bff
   }
 
   // MARK: - Tile data
@@ -60,11 +92,6 @@ public struct LcdControl {
   }
 
   // MARK: - Other
-
-  /// Control bit 0 - BG Display
-  public var isBackgroundVisible: Bool {
-    return isSet(self.value, mask: Masks.isBackgroundVisible)
-  }
 
   /// Control bit 2 - OBJ (Sprite) Size
   public var spriteHeight: Int {
