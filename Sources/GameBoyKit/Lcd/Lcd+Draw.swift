@@ -161,9 +161,9 @@ extension Lcd {
   // swiftlint:disable:next function_body_length
   private func drawSprites() {
     let line = Int(self.line)
-    let spriteHeight = self.control.spriteHeight
+    let spriteHeight = self.control.spriteHeight.value
 
-    let sprites = self.getSpritesFromRightToLeft(line: line)
+    let sprites = self.sprites.getSpritesToDrawFromRightToLeft(line: line)
     let framebufferSlice = self.getSpriteFramebuffer(line: line)
 
     // code taken from 'binjgb'
@@ -225,44 +225,6 @@ extension Lcd {
     let framebufferStart = self.framebuffer.baseAddress
     let start = framebufferStart.advanced(by: line * Constants.width)
     return UnsafeMutableBufferPointer(start: start, count: Constants.width)
-  }
-
-  /// Sort in REVERSE order (from right to left).
-  internal func getSpritesFromRightToLeft(line: Int) -> [Sprite] {
-    // Do we have data from previous frame?
-    if let cached = self.spritesPerLineInPreviousFrame.get(line: line) {
-      return cached
-    }
-
-    // Find which sprites should be displayed in the current line.
-    var result = [Sprite]()
-    result.reserveCapacity(Sprite.Constants.countPerLine)
-
-    let spriteHeight = self.control.spriteHeight
-
-    for sprite in self.sprites {
-      let spriteMinY = sprite.realY
-      let spriteMaxY = sprite.realY + spriteHeight
-      let spriteContainsLine = spriteMinY <= line && line < spriteMaxY
-
-      guard spriteContainsLine else {
-        continue
-      }
-
-      // TODO: Find the insertion index
-      result.append(sprite)
-      if result.count == Sprite.Constants.countPerLine {
-        break
-      }
-    }
-
-    // Sort in Swift is not stable! Thats why we have to use sprite.id.
-    result.sort { lhs, rhs in
-      lhs.x == rhs.x ? lhs.id > rhs.id : lhs.x > rhs.x
-    }
-
-    self.spritesPerLineInPreviousFrame.set(line: line, sprites: result)
-    return result
   }
 
   // MARK: - Helpers

@@ -2,25 +2,16 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// swiftlint:disable file_length
-
 import Foundation
 
 private typealias VideoRamMap = MemoryMap.VideoRam
 
 public final class Lcd: LcdMemory {
 
-  private var _control = LcdControl(value: 0)
-  public internal(set) var control: LcdControl {
-    get { return self._control }
-    set {
-      let oldValue = self._control
-      self._control = newValue
-
-      let hasSizeChanged = oldValue.spriteSize != newValue.spriteSize
-      if hasSizeChanged {
-        self.spritesPerLineInPreviousFrame.removeAll()
-      }
+  public internal(set) var control = LcdControl(value: 0) {
+    didSet {
+      let newSize = self.control.spriteSize
+      self.sprites.onSpriteSizeChanged(newSize: newSize)
     }
   }
 
@@ -43,11 +34,7 @@ public final class Lcd: LcdMemory {
   public internal(set) var tileMap9c00to9fff = MemoryBuffer(region: VideoRamMap.tileMap9c00to9fff)
 
   internal lazy var tiles = (0..<Tile.Constants.count).map { _ in Tile() }
-  internal lazy var sprites = (0..<Sprite.Constants.count).map { Sprite(id: $0) }
-
-  /// Cache, so we don't recalculate sprites on every line draw.
-  /// Writes to OAM will clear appropriate entries.
-  internal lazy var spritesPerLineInPreviousFrame = SpritesPerLineInPreviousFrame()
+  internal lazy var sprites = SpriteCollection(spriteSize: self.control.spriteSize)
 
   /// Data that should be put on screen
   internal lazy var framebuffer = Framebuffer()
@@ -129,55 +116,11 @@ public final class Lcd: LcdMemory {
   }
 
   public func readOAM(_ address: UInt16) -> UInt8 {
-    let oamAddress = Int(address - MemoryMap.oam.start)
-
-    let index = oamAddress / Sprite.Constants.byteCount
-    let byte = oamAddress % Sprite.Constants.byteCount
-
-    let sprite = self.sprites[index]
-    switch byte {
-    case 0: return sprite.y
-    case 1: return sprite.x
-    case 2: return sprite.tile
-    case 3: return sprite.flags
-    default: return 0
-    }
+    self.sprites.read(address)
   }
 
   internal func writeOAM(_ address: UInt16, value: UInt8) {
-    let oamAddress = Int(address - MemoryMap.oam.start)
-
-    let index = oamAddress / Sprite.Constants.byteCount
-    let byte = oamAddress % Sprite.Constants.byteCount
-
-    let sprite = self.sprites[index]
-    switch byte {
-    case 0:
-      if sprite.y != value {
-        self.clearSpriteCache(fromLine: sprite.realY)
-        sprite.y = value
-        self.clearSpriteCache(fromLine: sprite.realY)
-      }
-    case 1:
-      if sprite.x != value {
-        sprite.x = value
-        self.clearSpriteCache(fromLine: sprite.realY)
-      }
-    case 2: sprite.tile = value
-    case 3: sprite.flags = value
-    default: break
-    }
-  }
-
-  private func clearSpriteCache(fromLine startLine: Int) {
-    let height = self.control.spriteHeight
-
-    let startLine = max(startLine, 0)
-    let endLine = min(startLine + height, Constants.backgroundMapHeight)
-
-    for line in startLine..<endLine {
-      self.spritesPerLineInPreviousFrame.remove(line: line)
-    }
+    self.sprites.write(address, value: value)
   }
 
   // MARK: - Tick

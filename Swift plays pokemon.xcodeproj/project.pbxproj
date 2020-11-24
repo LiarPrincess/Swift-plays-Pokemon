@@ -70,6 +70,8 @@
 		908B1FF9256BF970004FBD53 /* DrawBackgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B1FF2256BF947004FBD53 /* DrawBackgroundTests.swift */; };
 		908B201A256C21C1004FBD53 /* DrawSpritesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */; };
 		90AC59BA256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */; };
+		90DF0504256D012C009304CC /* SpriteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0503256D012C009304CC /* SpriteCollection.swift */; };
+		90DF051A256D0A62009304CC /* SpriteSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0519256D0A62009304CC /* SpriteSize.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
 		90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681DD2556A69700EBD803 /* CartridgeType.swift */; };
 		90F682072556AA7A00EBD803 /* BootromError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681F92556AA6400EBD803 /* BootromError.swift */; };
@@ -269,6 +271,8 @@
 		908B1FF2256BF947004FBD53 /* DrawBackgroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawBackgroundTests.swift; sourceTree = "<group>"; };
 		908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawSpritesTests.swift; sourceTree = "<group>"; };
 		90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesPerLineInPreviousFrame.swift; sourceTree = "<group>"; };
+		90DF0503256D012C009304CC /* SpriteCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteCollection.swift; sourceTree = "<group>"; };
+		90DF0519256D0A62009304CC /* SpriteSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSize.swift; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
 		90F681DD2556A69700EBD803 /* CartridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeType.swift; sourceTree = "<group>"; };
 		90F681F92556AA6400EBD803 /* BootromError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromError.swift; sourceTree = "<group>"; };
@@ -550,6 +554,7 @@
 		90427E0625548FC5007A9E9D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				90DF0519256D0A62009304CC /* SpriteSize.swift */,
 				90427E0725548FEB007A9E9D /* LcdControl.swift */,
 				90427E0F255491C8007A9E9D /* LcdStatus.swift */,
 				90427E4F25549F5E007A9E9D /* LcdMode.swift */,
@@ -592,6 +597,8 @@
 		90DF0502256D004F009304CC /* Collections */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_62 /* Sprite.swift */,
+				90DF0503256D012C009304CC /* SpriteCollection.swift */,
 				90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */,
 			);
 			path = Collections;
@@ -769,7 +776,6 @@
 				OBJ_61 /* Lcd.swift */,
 				OBJ_59 /* Lcd+Draw.swift */,
 				OBJ_58 /* Lcd+Constants.swift */,
-				OBJ_62 /* Sprite.swift */,
 				OBJ_63 /* Tile.swift */,
 				90427E9F2555592C007A9E9D /* Framebuffer.swift */,
 			);
@@ -1134,11 +1140,13 @@
 				OBJ_197 /* Memory+read.swift in Sources */,
 				9063A2542556B0D800C36D84 /* CartridgeRamSize.swift in Sources */,
 				90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */,
+				90DF0504256D012C009304CC /* SpriteCollection.swift in Sources */,
 				OBJ_198 /* Memory+write.swift in Sources */,
 				OBJ_199 /* Memory.swift in Sources */,
 				90427E10255491C8007A9E9D /* LcdStatus.swift in Sources */,
 				90427E26255497CA007A9E9D /* LcdMemory.swift in Sources */,
 				90427E0825548FEB007A9E9D /* LcdControl.swift in Sources */,
+				90DF051A256D0A62009304CC /* SpriteSize.swift in Sources */,
 				OBJ_200 /* MemoryBuffer.swift in Sources */,
 				OBJ_201 /* MemoryMap.swift in Sources */,
 			);

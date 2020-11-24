@@ -10,14 +10,7 @@ private let isAboveBackgroundMask: UInt8 = 1 << 7
 // http://bgb.bircd.org/pandocs.htm#vramspriteattributetableoam
 internal final class Sprite {
 
-  internal enum Constants {
-    /// Total number of sprites (40)
-    internal static let count: UInt8 = 40
-    /// 1 line = max 10 sprites
-    internal static let countPerLine = 10
-    /// 1 sprite = 4 bytes
-    internal static let byteCount = 4
-  }
+  internal typealias Constants = SpriteCollection.Constants
 
   /// Sprite number (0..<40)
   internal var id: UInt8

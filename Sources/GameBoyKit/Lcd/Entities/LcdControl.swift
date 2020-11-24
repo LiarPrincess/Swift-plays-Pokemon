@@ -94,12 +94,12 @@ public struct LcdControl {
   // MARK: - Other
 
   /// Control bit 2 - OBJ (Sprite) Size
-  public var spriteHeight: Int {
-    return isSet(self.value, mask: Masks.spriteSize) ? 16 : 8
+  public var spriteHeight: SpriteSize {
+    return isSet(self.value, mask: Masks.spriteSize) ? .size16 : .size8
   }
 
   /// Control bit 2 - OBJ (Sprite) Size
-  public var spriteSize: Int {
+  public var spriteSize: SpriteSize {
     return self.spriteHeight
   }
 }
