@@ -42,7 +42,7 @@ public struct TileMap {
 
   // MARK: - Subscripts
 
-  subscript(index: Int) -> UInt8 {
+  internal subscript(index: Int) -> UInt8 {
     return self.data[index]
   }
 

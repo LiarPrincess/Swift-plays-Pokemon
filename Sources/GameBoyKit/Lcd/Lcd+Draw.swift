@@ -2,8 +2,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// swiftlint:disable file_length
-
 extension Lcd {
 
   internal func drawLine() {
@@ -171,7 +169,7 @@ extension Lcd {
       let inScreenLeft = sprite.realX + Tile.Constants.width >= 0
       let inScreenRight = sprite.realX < Constants.width
       guard inScreenLeft && inScreenRight else {
-          continue
+        continue
       }
 
       var tileIndex = Int(sprite.tile)

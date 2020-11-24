@@ -10,23 +10,20 @@ import XCTest
 
 class DrawSpritesTests: LcdTestCase {
 
-  // MARK: - Disable background and window
-
-  private func disableBackgroundAndSprites(lcd: Lcd) {
-    let enableMask = LcdControl.Masks.isBackgroundVisible | LcdControl.Masks.isWindowEnabled
-    let disableMask = ~enableMask
-
-    let value = lcd.control.value
-    let disabledValue = value & disableMask
-    lcd.control = LcdControl(value: disabledValue)
-  }
-
   // MARK: - Tetris
 
   func test_tetris() {
     let lcd = self.createLcdWithTetris()
-    self.disableBackgroundAndSprites(lcd: lcd)
-    let lines = self.drawFramebuffer(lcd: lcd)
+
+    // To enable sprites (since we do not draw background)
+    lcd.isBackgroundZero = LcdLineBitArray(initialValue: true)
+
+    let lines = self.drawFramebuffer(
+      lcd: lcd,
+      isBackgroundVisible: false,
+      isWindowEnabled: false,
+      isSpriteEnabled: true
+    )
 
     // Tetris uses prrites to display current & next blocks
     let currentBlockStart = 56

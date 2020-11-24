@@ -52,11 +52,11 @@ public struct TileData {
 
   // MARK: - Subscripts
 
-  subscript(index: Int) -> Tile {
+  internal subscript(index: Int) -> Tile {
     return self.tiles[index]
   }
 
-  subscript(index: Range<Int>) -> ArraySlice<Tile> {
+  internal subscript(index: Range<Int>) -> ArraySlice<Tile> {
     return self.tiles[index]
   }
 

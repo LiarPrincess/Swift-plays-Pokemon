@@ -10,23 +10,14 @@ import XCTest
 
 class DrawBackgroundTests: LcdTestCase {
 
-  // MARK: - Disable window and sprites
-
-  private func disableWindowAndSprites(lcd: Lcd) {
-    let enableMask = LcdControl.Masks.isWindowEnabled | LcdControl.Masks.isSpriteEnabled
-    let disableMask = ~enableMask
-
-    let value = lcd.control.value
-    let disabledValue = value & disableMask
-    lcd.control = LcdControl(value: disabledValue)
-  }
-
   // MARK: - Nintendo
 
   func test_nintendoLogo() {
     let lcd = self.createLcdWithNintendoLogo()
-    self.disableWindowAndSprites(lcd: lcd)
-    let lines = self.drawFramebuffer(lcd: lcd)
+    let lines = self.drawFramebuffer(lcd: lcd,
+                                     isBackgroundVisible: true,
+                                     isWindowEnabled: false,
+                                     isSpriteEnabled: false)
 
     let logoStart = 64
     let logoEnd = 79
@@ -60,8 +51,10 @@ class DrawBackgroundTests: LcdTestCase {
 
   func test_tetris() {
     let lcd = self.createLcdWithTetris()
-    self.disableWindowAndSprites(lcd: lcd)
-    let lines = self.drawFramebuffer(lcd: lcd)
+    let lines = self.drawFramebuffer(lcd: lcd,
+                                     isBackgroundVisible: true,
+                                     isWindowEnabled: false,
+                                     isSpriteEnabled: false)
 
     let expected = [
       "3333333 13 113 1                                                                                13 113 1 3333333333333333333333333333333333333333333333333333333",

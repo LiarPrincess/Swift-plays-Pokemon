@@ -28,19 +28,21 @@ public final class Lcd: LcdMemory {
   public internal(set) var spriteColorPalette0 = SpriteColorPalette(value: 0)
   public internal(set) var spriteColorPalette1 = SpriteColorPalette(value: 0)
 
+  // 'internal' because those are implementation details.
+  // 'readVideoRam' and 'readOAM' should be used to interact with it.
   internal lazy var tiles = TileData()
   internal lazy var sprites = SpriteCollection(spriteSize: self.control.spriteSize)
   internal lazy var tileMap9800to9bff = TileMap(variant: .from9800to9bff)
   internal lazy var tileMap9c00to9fff = TileMap(variant: .from9c00to9fff)
+
+  /// Used when drawing sprites (isBehindBackground property).
+  internal var isBackgroundZero = LcdLineBitArray(initialValue: false)
 
   /// Data that should be put on screen
   internal lazy var framebuffer = Framebuffer()
 
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress = 0
-
-  /// Used when drawing sprites (isBehindBackground property).
-  internal var isBackgroundZero = [Bool](repeating: true, count: Constants.width)
 
   /// We can enable/disable diplay only an the start of the frame.
   /// See: http://bgb.bircd.org/pandocs.htm#lcdcontrolregister

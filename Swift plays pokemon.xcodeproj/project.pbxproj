@@ -71,6 +71,8 @@
 		90DF0504256D012C009304CC /* SpriteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0503256D012C009304CC /* SpriteCollection.swift */; };
 		90DF0526256D0E33009304CC /* TileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0525256D0E33009304CC /* TileData.swift */; };
 		90DF0532256D12D4009304CC /* TileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0531256D12D4009304CC /* TileMap.swift */; };
+		90DF0552256D188A009304CC /* LcdLineBitArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0551256D188A009304CC /* LcdLineBitArray.swift */; };
+		90DF055F256D1A83009304CC /* LcdLineBitArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0558256D1A7A009304CC /* LcdLineBitArrayTests.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
 		90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681DD2556A69700EBD803 /* CartridgeType.swift */; };
 		90F682072556AA7A00EBD803 /* BootromError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681F92556AA6400EBD803 /* BootromError.swift */; };
@@ -271,6 +273,8 @@
 		90DF0503256D012C009304CC /* SpriteCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteCollection.swift; sourceTree = "<group>"; };
 		90DF0525256D0E33009304CC /* TileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileData.swift; sourceTree = "<group>"; };
 		90DF0531256D12D4009304CC /* TileMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMap.swift; sourceTree = "<group>"; };
+		90DF0551256D188A009304CC /* LcdLineBitArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdLineBitArray.swift; sourceTree = "<group>"; };
+		90DF0558256D1A7A009304CC /* LcdLineBitArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdLineBitArrayTests.swift; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
 		90F681DD2556A69700EBD803 /* CartridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeType.swift; sourceTree = "<group>"; };
 		90F681F92556AA6400EBD803 /* BootromError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromError.swift; sourceTree = "<group>"; };
@@ -598,6 +602,7 @@
 				OBJ_62 /* Sprite.swift */,
 				90DF0503256D012C009304CC /* SpriteCollection.swift */,
 				90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */,
+				90DF0551256D188A009304CC /* LcdLineBitArray.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -644,6 +649,7 @@
 				90427DE525548D8E007A9E9D /* BackgroundColorPaletteTests.swift */,
 				OBJ_122 /* SpriteColorPaletteTests.swift */,
 				OBJ_123 /* TileColorValueTests.swift */,
+				90DF0558256D1A7A009304CC /* LcdLineBitArrayTests.swift */,
 				908B1FF2256BF947004FBD53 /* DrawBackgroundTests.swift */,
 				908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */,
 			);
@@ -1123,6 +1129,7 @@
 				OBJ_184 /* SerialPort.swift in Sources */,
 				OBJ_185 /* TimerMemory.swift in Sources */,
 				OBJ_186 /* Timer.swift in Sources */,
+				90DF0552256D188A009304CC /* LcdLineBitArray.swift in Sources */,
 				OBJ_187 /* Interrupts.swift in Sources */,
 				OBJ_188 /* SpriteColorPalette.swift in Sources */,
 				OBJ_191 /* Lcd+Constants.swift in Sources */,
@@ -1184,6 +1191,7 @@
 				OBJ_234 /* CpuLogicTests.swift in Sources */,
 				9024C36D2555F60D0094AA47 /* NoMBCTests.swift in Sources */,
 				OBJ_235 /* CpuOpcodeLengthTests.swift in Sources */,
+				90DF055F256D1A83009304CC /* LcdLineBitArrayTests.swift in Sources */,
 				OBJ_236 /* CpuOpcodeTimingTests.swift in Sources */,
 				OBJ_237 /* CpuOtherInstructionsTests.swift in Sources */,
 				OBJ_238 /* CpuRegistersTests.swift in Sources */,

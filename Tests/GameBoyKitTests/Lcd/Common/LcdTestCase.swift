@@ -16,13 +16,29 @@ class LcdTestCase: XCTestCase {
 
   // MARK: - Render
 
-  func drawFramebuffer(lcd: Lcd) -> [String] {
+  func drawFramebuffer(lcd: Lcd,
+                       isBackgroundVisible: Bool,
+                       isWindowEnabled: Bool,
+                       isSpriteEnabled: Bool) -> [String] {
+    // Set control
+    let old = lcd.control
+    lcd.control = LcdControl(isLcdEnabled: old.isLcdEnabled,
+                             isBackgroundVisible: isBackgroundVisible,
+                             isWindowEnabled: isWindowEnabled,
+                             isSpriteEnabled: isSpriteEnabled,
+                             windowTileMap: old.windowTileMap,
+                             backgroundTileMap: old.backgroundTileMap,
+                             tileDataSelect: old.tileDataSelect,
+                             isSpriteHeight16: old.spriteSize == .size16)
+
+    // Draw to framebuffer
     for lineInt in 0..<Lcd.Constants.height {
       let line = UInt8(lineInt)
       lcd.line = line
       lcd.drawLine()
     }
 
+    // Extract framebuffer lines
     var lines = [String]()
     lines.reserveCapacity(Lcd.Constants.height)
 
