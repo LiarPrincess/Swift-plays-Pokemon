@@ -24,8 +24,8 @@ public struct BackgroundColorPalette {
     self.color3 = (value >> color3Shift) & 0b11
   }
 
-  public subscript(rawColor: UInt8) -> UInt8 {
-    switch rawColor {
+  internal func getColor(index: UInt8) -> UInt8 {
+    switch index {
     case 0: return self.color0
     case 1: return self.color1
     case 2: return self.color2

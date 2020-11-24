@@ -13,22 +13,22 @@ class SpriteColorPaletteTests: XCTestCase {
 
     var value: UInt8 = 0b00
     var palette = SpriteColorPalette(value: value)
-    XCTAssertEqual(palette[color], 0) // always 0
+    XCTAssertEqual(palette.getColor(index: color), 0) // always 0
     XCTAssertEqual(palette.value, 0) // not even saved
 
     value = 0b01
     palette = SpriteColorPalette(value: value)
-    XCTAssertEqual(palette[color], 0) // always 0
+    XCTAssertEqual(palette.getColor(index: color), 0) // always 0
     XCTAssertEqual(palette.value, value) // not even saved
 
     value = 0b10
     palette = SpriteColorPalette(value: value)
-    XCTAssertEqual(palette[color], 0) // always 0
+    XCTAssertEqual(palette.getColor(index: color), 0) // always 0
     XCTAssertEqual(palette.value, value) // not even saved
 
     value = 0b11
     palette = SpriteColorPalette(value: value)
-    XCTAssertEqual(palette[color], 0) // always 0
+    XCTAssertEqual(palette.getColor(index: color), 0) // always 0
     XCTAssertEqual(palette.value, value) // not even saved
   }
 
@@ -40,22 +40,22 @@ class SpriteColorPaletteTests: XCTestCase {
 
       var value: UInt8 = 0b00 << shift
       var palette = SpriteColorPalette(value: value)
-      XCTAssertEqual(palette[color], 0b00)
+      XCTAssertEqual(palette.getColor(index: color), 0b00)
       XCTAssertEqual(palette.value, value) // check if we can restore it
 
       value = 0b01 << shift
       palette = SpriteColorPalette(value: value)
-      XCTAssertEqual(palette[color], 0b01)
+      XCTAssertEqual(palette.getColor(index: color), 0b01)
       XCTAssertEqual(palette.value, value) // check if we can restore it
 
       value = 0b10 << shift
       palette = SpriteColorPalette(value: value)
-      XCTAssertEqual(palette[color], 0b10)
+      XCTAssertEqual(palette.getColor(index: color), 0b10)
       XCTAssertEqual(palette.value, value) // check if we can restore it
 
       value = 0b11 << shift
       palette = SpriteColorPalette(value: value)
-      XCTAssertEqual(palette[color], 0b11)
+      XCTAssertEqual(palette.getColor(index: color), 0b11)
       XCTAssertEqual(palette.value, value) // check if we can restore it
     }
   }
