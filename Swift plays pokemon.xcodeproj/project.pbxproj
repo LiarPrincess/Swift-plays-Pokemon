@@ -69,7 +69,6 @@
 		908B201A256C21C1004FBD53 /* DrawSpritesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */; };
 		90AC59BA256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */; };
 		90DF0504256D012C009304CC /* SpriteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0503256D012C009304CC /* SpriteCollection.swift */; };
-		90DF051A256D0A62009304CC /* SpriteSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0519256D0A62009304CC /* SpriteSize.swift */; };
 		90DF0526256D0E33009304CC /* TileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0525256D0E33009304CC /* TileData.swift */; };
 		90DF0532256D12D4009304CC /* TileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0531256D12D4009304CC /* TileMap.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
@@ -270,7 +269,6 @@
 		908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawSpritesTests.swift; sourceTree = "<group>"; };
 		90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesPerLineInPreviousFrame.swift; sourceTree = "<group>"; };
 		90DF0503256D012C009304CC /* SpriteCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteCollection.swift; sourceTree = "<group>"; };
-		90DF0519256D0A62009304CC /* SpriteSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSize.swift; sourceTree = "<group>"; };
 		90DF0525256D0E33009304CC /* TileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileData.swift; sourceTree = "<group>"; };
 		90DF0531256D12D4009304CC /* TileMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMap.swift; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
@@ -554,7 +552,6 @@
 		90427E0625548FC5007A9E9D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				90DF0519256D0A62009304CC /* SpriteSize.swift */,
 				90427E0725548FEB007A9E9D /* LcdControl.swift */,
 				90427E0F255491C8007A9E9D /* LcdStatus.swift */,
 				90427E4F25549F5E007A9E9D /* LcdMode.swift */,
@@ -1146,7 +1143,6 @@
 				90427E26255497CA007A9E9D /* LcdMemory.swift in Sources */,
 				90427E0825548FEB007A9E9D /* LcdControl.swift in Sources */,
 				90DF0526256D0E33009304CC /* TileData.swift in Sources */,
-				90DF051A256D0A62009304CC /* SpriteSize.swift in Sources */,
 				OBJ_200 /* MemoryBuffer.swift in Sources */,
 				OBJ_201 /* MemoryMap.swift in Sources */,
 			);

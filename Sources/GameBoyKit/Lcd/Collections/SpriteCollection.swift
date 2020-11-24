@@ -16,7 +16,7 @@ internal struct SpriteCollection {
     internal static let byteCount = 4
   }
 
-  private var spriteSize: SpriteSize
+  private var spriteSize: Sprite.Size
 
   private var sprites = (0..<Constants.count).map { Sprite(id: $0) }
 
@@ -24,13 +24,13 @@ internal struct SpriteCollection {
   /// Writes will clear appropriate entries.
   private var spritesInLine = SpritesPerLineInPreviousFrame()
 
-  internal init(spriteSize: SpriteSize) {
+  internal init(spriteSize: Sprite.Size) {
     self.spriteSize = spriteSize
   }
 
   // MARK: - Sprite size
 
-  internal mutating func onSpriteSizeChanged(newSize: SpriteSize) {
+  internal mutating func onSpriteSizeChanged(newSize: Sprite.Size) {
     let hasSizeChanged = self.spriteSize != newSize
     if hasSizeChanged {
       self.spritesInLine.removeAll()

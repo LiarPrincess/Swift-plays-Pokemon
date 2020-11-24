@@ -8,9 +8,21 @@ private let paletteNumberShift: UInt8 = 4
 private let isAboveBackgroundMask: UInt8 = 1 << 7
 
 // http://bgb.bircd.org/pandocs.htm#vramspriteattributetableoam
-internal final class Sprite {
+public final class Sprite {
 
   internal typealias Constants = SpriteCollection.Constants
+
+  public struct Size: Equatable {
+
+    internal static let size8 = Size(value: 8)
+    internal static let size16 = Size(value: 16)
+
+    public let value: Int
+
+    private init(value: Int) {
+      self.value = value
+    }
+  }
 
   /// Sprite number (0..<40)
   internal var id: UInt8
