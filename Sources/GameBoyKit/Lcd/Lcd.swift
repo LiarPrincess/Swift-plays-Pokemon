@@ -19,7 +19,7 @@ public final class Lcd: LcdMemory {
 
       let hasSizeChanged = oldValue.spriteSize != newValue.spriteSize
       if hasSizeChanged {
-        self.spritesByLineCache.removeAll(keepingCapacity: true)
+        self.spritesPerLineInPreviousFrame.removeAll()
       }
     }
   }
@@ -47,7 +47,7 @@ public final class Lcd: LcdMemory {
 
   /// Cache, so we don't recalculate sprites on every line draw.
   /// Writes to OAM will clear appropriate entries.
-  internal lazy var spritesByLineCache = [Int: [Sprite]]()
+  internal lazy var spritesPerLineInPreviousFrame = SpritesPerLineInPreviousFrame()
 
   /// Data that should be put on screen
   internal lazy var framebuffer = Framebuffer()
@@ -176,7 +176,7 @@ public final class Lcd: LcdMemory {
     let endLine = min(startLine + height, Constants.backgroundMapHeight)
 
     for line in startLine..<endLine {
-      self.spritesByLineCache[line] = nil
+      self.spritesPerLineInPreviousFrame.remove(line: line)
     }
   }
 

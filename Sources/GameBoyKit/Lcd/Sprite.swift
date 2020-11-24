@@ -7,6 +7,7 @@ private let flipXMask: UInt8 = 1 << 5
 private let paletteNumberShift: UInt8 = 4
 private let isAboveBackgroundMask: UInt8 = 1 << 7
 
+// http://bgb.bircd.org/pandocs.htm#vramspriteattributetableoam
 internal final class Sprite {
 
   internal enum Constants {

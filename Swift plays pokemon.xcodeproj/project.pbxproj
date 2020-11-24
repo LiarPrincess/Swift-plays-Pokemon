@@ -589,6 +589,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		90DF0502256D004F009304CC /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
 		90F681F82556AA1900EBD803 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -756,6 +764,7 @@
 			isa = PBXGroup;
 			children = (
 				90427E0625548FC5007A9E9D /* Entities */,
+				90DF0502256D004F009304CC /* Collections */,
 				90427E24255497CA007A9E9D /* LcdMemory.swift */,
 				OBJ_61 /* Lcd.swift */,
 				OBJ_59 /* Lcd+Draw.swift */,
@@ -1074,6 +1083,7 @@
 				90427EA825555E2D007A9E9D /* LinkCable.swift in Sources */,
 				OBJ_160 /* BootromFactory.swift in Sources */,
 				OBJ_161 /* Cartridge.swift in Sources */,
+				90AC59BA256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift in Sources */,
 				OBJ_162 /* CartridgeConstants.swift in Sources */,
 				OBJ_163 /* CartridgeFactory.swift in Sources */,
 				OBJ_165 /* CartridgeMap.swift in Sources */,

@@ -229,23 +229,27 @@ extension Lcd {
 
   /// Sort in REVERSE order (from right to left).
   internal func getSpritesFromRightToLeft(line: Int) -> [Sprite] {
-    if let cached = self.spritesByLineCache[line] {
+    // Do we have data from previous frame?
+    if let cached = self.spritesPerLineInPreviousFrame.get(line: line) {
       return cached
     }
 
+    // Find which sprites should be displayed in the current line.
     var result = [Sprite]()
     result.reserveCapacity(Sprite.Constants.countPerLine)
 
     let spriteHeight = self.control.spriteHeight
 
     for sprite in self.sprites {
-      let isAfterStart = line >= sprite.realY
-      let isBeforeEnd = line < (sprite.realY + spriteHeight)
+      let spriteMinY = sprite.realY
+      let spriteMaxY = sprite.realY + spriteHeight
+      let spriteContainsLine = spriteMinY <= line && line < spriteMaxY
 
-      guard isAfterStart && isBeforeEnd else {
+      guard spriteContainsLine else {
         continue
       }
 
+      // TODO: Find the insertion index
       result.append(sprite)
       if result.count == Sprite.Constants.countPerLine {
         break
@@ -257,7 +261,7 @@ extension Lcd {
       lhs.x == rhs.x ? lhs.id > rhs.id : lhs.x > rhs.x
     }
 
-    self.spritesByLineCache[line] = result
+    self.spritesPerLineInPreviousFrame.set(line: line, sprites: result)
     return result
   }
 
