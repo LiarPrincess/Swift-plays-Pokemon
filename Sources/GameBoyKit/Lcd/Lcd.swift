@@ -33,7 +33,7 @@ public final class Lcd: LcdMemory {
   public internal(set) var tileMap9800to9bff = MemoryBuffer(region: VideoRamMap.tileMap9800to9bff)
   public internal(set) var tileMap9c00to9fff = MemoryBuffer(region: VideoRamMap.tileMap9c00to9fff)
 
-  internal lazy var tiles = (0..<Tile.Constants.count).map { _ in Tile() }
+  internal lazy var tiles = TileCollection()
   internal lazy var sprites = SpriteCollection(spriteSize: self.control.spriteSize)
 
   /// Data that should be put on screen
@@ -56,10 +56,7 @@ public final class Lcd: LcdMemory {
   }
 
   deinit {
-    for tile in self.tiles {
-      tile.deallocate()
-    }
-
+    self.tiles.deallocate()
     self.tileMap9800to9bff.deallocate()
     self.tileMap9c00to9fff.deallocate()
     self.framebuffer.deallocate()
@@ -69,23 +66,14 @@ public final class Lcd: LcdMemory {
 
   public func readVideoRam(_ address: UInt16) -> UInt8 {
     switch address {
-
     case VideoRamMap.tileData:
-      let relativeAddress = Int(address - VideoRamMap.tileData.start)
-      let index = relativeAddress / Tile.Constants.byteCount
-      let byte = relativeAddress % Tile.Constants.byteCount
-
-      let tile = self.tiles[index]
-      return tile.data[byte]
-
+      return self.tiles.read(address)
     case VideoRamMap.tileMap9800to9bff:
       let index = address - VideoRamMap.tileMap9800to9bff.start
       return self.tileMap9800to9bff[index]
-
     case VideoRamMap.tileMap9c00to9fff:
       let index = address - VideoRamMap.tileMap9c00to9fff.start
       return self.tileMap9c00to9fff[index]
-
     default:
       return 0
     }
@@ -93,23 +81,14 @@ public final class Lcd: LcdMemory {
 
   internal func writeVideoRam(_ address: UInt16, value: UInt8) {
     switch address {
-
     case VideoRamMap.tileData:
-      let relativeAddress = Int(address - VideoRamMap.tileData.start)
-      let index = relativeAddress / Tile.Constants.byteCount
-      let byte = relativeAddress % Tile.Constants.byteCount
-
-      let tile = self.tiles[index]
-      tile.setByte(byte, value: value)
-
+      self.tiles.write(address, value: value)
     case VideoRamMap.tileMap9800to9bff:
       let index = address - VideoRamMap.tileMap9800to9bff.start
       self.tileMap9800to9bff[index] = value
-
     case VideoRamMap.tileMap9c00to9fff:
       let index = address - VideoRamMap.tileMap9c00to9fff.start
       self.tileMap9c00to9fff[index] = value
-
     default:
       break
     }

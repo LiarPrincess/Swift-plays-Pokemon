@@ -15,20 +15,7 @@
 
 internal struct Tile {
 
-  internal enum Constants {
-    /// Total number of tiles (3 * 128)
-    internal static let count = 3 * 128
-    /// 8 pixels
-    internal static let height = 8
-    /// 8 pixels
-    internal static let width = 8
-    /// 1 tile line = 2 bytes
-    internal static let bytesPerLine = 2
-    /// 1 tile = 16 bytes
-    internal static let byteCount = height * bytesPerLine
-    /// 1 row (in background map) = 32 tiles
-    internal static let tilesPerRow = 32
-  }
+  internal typealias Constants = TileCollection.Constants
 
   internal let data = MemoryBuffer(count: Constants.byteCount)
   // Processed `self.data`

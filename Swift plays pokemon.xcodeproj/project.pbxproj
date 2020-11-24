@@ -72,6 +72,7 @@
 		90AC59BA256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */; };
 		90DF0504256D012C009304CC /* SpriteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0503256D012C009304CC /* SpriteCollection.swift */; };
 		90DF051A256D0A62009304CC /* SpriteSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0519256D0A62009304CC /* SpriteSize.swift */; };
+		90DF0526256D0E33009304CC /* TileCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0525256D0E33009304CC /* TileCollection.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
 		90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681DD2556A69700EBD803 /* CartridgeType.swift */; };
 		90F682072556AA7A00EBD803 /* BootromError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681F92556AA6400EBD803 /* BootromError.swift */; };
@@ -273,6 +274,7 @@
 		90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesPerLineInPreviousFrame.swift; sourceTree = "<group>"; };
 		90DF0503256D012C009304CC /* SpriteCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteCollection.swift; sourceTree = "<group>"; };
 		90DF0519256D0A62009304CC /* SpriteSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSize.swift; sourceTree = "<group>"; };
+		90DF0525256D0E33009304CC /* TileCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileCollection.swift; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
 		90F681DD2556A69700EBD803 /* CartridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeType.swift; sourceTree = "<group>"; };
 		90F681F92556AA6400EBD803 /* BootromError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromError.swift; sourceTree = "<group>"; };
@@ -597,6 +599,8 @@
 		90DF0502256D004F009304CC /* Collections */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_63 /* Tile.swift */,
+				90DF0525256D0E33009304CC /* TileCollection.swift */,
 				OBJ_62 /* Sprite.swift */,
 				90DF0503256D012C009304CC /* SpriteCollection.swift */,
 				90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */,
@@ -776,7 +780,6 @@
 				OBJ_61 /* Lcd.swift */,
 				OBJ_59 /* Lcd+Draw.swift */,
 				OBJ_58 /* Lcd+Constants.swift */,
-				OBJ_63 /* Tile.swift */,
 				90427E9F2555592C007A9E9D /* Framebuffer.swift */,
 			);
 			path = Lcd;
@@ -1146,6 +1149,7 @@
 				90427E10255491C8007A9E9D /* LcdStatus.swift in Sources */,
 				90427E26255497CA007A9E9D /* LcdMemory.swift in Sources */,
 				90427E0825548FEB007A9E9D /* LcdControl.swift in Sources */,
+				90DF0526256D0E33009304CC /* TileCollection.swift in Sources */,
 				90DF051A256D0A62009304CC /* SpriteSize.swift in Sources */,
 				OBJ_200 /* MemoryBuffer.swift in Sources */,
 				OBJ_201 /* MemoryMap.swift in Sources */,
