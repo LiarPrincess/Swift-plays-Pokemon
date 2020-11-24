@@ -52,7 +52,7 @@ Lcd
 
   // MARK: - Tile indices
 
-  public func dumpTileIndices(tileMap: LcdTileMap) {
+  public func dumpTileIndices(tileMap: TileMap.Variant) {
     print("Tile indices \(tileMap):")
 
     // horizontal markers
@@ -90,7 +90,7 @@ Lcd
 
   // MARK: - Tile data
 
-  public func dumpTileData(tileData: LcdTileData) {
+  public func dumpTileData(tileData: TileData.Variant) {
     let columnCount = 16
     print("Tile data \(tileData):")
 
@@ -144,7 +144,7 @@ Lcd
 
   // MARK: - Background
 
-  public func dumpBackground(tileMap: LcdTileMap, tileData: LcdTileData) {
+  public func dumpBackground(tileMap: TileMap.Variant, tileData: TileData.Variant) {
     print("Background for map: \(tileMap), data: \(tileData)")
 
     let rowRange = 0..<tileRowCount
@@ -198,8 +198,8 @@ Lcd
     }
   }
 
-  private func drawTile(map: LcdTileMap,
-                        data: LcdTileData,
+  private func drawTile(map: TileMap.Variant,
+                        data: TileData.Variant,
                         row tileRow: Int,
                         column tileColumn: Int,
                         line tileLine: Int)

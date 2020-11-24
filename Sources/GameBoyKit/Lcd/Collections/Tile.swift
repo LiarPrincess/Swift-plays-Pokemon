@@ -15,7 +15,7 @@
 
 internal struct Tile {
 
-  internal typealias Constants = TileCollection.Constants
+  internal typealias Constants = TileData.Constants
 
   internal let data = MemoryBuffer(count: Constants.byteCount)
   // Processed `self.data`

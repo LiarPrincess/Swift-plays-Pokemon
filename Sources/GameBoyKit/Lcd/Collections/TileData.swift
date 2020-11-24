@@ -4,7 +4,12 @@
 
 private let tileDataStartAddress = MemoryMap.VideoRam.tileData.start
 
-internal struct TileCollection {
+public struct TileData {
+
+  public enum Variant {
+    case from8800to97ff
+    case from8000to8fff
+  }
 
   internal enum Constants {
     /// Total number of tiles (3 * 128)

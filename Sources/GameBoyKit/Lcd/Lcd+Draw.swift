@@ -234,7 +234,7 @@ extension Lcd {
     return Int(self.windowX) - Constants.windowXShift
   }
 
-  internal func getTileMap(for map: LcdTileMap) -> MemoryBuffer {
+  internal func getTileMap(for map: TileMap.Variant) -> TileMap {
     switch map {
     case .from9800to9bff: return self.tileMap9800to9bff
     case .from9c00to9fff: return self.tileMap9c00to9fff

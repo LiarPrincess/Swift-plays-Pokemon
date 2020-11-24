@@ -27,9 +27,9 @@ public struct LcdControl {
                 isBackgroundVisible: Bool,
                 isWindowEnabled: Bool,
                 isSpriteEnabled: Bool,
-                windowTileMap: LcdTileMap,
-                backgroundTileMap: LcdTileMap,
-                tileDataSelect: LcdTileData,
+                windowTileMap: TileMap.Variant,
+                backgroundTileMap: TileMap.Variant,
+                tileDataSelect: TileData.Variant,
                 isSpriteHeight16: Bool) {
     var value = UInt8()
     func set(_ mask: UInt8, if condition: Bool) {
@@ -75,20 +75,26 @@ public struct LcdControl {
   // MARK: - Tile map
 
   /// Control bit 3 - BG Tile Map Display Select
-  public var backgroundTileMap: LcdTileMap {
-    return isSet(self.value, mask: Masks.backgroundTileMap) ? .from9c00to9fff : .from9800to9bff
+  public var backgroundTileMap: TileMap.Variant {
+    return isSet(self.value, mask: Masks.backgroundTileMap) ?
+      .from9c00to9fff :
+      .from9800to9bff
   }
 
   /// Control bit 6 - Window Tile Map Display Select
-  public var windowTileMap: LcdTileMap {
-    return isSet(self.value, mask: Masks.windowTileMap) ? .from9c00to9fff : .from9800to9bff
+  public var windowTileMap: TileMap.Variant {
+    return isSet(self.value, mask: Masks.windowTileMap) ?
+      .from9c00to9fff :
+      .from9800to9bff
   }
 
   // MARK: - Tile data
 
   /// Control bit 4 - BG & Window Tile Data Select
-  public var tileDataSelect: LcdTileData {
-    return isSet(self.value, mask: Masks.tileData) ? .from8000to8fff : .from8800to97ff
+  public var tileDataSelect: TileData.Variant {
+    return isSet(self.value, mask: Masks.tileData) ?
+      .from8000to8fff :
+      .from8800to97ff
   }
 
   // MARK: - Other

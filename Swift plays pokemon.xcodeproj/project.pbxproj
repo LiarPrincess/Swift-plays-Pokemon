@@ -54,8 +54,6 @@
 		90427E0825548FEB007A9E9D /* LcdControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E0725548FEB007A9E9D /* LcdControl.swift */; };
 		90427E10255491C8007A9E9D /* LcdStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E0F255491C8007A9E9D /* LcdStatus.swift */; };
 		90427E26255497CA007A9E9D /* LcdMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E24255497CA007A9E9D /* LcdMemory.swift */; };
-		90427E3A25549F27007A9E9D /* LcdTileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E3925549F27007A9E9D /* LcdTileMap.swift */; };
-		90427E4825549F43007A9E9D /* LcdTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E4725549F43007A9E9D /* LcdTileData.swift */; };
 		90427E5025549F5E007A9E9D /* LcdMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E4F25549F5E007A9E9D /* LcdMode.swift */; };
 		90427EA02555592C007A9E9D /* Framebuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427E9F2555592C007A9E9D /* Framebuffer.swift */; };
 		90427EA825555E2D007A9E9D /* LinkCable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427EA725555E2D007A9E9D /* LinkCable.swift */; };
@@ -72,7 +70,8 @@
 		90AC59BA256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */; };
 		90DF0504256D012C009304CC /* SpriteCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0503256D012C009304CC /* SpriteCollection.swift */; };
 		90DF051A256D0A62009304CC /* SpriteSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0519256D0A62009304CC /* SpriteSize.swift */; };
-		90DF0526256D0E33009304CC /* TileCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0525256D0E33009304CC /* TileCollection.swift */; };
+		90DF0526256D0E33009304CC /* TileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0525256D0E33009304CC /* TileData.swift */; };
+		90DF0532256D12D4009304CC /* TileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0531256D12D4009304CC /* TileMap.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
 		90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681DD2556A69700EBD803 /* CartridgeType.swift */; };
 		90F682072556AA7A00EBD803 /* BootromError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681F92556AA6400EBD803 /* BootromError.swift */; };
@@ -259,8 +258,6 @@
 		90427E0725548FEB007A9E9D /* LcdControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdControl.swift; sourceTree = "<group>"; };
 		90427E0F255491C8007A9E9D /* LcdStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdStatus.swift; sourceTree = "<group>"; };
 		90427E24255497CA007A9E9D /* LcdMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcdMemory.swift; sourceTree = "<group>"; };
-		90427E3925549F27007A9E9D /* LcdTileMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileMap.swift; sourceTree = "<group>"; };
-		90427E4725549F43007A9E9D /* LcdTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdTileData.swift; sourceTree = "<group>"; };
 		90427E4F25549F5E007A9E9D /* LcdMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdMode.swift; sourceTree = "<group>"; };
 		90427E9F2555592C007A9E9D /* Framebuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Framebuffer.swift; sourceTree = "<group>"; };
 		90427EA725555E2D007A9E9D /* LinkCable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCable.swift; sourceTree = "<group>"; };
@@ -274,7 +271,8 @@
 		90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesPerLineInPreviousFrame.swift; sourceTree = "<group>"; };
 		90DF0503256D012C009304CC /* SpriteCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteCollection.swift; sourceTree = "<group>"; };
 		90DF0519256D0A62009304CC /* SpriteSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSize.swift; sourceTree = "<group>"; };
-		90DF0525256D0E33009304CC /* TileCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileCollection.swift; sourceTree = "<group>"; };
+		90DF0525256D0E33009304CC /* TileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileData.swift; sourceTree = "<group>"; };
+		90DF0531256D12D4009304CC /* TileMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMap.swift; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
 		90F681DD2556A69700EBD803 /* CartridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeType.swift; sourceTree = "<group>"; };
 		90F681F92556AA6400EBD803 /* BootromError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromError.swift; sourceTree = "<group>"; };
@@ -560,8 +558,6 @@
 				90427E0725548FEB007A9E9D /* LcdControl.swift */,
 				90427E0F255491C8007A9E9D /* LcdStatus.swift */,
 				90427E4F25549F5E007A9E9D /* LcdMode.swift */,
-				90427E3925549F27007A9E9D /* LcdTileMap.swift */,
-				90427E4725549F43007A9E9D /* LcdTileData.swift */,
 				90427DCB25548C7F007A9E9D /* BackgroundColorPalette.swift */,
 				OBJ_55 /* SpriteColorPalette.swift */,
 			);
@@ -600,7 +596,8 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_63 /* Tile.swift */,
-				90DF0525256D0E33009304CC /* TileCollection.swift */,
+				90DF0525256D0E33009304CC /* TileData.swift */,
+				90DF0531256D12D4009304CC /* TileMap.swift */,
 				OBJ_62 /* Sprite.swift */,
 				90DF0503256D012C009304CC /* SpriteCollection.swift */,
 				90AC59B9256BDD8600DB8E34 /* SpritesPerLineInPreviousFrame.swift */,
@@ -1106,14 +1103,12 @@
 				OBJ_170 /* CpuRegisters.swift in Sources */,
 				90F682072556AA7A00EBD803 /* BootromError.swift in Sources */,
 				OBJ_171 /* CBPrefixedOpcode.swift in Sources */,
-				90427E4825549F43007A9E9D /* LcdTileData.swift in Sources */,
 				90F682282556AB0A00EBD803 /* CartridgeError.swift in Sources */,
 				OBJ_173 /* DebugState.swift in Sources */,
 				90427DCC25548C80007A9E9D /* BackgroundColorPalette.swift in Sources */,
 				OBJ_174 /* Debugger+Cpu.swift in Sources */,
 				90427E5025549F5E007A9E9D /* LcdMode.swift in Sources */,
 				OBJ_175 /* Debugger+Memory.swift in Sources */,
-				90427E3A25549F27007A9E9D /* LcdTileMap.swift in Sources */,
 				90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */,
 				9024C32C25559FAA0094AA47 /* NoMBC.swift in Sources */,
 				9024C33C2555A0810094AA47 /* MBC3.swift in Sources */,
@@ -1122,6 +1117,7 @@
 				OBJ_178 /* Extensions.swift in Sources */,
 				OBJ_179 /* GameBoy.swift in Sources */,
 				OBJ_180 /* GameboyInput.swift in Sources */,
+				90DF0532256D12D4009304CC /* TileMap.swift in Sources */,
 				90427DA2255487C5007A9E9D /* Audio.swift in Sources */,
 				90427EBC25556202007A9E9D /* CartridgeHeader.swift in Sources */,
 				OBJ_182 /* JoypadMemory.swift in Sources */,
@@ -1149,7 +1145,7 @@
 				90427E10255491C8007A9E9D /* LcdStatus.swift in Sources */,
 				90427E26255497CA007A9E9D /* LcdMemory.swift in Sources */,
 				90427E0825548FEB007A9E9D /* LcdControl.swift in Sources */,
-				90DF0526256D0E33009304CC /* TileCollection.swift in Sources */,
+				90DF0526256D0E33009304CC /* TileData.swift in Sources */,
 				90DF051A256D0A62009304CC /* SpriteSize.swift in Sources */,
 				OBJ_200 /* MemoryBuffer.swift in Sources */,
 				OBJ_201 /* MemoryMap.swift in Sources */,
