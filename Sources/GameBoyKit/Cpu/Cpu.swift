@@ -42,10 +42,10 @@ public final class Cpu {
 
   /// Run 1 instruction. Returns the number of cycles it took.
   internal func tick() -> Int {
-    let interrupt = self.getAwaitingInterrupt()
+    let interruptHandlingRoutine = self.getAwaitingInterruptHandlingRoutine()
 
     if self.isHalted {
-      if interrupt != nil {
+      if interruptHandlingRoutine != nil {
         self.isHalted = false
         self.pc += 1 // move past halt
       } else {
@@ -53,11 +53,11 @@ public final class Cpu {
       }
     }
 
-    if let i = interrupt, self.ime {
+    if let handlingRoutine = interruptHandlingRoutine, self.ime {
       self.disableInterrupts()
-      self.interrupts.clear(i)
+      self.interrupts.clear(handlingRoutine.kind)
       self.push16(self.pc)
-      self.pc = self.getInterruptHandlingRoutine(i)
+      self.pc = handlingRoutine.address
       return 8 // because of push
     }
 
@@ -86,28 +86,30 @@ public final class Cpu {
     self.imeNext = false
   }
 
-  private func getAwaitingInterrupt() -> Interrupts.Kind? {
+  private struct InterruptHandlingRoutine {
+    fileprivate static let vBlank = InterruptHandlingRoutine(kind: .vBlank, address: 0x40)
+    fileprivate static let lcdStat = InterruptHandlingRoutine(kind: .lcdStat, address: 0x48)
+    fileprivate static let timer = InterruptHandlingRoutine(kind: .timer, address: 0x50)
+    fileprivate static let serial = InterruptHandlingRoutine(kind: .serial, address: 0x58)
+    fileprivate static let joypad = InterruptHandlingRoutine(kind: .joypad, address: 0x60)
+
+    fileprivate let kind: Interrupts.Kind
+    fileprivate let address: UInt16
+  }
+
+  private func getAwaitingInterruptHandlingRoutine() -> InterruptHandlingRoutine? {
     guard self.ime || self.isHalted else {
       return nil
     }
 
-    if self.interrupts.isEnabledAndSet(.vBlank) { return .vBlank }
-    if self.interrupts.isEnabledAndSet(.lcdStat) { return .lcdStat }
-    if self.interrupts.isEnabledAndSet(.timer) { return .timer }
-    if self.interrupts.isEnabledAndSet(.serial) { return .serial }
-    if self.interrupts.isEnabledAndSet(.joypad) { return .joypad }
+    let interrupts = self.interrupts
+    if interrupts.isEnabledAndSet(.vBlank) { return .vBlank }
+    if interrupts.isEnabledAndSet(.lcdStat) { return .lcdStat }
+    if interrupts.isEnabledAndSet(.timer) { return .timer }
+    if interrupts.isEnabledAndSet(.serial) { return .serial }
+    if interrupts.isEnabledAndSet(.joypad) { return .joypad }
 
     return nil
-  }
-
-  private func getInterruptHandlingRoutine(_ type: Interrupts.Kind) -> UInt16 {
-    switch type {
-    case .vBlank: return 0x40
-    case .lcdStat: return 0x48
-    case .timer: return 0x50
-    case .serial: return 0x58
-    case .joypad: return 0x60
-    }
   }
 
   // MARK: - Operands
