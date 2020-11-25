@@ -112,7 +112,7 @@ public final class Lcd: LcdMemory {
     self.updateMode()
 
     // This is not exactly correct, but for perfomance we will
-    // draw the whole line at once instead on every tick.
+    // draw the whole line at once instead of doing this on every tick.
     let hasFinishedTransfer = self.status.mode != previousMode && previousMode == .pixelTransfer
     if hasFinishedTransfer {
       self.drawLine()
@@ -136,7 +136,10 @@ public final class Lcd: LcdMemory {
 
   private func updateLine() {
     let previousLine = self.line
-    self.line = UInt8(self.frameProgress / Constants.cyclesPerLine)
+
+    // No 'truncation' will happen
+    let lineInt = self.frameProgress / Constants.cyclesPerLine
+    self.line = UInt8(truncatingIfNeeded: lineInt)
 
     if self.line != previousLine {
       let hasInterrupt = self.line == self.lineCompare
@@ -151,7 +154,14 @@ public final class Lcd: LcdMemory {
   /// Update STAT with new mode (after updating progress).
   /// Will also request any needed interrupt.
   private func updateMode() {
-    if self.line >= Constants.height {
+    // In DEBUG mode this conversion would be visible in Instruments
+    // (~12% of overal frame time).
+    // We will do it just once.
+    enum UpdateModeConstants { // swiftlint:disable:this nesting
+      static let lcdHeight = UInt8(Lcd.Constants.height)
+    }
+
+    if self.line >= UpdateModeConstants.lcdHeight {
       if self.status.mode != .vBlank {
         self.setMode(.vBlank)
         self.interrupts.set(.vBlank)

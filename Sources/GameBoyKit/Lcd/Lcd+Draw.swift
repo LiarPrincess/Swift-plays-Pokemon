@@ -2,6 +2,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// swiftlint:disable file_length
+
 extension Lcd {
 
   internal func drawLine() {
@@ -27,6 +29,7 @@ extension Lcd {
     let tileRow = globalY / Tile.Constants.height
     let tileLine = globalY % Tile.Constants.height
 
+    let tileData = self.control.tileDataSelect
     let tileMap = self.getTileMap(for: self.control.backgroundTileMap)
     let framebufferSlice = self.getBackgroundFramebuffer(line: line)
 
@@ -34,12 +37,11 @@ extension Lcd {
     while progress < framebufferSlice.count {
       let globalX = (Int(self.scrollX) + progress) % Constants.backgroundMapWidth
       let tileColumn = globalX / Tile.Constants.width
-      let tileIndexRaw = tileMap[tileRow * Tile.Constants.tilesPerRow + tileColumn]
 
-      var tileIndex = Int(tileIndexRaw)
-      if self.control.tileDataSelect == .from8800to97ff {
-        tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
-      }
+      let tileIndex = self.getTileIndex(map: tileMap,
+                                        data: tileData,
+                                        row: tileRow,
+                                        column: tileColumn)
 
       let tile = self.tiles[tileIndex]
       let tilePixels = tile.getPixels(in: tileLine)
@@ -48,13 +50,17 @@ extension Lcd {
       let startBit = globalX % Tile.Constants.width
       let lastBit = min(Tile.Constants.width, pixelsToEnd)
 
-      for bit in startBit..<lastBit {
+      // This could be rewritten as for-loop.
+      // But that would drop 16 fps in DEBUG (look for 'IndexIterator' in Instruments).
+      var bit = startBit
+      while bit != lastBit {
         let tileColor = tilePixels[bit]
         let color = self.backgroundColorPalette.getColor(index: tileColor)
 
         let targetX = progress + (bit - startBit)
         framebufferSlice[targetX] = color
         self.isBackgroundZero[targetX] = tileColor == 0
+        bit += 1
       }
 
       progress += (Tile.Constants.width - startBit)
@@ -65,7 +71,8 @@ extension Lcd {
   private func getBackgroundFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
     let framebufferStart = self.framebuffer.baseAddress
 
-    let start = framebufferStart.advanced(by: line * Constants.width)
+    let lineOffset = line * Constants.width
+    let start = framebufferStart.advanced(by: lineOffset)
     var count = Constants.width
 
     let isUsingWindow = self.control.isWindowEnabled && self.line >= self.windowY
@@ -91,7 +98,6 @@ extension Lcd {
   private func drawWindow() {
     let line = Int(self.line)
     let windowStartY = Int(self.windowY)
-    let windowStartX = self.shiftedWindowX
 
     guard line >= windowStartY else {
       return
@@ -101,18 +107,18 @@ extension Lcd {
     let tileRow = windowY / Tile.Constants.height
     let tileLine = windowY % Tile.Constants.height
 
+    let tileData = self.control.tileDataSelect
     let tileMap = self.getTileMap(for: self.control.windowTileMap)
     let framebufferSlice = self.getWindowFramebuffer(line: line)
 
     var progress = 0 // windowX
     while progress < framebufferSlice.count {
       let tileColumn = progress / Tile.Constants.width
-      let tileIndexRaw = tileMap[tileRow * Tile.Constants.tilesPerRow + tileColumn]
 
-      var tileIndex = Int(tileIndexRaw)
-      if self.control.tileDataSelect == .from8800to97ff {
-        tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
-      }
+      let tileIndex = self.getTileIndex(map: tileMap,
+                                        data: tileData,
+                                        row: tileRow,
+                                        column: tileColumn)
 
       let tile = self.tiles[tileIndex]
       let tilePixels = tile.getPixels(in: tileLine)
@@ -121,13 +127,16 @@ extension Lcd {
       let startBit = progress % Tile.Constants.width
       let lastBit = min(Tile.Constants.width, pixelsToEnd)
 
-      for bit in startBit..<lastBit {
+      var bit = startBit
+      while bit != lastBit {
         let tileColor = tilePixels[bit]
         let color = self.backgroundColorPalette.getColor(index: tileColor)
 
         let targetX = progress + (bit - startBit)
         framebufferSlice[targetX] = color
         self.isBackgroundZero[targetX] = tileColor == 0
+
+        bit += 1
       }
 
       progress += (Tile.Constants.width - startBit)
@@ -236,6 +245,20 @@ extension Lcd {
     switch map {
     case .from9800to9bff: return self.tileMap9800to9bff
     case .from9c00to9fff: return self.tileMap9c00to9fff
+    }
+  }
+
+  private func getTileIndex(map: TileMap,
+                            data: TileData.Variant,
+                            row: Int,
+                            column: Int) -> Int {
+    let tileIndexRaw = map[row * Tile.Constants.tilesPerRow + column]
+
+    switch data {
+    case .from8000to8fff:
+      return Int(tileIndexRaw)
+    case .from8800to97ff:
+      return 256 + Int(Int8(bitPattern: tileIndexRaw))
     }
   }
 }
