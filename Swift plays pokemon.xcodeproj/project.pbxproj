@@ -73,6 +73,7 @@
 		90DF0532256D12D4009304CC /* TileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0531256D12D4009304CC /* TileMap.swift */; };
 		90DF0552256D188A009304CC /* LcdLineBitArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0551256D188A009304CC /* LcdLineBitArray.swift */; };
 		90DF055F256D1A83009304CC /* LcdLineBitArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0558256D1A7A009304CC /* LcdLineBitArrayTests.swift */; };
+		90DF0576256D393C009304CC /* SpriteCollection+SpriteSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DF056F256D3915009304CC /* SpriteCollection+SpriteSelectionTests.swift */; };
 		90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681D52556A08C00EBD803 /* MBC3Tests.swift */; };
 		90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681DD2556A69700EBD803 /* CartridgeType.swift */; };
 		90F682072556AA7A00EBD803 /* BootromError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F681F92556AA6400EBD803 /* BootromError.swift */; };
@@ -275,6 +276,7 @@
 		90DF0531256D12D4009304CC /* TileMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMap.swift; sourceTree = "<group>"; };
 		90DF0551256D188A009304CC /* LcdLineBitArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdLineBitArray.swift; sourceTree = "<group>"; };
 		90DF0558256D1A7A009304CC /* LcdLineBitArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LcdLineBitArrayTests.swift; sourceTree = "<group>"; };
+		90DF056F256D3915009304CC /* SpriteCollection+SpriteSelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpriteCollection+SpriteSelectionTests.swift"; sourceTree = "<group>"; };
 		90F681D52556A08C00EBD803 /* MBC3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBC3Tests.swift; sourceTree = "<group>"; };
 		90F681DD2556A69700EBD803 /* CartridgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeType.swift; sourceTree = "<group>"; };
 		90F681F92556AA6400EBD803 /* BootromError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromError.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				90DF0558256D1A7A009304CC /* LcdLineBitArrayTests.swift */,
 				908B1FF2256BF947004FBD53 /* DrawBackgroundTests.swift */,
 				908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */,
+				90DF056F256D3915009304CC /* SpriteCollection+SpriteSelectionTests.swift */,
 			);
 			path = Lcd;
 			sourceTree = "<group>";
@@ -1212,6 +1215,7 @@
 				908B201A256C21C1004FBD53 /* DrawSpritesTests.swift in Sources */,
 				9024C3832555F67C0094AA47 /* CartridgeTestCase.swift in Sources */,
 				90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */,
+				90DF0576256D393C009304CC /* SpriteCollection+SpriteSelectionTests.swift in Sources */,
 				908B1FEC256BF921004FBD53 /* LcdTestCase.swift in Sources */,
 				OBJ_252 /* TimerTimaTests.swift in Sources */,
 				OBJ_253 /* TimerDivTests.swift in Sources */,

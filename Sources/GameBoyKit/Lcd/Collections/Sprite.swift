@@ -7,8 +7,8 @@ private let flipXMask: UInt8 = 1 << 5
 private let paletteNumberShift: UInt8 = 4
 private let isAboveBackgroundMask: UInt8 = 1 << 7
 
-// http://bgb.bircd.org/pandocs.htm#vramspriteattributetableoam
-public final class Sprite {
+/// http://bgb.bircd.org/pandocs.htm#vramspriteattributetableoam
+public struct Sprite {
 
   internal typealias Constants = SpriteCollection.Constants
 
@@ -24,10 +24,8 @@ public final class Sprite {
     }
   }
 
-  /// Sprite number (0..<40)
-  internal var id: UInt8
   /// Byte 0 - Y Position;
-  /// Specifies the sprites vertical position on the screen (minus 16).
+  /// Specifies the sprite vertical position on the screen (minus 16).
   internal var y: UInt8 = 0
   /// Byte 1 - X Position;
   /// Specifies the sprites horizontal position on the screen (minus 8).
@@ -40,10 +38,6 @@ public final class Sprite {
 
   internal var realY: Int { return Int(self.y) - 16 }
   internal var realX: Int { return Int(self.x) - 8 }
-
-  internal init(id: UInt8) {
-    self.id = id
-  }
 
   // MARK: - Flags
 
