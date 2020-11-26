@@ -14,21 +14,17 @@ private let joypadMask:  UInt8 = 1 << 4
 /// FFFF Interrupt Enable
 public final class Interrupts {
 
-  public enum Kind {
-    case vBlank
-    case lcdStat
-    case timer
-    case serial
-    case joypad
+  public struct Kind {
+    public static let vBlank  = Kind(mask: vBlankMask)
+    public static let lcdStat = Kind(mask: lcdStatMask)
+    public static let timer  = Kind(mask: timerMask)
+    public static let serial = Kind(mask: serialMask)
+    public static let joypad = Kind(mask: joypadMask)
 
-    fileprivate var mask: UInt8 {
-      switch self {
-      case .vBlank: return vBlankMask
-      case .lcdStat: return lcdStatMask
-      case .timer: return timerMask
-      case .serial: return serialMask
-      case .joypad: return joypadMask
-      }
+    fileprivate var mask: UInt8
+
+    private init(mask: UInt8) {
+      self.mask = mask
     }
   }
 
