@@ -26,7 +26,7 @@ public final class GameBoy {
 
   public init(bootrom: Bootrom?,
               cartridge: Cartridge,
-              input: GameboyInputProvider)
+              input: GameBoyInputProvider)
   {
     let interrupts = Interrupts()
     self.lcd = Lcd(interrupts: interrupts)

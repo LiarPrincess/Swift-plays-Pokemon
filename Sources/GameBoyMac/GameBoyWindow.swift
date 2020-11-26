@@ -6,7 +6,7 @@ import AppKit
 import MetalKit
 import GameBoyKit
 
-class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
+class GameBoyWindow: NSWindow, GameBoyInputProvider, MTKViewDelegate {
 
   // swiftlint:disable:next implicitly_unwrapped_optional
   private(set) var gameBoy: GameBoy!
@@ -79,9 +79,9 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
 
   // MARK: - Input
 
-  private var input = GameboyInput()
+  private var input = GameBoyInput()
 
-  func getGameboyInput() -> GameboyInput {
+  func getGameBoyInput() -> GameBoyInput {
     return self.input
   }
 

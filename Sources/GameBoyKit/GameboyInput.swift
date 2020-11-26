@@ -2,7 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-public struct GameboyInput {
+public struct GameBoyInput {
 
   public var up = false
   public var down = false
@@ -17,6 +17,7 @@ public struct GameboyInput {
   public init() {}
 }
 
-public protocol GameboyInputProvider: AnyObject {
-  func getGameboyInput() -> GameboyInput
+/// Game boy will ask you for the current state of the inputs.
+public protocol GameBoyInputProvider: AnyObject {
+  func getGameBoyInput() -> GameBoyInput
 }

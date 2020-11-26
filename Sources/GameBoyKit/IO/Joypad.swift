@@ -33,7 +33,7 @@ public final class Joypad: JoypadMemory {
       // both true or both false? -> ignore
       if isButtons == isDirections { return }
 
-      guard let input = self.provider?.getGameboyInput() else {
+      guard let input = self.provider?.getGameBoyInput() else {
         fatalError("GameBoy input provider was deallocated before finishing running")
       }
 
@@ -41,13 +41,13 @@ public final class Joypad: JoypadMemory {
     }
   }
 
-  private weak var provider: GameboyInputProvider?
+  private weak var provider: GameBoyInputProvider?
 
-  internal init(provider: GameboyInputProvider) {
+  internal init(provider: GameBoyInputProvider) {
     self.provider = provider
   }
 
-  private func setButtons(from input: GameboyInput) {
+  private func setButtons(from input: GameBoyInput) {
     self._value = 0
     if !input.a { self._value |= aMask }
     if !input.b { self._value |= bMask }
@@ -55,7 +55,7 @@ public final class Joypad: JoypadMemory {
     if !input.select { self._value |= selectMask }
   }
 
-  private func setDirections(from input: GameboyInput) {
+  private func setDirections(from input: GameBoyInput) {
     self._value = 0
     if !input.up { self._value |= upMask }
     if !input.down { self._value |= downMask }
