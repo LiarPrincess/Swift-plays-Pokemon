@@ -79,6 +79,8 @@
 		90F682282556AB0A00EBD803 /* CartridgeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F682142556AAF100EBD803 /* CartridgeError.swift */; };
 		90F6824B2556AE4B00EBD803 /* CartridgeRomSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F6822F2556AC4300EBD803 /* CartridgeRomSize.swift */; };
 		90F987D3256FA7920008C3A3 /* TileColorInLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F987D2256FA7920008C3A3 /* TileColorInLineTests.swift */; };
+		90F987EA256FC6F30008C3A3 /* ExternalRamState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F987E3256FC6EE0008C3A3 /* ExternalRamState.swift */; };
+		90F987F6256FCEE90008C3A3 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F987F5256FCEE80008C3A3 /* FileSystem.swift */; };
 		OBJ_146 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Common.swift */; };
 		OBJ_147 /* ModifyInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ModifyInstructions.swift */; };
 		OBJ_148 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Opcode.swift */; };
@@ -283,6 +285,8 @@
 		90F6822F2556AC4300EBD803 /* CartridgeRomSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeRomSize.swift; sourceTree = "<group>"; };
 		90F6823D2556AC7800EBD803 /* CartridgeRamSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartridgeRamSize.swift; sourceTree = "<group>"; };
 		90F987D2256FA7920008C3A3 /* TileColorInLineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileColorInLineTests.swift; sourceTree = "<group>"; };
+		90F987E3256FC6EE0008C3A3 /* ExternalRamState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalRamState.swift; sourceTree = "<group>"; };
+		90F987F5256FCEE80008C3A3 /* FileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		OBJ_100 /* CpuOpcodeLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeLengthTests.swift; sourceTree = "<group>"; };
 		OBJ_101 /* CpuOpcodeTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuOpcodeTimingTests.swift; sourceTree = "<group>"; };
@@ -509,6 +513,7 @@
 				903C2B5D2559774B00EB1C6D /* GameBoyWindow.swift */,
 				903C2B5A2559774B00EB1C6D /* KeyMap.swift */,
 				903C2B5F2559774B00EB1C6D /* Metal.swift */,
+				90F987F5256FCEE80008C3A3 /* FileSystem.swift */,
 				903C2B952559A5AF00EB1C6D /* ROMs.swift */,
 				903C2B5B2559774B00EB1C6D /* Shader.metal */,
 				903C2B1B2559758300EB1C6D /* Info.plist */,
@@ -714,6 +719,7 @@
 				90F682142556AAF100EBD803 /* CartridgeError.swift */,
 				OBJ_24 /* CartridgeConstants.swift */,
 				OBJ_27 /* CartridgeMap.swift */,
+				90F987E3256FC6EE0008C3A3 /* ExternalRamState.swift */,
 			);
 			path = Cartridge;
 			sourceTree = "<group>";
@@ -1063,6 +1069,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90F987F6256FCEE90008C3A3 /* FileSystem.swift in Sources */,
 				903C2B652559774B00EB1C6D /* Arguments.swift in Sources */,
 				903C2B642559774B00EB1C6D /* GameBoyWindow.swift in Sources */,
 				903C2B622559774B00EB1C6D /* Shader.metal in Sources */,
@@ -1137,6 +1144,7 @@
 				OBJ_188 /* SpriteColorPalette.swift in Sources */,
 				OBJ_191 /* Lcd+Constants.swift in Sources */,
 				OBJ_192 /* Lcd+Draw.swift in Sources */,
+				90F987EA256FC6F30008C3A3 /* ExternalRamState.swift in Sources */,
 				OBJ_193 /* Debugger+Lcd.swift in Sources */,
 				90F681EB2556A8A900EBD803 /* CartridgeType.swift in Sources */,
 				OBJ_194 /* Lcd.swift in Sources */,

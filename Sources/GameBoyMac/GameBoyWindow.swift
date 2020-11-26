@@ -10,6 +10,7 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
 
   // swiftlint:disable:next implicitly_unwrapped_optional
   private(set) var gameBoy: GameBoy!
+  let cartridgePath: String
   let keyMap: KeyMap
 
   let device: MTLDevice
@@ -22,7 +23,12 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
   override var canBecomeMain: Bool { return true }
 
   // swiftlint:disable:next function_body_length
-  init(scale: Int, bootrom: Bootrom?, cartridge: Cartridge, keyMap: KeyMap) {
+  init(scale: Int,
+       bootrom: Bootrom?,
+       cartridge: Cartridge,
+       cartridgePath: String,
+       keyMap: KeyMap) {
+    self.cartridgePath = cartridgePath
     self.keyMap = keyMap
 
     self.device = Metal.createDevice()
@@ -60,7 +66,7 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
       return view
     }()
 
-    self.title = title
+    self.title = cartridge.title
     self.backgroundColor = .black
     self.isMovableByWindowBackground = true
     self.center()
@@ -87,6 +93,7 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
     self.updateKeyState(event: event, isDown: false)
   }
 
+  // swiftlint:disable:next cyclomatic_complexity
   private func updateKeyState(event: NSEvent, isDown: Bool) {
     if event.isARepeat { return }
 
@@ -101,6 +108,11 @@ class GameBoyWindow: NSWindow, GameboyInputProvider, MTKViewDelegate {
     case self.keyMap.left.value:   self.input.left = isDown
     case self.keyMap.right.value:  self.input.right = isDown
     // swiftformat:enable consecutiveSpaces
+
+    case self.keyMap.save.value:
+      if isDown {
+        FileSystem.saveExternalRam(gameBoy: self.gameBoy, romPath: self.cartridgePath)
+      }
 
     default:
       // Use this if you want to propagate event down the responder chain:

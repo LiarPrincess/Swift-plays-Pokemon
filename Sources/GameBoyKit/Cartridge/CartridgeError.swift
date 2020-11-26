@@ -11,6 +11,7 @@ public enum CartridgeError: Error, CustomStringConvertible {
   case romSizeNotConsistentWithHeader(headerSize: CartridgeRomSize, actualSize: Int)
   case ramInCartridgeThatDoesNotSupportRam(type: CartridgeType, headerRamSize: CartridgeRamSize)
   case ramSizeMissingInHeader(type: CartridgeType)
+  case ramSizeNotConsistentProvidedSaveData(headerSize: CartridgeRamSize, saveSize: Int)
 
   public var description: String {
     switch self {
@@ -31,11 +32,14 @@ public enum CartridgeError: Error, CustomStringConvertible {
 
     case let .romSizeNotConsistentWithHeader(headerSize, actualSize):
       return "Expected \(headerSize.byteCount) bytes of cartridge ROM, got \(actualSize)."
+
     case let .ramInCartridgeThatDoesNotSupportRam(_, ramSize):
-      return "Cartridge type does not support ram but ram is declared in header" +
+      return "Cartridge type does not support ram, but ram is declared in header" +
              "(\(ramSize.byteCount) bytes)."
-    case .ramSizeMissingInHeader:
-      return "Cartridge type supports ram, but its size is missing in header."
+    case let .ramSizeMissingInHeader(type):
+      return "Cartridge type '\(type)' requires ram, but its size is missing in header."
+    case let .ramSizeNotConsistentProvidedSaveData(headerSize, saveSize):
+      return "Expected \(headerSize.byteCount) bytes of saved RAM, got \(saveSize)."
     }
   }
 }

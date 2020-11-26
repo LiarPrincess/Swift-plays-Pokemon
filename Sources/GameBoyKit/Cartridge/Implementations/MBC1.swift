@@ -32,10 +32,10 @@ internal struct MBC1: Cartridge, CartridgeMixin {
   private var mode = false
   private var isRamEnabled = false
 
-  internal init(header: CartridgeHeader, rom: Data) {
+  internal init(header: CartridgeHeader, rom: Data, ram: Data?) {
     self.header = header
     self.rom = rom
-    self.ram = Data(count: header.ramSize.byteCount)
+    self.ram = ram ?? Data(count: header.ramSize.byteCount)
   }
 
   // MARK: - Rom

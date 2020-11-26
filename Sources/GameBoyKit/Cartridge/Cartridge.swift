@@ -4,7 +4,12 @@
 
 import Foundation
 
-public protocol CartridgeMemory {
+public protocol Cartridge {
+
+  var header: CartridgeHeader { get }
+  var rom: Data { get }
+  var ram: Data { get }
+
   /// 0000-3FFF 16KB ROM Bank 00 (in cartridge, fixed at bank 00)
   func readRomLowerBank(_ address: UInt16) -> UInt8
   /// 4000-7FFF 16KB ROM Bank 01..NN (in cartridge, switchable bank number)
@@ -17,10 +22,4 @@ public protocol CartridgeMemory {
   func readRam(_ address: UInt16) -> UInt8
   /// A000-BFFF External RAM (in cartridge, switchable bank, if any)
   mutating func writeRam(_ address: UInt16, value: UInt8)
-}
-
-public protocol Cartridge: CartridgeMemory {
-  var header: CartridgeHeader { get }
-  var rom: Data { get }
-  var ram: Data { get }
 }

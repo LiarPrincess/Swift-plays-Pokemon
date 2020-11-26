@@ -9,6 +9,7 @@ Swift plays Pokemon.xcodeproj/**/xcuserdata
 
 # Roms are excluded because of legal stuff…
 ROMs/*.gb
+ROMs/*.sav
 
 # You can download 'Blargg' test ROMs at:
 # https://gbdev.gg8.se/wiki/articles/Test_ROMs

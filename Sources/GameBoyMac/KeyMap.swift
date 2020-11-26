@@ -14,6 +14,8 @@ struct KeyMap {
   let start: Key
   let select: Key
 
+  let save: Key
+
   struct Key {
 
     let value: UInt16

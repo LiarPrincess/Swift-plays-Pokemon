@@ -15,7 +15,7 @@ public final class Memory: CpuMemory {
   internal let linkCable: LinkCable
 
   internal let bootrom: BootromMemory
-  internal var cartridge: CartridgeMemory
+  internal var cartridge: Cartridge
   /// GameBoy starts with 'Bootrom' and then after writing to '0xff50'
   /// it switches to cartridge.
   internal var isRunningBootrom: Bool
@@ -31,7 +31,7 @@ public final class Memory: CpuMemory {
   internal var unmappedMemory = [UInt16: UInt8]()
 
   internal init(bootrom: BootromMemory?,
-                cartridge: CartridgeMemory,
+                cartridge: Cartridge,
                 joypad: JoypadMemory,
                 lcd: LcdMemory,
                 audio: AudioMemory,

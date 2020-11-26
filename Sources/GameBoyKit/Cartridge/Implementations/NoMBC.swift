@@ -20,10 +20,10 @@ internal struct NoMBC: Cartridge, CartridgeMixin {
   /// Offset to selected ram bank.
   internal let ramBankStart = 0
 
-  internal init(header: CartridgeHeader, rom: Data) {
+  internal init(header: CartridgeHeader, rom: Data, ram: Data?) {
     self.header = header
     self.rom = rom
-    self.ram = Data(count: header.ramSize.byteCount)
+    self.ram = ram ?? Data(count: header.ramSize.byteCount)
   }
 
   // MARK: - Rom
