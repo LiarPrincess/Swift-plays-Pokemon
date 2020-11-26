@@ -28,20 +28,12 @@ public struct LcdStatus {
                 isLineCompareInterrupt: Bool,
                 mode: LcdMode) {
     var value = UInt8()
-    func set(_ mask: UInt8, if condition: Bool) {
-      value |= condition ? mask : 0
-    }
-
-    set(Masks.isOamInterruptEnabled, if: isOamInterruptEnabled)
-    set(Masks.isVBlankInterruptEnabled, if: isVBlankInterruptEnabled)
-    set(Masks.isHBlankInterruptEnabled, if: isHBlankInterruptEnabled)
-    set(Masks.isLineCompareInterruptEnabled, if: isLineCompareInterruptEnabled)
-    set(Masks.isLineCompareInterrupt, if: isLineCompareInterrupt)
-
-    set(LcdMode.hBlankValue, if: mode == .hBlank)
-    set(LcdMode.vBlankValue, if: mode == .vBlank)
-    set(LcdMode.oamSearchValue, if: mode == .oamSearch)
-    set(LcdMode.pixelTransferValue, if: mode == .pixelTransfer)
+    value |= isOamInterruptEnabled ? Masks.isOamInterruptEnabled : 0
+    value |= isVBlankInterruptEnabled ? Masks.isVBlankInterruptEnabled : 0
+    value |= isHBlankInterruptEnabled ? Masks.isHBlankInterruptEnabled : 0
+    value |= isLineCompareInterruptEnabled ? Masks.isLineCompareInterruptEnabled : 0
+    value |= isLineCompareInterrupt ? Masks.isLineCompareInterrupt : 0
+    value |= mode.rawValue
 
     self.value = value
   }
@@ -79,14 +71,7 @@ public struct LcdStatus {
 
   /// Status bit 1-0 - Mode Flag
   public var mode: LcdMode {
-    let rawMode = self.value & Masks.mode
-    switch rawMode {
-    case LcdMode.hBlankValue: return .hBlank
-    case LcdMode.vBlankValue: return .vBlank
-    case LcdMode.oamSearchValue: return .oamSearch
-    case LcdMode.pixelTransferValue: return .pixelTransfer
-    default: fatalError("Invalid mode bits: '\(rawMode.bin)'.") // how?
-    }
+    return LcdMode(lcdStatus: self.value)
   }
 }
 

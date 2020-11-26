@@ -32,20 +32,17 @@ public struct LcdControl {
                 tileDataSelect: TileData.Variant,
                 isSpriteHeight16: Bool) {
     var value = UInt8()
-    func set(_ mask: UInt8, if condition: Bool) {
-      value |= condition ? mask : 0
-    }
 
-    set(Masks.isLcdEnabled, if: isLcdEnabled)
-    set(Masks.isBackgroundVisible, if: isBackgroundVisible)
-    set(Masks.isWindowEnabled, if: isWindowEnabled)
-    set(Masks.isSpriteEnabled, if: isSpriteEnabled)
+    value |= isLcdEnabled ? Masks.isLcdEnabled : 0
+    value |= isBackgroundVisible ? Masks.isBackgroundVisible : 0
+    value |= isWindowEnabled ? Masks.isWindowEnabled : 0
+    value |= isSpriteEnabled ? Masks.isSpriteEnabled : 0
 
-    set(Masks.backgroundTileMap, if: backgroundTileMap == .from9c00to9fff)
-    set(Masks.windowTileMap, if: windowTileMap == .from9c00to9fff)
-    set(Masks.tileData, if: tileDataSelect == .from8000to8fff)
+    value |= backgroundTileMap == .from9c00to9fff ? Masks.backgroundTileMap : 0
+    value |= windowTileMap == .from9c00to9fff ? Masks.windowTileMap : 0
+    value |= tileDataSelect == .from8000to8fff ? Masks.tileData : 0
 
-    set(Masks.spriteSize, if: isSpriteHeight16)
+    value |= isSpriteHeight16 ? Masks.spriteSize : 0
 
     self.value = value
   }

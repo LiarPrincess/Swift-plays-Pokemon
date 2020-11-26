@@ -171,6 +171,7 @@ public final class Lcd: LcdMemory {
           self.interrupts.set(.lcdStat)
         }
       }
+
       return
     }
 
@@ -208,16 +209,9 @@ public final class Lcd: LcdMemory {
   }
 
   private func setMode(_ mode: LcdMode) {
-    let clear = ~LcdStatus.Masks.mode
-    var newStatus = self.status.value & clear
-
-    switch mode {
-    case .hBlank: newStatus |= LcdMode.hBlankValue
-    case .vBlank: newStatus |= LcdMode.vBlankValue
-    case .oamSearch: newStatus |= LcdMode.oamSearchValue
-    case .pixelTransfer: newStatus |= LcdMode.pixelTransferValue
-    }
-
+    let clearMode = ~LcdStatus.Masks.mode
+    var newStatus = self.status.value & clearMode
+    newStatus |= mode.rawValue
     self.status = LcdStatus(value: newStatus)
   }
 }
