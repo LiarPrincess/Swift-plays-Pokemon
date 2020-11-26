@@ -4,6 +4,36 @@
 
 private let lcdWidth = Lcd.Constants.width
 
+/// We need to remember tile color that was used to draw background/window.
+/// This information is later used when drawing sprites.
+internal struct TileColorInLine {
+
+  // We could use bit array, but this is faster:
+  private let data = MemoryBuffer(count: lcdWidth)
+
+  internal func set(x: Int, color: UInt8) {
+    self.data[x] = color
+  }
+
+  internal func setAll(color: UInt8) {
+    for x in 0..<lcdWidth {
+      self.data[x] = color
+    }
+  }
+
+  internal func isColorZero(x: Int) -> Bool {
+    let value = self.data[x]
+    return value == 0
+  }
+
+  internal func deallocate() {
+    self.data.deallocate()
+  }
+}
+
+// MARK: - Old implementation - bit array
+
+/*
 /// Array with single bit for every pixel in line.
 internal struct LcdLineBitArray {
 
@@ -101,3 +131,4 @@ internal struct LcdLineBitArray {
 
   #endif
 }
+*/

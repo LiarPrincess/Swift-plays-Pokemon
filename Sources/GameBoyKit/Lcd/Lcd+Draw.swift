@@ -59,7 +59,7 @@ extension Lcd {
 
         let targetX = progress + (bit - startBit)
         framebufferSlice[targetX] = color
-        self.isBackgroundZero[targetX] = tileColor == 0
+        self.tileColorInLine.set(x: targetX, color: tileColor)
         bit += 1
       }
 
@@ -134,7 +134,7 @@ extension Lcd {
 
         let targetX = progress + (bit - startBit)
         framebufferSlice[targetX] = color
-        self.isBackgroundZero[targetX] = tileColor == 0
+        self.tileColorInLine.set(x: targetX, color: tileColor)
 
         bit += 1
       }
@@ -217,7 +217,8 @@ extension Lcd {
         let targetX = sprite.realX + bit
 
         let isTransparent = rawColor == 0
-        let isAboveBackground = sprite.isAboveBackground || self.isBackgroundZero[targetX]
+        let isBackgroundZero = self.tileColorInLine.isColorZero(x: targetX)
+        let isAboveBackground = sprite.isAboveBackground || isBackgroundZero
 
         if !isTransparent && isAboveBackground {
           let color = palette.getColor(index: rawColor)

@@ -35,8 +35,8 @@ public final class Lcd: LcdMemory {
   internal lazy var tileMap9800to9bff = TileMap(variant: .from9800to9bff)
   internal lazy var tileMap9c00to9fff = TileMap(variant: .from9c00to9fff)
 
-  /// Used when drawing sprites (isBehindBackground property).
-  internal var isBackgroundZero = LcdLineBitArray(initialValue: false)
+  /// Used when drawing sprites (isBehindBackground).
+  internal let tileColorInLine = TileColorInLine()
 
   /// Data that should be put on screen
   internal lazy var framebuffer = Framebuffer()
@@ -59,6 +59,7 @@ public final class Lcd: LcdMemory {
     self.tileMap9800to9bff.deallocate()
     self.tileMap9c00to9fff.deallocate()
     self.framebuffer.deallocate()
+    self.tileColorInLine.deallocate()
   }
 
   // MARK: - Read/write

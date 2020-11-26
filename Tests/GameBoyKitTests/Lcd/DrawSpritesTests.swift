@@ -16,7 +16,7 @@ class DrawSpritesTests: LcdTestCase {
     let lcd = self.createLcdWithTetris()
 
     // To enable sprites (since we do not draw background)
-    lcd.isBackgroundZero = LcdLineBitArray(initialValue: true)
+    lcd.tileColorInLine.setAll(color: 0)
 
     let lines = self.drawFramebuffer(
       lcd: lcd,
