@@ -15,9 +15,9 @@ private let joypadMask:  UInt8 = 1 << 4
 public final class Interrupts {
 
   public struct Kind {
-    public static let vBlank  = Kind(mask: vBlankMask)
+    public static let vBlank = Kind(mask: vBlankMask)
     public static let lcdStat = Kind(mask: lcdStatMask)
-    public static let timer  = Kind(mask: timerMask)
+    public static let timer = Kind(mask: timerMask)
     public static let serial = Kind(mask: serialMask)
     public static let joypad = Kind(mask: joypadMask)
 

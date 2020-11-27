@@ -27,7 +27,8 @@ class GameBoyWindow: NSWindow, GameBoyInputProvider, MTKViewDelegate {
        bootrom: Bootrom?,
        cartridge: Cartridge,
        cartridgePath: String,
-       keyMap: KeyMap) {
+       keyMap: KeyMap)
+  {
     self.cartridgePath = cartridgePath
     self.keyMap = keyMap
 

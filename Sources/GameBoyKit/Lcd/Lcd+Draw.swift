@@ -250,7 +250,8 @@ extension Lcd {
   private func getTileIndex(map: TileMap,
                             data: TileData.Variant,
                             row: Int,
-                            column: Int) -> Int {
+                            column: Int) -> Int
+  {
     let tileIndexRaw = map[row * Tile.Constants.tilesPerRow + column]
 
     switch data {

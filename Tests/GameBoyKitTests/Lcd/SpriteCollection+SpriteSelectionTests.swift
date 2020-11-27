@@ -212,7 +212,8 @@ class SpriteCollectionSpriteSelectionTests: XCTestCase {
                          line: Int? = nil,
                          column: Int? = nil,
                          tile: UInt8? = nil,
-                         flags: UInt8? = nil) {
+                         flags: UInt8? = nil)
+  {
     assert(spriteIndex < Sprite.Constants.count)
 
     let oamStartAddress = MemoryMap.oam.start
@@ -242,7 +243,8 @@ class SpriteCollectionSpriteSelectionTests: XCTestCase {
 
   /// In left to right  order!
   private func getSpritesToDraw(collection: inout SpriteCollection,
-                                line: Int) -> [Sprite] {
+                                line: Int) -> [Sprite]
+  {
     let sprites = collection.getSpritesToDrawFromRightToLeft(line: line)
     return sprites.reversed()
   }

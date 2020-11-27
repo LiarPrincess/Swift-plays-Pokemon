@@ -26,7 +26,8 @@ public struct LcdStatus {
                 isHBlankInterruptEnabled: Bool,
                 isLineCompareInterruptEnabled: Bool,
                 isLineCompareInterrupt: Bool,
-                mode: LcdMode) {
+                mode: LcdMode)
+  {
     var value = UInt8()
     value |= isOamInterruptEnabled ? Masks.isOamInterruptEnabled : 0
     value |= isVBlankInterruptEnabled ? Masks.isVBlankInterruptEnabled : 0

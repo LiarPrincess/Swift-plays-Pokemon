@@ -19,7 +19,8 @@ class LcdTestCase: XCTestCase {
   func drawFramebuffer(lcd: Lcd,
                        isBackgroundVisible: Bool,
                        isWindowEnabled: Bool,
-                       isSpriteEnabled: Bool) -> [String] {
+                       isSpriteEnabled: Bool) -> [String]
+  {
     // Set control
     let old = lcd.control
     lcd.control = LcdControl(isLcdEnabled: old.isLcdEnabled,

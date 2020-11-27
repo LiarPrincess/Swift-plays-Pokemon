@@ -99,7 +99,8 @@ class DrawBackgroundAndWindowTests: LcdTestCase {
   /// - window     - uses 'from9c00to9fff' tile map which always draws '2'
   private func createLcd(isWindowEnabled: Bool,
                          unshiftedWindowX: UInt8,
-                         windowY: UInt8) -> Lcd {
+                         windowY: UInt8) -> Lcd
+  {
     let interrupts = Interrupts()
     let lcd = Lcd(interrupts: interrupts)
 

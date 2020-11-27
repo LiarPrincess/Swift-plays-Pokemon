@@ -172,7 +172,8 @@ internal struct SpriteCollection {
   }
 
   private func getRightToLeftInsertionIndex(collection: [Sprite],
-                                            sprite: Sprite) -> Int {
+                                            sprite: Sprite) -> Int
+  {
     // Remember that we have to sort them in right-to-left order!
     // This is the sprite drawing order. It is basically a reversal.
     for (i, s) in collection.enumerated() {

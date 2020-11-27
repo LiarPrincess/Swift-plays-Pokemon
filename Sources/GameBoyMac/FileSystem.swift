@@ -53,7 +53,7 @@ enum FileSystem {
       print("Saved state found")
 
       return ExternalRamState(data: data)
-    } catch  {
+    } catch {
       let nsError = error as NSError
       if nsError.domain == NSCocoaErrorDomain && nsError.code == NSFileReadNoSuchFileError {
         print("No saved state found")

@@ -30,7 +30,8 @@ public struct LcdControl {
                 backgroundTileMap: TileMap.Variant,
                 windowTileMap: TileMap.Variant,
                 tileDataSelect: TileData.Variant,
-                isSpriteHeight16: Bool) {
+                isSpriteHeight16: Bool)
+  {
     var value = UInt8()
 
     value |= isLcdEnabled ? Masks.isLcdEnabled : 0
