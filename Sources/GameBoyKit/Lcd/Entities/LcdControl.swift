@@ -27,8 +27,8 @@ public struct LcdControl {
                 isBackgroundVisible: Bool,
                 isWindowEnabled: Bool,
                 isSpriteEnabled: Bool,
-                windowTileMap: TileMap.Variant,
                 backgroundTileMap: TileMap.Variant,
+                windowTileMap: TileMap.Variant,
                 tileDataSelect: TileData.Variant,
                 isSpriteHeight16: Bool) {
     var value = UInt8()

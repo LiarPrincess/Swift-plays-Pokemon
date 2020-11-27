@@ -11,12 +11,30 @@ private let tilesPerRow = 32
 
 extension Debugger {
 
+  public func dumpState() {
+    self.lcd.dumpState()
+  }
+
+  public func dumpTileIndices(tileMap: TileMap.Variant) {
+    self.lcd.dumpTileIndices(tileMap: tileMap)
+  }
+
+  public func dumpTileData(tileData: TileData.Variant) {
+    self.lcd.dumpTileData(tileData: tileData)
+  }
+
+  public func dumpBackground(tileMap: TileMap.Variant, tileData: TileData.Variant) {
+    self.lcd.dumpBackground(tileMap: tileMap, tileData: tileData)
+  }
+}
+
+extension Lcd {
+
   // MARK: - Properties
 
-  public func dumpLcdState() {
-    let lcd = self.lcd
-    let control = self.lcd.control
-    let status = self.lcd.status
+  public func dumpState() {
+    let control = self.control
+    let status = self.status
 
     print("""
 Lcd
@@ -38,15 +56,15 @@ Lcd
     isLineCompareInterrupt: \(status.isLineCompareInterrupt)
     mode: \(status.mode)
 
-  ScrollY: \(lcd.scrollY.hex)
-  ScrollX: \(lcd.scrollX.hex)
-  Line: \(lcd.line.hex)
-  LineCompare: \(lcd.lineCompare.hex)
-  WindowY: \(lcd.windowY.hex)
-  WindowX: \(lcd.windowX.hex)
-  BackgroundPalette: \(lcd.backgroundColorPalette.value.hex)
-  SpritePalette0: \(lcd.spriteColorPalette0.value.hex)
-  SpritePalette1: \(lcd.spriteColorPalette1.value.hex)
+  ScrollY: \(self.scrollY.hex)
+  ScrollX: \(self.scrollX.hex)
+  Line: \(self.line.hex)
+  LineCompare: \(self.lineCompare.hex)
+  WindowY: \(self.windowY.hex)
+  WindowX: \(self.windowX.hex)
+  BackgroundPalette: \(self.backgroundColorPalette.value.hex)
+  SpritePalette0: \(self.spriteColorPalette0.value.hex)
+  SpritePalette1: \(self.spriteColorPalette1.value.hex)
 """)
   }
 
@@ -71,7 +89,7 @@ Lcd
     print()
 
     // data
-    let tileMapBuffer = self.lcd.getTileMap(for: tileMap)
+    let tileMapBuffer = self.getTileMap(for: tileMap)
     for tileRow in 0..<tileRowCount {
       let rowText = String(describing: tileRow)
       let rowPadding = String(repeating: " ", count: 2 - rowText.count)
@@ -110,7 +128,7 @@ Lcd
 
     let start = tileData == .from8000to8fff ? 0 : 128
     let end = tileData == .from8000to8fff ? 256 : 384
-    let tiles = self.lcd.tiles[start..<end]
+    let tiles = self.tiles[start..<end]
 
     let rowCount = tiles.count / columnCount
     for row in 0..<rowCount {
@@ -204,7 +222,7 @@ Lcd
                         column tileColumn: Int,
                         line tileLine: Int)
   {
-    let tileMap = self.lcd.getTileMap(for: map)
+    let tileMap = self.getTileMap(for: map)
     let tileIndexRaw = tileMap[tileRow * tilesPerRow + tileColumn]
 
     var tileIndex = Int(tileIndexRaw)
@@ -212,7 +230,7 @@ Lcd
       tileIndex = 256 + Int(Int8(bitPattern: tileIndexRaw))
     }
 
-    let tile = self.lcd.tiles[tileIndex]
+    let tile = self.tiles[tileIndex]
     let tilePixels = tile.getPixels(in: tileLine)
 
     for pixel in tilePixels {

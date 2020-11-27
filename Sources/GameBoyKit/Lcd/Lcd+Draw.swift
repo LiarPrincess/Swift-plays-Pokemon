@@ -77,7 +77,6 @@ extension Lcd {
 
     let isUsingWindow = self.control.isWindowEnabled && self.line >= self.windowY
     if isUsingWindow {
-      // TODO: Convert to tests
       // http://bgb.bircd.org/pandocs.htm#lcdpositionandscrolling
       // desc                 |wx |with shift   | count
       // ---------------------+---+-------------+------
@@ -147,7 +146,6 @@ extension Lcd {
   private func getWindowFramebuffer(line: Int) -> UnsafeMutableBufferPointer<UInt8> {
     let framebufferStart = self.framebuffer.baseAddress
 
-    // TODO: Convert to tests
     // http://bgb.bircd.org/pandocs.htm#lcdpositionandscrolling
     // desc                 |wx |with shift   |start*|count
     // ---------------------+---+-------------+------+-----

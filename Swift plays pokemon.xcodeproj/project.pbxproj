@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		90023A0225712D8700269645 /* DrawBackgroundAndWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90023A0125712D8700269645 /* DrawBackgroundAndWindowTests.swift */; };
 		902341B825583CB200B72EFB /* DumpFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902341B725583CB200B72EFB /* DumpFile.swift */; };
 		902341DD255844F500B72EFB /* romsDir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902341DC255844F500B72EFB /* romsDir.swift */; };
 		902341F3255845AB00B72EFB /* openDumpFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902341F2255845AB00B72EFB /* openDumpFile.swift */; };
@@ -226,6 +227,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		90023A0125712D8700269645 /* DrawBackgroundAndWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawBackgroundAndWindowTests.swift; sourceTree = "<group>"; };
 		902341B725583CB200B72EFB /* DumpFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpFile.swift; sourceTree = "<group>"; };
 		902341DC255844F500B72EFB /* romsDir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = romsDir.swift; sourceTree = "<group>"; };
 		902341F2255845AB00B72EFB /* openDumpFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = openDumpFile.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				OBJ_123 /* TileColorValueTests.swift */,
 				908B1FF2256BF947004FBD53 /* DrawBackgroundTests.swift */,
 				908B200E256C21A1004FBD53 /* DrawSpritesTests.swift */,
+				90023A0125712D8700269645 /* DrawBackgroundAndWindowTests.swift */,
 				90F987D2256FA7920008C3A3 /* TileColorInLineTests.swift */,
 				90DF056F256D3915009304CC /* SpriteCollection+SpriteSelectionTests.swift */,
 			);
@@ -1225,6 +1228,7 @@
 				OBJ_257 /* InterruptsTests.swift in Sources */,
 				90F681D62556A08C00EBD803 /* MBC3Tests.swift in Sources */,
 				OBJ_258 /* MemoryReadTests.swift in Sources */,
+				90023A0225712D8700269645 /* DrawBackgroundAndWindowTests.swift in Sources */,
 				OBJ_259 /* MemoryWriteTests.swift in Sources */,
 				OBJ_260 /* UnmapBootromTests.swift in Sources */,
 				OBJ_261 /* String+padTests.swift in Sources */,
@@ -1311,7 +1315,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = GameBoyMac/GameBoyMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/GameBoyMac/GameBoyMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1376,7 +1380,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = GameBoyMac/GameBoyMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/GameBoyMac/GameBoyMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;

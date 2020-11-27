@@ -26,35 +26,36 @@ class LcdTestCase: XCTestCase {
                              isBackgroundVisible: isBackgroundVisible,
                              isWindowEnabled: isWindowEnabled,
                              isSpriteEnabled: isSpriteEnabled,
-                             windowTileMap: old.windowTileMap,
                              backgroundTileMap: old.backgroundTileMap,
+                             windowTileMap: old.windowTileMap,
                              tileDataSelect: old.tileDataSelect,
                              isSpriteHeight16: old.spriteSize == .size16)
 
     // Draw to framebuffer
-    for lineInt in 0..<Lcd.Constants.height {
-      let line = UInt8(lineInt)
-      lcd.line = line
-      lcd.drawLine()
-    }
-
-    // Extract framebuffer lines
     var lines = [String]()
     lines.reserveCapacity(Lcd.Constants.height)
 
-    var currentLine = ""
-    for (index, pixel) in lcd.framebuffer.pixels.enumerated() {
-      currentLine += pixel == 0 ? " " : String(pixel)
-
-      let isLineEnd = (index + 1) % Framebuffer.width == 0
-      if isLineEnd {
-        lines.append(currentLine)
-        currentLine = ""
-      }
+    for line in 0..<Lcd.Constants.height {
+      let lineString = self.drawLine(lcd: lcd, line: line)
+      lines.append(lineString)
     }
 
-    assert(lines.count == Lcd.Constants.height)
     return lines
+  }
+
+  func drawLine(lcd: Lcd, line: Int) -> String {
+    lcd.line = UInt8(line)
+    lcd.drawLine()
+
+    let pixelsStart = line * Framebuffer.width
+    let pixelsEnd = pixelsStart + Framebuffer.width
+
+    var result = ""
+    for pixel in lcd.framebuffer.pixels[pixelsStart..<pixelsEnd] {
+      result += pixel == 0 ? " " : String(pixel)
+    }
+
+    return result
   }
 
   // MARK: - Nintendo logo
@@ -68,8 +69,8 @@ class LcdTestCase: XCTestCase {
                              isBackgroundVisible: true,
                              isWindowEnabled: true,
                              isSpriteEnabled: true,
-                             windowTileMap: .from9800to9bff,
                              backgroundTileMap: .from9800to9bff,
+                             windowTileMap: .from9800to9bff,
                              tileDataSelect: .from8000to8fff,
                              isSpriteHeight16: false)
 
@@ -294,8 +295,8 @@ class LcdTestCase: XCTestCase {
                              isBackgroundVisible: true,
                              isWindowEnabled: false,
                              isSpriteEnabled: true,
-                             windowTileMap: .from9c00to9fff,
                              backgroundTileMap: .from9800to9bff,
+                             windowTileMap: .from9c00to9fff,
                              tileDataSelect: .from8000to8fff,
                              isSpriteHeight16: false)
 
