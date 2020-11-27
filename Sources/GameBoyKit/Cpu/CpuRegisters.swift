@@ -13,8 +13,8 @@ public struct CpuRegisters {
 
   // MARK: - Single registers
 
-  /// Accumulator. An 8-bit register for storing data
-  /// and the results of arithmetic and logical operations.
+  /// Accumulator. An 8-bit register for storing data and the results of arithmetic
+  /// and logical operations.
   public internal(set) var a: UInt8 = 0
 
   /// Auxiliary register: B
@@ -35,7 +35,20 @@ public struct CpuRegisters {
   /// Auxiliary register: L
   public internal(set) var l: UInt8 = 0
 
-  // MARK: - Flag register
+  // MARK: - Flag registers
+
+  /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
+  public internal(set) var zeroFlag: Bool = false
+
+  /// N: Set to 1 following execution of the substruction instruction,
+  /// regardless of the result.
+  public internal(set) var subtractFlag: Bool = false
+
+  /// H: Set to 1 when an operation results in carrying from or borrowing to bit 3.
+  public internal(set) var halfCarryFlag: Bool = false
+
+  /// CY: Set to 1 when an operation results in carrying from or borrowing to bit 7.
+  public internal(set) var carryFlag: Bool = false
 
   /// Flag register: F (lower 4 bits are always zero)
   public internal(set) var f: UInt8 {
@@ -48,55 +61,54 @@ public struct CpuRegisters {
       return result
     }
     set {
-      self.zeroFlag = isSet(newValue, mask: zeroFlagMask)
-      self.subtractFlag = isSet(newValue, mask: subtractFlagMask)
-      self.halfCarryFlag = isSet(newValue, mask: halfCarryFlagMask)
-      self.carryFlag = isSet(newValue, mask: carryFlagMask)
+      self.zeroFlag = Self.isSet(newValue, mask: zeroFlagMask)
+      self.subtractFlag = Self.isSet(newValue, mask: subtractFlagMask)
+      self.halfCarryFlag = Self.isSet(newValue, mask: halfCarryFlagMask)
+      self.carryFlag = Self.isSet(newValue, mask: carryFlagMask)
     }
   }
 
-  /// Z: Set to 1 when the result of an operation is 0; otherwise reset.
-  public internal(set) var zeroFlag: Bool = false
-
-  /// N: Set to 1 following execution of the
-  /// substruction instruction, regardless of the result.
-  public internal(set) var subtractFlag: Bool = false
-
-  /// H: Set to 1 when an operation results
-  /// in carrying from or borrowing to bit 3.
-  public internal(set) var halfCarryFlag: Bool = false
-
-  /// CY: Set to 1 when an operation results
-  /// in carrying from or borrowing to bit 7.
-  public internal(set) var carryFlag: Bool = false
+  private static func isSet(_ value: UInt8, mask: UInt8) -> Bool {
+    return (value & mask) == mask
+  }
 
   // MARK: - Combined registers
 
   /// Merge of A and F registers.
   public internal(set) var af: UInt16 {
-    get { return combine(high: self.a, low: self.f) }
-    set { (self.a, self.f) = split(combined: newValue) }
+    get { return Self.combine(high: self.a, low: self.f) }
+    set { (self.a, self.f) = Self.split(combined: newValue) }
   }
 
   /// Merge of B and C registers.
   public internal(set) var bc: UInt16 {
-    get { return combine(high: self.b, low: self.c) }
-    set { (self.b, self.c) = split(combined: newValue) }
+    get { return Self.combine(high: self.b, low: self.c) }
+    set { (self.b, self.c) = Self.split(combined: newValue) }
   }
 
   /// Merge of D and E registers.
   public internal(set) var de: UInt16 {
-    get { return combine(high: self.d, low: self.e) }
-    set { (self.d, self.e) = split(combined: newValue) }
+    get { return Self.combine(high: self.d, low: self.e) }
+    set { (self.d, self.e) = Self.split(combined: newValue) }
   }
 
   /// Merge of H and L registers.
   public internal(set) var hl: UInt16 {
-    get { return combine(high: self.h, low: self.l) }
-    set { (self.h, self.l) = split(combined: newValue) }
+    get { return Self.combine(high: self.h, low: self.l) }
+    set { (self.h, self.l) = Self.split(combined: newValue) }
   }
 
-  // MARK: - Addressing
+  private static func combine(high: UInt8, low: UInt8) -> UInt16 {
+    return (UInt16(high) << 8) | UInt16(low)
+  }
+
+  private static func split(combined: UInt16) -> (high: UInt8, low: UInt8) {
+    let high = UInt8((combined & 0xff00) >> 8)
+    let low = UInt8(combined & 0xff)
+    return (high, low)
+  }
+
+  // MARK: - Get/set flag
 
   /// Names of all of the flag registers
   public enum Flag {
@@ -104,26 +116,6 @@ public struct CpuRegisters {
     case subtractFlag
     case halfCarryFlag
     case carryFlag
-  }
-
-  /// Names of all of the single registers
-  public enum Single {
-    case a
-    case b
-    case c
-    case d
-    case e
-    case f
-    case h
-    case l
-  }
-
-  /// Names of all of the combined registers
-  public enum Combined {
-    case af
-    case bc
-    case de
-    case hl
   }
 
   public func get(_ f: Flag) -> Bool {
@@ -137,6 +129,31 @@ public struct CpuRegisters {
     }
   }
 
+  internal mutating func set(_ f: Flag, to value: Bool) {
+    switch f {
+    // swiftformat:disable consecutiveSpaces
+    case .zeroFlag:      self.zeroFlag = value
+    case .subtractFlag:  self.subtractFlag = value
+    case .halfCarryFlag: self.halfCarryFlag = value
+    case .carryFlag:     self.carryFlag = value
+    // swiftformat:enable consecutiveSpaces
+    }
+  }
+
+  // MARK: - Get/set single register
+
+  /// Names of all of the single registers
+  public enum Single {
+    case a
+    case b
+    case c
+    case d
+    case e
+    case f
+    case h
+    case l
+  }
+
   public func get(_ r: Single) -> UInt8 {
     switch r {
     case .a: return self.a
@@ -147,26 +164,6 @@ public struct CpuRegisters {
     case .f: return self.f
     case .h: return self.h
     case .l: return self.l
-    }
-  }
-
-  public func get(_ rr: Combined) -> UInt16 {
-    switch rr {
-    case .af: return self.af
-    case .bc: return self.bc
-    case .de: return self.de
-    case .hl: return self.hl
-    }
-  }
-
-  internal mutating func set(_ f: Flag, to value: Bool) {
-    switch f {
-    // swiftformat:disable consecutiveSpaces
-    case .zeroFlag:      self.zeroFlag = value
-    case .subtractFlag:  self.subtractFlag = value
-    case .halfCarryFlag: self.halfCarryFlag = value
-    case .carryFlag:     self.carryFlag = value
-    // swiftformat:enable consecutiveSpaces
     }
   }
 
@@ -183,6 +180,25 @@ public struct CpuRegisters {
     }
   }
 
+  // MARK: - Get/set combined register
+
+  /// Names of all of the combined registers
+  public enum Combined {
+    case af
+    case bc
+    case de
+    case hl
+  }
+
+  public func get(_ rr: Combined) -> UInt16 {
+    switch rr {
+    case .af: return self.af
+    case .bc: return self.bc
+    case .de: return self.de
+    case .hl: return self.hl
+    }
+  }
+
   internal mutating func set(_ rr: Combined, to value: UInt16) {
     switch rr {
     case .af: self.af = value
@@ -191,18 +207,4 @@ public struct CpuRegisters {
     case .hl: self.hl = value
     }
   }
-}
-
-private func combine(high: UInt8, low: UInt8) -> UInt16 {
-  return (UInt16(high) << 8) | UInt16(low)
-}
-
-private func split(combined: UInt16) -> (high: UInt8, low: UInt8) {
-  let high = UInt8((combined & 0xff00) >> 8)
-  let low = UInt8(combined & 0xff)
-  return (high, low)
-}
-
-private func isSet(_ value: UInt8, mask: UInt8) -> Bool {
-  return (value & mask) == mask
 }
