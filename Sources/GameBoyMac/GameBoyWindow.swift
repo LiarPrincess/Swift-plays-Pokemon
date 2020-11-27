@@ -66,7 +66,7 @@ class GameBoyWindow: NSWindow, GameBoyInputProvider, MTKViewDelegate {
       return view
     }()
 
-    self.title = cartridge.title
+    self.title = cartridge.header.title
     self.backgroundColor = .black
     self.isMovableByWindowBackground = true
     self.center()

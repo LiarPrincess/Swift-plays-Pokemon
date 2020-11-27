@@ -23,7 +23,6 @@ vertex VertexOut vertex_shader(const device float2* vertexArray [[ buffer(0) ]],
   return out;
 }
 
-
 fragment half4 fragment_shader(VertexOut          interpolated [[ stage_in ]],
                                texture2d<ushort>  tex2D        [[ texture(0) ]])
 {

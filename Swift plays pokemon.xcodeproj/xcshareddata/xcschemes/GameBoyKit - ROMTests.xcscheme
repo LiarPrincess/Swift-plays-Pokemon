@@ -17,7 +17,7 @@
                BlueprintIdentifier = "Swift plays pokemon::GameBoyKitROMTests"
                BuildableName = "GameBoyKitROMTests"
                BlueprintName = "GameBoyKitROMTests"
-               ReferencedContainer = "container:Swift plays pokemon.xcodeproj">
+               ReferencedContainer = "container:Swift plays Pokemon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "Swift plays pokemon::GameBoyKitROMTests"
             BuildableName = "GameBoyKitROMTests"
             BlueprintName = "GameBoyKitROMTests"
-            ReferencedContainer = "container:Swift plays pokemon.xcodeproj">
+            ReferencedContainer = "container:Swift plays Pokemon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "Swift plays pokemon::GameBoyKitROMTests"
             BuildableName = "GameBoyKitROMTests"
             BlueprintName = "GameBoyKitROMTests"
-            ReferencedContainer = "container:Swift plays pokemon.xcodeproj">
+            ReferencedContainer = "container:Swift plays Pokemon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

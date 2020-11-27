@@ -1405,10 +1405,9 @@ extension Cpu {
 
   /// Stop, blank the screen and wait for button press
   internal func stop() -> Int {
-    fatalError("Stop is not implemented!")
-
 //    self.pc += 1 // or maybe 2 as in docs?
 //    return 4
+    fatalError("Stop is not implemented!")
   }
 
   /// The program counter is halted at the step after the HALT instruction.
