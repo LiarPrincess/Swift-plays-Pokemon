@@ -6,7 +6,7 @@ import Foundation
 
 /// Code that will be ran when gameboy is started.
 /// You can find different bootroms [here](http://gbdev.gg8.se/files/roms/bootroms).
-public struct Bootrom: BootromMemory {
+public struct Bootrom {
 
   internal static let size = MemoryMap.bootrom.count
 
@@ -16,11 +16,11 @@ public struct Bootrom: BootromMemory {
     self.data = data
   }
 
-  func read(_ address: UInt16) -> UInt8 {
+  public func read(_ address: UInt16) -> UInt8 {
     return self.data[address]
   }
 
-  func write(_ address: UInt16, value: UInt8) {
+  internal func write(_ address: UInt16, value: UInt8) {
     print("Attempting to write to read-only bootrom at: \(address.hex).")
   }
 

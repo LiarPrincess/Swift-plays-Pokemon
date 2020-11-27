@@ -109,6 +109,6 @@ class NoMBCTests: CartridgeTestCase {
     }
 
     let header = try CartridgeHeader(rom: data, skipChecks: true)
-    return NoMBC(header: header, rom: data)
+    return NoMBC(header: header, rom: data, ram: nil)
   }
 }

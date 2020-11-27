@@ -18,6 +18,7 @@ public final class GameBoy {
   /// Number of cycles that elapsed since we started current frame.
   private var frameProgress: Int = 0
 
+  /// Data that should be put on the screen
   public var framebuffer: Framebuffer {
     return self.lcd.framebuffer
   }

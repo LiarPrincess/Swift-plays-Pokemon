@@ -210,6 +210,6 @@ class MBC3Tests: CartridgeTestCase {
     }
 
     let header = try CartridgeHeader(rom: data, skipChecks: true)
-    return MBC3(header: header, rom: data)
+    return MBC3(header: header, rom: data, ram: nil)
   }
 }

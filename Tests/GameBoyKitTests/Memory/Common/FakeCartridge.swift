@@ -5,7 +5,11 @@
 import Foundation
 @testable import GameBoyKit
 
-class FakeCartridgeMemory: CartridgeMemory {
+class FakeCartridge: Cartridge {
+
+  var header: CartridgeHeader {
+    fatalError("Not implemented")
+  }
 
   lazy var rom: Data = {
     let count = MemoryMap.rom0.count + MemoryMap.rom1.count

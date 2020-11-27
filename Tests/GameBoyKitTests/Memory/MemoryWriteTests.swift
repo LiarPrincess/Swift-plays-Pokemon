@@ -12,30 +12,30 @@ private let endValue: UInt8 = 6
 
 class MemoryWriteTests: MemoryTestCase {
 
-  func test_bootrom() {
+  func test_bootrom_isIgnored() {
     let range = MemoryMap.bootrom
 
-    let bootrom = FakeBootromMemory()
-    let cartridge = FakeCartridgeMemory()
+    let bootrom = self.createBootromWithIncreasingValues()
+    let cartridge = FakeCartridge()
     let memory = self.createMemory(bootrom: bootrom, cartridge: cartridge)
+    XCTAssertTrue(memory.isRunningBootrom)
 
-    // 'memory.hasFinishedBootrom' should be false by default
-
-    memory.write(range.start, value: startValue)
-    XCTAssertEqual(bootrom.data.first, startValue)
+    memory.write(range.start, value: 0x5)
+    XCTAssertEqual(bootrom.data.first, 0x0)
     XCTAssertEqual(cartridge.rom[MemoryMap.rom0.start], 0)
 
-    memory.write(range.end, value: endValue)
-    XCTAssertEqual(bootrom.data.last, endValue)
+    memory.write(range.end, value: 0x6)
+    XCTAssertEqual(bootrom.data.last, 0xff)
     XCTAssertEqual(cartridge.rom[MemoryMap.rom0.end], 0)
   }
 
   func test_rom0() {
     let range = MemoryMap.rom0
 
-    let cartridge = FakeCartridgeMemory()
+    let cartridge = FakeCartridge()
     let memory = self.createMemory(cartridge: cartridge)
     memory.isRunningBootrom = false
+    XCTAssertFalse(memory.isRunningBootrom)
 
     memory.write(range.start, value: startValue)
     XCTAssertEqual(cartridge.rom[MemoryMap.rom0.start], startValue)
@@ -47,7 +47,7 @@ class MemoryWriteTests: MemoryTestCase {
   func test_rom1() {
     let range = MemoryMap.rom1
 
-    let cartridge = FakeCartridgeMemory()
+    let cartridge = FakeCartridge()
     let memory = self.createMemory(cartridge: cartridge)
 
     memory.write(range.start, value: startValue)
@@ -70,7 +70,7 @@ class MemoryWriteTests: MemoryTestCase {
   }
 
   func test_externalRam() {
-    let cartridge = FakeCartridgeMemory()
+    let cartridge = FakeCartridge()
     let memory = self.createMemory(cartridge: cartridge)
 
     let range = MemoryMap.externalRam

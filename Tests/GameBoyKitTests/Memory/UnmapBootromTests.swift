@@ -16,7 +16,7 @@ class UnmapBootromTests: MemoryTestCase {
   func test_unmapBootrom() {
     let range = MemoryMap.rom0
 
-    let cartridge = FakeCartridgeMemory()
+    let cartridge = FakeCartridge()
     cartridge.rom[range.start] = startValue
     cartridge.rom[range.end] = endValue
 

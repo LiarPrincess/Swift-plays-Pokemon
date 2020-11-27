@@ -44,7 +44,6 @@
 		903C2B662559774B00EB1C6D /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B5F2559774B00EB1C6D /* Metal.swift */; };
 		903C2B962559A5B000EB1C6D /* ROMs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C2B952559A5AF00EB1C6D /* ROMs.swift */; };
 		90427CF825545FC8007A9E9D /* CpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427CF725545FC8007A9E9D /* CpuMemory.swift */; };
-		90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D5625546F00007A9E9D /* BootromMemory.swift */; };
 		90427D84255480B2007A9E9D /* Interrupts+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D7C25548092007A9E9D /* Interrupts+properties.swift */; };
 		90427D9A2554866E007A9E9D /* AudioMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427D992554866E007A9E9D /* AudioMemory.swift */; };
 		90427DA2255487C5007A9E9D /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90427DA1255487C5007A9E9D /* Audio.swift */; };
@@ -147,8 +146,7 @@
 		OBJ_239 /* CpuRotateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* CpuRotateTests.swift */; };
 		OBJ_240 /* CpuShiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* CpuShiftTests.swift */; };
 		OBJ_241 /* Data+UIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* Data+UIntTests.swift */; };
-		OBJ_242 /* FakeBootromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* FakeBootromMemory.swift */; };
-		OBJ_243 /* FakeCartridgeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* FakeCartridgeMemory.swift */; };
+		OBJ_243 /* FakeCartridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* FakeCartridge.swift */; };
 		OBJ_244 /* FakeCpuMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* FakeCpuMemory.swift */; };
 		OBJ_245 /* FakeJoypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* FakeJoypad.swift */; };
 		OBJ_246 /* FakeLcdMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* FakeLcdMemory.swift */; };
@@ -252,7 +250,6 @@
 		903C2B5F2559774B00EB1C6D /* Metal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
 		903C2B952559A5AF00EB1C6D /* ROMs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROMs.swift; sourceTree = "<group>"; };
 		90427CF725545FC8007A9E9D /* CpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuMemory.swift; sourceTree = "<group>"; };
-		90427D5625546F00007A9E9D /* BootromMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootromMemory.swift; sourceTree = "<group>"; };
 		90427D7C25548092007A9E9D /* Interrupts+properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Interrupts+properties.swift"; sourceTree = "<group>"; };
 		90427D992554866E007A9E9D /* AudioMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMemory.swift; sourceTree = "<group>"; };
 		90427DA1255487C5007A9E9D /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
@@ -295,8 +292,7 @@
 		OBJ_104 /* CpuRotateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuRotateTests.swift; sourceTree = "<group>"; };
 		OBJ_105 /* CpuShiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuShiftTests.swift; sourceTree = "<group>"; };
 		OBJ_106 /* Data+UIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+UIntTests.swift"; sourceTree = "<group>"; };
-		OBJ_108 /* FakeBootromMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeBootromMemory.swift; sourceTree = "<group>"; };
-		OBJ_109 /* FakeCartridgeMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCartridgeMemory.swift; sourceTree = "<group>"; };
+		OBJ_109 /* FakeCartridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCartridge.swift; sourceTree = "<group>"; };
 		OBJ_11 /* ModifyInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyInstructions.swift; sourceTree = "<group>"; };
 		OBJ_110 /* FakeCpuMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCpuMemory.swift; sourceTree = "<group>"; };
 		OBJ_111 /* FakeJoypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeJoypad.swift; sourceTree = "<group>"; };
@@ -543,7 +539,6 @@
 		90427D9125548341007A9E9D /* Bootrom */ = {
 			isa = PBXGroup;
 			children = (
-				90427D5625546F00007A9E9D /* BootromMemory.swift */,
 				OBJ_21 /* Bootrom.swift */,
 				OBJ_22 /* BootromFactory.swift */,
 				90F681F92556AA6400EBD803 /* BootromError.swift */,
@@ -628,8 +623,7 @@
 		OBJ_107 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_108 /* FakeBootromMemory.swift */,
-				OBJ_109 /* FakeCartridgeMemory.swift */,
+				OBJ_109 /* FakeCartridge.swift */,
 				OBJ_111 /* FakeJoypad.swift */,
 				OBJ_112 /* FakeLcdMemory.swift */,
 				90427DA925548A21007A9E9D /* FakeAudioMemory.swift */,
@@ -1153,7 +1147,6 @@
 				9024C33425559FB60094AA47 /* MBC1.swift in Sources */,
 				OBJ_197 /* Memory+read.swift in Sources */,
 				9063A2542556B0D800C36D84 /* CartridgeRamSize.swift in Sources */,
-				90427D5725546F00007A9E9D /* BootromMemory.swift in Sources */,
 				90DF0504256D012C009304CC /* SpriteCollection.swift in Sources */,
 				OBJ_198 /* Memory+write.swift in Sources */,
 				OBJ_199 /* Memory.swift in Sources */,
@@ -1209,8 +1202,7 @@
 				OBJ_239 /* CpuRotateTests.swift in Sources */,
 				OBJ_240 /* CpuShiftTests.swift in Sources */,
 				OBJ_241 /* Data+UIntTests.swift in Sources */,
-				OBJ_242 /* FakeBootromMemory.swift in Sources */,
-				OBJ_243 /* FakeCartridgeMemory.swift in Sources */,
+				OBJ_243 /* FakeCartridge.swift in Sources */,
 				OBJ_244 /* FakeCpuMemory.swift in Sources */,
 				OBJ_245 /* FakeJoypad.swift in Sources */,
 				OBJ_246 /* FakeLcdMemory.swift in Sources */,
