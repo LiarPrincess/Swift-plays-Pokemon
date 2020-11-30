@@ -4,9 +4,9 @@
 
 import GameBoyKit
 
-class DummyInputProvider: GameboyInputProvider {
+class DummyInputProvider: GameBoyInputProvider {
 
-  func getGameboyInput() -> GameboyInput {
-    return GameboyInput()
+  func getGameBoyInput() -> GameBoyInput {
+    return GameBoyInput()
   }
 }

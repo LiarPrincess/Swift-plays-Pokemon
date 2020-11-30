@@ -144,7 +144,7 @@ private func openRom(romPath: String) -> Cartridge {
       .appendingPathComponent(romPath)
 
     let data = try Data(contentsOf: romUrl)
-    return try CartridgeFactory.unchecked(data: data)
+    return try CartridgeFactory.unchecked(rom: data, ram: nil)
   } catch let error as CartridgeError {
     fatalError("Error when opening ROM: \(error.description).")
   } catch {

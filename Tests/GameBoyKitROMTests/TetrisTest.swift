@@ -30,7 +30,7 @@ enum TetrisTest {
   private static func openRom() -> Cartridge {
     do {
       let data = try Data(contentsOf: romUrl)
-      return try CartridgeFactory.create(data: data)
+      return try CartridgeFactory.create(rom: data, ram: nil)
     } catch {
       fatalError("Unable to open: '\(romUrl)'")
     }
