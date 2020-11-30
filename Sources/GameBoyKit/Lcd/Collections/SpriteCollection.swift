@@ -16,6 +16,7 @@ internal struct SpriteCollection {
     internal static let byteCount = 4
   }
 
+  /// Sprite height
   private var spriteSize: Sprite.Size
 
   private var sprites = (0..<Constants.count).map { _ in Sprite() }
@@ -33,6 +34,7 @@ internal struct SpriteCollection {
   internal mutating func onSpriteSizeChanged(newSize: Sprite.Size) {
     let hasSizeChanged = self.spriteSize != newSize
     if hasSizeChanged {
+      self.spriteSize = newSize
       self.lineCache.removeAll()
     }
   }

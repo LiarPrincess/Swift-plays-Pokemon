@@ -12,6 +12,7 @@ public struct Sprite {
 
   internal typealias Constants = SpriteCollection.Constants
 
+  /// Sprite height, either 8 or 16 pixels.
   public struct Size: Equatable {
 
     internal static let size8 = Size(value: 8)
