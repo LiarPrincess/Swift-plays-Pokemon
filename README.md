@@ -89,6 +89,7 @@ For the `GameBoyMac` target (emulator executable) following key map is used:
 ](https://www.youtube.com/watch?v=HyzD8pNlpwI) by Michael Steil - you have to watch it!
   - [bgb.bircd.org/pandocs](http://bgb.bircd.org/pandocs.htm) - most of the things are here
   - [gbdev.gg8.se](https://gbdev.gg8.se/wiki/articles/Main_Page) - pandocs alternative
+  - [gbdev/awesome-gbdev](https://github.com/gbdev/awesome-gbdev) - curated list of awesome Game Boy (Color) Development resources, tools, docs, related projects and open-source ROMs
   - [pastraiser.com/gameboy_opcodes](https://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html) - instruction set
   - [reddit.com/Game Boy (vblank) interrupt confusion](https://www.reddit.com/r/EmuDev/comments/7rm8l2/game_boy_vblank_interrupt_confusion/) - interrupts are disabled until the instruction after EI
   - Audio - we do not have audio (yet), but this can be useful:
