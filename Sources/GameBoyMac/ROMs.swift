@@ -80,6 +80,6 @@ enum ROMs {
       dir.deleteLastPathComponent()
     }
 
-    fatalError("Failed to obtain ROM dir")
+    fatalError("Failed to obtain path to ROMs dir")
   }()
 }
