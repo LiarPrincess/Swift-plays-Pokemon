@@ -39,13 +39,10 @@ class GameBoyWindow: NSWindow, GameBoyInputProvider, MTKViewDelegate {
     self.vertexBuffer = Metal.makeFullscreenVertexBuffer(device: self.device)
     self.texture = Metal.makeFramebuffer(device: self.device)
 
+    let width = scale * Framebuffer.width
+    let height = scale * Framebuffer.height
     super.init(
-      contentRect: NSRect(
-        x: 0,
-        y: 0,
-        width: scale * Framebuffer.width,
-        height: scale * Framebuffer.height
-      ),
+      contentRect: NSRect(x: 0, y: 0, width: width, height: height),
       styleMask: [.titled, .closable, .miniaturizable, .resizable],
       backing: .buffered,
       defer: false
