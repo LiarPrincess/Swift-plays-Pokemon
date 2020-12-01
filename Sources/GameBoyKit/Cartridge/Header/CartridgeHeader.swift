@@ -45,7 +45,7 @@ public struct CartridgeHeader {
     if rom.count != self.romSize.byteCount {
       throw CartridgeError.romSizeNotConsistentWithHeader(
         headerSize: self.romSize,
-        actualSize: rom.count
+        rom: rom
       )
     }
 
@@ -53,7 +53,7 @@ public struct CartridgeHeader {
     let hasRamByHeader = self.ramSize.byteCount != 0
 
     if hasRamByType && !hasRamByHeader {
-      throw CartridgeError.ramSizeMissingInHeader(type: self.type)
+      throw CartridgeError.ramSizeMissingInCartridgeThatRequiresRam(type: self.type)
     }
 
     if !hasRamByType && hasRamByHeader {

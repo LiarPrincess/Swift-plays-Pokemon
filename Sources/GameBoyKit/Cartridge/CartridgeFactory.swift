@@ -47,8 +47,7 @@ public enum CartridgeFactory {
     // case .huc1
     // case .huc3
     default:
-      let raw = rom[CartridgeMap.type]
-      throw CartridgeError.unsupportedType(raw)
+      throw CartridgeError.unimplementedType(header.type)
     }
   }
 
@@ -63,9 +62,9 @@ public enum CartridgeFactory {
     let ramCount = ram.data.count
 
     if headerRam.byteCount != ramCount {
-      throw CartridgeError.ramSizeNotConsistentProvidedSaveData(
+      throw CartridgeError.ramSizeNotConsistentWithHeader(
         headerSize: headerRam,
-        saveSize: ramCount
+        ram: ram
       )
     }
   }
