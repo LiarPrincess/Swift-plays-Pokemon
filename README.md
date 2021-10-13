@@ -111,5 +111,5 @@ For the `GameBoyMac` target (emulator executable) following key map is used:
 
 ## License
 
-“Swift plays Pokemon” is licensed under the Mozilla Public License 2.0 license.
-See [LICENSE](LICENSE) for more information.
+“Swift plays Pokemon” is licensed under the Mozilla Public License 2.0.
+See [LICENSE](LICENSE) file for more information.
